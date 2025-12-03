@@ -1,0 +1,75 @@
+import ContactForm from "@/components/ContactForm";
+import IconWrapper from "@/components/IconWrapper";
+import PageHeader from "@/components/PageHeader";
+import { Clock7, Mails, MapPin, PhoneCall } from "lucide-react";
+import Image from "next/image";
+import React from "react";
+
+const ContactPage = () => {
+  return (
+    <>
+      <PageHeader title="Contact Us" bgImage="contact" />
+      <section className="space-y-8 text-center mb-16">
+        <span className="subtitle">Get In Touch</span>
+        <h3>Have Questions? We&apos;re Just a Call or Click Away</h3>
+
+        <ul className="flex justify-between flex-wrap gap-8 mt-16 [&_div:has(svg)]:mx-auto">
+          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
+            <IconWrapper variant="primary">
+              <PhoneCall />
+            </IconWrapper>
+            <h4>Phone Number</h4>
+            <p>Phone : (+12)345-6789-1123</p>
+          </li>
+          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
+            <IconWrapper variant="primary">
+              <Mails />
+            </IconWrapper>
+            <h4>Mail Address</h4>
+            <p>info@mimedcarellc.com</p>
+          </li>
+          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
+            <IconWrapper variant="primary">
+              <MapPin />
+            </IconWrapper>
+            <h4>Head Office</h4>
+            <p>
+              1401 21st Street, Apartment #13807 Sacramento, CA 95811 United
+              States
+            </p>
+          </li>
+          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
+            <IconWrapper variant="primary">
+              <Clock7 />
+            </IconWrapper>
+            <h4>Work Hours</h4>
+            <div>
+              <span>Mon to Fri : 9AM - 5PM</span>
+              <span>Sat : 1PM - 8PM</span>
+              <span>Sun : 10AM - 4PM</span>
+            </div>
+          </li>
+        </ul>
+
+        <div className="flex flex-col-reverse md:flex-row mt-16">
+          <ContactForm
+            classname="basis-1/2"
+            title="Send Us A Message"
+            titleCn="text-2xl font-medium"
+            message="Whether you need help with billing, enrolment, or support, our experts are just a message away. Reach out today."
+          />
+
+          <Image
+            src="/images/contact.webp"
+            alt="Contact Image"
+            width={400}
+            height={400}
+            className="hidden md:inline-block"
+          />
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default ContactPage;
