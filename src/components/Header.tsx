@@ -21,12 +21,6 @@ const Header = () => {
             {contactDetails.email}
           </Link>
         </div>
-        <div>
-          Medical Billing Starting
-          <Link href="#">
-            <strong>@ 2.49%</strong>
-          </Link>
-        </div>
         <Link href="">
           <MapPin /> {contactDetails.address}
         </Link>
