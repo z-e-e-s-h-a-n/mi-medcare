@@ -1,8 +1,10 @@
 import ContactForm from "@/components/ContactForm";
 import IconWrapper from "@/components/IconWrapper";
 import PageHeader from "@/components/PageHeader";
+import { contactDetails } from "@/lib/constants";
 import { Clock7, Mails, MapPin, PhoneCall } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const ContactPage = () => {
@@ -13,30 +15,31 @@ const ContactPage = () => {
         <span className="subtitle">Get In Touch</span>
         <h3>Have Questions? We&apos;re Just a Call or Click Away</h3>
 
-        <ul className="flex justify-between flex-wrap gap-8 mt-16 [&_div:has(svg)]:mx-auto">
+        <ul className="flex justify-between flex-wrap gap-8 mt-16 [&_div:has(svg)]:mx-auto [&_a]:hover:text-primary">
           <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
             <IconWrapper variant="primary">
               <PhoneCall />
             </IconWrapper>
             <h4>Phone Number</h4>
-            <p>Phone : (+12)345-6789-1123</p>
+            <Link href={`tel:${contactDetails.phone}`}>
+              Phone : {contactDetails.phone}
+            </Link>
           </li>
           <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
             <IconWrapper variant="primary">
               <Mails />
             </IconWrapper>
             <h4>Mail Address</h4>
-            <p>info@mimedcarellc.com</p>
+            <Link href={`mailto:${contactDetails.email}`}>
+              {contactDetails.email}
+            </Link>
           </li>
           <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
             <IconWrapper variant="primary">
               <MapPin />
             </IconWrapper>
             <h4>Head Office</h4>
-            <p>
-              1401 21st Street, Apartment #13807 Sacramento, CA 95811 United
-              States
-            </p>
+            <Link href="#">{contactDetails.address}</Link>
           </li>
           <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
             <IconWrapper variant="primary">
