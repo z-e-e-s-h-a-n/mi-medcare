@@ -8,10 +8,12 @@ import SpecialtiesSection from "@/components/SpecialtiesSection";
 import ParallaxSection from "@/components/ParallaxSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import { strategyStepsHome } from "@/lib/constants";
+import PromoPopup from "@/components/PromoPopup";
 
 const Home = () => {
   return (
     <>
+      <PromoPopup />
       <HeroSection />
       <ExperienceSection />
       <WelcomeSection />

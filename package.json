@@ -23,10 +23,10 @@
     "embla-carousel-react": "^8.6.0",
     "lucide-react": "^0.555.0",
     "motion": "^12.23.25",
-    "next": "16.0.5",
+    "next": "16.0.7",
     "next-sitemap": "^4.2.3",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "react-hook-form": "^7.67.0",
     "tailwind-merge": "^3.4.0",
     "zod": "^4.1.13"
