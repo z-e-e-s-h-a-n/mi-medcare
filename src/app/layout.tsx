@@ -18,7 +18,7 @@ function RootLayout({ children }: AppLayoutProps) {
     <html lang="en">
       <meta
         name="google-site-verification"
-        content="4eWa9f0XKfV1elqMD2bidFeBsv_wj3ajWyXl9pT5ga0"
+        content="czbQ2_F4AE2zI66qUe-473yuffmrVgF3YvPeJoHJImQ"
       />
       <body className={`${primaryFont.variable} antialiased`}>{children}</body>
     </html>
