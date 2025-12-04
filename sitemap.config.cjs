@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: "https://mi-medcare.vercel.app",
+  siteUrl: "https://www.mimedcarellc.com",
   generateRobotsTxt: true,
   changefreq: "weekly",
   priority: 0.8,
