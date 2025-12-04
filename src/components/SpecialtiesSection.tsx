@@ -54,7 +54,7 @@ const SpecialtiesSection = () => {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-      <Button href="#" size="lg">
+      <Button href="/specialties" size="lg">
         View All Specialties
       </Button>
     </section>

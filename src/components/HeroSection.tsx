@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import IconWrapper from "./IconWrapper";
+import { contactDetails } from "@/lib/constants";
 
 const HeroSection = () => {
   return (
@@ -15,11 +16,15 @@ const HeroSection = () => {
           revenue cycle never skips a beat.
         </p>
         <div>
-          <Button size="lg" href="#">
+          <Button size="lg" href="#contact-section">
             Get Started
           </Button>
-          <Button size="lg" variant="outline" href="tel:+1916-252-1833">
-            <PhoneCall /> <span>+1 916-252-1833</span>
+          <Button
+            size="lg"
+            variant="outline"
+            href={`tel:${contactDetails.phone}`}
+          >
+            <PhoneCall /> <span>{contactDetails.phone}</span>
           </Button>
         </div>
         <div>

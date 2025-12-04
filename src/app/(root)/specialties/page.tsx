@@ -1,6 +1,13 @@
 import PageHeader from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { specialties } from "@/lib/constants";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Top Medical Billing Services in Pakistan - MI MedCare LLC",
+  description:
+    "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
+};
 
 const SpecialtiesPage = () => {
   return (
@@ -35,7 +42,9 @@ const SpecialtiesPage = () => {
             >
               {<s.icon className="size-8 text-primary mx-auto" />}
               <h4 className="text-md font-medium">{s.title}</h4>
-              <Button className="mt-2">Apply Now</Button>
+              <Button className="mt-2" href="/contact">
+                Apply Now
+              </Button>
             </li>
           ))}
         </ul>

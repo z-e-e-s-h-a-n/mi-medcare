@@ -15,9 +15,15 @@ const Footer = () => {
             experts are just a message away. Reach out today.
           </p>
           <div>
-            <Facebook />
-            <Linkedin />
-            <Instagram />
+            <Link href="https://www.facebook.com/mimedcarellc">
+              <Facebook />
+            </Link>
+            <Link href="https://www.linkedin.com/in/mm-alam-freelancer">
+              <Linkedin />
+            </Link>
+            <Link href="https://www.instagram.com/mahmoodalamlahore">
+              <Instagram />
+            </Link>
           </div>
         </div>
         <div>
@@ -56,7 +62,10 @@ const Footer = () => {
       <div>
         <p>Mimedcarellc © All Rights Reserved.​</p>
         <p>
-          Website Designed by <Link href="#">JZ Solution</Link>
+          Website Designed by{" "}
+          <Link href="#">
+            <strong>Crown Digital Lab</strong>
+          </Link>
         </p>
       </div>
     </footer>

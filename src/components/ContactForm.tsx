@@ -38,6 +38,7 @@ const ContactForm = ({
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn("space-y-8", classname)}
+        id="contact-form"
       >
         {title && <h4 className={titleCn}>Contact Us</h4>}
         {message && <p className={messageCn}>{message}</p>}

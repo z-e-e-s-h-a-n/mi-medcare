@@ -13,6 +13,13 @@ import {
 import ParallaxSection from "@/components/ParallaxSection";
 import StrategySection from "@/components/StrategySection";
 import { strategyStepsAbout } from "@/lib/constants";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Top Medical Billing Services in Pakistan - MI MedCare LLC",
+  description:
+    "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
+};
 
 const AboutPage = () => {
   return (
@@ -135,6 +142,7 @@ const AboutPage = () => {
         cta="Contact Us Now"
         bgImage="toward-about"
         position="right"
+        href="/contact"
       />
       <StrategySection
         title="How It Works"

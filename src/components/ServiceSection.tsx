@@ -60,7 +60,9 @@ const ServiceSection = () => {
           <h2>Personalized Healthcare Solutions for Every Stage of Life</h2>
           <div>
             <p>Schedule a Free Consultation with Our Billing Experts</p>
-            <Button size="lg">View More Services</Button>
+            <Button size="lg" href="/specialties">
+              View More Services
+            </Button>
           </div>
         </div>
       </div>
@@ -70,7 +72,7 @@ const ServiceSection = () => {
             <IconWrapper className="mx-auto">{<s.icon />}</IconWrapper>
             <h4>{s.title}</h4>
             <p>{s.desc}</p>
-            <Link href="#">
+            <Link href={s.href}>
               Learn more <ArrowRight />{" "}
             </Link>
           </li>

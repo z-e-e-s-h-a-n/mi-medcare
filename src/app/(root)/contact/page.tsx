@@ -6,6 +6,13 @@ import { Clock7, Mails, MapPin, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Top Medical Billing Services in Pakistan - MI MedCare LLC",
+  description:
+    "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
+};
 
 const ContactPage = () => {
   return (

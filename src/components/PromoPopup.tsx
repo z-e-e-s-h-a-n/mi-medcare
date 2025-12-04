@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { ArrowBigRight } from "lucide-react";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 const PromoPopup = () => {
   return (
@@ -26,10 +27,12 @@ const PromoPopup = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="justify-center!">
-          <Button>
-            <ArrowBigRight className="mr-2" />
-            Get Free Audit
-          </Button>
+          <DialogClose asChild>
+            <Button href="#contact-form">
+              <ArrowBigRight className="mr-2" />
+              Get Free Audit
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

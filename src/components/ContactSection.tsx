@@ -42,7 +42,9 @@ const ContactSection = () => {
             <span>Friday </span> <span>9AM - 5PM</span>
           </li>
         </ul>
-        <Button size="lg">Contact Us</Button>
+        <Button size="lg" href="/contact" className="w-full">
+          Contact Us
+        </Button>
       </div>
     </section>
   );
