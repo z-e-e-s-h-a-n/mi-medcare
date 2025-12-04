@@ -11,7 +11,7 @@ const OverlayCard = ({ title, desc, className }: OverlayCardProps) => {
   return (
     <div
       className={cn(
-        "p-8 rounded-2xl bg-black w-60 text-white text-center space-y-2  absolute -bottom-[2%] -left-[3%] z-10",
+        "p-4 md:p-8 rounded-2xl bg-black w-50 md:w-60 text-white text-center space-y-2  absolute -bottom-[2%] -left-[3%] z-10",
         className
       )}
     >

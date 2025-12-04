@@ -142,7 +142,7 @@ const AboutPage = () => {
         steps={strategyStepsAbout}
       />
       <section className="flex flex-col md:flex-row md:justify-between [&>div]:basis-1/2 bg-primary/10 py-24">
-        <div className="space-y-4 pr-16">
+        <div className="space-y-4 md:pr-16">
           <span className="subtitle">Why Choose Us</span>
           <h2 className="text-4xl">
             Your Practice, Our Commitment to Excellence
@@ -197,7 +197,7 @@ const AboutPage = () => {
             height={400}
             className="rounded-2xl"
           />
-          <div className="flex flex-col p-8 rounded-2xl bg-black text-white max-w-[300px]">
+          <div className="flex flex-col relative z-2 p-8 rounded-2xl bg-black/50 md:bg-black text-white max-w-[300px]">
             <span className="text-[44px] font-semibold">99 %</span>
             <span className="text-xl font-medium">Satisfied Clients</span>
             <p>

@@ -57,33 +57,6 @@ export const strategyStepsAbout = [
   },
 ];
 
-export const mainMenu = [
-  {
-    title: "Home",
-    href: "/",
-  },
-  {
-    title: "Services",
-    href: "/services",
-  },
-  {
-    title: "About Us",
-    href: "/about",
-  },
-  {
-    title: "Our Specialties",
-    href: "/specialties",
-  },
-  {
-    title: "Contact Us  ",
-    href: "/contact",
-  },
-  {
-    title: "Our IT Partner – JZ Solutions",
-    href: "#",
-  },
-];
-
 export const servicesMenu = [
   {
     title: "Medical Billing & Coding",
@@ -419,7 +392,7 @@ export const servicesMenu = [
     desc: `At our medical billing company, we offer a <strong>free, comprehensive billing audit</strong> to help healthcare providers identify revenue leaks, coding errors, and compliance issues. Our expert auditors thoroughly review your billing process, claims history, and reimbursement patterns to ensure accuracy and efficiency.
   
     This no-cost audit gives you a clear picture of your current billing performance and practical recommendations to maximize revenue and reduce denials.`,
-    subtitle: "Our Digital Marketing Services Include:",
+    subtitle: "Our Free Medical Billing Audit Includes:",
     services: [
       "Social media management & content creation",
       "Search engine optimization (SEO)",
@@ -434,7 +407,7 @@ export const servicesMenu = [
     title: "Free Website Audit",
     href: "/services/free-website-audit",
     desc: "In today’s competitive healthcare landscape, a strong online presence is essential. Our company provides <strong> specialized digital marketing services</strong> designed to help medical practices, clinics, and healthcare professionals attract and retain patients effectively.",
-    subtitle: "Our Free Medical Billing Audit Includes:",
+    subtitle: "Our Digital Marketing Services Include:",
     services: [
       "Review of coding accuracy & documentation",
       "Analysis of claim submission & denial trends",
@@ -456,6 +429,34 @@ export const servicesMenu = [
       "Staff training & onboarding",
       "System updates & performance optimization",
     ],
+  },
+];
+
+export const mainMenu = [
+  {
+    title: "Home",
+    href: "/",
+  },
+  {
+    title: "Services",
+    href: "#",
+    subMenu: servicesMenu,
+  },
+  {
+    title: "About Us",
+    href: "/about",
+  },
+  {
+    title: "Our Specialties",
+    href: "/specialties",
+  },
+  {
+    title: "Contact Us  ",
+    href: "/contact",
+  },
+  {
+    title: "Our IT Partner – JZ Solutions",
+    href: "#",
   },
 ];
 
