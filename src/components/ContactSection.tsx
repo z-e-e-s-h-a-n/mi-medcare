@@ -7,7 +7,7 @@ import ContactForm from "./ContactForm";
 
 const ContactSection = () => {
   return (
-    <section className="contact-section">
+    <section id="contact-section" className="contact-section">
       <div>
         <span>Free Consultation</span>
         <h2>Schedule a Free Consultation with Our Billing Experts</h2>
@@ -22,8 +22,7 @@ const ContactSection = () => {
       <div>
         <h4>Work Hours</h4>
         <p>
-          Expert billing support available day and night so your revenue cycle
-          never sleeps
+          Expert billing support available so your revenue cycle never sleeps
         </p>
         <ul>
           <li>

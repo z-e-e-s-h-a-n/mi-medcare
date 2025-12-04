@@ -37,11 +37,10 @@ const HeroSection = () => {
           <div>
             <div>
               <Clock9 />
-              <span>Accurate Claims</span>
+              <span>Improved Reimbursement</span>
             </div>
             <p>
-              Dedicated billing experts available day and night to help your
-              team.
+              Providing enhanced reimbursement for the services delivered by us.
             </p>
           </div>
         </div>

@@ -442,7 +442,7 @@ export const mainMenu = [
     href: "/contact",
   },
   {
-    title: "Our IT Partner – JZ Solutions",
+    title: "Our IT Partner – Crown Digital Lab",
     href: "#",
   },
 ];

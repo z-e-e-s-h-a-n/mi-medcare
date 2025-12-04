@@ -46,7 +46,7 @@ const ServiceSection = () => {
     },
     {
       icon: Monitor,
-      title: "Front Dest Management",
+      title: "Front Desk Management",
       desc: "Virtual medical assistant, ensuring smooth patient flow and efficient daily operations.",
       href: "",
     },
@@ -58,12 +58,6 @@ const ServiceSection = () => {
         <span>What We Offer</span>
         <div>
           <h2>Personalized Healthcare Solutions for Every Stage of Life</h2>
-          <div>
-            <p>Schedule a Free Consultation with Our Billing Experts</p>
-            <Button size="lg" href="/specialties">
-              View More Services
-            </Button>
-          </div>
         </div>
       </div>
       <ul>

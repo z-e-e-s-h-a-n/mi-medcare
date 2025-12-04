@@ -55,8 +55,6 @@ const ContactPage = () => {
             <h4>Work Hours</h4>
             <div>
               <span>Mon to Fri : 9AM - 5PM</span>
-              <span>Sat : 1PM - 8PM</span>
-              <span>Sun : 10AM - 4PM</span>
             </div>
           </li>
         </ul>

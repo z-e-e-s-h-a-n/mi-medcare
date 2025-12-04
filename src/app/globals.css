@@ -422,16 +422,10 @@
     @apply py-24 bg-secondary space-y-8;
 
     > div {
+      @apply text-center space-y-4;
+
       span {
         @apply subtitle;
-      }
-
-      > div {
-        @apply flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-8;
-
-        > div {
-          @apply space-y-4 lg:basis-1/2;
-        }
       }
     }
 
