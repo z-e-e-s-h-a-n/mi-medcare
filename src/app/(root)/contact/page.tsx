@@ -23,7 +23,7 @@ const ContactPage = () => {
         <h3>Have Questions? We&apos;re Just a Call or Click Away</h3>
 
         <ul className="flex justify-between flex-wrap gap-8 mt-16 [&_div:has(svg)]:mx-auto [&_a]:hover:text-primary">
-          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
+          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg border-2 border-primary">
             <IconWrapper variant="primary">
               <PhoneCall />
             </IconWrapper>
@@ -32,7 +32,7 @@ const ContactPage = () => {
               Phone : {contactDetails.phone}
             </Link>
           </li>
-          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
+          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg border-2 border-primary">
             <IconWrapper variant="primary">
               <Mails />
             </IconWrapper>
@@ -41,14 +41,14 @@ const ContactPage = () => {
               {contactDetails.email}
             </Link>
           </li>
-          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
+          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg border-2 border-primary">
             <IconWrapper variant="primary">
               <MapPin />
             </IconWrapper>
             <h4>Head Office</h4>
             <Link href="#">{contactDetails.address}</Link>
           </li>
-          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg">
+          <li className="basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)] lg:basis-[calc(25%-32px)] p-5 space-y-4 rounded-2xl shadow-lg border-2 border-primary">
             <IconWrapper variant="primary">
               <Clock7 />
             </IconWrapper>
@@ -61,9 +61,9 @@ const ContactPage = () => {
           </li>
         </ul>
 
-        <div className="flex flex-col-reverse md:flex-row mt-16">
+        <div className="flex flex-col-reverse md:flex-row mt-16 [&>form_h4]:text-primary">
           <ContactForm
-            classname="basis-1/2"
+            classname="basis-1/2 text-start"
             title="Send Us A Message"
             titleCn="text-2xl font-medium"
             message="Whether you need help with billing, enrolment, or support, our experts are just a message away. Reach out today."

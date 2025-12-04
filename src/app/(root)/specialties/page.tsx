@@ -38,7 +38,7 @@ const SpecialtiesPage = () => {
           {specialties.map((s) => (
             <li
               key={s.title}
-              className="space-y-2 py-8 md:p-4 bg-white rounded-2xl text-center shadow-sm"
+              className="space-y-2 py-8 md:p-4 bg-white rounded-2xl text-center shadow-sm border-2 border-primary"
             >
               {<s.icon className="size-8 text-primary mx-auto" />}
               <h4 className="text-md font-medium">{s.title}</h4>

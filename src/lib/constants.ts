@@ -404,19 +404,6 @@ export const servicesMenu = [
     ],
   },
   {
-    title: "Free Website Audit",
-    href: "/services/free-website-audit",
-    desc: "In today’s competitive healthcare landscape, a strong online presence is essential. Our company provides <strong> specialized digital marketing services</strong> designed to help medical practices, clinics, and healthcare professionals attract and retain patients effectively.",
-    subtitle: "Our Digital Marketing Services Include:",
-    services: [
-      "Review of coding accuracy & documentation",
-      "Analysis of claim submission & denial trends",
-      "Evaluation of payment posting & reconciliation",
-      "Identification of compliance gaps & revenue opportunities",
-      "Detailed performance report with actionable insights",
-    ],
-  },
-  {
     title: "IT Support & EHR System Integration Services",
     href: "/services/it-support-ehr-system-integration-services",
     desc: "Our medical billing company provides reliable <strong>IT support services</strong> to ensure seamless integration and smooth operation of <strong>Electronic Health Record (EHR)</strong> systems. We help healthcare providers implement, configure, and optimize their EHR platforms for improved workflow efficiency, data accuracy, and patient care coordination.",

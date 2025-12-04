@@ -43,7 +43,7 @@ const SpecialtiesSection = () => {
               key={i}
               className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
             >
-              <div className="flex flex-col items-center gap-2 h-full py-[30px] px-8 rounded-2xl shadow-sm">
+              <div className="flex flex-col items-center gap-2 h-full py-[30px] px-8 rounded-2xl shadow-sm border-2 border-primary">
                 {<s.icon className="size-8 text-primary" />}
                 <h4 className="text-lg font-medium">{s.title}</h4>
                 <p>{s.desc}</p>

@@ -63,7 +63,7 @@ const ContactForm = ({
         <InputField
           name="subject"
           label="Subject"
-          placeholder="How ca we help you"
+          placeholder="How can we help you"
           control={form.control}
         />
 

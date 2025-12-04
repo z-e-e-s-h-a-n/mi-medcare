@@ -35,7 +35,7 @@ const Navigation = ({ className }: NavigationProps) => {
           {title}
           {subMenu && <ChevronDown />}
           {subMenu && (
-            <ul className={cn(open && "active")}>
+            <ul className={cn("hidden", open && "active")}>
               {subMenu.map(({ title, href }) => (
                 <Link href={href} key={title}>
                   {title}
