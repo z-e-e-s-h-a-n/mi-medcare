@@ -38,7 +38,7 @@ const PromoPopup = () => {
           fixed z-50
           top-1/2 left-1/2
           -translate-x-1/2 -translate-y-1/2
-          max-w-xs p-8 pb-16 space-y-8
+          w-xs p-8 pb-16 space-y-8
           text-center rounded-md
           bg-secondary/95 shadow-xl
         "
