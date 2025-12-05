@@ -9,7 +9,7 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Top Medical Billing Services in Pakistan - MI MedCare LLC",
+  title: "Top Medical Billing Services in USA - MI MedCare LLC",
   description:
     "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
 };
