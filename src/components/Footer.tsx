@@ -15,13 +15,19 @@ const Footer = () => {
             experts are just a message away. Reach out today.
           </p>
           <div>
-            <Link href="https://www.facebook.com/mimedcarellc">
+            <Link href="https://www.facebook.com/mimedcarellc" target="_blank">
               <Facebook />
             </Link>
-            <Link href="https://www.linkedin.com/in/mm-alam-freelancer">
+            <Link
+              href="https://www.linkedin.com/in/mm-alam-freelancer"
+              target="_blank"
+            >
               <Linkedin />
             </Link>
-            <Link href="https://www.instagram.com/mahmoodalamlahore">
+            <Link
+              href="https://www.instagram.com/mahmoodalamlahore"
+              target="_blank"
+            >
               <Instagram />
             </Link>
           </div>

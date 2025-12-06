@@ -12,7 +12,7 @@ import PromoPopup from "@/components/PromoPopup";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Top Medical Billing Services in USA - MI MedCare LLC",
+  title: "Top Medical Billing Services in USA - MI MedCare",
   description:
     "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
 };
