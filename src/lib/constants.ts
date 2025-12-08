@@ -442,6 +442,10 @@ export const mainMenu = [
     href: "/contact",
   },
   {
+    title: "EHR Partners",
+    href: "/ehr-partners",
+  },
+  {
     title: "Our IT Partner – Crown Digital Lab",
     href: "#",
   },
@@ -555,3 +559,5 @@ export const specialties = [
     title: "Urgent Care Billing Services",
   },
 ];
+
+export const EHRsList = Array.from({ length: 33 });

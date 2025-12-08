@@ -219,8 +219,9 @@
   .navigation {
     @apply flex flex-col md:flex-row md:items-center gap-6;
 
-    > a {
-      @apply relative my-auto flex md:justify-center md:items-center flex-wrap md:gap-0 hover:text-primary;
+    > a,
+    div {
+      @apply cursor-pointer relative my-auto flex md:justify-center md:items-center flex-wrap md:gap-0 hover:text-primary;
 
       & > svg {
         @apply size-5 stroke-1;
@@ -533,6 +534,26 @@
           @apply text-xl font-semibold;
         }
       }
+    }
+  }
+
+  .ehrs-section {
+    @apply space-y-6 text-center;
+
+    ul {
+      @apply flex flex-wrap gap-8;
+
+      li {
+        @apply border-2 border-primary bg-white p-5  rounded-2xl basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)];
+
+        img {
+          @apply h-[68px];
+        }
+      }
+    }
+
+    > a {
+      @apply mt-4;
     }
   }
 

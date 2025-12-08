@@ -25,26 +25,30 @@ const Navigation = ({ className }: NavigationProps) => {
 
   return (
     <nav className={cn("navigation", className)}>
-      {mainMenu.slice(0, 5).map(({ title, href, subMenu }) => (
-        <Link
-          href={href}
-          key={title}
-          className={cn("group", pathname === href ? "active" : "")}
-          onClick={() => ToggleSubMenu(!!subMenu)}
-        >
-          {title}
-          {subMenu && <ChevronDown />}
-          {subMenu && (
-            <ul className={cn("hidden", open && "active")}>
-              {subMenu.map(({ title, href }) => (
-                <Link href={href} key={title}>
-                  {title}
-                </Link>
-              ))}
-            </ul>
-          )}
-        </Link>
-      ))}
+      {mainMenu.slice(0, 5).map(({ title, href, subMenu }) => {
+        const Comp = subMenu ? "div" : Link;
+
+        return (
+          <Comp
+            href={href}
+            key={title}
+            className={cn("group", pathname === href ? "active" : "")}
+            onClick={() => ToggleSubMenu(!!subMenu)}
+          >
+            {title}
+            {subMenu && <ChevronDown />}
+            {subMenu && (
+              <ul className={cn("hidden", open && "active")}>
+                {subMenu.map(({ title, href }) => (
+                  <Link href={href} key={title}>
+                    {title}
+                  </Link>
+                ))}
+              </ul>
+            )}
+          </Comp>
+        );
+      })}
     </nav>
   );
 };

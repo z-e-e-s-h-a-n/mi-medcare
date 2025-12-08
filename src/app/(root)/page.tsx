@@ -10,6 +10,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import { strategyStepsHome } from "@/lib/constants";
 import PromoPopup from "@/components/PromoPopup";
 import type { Metadata } from "next";
+import EHRsSection from "@/components/EHRsSection";
 
 export const metadata: Metadata = {
   title: "Top Medical Billing Services in USA - MI MedCare",
@@ -32,6 +33,12 @@ const Home = () => {
         steps={strategyStepsHome}
       />
       <SpecialtiesSection />
+      <EHRsSection
+        title="We work with these EHRs"
+        desc="Our medical billing specialists know the workarounds of all the EHRs. We
+        help you submit clean claims no matter which EHR you use."
+        length={6}
+      />
       <ParallaxSection
         title="Take the First Step Toward Smarter Billing Today"
         desc=" Let’s streamline your revenue cycle, reduce denials, and improve cash
