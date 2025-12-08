@@ -403,20 +403,20 @@ export const servicesMenu = [
       "Online reputation management",
     ],
   },
-  {
-    title: "IT Support & EHR System Integration Services",
-    href: "/services/it-support-ehr-system-integration-services",
-    desc: "Our medical billing company provides reliable <strong>IT support services</strong> to ensure seamless integration and smooth operation of <strong>Electronic Health Record (EHR)</strong> systems. We help healthcare providers implement, configure, and optimize their EHR platforms for improved workflow efficiency, data accuracy, and patient care coordination.",
-    subtitle: "Our IT & EHR Integration Services Include:",
-    services: [
-      "EHR system setup, configuration & customization",
-      "Integration with billing & practice management software",
-      "Data migration & security management",
-      "Troubleshooting & ongoing technical support",
-      "Staff training & onboarding",
-      "System updates & performance optimization",
-    ],
-  },
+  // {
+  //   title: "IT Support & EHR System Integration Services",
+  //   href: "/services/it-support-ehr-system-integration-services",
+  //   desc: "Our medical billing company provides reliable <strong>IT support services</strong> to ensure seamless integration and smooth operation of <strong>Electronic Health Record (EHR)</strong> systems. We help healthcare providers implement, configure, and optimize their EHR platforms for improved workflow efficiency, data accuracy, and patient care coordination.",
+  //   subtitle: "Our IT & EHR Integration Services Include:",
+  //   services: [
+  //     "EHR system setup, configuration & customization",
+  //     "Integration with billing & practice management software",
+  //     "Data migration & security management",
+  //     "Troubleshooting & ongoing technical support",
+  //     "Staff training & onboarding",
+  //     "System updates & performance optimization",
+  //   ],
+  // },
 ];
 
 export const mainMenu = [
@@ -437,13 +437,14 @@ export const mainMenu = [
     title: "Our Specialties",
     href: "/specialties",
   },
-  {
-    title: "Contact Us  ",
-    href: "/contact",
-  },
+
   {
     title: "EHR Partners",
     href: "/ehr-partners",
+  },
+  {
+    title: "Contact Us  ",
+    href: "/contact",
   },
   {
     title: "Our IT Partner – Crown Digital Lab",

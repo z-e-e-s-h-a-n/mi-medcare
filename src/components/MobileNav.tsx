@@ -25,7 +25,7 @@ const Navigation = ({ className }: NavigationProps) => {
 
   return (
     <nav className={cn("navigation", className)}>
-      {mainMenu.slice(0, 5).map(({ title, href, subMenu }) => {
+      {mainMenu.slice(0, 6).map(({ title, href, subMenu }) => {
         const Comp = subMenu ? "div" : Link;
 
         return (
@@ -56,14 +56,14 @@ const Navigation = ({ className }: NavigationProps) => {
 const MobileNav = () => {
   return (
     <>
-      <Navigation className="hidden md:flex" />
+      <Navigation className="hidden lg:flex mr-4 lg:mr-16" />
       <Sheet>
-        <SheetTrigger className="md:hidden">
+        <SheetTrigger className="lg:hidden">
           <TextAlignEnd className="size-6" />
         </SheetTrigger>
         <SheetContent
           side="left"
-          className="p-4 items-start gap-8 md:hidden overflow-y-auto"
+          className="p-4 items-start gap-8 lg:hidden overflow-y-auto"
         >
           <SheetClose>
             <Image
