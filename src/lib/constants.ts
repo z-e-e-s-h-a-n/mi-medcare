@@ -1,3 +1,4 @@
+import { SheetTitle } from "@/components/ui/sheet";
 import {
   Bandage,
   Bed,
@@ -562,3 +563,36 @@ export const specialties = [
 ];
 
 export const EHRsList = Array.from({ length: 33 });
+
+export const testimonials = [
+  {
+    name: "Meryam Shikara, MD",
+    title: "Otolaryngology",
+    imageUrl: "/images/testimonials/testimonial-1.jpg",
+    desc: "Mi MedCare's billing expertise helped streamline our claims process and reduce denials significantly.",
+  },
+  {
+    name: "Joshua A. Scheinerman, MD",
+    title: "Cardiac Surgery",
+    imageUrl: "/images/testimonials/testimonial-2.jpg",
+    desc: "Their team's attention to detail improved our revenue cycle and cash flow tremendously.",
+  },
+  {
+    name: "Aaron J. Wengrofsky, MD",
+    title: "Cardiology",
+    imageUrl: "/images/testimonials/testimonial-3.jpg",
+    desc: "Excellent credentialing and enrollment services. We're now enrolled with all major payers.",
+  },
+  {
+    name: "Lena Alsabban, DDS",
+    title: "Oral-Maxillofacial Surgery",
+    imageUrl: "/images/testimonials/testimonial-4.jpg",
+    desc: "Professional A/R management that maximized our reimbursements and reduced outstanding balances.",
+  },
+  {
+    name: "Pauline Muscat, PA",
+    title: "Wound Care",
+    imageUrl: "/images/testimonials/testimonial-5.jpg",
+    desc: "Outstanding support with claims and prior authorizations. Highly recommended for specialty practices.",
+  },
+];

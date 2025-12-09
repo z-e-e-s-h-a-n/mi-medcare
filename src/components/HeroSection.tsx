@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import IconWrapper from "./IconWrapper";
-import { contactDetails } from "@/lib/constants";
+import { contactDetails, testimonials } from "@/lib/constants";
 
 const HeroSection = () => {
   return (
@@ -60,11 +60,15 @@ const HeroSection = () => {
             <span>4.9 Clients Rating</span>
           </div>
           <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            {testimonials.map((t) => (
+              <Image
+                key={t.title}
+                src={t.imageUrl}
+                alt={t.title}
+                width={48}
+                height={48}
+              />
+            ))}
           </ul>
         </div>
         <div>

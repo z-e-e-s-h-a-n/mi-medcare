@@ -10,30 +10,23 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { testimonials } from "@/lib/constants";
 
 const TestimonialSection = () => {
-  const testimonials = [
-    {
-      name: "Dr. Emily Carter",
-      title: "Family Practice",
-      desc: "They simplified our billing completely. Clean claims, faster payments, and no more stress over denials",
-      avatar: "/images/testimonial-1.webp",
-    },
-  ];
-
   return (
     <section className="testimonial-section mb-16">
       <span>Testimonials</span>
       <h2>Dr. Experiences That Speak for Themselves</h2>
 
       <div>
-        <Image
-          src="/images/testimonial-left.webp"
-          alt="Testimonials Image"
-          width={600}
-          height={600}
-        />
-
+        <div>
+          <Image
+            src="/images/testimonial-left.webp"
+            alt="Testimonials Image"
+            width={600}
+            height={600}
+          />
+        </div>
         <div>
           <IconWrapper>
             <Quote />
@@ -46,7 +39,12 @@ const TestimonialSection = () => {
               {testimonials.map((t, i) => (
                 <CarouselItem key={i}>
                   <div>
-                    <Image src={t.avatar} alt={t.name} width={60} height={60} />
+                    <Image
+                      src={t.imageUrl}
+                      alt={t.name}
+                      width={60}
+                      height={60}
+                    />
                     <div>
                       <h5>{t.name}</h5>
                       <span>{t.title}</span>

@@ -326,8 +326,8 @@
           &:first-of-type {
             @apply bg-white max-lg:bottom-[5%] lg:bottom-1/5 max-md:right-4 md:left-4 space-y-4;
 
-            li {
-              @apply size-10 bg-primary/20 rounded-full;
+            img {
+              @apply size-10 bg-primary/20 rounded-full shadow-2xl border-2 border-white object-top;
 
               &:not(:first-child) {
                 @apply -ml-2;
@@ -567,45 +567,44 @@
     > div {
       @apply flex-col lg:flex-row flex items-center justify-between gap-16 mt-10;
 
-      > img,
-      > div:first-of-type {
-        @apply basis-1/2;
-      }
-
-      img {
-        @apply rounded-2xl;
-      }
-
       > div {
-        @apply space-y-8 text-start;
+        @apply w-full md:w-1/2;
 
-        > div:first-child {
-          @apply ml-auto text-end;
+        > img {
+          @apply rounded-2xl;
         }
 
-        [data-slot="carousel-previous"],
-        [data-slot="carousel-next"] {
-          position: relative !important;
-          @apply mb-4;
-        }
+        &:last-child {
+          @apply space-y-8 text-start;
 
-        [data-slot="carousel-item"] {
-          @apply space-y-8;
+          > div:first-child {
+            @apply ml-auto text-end;
+          }
 
-          > div {
-            @apply flex items-center gap-4;
+          [data-slot="carousel-previous"],
+          [data-slot="carousel-next"] {
+            position: relative !important;
+            @apply mb-4;
+          }
 
-            img {
-              @apply size-[60px] rounded-full;
-            }
+          [data-slot="carousel-item"] {
+            @apply space-y-8 max-w-full;
 
             > div {
-              h5 {
-                @apply text-lg font-medium;
+              @apply flex items-center gap-4;
+
+              img {
+                @apply size-[60px] rounded-full object-top;
               }
 
-              > span {
-                @apply subtitle;
+              > div {
+                h5 {
+                  @apply text-lg font-medium;
+                }
+
+                > span {
+                  @apply subtitle;
+                }
               }
             }
           }
