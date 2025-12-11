@@ -481,7 +481,8 @@
             @apply col-span-full text-2xl font-semibold;
           }
 
-          > div:last-of-type {
+          > div:last-of-type,
+          > p {
             @apply col-span-full;
           }
         }

@@ -27,6 +27,7 @@ const Home = () => {
       <WelcomeSection />
       <ServiceSection />
       <ContactSection />
+
       <StrategySection
         title="How It Works"
         desc="Smart Processes. Real Results. Reliable Payments"

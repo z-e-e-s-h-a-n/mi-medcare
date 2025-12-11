@@ -17,15 +17,21 @@ export const formSchema = z.object({
     .min(3, { error: "Last name must be at least 3 characters" })
     .max(50, { error: "Last name is too long" }),
 
-  email: z.email({ error: "Please enter a valid email address" }),
-
-  subject: z
+  email: z
     .string({
-      error: "Subject is required",
+      error: "Email is required",
     })
     .trim()
-    .min(5, { error: "Subject must be at least 5 characters" })
-    .max(150, { error: "Subject is too long" }),
+    .email({ error: "Please enter a valid email address" }),
+
+  phone: z
+    .string({
+      error: "Phone number is required",
+    })
+    .trim()
+    .regex(/^\+?[0-9\s\-()]{10,}$/, {
+      error: "Please enter a valid phone number",
+    }),
 
   message: z
     .string({
