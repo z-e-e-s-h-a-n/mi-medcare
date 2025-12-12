@@ -49,6 +49,8 @@ export const userEmailTemplate = (data: FormType) => `
       <p style="margin-top: 30px; font-size: 14px; color: #999;">
         MI MedCare LLC  
         <br />
+        1401 21st ST #13807 Sacramento, CA, 95811, US
+        <br />
         <a href="https://mimedcarellc.com" style="color:#7846FF;">Visit our website</a>
       </p>
     </div>

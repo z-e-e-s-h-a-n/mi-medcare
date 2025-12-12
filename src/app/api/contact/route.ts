@@ -21,14 +21,14 @@ export async function POST(req: Request) {
     await transporter.sendMail({
       from: `MI MedCare <${process.env.SMTP_USER}>`,
       to: process.env.ADMIN_EMAIL!,
-      subject: "New Contact Form Submission",
+      subject: "New Contact Form Submission – MI MedCare LLC",
       html: adminEmailTemplate(data),
     });
 
     await transporter.sendMail({
       from: `MI MedCare <${process.env.SMTP_USER}>`,
       to: data.email,
-      subject: "We received your message",
+      subject: "We've Received Your Message – MI MedCare LLC",
       html: userEmailTemplate(data),
     });
 
