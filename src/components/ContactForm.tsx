@@ -31,6 +31,13 @@ const ContactForm = ({
 
   const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      message: "",
+    },
   });
 
   const onSubmit = async (values: FormType) => {
@@ -50,14 +57,15 @@ const ContactForm = ({
         throw Error("Failed to send message.");
       }
 
-      form.reset({});
-      setLoading(false);
       setFormMessage("Thank you! Your message has been sent successfully.");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setLoading(false);
       setFormMessage("Error:" + (err?.message ?? "Something went wrong."));
+    } finally {
+      setLoading(false);
+      form.reset();
+      setTimeout(() => setFormMessage(""), 3000);
     }
   };
 
