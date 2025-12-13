@@ -34,7 +34,7 @@ export async function addLeadToSheet(data: FormType) {
     existing.data.values?.flat().map((e) => e.toLowerCase().trim()) || [];
 
   if (emails.includes(email)) {
-    console.log("Duplicate lead skipped:", email);
+    console.log("Duplicate lead skipped in Sheets:", email);
     return { inserted: false, reason: "DUPLICATE_EMAIL" };
   }
 
