@@ -3,6 +3,7 @@ import { FormType } from "@/schemas/contactForm";
 import { NextResponse } from "next/server";
 import { addLeadToSheet } from "@/lib/googleSheets";
 import { adminEmailTemplate, userEmailTemplate } from "@/lib/templates";
+import { addLeadToGHL } from "@/lib/goHighLevel";
 
 export async function POST(req: Request) {
   try {
@@ -34,6 +35,7 @@ export async function POST(req: Request) {
     });
 
     await addLeadToSheet(data);
+    await addLeadToGHL(data);
 
     return NextResponse.json({ success: true });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
