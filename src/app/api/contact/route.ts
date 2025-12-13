@@ -1,7 +1,8 @@
-import { adminEmailTemplate, userEmailTemplate } from "@/lib/templates";
+import nodemailer from "nodemailer";
 import { FormType } from "@/schemas/contactForm";
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { addLeadToSheet } from "@/lib/googleSheets";
+import { adminEmailTemplate, userEmailTemplate } from "@/lib/templates";
 
 export async function POST(req: Request) {
   try {
@@ -31,6 +32,8 @@ export async function POST(req: Request) {
       subject: "We've Received Your Message – MI MedCare LLC",
       html: userEmailTemplate(data),
     });
+
+    await addLeadToSheet(data);
 
     return NextResponse.json({ success: true });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
