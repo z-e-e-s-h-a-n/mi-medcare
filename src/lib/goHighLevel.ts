@@ -1,9 +1,29 @@
-export async function addLeadToGHL(data: {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone?: string;
-}) {
+import { FormType } from "@/schemas/contactForm";
+
+export async function addLeadToGHL(data: FormType) {
+  const searchRes = await fetch(
+    `https://rest.gohighlevel.com/v1/contacts/?email=${encodeURIComponent(
+      data.email
+    )}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.GHL_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!searchRes.ok) {
+    const error = await searchRes.text();
+    throw new Error(`GHL API Search Error: ${error}`);
+  }
+  const searchData = await searchRes.json();
+  if (searchData.contacts && searchData.contacts.length > 0) {
+    console.log("Contact already exists in GHL", searchData.contacts[0]);
+    return;
+  }
+
   const res = await fetch("https://rest.gohighlevel.com/v1/contacts/", {
     method: "POST",
     headers: {
@@ -24,6 +44,5 @@ export async function addLeadToGHL(data: {
     const error = await res.text();
     throw new Error(`GHL API Error: ${error}`);
   }
-
   return res.json();
 }
