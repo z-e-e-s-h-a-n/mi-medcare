@@ -12,19 +12,18 @@ const auth = new google.auth.GoogleAuth({
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID!;
 const SHEET_NAME = "contact-form";
 
-const formatDate = () => {
-  return new Date().toLocaleString("en-US", {
+const formatDate = () =>
+  new Date().toLocaleString("en-US", {
     dateStyle: "medium",
     timeStyle: "short",
   });
-};
 
 export async function addLeadToSheet(data: FormType) {
   const sheets = google.sheets({ version: "v4", auth });
 
   const email = data.email.toLowerCase().trim();
 
-  //
+  // Get all existing emails
   const existing = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
     range: `${SHEET_NAME}!C:C`,
@@ -33,14 +32,11 @@ export async function addLeadToSheet(data: FormType) {
   const emails =
     existing.data.values?.flat().map((e) => e.toLowerCase().trim()) || [];
 
-  if (emails.includes(email)) {
-    console.log("Duplicate lead skipped in Sheets:", email);
-    return { inserted: false, reason: "DUPLICATE_EMAIL" };
-  }
+  const isDuplicate = emails.includes(email);
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
-    range: `${SHEET_NAME}!A:F`,
+    range: `${SHEET_NAME}!A:G`,
     valueInputOption: "USER_ENTERED",
     requestBody: {
       values: [
@@ -51,10 +47,11 @@ export async function addLeadToSheet(data: FormType) {
           data.phone,
           data.message,
           formatDate(),
+          isDuplicate ? "DUPLICATE" : "NEW",
         ],
       ],
     },
   });
 
-  return { inserted: true };
+  return { inserted: true, duplicate: isDuplicate };
 }
