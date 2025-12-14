@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import type { FormType } from "@/schemas/contactForm";
+import { formatDate } from "./utils";
 
 const auth = new google.auth.GoogleAuth({
   credentials: {
@@ -11,17 +12,6 @@ const auth = new google.auth.GoogleAuth({
 
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID!;
 const SHEET_NAME = "contact-form";
-
-const formatDate = (timeZone = "Asia/Karachi") =>
-  new Date().toLocaleString("en-US", {
-    timeZone,
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  });
 
 export async function addLeadToSheet(data: FormType) {
   const sheets = google.sheets({ version: "v4", auth });
