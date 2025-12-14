@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/sheet";
 import { mainMenu } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { ChevronDown, ChevronRight, TextAlignEnd } from "lucide-react";
+import { ChevronDown, TextAlignEnd } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,10 +18,17 @@ interface NavigationProps {
 }
 
 const Navigation = ({ className }: NavigationProps) => {
-  const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+
   const pathname = usePathname();
 
-  const ToggleSubMenu = (hasSub: boolean) => setOpen(hasSub ? !open : false);
+  const toggleSubMenu = (title: string, hasSub?: boolean) => {
+    if (!hasSub) {
+      setOpenMenu(null);
+      return;
+    }
+    setOpenMenu((prev) => (prev === title ? null : title));
+  };
 
   return (
     <nav className={cn("navigation", className)}>
@@ -33,12 +40,12 @@ const Navigation = ({ className }: NavigationProps) => {
             href={href}
             key={title}
             className={cn("group", pathname === href ? "active" : "")}
-            onClick={() => ToggleSubMenu(!!subMenu)}
+            onClick={() => toggleSubMenu(title, !!subMenu)}
           >
             {title}
             {subMenu && <ChevronDown />}
             {subMenu && (
-              <ul className={cn("hidden", open && "active")}>
+              <ul className={cn("hidden", openMenu === title && "active")}>
                 {subMenu.map(({ title, href }) => (
                   <Link href={href} key={title}>
                     {title}

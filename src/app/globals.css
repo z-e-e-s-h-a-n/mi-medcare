@@ -235,7 +235,7 @@
         @apply lg:group-hover:flex! basis-full lg:absolute top-[150%] z-20 p-4 lg:rounded-2xl lg:bg-secondary flex-wrap gap-4 w-full lg:w-xl text-sm dot-list;
 
         &.active {
-          @apply flex;
+          @apply flex!;
         }
 
         > a {
