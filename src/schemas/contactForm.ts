@@ -24,8 +24,11 @@ export const formSchema = z.object({
   phone: z
     .string({ error: "Phone number is required" })
     .trim()
-    .regex(/^\+?[0-9\s\-()]{10,}$/, {
-      error: "Please enter a valid phone number",
+    .refine((val) => /^\+\d{1,3}/.test(val), {
+      message: "Country code is required",
+    })
+    .refine((val) => /^\+\d{1,3}[\d\s\-()]{6,14}$/.test(val), {
+      message: "Please enter a valid phone number",
     })
     .transform((val) => val.replace(/\s+/g, "")),
 
