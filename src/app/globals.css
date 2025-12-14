@@ -217,11 +217,11 @@
   }
 
   .navigation {
-    @apply flex flex-col md:flex-row md:items-center gap-6;
+    @apply flex flex-col lg:flex-row lg:items-center gap-6;
 
     > a,
-    div {
-      @apply cursor-pointer relative my-auto flex md:justify-center md:items-center flex-wrap md:gap-0 hover:text-primary;
+    > div {
+      @apply cursor-pointer relative my-auto flex lg:justify-center lg:items-center flex-wrap lg:gap-0 hover:text-primary;
 
       & > svg {
         @apply size-5 stroke-1;
@@ -232,14 +232,14 @@
       }
 
       & > ul {
-        @apply md:group-hover:flex! basis-full md:absolute top-[150%] z-20 p-4 md:rounded-2xl md:bg-secondary flex-wrap gap-4 w-full md:w-xl text-sm dot-list;
+        @apply lg:group-hover:flex! basis-full lg:absolute top-[150%] z-20 p-4 lg:rounded-2xl lg:bg-secondary flex-wrap gap-4 w-full lg:w-xl text-sm dot-list;
 
         &.active {
           @apply flex;
         }
 
         > a {
-          @apply basis-full md:basis-[calc(33%-16px)] text-foreground hover:text-primary;
+          @apply basis-full lg:basis-[calc(33%-16px)] text-foreground hover:text-primary;
         }
       }
 
