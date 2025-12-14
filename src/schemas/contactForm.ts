@@ -34,6 +34,8 @@ export const formSchema = z.object({
     .trim()
     .min(10, { error: "Message must be at least 10 characters" })
     .max(2000, { error: "Message is too long" }),
+
+  timeZone: z.string().optional(),
 });
 
 export type FormType = z.infer<typeof formSchema>;

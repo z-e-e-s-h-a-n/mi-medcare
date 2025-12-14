@@ -12,10 +12,15 @@ const auth = new google.auth.GoogleAuth({
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID!;
 const SHEET_NAME = "contact-form";
 
-const formatDate = () =>
+const formatDate = (timeZone = "Asia/Karachi") =>
   new Date().toLocaleString("en-US", {
-    dateStyle: "medium",
-    timeStyle: "short",
+    timeZone,
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
   });
 
 export async function addLeadToSheet(data: FormType) {
@@ -46,7 +51,7 @@ export async function addLeadToSheet(data: FormType) {
           email,
           data.phone,
           data.message,
-          formatDate(),
+          formatDate(data.timeZone),
           isDuplicate ? "DUPLICATE" : "NEW",
         ],
       ],

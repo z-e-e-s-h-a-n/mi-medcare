@@ -37,6 +37,7 @@ const ContactForm = ({
       phone: "",
       email: "",
       message: "",
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     },
   });
 
