@@ -448,8 +448,8 @@ export const mainMenu = [
     href: "/contact",
   },
   {
-    title: "Our IT Partner – Crown Digital Lab",
-    href: "#",
+    title: "Our IT Partner – JZ Digital Labs",
+    href: "https://jzdlabs.com/",
   },
 ];
 

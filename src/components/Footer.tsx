@@ -69,8 +69,8 @@ const Footer = () => {
         <p>Mimedcarellc © All Rights Reserved.​</p>
         <p>
           Website Designed by{" "}
-          <Link href="#">
-            <strong>Crown Digital Lab</strong>
+          <Link href="https://jzdlabs.com/">
+            <strong>JZ Digital Lab</strong>
           </Link>
         </p>
       </div>
