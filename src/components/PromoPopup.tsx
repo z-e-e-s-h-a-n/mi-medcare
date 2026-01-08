@@ -12,11 +12,15 @@ const PromoPopup = () => {
     const popupShown = getCookie("promoPopupShown");
 
     if (!popupShown) {
-      queueMicrotask(() => setOpen(true));
+      const timer = setTimeout(() => {
+        setOpen(true);
 
-      setCookie("promoPopupShown", "yes", {
-        maxAge: 60 * 60 * 24,
-      });
+        setCookie("promoPopupShown", "yes", {
+          maxAge: 60 * 60 * 24,
+        });
+      }, 3000); // 3 seconds delay
+
+      return () => clearTimeout(timer);
     }
   }, []);
 
@@ -43,7 +47,10 @@ const PromoPopup = () => {
           bg-secondary/95 shadow-xl
         "
       >
-        <X className="absolute right-4 top-4 cursor-pointer" />
+        <X
+          className="absolute right-4 top-4 cursor-pointer"
+          onClick={() => setOpen(false)}
+        />
 
         <div className="space-y-6">
           <h4 className="text-3xl font-semibold">

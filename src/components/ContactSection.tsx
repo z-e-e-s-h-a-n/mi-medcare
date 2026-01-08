@@ -20,7 +20,7 @@ const ContactSection = () => {
         />
       </div>
       <div>
-        <h4>Work Hours</h4>
+        <span>Work Hours</span>
         <p>
           Expert billing support available so your revenue cycle never sleeps
         </p>

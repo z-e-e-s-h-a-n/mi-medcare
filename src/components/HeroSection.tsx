@@ -61,13 +61,9 @@ const HeroSection = () => {
           </div>
           <ul>
             {testimonials.map((t) => (
-              <Image
-                key={t.title}
-                src={t.imageUrl}
-                alt={t.title}
-                width={48}
-                height={48}
-              />
+              <li key={t.title}>
+                <Image src={t.imageUrl} alt={t.title} width={48} height={48} />
+              </li>
             ))}
           </ul>
         </div>

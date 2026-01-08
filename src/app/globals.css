@@ -326,8 +326,12 @@
           &:first-of-type {
             @apply bg-white max-lg:bottom-[5%] lg:bottom-1/5 max-md:right-4 md:left-4 space-y-4;
 
-            img {
-              @apply size-10 bg-primary/20 rounded-full shadow-2xl border-2 border-white object-top;
+            ul > li {
+              @apply size-10 overflow-hidden bg-primary/20 rounded-full shadow-2xl border border-black;
+
+              img {
+                @apply object-top size-full rounded-full;
+              }
 
               &:not(:first-child) {
                 @apply -ml-2;
@@ -477,7 +481,7 @@
         form {
           @apply p-8 lg:p-18 bg-white rounded-2xl  grid grid-cols-2 gap-x-4 md:gap-x-8;
 
-          h4 {
+          span {
             @apply col-span-full text-2xl font-semibold;
           }
 
