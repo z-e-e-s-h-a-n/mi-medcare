@@ -18,7 +18,7 @@ const PromoPopup = () => {
         setCookie("promoPopupShown", "yes", {
           maxAge: 60 * 60 * 24,
         });
-      }, 3000); // 3 seconds delay
+      }, 3000);
 
       return () => clearTimeout(timer);
     }

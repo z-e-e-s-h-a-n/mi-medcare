@@ -26,7 +26,7 @@ const Header = () => {
         </Link>
       </div>
       <div>
-        <Image src="/images/logo-t.png" alt="Logo" width={200} height={60} />
+        <Image src="/images/logo.svg" alt="Logo" width={200} height={60} />
         <MobileNav />
       </div>
     </header>
