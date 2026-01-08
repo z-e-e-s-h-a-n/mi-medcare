@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "./ui/button";
 import Link from "next/link";
 import {
   Album,
@@ -66,8 +65,13 @@ const ServiceSection = () => {
             <IconWrapper className="mx-auto">{<s.icon />}</IconWrapper>
             <h4>{s.title}</h4>
             <p>{s.desc}</p>
-            <Link href={s.href}>
-              Learn more <ArrowRight />{" "}
+            <Link
+              href={s.href}
+              className="service-link"
+              aria-label={`Learn more about ${s.title}`}
+            >
+              <span>Learn more</span>
+              <ArrowRight aria-hidden="true" />
             </Link>
           </li>
         ))}
