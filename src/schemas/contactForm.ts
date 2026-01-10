@@ -1,42 +1,38 @@
 import { z } from "zod";
 
+/* ---------- Name Schemas ---------- */
+
+const nameSchema = z
+  .string({ error: "First name is required" })
+  .trim()
+  .min(2, "First name must be at least 2 characters")
+  .max(50, "First name is too long")
+  .transform((val) => val.replace(/\s+/g, " "));
+
+/* ---------- Main Schema ---------- */
+
 export const formSchema = z.object({
-  firstName: z
-    .string({ error: "First name is required" })
-    .trim()
-    .min(3, { error: "First name must be at least 3 characters" })
-    .max(50, { error: "First name is too long" })
-    .transform((val) => val.replace(/\s+/g, " ")),
+  firstName: nameSchema,
+  lastName: nameSchema.optional(),
 
-  lastName: z
-    .string({ error: "Last name is required" })
-    .trim()
-    .min(3, { error: "Last name must be at least 3 characters" })
-    .max(50, { error: "Last name is too long" })
-    .transform((val) => val.replace(/\s+/g, " ")),
-
-  email: z
-    .string({ error: "Email is required" })
-    .trim()
-    .email({ error: "Please enter a valid email address" })
-    .transform((val) => val.toLowerCase()),
+  email: z.email({ error: "Email is required" }).trim().toLowerCase(),
 
   phone: z
     .string({ error: "Phone number is required" })
     .trim()
-    .refine((val) => /^\+\d{1,3}/.test(val), {
-      message: "Country code is required",
-    })
-    .refine((val) => /^\+\d{1,3}[\d\s\-()]{6,14}$/.test(val), {
-      message: "Please enter a valid phone number",
-    })
-    .transform((val) => val.replace(/\s+/g, "")),
+    .transform((val) => val.replace(/[^\d+]/g, ""))
+    .refine(
+      (val) => val.replace(/\D/g, "").length >= 10,
+      "Please enter a valid phone number"
+    ),
 
   message: z
     .string({ error: "Message is required" })
     .trim()
-    .min(10, { error: "Message must be at least 10 characters" })
-    .max(2000, { error: "Message is too long" }),
+    .min(10, "Please provide a brief description of your billing needs")
+    .max(2000, "Message is too long")
+    .transform((val) => val.replace(/\s+/g, " "))
+    .optional(),
 
   timeZone: z.string().optional(),
 });

@@ -33,10 +33,10 @@ const ContactForm = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
-      lastName: "",
+      lastName: undefined,
       phone: "",
       email: "",
-      message: "",
+      message: undefined,
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     },
   });
@@ -58,7 +58,9 @@ const ContactForm = ({
         throw Error("Failed to send message.");
       }
 
-      setFormMessage("Thank you! Your message has been sent successfully.");
+      setFormMessage(
+        "We respond within 1 business day. All information is kept confidential."
+      );
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
@@ -81,26 +83,26 @@ const ContactForm = ({
         {message && <p className={messageCn}>{message}</p>}
         <InputField
           name="firstName"
-          label="First Name"
-          placeholder="First name here"
+          label="First Name *"
+          placeholder="e.g., John"
           control={form.control}
         />
         <InputField
           name="lastName"
           label="Last Name"
-          placeholder="Last name here"
+          placeholder="e.g., Smith"
           control={form.control}
         />
         <InputField
           name="phone"
-          label="Phone"
-          placeholder="Add Phone"
+          label="Phone *"
+          placeholder="e.g., +1 (555) 123-4567"
           control={form.control}
         />
         <InputField
           name="email"
-          label="Email"
-          placeholder="Add email"
+          label="Email *"
+          placeholder="e.g., billing@clinicname.com"
           control={form.control}
         />
 
