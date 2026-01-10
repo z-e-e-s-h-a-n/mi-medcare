@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const primaryFont = Inter({
   variable: "--font-primary",
@@ -16,11 +17,15 @@ export const metadata: Metadata = {
 function RootLayout({ children }: AppLayoutProps) {
   return (
     <html lang="en">
-      <meta
-        name="google-site-verification"
-        content="czbQ2_F4AE2zI66qUe-473yuffmrVgF3YvPeJoHJImQ"
-      />
+      <head>
+        {/* Google Search Console Verification */}
+        <meta
+          name="google-site-verification"
+          content="czbQ2_F4AE2zI66qUe-473yuffmrVgF3YvPeJoHJImQ"
+        />
+      </head>
       <body className={`${primaryFont.variable} antialiased`}>{children}</body>
+      <GoogleAnalytics gaId="G-3GCVD9KWT0" />
     </html>
   );
 }
