@@ -11,8 +11,7 @@ export const adminEmailTemplate = (data: FormType) => `
       <h3 style="color:#7846FF; margin-top: 25px;">Form Details</h3>
 
       <div style="background:#F3EDFF; padding: 15px; border-radius: 6px;">
-        <p><strong>First Name:</strong> ${data.firstName} </p>
-        <p><strong>Last Name:</strong> ${data.lastName} </p>
+        <p><strong>First Name:</strong> ${data.name} </p>
         <p><strong>Email:</strong> ${data.email} </p>
         <p><strong>Phone:</strong> ${data.phone} </p>
         <p><strong>Message:</strong>  ${data.message} </p>
@@ -33,7 +32,7 @@ export const userEmailTemplate = (data: FormType) => `
       <h2 style="color:#7846FF;">Thank You for Contacting Us!</h2>
 
       <p style="font-size: 15px;">
-        Hi ${data.firstName},<br/><br/>
+        Hi ${data.name},<br/><br/>
         Thank you for reaching out to <strong>MI MedCare LLC</strong>.
         We’ve received your message and our support team will get back to you shortly.
       </p>

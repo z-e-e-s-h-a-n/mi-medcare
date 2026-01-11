@@ -479,15 +479,10 @@
         @apply space-y-4 lg:max-w-xl;
 
         form {
-          @apply p-8 lg:p-18 bg-white rounded-2xl  grid grid-cols-2 gap-x-4 md:gap-x-8;
+          @apply p-8 lg:p-18 bg-white rounded-2xl  grid;
 
           span {
             @apply col-span-full text-2xl font-semibold;
-          }
-
-          > div:last-of-type,
-          > p {
-            @apply col-span-full;
           }
         }
 

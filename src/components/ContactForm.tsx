@@ -32,8 +32,7 @@ const ContactForm = ({
   const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: undefined,
+      name: "",
       phone: "",
       email: "",
       message: undefined,
@@ -82,15 +81,9 @@ const ContactForm = ({
         {title && <h4 className={titleCn}>Contact Us</h4>}
         {message && <p className={messageCn}>{message}</p>}
         <InputField
-          name="firstName"
-          label="First Name *"
+          name="name"
+          label="Name *"
           placeholder="e.g., John"
-          control={form.control}
-        />
-        <InputField
-          name="lastName"
-          label="Last Name"
-          placeholder="e.g., Smith"
           control={form.control}
         />
         <InputField

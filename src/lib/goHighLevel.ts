@@ -1,6 +1,8 @@
 import { FormType } from "@/schemas/contactForm";
 
 export async function addLeadToGHL(data: FormType) {
+  const [firstName, ...lastName] = data.name.split(" ").map((v) => v.trim());
+
   const res = await fetch("https://services.leadconnectorhq.com/contacts/", {
     method: "POST",
     headers: {
@@ -10,8 +12,8 @@ export async function addLeadToGHL(data: FormType) {
     },
     body: JSON.stringify({
       locationId: process.env.GHL_LOCATION_ID,
-      firstName: data.firstName,
-      lastName: data.lastName,
+      firstName: firstName,
+      lastName: lastName,
       email: data.email,
       phone: data.phone,
       tags: ["website-lead"],

@@ -28,6 +28,7 @@ export async function addLeadToSheet(data: FormType) {
     existing.data.values?.flat().map((e) => e.toLowerCase().trim()) || [];
 
   const isDuplicate = emails.includes(email);
+  const [firstName, ...lastName] = data.name.split(" ").map((v) => v.trim());
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
@@ -36,8 +37,8 @@ export async function addLeadToSheet(data: FormType) {
     requestBody: {
       values: [
         [
-          data.firstName,
-          data.lastName,
+          firstName,
+          lastName,
           email,
           data.phone,
           data.message,

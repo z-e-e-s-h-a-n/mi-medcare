@@ -2,18 +2,15 @@ import { z } from "zod";
 
 /* ---------- Name Schemas ---------- */
 
-const nameSchema = z
-  .string({ error: "First name is required" })
-  .trim()
-  .min(2, "First name must be at least 2 characters")
-  .max(50, "First name is too long")
-  .transform((val) => val.replace(/\s+/g, " "));
-
 /* ---------- Main Schema ---------- */
 
 export const formSchema = z.object({
-  firstName: nameSchema,
-  lastName: nameSchema.optional(),
+  name: z
+    .string({ error: "First name is required" })
+    .trim()
+    .min(2, "First name must be at least 2 characters")
+    .max(50, "First name is too long")
+    .transform((val) => val.replace(/\s+/g, " ")),
 
   email: z.email({ error: "Email is required" }).trim().toLowerCase(),
 
