@@ -6,16 +6,13 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React from "react";
-
 import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const pageData = servicesMenu.find((s) => s.href.includes(params.slug));
+}: AppPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const pageData = servicesMenu.find((s) => s.href.includes(slug));
 
   if (!pageData) return {};
 
