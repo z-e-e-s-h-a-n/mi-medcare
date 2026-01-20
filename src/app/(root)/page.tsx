@@ -9,14 +9,7 @@ import ParallaxSection from "@/components/ParallaxSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import { strategyStepsHome } from "@/lib/constants";
 import PromoPopup from "@/components/PromoPopup";
-import type { Metadata } from "next";
 import EHRsSection from "@/components/EHRsSection";
-
-export const metadata: Metadata = {
-  title: "Top Medical Billing Services in USA - MI MedCare",
-  description:
-    "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
-};
 
 const Home = () => {
   return (

@@ -9,7 +9,10 @@ const primaryFont = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Top Medical Billing Services in USA - MI MedCare LLC",
+  title: {
+    default: "Medical Billing Services in USA",
+    template: "%s | MI MedCare",
+  },
   description:
     "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
 };

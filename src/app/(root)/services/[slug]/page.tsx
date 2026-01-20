@@ -10,6 +10,28 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const pageData = servicesMenu.find((s) => s.href.includes(params.slug));
+
+  if (!pageData) return {};
+
+  const cleanTitle = pageData.title
+    .replace(/[\/-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return {
+    title: cleanTitle,
+    description: `MI MedCare offers professional ${pageData.title.toLowerCase()} services to improve revenue cycle efficiency, reduce denials, and increase reimbursements.`,
+  };
+}
+
 const ServicesPage = ({ params }: AppPageProps) => {
   const { slug } = React.use(params);
 
@@ -17,7 +39,7 @@ const ServicesPage = ({ params }: AppPageProps) => {
   if (!pageData) return notFound();
 
   const isObjectServices = pageData.services.every(
-    (s) => typeof s === "object"
+    (s) => typeof s === "object",
   );
 
   return (
@@ -31,7 +53,7 @@ const ServicesPage = ({ params }: AppPageProps) => {
           className={cn(
             isObjectServices
               ? "flex flex-col md:flex-row md:items-end md:*:basis-1/2 text-center space-y-4"
-              : "text-center space-y-8"
+              : "text-center space-y-8",
           )}
         >
           <div className="space-y-6">
@@ -47,7 +69,7 @@ const ServicesPage = ({ params }: AppPageProps) => {
         <ul
           className={cn(
             "flex flex-wrap gap-4",
-            isObjectServices ? "" : "bg-secondary p-4 rounded-2xl dot-list"
+            isObjectServices ? "" : "bg-secondary p-4 rounded-2xl dot-list",
           )}
         >
           {pageData.subtitle && (

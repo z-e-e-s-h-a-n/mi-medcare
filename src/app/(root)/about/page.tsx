@@ -16,9 +16,9 @@ import { strategyStepsAbout } from "@/lib/constants";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Top Medical Billing Services in USA - MI MedCare",
+  title: "About Us",
   description:
-    "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
+    "Learn about MI MedCare LLC, a trusted medical billing and revenue cycle management company helping healthcare providers across the USA improve efficiency, compliance, and profitability.",
 };
 
 const AboutPage = () => {

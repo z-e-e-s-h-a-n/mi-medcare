@@ -1,6 +1,13 @@
 import EHRsSection from "@/components/EHRsSection";
 import PageHeader from "@/components/PageHeader";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "EMR & EHR Support Services",
+  description:
+    "MI MedCare provides expert EMR and EHR support services to ensure clean claims, faster reimbursements, and seamless medical billing across all major EHR platforms.",
+};
 
 const EHRsPage = () => {
   return (

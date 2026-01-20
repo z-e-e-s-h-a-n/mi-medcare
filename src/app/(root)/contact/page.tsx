@@ -9,9 +9,9 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Top Medical Billing Services in USA - MI MedCare",
+  title: "Contact Us",
   description:
-    "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
+    "Contact MI MedCare LLC for medical billing, RCM, and healthcare revenue solutions in the USA.",
 };
 
 const ContactPage = () => {
