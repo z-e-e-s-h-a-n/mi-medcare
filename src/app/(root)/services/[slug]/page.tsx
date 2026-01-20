@@ -1,5 +1,3 @@
-"use client";
-
 import ContactSection from "@/components/ContactSection";
 import IconWrapper from "@/components/IconWrapper";
 import PageHeader from "@/components/PageHeader";
@@ -32,8 +30,8 @@ export async function generateMetadata({
   };
 }
 
-const ServicesPage = ({ params }: AppPageProps) => {
-  const { slug } = React.use(params);
+const ServicesPage = async ({ params }: AppPageProps) => {
+  const { slug } = await params;
 
   const pageData = servicesMenu.find((s) => s.href.includes(slug));
   if (!pageData) return notFound();
