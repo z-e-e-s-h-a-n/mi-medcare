@@ -480,10 +480,6 @@
 
         form {
           @apply p-8 lg:p-18 bg-white rounded-2xl  grid;
-
-          span {
-            @apply col-span-full text-2xl font-semibold;
-          }
         }
 
         img {
@@ -700,7 +696,7 @@
 }
 
 @utility text-outline-* {
-  -webkit-text-stroke: 1px --value(--color- *);
+  -webkit-text-stroke: 1px --value(--color-*);
   color: transparent;
 }
 

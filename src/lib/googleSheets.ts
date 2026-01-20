@@ -41,6 +41,7 @@ export async function addLeadToSheet(data: FormType) {
           lastName,
           email,
           data.phone,
+          data.source,
           data.message,
           formatDate(data.timeZone),
           isDuplicate ? "DUPLICATE" : "NEW",

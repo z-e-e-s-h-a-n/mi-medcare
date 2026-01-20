@@ -1,8 +1,14 @@
 import { z } from "zod";
 
-/* ---------- Name Schemas ---------- */
-
-/* ---------- Main Schema ---------- */
+export const contactSource = z.enum([
+  "email",
+  "website",
+  "linkedIn",
+  "ad",
+  "facebook",
+  "instagram",
+  "call",
+]);
 
 export const formSchema = z.object({
   name: z
@@ -20,8 +26,10 @@ export const formSchema = z.object({
     .transform((val) => val.replace(/[^\d+]/g, ""))
     .refine(
       (val) => val.replace(/\D/g, "").length >= 10,
-      "Please enter a valid phone number"
+      "Please enter a valid phone number",
     ),
+
+  source: contactSource.default("website"),
 
   message: z
     .string({ error: "Message is required" })
@@ -34,4 +42,4 @@ export const formSchema = z.object({
   timeZone: z.string().optional(),
 });
 
-export type FormType = z.infer<typeof formSchema>;
+export type FormType = z.input<typeof formSchema>;

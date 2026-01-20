@@ -59,15 +59,14 @@ const ContactPage = () => {
           </li>
         </ul>
 
-        <div className="flex flex-col-reverse items-end md:flex-row mt-16 [&>form_h4]:text-primary">
+        <div className="flex flex-col-reverse md:flex-row mt-16 [&_form_h4]:text-primary *:basis-full md:*:basis-1/2">
           <ContactForm
-            classname="text-start basis-full md:basis-1/2"
             title="Send Us A Message"
             titleCn="text-2xl font-medium"
             message="Whether you need help with billing, enrolment, or support, our experts are just a message away. Reach out today."
           />
 
-          <div className="basis-full md:basis-1/2">
+          <div>
             <Image
               src="/images/contact.webp"
               alt="Contact Image"
