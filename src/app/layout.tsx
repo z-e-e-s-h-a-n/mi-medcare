@@ -14,7 +14,46 @@ export const metadata: Metadata = {
     template: "%s | MI MedCare",
   },
   description:
-    "MI MedCare LLC offers expert medical billing and revenue cycle management services, helping healthcare providers maximize reimbursements and streamline operations.",
+    "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care. Increase revenue, reduce denials & stay HIPAA compliant.",
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  authors: [
+    {
+      name: "MI MedCare LLC",
+      url: "https://www.mimedcare.com",
+    },
+  ],
+
+  keywords: [
+    "medical billing services in USA",
+    "medical billing company USA",
+    "medical billing for family practice",
+    "medical billing for internal medicine",
+    "medical billing for mental health clinics",
+    "medical billing for urgent care",
+    "outsourced medical billing USA",
+    "HIPAA compliant medical billing",
+  ],
+
+  openGraph: {
+    title: "Medical Billing Services in USA | MI MedCare",
+    description:
+      "Professional medical billing services for family practice, internal medicine, mental health & urgent care.",
+    url: "https://mimedcare.com",
+    siteName: "MI MedCare",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Medical Billing Services in USA | MI MedCare",
+    description:
+      "HIPAA compliant medical billing services to increase revenue and reduce denials.",
+  },
 };
 
 function RootLayout({ children }: AppLayoutProps) {
