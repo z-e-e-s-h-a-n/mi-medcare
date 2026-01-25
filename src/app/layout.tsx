@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import ProviderWrapper from "@/provider";
 
 const primaryFont = Inter({
   variable: "--font-primary",
@@ -66,7 +67,11 @@ function RootLayout({ children }: AppLayoutProps) {
           content="czbQ2_F4AE2zI66qUe-473yuffmrVgF3YvPeJoHJImQ"
         />
       </head>
-      <body className={`${primaryFont.variable} antialiased`}>{children}</body>
+      <body className={`${primaryFont.variable} antialiased`}>
+        <ProviderWrapper>
+          {children}
+        </ProviderWrapper>
+      </body>
       <GoogleAnalytics gaId="G-3GCVD9KWT0" />
     </html>
   );
