@@ -1,0 +1,36 @@
+import apiClient, { executeApi } from "@lib/http/api-client";
+
+
+export const createMedia = (data: FormData) =>
+    executeApi<MediaResponse>(() =>
+        apiClient.post("/media", data, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
+    );
+
+export const findAllMedia = (params?: MediaQueryType) =>
+    executeApi<MediaQueryResponse>(() =>
+        apiClient.get("/media", { params },)
+    );
+
+export const findOneMedia = (id: string) =>
+    executeApi<MediaResponse>(() =>
+        apiClient.get(`/media/${id}`)
+    );
+
+export const updateMedia = (id: string, data: MediaUpdateType) =>
+    executeApi<MediaResponse>(() =>
+        apiClient.put(`/media/${id}`, data)
+    );
+
+export const restoreMedia = (id: string,) =>
+    executeApi<MediaResponse>(() =>
+        apiClient.post(`/media/${id}/restore`,)
+    );
+
+export const removeMedia = (id: string, force = false) =>
+    executeApi<MediaResponse>(() =>
+        apiClient.delete(`/media/${id}`, { params: { force } })
+    );

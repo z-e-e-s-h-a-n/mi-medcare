@@ -1,37 +1,16 @@
-import nodemailer from "nodemailer";
-import { FormType } from "@/schemas/contactForm";
 import { NextResponse } from "next/server";
-import { addLeadToSheet } from "@/lib/googleSheets";
-import { adminEmailTemplate, userEmailTemplate } from "@/lib/templates";
-import { addLeadToGHL } from "@/lib/goHighLevel";
+import { ContactFormType } from "@schemas/contact";
+import { sendMail } from "@lib/core/mailer";
+import { serverEnv } from "@lib/core/server-env";
+import { addLeadToSheet } from "@lib/integrations/googleSheets";
+import { addLeadToGHL } from "@lib/integrations/goHighLevel";
 
 export async function POST(req: Request) {
   try {
-    const data: FormType = await req.json();
+    const data: ContactFormType = await req.json();
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST!,
-      port: Number(process.env.SMTP_PORT!),
-      secure: Number(process.env.SMTP_PORT) === 465,
-      auth: {
-        user: process.env.SMTP_USER!,
-        pass: process.env.SMTP_PASS!,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `MI MedCare <${process.env.SMTP_USER}>`,
-      to: process.env.ADMIN_EMAIL!,
-      subject: "New Contact Form Submission – MI MedCare LLC",
-      html: adminEmailTemplate(data),
-    });
-
-    await transporter.sendMail({
-      from: `MI MedCare <${process.env.SMTP_USER}>`,
-      to: data.email,
-      subject: "We've Received Your Message – MI MedCare LLC",
-      html: userEmailTemplate(data),
-    });
+    await sendMail(serverEnv.ADMIN_EMAIL, "contactAdmin", { contactData: data });
+    await sendMail(data.email, "contactUser", { contactData: data });
 
     await addLeadToSheet(data);
     await addLeadToGHL(data);
@@ -42,7 +21,7 @@ export async function POST(req: Request) {
     console.error("Email error:", error);
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

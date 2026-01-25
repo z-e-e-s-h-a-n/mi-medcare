@@ -1,6 +1,6 @@
 import { google } from "googleapis";
-import type { FormType } from "@/schemas/contactForm";
-import { formatDate } from "./utils";
+import { formatDate } from "@lib/utils/general";
+import { ContactFormType } from "@schemas/contact";
 
 const auth = new google.auth.GoogleAuth({
   credentials: {
@@ -13,7 +13,7 @@ const auth = new google.auth.GoogleAuth({
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID!;
 const SHEET_NAME = "contact-form";
 
-export async function addLeadToSheet(data: FormType) {
+export async function addLeadToSheet(data: ContactFormType) {
   const sheets = google.sheets({ version: "v4", auth });
 
   const email = data.email.toLowerCase().trim();

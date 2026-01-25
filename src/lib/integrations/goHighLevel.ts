@@ -1,6 +1,6 @@
-import { FormType } from "@/schemas/contactForm";
+import { ContactFormType } from "@schemas/contact";
 
-export async function addLeadToGHL(data: FormType) {
+export async function addLeadToGHL(data: ContactFormType) {
   const [firstName, ...lastName] = data.name.split(" ").map((v) => v.trim());
 
   const res = await fetch("https://services.leadconnectorhq.com/contacts/", {
