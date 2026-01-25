@@ -10,7 +10,7 @@ export const contactSource = z.enum([
   "call",
 ]);
 
-export const formSchema = z.object({
+export const contactFormSchema = z.object({
   name: z
     .string({ error: "First name is required" })
     .trim()
@@ -42,4 +42,4 @@ export const formSchema = z.object({
   timeZone: z.string().optional(),
 });
 
-export type FormType = z.input<typeof formSchema>;
+export type ContactFormType = z.input<typeof contactFormSchema>;
