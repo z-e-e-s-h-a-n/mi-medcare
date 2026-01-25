@@ -1,0 +1,185 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  admin
+  author
+  editor
+}
+
+enum UserStatus {
+  pending
+  active
+  suspended
+}
+
+enum OtpPurpose {
+  setPassword
+  resetPassword
+  verifyEmail
+  changeEmail
+}
+
+enum OtpType {
+  numericCode
+  secureToken
+}
+
+enum PostStatus {
+  draft
+  review
+  published
+}
+
+model User {
+  id          String  @id @default(uuid())
+  firstName   String
+  lastName    String?
+  displayName String
+
+  email    String     @unique
+  password String
+  
+  imageId   String?
+  image     Media? @relation("UserImage", fields: [imageId], references: [id])
+
+
+  role     UserRole   @default(author)
+  status   UserStatus @default(pending)
+
+  isEmailVerified Boolean @default(false)
+
+  lastLoginAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  posts         Post[]
+  medias    Media[] @relation("UserUploads")
+  otps          Otp[]
+  refreshTokens RefreshToken[]
+}
+
+model RefreshToken {
+  id          String   @id @default(ulid())
+  token       String   @unique
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ip          String
+  userAgent   String
+  lastUsed    DateTime @default(now())
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+  blacklisted Boolean  @default(false)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([userId, expiresAt])
+}
+
+model Otp {
+  id        String     @id @default(ulid())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  purpose   OtpPurpose
+  type      OtpType    @default(numericCode)
+  secret    String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([userId, purpose])
+  @@index([expiresAt])
+}
+
+model Post {
+  id String @id @default(uuid())
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  title      String
+  slug       String  @unique
+  excerpt    String?
+  content    String  @db.Text
+ 
+  coverId String?
+  cover   Media? @relation("PostCover", fields: [coverId], references: [id])
+
+  tags Tag[]
+
+  status      PostStatus @default(draft)
+  publishedAt DateTime?
+
+  metaTitle       String?
+  metaDescription String?
+
+  views Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+   deletedAt   DateTime?
+}
+
+model Category {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  slug        String  @unique
+  description String?
+
+  parentId    String?
+  parent      Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+
+  children    Category[] @relation("CategoryHierarchy")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+   deletedAt   DateTime? 
+
+  posts Post[]
+}
+
+model Tag {
+  id   String @id @default(uuid())
+  name String @unique
+  slug String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt   DateTime?
+
+  posts Post[]
+}
+
+model Media {
+  id           String @id @default(uuid())
+ uploadedById String
+  uploadedBy   User   @relation("UserUploads", fields: [uploadedById], references: [id])
+
+  url      String @unique
+  filename String
+  mimeType String
+  size     Int
+
+  posts Post[] @relation("PostCover")
+  users        User[] @relation("UserImage")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt   DateTime?
+}
