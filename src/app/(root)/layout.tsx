@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@components/root/Header";
+import Footer from "@components/root/Footer";
 
 const Layout = ({ children }: AppLayoutProps) => {
   return (

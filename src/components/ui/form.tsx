@@ -76,16 +76,18 @@ export interface BaseFieldProps<
   validators?: FieldValidatorsFor<TFormData, TName>;
 }
 
-interface FormFieldProps<TFormData> extends BaseFieldProps<TFormData> {
-  children: (fieldProps: {
-    name: DeepKeys<TFormData>;
-    value: any;
-    placeholder?: string;
-    onBlur: () => void;
-    onChange: (e: any) => void;
-    isInvalid: boolean;
-    disabled?: boolean;
-  }) => React.ReactNode;
+export interface FieldChildrenProps<TFormData> {
+  name: DeepKeys<TFormData> & string;
+  value: any;
+  placeholder?: string;
+  onBlur: () => void;
+  onChange: (e: any) => void;
+  isInvalid: boolean;
+  disabled?: boolean;
+}
+
+export interface FormFieldProps<TFormData> extends BaseFieldProps<TFormData> {
+  children: (fieldProps: FieldChildrenProps<TFormData>) => React.ReactNode;
 }
 
 export const Form = <TFormData,>({

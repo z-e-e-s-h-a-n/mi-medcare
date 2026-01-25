@@ -2,7 +2,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils/general";
 import Link from "next/link";
 
 const buttonVariants = cva(
@@ -34,7 +34,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export type ButtonProps = React.ComponentProps<"button"> &
@@ -68,6 +68,7 @@ function Button({
   ) : (
     <Comp
       data-slot="button"
+      type="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />

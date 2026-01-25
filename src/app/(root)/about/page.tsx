@@ -1,5 +1,5 @@
-import OverlayCard from "@/components/OverlayCard";
-import PageHeader from "@/components/PageHeader";
+import OverlayCard from "@components/root/OverlayCard";
+import PageHeader from "@components/root/PageHeader";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -10,9 +10,9 @@ import {
   NotebookPen,
   Send,
 } from "lucide-react";
-import ParallaxSection from "@/components/ParallaxSection";
-import StrategySection from "@/components/StrategySection";
-import { strategyStepsAbout } from "@/lib/constants";
+import ParallaxSection from "@components/root/ParallaxSection";
+import StrategySection from "@components/root/StrategySection";
+import { strategyStepsAbout } from "../../../lib/constants/menu";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

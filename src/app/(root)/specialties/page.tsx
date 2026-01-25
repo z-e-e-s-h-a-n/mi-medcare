@@ -1,6 +1,6 @@
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@components/root/PageHeader";
 import { Button } from "@/components/ui/button";
-import { specialties } from "@/lib/constants";
+import { specialties } from "../../../lib/constants/menu";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

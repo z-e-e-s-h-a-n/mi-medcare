@@ -1,8 +1,8 @@
-import ContactSection from "@/components/ContactSection";
-import IconWrapper from "@/components/IconWrapper";
-import PageHeader from "@/components/PageHeader";
-import { servicesMenu } from "@/lib/constants";
-import { cn } from "@/lib/utils";
+import ContactSection from "@components/root/ContactSection";
+import IconWrapper from "@components/root/IconWrapper";
+import PageHeader from "@components/root/PageHeader";
+import { servicesMenu } from "../../../../lib/constants/menu";
+import { cn } from "../../../../lib/utils/general";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";

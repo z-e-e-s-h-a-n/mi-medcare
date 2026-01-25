@@ -1,7 +1,7 @@
-import ContactForm from "@/components/ContactForm";
-import IconWrapper from "@/components/IconWrapper";
-import PageHeader from "@/components/PageHeader";
-import { contactDetails } from "@/lib/constants";
+import ContactForm from "@components/root/ContactForm";
+import IconWrapper from "@components/root/IconWrapper";
+import PageHeader from "@components/root/PageHeader";
+import { contactDetails } from "../../../lib/constants/menu";
 import { Clock7, Mails, MapPin, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

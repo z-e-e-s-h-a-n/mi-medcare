@@ -1,15 +1,15 @@
-import HeroSection from "@/components/HeroSection";
-import ExperienceSection from "@/components/ExperienceSection";
-import WelcomeSection from "@/components/WelcomeSection";
-import ServiceSection from "@/components/ServiceSection";
-import ContactSection from "@/components/ContactSection";
-import StrategySection from "@/components/StrategySection";
-import SpecialtiesSection from "@/components/SpecialtiesSection";
-import ParallaxSection from "@/components/ParallaxSection";
-import TestimonialSection from "@/components/TestimonialSection";
-import { strategyStepsHome } from "@/lib/constants";
-import PromoPopup from "@/components/PromoPopup";
-import EHRsSection from "@/components/EHRsSection";
+import HeroSection from "@components/root/HeroSection";
+import ExperienceSection from "@components/root/ExperienceSection";
+import WelcomeSection from "@components/root/WelcomeSection";
+import ServiceSection from "@components/root/ServiceSection";
+import ContactSection from "@components/root/ContactSection";
+import StrategySection from "@components/root/StrategySection";
+import SpecialtiesSection from "@components/root/SpecialtiesSection";
+import ParallaxSection from "@components/root/ParallaxSection";
+import TestimonialSection from "@components/root/TestimonialSection";
+import { strategyStepsHome } from "@constants/content";
+import PromoPopup from "@components/root/PromoPopup";
+import EHRsSection from "@components/root/EHRsSection";
 
 const Home = () => {
   return (

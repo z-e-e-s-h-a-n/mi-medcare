@@ -1,5 +1,5 @@
-import EHRsSection from "@/components/EHRsSection";
-import PageHeader from "@/components/PageHeader";
+import EHRsSection from "@components/root/EHRsSection";
+import PageHeader from "@components/root/PageHeader";
 import React from "react";
 import type { Metadata } from "next";
 
