@@ -52,3 +52,12 @@ export const PostStatus = {
 } as const
 
 export type PostStatus = (typeof PostStatus)[keyof typeof PostStatus]
+
+
+export const ThemeMode = {
+  light: 'light',
+  dark: 'dark',
+  system: 'system'
+} as const
+
+export type ThemeMode = (typeof ThemeMode)[keyof typeof ThemeMode]

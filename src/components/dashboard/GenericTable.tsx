@@ -23,6 +23,7 @@ import {
 } from "@components/ui//dropdown-menu";
 import Pagination, { PaginationProps } from "./Pagination";
 import SearchToolbar, { SearchToolbarProps } from "./SearchToolbar";
+import TableSkeleton from "./TableSkeleton";
 
 export interface ColumnConfig<TData, TQuery extends BaseQueryType> {
   header: string;
@@ -37,7 +38,7 @@ interface GenericTableProps<
 >
   extends Omit<SearchToolbarProps<TQuery>, "setPage">, PaginationProps {
   data: TData[];
-  isLoading?: boolean;
+  isFetching?: boolean;
 
   columns: ColumnConfig<TData, TQuery>[];
 
@@ -55,7 +56,7 @@ function GenericTable<
   limit,
   currentPage,
   totalPages,
-  isLoading = false,
+  isFetching = false,
   entityType,
   columns,
   searchByOptions,
@@ -69,8 +70,8 @@ function GenericTable<
   setSortOrder,
   setPage,
   setLimit,
-  onView = (row) => `/dashboard/${entityType}/${row.id}`,
-  onEdit = (row) => `/dashboard/${entityType}/${row.id}/edit`,
+  onView = (row) => `/${entityType}/${row.id}`,
+  onEdit = (row) => `/${entityType}/${row.id}/edit`,
   onDelete,
   filter,
   setFilter,
@@ -98,6 +99,10 @@ function GenericTable<
       setDeletingId(null);
     }
   };
+
+  if (isFetching) {
+    return <TableSkeleton columnCount={columns.length} rowCount={limit} />;
+  }
 
   return (
     <section className="space-y-4">
@@ -136,21 +141,14 @@ function GenericTable<
                   )}
                 </TableHead>
               ))}
-              <TableHead className="w-20">Actions</TableHead>
+              <TableHead className="w-20 sticky right-0 bg-muted z-20">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody className="**:data-[slot=table-cell]:first:w-8">
-            {isLoading ? (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  Loading...
-                </TableCell>
-              </TableRow>
-            ) : data.length ? (
+            {data.length ? (
               data.map((row) => (
                 <TableRow key={row.id}>
                   {columns.map((c, i) => (
@@ -162,7 +160,7 @@ function GenericTable<
                     </TableCell>
                   ))}
 
-                  <TableCell>
+                  <TableCell className="sticky right-0 bg-background z-20">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button size="icon" variant="ghost">

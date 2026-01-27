@@ -1,10 +1,10 @@
 import type z from "zod";
-import { CUTagSchema, tagQuerySchema } from "@schemas/tags";
 import { Tag } from "@generated/prisma";
+import { CUTagSchema, tagQuerySchema } from "@schemas/tags";
 
 declare global {
   /* ======================================================
-     TAG — TYPES
+     Tags — TYPES
   ===================================================== */
 
   // client
@@ -16,18 +16,18 @@ declare global {
   type TagQueryDto = z.output<typeof tagQuerySchema>;
 
   /* ======================================================
-     TAG — RESPONSES
+     Tags — RESPONSES
   ===================================================== */
 
-  type TagResponse = Pick<Tag,
-    "id" |
-    "name" |
-    "slug">
-    & BaseResponse;
+  interface TagResponse extends Tag, BaseResponse {
+    parent?: TagResponse;
+    children: TagResponse[];
+    posts: PostResponse[];
+  }
 
   interface TagQueryResponse extends BaseQueryResponse {
     tags: TagResponse[];
   }
 }
 
-export { };
+export {};

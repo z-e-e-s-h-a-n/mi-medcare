@@ -3,9 +3,12 @@ import prisma from "@lib/core/prisma";
 import { tokenService } from "@lib/auth/token.service";
 import { NextRequest } from "next/server";
 import { slugify } from "@utils/general";
-import { PostOrderByWithRelationInput, PostWhereInput } from "prisma/generated/models";
+import {
+  PostOrderByWithRelationInput,
+  PostWhereInput,
+} from "prisma/generated/models";
 
-export class PostService {
+class PostService {
   async createPost(dto: CUPostDto, req: NextRequest) {
     const authorId = (await tokenService.getDecodeUser(req))?.id;
 
@@ -41,24 +44,22 @@ export class PostService {
   }
 
   async findPostById(id: string) {
-    // Try by id first
-    const post = await prisma.post.findUnique({
+    let post = await prisma.post.findUnique({
       where: { id },
       include: this.postInclude,
     });
 
-    // // If not found, try by slug
-    // if (!post) {
-    //   post = await prisma.post.findUnique({
-    //     where: { slug: id },
-    //     include: this.postInclude,
-    //   });
-    // }
+    if (!post) {
+      post = await prisma.post.findUnique({
+        where: { slug: id },
+        include: this.postInclude,
+      });
+    }
 
     await prisma.post.update({
       where: { id: post?.id },
-      data: { views: { increment: 1 } }
-    })
+      data: { views: { increment: 1 } },
+    });
 
     return {
       message: "Post fetched successfully",
@@ -67,15 +68,7 @@ export class PostService {
   }
 
   async findAllPosts(query: PostQueryDto) {
-    const {
-      page,
-      limit,
-      sortBy,
-      sortOrder,
-      search,
-      searchBy,
-      status,
-    } = query;
+    const { page, limit, sortBy, sortOrder, search, searchBy, status } = query;
 
     const where: Prisma.PostWhereInput = {};
 
@@ -90,8 +83,12 @@ export class PostService {
         slug: {
           slug: { contains: search, mode: "insensitive" },
         },
-        author: { author: { displayName: { contains: search, mode: "insensitive" } } },
-        category: { category: { name: { contains: search, mode: "insensitive" } } },
+        author: {
+          author: { displayName: { contains: search, mode: "insensitive" } },
+        },
+        category: {
+          category: { name: { contains: search, mode: "insensitive" } },
+        },
       };
       Object.assign(where, searchWhereMap[searchBy]);
     }
@@ -100,9 +97,9 @@ export class PostService {
     let orderBy: PostOrderByWithRelationInput = { [sortBy]: sortOrder };
 
     if (sortBy === "category") {
-      orderBy = { category: { name: sortOrder } }
+      orderBy = { category: { name: sortOrder } };
     } else if (sortBy === "author") {
-      orderBy = { author: { displayName: sortOrder } }
+      orderBy = { author: { displayName: sortOrder } };
     }
 
     const [posts, total] = await Promise.all([
@@ -140,21 +137,21 @@ export class PostService {
 
   private connectOrCreateTags(dto: CUPostDto) {
     return {
-      connectOrCreate: dto.tags.map((name) => ({
-        where: { name },
+      connectOrCreate: dto.tags.map((tag) => ({
+        where: { name: tag.name },
         create: {
-          name,
-          slug: slugify(name),
+          name: tag.name,
+          slug: slugify(tag.name),
         },
       })),
-    }
+    };
   }
 
   postInclude = {
     author: true,
     category: true,
     cover: true,
-    tags: true
+    tags: true,
   };
 }
 

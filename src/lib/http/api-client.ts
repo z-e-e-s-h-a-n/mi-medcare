@@ -1,6 +1,7 @@
 import { publicEnv } from "@lib/core/public-env";
 import axios from "axios";
 import type { AxiosInstance, AxiosResponse } from "axios";
+import { ApiException } from "./http-exception";
 export const API_URL = publicEnv.NEXT_PUBLIC_API_ENDPOINT;
 
 export const apiClient: AxiosInstance = axios.create({
@@ -11,25 +12,6 @@ export const apiClient: AxiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
-
-export class ApiException extends Error {
-  status: number;
-  data: unknown | null;
-  action?: string;
-
-  constructor(payload: {
-    message?: string;
-    status?: number;
-    data?: unknown;
-    action?: string;
-  }) {
-    super(payload.message ?? "API Error");
-    this.name = "ApiException";
-    this.status = payload.status ?? 0;
-    this.data = payload.data ?? null;
-    this.action = payload.action;
-  }
-}
 
 export const executeApi = async <T>(
   fn: () => Promise<AxiosResponse<ApiResponse<T>>>,

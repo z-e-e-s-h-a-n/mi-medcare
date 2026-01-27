@@ -139,7 +139,7 @@ const MainToolbarContent = ({
       <ToolbarSeparator />
 
       <ToolbarGroup>
-        <ImageUploadButton text="Add" />
+        <ImageUploadButton />
       </ToolbarGroup>
 
       <Spacer />
@@ -182,6 +182,10 @@ const MobileToolbarContent = ({
   </>
 );
 
+interface SimpleEditorProps<TFormData> extends FieldChildrenProps<TFormData> {
+  defaultValue?: string;
+}
+
 export function SimpleEditor<TFormData>({
   name,
   value,
@@ -190,7 +194,8 @@ export function SimpleEditor<TFormData>({
   disabled,
   onBlur,
   placeholder = "",
-}: FieldChildrenProps<TFormData>) {
+  defaultValue,
+}: SimpleEditorProps<TFormData>) {
   const isMobile = useIsBreakpoint();
   const { height } = useWindowSize();
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
@@ -235,7 +240,7 @@ export function SimpleEditor<TFormData>({
         onError: (error) => console.error("Upload failed:", error),
       }),
     ],
-    content: value ?? placeholder,
+    content: value ?? defaultValue ?? placeholder,
     onUpdate({ editor }) {
       onChange?.(editor.getHTML());
     },

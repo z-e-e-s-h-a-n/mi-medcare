@@ -35,9 +35,13 @@ export type UserMinAggregateOutputType = {
   role: $Enums.UserRole | null
   status: $Enums.UserStatus | null
   isEmailVerified: boolean | null
+  theme: $Enums.ThemeMode | null
+  emailNotifications: boolean | null
+  pushNotifications: boolean | null
   lastLoginAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -51,9 +55,13 @@ export type UserMaxAggregateOutputType = {
   role: $Enums.UserRole | null
   status: $Enums.UserStatus | null
   isEmailVerified: boolean | null
+  theme: $Enums.ThemeMode | null
+  emailNotifications: boolean | null
+  pushNotifications: boolean | null
   lastLoginAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -67,9 +75,13 @@ export type UserCountAggregateOutputType = {
   role: number
   status: number
   isEmailVerified: number
+  theme: number
+  emailNotifications: number
+  pushNotifications: number
   lastLoginAt: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -85,9 +97,13 @@ export type UserMinAggregateInputType = {
   role?: true
   status?: true
   isEmailVerified?: true
+  theme?: true
+  emailNotifications?: true
+  pushNotifications?: true
   lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -101,9 +117,13 @@ export type UserMaxAggregateInputType = {
   role?: true
   status?: true
   isEmailVerified?: true
+  theme?: true
+  emailNotifications?: true
+  pushNotifications?: true
   lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -117,9 +137,13 @@ export type UserCountAggregateInputType = {
   role?: true
   status?: true
   isEmailVerified?: true
+  theme?: true
+  emailNotifications?: true
+  pushNotifications?: true
   lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -206,9 +230,13 @@ export type UserGroupByOutputType = {
   role: $Enums.UserRole
   status: $Enums.UserStatus
   isEmailVerified: boolean
+  theme: $Enums.ThemeMode
+  emailNotifications: boolean
+  pushNotifications: boolean
   lastLoginAt: Date | null
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -243,9 +271,13 @@ export type UserWhereInput = {
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
+  theme?: Prisma.EnumThemeModeFilter<"User"> | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFilter<"User"> | boolean
+  pushNotifications?: Prisma.BoolFilter<"User"> | boolean
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   image?: Prisma.XOR<Prisma.MediaNullableScalarRelationFilter, Prisma.MediaWhereInput> | null
   posts?: Prisma.PostListRelationFilter
   medias?: Prisma.MediaListRelationFilter
@@ -264,9 +296,13 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  theme?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  pushNotifications?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.MediaOrderByWithRelationInput
   posts?: Prisma.PostOrderByRelationAggregateInput
   medias?: Prisma.MediaOrderByRelationAggregateInput
@@ -288,9 +324,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
+  theme?: Prisma.EnumThemeModeFilter<"User"> | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFilter<"User"> | boolean
+  pushNotifications?: Prisma.BoolFilter<"User"> | boolean
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   image?: Prisma.XOR<Prisma.MediaNullableScalarRelationFilter, Prisma.MediaWhereInput> | null
   posts?: Prisma.PostListRelationFilter
   medias?: Prisma.MediaListRelationFilter
@@ -309,9 +349,13 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  theme?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  pushNotifications?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -331,9 +375,13 @@ export type UserScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  theme?: Prisma.EnumThemeModeWithAggregatesFilter<"User"> | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  pushNotifications?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   lastLoginAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
@@ -346,9 +394,13 @@ export type UserCreateInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   image?: Prisma.MediaCreateNestedOneWithoutUsersInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   medias?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
@@ -367,9 +419,13 @@ export type UserUncheckedCreateInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   medias?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
@@ -386,9 +442,13 @@ export type UserUpdateInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.MediaUpdateOneWithoutUsersNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   medias?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
@@ -407,9 +467,13 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   medias?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
@@ -427,9 +491,13 @@ export type UserCreateManyInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -442,9 +510,13 @@ export type UserUpdateManyMutationInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -458,9 +530,13 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -474,9 +550,13 @@ export type UserCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  theme?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  pushNotifications?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -490,9 +570,13 @@ export type UserMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  theme?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  pushNotifications?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -506,9 +590,13 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isEmailVerified?: Prisma.SortOrder
+  theme?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  pushNotifications?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -544,6 +632,10 @@ export type EnumUserStatusFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type EnumThemeModeFieldUpdateOperationsInput = {
+  set?: $Enums.ThemeMode
 }
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -662,9 +754,13 @@ export type UserCreateWithoutRefreshTokensInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   image?: Prisma.MediaCreateNestedOneWithoutUsersInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   medias?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
@@ -682,9 +778,13 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   medias?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
@@ -716,9 +816,13 @@ export type UserUpdateWithoutRefreshTokensInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.MediaUpdateOneWithoutUsersNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   medias?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
@@ -736,9 +840,13 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   medias?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
@@ -754,9 +862,13 @@ export type UserCreateWithoutOtpsInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   image?: Prisma.MediaCreateNestedOneWithoutUsersInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   medias?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
@@ -774,9 +886,13 @@ export type UserUncheckedCreateWithoutOtpsInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   medias?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -808,9 +924,13 @@ export type UserUpdateWithoutOtpsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.MediaUpdateOneWithoutUsersNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   medias?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
@@ -828,9 +948,13 @@ export type UserUncheckedUpdateWithoutOtpsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   medias?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -846,9 +970,13 @@ export type UserCreateWithoutPostsInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   image?: Prisma.MediaCreateNestedOneWithoutUsersInput
   medias?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   otps?: Prisma.OtpCreateNestedManyWithoutUserInput
@@ -866,9 +994,13 @@ export type UserUncheckedCreateWithoutPostsInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   medias?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -900,9 +1032,13 @@ export type UserUpdateWithoutPostsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.MediaUpdateOneWithoutUsersNestedInput
   medias?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
@@ -920,9 +1056,13 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   medias?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -938,9 +1078,13 @@ export type UserCreateWithoutMediasInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   image?: Prisma.MediaCreateNestedOneWithoutUsersInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   otps?: Prisma.OtpCreateNestedManyWithoutUserInput
@@ -958,9 +1102,13 @@ export type UserUncheckedCreateWithoutMediasInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -981,9 +1129,13 @@ export type UserCreateWithoutImageInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   medias?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   otps?: Prisma.OtpCreateNestedManyWithoutUserInput
@@ -1000,9 +1152,13 @@ export type UserUncheckedCreateWithoutImageInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   medias?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
@@ -1040,9 +1196,13 @@ export type UserUpdateWithoutMediasInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   image?: Prisma.MediaUpdateOneWithoutUsersNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
@@ -1060,9 +1220,13 @@ export type UserUncheckedUpdateWithoutMediasInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -1098,9 +1262,13 @@ export type UserScalarWhereInput = {
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFilter<"User"> | boolean
+  theme?: Prisma.EnumThemeModeFilter<"User"> | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFilter<"User"> | boolean
+  pushNotifications?: Prisma.BoolFilter<"User"> | boolean
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
 }
 
 export type UserCreateManyImageInput = {
@@ -1113,9 +1281,13 @@ export type UserCreateManyImageInput = {
   role?: $Enums.UserRole
   status?: $Enums.UserStatus
   isEmailVerified?: boolean
+  theme?: $Enums.ThemeMode
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type UserUpdateWithoutImageInput = {
@@ -1128,9 +1300,13 @@ export type UserUpdateWithoutImageInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   medias?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
@@ -1147,9 +1323,13 @@ export type UserUncheckedUpdateWithoutImageInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   medias?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
@@ -1166,9 +1346,13 @@ export type UserUncheckedUpdateManyWithoutImageInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theme?: Prisma.EnumThemeModeFieldUpdateOperationsInput | $Enums.ThemeMode
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pushNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1240,9 +1424,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   status?: boolean
   isEmailVerified?: boolean
+  theme?: boolean
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   image?: boolean | Prisma.User$imageArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   medias?: boolean | Prisma.User$mediasArgs<ExtArgs>
@@ -1262,9 +1450,13 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   status?: boolean
   isEmailVerified?: boolean
+  theme?: boolean
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   image?: boolean | Prisma.User$imageArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1279,9 +1471,13 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   status?: boolean
   isEmailVerified?: boolean
+  theme?: boolean
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   image?: boolean | Prisma.User$imageArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1296,12 +1492,16 @@ export type UserSelectScalar = {
   role?: boolean
   status?: boolean
   isEmailVerified?: boolean
+  theme?: boolean
+  emailNotifications?: boolean
+  pushNotifications?: boolean
   lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "displayName" | "email" | "password" | "imageId" | "role" | "status" | "isEmailVerified" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "displayName" | "email" | "password" | "imageId" | "role" | "status" | "isEmailVerified" | "theme" | "emailNotifications" | "pushNotifications" | "lastLoginAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   image?: boolean | Prisma.User$imageArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
@@ -1337,9 +1537,13 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     role: $Enums.UserRole
     status: $Enums.UserStatus
     isEmailVerified: boolean
+    theme: $Enums.ThemeMode
+    emailNotifications: boolean
+    pushNotifications: boolean
     lastLoginAt: Date | null
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1778,9 +1982,13 @@ export interface UserFieldRefs {
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
   readonly isEmailVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly theme: Prisma.FieldRef<"User", 'ThemeMode'>
+  readonly emailNotifications: Prisma.FieldRef<"User", 'Boolean'>
+  readonly pushNotifications: Prisma.FieldRef<"User", 'Boolean'>
   readonly lastLoginAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 

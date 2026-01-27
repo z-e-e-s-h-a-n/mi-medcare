@@ -16,7 +16,6 @@ import {
   IconUsers,
   IconSettings,
   type Icon,
-  IconHelp,
 } from "@tabler/icons-react";
 
 export const servicesMenu = [
@@ -481,7 +480,7 @@ export const sidebarMenu: NavGroup[] = [
     items: [
       {
         title: "Users",
-        url: "/dashboard/users",
+        url: "/dashboard/admin/users",
         icon: IconUsers,
       },
     ],
@@ -491,13 +490,8 @@ export const sidebarMenu: NavGroup[] = [
     items: [
       {
         title: "Settings",
-        url: "/dashboard/settings",
+        url: "#",
         icon: IconSettings,
-      },
-      {
-        title: "Get Help",
-        url: "/dashboard/help",
-        icon: IconHelp,
       },
     ],
   },

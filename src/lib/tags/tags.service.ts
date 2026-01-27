@@ -2,7 +2,7 @@ import type { Prisma } from "@generated/prisma";
 import prisma from "@lib/core/prisma";
 import { TagWhereInput } from "prisma/generated/models";
 
-export class TagService {
+class TagService {
   async createTag(dto: CUTagDto) {
     const tag = await prisma.tag.create({
       data: dto,
@@ -64,7 +64,6 @@ export class TagService {
         skip,
         take: limit,
         orderBy,
-
       }),
       prisma.tag.count({ where }),
     ]);
@@ -90,8 +89,6 @@ export class TagService {
       message: "Tag deleted successfully",
     };
   }
-
-
 }
 
 export const tagService = new TagService();

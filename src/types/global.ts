@@ -24,6 +24,7 @@ declare global {
 
   type OtpPurpose = z.infer<typeof enums.OtpPurposeEnum>;
   type OtpType = z.infer<typeof enums.OtpTypeEnum>;
+  type PostStatusType = z.infer<typeof enums.PostStatusEnum>;
 
   type NotificationPurpose =
     | "signin"

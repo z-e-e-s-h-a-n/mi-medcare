@@ -26,6 +26,8 @@ async function adminBootstrap() {
   });
 
   if (existingAdmin) {
+    console.log("existingAdmin", existingAdmin.id);
+
     throw new Error("❌ Admin already exists. Aborting.");
   }
 
@@ -43,8 +45,7 @@ async function adminBootstrap() {
       lastName,
       displayName: ADMIN_NAME?.trim(),
       isEmailVerified: true,
-      role: "admin"
-      ,
+      role: "admin",
     },
   });
 

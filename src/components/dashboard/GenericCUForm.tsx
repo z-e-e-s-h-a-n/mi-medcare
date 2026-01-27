@@ -4,20 +4,19 @@ import { useForm, type FormValidateOrFn } from "@tanstack/react-form";
 import { Form, type AnyFormApi } from "@components/ui/form";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { ApiException } from "@lib/http/api-client";
+import CUFormSkeleton from "./CUFormSkeleton";
+import { ApiException } from "@lib/http/http-exception";
 
 interface UseQueryResult<TData, TFormData> {
   data?: TData;
-  isLoading: boolean;
   isFetching?: boolean;
-  error: ApiException | null;
+  fetchError: ApiException | null;
   mutateAsync: (data: TFormData) => Promise<TData>;
+  isPending: boolean;
+  mutateError: ApiException | null;
 }
 
-interface GenericCUFormProps<
-  TData,
-  TFormData,
-> extends BaseCUFormProps {
+interface GenericCUFormProps<TData, TFormData> extends BaseCUFormProps {
   entityName: string;
   defaultValues?: Partial<TFormData>;
   schema: FormValidateOrFn<TFormData>;
@@ -26,14 +25,11 @@ interface GenericCUFormProps<
   children: (
     form: AnyFormApi<TFormData>,
     formType: FormSectionType,
-    data?: TData
+    data?: TData,
   ) => React.ReactNode;
 }
 
-export function GenericCUForm<
-  TData,
-  TFormData
->({
+export function GenericCUForm<TData, TFormData>({
   entityId,
   entityName,
   formType,
@@ -44,7 +40,7 @@ export function GenericCUForm<
   successRedirectPath,
 }: GenericCUFormProps<TData, TFormData>) {
   const router = useRouter();
-  const { data, isLoading, mutateAsync } = useQuery(entityId);
+  const { data, mutateAsync, isFetching, isPending } = useQuery(entityId);
 
   const initialValues: TFormData = {
     ...defaultValues,
@@ -70,10 +66,12 @@ export function GenericCUForm<
     },
   });
 
+  if (isFetching) return <CUFormSkeleton />;
+
   return (
     <Form
       form={form}
-      isLoading={isLoading}
+      isPending={isPending}
       title={
         <>
           {formType === "add" ? "Add New" : "Update"} {entityName}

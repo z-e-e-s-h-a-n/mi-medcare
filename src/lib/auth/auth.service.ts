@@ -2,6 +2,7 @@ import argon2 from "argon2";
 import { Prisma } from "@generated/prisma";
 import {
   BadRequestException,
+  ForbiddenException,
   NotFoundException,
   UnauthorizedException,
 } from "@lib/http/http-exception";
@@ -11,7 +12,7 @@ import { tokenService } from "./token.service";
 import { sendMail } from "@lib/core/mailer";
 import { NextRequest } from "next/server";
 
-export class AuthService {
+class AuthService {
   async signUp(dto: SignUpDto) {
     await this.createUser(dto, "author");
 
@@ -51,6 +52,7 @@ export class AuthService {
     }
 
     await this.checkVerificationStatus(user, dto.email, "unverified");
+    this.checkUserStatus(user);
 
     await tokenService.createAuthSession(req, {
       id: user.id,
@@ -268,16 +270,6 @@ export class AuthService {
     return { message: `Email changed successfully.` };
   }
 
-  async getCurrentUser(req: NextRequest) {
-    const userId = (await tokenService.getDecodeUser(req))?.id;
-    const { user } = await this.findUserFail404(userId, { id: userId });
-
-    return {
-      message: "User Data Fetched Successfully.",
-      data: user,
-    };
-  }
-
   async createUser(dto: SignUpDto, role: UserRole) {
     await this.findUserFail200(dto.email);
     const hashedPassword = await this.hashPassword(dto.password);
@@ -289,7 +281,7 @@ export class AuthService {
         password: hashedPassword,
         displayName: `${dto.firstName} ${dto.lastName}`.trim(),
       },
-      select: this.userSelect,
+      ...this.userView,
     });
 
     await sendMail(dto.email, "signup", { user });
@@ -315,16 +307,10 @@ export class AuthService {
     return argon2.verify(hash, password);
   }
 
-  private async findUserFail404(
-    email: string,
-    q?: Prisma.UserWhereUniqueInput,
-  ) {
+  async findUserFail404(email: string, q?: Prisma.UserWhereUniqueInput) {
     const user = await prisma.user.findUnique({
       where: q ?? { email },
-      select: {
-        ...this.userSelect,
-        password: true,
-      },
+      include: authService.userView.include,
     });
 
     if (!user) throw new NotFoundException("User not found");
@@ -340,7 +326,7 @@ export class AuthService {
   private findUserFail200 = async (email: string) => {
     const user = await prisma.user.findUnique({
       where: { email },
-      select: this.userSelect,
+      ...this.userView,
     });
 
     if (user) {
@@ -370,19 +356,23 @@ export class AuthService {
     }
   }
 
-  userSelect = {
-    id: true,
-    firstName: true,
-    lastName: true,
-    displayName: true,
-    role: true,
-    imageId: true,
-    image: true,
-    email: true,
-    isEmailVerified: true,
-    lastLoginAt: true,
-    createdAt: true,
-    updatedAt: true,
+  private checkUserStatus(user: UserResponse) {
+    if (user.status === "pending") {
+      throw new ForbiddenException(
+        "Your account is pending approval. Please contact support.",
+      );
+    } else if (user.status === "suspended") {
+      throw new ForbiddenException(
+        "Your account has been suspended. Contact support for assistance.",
+      );
+    }
+  }
+
+  userView = {
+    omit: { password: true },
+    include: {
+      image: { include: { uploadedBy: { omit: { password: true } } } },
+    },
   };
 }
 

@@ -17,22 +17,56 @@ import {
   FileIcon,
 } from "lucide-react";
 import { Button } from "@components/ui/button";
+import { useConfirm } from "@hooks/use-confirm";
+import { useUpdateMedia, useRemoveMedia } from "@hooks/media";
+import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+  AlertDialogTitle,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogFooter,
+} from "@components/ui/alert-dialog";
+import { Input } from "@components/ui/input";
+import { useState } from "react";
 
 interface MediaCardProps {
   media: MediaResponse;
-  selectable?: boolean;
   onSelect?: (media: MediaResponse) => void;
 }
 
-export function MediaCard({ media, selectable, onSelect }: MediaCardProps) {
+export function MediaCard({ media, onSelect }: MediaCardProps) {
+  const [filename, setFilename] = useState(media.filename);
+  const { updateAsync } = useUpdateMedia(media.id);
+  const { removeAsync, isRemoving } = useRemoveMedia();
   const isImage = media.mimeType.startsWith("image/");
+  const { confirm } = useConfirm();
+
+  const handleDelete = async (id: string) => {
+    const ok = await confirm();
+    if (!ok) return;
+    await removeAsync({ id });
+  };
+
+  const handleRename = async (filename: string) => {
+    try {
+      await updateAsync({ filename });
+      toast.success("File Renamed Successfully.");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.log("error:", err);
+      toast.error(err.message);
+    }
+  };
 
   return (
     <div
       onClick={() => onSelect?.(media)}
       className={cn(
         "group relative overflow-hidden rounded-xl border bg-background transition-all duration-300 ease-out",
-        selectable && "cursor-pointer hover:ring-2 hover:ring-primary",
+        onSelect && "cursor-pointer hover:ring-2 hover:ring-primary",
       )}
     >
       {/* Preview */}
@@ -66,20 +100,44 @@ export function MediaCard({ media, selectable, onSelect }: MediaCardProps) {
               </Button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuItem className="gap-2">
-                <Pencil className="size4" />
-                Rename
-              </DropdownMenuItem>
-              <DropdownMenuItem className="gap-2">
-                <Download className="size4" />
-                Download
-              </DropdownMenuItem>
-              <DropdownMenuItem className="gap-2 text-destructive focus:text-destructive">
-                <Trash2 className="size4" />
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
+            <AlertDialog>
+              <DropdownMenuContent align="end" className="w-40">
+                <AlertDialogTrigger asChild>
+                  <DropdownMenuItem className="gap-2 cursor-pointer">
+                    <Pencil className="size4" />
+                    Rename
+                  </DropdownMenuItem>
+                </AlertDialogTrigger>
+                <DropdownMenuItem className="gap-2 cursor-pointer">
+                  <Download className="size4" />
+                  Download
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="gap-2 text-destructive focus:text-destructive cursor-pointer"
+                  onClick={() => handleDelete(media.id)}
+                  disabled={isRemoving}
+                >
+                  <Trash2 className="size4" />
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+              <AlertDialogContent className="w-full max-w-md! p-8 gap-6">
+                <AlertDialogTitle>
+                  Rename: <span className="text-primary">{media.filename}</span>
+                </AlertDialogTitle>
+                <Input
+                  name="filename"
+                  value={filename}
+                  onChange={(e) => setFilename(e.target.value)}
+                />
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => handleRename(filename)}>
+                    Rename
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </DropdownMenu>
         </div>
 

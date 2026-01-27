@@ -4,15 +4,15 @@ import * as React from "react";
 import GenericTable, { type ColumnConfig } from "./GenericTable";
 import { useConfirm } from "@hooks/use-confirm";
 import { ListFilterConfig, SearchByOption } from "./SearchToolbar";
+import { ApiException } from "@lib/http/http-exception";
 
 interface UseListResult<TKey extends string, TData> {
   data?: BaseQueryResponse & {
     [K in TKey]: TData[];
   };
 
-  isLoading: boolean;
   isFetching?: boolean;
-  error?: unknown;
+  fetchError?: unknown;
 }
 
 interface ListPageConfig<
@@ -28,9 +28,11 @@ interface ListPageConfig<
   defaultParams?: TQuery;
   useListHook: (params: TQuery) => UseListResult<TKey, TData>;
   useDeleteHook?: () => {
-    remove: (args: { id: string }) => Promise<unknown>;
+    removeAsync: (args: { id: string; force?: boolean }) => Promise<unknown>;
     isRemoving: boolean;
+    removeError: ApiException | null;
   };
+
   defaultSortBy: TQuery["sortBy"];
   defaultSearchBy: TQuery["searchBy"];
 
@@ -70,21 +72,18 @@ function ListPage<
       : {}),
   } as unknown as TQuery;
 
-  const { data, isLoading } = config.useListHook(query);
+  const { data, isFetching } = config.useListHook(query);
   const deleteHook = config.useDeleteHook?.();
-  const confirm = useConfirm();
+  const { confirm } = useConfirm();
 
   const handleDelete = async (row: TData) => {
     if (!deleteHook) return;
     const ok = await confirm();
     if (!ok) return;
-    await deleteHook.remove({ id: row.id });
+    await deleteHook.removeAsync({ id: row.id, force: false });
   };
 
-  const entityArr = config.entityType.split("/");
-  const entityTitle = entityArr
-    .map((e, i) => (i < 1 && entityArr.length > 1 ? e.replace(/s$/, "") : e))
-    .join(" ");
+  const entityTitle = config.entityType.split("/").pop();
 
   return (
     <div className="container mx-auto p-6">
@@ -104,7 +103,7 @@ function ListPage<
         limit={data?.limit || 10}
         currentPage={data?.page || 1}
         totalPages={data?.totalPages || 1}
-        isLoading={isLoading}
+        isFetching={isFetching}
         search={search}
         setSearch={setSearch}
         searchBy={searchBy}

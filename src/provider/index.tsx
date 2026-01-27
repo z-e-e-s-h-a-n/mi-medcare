@@ -3,17 +3,20 @@
 import React from "react";
 import ThemeProvider from "./theme";
 import ReactQueryProvider from "./react-query";
-import { AlertDialogProvider } from "./alert-dialog";
+import ConfirmDialogProvider from "./confirm-dialog";
 import { Toaster } from "@components/ui/sonner";
+import { MediaLibraryProvider } from "./media-library";
 
 const ProviderWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <ReactQueryProvider>
       <ThemeProvider>
-        <AlertDialogProvider>
-          {children}
-          <Toaster />
-        </AlertDialogProvider>
+        <ConfirmDialogProvider>
+          <MediaLibraryProvider>
+            {children}
+            <Toaster />
+          </MediaLibraryProvider>
+        </ConfirmDialogProvider>
       </ThemeProvider>
     </ReactQueryProvider>
   );

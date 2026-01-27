@@ -14,6 +14,7 @@ type RoutePolicy = {
 const ROUTE_POLICIES: RoutePolicy[] = [
   { route: "/api/admin", roles: ["admin"] },
   { route: "/dashboard/users", roles: ["admin"] },
+  { route: "/dashboard/users/account" },
 
   { route: "/dashboard" },
 
@@ -38,10 +39,7 @@ export const proxy = async (req: NextRequest) => {
 
   try {
     const decoded = await tokenService.verifyToken(req, "accessToken");
-    if (
-      policy.roles &&
-      !policy.roles.includes(decoded.role)
-    ) {
+    if (policy.roles && !policy.roles.includes(decoded.role)) {
       return redirectWithAuthError(req, "/dashboard", AUTH_ERRORS.FORBIDDEN);
     }
 
@@ -52,7 +50,11 @@ export const proxy = async (req: NextRequest) => {
       await tokenService.refreshTokens(req, decoded);
       return NextResponse.next();
     } catch {
-      return redirectWithAuthError(req, "/auth/sign-in", AUTH_ERRORS.UNAUTHORIZED);
+      return redirectWithAuthError(
+        req,
+        "/auth/sign-in",
+        AUTH_ERRORS.UNAUTHORIZED,
+      );
     }
   }
 };

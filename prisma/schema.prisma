@@ -43,32 +43,49 @@ enum PostStatus {
   published
 }
 
+enum ThemeMode {
+  light
+  dark
+  system
+}
+
 model User {
   id          String  @id @default(uuid())
   firstName   String
   lastName    String?
   displayName String
 
-  email    String     @unique
+  email    String @unique
   password String
-  
-  imageId   String?
-  image     Media? @relation("UserImage", fields: [imageId], references: [id])
 
+  imageId String?
+  image   Media?  @relation("UserImage", fields: [imageId], references: [id])
 
-  role     UserRole   @default(author)
-  status   UserStatus @default(pending)
+  role   UserRole   @default(author)
+  status UserStatus @default(pending)
 
   isEmailVerified Boolean @default(false)
+
+  theme ThemeMode @default(system)
+
+  emailNotifications Boolean @default(true)
+  pushNotifications  Boolean @default(true)
 
   lastLoginAt DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
 
   posts         Post[]
-  medias    Media[] @relation("UserUploads")
+  medias        Media[]        @relation("UserUploads")
   otps          Otp[]
   refreshTokens RefreshToken[]
+
+  @@index([status])
+  @@index([role])
+  @@index([deletedAt])
+  @@index([createdAt])
+  @@index([lastLoginAt])
 }
 
 model RefreshToken {
@@ -86,6 +103,7 @@ model RefreshToken {
   @@index([userId])
   @@index([expiresAt])
   @@index([userId, expiresAt])
+  @@index([blacklisted])
 }
 
 model Otp {
@@ -113,13 +131,13 @@ model Post {
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])
 
-  title      String
-  slug       String  @unique
-  excerpt    String?
-  content    String  @db.Text
- 
+  title   String
+  slug    String  @unique
+  excerpt String?
+  content String  @db.Text
+
   coverId String?
-  cover   Media? @relation("PostCover", fields: [coverId], references: [id])
+  cover   Media?  @relation("PostCover", fields: [coverId], references: [id])
 
   tags Tag[]
 
@@ -131,9 +149,19 @@ model Post {
 
   views Int @default(0)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-   deletedAt   DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([views])
+  @@index([title])
+  @@index([slug])
+  @@index([status])
+  @@index([publishedAt])
+  @@index([authorId])
+  @@index([categoryId])
+  @@index([createdAt])
+  @@index([deletedAt])
 }
 
 model Category {
@@ -142,16 +170,22 @@ model Category {
   slug        String  @unique
   description String?
 
-  parentId    String?
-  parent      Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId String?
+  parent   Category? @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
 
-  children    Category[] @relation("CategoryHierarchy")
+  children Category[] @relation("CategoryHierarchy")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-   deletedAt   DateTime? 
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   posts Post[]
+
+  @@index([name])
+  @@index([parentId])
+  @@index([slug])
+  @@index([createdAt])
+  @@index([deletedAt])
 }
 
 model Tag {
@@ -159,16 +193,21 @@ model Tag {
   name String @unique
   slug String @unique
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  deletedAt   DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   posts Post[]
+
+  @@index([name])
+  @@index([slug])
+  @@index([createdAt])
+  @@index([deletedAt])
 }
 
 model Media {
   id           String @id @default(uuid())
- uploadedById String
+  uploadedById String
   uploadedBy   User   @relation("UserUploads", fields: [uploadedById], references: [id])
 
   url      String @unique
@@ -177,9 +216,14 @@ model Media {
   size     Int
 
   posts Post[] @relation("PostCover")
-  users        User[] @relation("UserImage")
+  users User[] @relation("UserImage")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  deletedAt   DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([filename])
+  @@index([uploadedById])
+  @@index([createdAt])
+  @@index([deletedAt])
 }

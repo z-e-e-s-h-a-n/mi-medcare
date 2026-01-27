@@ -2,24 +2,23 @@ import type { Prisma } from "@generated/prisma";
 import { tokenService } from "@lib/auth/token.service";
 import { uploaderService } from "@lib/core/cloudinary";
 import prisma from "@lib/core/prisma";
-import { ForbiddenException, NotFoundException } from "@lib/http/http-exception";
 import { NextRequest } from "next/server";
 import { MediaWhereInput } from "prisma/generated/models";
 
-export class MediaService {
+class MediaService {
   async createMedia(req: NextRequest) {
     const user = await tokenService.getDecodeUser(req);
-    const uploadResult = await uploaderService.uploadStream(req)
+    const uploadResult = await uploaderService.uploadStream(req);
 
     const media = await prisma.media.create({
       data: {
         uploadedById: user.id,
         url: uploadResult.secure_url,
         filename: uploadResult.original_filename,
-        mimeType: uploadResult.format,
+        mimeType: `${uploadResult.resource_type}/${uploadResult.format}`,
         size: uploadResult.bytes,
       },
-      include: this.mediaInclude
+      include: this.mediaInclude,
     });
 
     return {
@@ -28,29 +27,11 @@ export class MediaService {
     };
   }
 
-  async updateMedia(
-    id: string,
-    dto: MediaUpdateDto,
-    req: NextRequest
-  ) {
-    const user = await tokenService.getDecodeUser(req);
-
-    const media = await prisma.media.findUnique({
-      where: { id },
-    });
-
-    if (!media) {
-      throw new NotFoundException("Media not found");
-    }
-
-    if (media.uploadedById !== user.id) {
-      throw new ForbiddenException("You cannot update this media");
-    }
-
+  async updateMedia(id: string, dto: MediaUpdateDto) {
     const updated = await prisma.media.update({
       where: { id },
       data: dto,
-      include: this.mediaInclude
+      include: this.mediaInclude,
     });
 
     return {
@@ -62,7 +43,7 @@ export class MediaService {
   async findMediaById(id: string) {
     const media = await prisma.media.findUnique({
       where: { id },
-      include: this.mediaInclude
+      include: this.mediaInclude,
     });
 
     return {
@@ -72,15 +53,8 @@ export class MediaService {
   }
 
   async findAllMedia(query: MediaQueryDto) {
-    const {
-      page,
-      limit,
-      sortBy,
-      sortOrder,
-      search,
-      searchBy,
-      mimeType,
-    } = query;
+    const { page, limit, sortBy, sortOrder, search, searchBy, mimeType } =
+      query;
 
     const where: Prisma.MediaWhereInput = {};
 
@@ -105,7 +79,7 @@ export class MediaService {
         skip,
         take: limit,
         orderBy,
-        include: this.mediaInclude
+        include: this.mediaInclude,
       }),
       prisma.media.count({ where }),
     ]);
@@ -123,6 +97,8 @@ export class MediaService {
   }
 
   async deleteMedia(id: string) {
+    console.log(" req delete media");
+
     await prisma.media.delete({
       where: { id },
     });
@@ -132,9 +108,7 @@ export class MediaService {
     };
   }
 
-  mediaInclude = {
-    uploadedBy: true
-  }
+  mediaInclude = { uploadedBy: { omit: { password: true } } };
 }
 
 export const mediaService = new MediaService();

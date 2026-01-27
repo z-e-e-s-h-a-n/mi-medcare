@@ -1,7 +1,7 @@
 "use client";
 
 import type { ColumnConfig } from "@components/dashboard/GenericTable";
-import useAdmin from "@/hooks/admin";
+import { useAdminUsers } from "@/hooks/admin";
 import ListPage from "@components/dashboard/ListPage";
 import { SearchByOption } from "@components/dashboard/SearchToolbar";
 import { Badge } from "@components/ui/badge";
@@ -19,8 +19,13 @@ const userColumns: ColumnConfig<UserResponse, UserQueryType>[] = [
   },
   {
     header: "Role",
-    accessor: (u) => <Badge variant="outline">{u.role}</Badge>,
+    accessor: (u) => <Badge variant="secondary">{u.role}</Badge>,
   },
+  {
+    header: "Status",
+    accessor: (u) => <Badge variant="secondary">{u.status}</Badge>,
+  },
+
   {
     header: "Email",
     accessor: "email",
@@ -39,7 +44,7 @@ const userColumns: ColumnConfig<UserResponse, UserQueryType>[] = [
 ];
 
 const userSearchByOptions: SearchByOption<UserQueryType>[] = [
-  { value: "id", label: "userId" },
+  { value: "id", label: "User Id" },
   { value: "displayName", label: "Name" },
   { value: "email", label: "Email" },
 ];
@@ -47,11 +52,12 @@ const userSearchByOptions: SearchByOption<UserQueryType>[] = [
 const page = () => {
   return (
     <ListPage
-      entityType="users"
+      entityType="dashboard/admin/users"
       dataKey="users"
       columns={userColumns}
       searchByOptions={userSearchByOptions}
-      useListHook={useAdmin}
+      useListHook={useAdminUsers}
+      // useDeleteHook={}
       defaultSortBy="createdAt"
       defaultSearchBy="displayName"
       filterConfig={{

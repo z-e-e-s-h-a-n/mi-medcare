@@ -26,7 +26,7 @@ const TagField = <TFormData,>({
   return (
     <form.Field name={name} mode="array">
       {(field) => {
-        const values: string[] = Array.isArray(field.state.value)
+        const values: TagResponse[] = Array.isArray(field.state.value)
           ? field.state.value
           : [];
 
@@ -37,22 +37,33 @@ const TagField = <TFormData,>({
             ? []
             : options.filter(
                 (t) =>
-                  !values.includes(normalize(t.name)) &&
+                  !values.some((v) => v.slug === t.slug) &&
                   (t.name.toLowerCase().includes(q) ||
                     t.slug.toLowerCase().includes(q)),
               );
 
-        const exactMatch = options.find(
-          (t) => normalize(t.name) === normalize(query),
-        );
-
+        const exactMatch = options.find((t) => t.slug === normalize(query));
         const isNew =
-          query.length > 0 && !exactMatch && !values.includes(normalize(query));
+          query.length > 0 &&
+          !exactMatch &&
+          !values.some((v) => v.slug === normalize(query));
 
         const addTag = (value: string) => {
-          const tag = normalize(value);
-          if (!tag || values.includes(tag)) return;
-          field.pushValue(tag as any);
+          const slug = normalize(value);
+          if (!slug) return;
+
+          if (values.some((v) => v.slug === slug)) return;
+
+          const existing = options.find((t) => t.slug === slug);
+
+          field.pushValue(
+            existing ??
+              ({
+                name: value.trim(),
+                slug,
+              } as any),
+          );
+
           setQuery("");
         };
 
@@ -67,8 +78,8 @@ const TagField = <TFormData,>({
             {/* Selected tags */}
             <div className="flex flex-wrap gap-2">
               {values.map((tag, i) => (
-                <Badge key={tag} variant="secondary">
-                  {tag}
+                <Badge key={tag.name} variant="secondary">
+                  {tag.name}
                   <button
                     type="button"
                     className="ml-1"

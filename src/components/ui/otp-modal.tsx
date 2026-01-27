@@ -20,8 +20,8 @@ interface OtpModalProps {
   purpose: OtpPurpose;
   open: boolean;
   setOpen: (o: boolean) => void;
-  setOtpToken: (t: string | null) => void;
-  redirectUrl: string | null;
+  setOtpToken: (t?: string) => void;
+  redirectUrl?: string;
 }
 
 const OtpModal = ({
@@ -41,7 +41,7 @@ const OtpModal = ({
     try {
       const res = await validateOtp({ email, purpose, secret });
       toast.success(res.message);
-      setOtpToken(res.data?.secret ?? null);
+      setOtpToken(res.data?.secret);
       setOpen(false);
       if (redirectUrl) router.push(redirectUrl);
     } catch (err: any) {
@@ -77,10 +77,7 @@ const OtpModal = ({
           <AlertDialogTitle>Enter You OTP</AlertDialogTitle>
           <AlertDialogDescription>
             We&apos;ve sent a code to{" "}
-            <span className="text-primary">
-              {email}
-            </span>
-            .
+            <span className="text-primary">{email}</span>.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <InputOTP maxLength={6} value={secret} onChange={setSecret}>

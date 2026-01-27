@@ -70,11 +70,11 @@ const postSearchByOptions: SearchByOption<PostQueryType>[] = [
   { value: "category", label: "Category" },
 ];
 
-const page = () => {
+const Page = () => {
   return (
     <ListPage
-      entityType="posts"
       dataKey="posts"
+      entityType="dashboard/posts"
       columns={postColumns}
       searchByOptions={postSearchByOptions}
       useListHook={usePosts}
@@ -90,4 +90,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -22,7 +22,6 @@ export const SelectField = <TFormData,>({
         <Select
           name={field.name}
           value={field.value}
-          defaultValue={field.value}
           onValueChange={field.onChange}
           disabled={disabled}
         >

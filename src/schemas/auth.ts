@@ -1,22 +1,22 @@
 import { OtpPurposeEnum, OtpTypeEnum } from "@schemas/enums";
 import { z } from "zod";
 
-export const email = z.string().min(11);
-export const password = z.string().min(8);
-export const name = z.string().min(3);
+export const emailSchema = z.string().min(11);
+export const passwordSchema = z.string().min(8);
+export const nameSchema = z.string().min(3);
 
 export const signInSchema = z.object({
-  email,
-  password: password,
+  email: emailSchema,
+  password: passwordSchema,
 });
 
 export const signUpSchema = signInSchema.extend({
-  firstName: name,
-  lastName: name.optional(),
-})
+  firstName: nameSchema,
+  lastName: nameSchema.optional(),
+});
 
 export const requestOtpSchema = z.object({
-  email,
+  email: emailSchema,
   purpose: OtpPurposeEnum,
 });
 
@@ -26,9 +26,9 @@ export const validateOtpSchema = requestOtpSchema.extend({
 });
 
 export const resetPasswordSchema = validateOtpSchema.extend({
-  newPassword: password,
+  newPassword: passwordSchema,
 });
 
 export const changeEmailSchema = validateOtpSchema.extend({
-  newEmail: email,
+  newEmail: emailSchema,
 });

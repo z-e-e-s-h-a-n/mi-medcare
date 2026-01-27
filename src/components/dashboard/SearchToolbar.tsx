@@ -46,7 +46,7 @@ export interface SearchToolbarProps<TQuery extends BaseQueryType> {
   filterConfig?: ListFilterConfig<TQuery>;
 
   searchByOptions: SearchByOption<TQuery>[];
-  entityType: string;
+  entityType?: string;
 }
 
 function SearchToolbar<TQuery extends BaseQueryType>({
@@ -118,9 +118,11 @@ function SearchToolbar<TQuery extends BaseQueryType>({
           </Select>
         )}
 
-        <Button href={`/${entityType}/new`} className="capitalize">
-          <Plus /> New {entityType.split("/").pop()?.replace(/s$/, "")}
-        </Button>
+        {entityType && (
+          <Button href={`/${entityType}/new`} className="capitalize">
+            <Plus /> New {entityType.split("/").pop()?.replace(/s$/, "")}
+          </Button>
+        )}
       </div>
     </div>
   );

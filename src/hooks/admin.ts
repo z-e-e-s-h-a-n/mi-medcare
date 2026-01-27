@@ -1,50 +1,105 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { findAllUsers, createUser } from "@lib/admin/client";
+import {
+  findAllUsers,
+  findOneUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  restoreUser,
+} from "@lib/admin/client";
+import { ApiException } from "@lib/http/http-exception";
 import { parseExpiry } from "@lib/utils/general";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const STALE_TIME = parseExpiry("15m");
 const GC_TIME = parseExpiry("30m");
 
-const useAdmin = (params?: UserQueryType) => {
-  const queryClient = useQueryClient();
+const queryDefaults = {
+  staleTime: STALE_TIME,
+  gcTime: GC_TIME,
+  refetchOnWindowFocus: false,
+  refetchOnReconnect: false,
+  retry: false,
+};
 
-  /* -------------------------------------------
-   * FETCH USERS
-   * ------------------------------------------- */
+export function useAdminUsers(params?: UserQueryType) {
   const usersQuery = useQuery({
     queryKey: ["users", params],
     queryFn: () => findAllUsers(params),
     select: (res) => res.data,
     placeholderData: (prev) => prev,
-    staleTime: STALE_TIME,
-    gcTime: GC_TIME,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    retry: false,
+    ...queryDefaults,
   });
 
+  return {
+    data: usersQuery.data,
+    isFetching: usersQuery.isLoading || usersQuery.isFetching,
+    fetchError: usersQuery.error as ApiException,
+  };
+}
 
-  /* -------------------------------------------
-   * CREATE USER
-   * ------------------------------------------- */
-  const createCustomerMutation = useMutation({
-    mutationFn: createUser,
+export function useAdminUser(id?: string) {
+  const queryClient = useQueryClient();
+
+  const userQuery = useQuery({
+    queryKey: ["user", id],
+    queryFn: () => findOneUser(id!),
+    select: (res) => res.data,
+    enabled: Boolean(id),
+    placeholderData: (prev) => prev,
+    ...queryDefaults,
+  });
+
+  const CUMutation = useMutation<any, ApiException, CUUserType>({
+    mutationFn: (data) => (id ? updateUser(id, data) : createUser(data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
   });
 
   return {
-    data: usersQuery.data,
-    isLoading: usersQuery.isLoading,
-    isFetching: usersQuery.isFetching,
-    isError: usersQuery.isError,
-    error: usersQuery.error,
-    createUser: createCustomerMutation.mutateAsync,
-    isCreatingUser: createCustomerMutation.isPending,
-  };
-};
+    data: userQuery.data,
+    isFetching: userQuery.isLoading || userQuery.isFetching,
+    fetchError: userQuery.error as ApiException,
 
-export default useAdmin;
+    mutateAsync: CUMutation.mutateAsync,
+    isPending: CUMutation.isPending,
+    mutateError: CUMutation.error,
+  };
+}
+
+export function useAdminMutations() {
+  const queryClient = useQueryClient();
+
+  const invalidateUsers = () =>
+    queryClient.invalidateQueries({ queryKey: ["users"] });
+
+  const removeMutation = useMutation<
+    null,
+    ApiException,
+    { id: string; force?: boolean }
+  >({
+    mutationFn: async ({ id, force }) => {
+      const res = await deleteUser(id, force);
+      return res.data;
+    },
+    onSuccess: invalidateUsers,
+  });
+
+  const restoreMutation = useMutation({
+    mutationFn: (id: string) => restoreUser(id),
+    onSuccess: invalidateUsers,
+  });
+
+  return {
+    deleteAsync: removeMutation.mutateAsync,
+    isDeleting: removeMutation.isPending,
+    deleteError: removeMutation.error,
+
+    restoreAsync: restoreMutation.mutateAsync,
+    isRestoring: restoreMutation.isPending,
+    restoreError: restoreMutation.error,
+  };
+}

@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import SocialAuthField from "./SocialAuthField";
 import { useRouter } from "next/navigation";
 import { InputField } from "@components/ui/input-field";
-import { signInSchema, signUpSchema } from "@schemas/auth";
+import { emailSchema, nameSchema, passwordSchema } from "@schemas/auth";
 import {
   requestOtp,
   resetPassword,
@@ -23,6 +23,7 @@ import {
   validateOtp,
 } from "@lib/auth/client";
 import Image from "next/image";
+import z from "zod";
 
 export type AuthQueryParams = ValidateOtpType & {
   error?: string;
@@ -39,13 +40,24 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
   const { purpose, secret, type, error, message } = queryParams;
   const [email, setEmail] = useState(queryParams.email);
   const [isOpen, setIsOpen] = useState(false);
-  const [otpToken, setOtpToken] = useState<string | null>(null);
+  const [otpToken, setOtpToken] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
   const [otpPurpose, setOtpPurpose] = useState<OtpPurpose>(purpose);
-  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
+  const [redirectUrl, setRedirectUrl] = useState<string>();
 
   const router = useRouter();
-  const schema = formType === "sign-up" ? signUpSchema : signInSchema;
+  const schema = z.object({
+    email: emailSchema,
+    ...(formType.includes("sign") && {
+      password: passwordSchema,
+    }),
+    ...(formType === "sign-up" && {
+      firstName: nameSchema,
+      lastName: nameSchema.optional(),
+    }),
+    ...(formType.includes("set-password") &&
+      otpToken && { password: passwordSchema }),
+  });
 
   const form = useForm({
     defaultValues: {
@@ -66,7 +78,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
           setOtpPurpose("verifyEmail");
           const res = await signUp(value);
           message = res.message;
-          setRedirectUrl("/dashboard");
+          setRedirectUrl("/auth/sign-in");
           setIsOpen(true);
         } else if (formType === "sign-in") {
           const res = await signIn(value);
@@ -121,7 +133,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
           secret,
           type,
         });
-        setOtpToken(res.data?.secret ?? null);
+        setOtpToken(res.data?.secret);
         toast.success(res.message);
       } catch (err: any) {
         toast.error("Failed to verify Otp", {

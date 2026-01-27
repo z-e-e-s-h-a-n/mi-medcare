@@ -6,10 +6,13 @@ import {
   UserSortByEnum,
   UserStatusEnum,
 } from "./enums";
-import { signUpSchema } from "./auth";
+import { nameSchema, passwordSchema, signUpSchema } from "./auth";
 
 export const CUUserSchema = signUpSchema.extend({
   role: UserRoleEnum.exclude(["admin"]),
+  displayName: nameSchema,
+  status: UserStatusEnum,
+  password: passwordSchema,
 });
 
 export const userQuerySchema = baseQuerySchema(

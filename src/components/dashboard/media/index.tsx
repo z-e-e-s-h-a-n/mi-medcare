@@ -5,13 +5,15 @@ import SearchToolbar from "@components/dashboard/SearchToolbar";
 import { MediaGrid } from "./MediaGrid";
 import Pagination from "@components/dashboard/Pagination";
 import { useState } from "react";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@components/ui/tabs";
+import { Library, Upload } from "lucide-react";
+import MediaUploader from "./MediaUploader";
 
 interface MediaLibraryProps {
-  selectable?: boolean;
   onSelect?: (media: MediaResponse) => void;
 }
 
-function MediaLibrary({ selectable, onSelect }: MediaLibraryProps) {
+function MediaLibrary({ onSelect }: MediaLibraryProps) {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
@@ -21,7 +23,7 @@ function MediaLibrary({ selectable, onSelect }: MediaLibraryProps) {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [filter, setFilter] = useState<string>();
 
-  const { data, isLoading } = useMedias({
+  const { data, isFetching } = useMedias({
     page,
     limit,
     search,
@@ -31,45 +33,59 @@ function MediaLibrary({ selectable, onSelect }: MediaLibraryProps) {
   });
 
   return (
-    <section className="space-y-6">
-      <SearchToolbar<MediaQueryType>
-        entityType={"dashboard/media"}
-        search={search}
-        setPage={setPage}
-        setSearch={setSearch}
-        searchBy={searchBy}
-        setSearchBy={setSearchBy}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        sortOrder={sortOrder}
-        filter={filter}
-        setFilter={setFilter}
-        setSortOrder={setSortOrder}
-        searchByOptions={[
-          { label: "Filename", value: "filename" },
-          { label: "ID", value: "id" },
-        ]}
-        // filterConfig={}
-      />
+    <Tabs asChild defaultValue="library">
+      <section className="space-y-16">
+        <div className="flex items-center justify-between">
+          <TabsList className="bg-transparent gap-4 border">
+            <TabsTrigger value="upload">
+              <Upload /> Upload
+            </TabsTrigger>
+            <TabsTrigger value="library">
+              <Library /> Library
+            </TabsTrigger>
+          </TabsList>
 
-      <MediaGrid
-        medias={data?.medias ?? []}
-        isLoading={isLoading}
-        selectable={selectable}
-        onSelect={onSelect}
-      />
-
-      {data && (
-        <Pagination
-          total={data.total}
-          limit={limit}
-          currentPage={page}
-          totalPages={data.totalPages}
-          setLimit={setLimit}
-          setPage={setPage}
-        />
-      )}
-    </section>
+          <SearchToolbar<MediaQueryType>
+            search={search}
+            setPage={setPage}
+            setSearch={setSearch}
+            searchBy={searchBy}
+            setSearchBy={setSearchBy}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            sortOrder={sortOrder}
+            filter={filter}
+            setFilter={setFilter}
+            setSortOrder={setSortOrder}
+            searchByOptions={[
+              { label: "Filename", value: "filename" },
+              { label: "ID", value: "id" },
+            ]}
+            // filterConfig={}
+          />
+        </div>
+        <TabsContent value="upload">
+          <MediaUploader />
+        </TabsContent>
+        <TabsContent value="library" className="space-y-6">
+          <MediaGrid
+            medias={data?.medias ?? []}
+            isFetching={isFetching}
+            onSelect={onSelect}
+          />
+          {data && (
+            <Pagination
+              total={data.total}
+              limit={limit}
+              currentPage={page}
+              totalPages={data.totalPages}
+              setLimit={setLimit}
+              setPage={setPage}
+            />
+          )}
+        </TabsContent>
+      </section>
+    </Tabs>
   );
 }
 

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useRouter, notFound } from "next/navigation";
 import { CircleCheckIcon, LoaderCircle, OctagonXIcon } from "lucide-react";
 import { toast } from "sonner";
-import { validateOtp } from "@lib/auth/client";
+import { validateOtp, verifyChangeEmail } from "@lib/auth/client";
 import { Card, CardContent } from "@components/ui/card";
 import { cn } from "@lib/utils/general";
 
@@ -14,16 +14,20 @@ export default function VerifyPage() {
   const router = useRouter();
 
   const [status, setStatus] = useState<"loading" | "success" | "error">(
-    "loading"
+    "loading",
   );
 
   const email = params.get("email");
+  const newEmail = params.get("newEmail");
   const purpose = params.get("purpose") as OtpPurpose;
   const secret = params.get("secret");
   const type = params.get("type") as OtpType;
 
   if (!email || !purpose || !secret) {
     notFound();
+  } else if (!["verifyEmail", "changeEmail"].includes(purpose)) {
+    toast.error("Invalid Purpose");
+    router.push("/auth/sign-in");
   }
 
   const Icon =
@@ -36,12 +40,23 @@ export default function VerifyPage() {
   useEffect(() => {
     const verify = async () => {
       try {
-        const res = await validateOtp({
-          email,
-          purpose,
-          secret,
-          type,
-        });
+        let res;
+        if (purpose === "changeEmail" && newEmail) {
+          res = await verifyChangeEmail({
+            email,
+            newEmail,
+            purpose,
+            secret,
+            type,
+          });
+        } else {
+          res = await validateOtp({
+            email,
+            purpose,
+            secret,
+            type,
+          });
+        }
 
         toast.success(res.message);
         setStatus("success");
@@ -55,13 +70,13 @@ export default function VerifyPage() {
         });
         setStatus("error");
         setTimeout(() => {
-          router.push("/");
+          router.push("/auth/sign-in");
         }, 500);
       }
     };
 
     verify();
-  }, [email, params, purpose, router, secret, type]);
+  }, [email, newEmail, params, purpose, router, secret, type]);
 
   return (
     <Card className="w-full max-w-md mx-auto">
@@ -69,7 +84,7 @@ export default function VerifyPage() {
         className={cn(
           "flex-center flex-col gap-4 py-10",
           status === "success" && "text-green-500",
-          status === "error" && "text-destructive"
+          status === "error" && "text-destructive",
         )}
       >
         <Icon

@@ -1,6 +1,6 @@
-import { tagService } from "@lib/tags/tags.service";
 import { withApiHandler } from "@lib/http/api-handler";
 import { validateBody, validateQuery } from "@lib/http/validate";
+import { tagService } from "@lib/tags/tags.service";
 import { CUTagSchema, tagQuerySchema } from "@schemas/tags";
 
 export const GET = withApiHandler(async (req) => {

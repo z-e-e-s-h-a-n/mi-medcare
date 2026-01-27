@@ -12,6 +12,7 @@ import { MediaField } from "../ui/media-field";
 import { PostStatusEnum } from "@schemas/enums";
 import TagField from "./TagField";
 import { RichTextField } from "./RichTextField";
+import { slugify } from "@utils/general";
 
 const CUPostForm = ({ formType, entityId }: BaseCUFormProps) => {
   return (
@@ -51,19 +52,33 @@ const CUPostForm = ({ formType, entityId }: BaseCUFormProps) => {
               })}
             />
           </div>
-          <InputField form={form} name="slug" label="Slug" />
+          <form.Subscribe selector={(state) => ({ title: state.values.title })}>
+            {({ title }) => {
+              const slug = slugify(title);
+              return (
+                <InputField
+                  form={form}
+                  name="slug"
+                  label="Slug"
+                  defaultValue={slug}
+                />
+              );
+            }}
+          </form.Subscribe>
           <InputField form={form} name="excerpt" label="Excerpt" />
-          <div className="min-w-0 max-w-full overflow-x-auto"></div>
-          <RichTextField form={form} name="content" label="Content" />
+          <TagField form={form} name="tags" label="Tags" />
           <MediaField
             form={form}
             name="coverImage"
             label="Cover Image"
-            accept="image/*"
-            maxSize={5 * 1024 * 1024}
-            defaultMedia={data?.cover}
+            defaultValue={data?.cover}
           />
-          <TagField form={form} name="tags" label="Tags" />
+          <RichTextField
+            form={form}
+            name="content"
+            label="Content"
+            defaultValue={data?.content}
+          />
           <SelectField
             form={form}
             name="status"

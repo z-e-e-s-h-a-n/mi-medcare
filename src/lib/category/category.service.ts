@@ -1,13 +1,15 @@
 import type { Prisma } from "@generated/prisma";
 import prisma from "@lib/core/prisma";
-import { CategoryOrderByWithRelationInput, CategoryWhereInput } from "prisma/generated/models";
+import {
+  CategoryOrderByWithRelationInput,
+  CategoryWhereInput,
+} from "prisma/generated/models";
 
-export class CategoryService {
+class CategoryService {
   async createCategory(dto: CUCategoryDto) {
-
     const category = await prisma.category.create({
       data: dto,
-      include: this.categoryInclude
+      include: this.categoryInclude,
     });
 
     return {
@@ -17,11 +19,10 @@ export class CategoryService {
   }
 
   async updateCategory(id: string, dto: CUCategoryDto) {
-
     const category = await prisma.category.update({
       where: { id },
       data: dto,
-      include: this.categoryInclude
+      include: this.categoryInclude,
     });
 
     return {
@@ -33,7 +34,7 @@ export class CategoryService {
   async findCategoryById(id: string) {
     const category = await prisma.category.findUnique({
       where: { id },
-      include: this.categoryInclude
+      include: this.categoryInclude,
     });
     return {
       message: "Category fetched successfully",
@@ -63,9 +64,9 @@ export class CategoryService {
     let orderBy: CategoryOrderByWithRelationInput = { [sortBy]: sortOrder };
 
     if (sortBy === "posts") {
-      orderBy = { "posts": { _count: sortOrder } }
+      orderBy = { posts: { _count: sortOrder } };
     } else if (sortBy === "parent") {
-      orderBy = { "parent": { name: sortOrder } }
+      orderBy = { parent: { name: sortOrder } };
     }
 
     const [categories, total] = await Promise.all([
@@ -74,7 +75,7 @@ export class CategoryService {
         skip,
         take: limit,
         orderBy,
-        include: this.categoryInclude
+        include: this.categoryInclude,
       }),
       prisma.category.count({ where }),
     ]);
@@ -105,8 +106,7 @@ export class CategoryService {
     parent: true,
     children: true,
     posts: true,
-  }
-
+  };
 }
 
 export const categoryService = new CategoryService();

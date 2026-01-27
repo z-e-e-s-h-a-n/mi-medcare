@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Check, ChevronsUpDown, } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@lib/utils/general";
 
 import { Button } from "./button";
@@ -15,23 +15,19 @@ import {
 } from "./command";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { FormField, type BaseFieldProps } from "./form";
-import { ApiException } from "@lib/http/api-client";
 
 export type ComboboxOption<TData, TValue = TData[keyof TData]> = {
-  key: TValue
+  key: TValue;
   value: TValue;
   content: string | React.ReactNode;
 };
 
-export type UseEntitiesResult<TKey extends string, TData,> = {
-  data?:
-  | (BaseQueryResponse & {
+export type UseEntitiesResult<TKey extends string, TData> = {
+  data?: BaseQueryResponse & {
     [K in TKey]: TData[];
-  })
-  | null;
-  isLoading: boolean;
+  };
   isFetching: boolean;
-  error: ApiException | null;
+  fetchError: ApiException | null;
 };
 
 interface ComboboxFieldProps<
@@ -66,7 +62,7 @@ export function ComboboxField<
 }: ComboboxFieldProps<TKey, TQuery, TData, TFormData>) {
   const [open, setOpen] = React.useState(false);
 
-  const { data, isLoading } = useQuery(queryArgs);
+  const { data, isFetching } = useQuery(queryArgs);
   const options = data
     ? data[dataKey].map((d) => ({ ...getOption(d), id: d.id }))
     : [];
@@ -102,7 +98,7 @@ export function ComboboxField<
                 <CommandInput placeholder={field.placeholder} />
                 <CommandList>
                   <CommandEmpty>
-                    {isLoading ? "Loading..." : placeholder}
+                    {isFetching ? "Loading..." : placeholder}
                   </CommandEmpty>
 
                   <CommandGroup>

@@ -15,14 +15,12 @@ import {
   useSidebar,
 } from "@components/ui/sidebar";
 import {
-  IconCreditCard,
   IconDotsVertical,
   IconLogout,
   IconNotification,
   IconUserCircle,
 } from "@tabler/icons-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,9 +33,24 @@ import {
 
 import Link from "next/link";
 import { appName } from "@constants/app";
+import useUser from "@hooks/user";
+import { toast } from "sonner";
+import { redirect } from "next/navigation";
+import UserCard from "./UserCard";
 
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   const { isMobile } = useSidebar();
+  const { currentUser, isFetching, logoutUser, isLogoutPending, logoutError } =
+    useUser();
+
+  const logout = async () => {
+    await logoutUser();
+    if (logoutError) {
+      toast.error("Error: in Logout User");
+    }
+    toast.success("Logout Successfully.");
+    redirect("/auth/sign-in");
+  };
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -48,7 +61,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
               asChild
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
-              <Link href="#">
+              <Link href="/dashboard">
                 <IconInnerShadowTop className="size-5!" />
                 {appName}
               </Link>
@@ -68,16 +81,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                   size="lg"
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
-                  <Avatar className="h-8 w-8 rounded-lg grayscale">
-                    <AvatarImage src={"/"} alt={"Zeeshan"} />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                  </Avatar>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">Zeeshan</span>
-                    <span className="text-muted-foreground truncate text-xs">
-                      zeeshan@oneworld.tours
-                    </span>
-                  </div>
+                  <UserCard currentUser={currentUser} isFetching={isFetching} />
                   <IconDotsVertical className="ml-auto size-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
@@ -88,36 +92,27 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                 sideOffset={4}
               >
                 <DropdownMenuLabel className="p-0 font-normal">
-                  <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                    <Avatar className="h-8 w-8 rounded-lg">
-                      <AvatarImage src={"/"} alt={"Zeeshan"} />
-                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                    </Avatar>
-                    <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-medium">Zeeshan</span>
-                      <span className="text-muted-foreground truncate text-xs">
-                        zeeshan@oneworld.tours
-                      </span>
-                    </div>
-                  </div>
+                  <UserCard currentUser={currentUser} isFetching={isFetching} />
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <IconUserCircle />
-                    Account
+                  <DropdownMenuItem className="cursor-pointer" asChild>
+                    <Link href="/dashboard/users/account">
+                      <IconUserCircle />
+                      Account
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <IconCreditCard />
-                    Billing
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
                     <IconNotification />
                     Notifications
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem
+                  disabled={isLogoutPending}
+                  onClick={logout}
+                  className="cursor-pointer"
+                >
                   <IconLogout />
                   Log out
                 </DropdownMenuItem>

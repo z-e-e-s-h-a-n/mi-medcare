@@ -1,11 +1,17 @@
 import { publicEnv } from "@lib/core/public-env";
+import { serverEnv } from "@lib/core/server-env";
 import { TemplateProps } from "@lib/core/mailer";
+import { Otp } from "@generated/prisma";
+
+/* ======================================================
+   Config
+====================================================== */
 
 const appName = publicEnv.NEXT_PUBLIC_APP_NAME;
 const clientUrl = publicEnv.NEXT_PUBLIC_APP_ENDPOINT;
 
 /* ======================================================
-   Base styles (Gmail safe)
+   Base styles (Email safe)
 ====================================================== */
 
 const baseStyles = `
@@ -25,10 +31,10 @@ const containerStyles = `
 `;
 
 const headerStyles = `
-  font-size:22px;
-  font-weight:700;
-  margin-bottom:8px;
-  color:#7c3aed;
+  font-size:20px;
+  font-weight:600;
+  margin-bottom:6px;
+  color:#111827;
 `;
 
 const textStyles = `
@@ -53,16 +59,18 @@ const buttonStyles = `
   font-weight:600;
 `;
 
-const codeStyles = `
+const otpBoxStyles = `
+  display:inline-block;
+  min-width:44px;
+  padding:12px 0;
+  margin:0 4px;
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
   font-size:20px;
   font-weight:700;
-  letter-spacing:4px;
-  background:#f3f4f6;
-  padding:12px 20px;
-  border-radius:8px;
-  display:inline-block;
   font-family:monospace;
-  color:#7c3aed;
+  color:#111827;
 `;
 
 /* ======================================================
@@ -97,9 +105,6 @@ const EmailFooter = () => `
 <hr style="margin:32px 0;border:none;border-top:1px solid #e5e7eb;" />
 <p style="${mutedTextStyles}">
   Sent by <strong>${appName}</strong><br/>
-  Medical Billing Services
-</p>
-<p style="${mutedTextStyles}">
   © ${new Date().getFullYear()} ${appName}
 </p>
 `;
@@ -109,19 +114,40 @@ const Greeting = (name?: string) => `
 `;
 
 /* ======================================================
-   Action block (Gmail-safe)
+   OTP helpers
 ====================================================== */
 
-const ActionBlock = (link: string, label: string, secret?: string) =>
-  secret
+const NumericCode = (code: string) => `
+<div style="margin:20px 0;text-align:center;">
+  ${code
+    .split("")
+    .map((d) => `<span style="${otpBoxStyles}">${d}</span>`)
+    .join("")}
+</div>
+`;
+
+const ExpiryNotice = () => `
+<p style="${mutedTextStyles};text-align:center;">
+  This code expires in ${serverEnv.OTP_EXP}.
+</p>
+`;
+
+/* ======================================================
+   Action block
+====================================================== */
+
+const ActionBlock = (link: string, label: string, otp?: Otp) =>
+  otp?.type === "numericCode"
     ? `
-<table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;background:#f3f4f6;border-radius:10px;">
+<table width="100%" cellpadding="0" cellspacing="0" style="margin:28px 0;">
   <tr>
-    <td align="center" style="padding:24px;">
-      <div style="${codeStyles}">${secret}</div>
-      <div style="margin-top:16px;">
-        <a href="${link}" style="${buttonStyles}">${label}</a>
-      </div>
+    <td align="center">
+      <p style="${mutedTextStyles}">
+        Use the verification code below
+      </p>
+      ${NumericCode(otp.secret)}
+      ${ExpiryNotice()}
+      <a href="${link}" style="${buttonStyles}">${label}</a>
     </td>
   </tr>
 </table>`
@@ -141,28 +167,28 @@ const ActionBlock = (link: string, label: string, secret?: string) =>
 export const signupTemplate = ({ user }: TemplateProps) => ({
   subject: `Welcome to ${appName}`,
   html: EmailLayout(`
-    ${EmailHeader("Welcome 👋", "Your medical billing account is ready")}
+    ${EmailHeader("Welcome to MI MedCare", "Your account is ready")}
     ${Greeting(user?.displayName)}
     <p style="${textStyles}">
-      Your account with MI MedCare LLC is now active.
+      Your medical billing account has been successfully created.
     </p>
     <p style="${textStyles}">
-      Sign in to access your medical billing dashboard.
+      You can now sign in and access your dashboard.
     </p>
   `),
-  text: `Welcome to ${appName}. Account ready.`,
+  text: `Welcome to ${appName}. Your account is ready.`,
 });
 
 export const signinTemplate = ({ user }: TemplateProps) => ({
   subject: `New sign-in detected`,
   html: EmailLayout(`
-    ${EmailHeader("New sign-in 🔐")}
+    ${EmailHeader("New Sign-in Detected")}
     ${Greeting(user?.displayName)}
     <p style="${textStyles}">
-      A sign-in to your medical billing account was detected.
+      A sign-in to your account was detected.
     </p>
     <p style="${textStyles}">
-      Secure your account if this wasn't you.
+      If this wasn't you, please secure your account immediately.
     </p>
   `),
   text: `New sign-in detected.`,
@@ -171,77 +197,77 @@ export const signinTemplate = ({ user }: TemplateProps) => ({
 export const setPasswordTemplate = ({ user, otp, email }: TemplateProps) =>
   otp
     ? {
-      subject: `Set your password`,
-      html: EmailLayout(`
-          ${EmailHeader("Set your password 🔑")}
+        subject: `Set your password`,
+        html: EmailLayout(`
+          ${EmailHeader("Set Your Password")}
           ${Greeting(user?.displayName)}
           <p style="${textStyles}">
-            Create your password to access MI MedCare services.
+            Create a password to access your MI MedCare account.
           </p>
           ${ActionBlock(
-        `${clientUrl}/set-password?email=${email}&purpose=${otp.purpose}&secret=${otp.secret}&type=${otp.type}`,
-        "Set password",
-        otp.secret
-      )}
+            `${clientUrl}/auth/set-password?email=${email}&purpose=${otp.purpose}&secret=${otp.secret}&type=${otp.type}`,
+            "Set password",
+            otp,
+          )}
         `),
-      text: `Setup code: ${otp.secret}`,
-    }
+        text: `Your setup code is ${otp.secret}`,
+      }
     : {
-      subject: `Password set successfully`,
-      html: EmailLayout(`
-          ${EmailHeader("Password updated ✅")}
+        subject: `Password set successfully`,
+        html: EmailLayout(`
+          ${EmailHeader("Password Set Successfully")}
           ${Greeting(user?.displayName)}
           <p style="${textStyles}">
-            Your MI MedCare password is now set.
+            Your password has been created successfully.
           </p>
         `),
-      text: `Password set.`,
-    };
+        text: `Password set.`,
+      };
 
 export const resetPasswordTemplate = ({ user, otp, email }: TemplateProps) =>
   otp
     ? {
-      subject: `Reset your password`,
-      html: EmailLayout(`
-          ${EmailHeader("Reset password 🔄")}
+        subject: `Reset your password`,
+        html: EmailLayout(`
+          ${EmailHeader("Reset Your Password")}
           ${Greeting(user?.displayName)}
           <p style="${textStyles}">
-            Reset your MI MedCare billing account password.
+            Use the code below to reset your password.
           </p>
           ${ActionBlock(
-        `${clientUrl}/reset-password?email=${email}&purpose=${otp.purpose}&secret=${otp.secret}&type=${otp.type}`,
-        "Reset password",
-        otp.secret
-      )}
+            `${clientUrl}/auth/reset-password?email=${email}&purpose=${otp.purpose}&secret=${otp.secret}&type=${otp.type}`,
+            "Reset password",
+            otp,
+          )}
         `),
-      text: `Reset code: ${otp.secret}`,
-    }
+        text: `Reset code: ${otp.secret}`,
+      }
     : {
-      subject: `Password reset successful`,
-      html: EmailLayout(`
-          ${EmailHeader("Password updated ✅")}
+        subject: `Password reset successful`,
+        html: EmailLayout(`
+          ${EmailHeader("Password Reset Successful")}
           ${Greeting(user?.displayName)}
           <p style="${textStyles}">
-            Your password has been reset.
+            Your password has been updated.
           </p>
         `),
-      text: `Password reset.`,
-    };
+        text: `Password reset.`,
+      };
 
 export const verifyEmailTemplate = ({ user, otp, email }: TemplateProps) => {
-  const link = `${clientUrl}/verify?email=${email}&purpose=${otp?.purpose}&secret=${otp?.secret}&type=${otp?.type}`;
+  const link = `${clientUrl}/auth/verify?email=${email}&purpose=${otp?.purpose}&secret=${otp?.secret}&type=${otp?.type}`;
 
   return {
-    subject: `Verify your account`,
+    subject: `Verify your email address`,
     html: EmailLayout(`
-      ${EmailHeader("Verification required")}
+      ${EmailHeader("Verify Your Email Address")}
       ${Greeting(user?.displayName)}
       <p style="${textStyles}">
-        Verify your email for MI MedCare access.
+        Please verify your email to activate your account.
       </p>
-      ${otp ? ActionBlock(link, "Verify", otp.secret) : ""}
+      ${otp ? ActionBlock(link, "Verify email", otp) : ""}
     `),
-    text: `Code: ${otp?.secret}`,
+    text: `Verification code: ${otp?.secret}`,
   };
 };
 
@@ -253,37 +279,43 @@ export const changeEmailTemplate = ({
 }: TemplateProps) =>
   otp
     ? {
-      subject: `Confirm change request`,
-      html: EmailLayout(`
-          ${EmailHeader("Confirm change 🔄")}
+        subject: `Email change request`,
+        html: EmailLayout(`
+          ${EmailHeader(
+            "Email Change Request",
+            "Confirm your new email address",
+          )}
           ${Greeting(user?.displayName)}
           <p style="${textStyles}">
-            Confirm updating your MI MedCare contact info.
+            A request was made to change your email address.
+          </p>
+          <p style="${textStyles}">
+            New email: <strong>${newEmail}</strong>
           </p>
           ${ActionBlock(
-        `${clientUrl}/confirm-change?email=${email}&newEmail=${newEmail}&purpose=${otp.purpose}&secret=${otp.secret}&type=${otp.type}`,
-        "Confirm change",
-        otp.secret
-      )}
+            `${clientUrl}/auth/verify?email=${email}&newEmail=${newEmail}&purpose=${otp.purpose}&secret=${otp.secret}&type=${otp.type}`,
+            "Confirm email change",
+            otp,
+          )}
         `),
-      text: `Confirm change.`,
-    }
+        text: `Confirm email change.`,
+      }
     : {
-      subject: `Update successful`,
-      html: EmailLayout(`
-          ${EmailHeader("Update completed ✅")}
+        subject: `Email address updated`,
+        html: EmailLayout(`
+          ${EmailHeader("Email Address Updated")}
           ${Greeting(user?.displayName)}
           <p style="${textStyles}">
-            Your contact info is updated.
+            Your email address has been successfully updated.
           </p>
         `),
-      text: `Info updated.`,
-    };
+        text: `Email updated.`,
+      };
 
 export const securityAlertTemplate = ({ user, message }: TemplateProps) => ({
   subject: `Security alert`,
   html: EmailLayout(`
-    ${EmailHeader("Security alert 🚨")}
+    ${EmailHeader("Security Alert")}
     ${Greeting(user?.displayName)}
     <table width="100%" cellpadding="0" cellspacing="0" style="background:#fef2f2;border-radius:8px;margin:16px 0;">
       <tr>
@@ -295,5 +327,5 @@ export const securityAlertTemplate = ({ user, message }: TemplateProps) => ({
       </tr>
     </table>
   `),
-  text: `Alert: ${message}`,
+  text: `Security alert: ${message}`,
 });

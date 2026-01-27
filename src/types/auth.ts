@@ -1,6 +1,6 @@
 import z from "zod";
 import * as schema from "../schemas/auth";
-import { User, UserRole } from "@generated/prisma";
+import { UserRole } from "@generated/prisma";
 
 declare global {
   /* ======================================================
@@ -39,22 +39,6 @@ declare global {
   /* ======================================================
      AUTH — RESPONSES
   ===================================================== */
-
-  type BaseUserResponse = Pick<User, "id" | "displayName" | "email">;
-
-  type UserResponse = Pick<
-    User,
-    | "firstName"
-    | "lastName"
-    | "role"
-    | "imageId"
-    | "isEmailVerified"
-    | "lastLoginAt"
-  > &
-    BaseResponse &
-    BaseUserResponse & {
-      image?: MediaResponse | null;
-    };
 
   interface SignInResponse {
     id: string;

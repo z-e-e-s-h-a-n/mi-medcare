@@ -39,3 +39,22 @@ export class NotFoundException extends HttpException {
     super(message, 404);
   }
 }
+
+export class ApiException extends Error {
+  status: number;
+  data: unknown | null;
+  action?: string;
+
+  constructor(payload: {
+    message?: string;
+    status?: number;
+    data?: unknown;
+    action?: string;
+  }) {
+    super(payload.message ?? "API Error");
+    this.name = "ApiException";
+    this.status = payload.status ?? 0;
+    this.data = payload.data ?? null;
+    this.action = payload.action;
+  }
+}
