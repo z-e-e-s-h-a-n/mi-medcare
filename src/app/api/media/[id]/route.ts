@@ -11,7 +11,7 @@ export const GET = withApiHandler(async (_req, { getParam }) => {
 export const PUT = withApiHandler(async (req, { getParam }) => {
   const id = await getParam("id");
   const dto = await validateBody(req, MediaUpdateSchema);
-  return mediaService.updateMedia(id, dto, req);
+  return mediaService.updateMedia(id, dto);
 });
 
 export const DELETE = withApiHandler(async (_req, { getParam }) => {

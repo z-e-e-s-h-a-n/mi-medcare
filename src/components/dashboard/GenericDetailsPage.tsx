@@ -9,7 +9,7 @@ import { ArrowLeft, Edit, Eye } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { cn } from "@utils/general";
-import DetailsPageSkeleton from "./DetailsPageSkeleton";
+import DetailsPageSkeleton from "../skeleton/DetailsPageSkeleton";
 import { ApiException } from "@lib/http/http-exception";
 
 export interface DetailFieldConfig<TData> {

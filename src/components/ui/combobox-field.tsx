@@ -15,6 +15,7 @@ import {
 } from "./command";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { FormField, type BaseFieldProps } from "./form";
+import { ApiException } from "@lib/http/http-exception";
 
 export type ComboboxOption<TData, TValue = TData[keyof TData]> = {
   key: TValue;

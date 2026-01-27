@@ -30,6 +30,7 @@ export const PostSearchByEnum = z.enum([
   "slug",
   "author",
   "category",
+  "tags",
 ]);
 export const PostSortByEnum = z.enum([
   "publishedAt",

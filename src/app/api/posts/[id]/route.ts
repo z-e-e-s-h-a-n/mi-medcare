@@ -4,7 +4,8 @@ import { validateBody } from "@lib/http/validate";
 import { CUPostSchema } from "@schemas/post";
 export const GET = withApiHandler(async (_req, { getParam }) => {
   const id = await getParam("id");
-  return postService.findPostById(id);
+
+  return postService.findPost(id);
 });
 
 export const PUT = withApiHandler(async (req, { getParam }) => {

@@ -3,4 +3,14 @@ module.exports = {
   generateRobotsTxt: true,
   changefreq: "weekly",
   priority: 0.8,
+
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/dashboard", "/auth"],
+      },
+    ],
+  },
 };

@@ -23,7 +23,7 @@ import {
 } from "@components/ui//dropdown-menu";
 import Pagination, { PaginationProps } from "./Pagination";
 import SearchToolbar, { SearchToolbarProps } from "./SearchToolbar";
-import TableSkeleton from "./TableSkeleton";
+import TableSkeleton from "../skeleton/TableSkeleton";
 
 export interface ColumnConfig<TData, TQuery extends BaseQueryType> {
   header: string;

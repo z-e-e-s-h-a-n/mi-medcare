@@ -270,8 +270,12 @@ class AuthService {
     return { message: `Email changed successfully.` };
   }
 
-  async createUser(dto: SignUpDto, role: UserRole) {
+  async createUser(dto: Optional<SignUpDto, "password">, role: UserRole) {
     await this.findUserFail200(dto.email);
+
+    if (!dto.password) {
+      throw new BadRequestException("password should not be empty.");
+    }
     const hashedPassword = await this.hashPassword(dto.password);
 
     const user = await prisma.user.create({

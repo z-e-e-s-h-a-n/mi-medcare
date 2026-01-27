@@ -1,12 +1,12 @@
 import ContactForm from "@components/root/ContactForm";
 import IconWrapper from "@components/root/IconWrapper";
 import PageHeader from "@components/root/PageHeader";
-import { contactDetails } from "../../../lib/constants/menu";
 import { Clock7, Mails, MapPin, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import type { Metadata } from "next";
+import { contactDetails } from "@constants/app";
 
 export const metadata: Metadata = {
   title: "Contact Us",

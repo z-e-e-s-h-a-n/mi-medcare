@@ -32,7 +32,7 @@ const Navigation = ({ className }: NavigationProps) => {
 
   return (
     <nav className={cn("navigation", className)}>
-      {mainMenu.slice(0, 6).map(({ title, href, subMenu }) => {
+      {mainMenu.slice(0, 7).map(({ title, href, subMenu }) => {
         const Comp = subMenu ? "div" : Link;
 
         return (

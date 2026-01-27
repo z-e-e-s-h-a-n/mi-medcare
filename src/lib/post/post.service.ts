@@ -43,18 +43,11 @@ class PostService {
     };
   }
 
-  async findPostById(id: string) {
-    let post = await prisma.post.findUnique({
-      where: { id },
+  async findPost(id: string) {
+    const post = await prisma.post.findFirst({
+      where: { OR: [{ id }, { slug: id }] },
       include: this.postInclude,
     });
-
-    if (!post) {
-      post = await prisma.post.findUnique({
-        where: { slug: id },
-        include: this.postInclude,
-      });
-    }
 
     await prisma.post.update({
       where: { id: post?.id },
@@ -87,7 +80,24 @@ class PostService {
           author: { displayName: { contains: search, mode: "insensitive" } },
         },
         category: {
-          category: { name: { contains: search, mode: "insensitive" } },
+          OR: [
+            { category: { name: { contains: search, mode: "insensitive" } } },
+            { category: { slug: { contains: search, mode: "insensitive" } } },
+          ],
+        },
+        tags: {
+          OR: [
+            {
+              tags: {
+                some: {
+                  OR: [
+                    { name: { contains: search, mode: "insensitive" } },
+                    { slug: { contains: search, mode: "insensitive" } },
+                  ],
+                },
+              },
+            },
+          ],
         },
       };
       Object.assign(where, searchWhereMap[searchBy]);

@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 import ParallaxSection from "@components/root/ParallaxSection";
 import StrategySection from "@components/root/StrategySection";
-import { strategyStepsAbout } from "../../../lib/constants/menu";
 import type { Metadata } from "next";
+import { strategyStepsAbout } from "@constants/content";
 
 export const metadata: Metadata = {
   title: "About Us",

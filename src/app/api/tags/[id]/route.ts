@@ -5,7 +5,7 @@ import { CUTagSchema } from "@schemas/tags";
 
 export const GET = withApiHandler(async (_req, { getParam }) => {
   const id = await getParam("id");
-  return tagService.findTagById(id);
+  return tagService.findTag(id);
 });
 
 export const PUT = withApiHandler(async (req, { getParam }) => {

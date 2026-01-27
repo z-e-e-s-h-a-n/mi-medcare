@@ -404,6 +404,10 @@ export const mainMenu = [
     href: "/ehr-partners",
   },
   {
+    title: "Blogs",
+    href: "/blogs",
+  },
+  {
     title: "Contact Us  ",
     href: "/contact",
   },

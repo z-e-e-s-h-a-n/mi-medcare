@@ -9,13 +9,13 @@ import {
   Hammer,
   Hand,
   Heart,
+  HeartPulse,
   Home,
   PersonStanding,
   Pill,
   SquarePercent,
   Stethoscope,
   Sun,
-  Syringe,
   TestTubeDiagonal,
   User,
   Utensils,
@@ -53,104 +53,134 @@ export const strategyStepsAbout = [
 ];
 export const specialties = [
   {
-    icon: Flower,
-    title: "Acupuncture Billing Services",
-  },
-  {
-    icon: Hand,
-    title: "Allergy Immunology Billing Services",
-  },
-  {
-    icon: Syringe,
+    icon: Stethoscope,
     title: "Anesthesia Billing Services",
+    desc: "Timely anesthesia billing and reimbursements.",
   },
   {
-    icon: Brain,
-    title: "Behavioral Health Billing Services",
-  },
-  {
-    icon: Bed,
-    title: "Cardiovascular Billing Services",
-  },
-  {
-    icon: Bone,
-    title: "Chiropractic Billing Services",
+    icon: HeartPulse,
+    title: "Cardiology Billing Services",
+    desc: "Precise cardiology coding to maximize revenue.",
   },
   {
     icon: Heart,
     title: "Dentistry Billing Services",
-  },
-  {
-    icon: Sun,
-    title: "Dermatology Billing Services",
-  },
-  {
-    icon: TestTubeDiagonal,
-    title: "Endocrinology Billing Services",
+    desc: "Compliant dental billing and claim support.",
   },
   {
     icon: User,
     title: "Family Medicine Billing Services",
+    desc: "Reliable billing for family practitioners.",
+  },
+  {
+    icon: Flower,
+    title: "Acupuncture Billing Services",
+    desc: "Reduce denials and speed up payments.",
+  },
+  {
+    icon: Hand,
+    title: "Allergy Immunology Billing Services",
+    desc: "Specialized billing for allergy practices.",
+  },
+  {
+    icon: Brain,
+    title: "Behavioral Health Billing Services",
+    desc: "High claim accuracy for behavioral health.",
+  },
+  {
+    icon: Bed,
+    title: "Cardiovascular Billing Services",
+    desc: "Maximize revenue with precise coding.",
+  },
+  {
+    icon: Bone,
+    title: "Chiropractic Billing Services",
+    desc: "Tailored services to improve cash flow.",
+  },
+  {
+    icon: Sun,
+    title: "Dermatology Billing Services",
+    desc: "Optimized for faster claim approvals.",
+  },
+  {
+    icon: TestTubeDiagonal,
+    title: "Endocrinology Billing Services",
+    desc: "Accurate billing with detailed coding.",
   },
   {
     icon: Utensils,
     title: "Gastroenterology Billing Services",
+    desc: "Expert services for better revenue.",
   },
   {
     icon: PersonStanding,
     title: "Geriatrics Billing Services",
+    desc: "Solutions for complex care needs.",
   },
   {
     icon: BookPlus,
     title: "Internal Medicine Billing Services",
+    desc: "Comprehensive medical billing services.",
   },
   {
     icon: Droplet,
     title: "Nephrology Billing Services",
+    desc: "Specialized nephrology billing support.",
   },
   {
     icon: Bed,
     title: "Nursing Home Billing Services",
+    desc: "Accurate billing for nursing homes.",
   },
   {
     icon: Eye,
     title: "Ophthalmology Billing Services",
+    desc: "Reduce denials with expert billing.",
   },
   {
     icon: Bone,
     title: "Orthopedic Billing Services",
+    desc: "Expertise for complex procedures.",
   },
   {
     icon: Heart,
     title: "Otolaryngology Billing Services",
+    desc: "Improve ENT claim acceptance.",
   },
   {
     icon: Pill,
     title: "Pain Management Billing Services",
+    desc: "Focused on compliance and accuracy.",
   },
   {
     icon: Hammer,
     title: "Pediatrics Billing Services",
+    desc: "Payer-specific pediatric expertise.",
   },
   {
     icon: SquarePercent,
     title: "Podiatry Billing Services",
+    desc: "Efficient podiatry billing solutions.",
   },
   {
     icon: Stethoscope,
     title: "Pulmonology Billing Services",
+    desc: "Precise coding for pulmonology.",
   },
   {
     icon: Bone,
     title: "Rheumatology Billing Services",
+    desc: "Ensure accuracy in rheumatology billing.",
   },
   {
     icon: Video,
     title: "Telemedicine Billing Services",
+    desc: "Compliant telemedicine billing.",
   },
   {
     icon: Home,
     title: "Urgent Care Billing Services",
+    desc: "Fast and reliable urgent care billing.",
   },
 ];
 

@@ -12,7 +12,7 @@ export const CUUserSchema = signUpSchema.extend({
   role: UserRoleEnum.exclude(["admin"]),
   displayName: nameSchema,
   status: UserStatusEnum,
-  password: passwordSchema,
+  password: passwordSchema.optional(),
 });
 
 export const userQuerySchema = baseQuerySchema(

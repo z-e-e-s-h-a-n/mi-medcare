@@ -31,9 +31,9 @@ class CategoryService {
     };
   }
 
-  async findCategoryById(id: string) {
-    const category = await prisma.category.findUnique({
-      where: { id },
+  async findCategory(id: string) {
+    const category = await prisma.category.findFirst({
+      where: { OR: [{ id }, { slug: id }] },
       include: this.categoryInclude,
     });
     return {

@@ -127,7 +127,6 @@ const CategoryDetailsPage = ({ params }: AppPageProps<{ id: string }>) => {
             {
               header: "Description",
               accessor: "description",
-              render: (value) => value || "—",
             },
           ],
           viewPath: (item) => `/dashboard/categories/${item.id}`,
@@ -239,7 +238,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps<{ id: string }>) => {
                         slug: current.slug,
                         id: current.id,
                       });
-                      current = current.parent;
+                      if (current.parent) current = current.parent;
                     }
                     return path.map((category, index) => (
                       <React.Fragment key={category.id}>

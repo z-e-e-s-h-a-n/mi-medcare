@@ -44,3 +44,15 @@ export const expiryDate = (exp: StringValue, future = false): Date => {
   const val = parseExpiry(exp, future);
   return new Date(val);
 };
+
+export const formatNullDate = (dateString: Date | null) => {
+  if (!dateString) return;
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+};
+
+export const getReadTime = (v: string) => Math.ceil((v?.length || 0) / 1000);

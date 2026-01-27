@@ -97,13 +97,10 @@ class TokenService {
 
   async refreshTokens(req: NextRequest, jwtPayload: JwtPayload) {
     const refreshToken = req.cookies.get("refreshToken")?.value;
-    console.log("refreshToken", refreshToken);
 
     const tokenRecord = await prisma.refreshToken.findUnique({
       where: { token: refreshToken, blacklisted: false },
     });
-
-    console.log("tokenRecord", tokenRecord);
 
     if (!tokenRecord) {
       throw new Error("Invalid or expired refresh token");

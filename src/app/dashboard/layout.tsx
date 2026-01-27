@@ -1,6 +1,14 @@
 import AppSidebar from "@components/dashboard/AppSidebar";
 import DashboardHeader from "@components/dashboard/DashboardHeader";
 import { SidebarInset, SidebarProvider } from "@components/ui/sidebar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const Layout = ({ children }: AppLayoutProps) => {
   return (

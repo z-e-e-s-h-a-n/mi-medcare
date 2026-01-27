@@ -12,7 +12,7 @@ import { UserRoleEnum, UserStatusEnum } from "@schemas/enums";
 import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 import { LoaderCircle } from "lucide-react";
 import { useState } from "react";
-import CUFormSkeleton from "./CUFormSkeleton";
+import CUFormSkeleton from "../skeleton/CUFormSkeleton";
 
 const CUUserForm = ({ entityId, formType }: BaseCUFormProps) => {
   const router = useRouter();

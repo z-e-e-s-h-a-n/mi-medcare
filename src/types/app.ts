@@ -17,12 +17,16 @@ declare global {
     children?: React.ReactNode;
   }
 
-  type FormSectionType = "add" | 'update'
+  type FormSectionType = "add" | "update";
 
   interface BaseCUFormProps {
     entityId?: string;
     formType: FormSectionType;
   }
+
+  interface BaseBlogPageProps {
+    slug?: string;
+  }
 }
 
-export { };
+export {};

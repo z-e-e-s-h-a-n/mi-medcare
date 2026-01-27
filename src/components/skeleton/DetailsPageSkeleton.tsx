@@ -1,5 +1,5 @@
 import { Skeleton } from "@components/ui/skeleton";
-import { SectionConfig } from "./GenericDetailsPage";
+import { SectionConfig } from "../dashboard/GenericDetailsPage";
 import { Card, CardContent, CardHeader } from "@components/ui/card";
 import { cn } from "@utils/tiptap-utils";
 

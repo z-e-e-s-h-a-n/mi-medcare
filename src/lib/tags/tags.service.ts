@@ -26,9 +26,9 @@ class TagService {
     };
   }
 
-  async findTagById(id: string) {
-    const tag = await prisma.tag.findUnique({
-      where: { id },
+  async findTag(id: string) {
+    const tag = await prisma.tag.findFirst({
+      where: { OR: [{ id }, { slug: id }] },
     });
 
     return {
@@ -64,6 +64,7 @@ class TagService {
         skip,
         take: limit,
         orderBy,
+        include: { posts: true },
       }),
       prisma.tag.count({ where }),
     ]);

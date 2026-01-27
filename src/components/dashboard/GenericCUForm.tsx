@@ -4,7 +4,7 @@ import { useForm, type FormValidateOrFn } from "@tanstack/react-form";
 import { Form, type AnyFormApi } from "@components/ui/form";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import CUFormSkeleton from "./CUFormSkeleton";
+import CUFormSkeleton from "../skeleton/CUFormSkeleton";
 import { ApiException } from "@lib/http/http-exception";
 
 interface UseQueryResult<TData, TFormData> {

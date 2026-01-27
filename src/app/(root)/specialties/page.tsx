@@ -1,7 +1,7 @@
 import PageHeader from "@components/root/PageHeader";
 import { Button } from "@/components/ui/button";
-import { specialties } from "../../../lib/constants/menu";
 import type { Metadata } from "next";
+import { specialties } from "@constants/content";
 
 export const metadata: Metadata = {
   title: "Medical Billing Specialties",

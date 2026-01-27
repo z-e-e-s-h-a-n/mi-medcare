@@ -5,7 +5,7 @@ import { CUCategorySchema } from "@schemas/category";
 
 export const GET = withApiHandler(async (_req, { getParam }) => {
   const id = await getParam("id");
-  return categoryService.findCategoryById(id);
+  return categoryService.findCategory(id);
 });
 
 export const PUT = withApiHandler(async (req, { getParam }) => {
