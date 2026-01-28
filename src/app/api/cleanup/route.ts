@@ -4,10 +4,11 @@ import { withApiHandler } from "@lib/http/api-handler";
 import { UnauthorizedException } from "@lib/http/http-exception";
 
 export const POST = withApiHandler(async (req) => {
-  const token = req.headers.get("x-cron-token");
+  const url = new URL(req.url);
+  const token = url.searchParams.get("token");
 
   if (token !== serverEnv.CLEANUP_CRON_SECRET) {
-    throw new UnauthorizedException("you not have access to this route");
+    throw new UnauthorizedException("you do not have access to this route");
   }
 
   const otpResult = await prisma.otp.deleteMany({
