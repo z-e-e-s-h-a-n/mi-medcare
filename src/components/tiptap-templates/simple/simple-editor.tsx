@@ -73,7 +73,6 @@ import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/utils/tiptap-utils";
 // --- Styles ---
 import "@/components/tiptap-templates/simple/simple-editor.scss";
 
-import content from "@/components/tiptap-templates/simple/data/content.json";
 import { FieldChildrenProps } from "@components/ui/form";
 
 const MainToolbarContent = ({
@@ -250,6 +249,7 @@ export function SimpleEditor<TFormData>({
 
   const rect = useCursorVisibility({
     editor,
+    // eslint-disable-next-line react-hooks/refs
     overlayHeight: toolbarRef.current?.getBoundingClientRect().height ?? 0,
   });
 
@@ -292,7 +292,7 @@ export function SimpleEditor<TFormData>({
           disabled={disabled}
           aria-invalid={isInvalid}
           onBlur={onBlur}
-          className="simple-editor-content bg-input/10"
+          className="simple-editor-content bg-input/10  max-h-[70svh] overflow-y-auto"
         />
       </EditorContext.Provider>
     </div>
