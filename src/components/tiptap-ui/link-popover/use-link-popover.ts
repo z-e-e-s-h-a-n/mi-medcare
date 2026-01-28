@@ -105,7 +105,6 @@ export function useLinkHandler(props: LinkHandlerProps) {
     const { href } = editor.getAttributes("link");
 
     if (isLinkActive(editor) && url === null) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUrl(href || "");
     }
   }, [editor, url]);

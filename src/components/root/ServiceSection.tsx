@@ -52,22 +52,25 @@ const ServiceSection = () => {
   ];
 
   return (
-    <section className="service-section">
-      <div>
-        <span>What We Offer</span>
+    <section className="py-24 bg-secondary space-y-8">
+      <div className="text-center space-y-4">
+        <span className="subtitle">What We Offer</span>
         <div>
           <h2>Personalized Healthcare Solutions for Every Stage of Life</h2>
         </div>
       </div>
-      <ul>
+      <ul className="flex justify-between flex-wrap gap-4">
         {services.map((s) => (
-          <li key={s.title}>
+          <li
+            key={s.title}
+            className="group relative basis-full sm:basis-[calc(50%-16px)] lg:basis-[calc(33.3%-16px)] p-8 bg-white rounded-2xl text-center space-y-2 border-2 border-primary hover:bg-primary/90 hover:text-primary-foreground"
+          >
             <IconWrapper className="mx-auto">{<s.icon />}</IconWrapper>
-            <h4>{s.title}</h4>
+            <h4 className="text-xl font-medium">{s.title}</h4>
             <p>{s.desc}</p>
             <Link
               href={s.href}
-              className="service-link"
+              className="flex-center-inline gap-1 text-primary group-hover:text-primary-foreground before:absolute before:content-[''] before:inset-0"
               aria-label={`Learn more about ${s.title}`}
             >
               <span>Learn more</span>

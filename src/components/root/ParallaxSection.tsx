@@ -20,21 +20,19 @@ const ParallaxSection = ({
 }: ParallaxSectionProps) => {
   return (
     <section
-      className="parallax-section"
-      style={
-        {
-          "--bg-image": `url(/images/${bgImage}-parallax-bg.webp)`,
-          "--text-align": position,
-          "--justify-content":
-            position === "left"
-              ? "start"
-              : position === "right"
-                ? "end"
-                : "center",
-        } as React.CSSProperties
-      }
+      className="relative bg-center bg-no-repeat bg-cover bg-fixed min-h-[80svh]  md:min-h-svh flex items-center before:absolute before:inset-0 before:bg-black/40"
+      style={{
+        backgroundImage: `url(/images/${bgImage}-parallax-bg.webp)`,
+        textAlign: position,
+        justifyContent:
+          position === "left"
+            ? "start"
+            : position === "right"
+              ? "end"
+              : "center",
+      }}
     >
-      <div>
+      <div className="relative text-primary-foreground w-lg space-y-4">
         <h2> {title}</h2>
         <p>{desc}</p>
         <Button href={href} variant="secondary" size="lg">

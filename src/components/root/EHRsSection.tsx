@@ -13,18 +13,22 @@ interface EHRsSectionProps {
 
 const EHRsSection = ({ title, desc, length, className }: EHRsSectionProps) => {
   return (
-    <section className={cn("ehrs-section", className)}>
+    <section className={cn("space-y-6 text-center", className)}>
       <h2>{title}</h2>
       <p>{desc}</p>
 
-      <ul>
+      <ul className="flex flex-wrap gap-8">
         {(length ? EHRsList.slice(0, length) : EHRsList).map((_, i) => (
-          <li key={i}>
+          <li
+            key={i}
+            className="border-2 border-primary bg-background p-5  rounded-2xl basis-full sm:basis-[calc(50%-32px)] md:basis-[calc(33.3%-32px)]"
+          >
             <Image
               src={`/images/ehrs/ehrs-${i + 1}.jpg`}
               alt="EHRs Image"
               width={200}
               height={200}
+              className="h-[68px] bg-transparent"
             />
           </li>
         ))}

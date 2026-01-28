@@ -68,9 +68,7 @@ function RootLayout({ children }: AppLayoutProps) {
         />
       </head>
       <body className={`${primaryFont.variable} antialiased`}>
-        <ProviderWrapper>
-          {children}
-        </ProviderWrapper>
+        <ProviderWrapper>{children}</ProviderWrapper>
       </body>
       <GoogleAnalytics gaId="G-3GCVD9KWT0" />
     </html>

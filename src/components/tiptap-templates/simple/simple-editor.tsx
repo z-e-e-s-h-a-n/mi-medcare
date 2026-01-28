@@ -64,11 +64,16 @@ import { useIsBreakpoint } from "@/hooks/tiptap/use-is-breakpoint";
 import { useWindowSize } from "@/hooks/tiptap/use-window-size";
 import { useCursorVisibility } from "@/hooks/tiptap/use-cursor-visibility";
 
+// --- Components ---
+import { ThemeToggle } from "@/components/tiptap-templates/simple/theme-toggle";
+
 // --- Lib ---
 import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/utils/tiptap-utils";
 
 // --- Styles ---
 import "@/components/tiptap-templates/simple/simple-editor.scss";
+
+import content from "@/components/tiptap-templates/simple/data/content.json";
 import { FieldChildrenProps } from "@components/ui/form";
 
 const MainToolbarContent = ({
@@ -136,10 +141,16 @@ const MainToolbarContent = ({
       <ToolbarSeparator />
 
       <ToolbarGroup>
-        <ImageUploadButton />
+        <ImageUploadButton text="Add" />
       </ToolbarGroup>
 
       <Spacer />
+
+      {isMobile && <ToolbarSeparator />}
+
+      <ToolbarGroup>
+        <ThemeToggle />
+      </ToolbarGroup>
     </>
   );
 };
@@ -239,7 +250,6 @@ export function SimpleEditor<TFormData>({
 
   const rect = useCursorVisibility({
     editor,
-    // eslint-disable-next-line react-hooks/refs
     overlayHeight: toolbarRef.current?.getBoundingClientRect().height ?? 0,
   });
 
