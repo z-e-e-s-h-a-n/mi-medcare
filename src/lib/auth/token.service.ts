@@ -96,14 +96,24 @@ class TokenService {
   }
 
   async refreshTokens(req: NextRequest, jwtPayload: JwtPayload) {
-    const refreshToken = req.cookies.get("refreshToken")?.value;
+    const tokenId = req.cookies.get("tokenId")?.value;
+    const token = req.cookies.get("refreshToken")?.value;
+
+    if (!tokenId || !token) {
+      throw new UnauthorizedException("Missing refresh session");
+    }
 
     const tokenRecord = await prisma.refreshToken.findUnique({
-      where: { token: refreshToken, blacklisted: false },
+      where: { id: tokenId },
     });
 
-    if (!tokenRecord) {
-      throw new Error("Invalid or expired refresh token");
+    if (
+      !tokenRecord ||
+      tokenRecord.blacklisted ||
+      tokenRecord.token !== token ||
+      tokenRecord.expiresAt < new Date()
+    ) {
+      throw new UnauthorizedException("Invalid refresh session");
     }
 
     await this.createAuthSession(req, jwtPayload);

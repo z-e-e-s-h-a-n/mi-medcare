@@ -13,11 +13,11 @@ type RoutePolicy = {
 
 const ROUTE_POLICIES: RoutePolicy[] = [
   { route: "/api/admin", roles: ["admin"] },
-  { route: "/dashboard/users", roles: ["admin"] },
-  { route: "/dashboard/users/account" },
+  { route: "/dashboard", roles: ["admin", "author", "editor"] },
+  { route: "/dashboard/admin", roles: ["admin"] },
 
-  { route: "/dashboard" },
-
+  { route: "/api/user" },
+  { route: "/api/dashboard" },
   { route: "/api/auth/signout" },
   { route: "/api/auth/change-email", publicMethods: ["GET"] },
   { route: "/api/posts", publicMethods: ["GET"] },
