@@ -1,6 +1,8 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /auth
 
 # Host
 Host: https://www.mimedcarellc.com

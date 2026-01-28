@@ -1,0 +1,11 @@
+{
+  "crons": [
+    {
+      "path": "/api/cleanup",
+      "schedule": "0 * * * *",
+      "headers": {
+        "x-cron-token": "@CLEANUP_CRON_SECRET"
+      }
+    }
+  ]
+}

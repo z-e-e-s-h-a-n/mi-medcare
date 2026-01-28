@@ -92,6 +92,15 @@ CREATE TABLE "Post" (
 );
 
 -- CreateTable
+CREATE TABLE "PostView" (
+    "id" TEXT NOT NULL,
+    "postId" TEXT NOT NULL,
+    "viewedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "PostView_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Category" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -210,6 +219,15 @@ CREATE INDEX "Post_createdAt_idx" ON "Post"("createdAt");
 CREATE INDEX "Post_deletedAt_idx" ON "Post"("deletedAt");
 
 -- CreateIndex
+CREATE INDEX "PostView_viewedAt_idx" ON "PostView"("viewedAt");
+
+-- CreateIndex
+CREATE INDEX "PostView_postId_idx" ON "PostView"("postId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "PostView_postId_viewedAt_key" ON "PostView"("postId", "viewedAt");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
 
 -- CreateIndex
@@ -283,6 +301,9 @@ ALTER TABLE "Post" ADD CONSTRAINT "Post_categoryId_fkey" FOREIGN KEY ("categoryI
 
 -- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_coverId_fkey" FOREIGN KEY ("coverId") REFERENCES "Media"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PostView" ADD CONSTRAINT "PostView_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Category" ADD CONSTRAINT "Category_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;

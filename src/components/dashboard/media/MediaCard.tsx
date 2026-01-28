@@ -30,7 +30,7 @@ import {
   AlertDialogFooter,
 } from "@components/ui/alert-dialog";
 import { Input } from "@components/ui/input";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 interface MediaCardProps {
   media: MediaResponse;
@@ -39,6 +39,7 @@ interface MediaCardProps {
 
 export function MediaCard({ media, onSelect }: MediaCardProps) {
   const [filename, setFilename] = useState(media.filename);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { updateAsync } = useUpdateMedia(media.id);
   const { removeAsync, isRemoving } = useRemoveMedia();
   const isImage = media.mimeType.startsWith("image/");
@@ -121,14 +122,27 @@ export function MediaCard({ media, onSelect }: MediaCardProps) {
                   Delete
                 </DropdownMenuItem>
               </DropdownMenuContent>
-              <AlertDialogContent className="w-full max-w-md! p-8 gap-6">
+              <AlertDialogContent
+                className="w-full max-w-md! p-8 gap-6"
+                onOpenAutoFocus={(event) => {
+                  event.preventDefault();
+                  inputRef.current?.focus();
+                  inputRef.current?.select();
+                }}
+              >
                 <AlertDialogTitle>
                   Rename: <span className="text-primary">{media.filename}</span>
                 </AlertDialogTitle>
                 <Input
+                  ref={inputRef}
                   name="filename"
                   value={filename}
                   onChange={(e) => setFilename(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleRename(filename);
+                    }
+                  }}
                 />
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>

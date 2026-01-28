@@ -1,7 +1,6 @@
+import "dotenv/config";
 import { PrismaClient } from "@generated/prisma";
 import { PrismaPg } from "@prisma/adapter-pg";
-import dotenv from "dotenv";
-dotenv.config({ path: ".env.local" });
 import {
   seedUsers,
   seedCategories,
@@ -21,9 +20,7 @@ const prisma = new PrismaClient({
 
 async function main() {
   console.log("🌱 Starting medical billing website seeding...");
-  if (process.env.NODE_ENV !== "development") {
-    return;
-  }
+  if (process.env.NODE_ENV === "production") return;
 
   try {
     // =========================

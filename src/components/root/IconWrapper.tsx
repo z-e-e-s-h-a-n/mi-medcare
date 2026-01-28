@@ -27,7 +27,7 @@ const IconWrapper = ({
 
         variant === "primary"
           ? "bg-primary text-secondary"
-          : "bg-secondary text-primary",
+          : "bg-secondary text-primary dark:bg-muted",
       )}
     >
       {children}

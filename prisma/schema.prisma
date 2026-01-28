@@ -149,6 +149,8 @@ model Post {
 
   views Int @default(0)
 
+  postViews PostView[]
+
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
@@ -162,6 +164,17 @@ model Post {
   @@index([categoryId])
   @@index([createdAt])
   @@index([deletedAt])
+}
+
+model PostView {
+  id       String   @id @default(cuid())
+  postId   String
+  post     Post     @relation(fields: [postId], references: [id])
+  viewedAt DateTime @default(now())
+
+  @@unique([postId, viewedAt])
+  @@index([viewedAt])
+  @@index([postId])
 }
 
 model Category {

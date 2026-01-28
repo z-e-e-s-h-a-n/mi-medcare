@@ -11,7 +11,7 @@ interface UseListResult<TKey extends string, TData> {
     [K in TKey]: TData[];
   };
 
-  isFetching?: boolean;
+  isLoading?: boolean;
   fetchError?: unknown;
 }
 
@@ -72,7 +72,7 @@ function ListPage<
       : {}),
   } as unknown as TQuery;
 
-  const { data, isFetching } = config.useListHook(query);
+  const { data, isLoading } = config.useListHook(query);
   const deleteHook = config.useDeleteHook?.();
   const { confirm } = useConfirm();
 
@@ -103,7 +103,7 @@ function ListPage<
         limit={data?.limit || 10}
         currentPage={data?.page || 1}
         totalPages={data?.totalPages || 1}
-        isFetching={isFetching}
+        isLoading={isLoading}
         search={search}
         setSearch={setSearch}
         searchBy={searchBy}

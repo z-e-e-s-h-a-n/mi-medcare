@@ -7,7 +7,7 @@ declare global {
       footer: { title: string; description: string };
     }[];
     visitors: {
-      date: Date;
+      date: string;
       views: number;
     }[];
     recentPosts: Array<{

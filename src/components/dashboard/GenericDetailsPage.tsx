@@ -43,7 +43,7 @@ interface GenericDetailsPageProps<TData extends BaseResponse> {
   sections: SectionConfig<TData>[];
   useQuery: (entityId: string) => {
     data?: TData;
-    isFetching?: boolean;
+    isLoading?: boolean;
     fetchError: ApiException | null;
   };
   editPath?: string;
@@ -67,9 +67,9 @@ export function GenericDetailsPage<TData extends BaseResponse>({
   children,
 }: GenericDetailsPageProps<TData>) {
   const router = useRouter();
-  const { data, isFetching, fetchError } = useQuery(entityId);
+  const { data, isLoading, fetchError } = useQuery(entityId);
 
-  if (isFetching) {
+  if (isLoading) {
     return <DetailsPageSkeleton sections={sections} />;
   }
 

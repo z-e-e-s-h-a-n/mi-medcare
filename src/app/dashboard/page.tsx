@@ -4,12 +4,13 @@ import RecentPosts from "@components/dashboard/RecentPosts";
 import DashboardCards from "@components/dashboard/dashboard-cards";
 import useDashboard from "@hooks/dashboard";
 import ContentOverview from "@components/dashboard/ContentOverview";
+import DashboardSkeleton from "@components/skeleton/DashboardSke1eton";
 
 const Dashboard = () => {
   const { data, isLoading } = useDashboard();
 
   if (isLoading || !data) {
-    return <div>Loading ...</div>;
+    return <DashboardSkeleton />;
   }
 
   return (

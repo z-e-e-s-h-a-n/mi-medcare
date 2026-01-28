@@ -16,7 +16,7 @@ import CUFormSkeleton from "../skeleton/CUFormSkeleton";
 
 const CUUserForm = ({ entityId, formType }: BaseCUFormProps) => {
   const router = useRouter();
-  const { data, mutateAsync, isPending, isFetching } = useAdminUser(entityId);
+  const { data, mutateAsync, isPending, isLoading } = useAdminUser(entityId);
   const [changePassword, setChangePassword] = useState(false);
 
   const form = useForm({
@@ -50,7 +50,7 @@ const CUUserForm = ({ entityId, formType }: BaseCUFormProps) => {
 
   console.log("data", data);
 
-  if (isFetching) return <CUFormSkeleton />;
+  if (isLoading) return <CUFormSkeleton />;
 
   return (
     <div className="container mx-auto p-6 max-w-4xl">

@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { cn } from "@utils/general";
 import { Button } from "@components/ui/button";
 import Image from "next/image";
+import { Input } from "@components/ui/input";
 
 export interface MediaUploaderProps {
   accept?: Accept;
@@ -120,7 +121,7 @@ function MediaUploader({
             isDragActive && "border-primary bg-primary/10",
           )}
         >
-          <input {...getInputProps()} />
+          <Input {...getInputProps()} />
           <Upload className="size-8 text-muted-foreground" />
           <p className="text-sm font-medium">
             Click to upload or drag and drop

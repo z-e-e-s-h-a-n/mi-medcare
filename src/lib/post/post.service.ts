@@ -49,10 +49,15 @@ class PostService {
       include: this.postInclude,
     });
 
-    await prisma.post.update({
-      where: { id: post?.id },
-      data: { views: { increment: 1 } },
-    });
+    if (post?.slug === id) {
+      await prisma.post.update({
+        where: { id: post?.id },
+        data: {
+          views: { increment: 1 },
+          postViews: { create: { viewedAt: new Date() } },
+        },
+      });
+    }
 
     return {
       message: "Post fetched successfully",

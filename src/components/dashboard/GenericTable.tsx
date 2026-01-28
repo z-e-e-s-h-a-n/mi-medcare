@@ -38,7 +38,7 @@ interface GenericTableProps<
 >
   extends Omit<SearchToolbarProps<TQuery>, "setPage">, PaginationProps {
   data: TData[];
-  isFetching?: boolean;
+  isLoading?: boolean;
 
   columns: ColumnConfig<TData, TQuery>[];
 
@@ -56,7 +56,7 @@ function GenericTable<
   limit,
   currentPage,
   totalPages,
-  isFetching = false,
+  isLoading = false,
   entityType,
   columns,
   searchByOptions,
@@ -100,7 +100,7 @@ function GenericTable<
     }
   };
 
-  if (isFetching) {
+  if (isLoading) {
     return <TableSkeleton columnCount={columns.length} rowCount={limit} />;
   }
 

@@ -11,7 +11,7 @@ import BlogSidebar from "@components/blog/BlogSidebar";
 import CategoryCard from "@components/blog/CategoryCard";
 
 const CategoryList = () => {
-  const { data, isFetching } = useCategories();
+  const { data, isLoading } = useCategories();
 
   const categories = data?.categories;
 
@@ -67,7 +67,7 @@ const CategoryList = () => {
                 </Badge>
               </div>
 
-              {isFetching ? (
+              {isLoading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[1, 2, 3, 4, 5, 6].map((i) => (
                     <Card key={i}>

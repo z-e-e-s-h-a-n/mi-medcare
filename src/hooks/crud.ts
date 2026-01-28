@@ -61,7 +61,8 @@ export const createCrudHooks = <
 
     return {
       data: query.data,
-      isFetching: query.isLoading || query.isFetching,
+      isLoading: query.isLoading,
+      isFetching: query.isFetching,
       fetchError: query.error,
       mutateAsync: cu.mutateAsync,
       isPending: cu.isPending,
@@ -88,7 +89,8 @@ export const createCrudHooks = <
 
     return {
       data: query.data,
-      isFetching: query.isLoading || query.isFetching,
+      isLoading: query.isLoading,
+      isFetching: query.isFetching,
       fetchError: query.error,
     };
   };

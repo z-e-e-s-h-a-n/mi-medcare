@@ -18,7 +18,7 @@ const ContactSection = () => {
         <h2 className="text-primary-foreground">
           Schedule a Free Consultation with Our Billing Experts
         </h2>
-        <ContactForm classname="p-8 lg:p-18 bg-background rounded-2xl grid" />
+        <ContactForm classname="p-8 lg:p-18 bg-card rounded-2xl grid" />
         <Image
           src="/images/contact.webp"
           alt="Contact Image"
@@ -27,7 +27,7 @@ const ContactSection = () => {
           className="absolute left-[60%] md:left-1/2 bottom-0 w-1/2 md:w-auto"
         />
       </div>
-      <div className="p-8 w-xs h-max bg-primary-foreground rounded-2xl space-y-4">
+      <div className="p-8 w-xs h-max bg-card rounded-2xl space-y-4">
         <span className="text-2xl font-medium">Work Hours</span>
         <p>
           Expert billing support available so your revenue cycle never sleeps

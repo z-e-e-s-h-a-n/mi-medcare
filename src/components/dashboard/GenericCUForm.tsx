@@ -9,7 +9,7 @@ import { ApiException } from "@lib/http/http-exception";
 
 interface UseQueryResult<TData, TFormData> {
   data?: TData;
-  isFetching?: boolean;
+  isLoading?: boolean;
   fetchError: ApiException | null;
   mutateAsync: (data: TFormData) => Promise<TData>;
   isPending: boolean;
@@ -40,7 +40,7 @@ export function GenericCUForm<TData, TFormData>({
   successRedirectPath,
 }: GenericCUFormProps<TData, TFormData>) {
   const router = useRouter();
-  const { data, mutateAsync, isFetching, isPending } = useQuery(entityId);
+  const { data, mutateAsync, isLoading, isPending } = useQuery(entityId);
 
   const initialValues: TFormData = {
     ...defaultValues,
@@ -66,7 +66,7 @@ export function GenericCUForm<TData, TFormData>({
     },
   });
 
-  if (isFetching) return <CUFormSkeleton />;
+  if (isLoading) return <CUFormSkeleton />;
 
   return (
     <Form

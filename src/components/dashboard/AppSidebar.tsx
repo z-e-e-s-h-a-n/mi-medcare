@@ -40,7 +40,7 @@ import UserCard from "./UserCard";
 
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   const { isMobile } = useSidebar();
-  const { currentUser, isFetching, logoutUser, isLogoutPending, logoutError } =
+  const { currentUser, isLoading, logoutUser, isLogoutPending, logoutError } =
     useUser();
 
   const logout = async () => {
@@ -81,7 +81,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                   size="lg"
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
-                  <UserCard currentUser={currentUser} isFetching={isFetching} />
+                  <UserCard currentUser={currentUser} isLoading={isLoading} />
                   <IconDotsVertical className="ml-auto size-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
@@ -92,7 +92,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                 sideOffset={4}
               >
                 <DropdownMenuLabel className="p-0 font-normal">
-                  <UserCard currentUser={currentUser} isFetching={isFetching} />
+                  <UserCard currentUser={currentUser} isLoading={isLoading} />
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>

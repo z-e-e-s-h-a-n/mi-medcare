@@ -63,7 +63,7 @@ const ServiceSection = () => {
         {services.map((s) => (
           <li
             key={s.title}
-            className="group relative basis-full sm:basis-[calc(50%-16px)] lg:basis-[calc(33.3%-16px)] p-8 bg-white rounded-2xl text-center space-y-2 border-2 border-primary hover:bg-primary/90 hover:text-primary-foreground"
+            className="group relative basis-full sm:basis-[calc(50%-16px)] lg:basis-[calc(33.3%-16px)] p-8 bg-card rounded-2xl text-center space-y-2 border-2 border-primary hover:bg-primary/90 hover:text-primary-foreground"
           >
             <IconWrapper className="mx-auto">{<s.icon />}</IconWrapper>
             <h4 className="text-xl font-medium">{s.title}</h4>

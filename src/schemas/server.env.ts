@@ -52,6 +52,8 @@ export const serverEnvSchema = z.object({
   ACCESS_TOKEN_EXP: zMsString,
   REFRESH_TOKEN_EXP: zMsString,
 
+  CLEANUP_CRON_SECRET: z.string(),
+
   // ==============================
   // OAuth (Google)
   // ==============================

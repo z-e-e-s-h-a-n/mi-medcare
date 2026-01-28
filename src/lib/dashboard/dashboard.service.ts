@@ -23,11 +23,10 @@ class DashboardService {
       viewsLastMonth,
     ] = await Promise.all([
       // TOTAL POSTS
-      prisma.post.count({ where: { deletedAt: null } }),
+      prisma.post.count({ where: {} }),
       prisma.post.count({
         where: {
           createdAt: { lt: thisMonth.start },
-          deletedAt: null,
         },
       }),
 
@@ -39,7 +38,6 @@ class DashboardService {
             gte: thisMonth.start,
             lt: thisMonth.end,
           },
-          deletedAt: null,
         },
       }),
       prisma.post.count({
@@ -49,7 +47,6 @@ class DashboardService {
             gte: lastMonth.start,
             lt: lastMonth.end,
           },
-          deletedAt: null,
         },
       }),
 
@@ -61,7 +58,6 @@ class DashboardService {
             gte: thisMonth.start,
             lt: thisMonth.end,
           },
-          deletedAt: null,
         },
       }),
       prisma.post.count({
@@ -71,31 +67,30 @@ class DashboardService {
             gte: lastMonth.start,
             lt: lastMonth.end,
           },
-          deletedAt: null,
         },
       }),
 
       // VIEWS
-      prisma.post.aggregate({
-        _sum: { views: true },
+      await prisma.postView.count({
         where: {
-          status: PostStatus.published,
-          createdAt: {
+          post: {
+            status: PostStatus.published,
+          },
+          viewedAt: {
             gte: thisMonth.start,
             lt: thisMonth.end,
           },
-          deletedAt: null,
         },
       }),
-      prisma.post.aggregate({
-        _sum: { views: true },
+      await prisma.postView.count({
         where: {
-          status: PostStatus.published,
-          createdAt: {
+          post: {
+            status: PostStatus.published,
+          },
+          viewedAt: {
             gte: lastMonth.start,
             lt: lastMonth.end,
           },
-          deletedAt: null,
         },
       }),
     ]);
@@ -116,8 +111,8 @@ class DashboardService {
     );
 
     const viewsTrend = this.getPercentageChange(
-      viewsThisMonth._sum.views ?? 0,
-      viewsLastMonth._sum.views ?? 0,
+      viewsThisMonth ?? 0,
+      viewsLastMonth ?? 0,
     );
 
     return [
@@ -174,7 +169,7 @@ class DashboardService {
 
       {
         title: "Total Views",
-        value: viewsThisMonth._sum.views ?? 0,
+        value: viewsThisMonth ?? 0,
         badge: {
           value: this.formatBadge(viewsTrend.value, viewsTrend.trend),
           trend: viewsTrend.trend,
@@ -203,22 +198,21 @@ class DashboardService {
     startDate.setDate(endDate.getDate() - days + 1);
     startDate.setHours(0, 0, 0, 0);
 
-    const raw = await prisma.$queryRaw<{ date: Date; views: number }[]>`
-    SELECT
-      DATE("createdAt") as date,
-      SUM("views") as views
-    FROM "Post"
-    WHERE
-      "status" = 'published'
-      AND "deletedAt" IS NULL
-      AND "createdAt" BETWEEN ${startDate} AND ${endDate}
-    GROUP BY DATE("createdAt")
-    ORDER BY DATE("createdAt") ASC
-  `;
+    const raw = await prisma.$queryRaw<{ date: Date; views: bigint }[]>`
+  SELECT
+    DATE(pv."viewedAt") as date,
+    COUNT(*) as views
+  FROM "PostView" pv
+  INNER JOIN "Post" p ON p.id = pv."postId"
+  WHERE
+    p.status = ${PostStatus.published}
+    AND pv."viewedAt" BETWEEN ${startDate} AND ${endDate}
+  GROUP BY DATE(pv."viewedAt")
+  ORDER BY DATE(pv."viewedAt") ASC
+`;
 
-    //
     const map = new Map(
-      raw.map((r) => [r.date.toISOString().split("T")[0], Number(r.views)]),
+      raw.map((r) => [r.date.toLocaleDateString("en-US"), Number(r.views)]),
     );
 
     const chartData: { date: string; views: number }[] = [];
@@ -226,8 +220,7 @@ class DashboardService {
     for (let i = 0; i < days; i++) {
       const d = new Date(startDate);
       d.setDate(startDate.getDate() + i);
-
-      const key = d.toISOString().split("T")[0];
+      const key = d.toLocaleDateString("en-US");
 
       chartData.push({
         date: key,
@@ -243,7 +236,7 @@ class DashboardService {
    * ======================= */
   async getRecentPosts(limit = 5) {
     const posts = await prisma.post.findMany({
-      where: { deletedAt: null },
+      where: {},
       orderBy: { createdAt: "desc" },
       take: limit,
       select: {
@@ -266,14 +259,14 @@ class DashboardService {
    * ======================= */
   async getContentOverview() {
     const categories = await prisma.category.findMany({
-      where: { deletedAt: null },
+      where: {},
       select: {
         id: true,
         name: true,
         _count: {
           select: {
             posts: {
-              where: { deletedAt: null },
+              where: {},
             },
           },
         },
@@ -286,7 +279,7 @@ class DashboardService {
     });
 
     const tags = await prisma.tag.findMany({
-      where: { deletedAt: null },
+      where: {},
       select: {
         id: true,
         name: true,

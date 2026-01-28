@@ -14,11 +14,10 @@ import { parseExpiry } from "@lib/utils/general";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const STALE_TIME = parseExpiry("15m");
-const GC_TIME = parseExpiry("30m");
 
 const queryDefaults = {
   staleTime: STALE_TIME,
-  gcTime: GC_TIME,
+  gcTime: STALE_TIME,
   refetchOnWindowFocus: false,
   refetchOnReconnect: false,
   retry: false,
@@ -35,7 +34,8 @@ export function useAdminUsers(params?: UserQueryType) {
 
   return {
     data: usersQuery.data,
-    isFetching: usersQuery.isLoading || usersQuery.isFetching,
+    isLoading: usersQuery.isLoading,
+    isFetching: usersQuery.isFetching,
     fetchError: usersQuery.error as ApiException,
   };
 }
@@ -61,7 +61,8 @@ export function useAdminUser(id?: string) {
 
   return {
     data: userQuery.data,
-    isFetching: userQuery.isLoading || userQuery.isFetching,
+    isLoading: userQuery.isLoading,
+    isFetching: userQuery.isFetching,
     fetchError: userQuery.error as ApiException,
 
     mutateAsync: CUMutation.mutateAsync,

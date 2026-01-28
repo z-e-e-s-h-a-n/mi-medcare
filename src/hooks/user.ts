@@ -35,7 +35,8 @@ const useUser = () => {
 
   return {
     currentUser: userQuery.data,
-    isFetching: userQuery.isLoading || userQuery.isFetching,
+    isLoading: userQuery.isLoading,
+    isFetching: userQuery.isFetching,
     fetchError: userQuery.error,
     logoutUser: signoutMutation.mutateAsync,
     isLogoutPending: signoutMutation.isPending,

@@ -10,7 +10,7 @@ import BlogSidebar from "@components/blog/BlogSidebar";
 import Newsletter from "@components/root/Newsletter";
 
 const BlogList = () => {
-  const { data, isFetching } = usePosts({
+  const { data, isLoading } = usePosts({
     status: "published",
     sortBy: "publishedAt",
     sortOrder: "desc",
@@ -65,7 +65,7 @@ const BlogList = () => {
                 </Button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {isFetching ? (
+                {isLoading ? (
                   <>
                     {[1, 2].map((i) => (
                       <div key={i} className="space-y-3">
@@ -96,7 +96,7 @@ const BlogList = () => {
                 </Button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {isFetching ? (
+                {isLoading ? (
                   <>
                     {[1, 2, 3, 4, 5, 6].map((i) => (
                       <div key={i} className="space-y-3">

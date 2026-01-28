@@ -22,8 +22,8 @@ import TagSkeleton from "@components/skeleton/TagSkeleton";
 import { formatNullDate } from "@utils/general";
 
 const TagDetails = ({ slug }: BaseBlogPageProps) => {
-  const { data: tag, isFetching: tagLoading } = useTag(slug);
-  const { data: postsData, isFetching: postsLoading } = usePosts({
+  const { data: tag, isLoading: tagLoading } = useTag(slug);
+  const { data: postsData, isLoading: postsLoading } = usePosts({
     status: "published",
     sortBy: "publishedAt",
     searchBy: "tags",

@@ -25,7 +25,7 @@ const Header = () => {
           <MapPin /> {contactDetails.address}
         </Link>
       </div>
-      <div className="section-container flex justify-between items-center bg-primary/10 py-4">
+      <div className="section-container flex justify-between items-center bg-primary/10 py-2">
         <Image src="/images/logo.png" alt="Logo" width={200} height={60} />
         <MobileNav />
       </div>

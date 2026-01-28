@@ -2,11 +2,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@components/ui/avatar";
 
 interface UserCardProps {
   currentUser?: UserResponse;
-  isFetching: boolean;
+  isLoading: boolean;
 }
 
-const UserCard = ({ currentUser, isFetching }: UserCardProps) => {
-  if (isFetching || !currentUser) {
+const UserCard = ({ currentUser, isLoading }: UserCardProps) => {
+  if (isLoading || !currentUser) {
     return <div className="size-8 rounded-lg bg-muted animate-pulse" />;
   }
 

@@ -20,8 +20,8 @@ import BlogSidebar from "@components/blog/BlogSidebar";
 import CategorySkeleton from "@components/skeleton/CategorySkeleton";
 
 const CategoryDetails = ({ slug }: BaseBlogPageProps) => {
-  const { data: category, isFetching: categoryLoading } = useCategory(slug);
-  const { data: postsData, isFetching: postsLoading } = usePosts({
+  const { data: category, isLoading: categoryLoading } = useCategory(slug);
+  const { data: postsData, isLoading: postsLoading } = usePosts({
     status: "published",
     sortBy: "publishedAt",
     searchBy: "category",

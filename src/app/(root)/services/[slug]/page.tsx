@@ -76,7 +76,7 @@ const ServicesPage = async ({ params }: AppPageProps) => {
             return typeof s === "object" ? (
               <li
                 key={s.title}
-                className="basis-full sm:basis-[calc(50%-16px)] md:basis-[calc(33.3%-16px)] lg:basis-[calc(25%-16px)] xl:basis-[calc(20%-16px)] p-4 bg-white rounded-2xl text-center space-y-4 shadow-sm"
+                className="basis-full sm:basis-[calc(50%-16px)] md:basis-[calc(33.3%-16px)] lg:basis-[calc(25%-16px)] xl:basis-[calc(20%-16px)] p-4 bg-card rounded-2xl text-center space-y-4 shadow-sm"
               >
                 <IconWrapper className="shadow-sm mx-auto" size="md">
                   {<s.icon />}

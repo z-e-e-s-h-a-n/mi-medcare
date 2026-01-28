@@ -5,7 +5,6 @@ import { getDashboardData } from "@lib/dashboard/client";
 import { parseExpiry } from "@lib/utils/general";
 
 const STALE_TIME = parseExpiry("1h");
-const GC_TIME = parseExpiry("2h");
 
 const useDashboard = () => {
   const query = useQuery({
@@ -13,18 +12,14 @@ const useDashboard = () => {
     queryFn: getDashboardData,
     select: (res) => res.data,
     staleTime: STALE_TIME,
-    gcTime: GC_TIME,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    retry: false,
+    gcTime: STALE_TIME,
   });
 
   return {
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    isError: query.isError,
-    error: query.error,
+    fetchError: query.error,
     refetch: query.refetch,
   };
 };

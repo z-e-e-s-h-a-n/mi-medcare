@@ -22,7 +22,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
   popularTags,
   className,
 }) => {
-  const { data, isFetching } = useCategories();
+  const { data, isLoading } = useCategories();
 
   return (
     <aside className={cn("space-y-6", className)}>
@@ -52,7 +52,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {isFetching ? (
+          {isLoading ? (
             <div className="space-y-2">
               {[1, 2, 3, 4].map((i) => (
                 <Skeleton key={i} className="h-8 w-full" />

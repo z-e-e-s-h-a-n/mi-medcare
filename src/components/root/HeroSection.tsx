@@ -9,7 +9,7 @@ import { cn } from "@utils/general";
 
 const HeroSection = () => {
   return (
-    <section className="flex flex-col md:flex-row justify-between relative min-h-[120vh] bg-[url(/images/hero-bg.webp)] bg-top bg-no-repeat bg-cover [&>div]:basis-1/2 [&>div]:relative">
+    <section className="flex flex-col md:flex-row justify-between relative min-h-[120vh] bg-[url(/images/hero-bg.webp)] bg-top bg-no-repeat bg-cover [&>div]:basis-1/2 [&>div]:relative before:absolute before:inset-0 before:bg-secondary/90 after:absolute after:inset-0 after:bg-primary/7">
       <div className="pt-16 space-y-6 z-10">
         <h1 className="text-4xl md:text-5xl font-medium leading-[1.4] tracking-tight">
           Revenue Cycle Management Services
@@ -57,7 +57,7 @@ const HeroSection = () => {
           height={1000}
           className=" w-[80%] float-right"
         />
-        <div className="gap-2 text-lg bg-white max-lg:bottom-[5%] lg:bottom-1/5 max-md:right-4 md:left-4 space-y-4">
+        <div className="gap-2 text-lg bg-card max-lg:bottom-[5%] lg:bottom-1/5 max-md:right-4 md:left-4 space-y-4">
           <div className="flex items-center">
             <IconWrapper size="sm">
               <Star />

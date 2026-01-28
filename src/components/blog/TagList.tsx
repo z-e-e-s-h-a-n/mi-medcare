@@ -11,7 +11,7 @@ import { useTags } from "@hooks/tags";
 import { Skeleton } from "@components/ui/skeleton";
 
 const TagList = () => {
-  const { data, isFetching } = useTags();
+  const { data, isLoading } = useTags();
   const tags = data?.tags;
 
   const sortedTags =
@@ -54,7 +54,7 @@ const TagList = () => {
               <Badge variant="outline">{tags?.length || 0} tags</Badge>
             </div>
 
-            {isFetching ? (
+            {isLoading ? (
               <div className="flex flex-wrap gap-2">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
                   (i) => (
@@ -84,7 +84,7 @@ const TagList = () => {
               </div>
             )}
 
-            {!isFetching && allTags.length === 0 && (
+            {!isLoading && allTags.length === 0 && (
               <div className="text-center py-12 border rounded-lg">
                 <Tag className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                 <h3 className="text-xl font-semibold mb-2">No tags yet</h3>
@@ -96,7 +96,7 @@ const TagList = () => {
           </section>
 
           {/* Tag Cloud Alternative View */}
-          {!isFetching && allTags.length > 0 && (
+          {!isLoading && allTags.length > 0 && (
             <section className="mt-12">
               <h3 className="text-2xl font-bold mb-6">Tag Cloud</h3>
               <Card>

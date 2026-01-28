@@ -42,6 +42,8 @@ const ChartAreaInteractive = ({ data }: VisitorsChartProps) => {
   const isMobile = useIsMobile();
   const [timeRange, setTimeRange] = React.useState("90d");
 
+  console.log("chart data:", data);
+
   React.useEffect(() => {
     if (isMobile) setTimeRange("7d");
   }, [isMobile]);
@@ -51,6 +53,8 @@ const ChartAreaInteractive = ({ data }: VisitorsChartProps) => {
 
     return data.slice(-days);
   }, [data, timeRange]);
+
+  console.log("filter chart data", data);
 
   return (
     <Card className="@container/card">

@@ -24,7 +24,7 @@ import BlogSidebar from "@components/blog/BlogSidebar";
 import PostSkeleton from "@components/skeleton/PostSkeleton";
 
 const BlogDetails = ({ slug }: BaseBlogPageProps) => {
-  const { data: post, isFetching } = usePost(slug);
+  const { data: post, isLoading } = usePost(slug);
   const { data: relatedPosts } = usePosts({
     status: "published",
     limit: 3,
@@ -32,7 +32,7 @@ const BlogDetails = ({ slug }: BaseBlogPageProps) => {
     sortOrder: "desc",
   });
 
-  if (isFetching) {
+  if (isLoading) {
     return <PostSkeleton />;
   }
 
