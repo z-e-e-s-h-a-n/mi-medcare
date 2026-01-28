@@ -89,7 +89,7 @@ model User {
 }
 
 model RefreshToken {
-  id          String   @id @default(ulid())
+  id          String   @id @default(uuid())
   token       String   @unique
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -107,7 +107,7 @@ model RefreshToken {
 }
 
 model Otp {
-  id        String     @id @default(ulid())
+  id        String     @id @default(uuid())
   userId    String
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   purpose   OtpPurpose
@@ -167,14 +167,18 @@ model Post {
 }
 
 model PostView {
-  id       String   @id @default(cuid())
-  postId   String
-  post     Post     @relation(fields: [postId], references: [id])
-  viewedAt DateTime @default(now())
+  id     String @id @default(uuid())
+  postId String
+  post   Post   @relation(fields: [postId], references: [id])
 
-  @@unique([postId, viewedAt])
-  @@index([viewedAt])
+  ip        String
+  userAgent String
+  viewedAt  DateTime @default(now())
+
   @@index([postId])
+  @@index([ip])
+  @@index([userAgent])
+  @@index([viewedAt])
 }
 
 model Category {

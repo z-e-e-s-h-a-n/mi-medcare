@@ -27,7 +27,7 @@ class TagService {
   }
 
   async findTag(id: string) {
-    const tag = await prisma.tag.findFirst({
+    const tag = await prisma.tag.findFirstOrThrow({
       where: { OR: [{ id }, { slug: id }] },
     });
 

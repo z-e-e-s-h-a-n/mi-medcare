@@ -43,20 +43,14 @@ class PostService {
     };
   }
 
-  async findPost(id: string) {
-    const post = await prisma.post.findFirst({
+  async findPost(id: string, req: NextRequest) {
+    const post = await prisma.post.findFirstOrThrow({
       where: { OR: [{ id }, { slug: id }] },
       include: this.postInclude,
     });
 
-    if (post?.slug === id) {
-      await prisma.post.update({
-        where: { id: post?.id },
-        data: {
-          views: { increment: 1 },
-          postViews: { create: { viewedAt: new Date() } },
-        },
-      });
+    if (post.slug === id) {
+      await this.addPostView(post.id, req);
     }
 
     return {
@@ -162,8 +156,40 @@ class PostService {
     };
   }
 
+  private async addPostView(postId: string, req: NextRequest) {
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
+    const userAgent = req.headers.get("user-agent") ?? "unknown";
+
+    const lastView = await prisma.postView.findFirst({
+      where: {
+        postId,
+        ip,
+        userAgent,
+        viewedAt: {
+          gte: new Date(Date.now() - 24 * 60 * 60 * 1000),
+        },
+      },
+      orderBy: { viewedAt: "desc" },
+    });
+
+    if (!lastView) {
+      await prisma.postView.create({
+        data: { postId, ip, userAgent },
+      });
+
+      await prisma.post.update({
+        where: { id: postId },
+        data: { views: { increment: 1 } },
+      });
+    } else {
+      console.log(
+        "User already viewed in the last 24 hours, skipping increment",
+      );
+    }
+  }
+
   postInclude = {
-    author: true,
+    author: { omit: { password: true } },
     category: true,
     cover: true,
     tags: true,

@@ -95,6 +95,8 @@ CREATE TABLE "Post" (
 CREATE TABLE "PostView" (
     "id" TEXT NOT NULL,
     "postId" TEXT NOT NULL,
+    "ip" TEXT NOT NULL,
+    "userAgent" TEXT NOT NULL,
     "viewedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "PostView_pkey" PRIMARY KEY ("id")
@@ -219,13 +221,16 @@ CREATE INDEX "Post_createdAt_idx" ON "Post"("createdAt");
 CREATE INDEX "Post_deletedAt_idx" ON "Post"("deletedAt");
 
 -- CreateIndex
-CREATE INDEX "PostView_viewedAt_idx" ON "PostView"("viewedAt");
-
--- CreateIndex
 CREATE INDEX "PostView_postId_idx" ON "PostView"("postId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "PostView_postId_viewedAt_key" ON "PostView"("postId", "viewedAt");
+CREATE INDEX "PostView_ip_idx" ON "PostView"("ip");
+
+-- CreateIndex
+CREATE INDEX "PostView_userAgent_idx" ON "PostView"("userAgent");
+
+-- CreateIndex
+CREATE INDEX "PostView_viewedAt_idx" ON "PostView"("viewedAt");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");

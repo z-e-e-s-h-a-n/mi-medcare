@@ -28,7 +28,7 @@ const EHRsSection = ({ title, desc, length, className }: EHRsSectionProps) => {
               alt="EHRs Image"
               width={200}
               height={200}
-              className="h-[68px] bg-transparent"
+              className="h-17 bg-transparent"
             />
           </li>
         ))}

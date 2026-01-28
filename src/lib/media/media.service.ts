@@ -41,7 +41,7 @@ class MediaService {
   }
 
   async findMediaById(id: string) {
-    const media = await prisma.media.findUnique({
+    const media = await prisma.media.findUniqueOrThrow({
       where: { id },
       include: this.mediaInclude,
     });

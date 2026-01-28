@@ -32,7 +32,7 @@ class CategoryService {
   }
 
   async findCategory(id: string) {
-    const category = await prisma.category.findFirst({
+    const category = await prisma.category.findFirstOrThrow({
       where: { OR: [{ id }, { slug: id }] },
       include: this.categoryInclude,
     });

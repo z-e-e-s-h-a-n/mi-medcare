@@ -24,7 +24,7 @@ class AdminService {
   }
 
   async getUserById(userId: string) {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findUniqueOrThrow({
       where: { id: userId },
       ...authService.userView,
     });
