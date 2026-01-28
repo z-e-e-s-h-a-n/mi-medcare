@@ -21,17 +21,20 @@ const prisma = new PrismaClient({
 
 async function main() {
   console.log("🌱 Starting medical billing website seeding...");
+  if (process.env.NODE_ENV !== "development") {
+    return;
+  }
 
   try {
     // =========================
     // USERS
     // =========================
-    const { admin, editor, author } = await seedUsers(prisma);
+    const { editor, author } = await seedUsers(prisma);
 
     // =========================
     // MEDIA
     // =========================
-    const mediaItems = await seedMedia(prisma, admin);
+    const mediaItems = await seedMedia(prisma, editor);
 
     // =========================
     // CATEGORIES
@@ -47,7 +50,6 @@ async function main() {
     // POSTS
     // =========================
     await seedPosts(prisma, {
-      admin,
       editor,
       author,
       mediaItems,
@@ -58,7 +60,13 @@ async function main() {
     // =========================
     // CREATE SAMPLE CONTENT FOR EACH USER
     // =========================
-    await createSampleContent(prisma, { admin, editor, author }, categories, tags, mediaItems);
+    await createSampleContent(
+      prisma,
+      { editor, author },
+      categories,
+      tags,
+      mediaItems,
+    );
 
     console.log("✅ Medical billing website seeding completed");
   } catch (error) {
@@ -66,6 +74,5 @@ async function main() {
     throw error;
   }
 }
-
 
 main();
