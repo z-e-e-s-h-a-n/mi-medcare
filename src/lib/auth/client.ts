@@ -3,6 +3,7 @@
    ========================= */
 
 import apiClient, { executeApi } from "@lib/http/api-client";
+import { toast } from "sonner";
 
 export const signUp = (data: SignUpType) =>
   executeApi(() => apiClient.post("/auth/signup", data));
@@ -46,6 +47,12 @@ export const verifyChangeEmail = (params: ChangeEmailType) =>
    ========================= */
 
 export const redirectToOAuth = (provider: OAuthProvider) => {
-  const clientUrl = window.location.origin;
-  window.location.href = `api/oauth/${provider}?clientUrl=${clientUrl}`;
+  if (provider !== "google") {
+    toast.error("Error: oAuth Login", {
+      description: `${provider} login feature not implement yet`,
+    });
+    return;
+  }
+  const redirectUrl = `${window.location.origin}/dashboard`;
+  window.location.href = `/api/oauth/${provider}?state=${redirectUrl}`;
 };

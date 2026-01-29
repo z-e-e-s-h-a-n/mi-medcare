@@ -1,5 +1,5 @@
 import argon2 from "argon2";
-import { Prisma } from "@generated/prisma";
+import { Prisma, UserStatus } from "@generated/prisma";
 import {
   BadRequestException,
   ForbiddenException,
@@ -52,7 +52,7 @@ class AuthService {
     }
 
     await this.checkVerificationStatus(user, dto.email, "unverified");
-    this.checkUserStatus(user);
+    this.checkUserStatus(user.status);
 
     await tokenService.createAuthSession(req, {
       id: user.id,
@@ -290,7 +290,7 @@ class AuthService {
     });
 
     await sendMail(dto.email, "signup", { user });
-    if (!user.password) {
+    if (!dto.password) {
       await otpService.sendOtp({
         userId: user.id,
         purpose: "setPassword",
@@ -350,7 +350,7 @@ class AuthService {
 
   private async checkVerificationStatus(
     user: UserResponse,
-    value: string,
+    email: string,
     check: "verified" | "unverified",
   ) {
     const isVerified = user.isEmailVerified;
@@ -361,7 +361,7 @@ class AuthService {
     if (check === "unverified" && !isVerified) {
       await otpService.sendOtp({
         userId: user.id,
-        email: value,
+        email,
         purpose: "verifyEmail",
         metadata: { user },
       });
@@ -370,12 +370,12 @@ class AuthService {
     }
   }
 
-  private checkUserStatus(user: UserResponse) {
-    if (user.status === "pending") {
+  checkUserStatus(status: UserStatus) {
+    if (status === "pending") {
       throw new ForbiddenException(
         "Your account is pending approval. Please contact support.",
       );
-    } else if (user.status === "suspended") {
+    } else if (status === "suspended") {
       throw new ForbiddenException(
         "Your account has been suspended. Contact support for assistance.",
       );
