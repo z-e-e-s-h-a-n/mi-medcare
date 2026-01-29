@@ -31,6 +31,13 @@ export const serverEnvSchema = z.object({
     .default("development"),
 
   // ==============================
+  // APP
+  // ==============================
+  CORS_ORIGIN: z
+    .string()
+    .transform((val) => val.split(",").map((origin) => origin.trim())),
+
+  // ==============================
   // Database
   // ==============================
   DB_URI: z.string(),
