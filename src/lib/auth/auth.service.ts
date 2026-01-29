@@ -273,22 +273,32 @@ class AuthService {
   async createUser(dto: Optional<SignUpDto, "password">, role: UserRole) {
     await this.findUserFail200(dto.email);
 
-    if (!dto.password) {
-      throw new BadRequestException("password should not be empty.");
+    let hashedPassword = null;
+
+    if (dto.password) {
+      hashedPassword = await this.hashPassword(dto.password);
     }
-    const hashedPassword = await this.hashPassword(dto.password);
 
     const user = await prisma.user.create({
       data: {
+        displayName: `${dto.firstName} ${dto.lastName}`.trim(),
         ...dto,
         role,
         password: hashedPassword,
-        displayName: `${dto.firstName} ${dto.lastName}`.trim(),
       },
       ...this.userView,
     });
 
     await sendMail(dto.email, "signup", { user });
+    if (!user.password) {
+      await otpService.sendOtp({
+        userId: user.id,
+        purpose: "setPassword",
+        email: dto.email,
+        type: "secureToken",
+        metadata: { user },
+      });
+    }
 
     await otpService.sendOtp({
       userId: user.id,

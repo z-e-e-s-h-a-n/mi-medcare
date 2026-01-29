@@ -4,10 +4,12 @@ import { Textarea } from "./textarea";
 
 export interface InputFieldProps<TFormData> extends BaseFieldProps<TFormData> {
   type?: "text" | "password" | "email" | "checkbox" | "number" | "textarea";
+  autoComplete?: string;
 }
 
 export const InputField = <TFormData,>({
   type = "text",
+  autoComplete,
   ...props
 }: InputFieldProps<TFormData>) => {
   return (
@@ -21,6 +23,7 @@ export const InputField = <TFormData,>({
             {...field}
             id={field.name}
             aria-invalid={isInvalid}
+            autoComplete={autoComplete}
           />
         )
       }

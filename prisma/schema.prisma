@@ -55,8 +55,8 @@ model User {
   lastName    String?
   displayName String
 
-  email    String @unique
-  password String
+  email    String  @unique
+  password String?
 
   imageId String?
   image   Media?  @relation("UserImage", fields: [imageId], references: [id])

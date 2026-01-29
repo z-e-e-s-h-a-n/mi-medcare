@@ -25,7 +25,7 @@ const CUUserForm = ({ entityId, formType }: BaseCUFormProps) => {
       lastName: "",
       displayName: "",
       email: "",
-      password: formType === "add" ? "" : undefined,
+      password: undefined,
       role: "author",
       status: "pending",
       ...data,
@@ -47,8 +47,6 @@ const CUUserForm = ({ entityId, formType }: BaseCUFormProps) => {
       }
     },
   });
-
-  console.log("data", data);
 
   if (isLoading) return <CUFormSkeleton />;
 
@@ -120,66 +118,56 @@ const CUUserForm = ({ entityId, formType }: BaseCUFormProps) => {
                     placeholder="user@example.com"
                     disabled={formType === "update"}
                   />
-                  {formType === "add" && (
-                    <>
-                      <InputField
-                        form={form}
-                        name="password"
-                        label="Password"
-                        type="password"
-                        placeholder="Enter password"
-                      />
-                    </>
-                  )}
-                  {formType === "update" && (
-                    <div className="flex flex-col gap-4 mt-4">
-                      {!changePassword ? (
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          className="w-fit"
-                          onClick={() => setChangePassword(true)}
-                        >
-                          Update Password
-                        </Button>
-                      ) : (
-                        <div className="flex flex-col gap-3 p-4 border rounded-lg bg-muted/10">
-                          <InputField
-                            form={form}
-                            name="password"
-                            label="New Password"
-                            type="password"
-                            placeholder="Enter a new secure password"
-                          />
-                          <div className="flex flex-col md:flex-row md:gap-3 gap-2 mt-2">
-                            <Button
-                              type="button"
-                              size="sm"
-                              className="w-full md:w-auto"
-                              onClick={() => {
-                                setChangePassword(false);
-                              }}
-                            >
-                              Save Password
-                            </Button>
-                            <Button
-                              type="button"
-                              variant="ghost"
-                              size="sm"
-                              className="w-full md:w-auto text-muted-foreground"
-                              onClick={() => {
-                                setChangePassword(false);
-                                form.setFieldValue("password", undefined);
-                              }}
-                            >
-                              Cancel
-                            </Button>
-                          </div>
+                  <div className="flex flex-col gap-4 mt-4">
+                    {!changePassword ? (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="w-fit"
+                        onClick={() => setChangePassword(true)}
+                      >
+                        {formType === "add"
+                          ? "Set Password"
+                          : "Update Password"}
+                      </Button>
+                    ) : (
+                      <div className="flex flex-col gap-3 p-4 border rounded-lg bg-muted/10">
+                        <InputField
+                          form={form}
+                          name="password"
+                          label="New Password"
+                          type="password"
+                          placeholder="Enter a new secure password"
+                          autoComplete="new-password"
+                        />
+                        <div className="flex flex-col md:flex-row md:gap-3 gap-2 mt-2">
+                          <Button
+                            type="button"
+                            size="sm"
+                            className="w-full md:w-auto"
+                            onClick={() => {
+                              setChangePassword(false);
+                            }}
+                          >
+                            Save Password
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="w-full md:w-auto text-muted-foreground"
+                            onClick={() => {
+                              setChangePassword(false);
+                              form.setFieldValue("password", undefined);
+                            }}
+                          >
+                            Cancel
+                          </Button>
                         </div>
-                      )}
-                    </div>
-                  )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </section>
 
