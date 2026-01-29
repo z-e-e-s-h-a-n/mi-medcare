@@ -8,15 +8,17 @@ import { MediaWhereInput } from "prisma/generated/models";
 class MediaService {
   async createMedia(req: NextRequest) {
     const user = await tokenService.getDecodeUser(req);
-    const uploadResult = await uploaderService.uploadStream(req);
+
+    const { data, hash } = await uploaderService.uploadStream(req);
 
     const media = await prisma.media.create({
       data: {
         uploadedById: user.id,
-        url: uploadResult.secure_url,
-        filename: uploadResult.original_filename,
-        mimeType: `${uploadResult.resource_type}/${uploadResult.format}`,
-        size: uploadResult.bytes,
+        url: data.secure_url,
+        filename: data.original_filename,
+        mimeType: `${data.resource_type}/${data.format}`,
+        size: data.bytes,
+        hash,
       },
       include: this.mediaInclude,
     });

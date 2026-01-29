@@ -71,7 +71,7 @@ function SearchToolbar<TQuery extends BaseQueryType>({
             setPage(1);
             setSearch(e.target.value);
           }}
-          className="w-64"
+          className="w-full md:w-64"
         />
 
         <Select

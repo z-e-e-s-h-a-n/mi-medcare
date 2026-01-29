@@ -75,7 +75,7 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
 
         <CardContent className="space-y-10">
           {/* ---------- Profile Identity ---------- */}
-          <div className="flex justify-between gap-6">
+          <div className="flex flex-col md:flex-row justify-between gap-6">
             {/* Avatar */}
             <Avatar className="size-28 shrink-0">
               <AvatarImage src={userImage?.url} />

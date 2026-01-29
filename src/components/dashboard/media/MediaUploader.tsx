@@ -44,8 +44,18 @@ function MediaUploader({
         toast.success(`${file.name} uploaded`);
 
         setFiles((prev) => prev.filter((f) => f !== file));
-      } catch {
-        toast.error(`${file.name} failed to upload`);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (err: any) {
+        console.log(" error ", err);
+        if (err?.status === 409) {
+          toast.error("Error: Failed to upload", {
+            description: `${file.name} already exist`,
+          });
+        } else {
+          toast.error(`${file.name} failed to upload`, {
+            description: err?.message,
+          });
+        }
       }
     }
   };

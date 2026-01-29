@@ -17,6 +17,7 @@ class PostService {
         ...dto,
         authorId,
         tags: this.connectOrCreateTags(dto),
+        publishedAt: dto.status === "published" ? new Date() : null,
       },
       include: this.postInclude,
     });
@@ -28,11 +29,24 @@ class PostService {
   }
 
   async updatePost(id: string, dto: CUPostDto) {
+    const existingPost = await prisma.post.findUniqueOrThrow({
+      where: { id },
+      select: { status: true, publishedAt: true },
+    });
+
+    let publishedAt = existingPost.publishedAt;
+
+    if (dto.status === "published" && existingPost.status !== "published") {
+      publishedAt = new Date();
+    } else if (dto.status !== "published") {
+      publishedAt = null;
+    }
     const post = await prisma.post.update({
       where: { id },
       data: {
         ...dto,
         tags: this.connectOrCreateTags(dto),
+        publishedAt,
       },
       include: this.postInclude,
     });

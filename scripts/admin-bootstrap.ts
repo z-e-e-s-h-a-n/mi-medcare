@@ -45,6 +45,7 @@ async function adminBootstrap() {
       displayName: ADMIN_NAME?.trim(),
       isEmailVerified: true,
       role: "admin",
+      status: "active",
     },
   });
 
