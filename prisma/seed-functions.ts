@@ -6,6 +6,8 @@ import {
   type Tag,
 } from "@generated/prisma";
 import argon2 from "argon2";
+import axios from "axios";
+import { createHash } from "crypto";
 
 // =========================
 // USERS SEEDING
@@ -127,14 +129,21 @@ export async function seedMedia(prisma: PrismaClient, uploadedBy: User) {
   ];
 
   const createdMedia = await Promise.all(
-    mediaItems.map((media) =>
-      prisma.media.create({
+    mediaItems.map(async (media) => {
+      const response = await axios.get(media.url, {
+        responseType: "arraybuffer",
+      });
+      const buffer = Buffer.from(response.data);
+      const hash = createHash("sha256").update(buffer).digest("hex");
+
+      return prisma.media.create({
         data: {
           ...media,
           uploadedById: uploadedBy.id,
+          hash,
         },
-      }),
-    ),
+      });
+    }),
   );
 
   console.log(`✅ Created ${createdMedia.length} media items`);

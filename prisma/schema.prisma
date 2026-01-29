@@ -227,11 +227,11 @@ model Media {
   uploadedById String
   uploadedBy   User   @relation("UserUploads", fields: [uploadedById], references: [id])
 
-  url      String  @unique
+  url      String @unique
   filename String
   mimeType String
   size     Int
-  hash     String? @unique
+  hash     String @unique
 
   posts Post[] @relation("PostCover")
   users User[] @relation("UserImage")

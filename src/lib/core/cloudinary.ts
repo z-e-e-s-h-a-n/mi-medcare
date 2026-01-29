@@ -36,9 +36,8 @@ export class UploadService {
           {
             folder: "posts",
             resource_type: "auto",
-            use_filename: true,
-            unique_filename: false,
-            filename_override: file.name.replace(/\s+/g, "_"),
+            public_id: hash,
+            overwrite: false,
           },
           (err, result) => {
             if (err) reject(err);
