@@ -17,7 +17,6 @@
     "prisma:seed": "prisma db seed",
     "prisma:generate:sdm": "tsx ./scripts/gen-soft-delete",
     "admin:bootstrap": "tsx ./scripts/admin-bootstrap.ts",
-    "postinstall": "prisma generate",
     "vercel-build": "prisma migrate deploy && prisma generate",
     "lint": "eslint",
     "lint:fix": "next lint --fix",
