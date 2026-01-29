@@ -19,12 +19,8 @@ export const CUPostSchema = z.object({
   coverId: idSchema,
   tags: z.array(TagSchema).default([]),
   status: PostStatusEnum.default("draft"),
-  metaTitle: z
-    .string({ error: "Meta title is required" })
-    .min(10, "Meta title too short"),
-  metaDescription: z
-    .string({ error: "Meta description is required" })
-    .min(10, "Meta description too short"),
+  metaTitle: z.string().min(10, "Meta title too short").optional(),
+  metaDescription: z.string().min(10, "Meta description too short").optional(),
 });
 
 export const postQuerySchema = baseQuerySchema(

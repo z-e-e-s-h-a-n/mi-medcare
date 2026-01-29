@@ -31,9 +31,9 @@ const CUPostForm = ({ formType, entityId }: BaseCUFormProps) => {
         categoryId: "",
         coverId: "",
         excerpt: "",
-        metaTitle: "",
         status: "draft",
-        metaDescription: "",
+        metaTitle: undefined,
+        metaDescription: undefined,
       }}
     >
       {(form, _, data) => (
