@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import CUFormSkeleton from "../skeleton/CUFormSkeleton";
 import { ApiException } from "@lib/http/http-exception";
+import { useEffect, useState } from "react";
 
 interface UseQueryResult<TData, TFormData> {
   data?: TData;
@@ -18,7 +19,7 @@ interface UseQueryResult<TData, TFormData> {
 
 interface GenericCUFormProps<TData, TFormData> extends BaseCUFormProps {
   entityName: string;
-  defaultValues?: Partial<TFormData>;
+  defaultValues?: TFormData;
   schema: FormValidateOrFn<TFormData>;
   useQuery: (entityId?: string) => UseQueryResult<TData, TFormData>;
   successRedirectPath: string;
@@ -41,14 +42,10 @@ export function GenericCUForm<TData, TFormData>({
 }: GenericCUFormProps<TData, TFormData>) {
   const router = useRouter();
   const { data, mutateAsync, isLoading, isPending } = useQuery(entityId);
-
-  const initialValues: TFormData = {
-    ...defaultValues,
-    ...data,
-  } as TFormData;
+  const [isFormReady, setIsFormReady] = useState(!entityId);
 
   const form = useForm({
-    defaultValues: initialValues,
+    defaultValues: entityId ? undefined : defaultValues,
     validators: {
       onSubmit: schema,
     },
@@ -66,7 +63,14 @@ export function GenericCUForm<TData, TFormData>({
     },
   });
 
-  if (isLoading) return <CUFormSkeleton />;
+  useEffect(() => {
+    if (data && !isFormReady) {
+      form.reset(data as TFormData);
+      setIsFormReady(true);
+    }
+  }, [data, form, isFormReady]);
+
+  if (isLoading || !isFormReady) return <CUFormSkeleton />;
 
   return (
     <Form

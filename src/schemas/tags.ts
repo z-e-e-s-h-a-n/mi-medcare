@@ -4,8 +4,8 @@ import { TagSearchByEnum, TagSortByEnum } from "./enums";
 
 export const CUTagSchema = z.object({
   parentId: idSchema.optional(),
-  name: z.string().min(1, "Name is required"),
-  slug: z.string().min(1, "Slug is required"),
+  name: z.string({ error: "Name is required" }).min(3, "Name too short"),
+  slug: z.string({ error: "Slug is required" }).min(3, "Slug too short"),
   description: z.string().optional(),
 });
 

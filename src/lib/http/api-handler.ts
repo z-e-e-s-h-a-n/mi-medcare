@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { handleException } from "./handle-exception";
+import isPlainObject from "lodash/isPlainObject.js";
 
 type ApiContext = {
   getParam: (key: string) => Promise<string>;
@@ -36,7 +37,7 @@ export function withApiHandler<T extends Record<string, unknown>>(
           status: 200,
           success: true,
           message: message ?? "Success",
-          data: data ?? null,
+          data: sanitizeResponse(data),
           ...(Object.keys(meta).length ? { meta } : {}),
         },
         { status: 200 },
@@ -45,4 +46,27 @@ export function withApiHandler<T extends Record<string, unknown>>(
       return handleException(error);
     }
   };
+}
+
+export function sanitizeResponse<T>(value: T): T {
+  if (value === null || value === undefined) {
+    return undefined as T;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => sanitizeResponse(item)) as T;
+  }
+
+  if (isPlainObject(value)) {
+    const result: Record<string, unknown> = {};
+    for (const [key, val] of Object.entries(value)) {
+      const sanitized = sanitizeResponse(val);
+      if (sanitized !== undefined) {
+        result[key] = sanitized;
+      }
+    }
+    return result as T;
+  }
+
+  return value;
 }

@@ -50,7 +50,7 @@ enum ThemeMode {
 }
 
 model User {
-  id          String  @id @default(uuid())
+  id          String  @id @default(ulid())
   firstName   String
   lastName    String?
   displayName String
@@ -89,7 +89,7 @@ model User {
 }
 
 model RefreshToken {
-  id          String   @id @default(uuid())
+  id          String   @id @default(ulid())
   token       String   @unique
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -107,7 +107,7 @@ model RefreshToken {
 }
 
 model Otp {
-  id        String     @id @default(uuid())
+  id        String     @id @default(ulid())
   userId    String
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   purpose   OtpPurpose
@@ -123,29 +123,29 @@ model Otp {
 }
 
 model Post {
-  id String @id @default(uuid())
+  id String @id @default(ulid())
 
   authorId String
   author   User   @relation(fields: [authorId], references: [id])
 
-  categoryId String?
-  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
 
   title   String
-  slug    String  @unique
-  excerpt String?
-  content String  @db.Text
+  slug    String @unique
+  excerpt String
+  content String @db.Text
 
-  coverId String?
-  cover   Media?  @relation("PostCover", fields: [coverId], references: [id])
+  coverId String
+  cover   Media  @relation("PostCover", fields: [coverId], references: [id])
 
   tags Tag[]
 
   status      PostStatus @default(draft)
   publishedAt DateTime?
 
-  metaTitle       String?
-  metaDescription String?
+  metaTitle       String
+  metaDescription String
 
   views Int @default(0)
 
@@ -167,7 +167,7 @@ model Post {
 }
 
 model PostView {
-  id     String @id @default(uuid())
+  id     String @id @default(ulid())
   postId String
   post   Post   @relation(fields: [postId], references: [id])
 
@@ -182,7 +182,7 @@ model PostView {
 }
 
 model Category {
-  id          String  @id @default(uuid())
+  id          String  @id @default(ulid())
   name        String  @unique
   slug        String  @unique
   description String?
@@ -206,7 +206,7 @@ model Category {
 }
 
 model Tag {
-  id   String @id @default(uuid())
+  id   String @id @default(ulid())
   name String @unique
   slug String @unique
 
@@ -223,7 +223,7 @@ model Tag {
 }
 
 model Media {
-  id           String @id @default(uuid())
+  id           String @id @default(ulid())
   uploadedById String
   uploadedBy   User   @relation("UserUploads", fields: [uploadedById], references: [id])
 

@@ -26,8 +26,14 @@ const CUPostForm = ({ formType, entityId }: BaseCUFormProps) => {
       defaultValues={{
         title: "",
         slug: "",
+        tags: [],
         content: "",
+        categoryId: "",
+        coverId: "",
+        excerpt: "",
+        metaTitle: "",
         status: "draft",
+        metaDescription: "",
       }}
     >
       {(form, _, data) => (
@@ -55,30 +61,24 @@ const CUPostForm = ({ formType, entityId }: BaseCUFormProps) => {
           <form.Subscribe selector={(state) => ({ title: state.values.title })}>
             {({ title }) => {
               const slug = slugify(title);
-              return (
-                <InputField
-                  form={form}
-                  name="slug"
-                  label="Slug"
-                  defaultValue={slug}
-                />
-              );
+              if (title) form.setFieldValue("slug", slug);
+              return <InputField form={form} name="slug" label="Slug" />;
             }}
           </form.Subscribe>
           <InputField form={form} name="excerpt" label="Excerpt" />
-          <TagField form={form} name="tags" label="Tags" />
+          <TagField
+            form={form}
+            name="tags"
+            label="Tags"
+            defaultValue={data?.tags}
+          />
           <MediaField
             form={form}
-            name="coverImage"
+            name="coverId"
             label="Cover Image"
-            defaultValue={data?.cover}
+            defaultMedia={data?.cover}
           />
-          <RichTextField
-            form={form}
-            name="content"
-            label="Content"
-            defaultValue={data?.content}
-          />
+          <RichTextField form={form} name="content" label="Content" />
           <SelectField
             form={form}
             name="status"

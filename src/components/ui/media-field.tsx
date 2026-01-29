@@ -10,14 +10,15 @@ import { useMediaLibrary } from "@hooks/media";
 
 export interface MediaFieldProps<TFormData> extends BaseFieldProps<TFormData> {
   label?: string;
+  defaultMedia?: MediaResponse;
 }
 
 export const MediaField = <TFormData,>({
   label,
-  defaultValue,
+  defaultMedia,
   ...props
 }: MediaFieldProps<TFormData>) => {
-  const [preview, setPreview] = React.useState(defaultValue?.url);
+  const [preview, setPreview] = React.useState(defaultMedia?.url);
   const { onMediaSelect } = useMediaLibrary();
 
   return (
@@ -26,7 +27,7 @@ export const MediaField = <TFormData,>({
         const selectMedia = () => {
           onMediaSelect((media) => {
             try {
-              field.onChange(media.url);
+              field.onChange(media.id);
               setPreview(media.url);
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (err: any) {

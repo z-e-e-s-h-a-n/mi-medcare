@@ -1,142 +1,104 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import {
+  Combobox,
+  ComboboxChip,
+  ComboboxChips,
+  ComboboxChipsInput,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxItem,
+  ComboboxList,
+  ComboboxValue,
+  useComboboxAnchor,
+} from "@components/ui/combobox";
 
-import { useRef, useState } from "react";
-import { X } from "lucide-react";
-import { Input } from "../ui/input";
-import { Badge } from "../ui/badge";
-import { Label } from "../ui/label";
-import type { BaseFieldProps } from "../ui/form";
+import type { BaseFieldProps } from "@components/ui/form";
 import { useTags } from "@hooks/tags";
+import { Field, FieldError, FieldLabel } from "@components/ui/field";
+import React from "react";
+
+interface TagFieldProps<TFormData> extends BaseFieldProps<TFormData> {
+  defaultValue?: TagResponse[];
+}
 
 const TagField = <TFormData,>({
   form,
   name,
   label,
   disabled,
-}: BaseFieldProps<TFormData>) => {
+  defaultValue = [],
+}: TagFieldProps<TFormData>) => {
   const { data } = useTags();
 
-  const options = data?.tags ?? [];
-  const [query, setQuery] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const options = React.useMemo(() => {
+    const fetchedTags = data?.tags ?? [];
 
-  const normalize = (v: string) => v.trim().toLowerCase();
+    const combined = [...defaultValue, ...fetchedTags];
+
+    const uniqueTags = combined.filter(
+      (tag, index, self) => self.findIndex((t) => t.id === tag.id) === index,
+    );
+
+    return uniqueTags;
+  }, [data?.tags, defaultValue]);
+
+  console.log("options", options);
+  console.log("data.tags", data?.tags);
+
+  const anchor = useComboboxAnchor();
 
   return (
     <form.Field name={name} mode="array">
       {(field) => {
+        const isInvalid =
+          field.state.meta.isTouched && !field.state.meta.isValid;
+
         const values: TagResponse[] = Array.isArray(field.state.value)
           ? field.state.value
           : [];
 
-        const q = normalize(query);
-
-        const filtered =
-          q.length === 0
-            ? []
-            : options.filter(
-                (t) =>
-                  !values.some((v) => v.slug === t.slug) &&
-                  (t.name.toLowerCase().includes(q) ||
-                    t.slug.toLowerCase().includes(q)),
-              );
-
-        const exactMatch = options.find((t) => t.slug === normalize(query));
-        const isNew =
-          query.length > 0 &&
-          !exactMatch &&
-          !values.some((v) => v.slug === normalize(query));
-
-        const addTag = (value: string) => {
-          const slug = normalize(value);
-          if (!slug) return;
-
-          if (values.some((v) => v.slug === slug)) return;
-
-          const existing = options.find((t) => t.slug === slug);
-
-          field.pushValue(
-            existing ??
-              ({
-                name: value.trim(),
-                slug,
-              } as any),
-          );
-
-          setQuery("");
-        };
-
-        const removeTag = (index: number) => {
-          field.removeValue(index);
-        };
-
         return (
-          <div className="space-y-2">
-            <Label>{label}</Label>
+          <Field data-invalid={isInvalid}>
+            <FieldLabel
+              className="w-full flex items-center justify-between"
+              htmlFor={field.name}
+            >
+              {label}
+            </FieldLabel>
 
-            {/* Selected tags */}
-            <div className="flex flex-wrap gap-2">
-              {values.map((tag, i) => (
-                <Badge key={tag.name} variant="secondary">
-                  {tag.name}
-                  <button
-                    type="button"
-                    className="ml-1"
-                    onClick={() => removeTag(i)}
-                  >
-                    <X size={12} />
-                  </button>
-                </Badge>
-              ))}
-            </div>
-
-            {/* Input */}
-            <div className="relative">
-              <Input
-                ref={inputRef}
-                value={query}
-                disabled={disabled}
-                placeholder="Type tag and press Enter"
-                onChange={(e) => setQuery(e.target.value)}
-                onBlur={() => {
-                  setQuery("");
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === ",") {
-                    e.preventDefault();
-                    addTag(query);
-                  }
-                }}
-              />
-
-              {(filtered.length > 0 || isNew) && (
-                <ul className="absolute top-full z-50 w-full rounded-md border bg-background shadow-md max-h-60 overflow-y-auto">
-                  {/* Existing matches */}
-                  {filtered.map((item) => (
-                    <li
-                      key={item.name}
-                      className="cursor-pointer px-3 py-2 hover:bg-muted"
-                      onMouseDown={() => addTag(item.name)}
-                    >
-                      {item.name}
-                    </li>
+            <Combobox
+              items={options}
+              multiple
+              value={values}
+              defaultValue={values}
+              onValueChange={(v) => {
+                field.handleChange(v as any);
+              }}
+              disabled={disabled}
+            >
+              <ComboboxChips ref={anchor} className="w-full">
+                <ComboboxValue>
+                  {values.map((v) => (
+                    <ComboboxChip key={v.id}>{v.name}</ComboboxChip>
                   ))}
+                </ComboboxValue>
+                <ComboboxChipsInput placeholder="Add framework" />
+              </ComboboxChips>
 
-                  {/* Add new */}
-                  {isNew && (
-                    <li
-                      className="cursor-pointer px-3 py-2 text-sm text-muted-foreground hover:bg-muted"
-                      onMouseDown={() => addTag(query)}
-                    >
-                      ➕ Add <b>&quot;{query}&quot;</b>
-                      <span className="ml-2 opacity-70">(Press Enter)</span>
-                    </li>
+              <ComboboxContent anchor={anchor}>
+                <ComboboxEmpty>No items found.</ComboboxEmpty>
+                <ComboboxList>
+                  {(item: TagResponse) => (
+                    <ComboboxItem key={item.id} value={item}>
+                      {item.name}
+                    </ComboboxItem>
                   )}
-                </ul>
-              )}
-            </div>
-          </div>
+                </ComboboxList>
+              </ComboboxContent>
+            </Combobox>
+            {isInvalid && <FieldError errors={[field.state.meta.errors[0]]} />}
+          </Field>
         );
       }}
     </form.Field>

@@ -5,13 +5,20 @@ import { SortOrderEnum, BaseSortByEnum } from "./enums";
      SHARED UTILS — SCHEMA
   ===================================================== */
 
-export const idSchema = z.string().min(1, "Invalid Id");
+export const idSchema = z
+  .string()
+  .length(26, "Invalid ULID length")
+  .regex(/^[0-9A-HJKMNPQRSTVWXYZ]{26}$/, "Invalid ULID format");
 
-export const numberSchema = z.coerce.number<number>().int().min(1);
+export const numberSchema = z.coerce
+  .number({ error: "Must be a number" })
+  .int("Must be an integer")
+  .min(1, "Number must be at least 1");
 
-export const isoDateSchema = z.iso
-  .datetime({ message: "Invalid Date" })
-  .transform((value) => new Date(value));
+export const isoDateSchema = z
+  .string({ error: "Date is required" })
+  .refine((val) => !isNaN(Date.parse(val)), { message: "Invalid date format" })
+  .transform((val) => new Date(val));
 
 /* ======================================================
      SHARED QUERY — SCHEMA

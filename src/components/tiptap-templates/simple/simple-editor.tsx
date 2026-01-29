@@ -24,7 +24,6 @@ import {
 } from "@/components/tiptap-ui-primitive/toolbar";
 
 // --- Tiptap Node ---
-import { ImageUploadNode } from "@/components/tiptap-node/image-upload-node/image-upload-node-extension";
 import { HorizontalRule } from "@/components/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension";
 import "@/components/tiptap-node/blockquote-node/blockquote-node.scss";
 import "@/components/tiptap-node/code-block-node/code-block-node.scss";
@@ -63,12 +62,6 @@ import { LinkIcon } from "@/components/tiptap-icons/link-icon";
 import { useIsBreakpoint } from "@/hooks/tiptap/use-is-breakpoint";
 import { useWindowSize } from "@/hooks/tiptap/use-window-size";
 import { useCursorVisibility } from "@/hooks/tiptap/use-cursor-visibility";
-
-// --- Components ---
-import { ThemeToggle } from "@/components/tiptap-templates/simple/theme-toggle";
-
-// --- Lib ---
-import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/utils/tiptap-utils";
 
 // --- Styles ---
 import "@/components/tiptap-templates/simple/simple-editor.scss";
@@ -140,16 +133,10 @@ const MainToolbarContent = ({
       <ToolbarSeparator />
 
       <ToolbarGroup>
-        <ImageUploadButton text="Add" />
+        <ImageUploadButton />
       </ToolbarGroup>
 
       <Spacer />
-
-      {isMobile && <ToolbarSeparator />}
-
-      <ToolbarGroup>
-        <ThemeToggle />
-      </ToolbarGroup>
     </>
   );
 };
@@ -183,10 +170,6 @@ const MobileToolbarContent = ({
   </>
 );
 
-interface SimpleEditorProps<TFormData> extends FieldChildrenProps<TFormData> {
-  defaultValue?: string;
-}
-
 export function SimpleEditor<TFormData>({
   name,
   value,
@@ -195,8 +178,7 @@ export function SimpleEditor<TFormData>({
   disabled,
   onBlur,
   placeholder = "",
-  defaultValue,
-}: SimpleEditorProps<TFormData>) {
+}: FieldChildrenProps<TFormData>) {
   const isMobile = useIsBreakpoint();
   const { height } = useWindowSize();
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
@@ -233,15 +215,8 @@ export function SimpleEditor<TFormData>({
       Superscript,
       Subscript,
       Selection,
-      ImageUploadNode.configure({
-        accept: "image/*",
-        maxSize: MAX_FILE_SIZE,
-        limit: 3,
-        upload: handleImageUpload,
-        onError: (error) => console.error("Upload failed:", error),
-      }),
     ],
-    content: value ?? defaultValue ?? placeholder,
+    content: value ?? placeholder,
     onUpdate({ editor }) {
       onChange?.(editor.getHTML());
     },

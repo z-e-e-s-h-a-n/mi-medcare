@@ -74,7 +74,6 @@ export interface BaseFieldProps<
   form: AnyFormApi<TFormData>;
   disabled?: boolean;
   validators?: FieldValidatorsFor<TFormData, TName>;
-  defaultValue?: any;
 }
 
 export interface FieldChildrenProps<TFormData> {
@@ -149,7 +148,6 @@ export const FormField = <TFormData,>({
   children,
   validators,
   disabled,
-  defaultValue,
 }: FormFieldProps<TFormData>) => {
   if (!placeholder && typeof label === "string") placeholder = label;
 
@@ -162,7 +160,7 @@ export const FormField = <TFormData,>({
         const fieldProps = {
           name: field.name,
           placeholder,
-          value: !field.state.value ? defaultValue : field.state.value,
+          value: field.state.value,
           onBlur: field.handleBlur,
           onChange: (e: any) => field.handleChange(e?.target?.value ?? e),
           isInvalid,
@@ -181,7 +179,7 @@ export const FormField = <TFormData,>({
             )}
             {children(fieldProps)}
             {desc && <FieldDescription>{desc}</FieldDescription>}
-            {isInvalid && <FieldError errors={field.state.meta.errors} />}
+            {isInvalid && <FieldError errors={[field.state.meta.errors[0]]} />}
           </Field>
         );
       }}

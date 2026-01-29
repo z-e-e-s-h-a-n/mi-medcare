@@ -183,14 +183,6 @@ const BlogDetails = ({ slug }: BaseBlogPageProps) => {
                   />
                 </div>
               )}
-              <div>
-                <h4 className="text-lg font-bold mb-2">About the Author</h4>
-                <p className="text-muted-foreground">
-                  {post.author.displayName} is an expert in web development and
-                  design. With years of experience, they share insights and
-                  tutorials to help others grow their skills.
-                </p>
-              </div>
             </div>
           </div>
 

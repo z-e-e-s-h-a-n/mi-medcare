@@ -3,14 +3,11 @@
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
 import { BaseFieldProps, FormField } from "../ui/form";
 
-export const RichTextField = <TFormData,>({
-  defaultValue,
-  ...rest
-}: BaseFieldProps<TFormData>) => {
+export const RichTextField = <TFormData,>(props: BaseFieldProps<TFormData>) => {
   return (
-    <FormField {...rest}>
+    <FormField {...props}>
       {(field) => {
-        return <SimpleEditor {...field} defaultValue={defaultValue} />;
+        return <SimpleEditor {...field} />;
       }}
     </FormField>
   );

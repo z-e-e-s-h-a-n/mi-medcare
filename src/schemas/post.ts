@@ -3,21 +3,28 @@ import { baseQuerySchema, idSchema, isoDateSchema } from "./shared";
 import { PostStatusEnum, PostSearchByEnum, PostSortByEnum } from "./enums";
 
 export const TagSchema = z.object({
-  name: z.string().min(3, "Name is required"),
+  name: z.string({ error: "Tag is required" }).min(3, "Tag too short"),
 });
 
 export const CUPostSchema = z.object({
-  categoryId: idSchema.optional(),
-  title: z.string().min(10, "Title is required"),
-  slug: z.string().min(10, "Slug is required"),
-  excerpt: z.string().optional(),
-  content: z.string().min(20, "Content is required"),
-  coverImage: z.string().optional(),
-  tags: z.array(TagSchema),
+  categoryId: idSchema,
+  title: z.string({ error: "Title is required" }).min(10, "Title too short"),
+  slug: z.string({ error: "Slug is required" }).min(10, "Slug too short"),
+  excerpt: z
+    .string({ error: "Excerpt is required" })
+    .min(10, "Excerpt too short"),
+  content: z
+    .string({ error: "Content is required" })
+    .min(20, "Content too short"),
+  coverId: idSchema,
+  tags: z.array(TagSchema).default([]),
   status: PostStatusEnum.default("draft"),
-  publishedAt: isoDateSchema.optional(),
-  metaTitle: z.string().optional(),
-  metaDescription: z.string().optional(),
+  metaTitle: z
+    .string({ error: "Meta title is required" })
+    .min(10, "Meta title too short"),
+  metaDescription: z
+    .string({ error: "Meta description is required" })
+    .min(10, "Meta description too short"),
 });
 
 export const postQuerySchema = baseQuerySchema(
