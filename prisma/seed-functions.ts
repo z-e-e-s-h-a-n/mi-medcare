@@ -545,6 +545,7 @@ export async function createSampleContent(
         content: post.content + " " + generateLoremIpsum(),
         publishedAt: post.status === "published" ? new Date() : undefined,
         coverId: mediaItems[Math.floor(Math.random() * mediaItems.length)].id,
+        metaTitle: post.title,
         tags: {
           connect: post.tags.map((id) => ({ id })),
         },

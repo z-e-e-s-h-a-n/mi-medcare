@@ -73,12 +73,12 @@ CREATE TABLE "Otp" (
 CREATE TABLE "Post" (
     "id" TEXT NOT NULL,
     "authorId" TEXT NOT NULL,
-    "categoryId" TEXT,
+    "categoryId" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
-    "excerpt" TEXT,
+    "excerpt" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "coverId" TEXT,
+    "coverId" TEXT NOT NULL,
     "status" "PostStatus" NOT NULL DEFAULT 'draft',
     "publishedAt" TIMESTAMP(3),
     "metaTitle" TEXT,
@@ -136,6 +136,7 @@ CREATE TABLE "Media" (
     "filename" TEXT NOT NULL,
     "mimeType" TEXT NOT NULL,
     "size" INTEGER NOT NULL,
+    "hash" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "deletedAt" TIMESTAMP(3),
@@ -275,6 +276,9 @@ CREATE INDEX "Tag_deletedAt_idx" ON "Tag"("deletedAt");
 CREATE UNIQUE INDEX "Media_url_key" ON "Media"("url");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Media_hash_key" ON "Media"("hash");
+
+-- CreateIndex
 CREATE INDEX "Media_filename_idx" ON "Media"("filename");
 
 -- CreateIndex
@@ -302,10 +306,10 @@ ALTER TABLE "Otp" ADD CONSTRAINT "Otp_userId_fkey" FOREIGN KEY ("userId") REFERE
 ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Post" ADD CONSTRAINT "Post_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Post" ADD CONSTRAINT "Post_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Post" ADD CONSTRAINT "Post_coverId_fkey" FOREIGN KEY ("coverId") REFERENCES "Media"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Post" ADD CONSTRAINT "Post_coverId_fkey" FOREIGN KEY ("coverId") REFERENCES "Media"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PostView" ADD CONSTRAINT "PostView_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

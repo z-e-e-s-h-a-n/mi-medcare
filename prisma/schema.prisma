@@ -144,8 +144,8 @@ model Post {
   status      PostStatus @default(draft)
   publishedAt DateTime?
 
-  metaTitle       String
-  metaDescription String
+  metaTitle       String?
+  metaDescription String?
 
   views Int @default(0)
 
