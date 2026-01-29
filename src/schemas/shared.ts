@@ -7,8 +7,8 @@ import { SortOrderEnum, BaseSortByEnum } from "./enums";
 
 export const idSchema = z
   .string()
-  .length(26, "Invalid ULID length")
-  .regex(/^[0-9A-HJKMNPQRSTVWXYZ]{26}$/, "Invalid ULID format");
+  .length(26, "Id is Required")
+  .regex(/^[0-9A-HJKMNPQRSTVWXYZ]{26}$/, "Invalid Id");
 
 export const numberSchema = z.coerce
   .number({ error: "Must be a number" })

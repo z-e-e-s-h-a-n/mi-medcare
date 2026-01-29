@@ -169,23 +169,6 @@ const BlogDetails = ({ slug }: BaseBlogPageProps) => {
             </div>
           )}
 
-          {/* Author Bio */}
-          <div className="bg-muted/30 rounded-xl p-6 mb-12">
-            <div className="flex items-start gap-4">
-              {post.author.image && (
-                <div className="relative w-16 h-16 rounded-full overflow-hidden shrink-0">
-                  <Image
-                    src={post.author.image.url}
-                    alt={post.author.displayName}
-                    fill
-                    className="object-cover"
-                    sizes="64px"
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-
           {/* Related Posts */}
           {relatedPosts?.posts && relatedPosts.posts.length > 0 && (
             <div className="mb-12">

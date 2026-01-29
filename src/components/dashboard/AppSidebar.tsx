@@ -39,7 +39,8 @@ import { redirect } from "next/navigation";
 import UserCard from "./UserCard";
 
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
-  const { isMobile } = useSidebar();
+  const { isMobile, setOpenMobile, toggleSidebar } = useSidebar();
+
   const { currentUser, isLoading, logoutUser, isLogoutPending, logoutError } =
     useUser();
 
@@ -52,25 +53,29 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
     redirect("/auth/sign-in");
   };
 
+  const closeSidebar = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+  };
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
-              asChild
               className="data-[slot=sidebar-menu-button]:p-1.5!"
+              onClick={toggleSidebar}
             >
-              <Link href="/dashboard">
-                <IconInnerShadowTop className="size-5!" />
-                {appName}
-              </Link>
+              <IconInnerShadowTop className="size-5!" />
+              {appName}
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent className="scrollbar-hidden">
-        <NavMain />
+        <NavMain closeSidebar={closeSidebar} />
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
@@ -96,7 +101,11 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem className="cursor-pointer" asChild>
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    asChild
+                    onClick={closeSidebar}
+                  >
                     <Link href="/dashboard/users/account">
                       <IconUserCircle />
                       Account

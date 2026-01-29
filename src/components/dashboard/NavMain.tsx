@@ -22,7 +22,11 @@ import { cn } from "@lib/utils/general";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-const NavMain = () => {
+interface NavMainProps {
+  closeSidebar: () => void;
+}
+
+const NavMain = ({ closeSidebar }: NavMainProps) => {
   return sidebarMenu.map(({ items, groupLabel }, i) => (
     <SidebarGroup
       key={i}
@@ -58,7 +62,7 @@ const NavMain = () => {
                         )}
                       </div>
                     ) : (
-                      <Link href={item.url!}>
+                      <Link href={item.url!} onClick={closeSidebar}>
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
                         {item.children && (
@@ -74,7 +78,7 @@ const NavMain = () => {
                       {item.children.map((i) => (
                         <SidebarMenuSubItem key={i.title}>
                           <SidebarMenuSubButton asChild>
-                            <Link href={i.url || ""}>
+                            <Link href={i.url || ""} onClick={closeSidebar}>
                               <span>{i.title}</span>
                             </Link>
                           </SidebarMenuSubButton>
