@@ -1,5 +1,5 @@
 import z from "zod";
-import { baseQuerySchema, idSchema, isoDateSchema } from "./shared";
+import { baseQuerySchema, idSchema } from "./shared";
 import { PostStatusEnum, PostSearchByEnum, PostSortByEnum } from "./enums";
 
 export const TagSchema = z.object({
