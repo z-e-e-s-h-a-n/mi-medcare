@@ -3,18 +3,15 @@ import { PrismaClient } from "../prisma/generated/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import argon2 from "argon2";
 
-const connectionString =
-  process.env.NODE_ENV === "production"
-    ? process.env.PROD_DB_URI
-    : process.env.DB_URI;
+const connectionString = process.env.DB_URI;
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 async function adminBootstrap() {
   const { ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME } = process.env;
 
-  if (process.env.NODE_ENV === "production" && !process.env.PROD_DB_URI) {
-    throw new Error("PROD_DB_URI must be set in production");
+  if (process.env.NODE_ENV === "production") {
+    console.log("⚠️  Running in PRODUCTION");
   }
 
   if (!ADMIN_EMAIL || !ADMIN_PASSWORD || !ADMIN_NAME) {
