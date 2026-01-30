@@ -15,9 +15,18 @@ class AdminService {
   }
 
   async updateUser(dto: CUUserDto, userId: string) {
+    let hashedPassword = null;
+
+    if (!!dto.password) {
+      hashedPassword = await authService.hashPassword(dto.password);
+    }
+
     await prisma.user.update({
       where: { id: userId },
-      data: dto,
+      data: {
+        ...dto,
+        ...(hashedPassword && { password: hashedPassword }),
+      },
     });
 
     return { message: "User Updated Successfully" };

@@ -290,7 +290,7 @@ class AuthService {
     });
 
     await sendMail(dto.email, "signup", { user });
-    if (!dto.password) {
+    if (!hashedPassword) {
       await otpService.sendOtp({
         userId: user.id,
         purpose: "setPassword",
@@ -310,7 +310,7 @@ class AuthService {
     return { user };
   }
 
-  private async hashPassword(password: string): Promise<string> {
+  async hashPassword(password: string): Promise<string> {
     return argon2.hash(password);
   }
 
