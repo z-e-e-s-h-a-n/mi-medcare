@@ -5,7 +5,6 @@ import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
 
 // --- Tiptap Core Extensions ---
 import { StarterKit } from "@tiptap/starter-kit";
-import { Image } from "@tiptap/extension-image";
 import { TaskItem, TaskList } from "@tiptap/extension-list";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { Typography } from "@tiptap/extension-typography";
@@ -65,6 +64,7 @@ import { useIsBreakpoint } from "@/hooks/tiptap/use-is-breakpoint";
 import "@/components/tiptap-templates/simple/simple-editor.scss";
 
 import { FieldChildrenProps } from "@components/ui/form";
+import { Image } from "@components/tiptap-node/image-node/image-node-extension";
 
 const MainToolbarContent = ({
   onHighlighterClick,

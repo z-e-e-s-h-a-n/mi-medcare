@@ -27,6 +27,8 @@ export const ImageUploadButton = forwardRef<
             src: media.url,
             alt: media.filename,
             title: media.filename,
+            width: 300,
+            height: 200,
           },
         })
         .run();
