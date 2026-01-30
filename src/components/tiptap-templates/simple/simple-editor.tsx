@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
 
 // --- Tiptap Core Extensions ---
@@ -60,8 +60,6 @@ import { LinkIcon } from "@/components/tiptap-icons/link-icon";
 
 // --- Hooks ---
 import { useIsBreakpoint } from "@/hooks/tiptap/use-is-breakpoint";
-import { useWindowSize } from "@/hooks/tiptap/use-window-size";
-import { useCursorVisibility } from "@/hooks/tiptap/use-cursor-visibility";
 
 // --- Styles ---
 import "@/components/tiptap-templates/simple/simple-editor.scss";
@@ -89,11 +87,12 @@ const MainToolbarContent = ({
       <ToolbarSeparator />
 
       <ToolbarGroup>
-        <HeadingDropdownMenu levels={[1, 2, 3, 4]} portal={isMobile} />
+        <HeadingDropdownMenu levels={[1, 2, 3, 4]} portal />
         <ListDropdownMenu
           types={["bulletList", "orderedList", "taskList"]}
-          portal={isMobile}
+          portal
         />
+
         <BlockquoteButton />
         <CodeBlockButton />
       </ToolbarGroup>
@@ -180,7 +179,6 @@ export function SimpleEditor<TFormData>({
   placeholder = "",
 }: FieldChildrenProps<TFormData>) {
   const isMobile = useIsBreakpoint();
-  const { height } = useWindowSize();
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
     "main",
   );
@@ -222,31 +220,10 @@ export function SimpleEditor<TFormData>({
     },
   });
 
-  const rect = useCursorVisibility({
-    editor,
-    // eslint-disable-next-line react-hooks/refs
-    overlayHeight: toolbarRef.current?.getBoundingClientRect().height ?? 0,
-  });
-
-  useEffect(() => {
-    if (!isMobile && mobileView !== "main") {
-      setMobileView("main");
-    }
-  }, [isMobile, mobileView]);
-
   return (
     <div className="simple-editor-wrapper border">
       <EditorContext.Provider value={{ editor }}>
-        <Toolbar
-          ref={toolbarRef}
-          style={{
-            ...(isMobile
-              ? {
-                  bottom: `calc(100% - ${height - rect.y}px)`,
-                }
-              : {}),
-          }}
-        >
+        <Toolbar ref={toolbarRef} className="sticky top-0">
           {mobileView === "main" ? (
             <MainToolbarContent
               onHighlighterClick={() => setMobileView("highlighter")}
@@ -267,7 +244,7 @@ export function SimpleEditor<TFormData>({
           disabled={disabled}
           aria-invalid={isInvalid}
           onBlur={onBlur}
-          className="simple-editor-content bg-input/10  max-h-[70svh] overflow-y-auto"
+          className="simple-editor-content relative bg-input/10  max-h-[70svh] overflow-y-auto"
         />
       </EditorContext.Provider>
     </div>
