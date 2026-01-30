@@ -38,8 +38,13 @@ const CUPostForm = ({ formType, entityId }: BaseCUFormProps) => {
     >
       {(form, _, data) => (
         <>
-          <div className="flex items-center gap-4">
-            <InputField form={form} name="title" label="Title" />
+          <div className="grid grid-cols-2 gap-4">
+            <InputField
+              form={form}
+              name="title"
+              label="Title"
+              className="shrink-0"
+            />
             <ComboboxField
               form={form}
               name="categoryId"

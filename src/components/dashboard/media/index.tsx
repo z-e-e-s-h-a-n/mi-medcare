@@ -35,8 +35,8 @@ function MediaLibrary({ onSelect }: MediaLibraryProps) {
   return (
     <Tabs asChild defaultValue="library">
       <section className="space-y-16">
-        <div className="flex items-center justify-between">
-          <TabsList className="bg-transparent gap-4 border">
+        <div className="flex flex-col sm:flex-row items-center justify-between  gap-4">
+          <TabsList className="bg-transparent gap-4 border w-1/2">
             <TabsTrigger value="upload">
               <Upload /> Upload
             </TabsTrigger>
@@ -61,7 +61,6 @@ function MediaLibrary({ onSelect }: MediaLibraryProps) {
               { label: "Filename", value: "filename" },
               { label: "ID", value: "id" },
             ]}
-            // filterConfig={}
           />
         </div>
         <TabsContent value="upload">

@@ -89,7 +89,7 @@ export function MediaCard({ media, onSelect }: MediaCardProps) {
         <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out" />
 
         {/* Actions */}
-        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
+        <div className="absolute top-2 right-2 sm:opacity-0 sm:group-hover:opacity-100 sm:transition-all sm:duration-300 ease-out">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button

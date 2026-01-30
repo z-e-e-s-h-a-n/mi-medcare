@@ -221,7 +221,7 @@ export function SimpleEditor<TFormData>({
   });
 
   return (
-    <div className="simple-editor-wrapper border">
+    <div className="simple-editor-wrapper border relative">
       <EditorContext.Provider value={{ editor }}>
         <Toolbar ref={toolbarRef} className="sticky top-0">
           {mobileView === "main" ? (

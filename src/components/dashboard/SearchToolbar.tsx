@@ -62,7 +62,7 @@ function SearchToolbar<TQuery extends BaseQueryType>({
   entityType,
 }: SearchToolbarProps<TQuery>) {
   return (
-    <div className="flex flex-wrap gap-3 items-center justify-between">
+    <div className="flex items-center flex-wrap gap-3 justify-between">
       <div className="flex gap-2 items-center">
         <Input
           placeholder="Search..."
@@ -95,35 +95,37 @@ function SearchToolbar<TQuery extends BaseQueryType>({
         </Select>
       </div>
 
-      <div className="flex items-center gap-4">
-        {filterConfig && setFilter && (
-          <Select
-            value={filter ?? "all"}
-            onValueChange={(v) => {
-              setPage(1);
-              setFilter(v === "all" ? undefined : v);
-            }}
-          >
-            <SelectTrigger className="w-44">
-              <SelectValue placeholder={filterConfig.label} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              {filterConfig.options.map((o) => (
-                <SelectItem key={o} value={o}>
-                  {o}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
+      {entityType && (
+        <div className="flex items-center gap-4">
+          {filterConfig && setFilter && (
+            <Select
+              value={filter ?? "all"}
+              onValueChange={(v) => {
+                setPage(1);
+                setFilter(v === "all" ? undefined : v);
+              }}
+            >
+              <SelectTrigger className="w-44">
+                <SelectValue placeholder={filterConfig.label} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+                {filterConfig.options.map((o) => (
+                  <SelectItem key={o} value={o}>
+                    {o}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
 
-        {entityType && (
-          <Button href={`/${entityType}/new`} className="capitalize">
-            <Plus /> New {entityType.split("/").pop()?.replace(/s$/, "")}
-          </Button>
-        )}
-      </div>
+          {entityType && (
+            <Button href={`/${entityType}/new`} className="capitalize">
+              <Plus /> New {entityType.split("/").pop()?.replace(/s$/, "")}
+            </Button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

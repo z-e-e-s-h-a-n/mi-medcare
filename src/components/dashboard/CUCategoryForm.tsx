@@ -23,7 +23,7 @@ const CUCategoryForm = ({ formType, entityId }: BaseCUFormProps) => {
     >
       {(form) => (
         <>
-          <div className="flex items-center gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <InputField form={form} name="name" label="Name" />
             <ComboboxField
               form={form}

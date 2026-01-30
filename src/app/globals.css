@@ -155,6 +155,10 @@
     @apply inline-block;
   }
 
+  div {
+    @apply max-w-full;
+  }
+
   svg {
     @apply size-4;
   }
