@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import ThemeProvider from "./theme";
 import ReactQueryProvider from "./react-query";
 import ConfirmDialogProvider from "./confirm-dialog";
@@ -13,7 +13,9 @@ const ProviderWrapper = ({ children }: { children: React.ReactNode }) => {
       <ThemeProvider>
         <ConfirmDialogProvider>
           <MediaLibraryProvider>
-            <Toaster />
+            <Suspense fallback={null}>
+              <Toaster />
+            </Suspense>
             {children}
           </MediaLibraryProvider>
         </ConfirmDialogProvider>

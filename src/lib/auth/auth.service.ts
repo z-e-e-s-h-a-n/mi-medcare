@@ -117,7 +117,7 @@ class AuthService {
           userId: user.id,
           email: dto.email,
           purpose: dto.purpose,
-          metadata: { user, newEmail: dto.newEmail },
+          metadata: { user },
         });
 
         return { message: `Change Email OTP sent.` };
