@@ -43,6 +43,8 @@ export function withApiHandler<T extends Record<string, unknown>>(
         { status: 200 },
       );
     } catch (error) {
+      console.log("error", error);
+
       return handleException(error);
     }
   };

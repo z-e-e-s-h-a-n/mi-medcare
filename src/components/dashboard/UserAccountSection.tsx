@@ -85,9 +85,6 @@ const AccountSection = ({ user }: AccountSectionProps) => {
   };
 
   useEffect(() => {
-    console.log(isOpen || otpToken || !otpPurpose);
-    console.log(isOpen, otpToken, !otpPurpose);
-
     if ((!isOpen && otpToken) || !otpPurpose) return;
     const otpRequest = async () => {
       try {

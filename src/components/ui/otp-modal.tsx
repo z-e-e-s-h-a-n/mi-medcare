@@ -15,9 +15,7 @@ import { LoaderCircle } from "lucide-react";
 import { requestOtp, validateOtp } from "@lib/auth/client";
 import { useRouter } from "next/navigation";
 
-interface OtpModalProps {
-  email: string;
-  purpose: OtpPurpose;
+interface OtpModalProps extends RequestOtpType {
   open: boolean;
   setOpen: (o: boolean) => void;
   setOtpToken: (t?: string) => void;
@@ -103,12 +101,13 @@ const OtpModal = ({
           </Button>
           <AlertDialogDescription className="flex-center gap-1">
             Didn&apos;t get a code?
-            <span
+            <button
               className="text-sm text-primary cursor-pointer"
               onClick={handleResendOTP}
+              disabled={isLoading}
             >
               Resend OTP
-            </span>
+            </button>
           </AlertDialogDescription>
         </AlertDialogFooter>
       </AlertDialogContent>

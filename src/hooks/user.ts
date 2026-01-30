@@ -22,6 +22,11 @@ const useUser = () => {
 
   const signoutMutation = useMutation({
     mutationFn: () => signOut(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["currentUser"],
+      });
+    },
   });
 
   const updateMutation = useMutation({

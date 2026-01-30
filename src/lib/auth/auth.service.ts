@@ -117,7 +117,7 @@ class AuthService {
           userId: user.id,
           email: dto.email,
           purpose: dto.purpose,
-          metadata: { user },
+          metadata: { user, newEmail: dto.newEmail },
         });
 
         return { message: `Change Email OTP sent.` };
@@ -253,7 +253,7 @@ class AuthService {
 
     await prisma.user.update({
       where: { id: user.id },
-      data: { isEmailVerified: false },
+      data: { email: dto.newEmail },
     });
 
     await prisma.refreshToken.updateMany({

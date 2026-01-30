@@ -289,9 +289,17 @@ export const changeEmailTemplate = ({
           <p style="${textStyles}">
             A request was made to change your email address.
           </p>
+       ${
+         newEmail
+           ? `<p style="${textStyles}">
+            Current email: <strong>${email}</strong>
+          </p>
           <p style="${textStyles}">
             New email: <strong>${newEmail}</strong>
           </p>
+          `
+           : ""
+       }
           ${ActionBlock(
             `${clientUrl}/auth/verify?email=${email}&newEmail=${newEmail}&purpose=${otp.purpose}&secret=${otp.secret}&type=${otp.type}`,
             "Confirm email change",
