@@ -27,7 +27,7 @@ class OtpService {
     email,
     purpose,
     type = "numericCode",
-    notify = true,
+    notify = false,
     metadata,
   }: SendOtpPayload) {
     let otp = await prisma.otp.findFirst({
@@ -50,9 +50,10 @@ class OtpService {
           expiresAt: expiryDate(serverEnv.OTP_EXP, true),
         },
       });
+      notify = true;
     }
 
-    if (!notify || otp) return otp;
+    if (!notify) return otp;
     await sendMail(email, purpose, { otp, email, ...metadata });
     return otp;
   }
