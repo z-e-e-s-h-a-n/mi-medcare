@@ -37,20 +37,31 @@ class OAuthService {
         },
       });
 
-      if (profile.imageUrl) {
-        await prisma.media.create({
-          data: {
-            url: profile.imageUrl,
-            filename: `${slugify(profile.displayName)}-avatar`,
-            mimeType: "image/jpeg",
-            size: 0,
-            hash: crypto.randomUUID(),
-            uploadedById: user.id,
-          },
-        });
-      }
-
       await sendMail(profile.email, "signup", { user });
+    }
+
+    if (profile.imageUrl) {
+      await prisma.media.upsert({
+        where: {
+          url: profile.imageUrl,
+        },
+        create: {
+          url: profile.imageUrl,
+          filename: `${slugify(profile.displayName)}-avatar`,
+          mimeType: "image/jpeg",
+          size: 0,
+          hash: crypto.randomUUID(),
+          uploadedById: user.id,
+        },
+        update: {
+          url: profile.imageUrl,
+          filename: `${slugify(profile.displayName)}-avatar`,
+          mimeType: "image/jpeg",
+          size: 0,
+          hash: crypto.randomUUID(),
+          uploadedById: user.id,
+        },
+      });
     }
 
     const { password, ...rest } = user;

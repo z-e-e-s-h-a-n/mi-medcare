@@ -52,10 +52,8 @@ class OtpService {
       });
     }
 
-    if (!notify) return otp;
-
+    if (!notify || otp) return otp;
     await sendMail(email, purpose, { otp, email, ...metadata });
-
     return otp;
   }
 

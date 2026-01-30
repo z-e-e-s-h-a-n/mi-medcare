@@ -1,10 +1,10 @@
-import AuthForm, { AuthQueryParams } from "@components/dashboard/AuthForm";
+import AuthForm from "@components/dashboard/AuthForm";
 import { notFound } from "next/navigation";
 
 const page = async ({
   params,
   searchParams,
-}: AppPageProps<{ type: AuthFormType }, AuthQueryParams>) => {
+}: AppPageProps<{ type: AuthFormType }, ValidateOtpType>) => {
   const { type } = await params;
   const queryParams = await searchParams;
 

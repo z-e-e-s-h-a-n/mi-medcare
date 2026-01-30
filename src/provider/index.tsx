@@ -13,8 +13,8 @@ const ProviderWrapper = ({ children }: { children: React.ReactNode }) => {
       <ThemeProvider>
         <ConfirmDialogProvider>
           <MediaLibraryProvider>
-            {children}
             <Toaster />
+            {children}
           </MediaLibraryProvider>
         </ConfirmDialogProvider>
       </ThemeProvider>

@@ -25,19 +25,14 @@ import {
 import Image from "next/image";
 import z from "zod";
 
-export type AuthQueryParams = ValidateOtpType & {
-  error?: string;
-  message?: string;
-};
-
 interface AuthFormProps {
   formType: AuthFormType;
   className?: string;
-  queryParams: AuthQueryParams;
+  queryParams: ValidateOtpType;
 }
 
 function AuthForm({ className, formType, queryParams }: AuthFormProps) {
-  const { purpose, secret, type, error, message } = queryParams;
+  const { purpose, secret, type } = queryParams;
   const [email, setEmail] = useState(queryParams.email);
   const [isOpen, setIsOpen] = useState(false);
   const [otpToken, setOtpToken] = useState<string>();
@@ -160,14 +155,6 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
       router.push(redirectUrl);
     }
   }, [redirectUrl, isOpen, router]);
-
-  useEffect(() => {
-    if (error && message) {
-      toast.error(error, {
-        description: message,
-      });
-    }
-  }, [error, message]);
 
   useEffect(() => {
     if (formEmail) {

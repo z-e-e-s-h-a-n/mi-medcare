@@ -66,7 +66,7 @@ export async function GET(req: NextRequest) {
   } catch (err) {
     console.error("Google OAuth error:", err);
 
-    let message = "";
+    let message = "An Error Accords";
     let code = "oauth_failed";
     if (err instanceof ForbiddenException) {
       message = err.message;
