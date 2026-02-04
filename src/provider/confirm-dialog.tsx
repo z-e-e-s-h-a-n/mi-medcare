@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useRef,
-  useState,
-} from "react";
+import React, { createContext, useCallback, useRef, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -100,22 +94,6 @@ export function ConfirmProvider({ children }: { children: React.ReactNode }) {
       </AlertDialog>
     </ConfirmContext.Provider>
   );
-}
-
-/* ========== Hook ========== */
-export function useConfirm(defaults?: ConfirmOptions) {
-  const ctx = useContext(ConfirmContext);
-
-  if (!ctx) {
-    throw new Error("useConfirm must be used within ConfirmProvider");
-  }
-
-  const confirm = useCallback(
-    (options?: ConfirmOptions) => ctx.confirm({ ...defaults, ...options }),
-    [ctx, defaults],
-  );
-
-  return { confirm };
 }
 
 export default ConfirmProvider;

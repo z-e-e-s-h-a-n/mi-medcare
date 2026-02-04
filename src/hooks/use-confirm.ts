@@ -1,5 +1,5 @@
 import { ConfirmContext, ConfirmOptions } from "@/provider/confirm-dialog";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 
 export function useConfirm(defaults?: ConfirmOptions) {
   const ctx = useContext(ConfirmContext);
@@ -8,9 +8,10 @@ export function useConfirm(defaults?: ConfirmOptions) {
     throw new Error("useConfirm must be used within ConfirmProvider");
   }
 
-  const confirm = (options?: ConfirmOptions) => {
-    return ctx.confirm({ ...defaults, ...options });
-  };
+  const confirm = useCallback(
+    (options?: ConfirmOptions) => ctx.confirm({ ...defaults, ...options }),
+    [ctx, defaults],
+  );
 
   return { confirm };
 }

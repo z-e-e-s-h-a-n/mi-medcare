@@ -111,7 +111,7 @@ class TokenService {
       !tokenRecord ||
       tokenRecord.blacklisted ||
       tokenRecord.token !== token ||
-      tokenRecord.expiresAt < new Date()
+      tokenRecord.expiresAt <= new Date()
     ) {
       throw new UnauthorizedException("Invalid refresh session");
     }
