@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "prebuild": "cd server && pnpm prisma generate",
     "build": "turbo build",
     "build:packages": "turbo run build --filter=@workspace/*",
     "dev": "turbo dev",
