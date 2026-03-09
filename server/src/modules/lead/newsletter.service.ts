@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@/modules/prisma/prisma.service";
-import type { NewsletterSubscriberWhereInput } from "prisma/generated/models";
 import { resolveEmailTemplate } from "@workspace/templates";
 import { NotificationService } from "@/modules/notification/notification.service";
-import type { NewsletterSubscriber } from "@generated/prisma";
+import type { NewsletterSubscriber, Prisma } from "@workspace/db/browser";
 
 @Injectable()
 export class NewsletterService {
@@ -38,13 +37,13 @@ export class NewsletterService {
   async list(query: NewsletterSubscriberQueryDto) {
     const { page, limit, searchBy, search, sortBy, sortOrder } = query;
 
-    const where: NewsletterSubscriberWhereInput = {};
+    const where: Prisma.NewsletterSubscriberWhereInput = {};
     if (query.isActive) where.isActive = query.isActive;
 
     if (search && searchBy) {
       const searchWhereMap: Record<
         typeof searchBy,
-        NewsletterSubscriberWhereInput
+        Prisma.NewsletterSubscriberWhereInput
       > = {
         email: {
           email: { contains: search, mode: "insensitive" },

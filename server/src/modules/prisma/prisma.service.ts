@@ -1,6 +1,6 @@
 import type { OnModuleDestroy, OnModuleInit } from "@nestjs/common";
 import { Injectable } from "@nestjs/common";
-import { PrismaClient } from "@generated/prisma";
+import { PrismaClient } from "@workspace/db/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 import { softDeleteExtension } from "./prisma.extension";

@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { NotificationService } from "@/modules/notification/notification.service";
 import { resolveEmailTemplate } from "@workspace/templates";
-import type { ConsultationRequest } from "@generated/prisma";
+import type { ConsultationRequest } from "@workspace/db/browser";
 
 @Injectable()
 export class ConsultationService {

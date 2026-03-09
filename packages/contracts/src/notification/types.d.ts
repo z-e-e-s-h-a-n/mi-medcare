@@ -1,6 +1,6 @@
 import type z from "zod";
 import { registerPushTokenSchema } from "./schema";
-import type { Notification } from "../lib/prisma";
+import type { Notification } from "@workspace/db/browser";
 
 declare global {
   /* ======================================================

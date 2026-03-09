@@ -1,7 +1,7 @@
 import { z } from "zod";
 import * as enums from "./enums";
 import React from "react";
-import { Prisma } from "../lib/prisma";
+import { Prisma } from "@workspace/db/browser";
 
 /* ======================================================
    GLOBAL DECLARATIONS

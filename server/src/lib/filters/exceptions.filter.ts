@@ -8,7 +8,7 @@ import {
   type ExceptionFilter,
   type ArgumentsHost,
 } from "@nestjs/common";
-import { Prisma } from "@generated/prisma";
+import { Prisma } from "@workspace/db/client";
 
 import { InjectLogger } from "@/decorators/logger.decorator";
 import { LoggerService } from "@/modules/logger/logger.service";

@@ -1,4 +1,4 @@
-import { Prisma } from "@generated/prisma";
+import { Prisma } from "@workspace/db/client";
 import { SoftDeleteModels } from "./soft-delete.models";
 
 export type SoftDeleteExtraArgs = {

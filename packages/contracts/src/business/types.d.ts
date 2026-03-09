@@ -1,6 +1,6 @@
 import type z from "zod";
 import type { businessProfileSchema } from "./schema";
-import { type BusinessProfile } from "../lib/prisma";
+import type { BusinessProfile } from "@workspace/db/browser";
 
 declare global {
   type BusinessProfileType = z.input<typeof businessProfileSchema>;

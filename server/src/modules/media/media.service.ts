@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import type { MediaWhereInput } from "prisma/generated/models";
+import type { Prisma } from "@workspace/db/browser";
 import { MediaQueryDto, MediaUpdateDto } from "@workspace/contracts/media";
 
 import { PrismaService } from "@/modules/prisma/prisma.service";
@@ -46,13 +46,13 @@ export class MediaService {
     const { page, limit, sortBy, sortOrder, search, searchBy, mimeType, type } =
       query;
 
-    const where: MediaWhereInput = {};
+    const where: Prisma.MediaWhereInput = {};
 
     if (type) where.type = { equals: type };
     if (mimeType) where.mimeType = { contains: mimeType, mode: "insensitive" };
 
     if (search && searchBy) {
-      const searchWhereMap: Record<typeof searchBy, MediaWhereInput> = {
+      const searchWhereMap: Record<typeof searchBy, Prisma.MediaWhereInput> = {
         id: { id: search },
         title: {
           title: { contains: search, mode: "insensitive" },

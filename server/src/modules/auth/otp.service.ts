@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import type { Otp } from "@generated/prisma";
+import type { Otp } from "@workspace/db/browser";
 import { futureDate } from "@workspace/shared/utils";
 
 import { InjectLogger } from "@/decorators/logger.decorator";

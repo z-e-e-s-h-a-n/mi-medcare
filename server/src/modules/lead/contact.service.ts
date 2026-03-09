@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@/modules/prisma/prisma.service";
-import type { ContactMessageWhereInput } from "prisma/generated/models";
 import { NotificationService } from "@/modules/notification/notification.service";
 import { resolveEmailTemplate } from "@workspace/templates";
-import type { ContactMessage } from "@generated/prisma";
+import type { ContactMessage, Prisma } from "@workspace/db/browser";
 
 @Injectable()
 export class ContactService {
@@ -55,11 +54,14 @@ export class ContactService {
   async queryMessages(query: ContactMessageQueryDto) {
     const { page, limit, status, search, searchBy, sortBy, sortOrder } = query;
 
-    const where: ContactMessageWhereInput = {};
+    const where: Prisma.ContactMessageWhereInput = {};
     if (status) where.status = status;
 
     if (search && searchBy) {
-      const searchWhereMap: Record<typeof searchBy, ContactMessageWhereInput> =
+      const searchWhereMap: Record<
+        typeof searchBy,
+        Prisma.ContactMessageWhereInput
+      > =
         {
           email: {
             email: { contains: search, mode: "insensitive" },

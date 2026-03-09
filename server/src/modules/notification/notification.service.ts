@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import type { Otp } from "@generated/prisma";
+import type { Otp } from "@workspace/db/browser";
 import { resolveEmailTemplate } from "@workspace/templates";
 import { appName } from "@workspace/shared/constants";
 

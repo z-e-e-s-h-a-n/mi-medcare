@@ -4,7 +4,7 @@ import type {
   updateContactMessageSchema,
   contactMessageQuerySchema,
 } from "./schema";
-import { type ContactMessage } from "../lib/prisma";
+import type { ContactMessage } from "@workspace/db/browser";
 
 declare global {
   type CreateContactMessageType = z.input<typeof createContactMessageSchema>;

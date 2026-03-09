@@ -6,7 +6,7 @@ import {
 } from "@nestjs/common";
 import argon2 from "argon2";
 import type { Request, Response } from "express";
-import type { UserStatus } from "@generated/prisma";
+import type { UserStatus } from "@workspace/db/browser";
 
 import { OtpService } from "./otp.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";

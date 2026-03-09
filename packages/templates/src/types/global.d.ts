@@ -1,5 +1,9 @@
-import type * as Prisma from "../../../../server/prisma/generated/browser";
-export type Otp = Prisma.Otp;
+import type {
+  Otp,
+  ConsultationRequest,
+  ContactMessage,
+  NewsletterSubscriber,
+} from "@workspace/db/browser";
 
 declare global {
   /********************
@@ -19,13 +23,13 @@ declare global {
 
   interface EmailTemplateBaseProps {
     user: SafeUser;
-    otp?: Prisma.Otp;
+    otp?: Otp;
     identifier: string;
     clientUrl?: string;
     message: string;
-    contactMessage: Prisma.ContactMessage;
-    newsletterSubscriber: Prisma.NewsletterSubscriber;
-    consultationRequest: Prisma.ConsultationRequest;
+    contactMessage: ContactMessage;
+    newsletterSubscriber: NewsletterSubscriber;
+    consultationRequest: ConsultationRequest;
   }
 
   type EmailTemplateMap = {

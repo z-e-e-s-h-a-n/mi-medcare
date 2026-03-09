@@ -1,6 +1,6 @@
 import type z from "zod";
 import * as schema from "./schema";
-import type { Session } from "../lib/prisma";
+import type { Session } from "@workspace/db/browser";
 
 declare global {
   /* ======================================================

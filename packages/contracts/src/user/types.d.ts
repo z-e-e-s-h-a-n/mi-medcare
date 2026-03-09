@@ -1,6 +1,6 @@
 import z from "zod";
 import type { userProfileSchema } from "./schema";
-import { type Media, type User } from "../lib/prisma";
+import type { Media, User } from "@workspace/db/browser";
 
 declare global {
   /* ======================================================

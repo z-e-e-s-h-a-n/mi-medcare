@@ -4,7 +4,7 @@ import type {
   updateConsultationRequestSchema,
   consultationRequestQuerySchema,
 } from "./schema";
-import { type ConsultationRequest } from "../lib/prisma";
+import type { ConsultationRequest } from "@workspace/db/browser";
 
 declare global {
   type CreateConsultationRequestType = z.input<

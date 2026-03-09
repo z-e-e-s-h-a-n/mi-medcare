@@ -4,7 +4,7 @@ import type {
   mediaQuerySchema,
   mediaUpdateSchema,
 } from "./schema";
-import { type Media } from "../lib/prisma";
+import type { Media } from "@workspace/db/browser";
 
 declare global {
   /* ======================================================

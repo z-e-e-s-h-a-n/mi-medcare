@@ -5,7 +5,10 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SCHEMA_PATH = path.resolve(__dirname, "../prisma/schema.prisma");
+const SCHEMA_PATH = path.resolve(
+  __dirname,
+  "../../packages/db/prisma/schema.prisma"
+);
 const OUTPUT_PATH = path.resolve(
   __dirname,
   "../src/modules/prisma/soft-delete.models.ts"

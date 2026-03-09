@@ -4,7 +4,7 @@ import type {
   newsletterUnSubscriberSchema,
   newsletterSubscriberQuerySchema,
 } from "./schema";
-import { type NewsletterSubscriber } from "../lib/prisma";
+import type { NewsletterSubscriber } from "@workspace/db/browser";
 
 declare global {
   type NewsletterSubscriberType = z.input<typeof newsletterSubscriberSchema>;
