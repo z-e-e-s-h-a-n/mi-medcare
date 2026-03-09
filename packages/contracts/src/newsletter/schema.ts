@@ -8,7 +8,6 @@ import { nameSchema, emailSchema, baseQuerySchema } from "../lib/schema";
 export const newsletterSubscriberSchema = z.object({
   name: nameSchema,
   email: emailSchema,
-  source: z.string(),
 });
 
 export const newsletterUnSubscriberSchema = z.object({

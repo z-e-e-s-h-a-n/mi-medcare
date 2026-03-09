@@ -7,8 +7,6 @@ import {
   FieldLabel,
 } from "./field";
 
-import { Button } from "./button";
-import { LoaderCircle } from "lucide-react";
 import type {
   DeepKeys,
   DeepValue,
@@ -54,11 +52,9 @@ type FieldValidatorsFor<
 interface FormProps<TFormData> {
   id?: string;
   form: AnyFormApi<TFormData>;
-  title?: string | React.ReactNode;
-  desc?: string;
-  btnText?: string;
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
   children: React.ReactNode;
-  isPending?: boolean;
   className?: string;
 }
 
@@ -93,28 +89,14 @@ export interface FormFieldProps<TFormData> extends BaseFieldProps<TFormData> {
 export const Form = <TFormData,>({
   id,
   form,
-  title,
-  desc,
+  header,
+  footer,
   children,
-  isPending,
-  btnText,
   className,
 }: FormProps<TFormData>) => {
   return (
-    <section className="space-y-8" id={id}>
-      <div className=" flex items-center justify-between">
-        {title && <h2 className="capitalize text-lg font-semibold">{title}</h2>}
-        {desc && <p>{desc}</p>}
-        <Button
-          variant="secondary"
-          onClick={() => {
-            console.log("values:", form.state.values);
-            console.log("errors:", form.getAllErrors());
-          }}
-        >
-          Form Logs
-        </Button>
-      </div>
+    <section id={id} className={className}>
+      {header}
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -123,26 +105,9 @@ export const Form = <TFormData,>({
         }}
         autoComplete="off"
       >
-        <FieldGroup className={className}>
-          {children}
-
-          {btnText && (
-            <form.Subscribe selector={(state) => state.canSubmit}>
-              {(canSubmit) => (
-                <Button
-                  size="lg"
-                  disabled={!canSubmit || isPending}
-                  type="submit"
-                  className="w-max capitalize"
-                >
-                  {btnText}
-                  {isPending && <LoaderCircle className="animate-spin" />}
-                </Button>
-              )}
-            </form.Subscribe>
-          )}
-        </FieldGroup>
+        <FieldGroup className={className}>{children}</FieldGroup>
       </form>
+      {footer}
     </section>
   );
 };
@@ -180,7 +145,7 @@ export const FormField = <TFormData,>({
           <Field data-invalid={isInvalid} className={className}>
             {label && (
               <FieldLabel
-                className="w-full flex items-center justify-between"
+                className="w-full flex items-center gap-2"
                 htmlFor={field.name}
               >
                 {label}

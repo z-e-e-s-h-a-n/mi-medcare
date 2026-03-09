@@ -30,6 +30,10 @@
       "import": "./dist/contact.js",
       "types": "./dist/contact.d.ts"
     },
+    "./consultation": {
+      "import": "./dist/consultation.js",
+      "types": "./dist/consultation.d.ts"
+    },
     "./newsletter": {
       "import": "./dist/newsletter.js",
       "types": "./dist/newsletter.d.ts"

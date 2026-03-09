@@ -15,5 +15,6 @@ export const emailTemplateMap: Record<
   userStatus: emailTemplates.UserStatus,
   newsletter: emailTemplates.Newsletter,
   contactMessage: emailTemplates.ContactMessage,
+  consultationRequest: emailTemplates.ConsultationRequest,
   securityAlert: emailTemplates.SecurityAlert,
 };

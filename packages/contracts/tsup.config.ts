@@ -11,6 +11,7 @@ export default defineConfig({
     notification: "src/notification/index.ts",
     contact: "src/contact/index.ts",
     newsletter: "src/newsletter/index.ts",
+    consultation: "src/consultation/index.ts",
   },
   outDir: "dist",
   format: ["esm"],

@@ -59,7 +59,7 @@ const CUUserForm = ({ entityId, formType }: BaseCUFormProps) => {
   if (isLoading) return <CUFormSkeleton />;
 
   return (
-    <Form form={form} isPending={isPending}>
+    <Form form={form}>
       <div>
         <h2 className="capitalize text-lg font-semibold">
           {formType === "add" ? "Add New" : "Update"} User

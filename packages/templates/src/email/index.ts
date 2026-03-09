@@ -8,4 +8,5 @@ export { UpdateIdentifier } from "./updateIdentifier";
 export { UserStatus } from "./userStatus";
 export { Newsletter } from "./newsletter";
 export { ContactMessage } from "./contactMessage";
+export { ConsultationRequest } from "./consultationRequest";
 export { SecurityAlert } from "./securityAlert";

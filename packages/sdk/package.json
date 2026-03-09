@@ -15,6 +15,9 @@
     "./admin": "./src/admin/index.ts",
     "./user": "./src/user/index.ts",
     "./media": "./src/media/index.ts",
+    "./newsletter": "./src/newsletter/index.ts",
+    "./contact": "./src/contact/index.ts",
+    "./consultation": "./src/consultation/index.ts",
     "./notification": "./src/notification/index.ts"
   },
   "dependencies": {

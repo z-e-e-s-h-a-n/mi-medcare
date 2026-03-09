@@ -2,7 +2,6 @@ import z from "zod";
 import {
   baseQuerySchema,
   emailSchema,
-  isoDateSchema,
   nameSchema,
   phoneSchema,
 } from "../lib/schema";
@@ -10,22 +9,23 @@ import {
   ContactMessageSearchByEnum,
   ContactMessageSortByEnum,
   ContactMessageStatusEnum,
+  ContactTimePreferenceEnum,
+  PracticeTypeEnum,
 } from "../lib/enums";
 
 export const createContactMessageSchema = z.object({
-  firstName: nameSchema,
-  lastName: nameSchema.optional(),
+  fullName: nameSchema,
+  practiceName: z.string().optional(),
   email: emailSchema,
   phone: phoneSchema,
-  subject: z.string().optional(),
+  practiceType: PracticeTypeEnum,
+  bestContactTime: ContactTimePreferenceEnum,
   message: z.string(),
-  source: z.string().optional(),
 });
 
 export const updateContactMessageSchema = z.object({
-  replyNotes: z.string().optional(),
+  notes: z.string().optional(),
   status: ContactMessageStatusEnum,
-  repliedAt: isoDateSchema,
 });
 
 export const contactMessageQuerySchema = baseQuerySchema(

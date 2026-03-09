@@ -80,17 +80,19 @@ declare global {
 
   type OAuthProvider = "google" | "facebook" | "apple";
   type AuthActions = "verifyIdentifier" | "verifyMfa" | "setPassword";
-  type MfaMethod = z.infer<typeof enums.MfaMethodEnum>;
 
-  type OtpPurpose = z.infer<typeof enums.OtpPurposeEnum>;
   type OtpType = z.infer<typeof enums.OtpTypeEnum>;
+  type OtpPurpose = z.infer<typeof enums.OtpPurposeEnum>;
+
+  type MfaMethod = z.infer<typeof enums.MfaMethodEnum>;
   type SessionStatus = z.infer<typeof enums.SessionStatusEnum>;
 
-  type NotificationPurpose = z.infer<typeof enums.NotificationPurposeEnum>;
+  type PushProvider = z.infer<typeof enums.PushProviderEnum>;
   type MessagingChannel = z.infer<typeof enums.MessagingChannelEnum>;
   type NotificationChannel = z.infer<typeof enums.NotificationChannelEnum>;
-  type NotificationPriority = z.infer<typeof enums.NotificationPriorityEnum>;
+  type NotificationPurpose = z.infer<typeof enums.NotificationPurposeEnum>;
   type NotificationStatus = z.infer<typeof enums.NotificationStatusEnum>;
+  type NotificationPriority = z.infer<typeof enums.NotificationPriorityEnum>;
 
   /* --------------------
      SHARED QUERY - TYPES
@@ -135,6 +137,7 @@ declare global {
 
   type UserRole = z.infer<typeof enums.UserRoleEnum>;
   type UserStatus = z.infer<typeof enums.UserStatusEnum>;
+
   type UserSearchByType = z.infer<typeof enums.UserSearchByEnum>;
   type UserSortByType = z.infer<typeof enums.UserSortByEnum>;
 
@@ -144,6 +147,48 @@ declare global {
 
   type MediaType = z.infer<typeof enums.MediaTypeEnum>;
   type MediaVisibility = z.infer<typeof enums.MediaVisibilityEnum>;
+
+  type MediaSearchByType = z.infer<typeof enums.MediaSearchByEnum>;
+  type MediaSortByType = z.infer<typeof enums.MediaSortByEnum>;
+
+  /* --------------------
+     CONTACT / CONSULTATION
+  -------------------- */
+  type PracticeType = z.infer<typeof enums.PracticeTypeEnum>;
+  type ConsultationStatus = z.infer<typeof enums.ConsultationStatusEnum>;
+
+  type MonthlyClaimsRangeType = z.infer<typeof enums.MonthlyClaimsRangeEnum>;
+  type ContactMessageStatus = z.infer<typeof enums.ContactMessageStatusEnum>;
+  type ContactTimePreference = z.infer<typeof enums.ContactTimePreferenceEnum>;
+
+  type ContactMessageSortByType = z.infer<
+    typeof enums.ContactMessageSortByEnum
+  >;
+  type ContactMessageSearchByType = z.infer<
+    typeof enums.ContactMessageSearchByEnum
+  >;
+
+  type ConsultationRequestSearchByType = z.infer<
+    typeof enums.ConsultationRequestSearchByEnum
+  >;
+  type ConsultationRequestSearchByType = z.infer<
+    typeof enums.ConsultationRequestSearchByEnum
+  >;
+
+  /* --------------------
+     NEWSLETTER - TYPES
+  -------------------- */
+  type NewsletterSubscriberSortByType = z.infer<
+    typeof enums.NewsletterSubscriberSortByEnum
+  >;
+  type NewsletterSubscriberSearchByType = z.infer<
+    typeof enums.NewsletterSubscriberSearchByEnum
+  >;
+
+  /* --------------------
+     SERVICES - TYPES
+  -------------------- */
+  type ProductStatus = z.infer<typeof enums.ProductStatusEnum>;
 }
 
 export {};

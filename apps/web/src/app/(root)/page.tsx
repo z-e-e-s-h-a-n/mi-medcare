@@ -1,14 +1,34 @@
-import { Button } from "@workspace/ui/components/button"
+import { HeroSection } from "@/components/sections/hero-section";
+import { ServicesSection } from "@/components/sections/services-section";
+import { FeaturesSection } from "@/components/sections/features-section";
+import { SuccessMetrics } from "@/components/sections/stats-section";
+import { HowItWorksSection } from "@/components/sections/how-it-works";
+import { BenefitsSection } from "@/components/sections/benefits-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
+import { FAQSection } from "@/components/sections/faq-section";
+import { BlogSection } from "@/components/sections/blog-section";
+import { CTASection } from "@/components/sections/cta-section";
+import { EHRSection } from "@/components/sections/ehr-section";
+import { SpecialtiesSection } from "@/components/sections/specialties-section";
+import { MetricsSection } from "@/components/sections/metrics-section";
+import { TRUST_METRICS } from "@/lib/constants";
 
-const HomePage = () => {
+export default function Home() {
   return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Hello World</h1>
-        <Button size="sm">Button</Button>
-      </div>
-    </div>
-  )
+    <>
+      <HeroSection />
+      <MetricsSection metrics={TRUST_METRICS} />
+      <SuccessMetrics />
+      <ServicesSection limit={6} />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <BenefitsSection />
+      <EHRSection limit={8} />
+      <SpecialtiesSection limit={8} />
+      <TestimonialsSection />
+      <FAQSection />
+      <BlogSection />
+      <CTASection />
+    </>
+  );
 }
-
-export default HomePage

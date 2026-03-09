@@ -25,6 +25,7 @@ declare global {
     message: string;
     contactMessage: Prisma.ContactMessage;
     newsletterSubscriber: Prisma.NewsletterSubscriber;
+    consultationRequest: Prisma.ConsultationRequest;
   }
 
   type EmailTemplateMap = {
@@ -67,6 +68,8 @@ declare global {
     newsletter: Pick<EmailTemplateBaseProps, "newsletterSubscriber">;
 
     contactMessage: Pick<EmailTemplateBaseProps, "contactMessage">;
+
+    consultationRequest: Pick<EmailTemplateBaseProps, "consultationRequest">;
   };
 
   type EmailTemplateProps<T extends NotificationPurpose> = {

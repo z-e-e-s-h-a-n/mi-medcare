@@ -57,6 +57,12 @@ export const NOTIFICATION_POLICY_MAP: Record<
     push: false,
   },
 
+  //Consultation Request
+  consultationRequest: {
+    priority: "normal",
+    push: false,
+  },
+
   securityAlert: {
     priority: "important",
     push: true,

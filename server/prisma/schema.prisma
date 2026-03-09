@@ -20,6 +20,7 @@ enum ThemeMode {
 enum UserRole {
   admin
   customer
+  author
   editor
 }
 
@@ -90,6 +91,7 @@ enum NotificationPurpose {
   newsletter
   securityAlert
   contactMessage
+  consultationRequest
 }
 
 enum NotificationPriority {
@@ -102,11 +104,6 @@ enum NotificationStatus {
   partial
   sent
   failed
-}
-
-enum ContactMessageStatus {
-  pending
-  replied
 }
 
 enum AuditAction {
@@ -127,6 +124,49 @@ enum MediaType {
   photo
   logo
   other
+}
+
+enum ProductStatus {
+  draft
+  review
+  published
+}
+
+enum PracticeType {
+  privatePractice
+  groupPractice
+  hospital
+  clinic
+  urgentCare
+  specialtyClinic
+  other
+}
+
+enum ConsultationRequestStatus {
+  new
+  contacted
+  qualified
+  closed
+}
+
+enum MonthlyClaimsRange {
+  range_0_250
+  range_251_1000
+  range_1001_3000
+  range_3000_plus
+}
+
+enum ContactMessageStatus {
+  pending
+  viewed
+  replied
+}
+
+enum ContactTimePreference {
+  morning
+  afternoon
+  evening
+  anytime
 }
 
 //
@@ -170,12 +210,11 @@ model User {
   // Relations
   otps          Otp[]
   sessions      Session[]
-  notifications Notification[]
   auditLogs     AuditLog[]
+  notifications Notification[]
 
-  medias          Media[]          @relation("UserUploads")
-  contactMessages ContactMessage[] @relation("ContactMessageAuthor")
-  repliedMessages ContactMessage[] @relation("ContactMessageRepliedBy")
+  posts  Post[]
+  medias Media[] @relation("UserUploads")
 
   // Indexes
   @@index([status])
@@ -252,7 +291,7 @@ model Notification {
 
   status NotificationStatus @default(pending)
 
-  readAt    DateTime?
+  viewedAt  DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
@@ -283,13 +322,151 @@ model Media {
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
-  users          User[]            @relation("UserImage")
-  businessLogos  BusinessProfile[] @relation("BusinessProfileLogo")
-  businessCovers BusinessProfile[] @relation("BusinessProfileCoverImage")
+  users            User[]            @relation("UserImage")
+  posts            Post[]            @relation("PostCover")
+  pages            Page[]            @relation("PageCover")
+  businessLogos    BusinessProfile[] @relation("BusinessProfileLogo")
+  businessCovers   BusinessProfile[] @relation("BusinessProfileCoverImage")
+  businessFavIcons BusinessProfile[] @relation("BusinessProfileFavicon")
 
   @@index([type])
   @@index([filename])
   @@index([uploadedById])
+  @@index([createdAt])
+  @@index([deletedAt])
+}
+
+//
+// SERVICES
+//
+
+model Page {
+  id String @id @default(ulid())
+
+  coverId String?
+  cover   Media?  @relation("PageCover", fields: [coverId], references: [id])
+
+  title   String
+  slug    String @unique
+  content String @db.Text
+
+  metaTitle       String?
+  metaDescription String?
+
+  viewsCount Int           @default(0)
+  status     ProductStatus @default(draft)
+
+  views ContentView[]
+
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+}
+
+model Post {
+  id String @id @default(ulid())
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  title   String
+  slug    String @unique
+  excerpt String
+  content String @db.Text
+
+  coverId String?
+  cover   Media?  @relation("PostCover", fields: [coverId], references: [id])
+
+  tags Tag[]
+
+  status      ProductStatus @default(draft)
+  publishedAt DateTime?
+
+  metaTitle       String?
+  metaDescription String?
+
+  viewsCount Int     @default(0)
+  isFeatured Boolean @default(false)
+
+  views ContentView[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([viewsCount])
+  @@index([title])
+  @@index([slug])
+  @@index([status])
+  @@index([publishedAt])
+  @@index([authorId])
+  @@index([categoryId])
+  @@index([createdAt])
+  @@index([deletedAt])
+}
+
+model ContentView {
+  id String @id @default(ulid())
+
+  postId String?
+  post   Post?   @relation(fields: [postId], references: [id])
+
+  pageId String?
+  page   Page?   @relation(fields: [pageId], references: [id])
+
+  trafficSourceId String?
+  trafficSource   TrafficSource? @relation(fields: [trafficSourceId], references: [id])
+
+  viewedAt DateTime @default(now())
+
+  @@index([postId])
+  @@index([pageId])
+  @@index([viewedAt])
+  @@index([postId, viewedAt])
+  @@index([pageId, viewedAt])
+}
+
+model Category {
+  id          String  @id @default(ulid())
+  name        String  @unique
+  slug        String  @unique
+  description String?
+
+  parentId String?
+  parent   Category? @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+
+  children Category[] @relation("CategoryHierarchy")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  posts Post[]
+
+  @@index([name])
+  @@index([parentId])
+  @@index([slug])
+  @@index([createdAt])
+  @@index([deletedAt])
+}
+
+model Tag {
+  id   String @id @default(ulid())
+  name String @unique
+  slug String @unique
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  posts Post[]
+
+  @@index([name])
+  @@index([slug])
   @@index([createdAt])
   @@index([deletedAt])
 }
@@ -322,57 +499,105 @@ model AuditLog {
 }
 
 model ContactMessage {
-  userId String?
-  user   User?   @relation("ContactMessageAuthor", fields: [userId], references: [id])
+  id String @id @default(cuid())
 
-  id        String  @id @default(ulid())
-  firstName String
-  lastName  String?
+  trafficSourceId String?
+  trafficSource   TrafficSource? @relation(fields: [trafficSourceId], references: [id])
 
-  email String  @db.VarChar(255)
-  phone String? @db.VarChar(20)
-
-  subject String?
-  message String
-
-  ip     String?
-  source String?
-
-  replyNotes String?
-
-  repliedById String?
-  repliedBy   User?   @relation("ContactMessageRepliedBy", fields: [repliedById], references: [id])
+  fullName        String
+  practiceName    String?
+  email           String
+  phone           String
+  practiceType    PracticeType?
+  bestContactTime ContactTimePreference?
+  message         String
 
   status ContactMessageStatus @default(pending)
+  notes  String?
+
+  viewedAt  DateTime?
+  repliedAt DateTime?
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  repliedAt DateTime?
+  deletedAt DateTime?
 
-  @@index([email])
-  @@index([status])
   @@index([createdAt])
+  @@index([status])
+  @@index([email])
+}
+
+model ConsultationRequest {
+  id String @id @default(cuid())
+
+  trafficSourceId String?
+  trafficSource   TrafficSource? @relation(fields: [trafficSourceId], references: [id])
+
+  fullName      String
+  practiceName  String
+  email         String
+  phone         String
+  practiceType  PracticeType?
+  monthlyClaims MonthlyClaimsRange?
+  message       String
+
+  status ConsultationRequestStatus @default(new)
+  notes  String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([email])
+  @@index([phone])
 }
 
 model NewsletterSubscriber {
   id String @id @default(ulid())
+
+  trafficSourceId String?
+  trafficSource   TrafficSource? @relation(fields: [trafficSourceId], references: [id])
 
   name  String
   email String @unique @db.VarChar(255)
 
   isActive Boolean @default(true)
 
-  ip     String?
-  source String?
-
   subscribedAt   DateTime  @default(now())
   unsubscribedAt DateTime?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
+  @@index([email])
   @@index([createdAt])
   @@index([isActive])
+}
+
+model TrafficSource {
+  id String @id @default(ulid())
+
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmTerm     String?
+  utmContent  String?
+
+  referrer    String?
+  landingPage String?
+
+  ip        String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  contentViews         ContentView[]
+  contactMessages      ContactMessage[]
+  consultationRequests ConsultationRequest[]
+  newsletterSubs       NewsletterSubscriber[]
 }
 
 model BusinessProfile {
@@ -382,11 +607,14 @@ model BusinessProfile {
   legalName   String
   description String
 
+  faviconId String
+  favicon   Media  @relation("BusinessProfileFavicon", fields: [faviconId], references: [id])
+
   logoId String
   logo   Media  @relation("BusinessProfileLogo", fields: [logoId], references: [id])
 
-  coverImageId String?
-  coverImage   Media?  @relation("BusinessProfileCoverImage", fields: [coverImageId], references: [id])
+  coverId String?
+  cover   Media?  @relation("BusinessProfileCoverImage", fields: [coverId], references: [id])
 
   email   String @db.VarChar(255)
   phone   String @db.VarChar(20)

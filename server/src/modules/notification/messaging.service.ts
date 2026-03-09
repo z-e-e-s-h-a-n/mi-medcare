@@ -16,8 +16,8 @@ export class MessagingService {
   ) {
     const accountSid = this.env.get("TWILIO_ACCOUNT_SID");
     const authToken = this.env.get("TWILIO_AUTH_TOKEN");
-    this.twilioPhone = this.env.get("TWILIO_PHONE_NUMBER");
-    this.twilioWhatsapp = this.env.get("TWILIO_WHATSAPP_NUMBER");
+    this.twilioPhone = this.env.get("TWILIO_PHONE");
+    this.twilioWhatsapp = this.env.get("TWILIO_WHATSAPP");
 
     this.twilioClient = twilio(accountSid, authToken);
   }

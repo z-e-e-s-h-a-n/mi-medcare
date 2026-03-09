@@ -11,6 +11,8 @@ import { Form, type AnyFormApi } from "@workspace/ui/components/form";
 import type { ColumnConfig } from "@/components/shared/GenericTable";
 import CUFormSkeleton from "@/components/skeleton/CUFormSkeleton";
 import GenericArrayField, { type ArrayFormItem } from "./GenericArrayField";
+import { Button } from "@workspace/ui/components/button";
+import { Loader2 } from "lucide-react";
 
 interface UseQueryResult<TData, TFormData> {
   data?: TData;
@@ -98,14 +100,14 @@ export function GenericCUForm<
   return (
     <Form
       form={form}
-      isPending={isPending}
-      title={
-        <>
-          {formType === "add" ? "Add New" : "Update"} {entityName}
-          {entityId && `: ${entityId}`}
-        </>
+      header={
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold mb-3">
+            {formType === "add" ? "Add New" : "Update"} {entityName}
+            {entityId && `: ${entityId}`}
+          </h2>
+        </div>
       }
-      btnText={`${formType} ${entityName}`}
     >
       {formHeader && formHeader(form, formType)}
 
@@ -119,6 +121,30 @@ export function GenericCUForm<
       )}
 
       {children?.(form, formType)}
+
+      <form.Subscribe
+        selector={(state) => ({
+          canSubmit: state.canSubmit,
+        })}
+      >
+        {({ canSubmit }) => (
+          <Button
+            type="submit"
+            size="lg"
+            className="w-full text-base"
+            disabled={isPending || !canSubmit}
+          >
+            {isPending ? (
+              <>
+                <Loader2 className="mr-2 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              `${formType} ${entityName}`
+            )}
+          </Button>
+        )}
+      </form.Subscribe>
     </Form>
   );
 }

@@ -24,7 +24,7 @@ export class NotificationController {
   async markAsRead(@Param("id") id: string) {
     await this.prisma.notification.update({
       where: { id },
-      data: { readAt: new Date() },
+      data: { viewedAt: new Date() },
     });
 
     return { message: "Notification read successfully." };

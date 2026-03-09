@@ -7,11 +7,11 @@ import { $Enums } from "./prisma";
 
 export const SortOrderEnum = z.enum(["asc", "desc"]);
 export const ChartRangeEnum = z.enum(["7d", "30d", "90d"]);
-
-export const OtpPurposeEnum = z.enum($Enums.OtpPurpose);
-export const OtpTypeEnum = z.enum($Enums.OtpType);
-
 export const ThemeModeEnum = z.enum($Enums.ThemeMode);
+
+export const OtpTypeEnum = z.enum($Enums.OtpType);
+export const OtpPurposeEnum = z.enum($Enums.OtpPurpose);
+
 export const MfaMethodEnum = z.enum($Enums.MfaMethod);
 export const SessionStatusEnum = z.enum($Enums.SessionStatus);
 
@@ -21,8 +21,6 @@ export const NotificationChannelEnum = z.enum($Enums.NotificationChannel);
 export const NotificationPurposeEnum = z.enum($Enums.NotificationPurpose);
 export const NotificationStatusEnum = z.enum($Enums.NotificationStatus);
 export const NotificationPriorityEnum = z.enum($Enums.NotificationPriority);
-
-export const ContactMessageStatusEnum = z.enum($Enums.ContactMessageStatus);
 
 /* =========================
    SHARED - VARIABLES
@@ -57,8 +55,17 @@ export const MediaSearchByEnum = z.enum(["id", "title"]);
 export const MediaSortByEnum = z.enum(["size", "title", "type"]);
 
 /* =========================
-   CONTACT MESSAGE
+   CONTACT / CONSULTATION
 ========================= */
+export const PracticeTypeEnum = z.enum($Enums.PracticeType);
+export const ConsultationRequestStatusEnum = z.enum(
+  $Enums.ConsultationRequestStatus,
+);
+export const MonthlyClaimsRangeEnum = z.enum($Enums.MonthlyClaimsRange);
+
+export const ContactMessageStatusEnum = z.enum($Enums.ContactMessageStatus);
+export const ContactTimePreferenceEnum = z.enum($Enums.ContactTimePreference);
+
 export const ContactMessageSortByEnum = z.enum([
   "name",
   "email",
@@ -69,10 +76,27 @@ export const ContactMessageSortByEnum = z.enum([
 
 export const ContactMessageSearchByEnum = z.enum([
   "name",
+  "practiceName",
   "email",
   "phone",
-  "subject",
-  "source",
+  "practiceType",
+  "bestContactTime",
+]);
+
+export const ConsultationRequestSortByEnum = z.enum([
+  "name",
+  "practiceName",
+  "email",
+  "phone",
+  "practiceType",
+]);
+
+export const ConsultationRequestSearchByEnum = z.enum([
+  "name",
+  "practiceName",
+  "email",
+  "phone",
+  "practiceType",
 ]);
 
 /* =========================
@@ -85,8 +109,10 @@ export const NewsletterSubscriberSortByEnum = z.enum([
   "unsubscribedAt",
 ]);
 
-export const NewsletterSubscriberSearchByEnum = z.enum([
-  "name",
-  "email",
-  "source",
-]);
+export const NewsletterSubscriberSearchByEnum = z.enum(["name", "email"]);
+
+/* =========================
+   SERVICES
+========================= */
+
+export const ProductStatusEnum = z.enum($Enums.ProductStatus);

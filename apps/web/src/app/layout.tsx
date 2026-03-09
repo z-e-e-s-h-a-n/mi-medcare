@@ -1,6 +1,15 @@
 import "@workspace/ui/globals.css";
 import { Inter, Poppins } from "next/font/google";
 import ProviderWrapper from "@workspace/ui/provider-wrapper";
+import { business } from "@/lib/constants";
+
+export async function generateMetadata() {
+  return {
+    icons: {
+      icon: business.favicon.url,
+    },
+  };
+}
 
 const primaryFont = Poppins({
   variable: "--font-primary",
