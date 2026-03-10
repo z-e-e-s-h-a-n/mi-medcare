@@ -86,16 +86,11 @@ export function SuccessMetrics({
             return (
               <motion.div
                 key={metric.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 100,
-                }}
-                whileHover={{ y: -5 }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.08 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="group"
               >
                 <div className="relative h-full bg-linear-to-br from-background via-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 overflow-hidden">

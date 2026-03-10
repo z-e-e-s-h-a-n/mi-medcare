@@ -43,14 +43,17 @@ export function TestimonialsSection() {
           className="w-full"
         >
           <CarouselContent className="-ml-4 md:-ml-6">
-            {TESTIMONIALS.map((testimonial) => (
+            {TESTIMONIALS.map((testimonial, index) => (
               <CarouselItem
                 key={testimonial.name}
                 className="pl-4 md:pl-6 md:basis-1/2 lg:basis-1/3"
               >
                 <motion.div
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, y: 18, scale: 0.98 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.35, delay: index * 0.05 }}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
                   className="bg-background rounded-2xl p-6 border hover:shadow-xl transition-all h-full"
                 >
                   {/* Rating */}
