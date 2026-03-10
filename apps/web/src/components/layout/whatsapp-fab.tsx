@@ -3,17 +3,12 @@ import { business } from "@/lib/constants";
 import { buttonVariants } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 
-function toWhatsAppDigits(value: string) {
-  return value.replace(/\D/g, "");
-}
-
 type WhatsAppFabProps = {
   className?: string;
 };
 
 export function WhatsAppFab({ className }: WhatsAppFabProps) {
-  const phoneDigits = toWhatsAppDigits(business.whatsapp || business.phone);
-  const href = `https://wa.me/${phoneDigits}`;
+  const href = `https://wa.me/${business.whatsapp}`;
 
   return (
     <a

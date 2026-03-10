@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
 import { SectionHeader } from "@/components/layout/section-header";
 import { SERVICES } from "@/lib/constants";
-import { gradientClass } from "@/lib/gradient";
+import { gradientClass } from "@/lib/utils";
 import { cn } from "@workspace/ui/lib/utils";
 
 interface ServicesSectionProps {
@@ -22,7 +22,7 @@ export function ServicesSection({
   const displayServices = limit ? SERVICES.slice(0, limit) : SERVICES;
 
   return (
-    <section className="section-container bg-muted/30">
+    <section className="section-container bg-muted">
       <SectionHeader
         badge="Our Services"
         title="Comprehensive RCM Solutions"

@@ -6,7 +6,7 @@ import { BILLING_PROCESS } from "@/lib/constants";
 import { SectionHeader } from "@/components/layout/section-header";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { KpiSection } from "./kpi-section";
-import { gradientClass } from "@/lib/gradient";
+import { gradientClass } from "@/lib/utils";
 
 interface HowItWorksSectionProps {
   useConstantColors?: boolean;
@@ -27,7 +27,7 @@ export function HowItWorksSection({
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden py-24 bg-linear-to-b from-background via-background to-muted/30"
+      className="relative overflow-hidden py-24 bg-muted"
     >
       {/* Abstract Background Elements */}
       <div className="absolute inset-0 -z-10">

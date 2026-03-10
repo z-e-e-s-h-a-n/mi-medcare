@@ -17,7 +17,8 @@ import {
   CollapsibleTrigger,
 } from "@workspace/ui/components/collapsible";
 import { Menu, ChevronDown, Phone, Mail, MapPin } from "lucide-react";
-import { HEADER_NAVIGATION, business } from "@/lib/constants";
+import { business, HEADER_NAVIGATION } from "@/lib/constants";
+import { formatBusinessAddress } from "@/lib/utils";
 
 interface MobileNavProps {
   onBookConsultation?: () => void;
@@ -32,6 +33,9 @@ export function MobileNav({ onBookConsultation }: MobileNavProps) {
       prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title],
     );
   };
+
+  const headOfficeAddress = business.addresses?.[0];
+  const branchAddresses = business.addresses?.slice(1) ?? [];
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -66,19 +70,34 @@ export function MobileNav({ onBookConsultation }: MobileNavProps) {
             </motion.a>
             <motion.div
               whileHover={{ x: 5 }}
-              className="flex items-center gap-2 text-sm"
+              className="flex items-start gap-2 text-sm"
             >
               <MapPin className="h-4 w-4 text-primary" />
-              <span className="text-muted-foreground">
-                {business.address}, {business.city}, {business.state}{" "}
-                {business.postalCode}, {business.country}
-                {business.secondaryAddress ? (
+              <div className="text-muted-foreground text-sm">
+                {headOfficeAddress ? (
                   <>
-                    <br />
-                    {business.secondaryAddress}
+                    <span className="font-semibold text-foreground">
+                      {headOfficeAddress.label ?? "Head Office"}:
+                    </span>{" "}
+                    {formatBusinessAddress(headOfficeAddress)}
                   </>
+                ) : (
+                  "Multiple Locations"
+                )}
+                {branchAddresses.length > 0 ? (
+                  <div className="mt-1 space-y-1 text-xs">
+                    <span className="block font-semibold text-foreground">
+                      Branches
+                    </span>
+                    {branchAddresses.map((address) => (
+                      <span key={address.line1} className="block">
+                        {address.label ? `${address.label}: ` : ""}
+                        {formatBusinessAddress(address)}
+                      </span>
+                    ))}
+                  </div>
                 ) : null}
-              </span>
+              </div>
             </motion.div>
           </div>
         </div>

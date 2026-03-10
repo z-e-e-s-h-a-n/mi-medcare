@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { SPECIALTIES } from "@/lib/constants";
-import { gradientClass } from "@/lib/gradient";
+import { gradientClass } from "@/lib/utils";
 import { Button } from "@workspace/ui/components/button";
 import { ArrowRight } from "lucide-react";
 

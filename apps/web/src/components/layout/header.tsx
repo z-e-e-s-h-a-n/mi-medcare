@@ -11,7 +11,7 @@ import {
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandTiktok,
-  IconBrandWhatsapp,
+  IconPhone,
 } from "@tabler/icons-react";
 import {
   NavigationMenu,
@@ -26,13 +26,19 @@ import { business, HEADER_NAVIGATION } from "@/lib/constants";
 import { MegaMenu } from "./mega-menu";
 import { ConsultationForm } from "@/components/forms/consultation-form";
 import { FloatingCtas } from "@/components/layout/floating-ctas";
-import { IconCalendar } from "@tabler/icons-react";
+import { formatBusinessAddress } from "@/lib/utils";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const scrollThreshold = 80;
   const lastScrolledRef = useRef(false);
+  const headOfficeAddress = business.addresses?.[0];
+  const headOfficeDisplay = headOfficeAddress
+    ? `${headOfficeAddress.label ? `${headOfficeAddress.label}: ` : ""}${formatBusinessAddress(
+        headOfficeAddress,
+      )}`
+    : "Multiple Locations";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,10 +79,7 @@ export function Header() {
               >
                 <IconMapPin />
               </motion.div>
-              <span>
-                {business.address}, {business.city}, {business.state},{" "}
-                {business.postalCode}, {business.country}
-              </span>
+              <span>{headOfficeDisplay}</span>
             </motion.div>
             <motion.div
               whileHover={{ x: 2 }}
@@ -109,7 +112,7 @@ export function Header() {
                   whileHover={{ rotate: [0, -10, 10, -5, 0] }}
                   transition={{ duration: 0.3 }}
                 >
-                  <IconBrandWhatsapp />
+                  <IconPhone />
                 </motion.div>
                 <span>{business.phone}</span>
               </Link>

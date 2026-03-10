@@ -1,6 +1,6 @@
 import { KPI_HIGHLIGHTS } from "@/lib/constants";
 import { motion } from "motion/react";
-import { gradientClass } from "@/lib/gradient";
+import { gradientClass } from "@/lib/utils";
 
 interface KpiSectionProps {
   useConstantColors?: boolean;

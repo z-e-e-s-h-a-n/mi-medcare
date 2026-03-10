@@ -11,7 +11,7 @@ import { SectionHeader } from "@/components/layout/section-header";
 
 export function BlogSection() {
   return (
-    <section className="section-container">
+    <section className="section-container bg-muted">
       <div>
         <SectionHeader
           badge="Blog"

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { motion } from "motion/react";
@@ -15,38 +16,84 @@ import { business } from "@/lib/constants";
 import { FAQSection } from "@/components/sections/faq-section";
 import { PageHeader } from "@/components/layout/page-header";
 import { ContactForm } from "@/components/forms/contact-form";
+import { formatBusinessAddress } from "@/lib/utils";
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: "Visit Us",
-    content: `${business.address}`,
-    subtitle: `${business.city}, ${business.state} ${business.postalCode}, ${business.country}`,
-    extra: business.secondaryAddress,
-  },
-  {
-    icon: Phone,
-    title: "Call Us",
-    content: business.phone,
-    subtitle: "Mon-Fri 9am-6pm PST",
-    href: `tel:${business.phone}`,
-    action: "Call Now",
-  },
-  {
-    icon: Mail,
-    title: "Email Us",
-    content: business.email,
-    subtitle: "24/7 Support Available",
-    href: `mailto:${business.email}`,
-    action: "Send Email",
-  },
-  {
-    icon: Clock,
-    title: "Business Hours",
-    content: "Monday - Friday",
-    subtitle: "9:00 AM - 6:00 PM PST",
-  },
-];
+const headOfficeAddress = business.addresses?.[0];
+const branchAddresses = business.addresses?.slice(1) ?? [];
+
+// Address card with all branches shown
+const addressCard = {
+  icon: MapPin,
+  title: "Our Locations",
+  content: "Multiple Offices to Serve You",
+  extra: (
+    <div className="space-y-3 mt-3">
+      {headOfficeAddress && (
+        <div>
+          <p className="text-sm font-semibold text-foreground">Head Office</p>
+          <p className="text-sm text-muted-foreground">
+            {formatBusinessAddress(headOfficeAddress)}
+          </p>
+        </div>
+      )}
+
+      {branchAddresses.length > 0 && (
+        <div>
+          <p className="text-sm font-semibold text-foreground">
+            Branch {branchAddresses.length > 1 ? "Locations" : "Location"}
+          </p>
+          {branchAddresses.map((address) => (
+            <p key={address.line1} className="text-sm text-muted-foreground">
+              {address.label ? `${address.label}: ` : ""}
+              {formatBusinessAddress(address)}
+            </p>
+          ))}
+        </div>
+      )}
+    </div>
+  ),
+};
+
+const callCard = {
+  icon: Phone,
+  title: "Call Us",
+  content: business.phone,
+  subtitle: "Mon-Fri 9am-6pm PST",
+  href: `tel:${business.phone}`,
+  action: "Call Now",
+};
+
+const whatsappCard = {
+  icon: IconBrandWhatsapp,
+  title: "WhatsApp",
+  content: business.whatsapp,
+  subtitle: "Quick replies via chat",
+  href: `https://wa.me/${business.whatsapp}`,
+  action: "Send Message",
+  iconColor: "text-[#25D366]", // WhatsApp green color
+  external: true, // Mark as external link
+};
+
+const emailCard = {
+  icon: Mail,
+  title: "Email Us",
+  content: business.email,
+  subtitle: "24/7 Support Available",
+  href: `mailto:${business.email}`,
+  action: "Send Email",
+};
+
+const hoursCard = {
+  icon: Clock,
+  title: "Business Hours",
+  content: "Monday - Friday",
+  subtitle: "9:00 AM - 6:00 PM PST",
+  extra: (
+    <div className="mt-2 text-sm text-muted-foreground">
+      <p>Weekends: Closed</p>
+    </div>
+  ),
+};
 
 // Social Links
 const socialLinks = [
@@ -67,20 +114,22 @@ export default function ContactPage() {
     hover: { y: -5 },
   };
 
+  // Fixed icon animation to prevent overflow
   const iconVariants = {
     rest: {
       rotate: 0,
       scale: 1,
     },
     hover: {
-      rotate: 8,
-      scale: 1.1,
+      rotate: 3,
+      scale: 1.05,
       transition: {
-        duration: 0.25,
+        duration: 0.2,
         ease: easeOut,
       },
     },
   };
+
   const actionVariants = {
     rest: { opacity: 0, x: -10 },
     hover: {
@@ -88,6 +137,109 @@ export default function ContactPage() {
       x: 0,
       transition: { duration: 0.2 },
     },
+  };
+
+  const renderContactCard = (item: any, index: any, customDelay = 0) => {
+    const Icon = item.icon;
+    const hasHref = "href" in item && item.href;
+
+    // Card content
+    const cardContent = (
+      <>
+        {/* Icon */}
+        <motion.div
+          variants={iconVariants}
+          className="relative mb-4 overflow-visible"
+        >
+          {/* Blur effect */}
+          <div className="absolute inset-0 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-all" />
+
+          {/* Icon container */}
+          <div className="relative w-14 h-14 bg-linear-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center border border-primary/20 overflow-hidden">
+            <Icon
+              className={`w-7 h-7 ${item.iconColor || "text-primary"} transform-gpu`}
+            />
+          </div>
+        </motion.div>
+
+        {/* Content */}
+        <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+
+        {hasHref ? (
+          <p className="text-primary mb-1">{item.content}</p>
+        ) : (
+          <p className="font-medium mb-1">{item.content}</p>
+        )}
+
+        <p className="text-sm text-muted-foreground">{item.subtitle}</p>
+
+        {"extra" in item && item.extra ? (
+          <div className="mt-2">{item.extra}</div>
+        ) : null}
+
+        {/* Action */}
+        {item.action && (
+          <motion.div
+            variants={actionVariants}
+            className="mt-3 text-xs text-primary font-medium flex items-center gap-1"
+          >
+            {item.action}
+            <ArrowRight className="w-3 h-3" />
+          </motion.div>
+        )}
+      </>
+    );
+
+    // If card has href, wrap in Link component
+    if (hasHref) {
+      return (
+        <motion.div
+          key={item.title}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: index * 0.1 + customDelay }}
+        >
+          <Link
+            href={item.href}
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener noreferrer" : undefined}
+            className="block cursor-pointer"
+          >
+            <motion.div
+              variants={cardVariants}
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+              className="group h-full bg-linear-to-b from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 hover:border-primary/30 transition-all overflow-hidden"
+            >
+              {cardContent}
+            </motion.div>
+          </Link>
+        </motion.div>
+      );
+    }
+
+    // Card without href
+    return (
+      <motion.div
+        key={item.title}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.1 + customDelay }}
+      >
+        <motion.div
+          variants={cardVariants}
+          initial="rest"
+          whileHover="hover"
+          animate="rest"
+          className="group h-full bg-linear-to-b from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 hover:border-primary/30 transition-all overflow-hidden"
+        >
+          {cardContent}
+        </motion.div>
+      </motion.div>
+    );
   };
 
   return (
@@ -100,74 +252,20 @@ Revenue Cycle"
       />
 
       {/* Contact Info Cards Section */}
-
       <section className="section-container py-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {contactInfo.map((item, index) => {
-            const Icon = item.icon;
+        <div className="space-y-6">
+          {/* Address Card - Full Width */}
+          <div className="grid grid-cols-1">
+            {renderContactCard(addressCard, 0)}
+          </div>
 
-            return (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                {/* Card Hover Controller */}
-                <motion.div
-                  variants={cardVariants}
-                  initial="rest"
-                  whileHover="hover"
-                  animate="rest"
-                  className="group h-full bg-linear-to-b from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 hover:border-primary/30 transition-all"
-                >
-                  {/* Icon */}
-                  <motion.div variants={iconVariants} className="relative mb-4">
-                    <div className="absolute inset-0 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-all" />
-
-                    <div className="relative w-14 h-14 bg-linear-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center border border-primary/20">
-                      <Icon className="w-7 h-7 text-primary" />
-                    </div>
-                  </motion.div>
-
-                  {/* Content */}
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-
-                  {item.href ? (
-                    <Link href={item.href}>
-                      <p className="text-primary hover:underline mb-1">
-                        {item.content}
-                      </p>
-                    </Link>
-                  ) : (
-                    <p className="font-medium mb-1">{item.content}</p>
-                  )}
-
-                  <p className="text-sm text-muted-foreground">
-                    {item.subtitle}
-                  </p>
-
-                  {"extra" in item && item.extra ? (
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      {item.extra}
-                    </p>
-                  ) : null}
-
-                  {/* Action */}
-                  {item.action && (
-                    <motion.div
-                      variants={actionVariants}
-                      className="mt-3 text-xs text-primary font-medium flex items-center gap-1"
-                    >
-                      {item.action}
-                      <ArrowRight className="w-3 h-3" />
-                    </motion.div>
-                  )}
-                </motion.div>
-              </motion.div>
-            );
-          })}
+          {/* Call, WhatsApp, Email, Hours Cards - 4 Columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {renderContactCard(callCard, 1, 0.1)}
+            {renderContactCard(whatsappCard, 2, 0.15)}
+            {renderContactCard(emailCard, 3, 0.2)}
+            {renderContactCard(hoursCard, 4, 0.25)}
+          </div>
         </div>
       </section>
 
@@ -225,8 +323,8 @@ Revenue Cycle"
                       whileTap={{ scale: 0.95 }}
                       className="group"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary/10 to-secondary/10 flex items-center justify-center border border-primary/20 hover:border-primary/40 transition-all">
-                        <Icon className="w-5 h-5 text-primary group-hover:text-primary/80 transition-colors" />
+                      <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary/10 to-secondary/10 flex items-center justify-center border border-primary/20 hover:border-primary/40 transition-all overflow-hidden">
+                        <Icon className="w-5 h-5 text-primary group-hover:text-primary/80 transition-colors transform-gpu" />
                       </div>
                     </motion.a>
                   );
@@ -235,8 +333,21 @@ Revenue Cycle"
 
               <div className="mt-6 pt-6 border-t">
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Office:</span>{" "}
-                  {business.address}
+                  <span className="font-semibold text-foreground">
+                    Head Office:
+                  </span>{" "}
+                  {headOfficeAddress ? (
+                    <>
+                      {formatBusinessAddress(headOfficeAddress)}
+                      <br />
+                      <span className="text-xs block mt-1">
+                        {headOfficeAddress.city}, {headOfficeAddress.state}{" "}
+                        {headOfficeAddress.postalCode}
+                      </span>
+                    </>
+                  ) : (
+                    "Multiple Locations"
+                  )}
                   <br />
                   <span className="font-semibold text-foreground">
                     Hours:

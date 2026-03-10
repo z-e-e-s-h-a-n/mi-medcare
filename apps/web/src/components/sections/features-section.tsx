@@ -5,7 +5,7 @@ import { CheckCircle2 } from "lucide-react";
 
 import { FEATURES } from "@/lib/constants";
 import { SectionHeader } from "@/components/layout/section-header";
-import { gradientClass } from "@/lib/gradient";
+import { gradientClass } from "@/lib/utils";
 
 interface FeaturesSectionProps {
   useConstantColors?: boolean;

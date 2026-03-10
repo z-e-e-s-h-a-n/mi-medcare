@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <MetricsSection useConstantColors />
+      <MetricsSection />
       <SuccessMetrics />
       <ServicesSection limit={6} useConstantColors />
       <FeaturesSection />

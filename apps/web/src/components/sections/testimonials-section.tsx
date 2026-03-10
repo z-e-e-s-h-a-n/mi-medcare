@@ -16,7 +16,7 @@ import { SectionHeader } from "@/components/layout/section-header";
 
 export function TestimonialsSection() {
   return (
-    <section className="section-container bg-muted/30">
+    <section className="section-container bg-muted">
       <SectionHeader
         badge="Testimonials"
         title="What Our Clients Say"

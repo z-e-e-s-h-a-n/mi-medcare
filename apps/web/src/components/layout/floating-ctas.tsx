@@ -8,7 +8,7 @@ type FloatingCtasProps = {
 
 export function FloatingCtas({ onBookConsultation }: FloatingCtasProps) {
   return (
-    <div className="fixed bottom-5 right-5 z-10 flex flex-col items-end gap-3">
+    <div className="fixed bottom-5 right-5 z-12 flex flex-col items-end gap-3">
       <Button
         variant="gradient"
         className="h-11 rounded-full px-4 shadow-lg lg:hidden"

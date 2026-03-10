@@ -3,7 +3,7 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { BENEFITS_OF_CHOOSING } from "@/lib/constants";
-import { gradientClass } from "@/lib/gradient";
+import { gradientClass } from "@/lib/utils";
 import { CheckCircle, TrendingUp } from "lucide-react";
 
 interface BenefitsSectionProps {
@@ -19,31 +19,6 @@ export function BenefitsSection({
 
   return (
     <section className="relative overflow-hidden py-24" ref={ref}>
-      {/* Sophisticated Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-linear-to-br from-secondary/5 via-transparent to-primary/5" />
-
-        {/* Abstract Wave Pattern */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.02]">
-          <pattern
-            id="wave"
-            x="0"
-            y="0"
-            width="100"
-            height="100"
-            patternUnits="userSpaceOnUse"
-          >
-            <path
-              d="M0 50 Q 25 30, 50 50 T 100 50"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="1"
-            />
-          </pattern>
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#wave)" />
-        </svg>
-      </div>
-
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Main Content */}

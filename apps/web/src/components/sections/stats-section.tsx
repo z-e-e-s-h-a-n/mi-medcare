@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import CountUp from "react-countup";
 import { COMPANY_STATS } from "@/lib/constants";
-import { gradientClass } from "@/lib/gradient";
+import { gradientClass } from "@/lib/utils";
 
 interface SuccessMetricsProps {
   useConstantColors?: boolean;
@@ -89,7 +89,11 @@ export function SuccessMetrics({
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.08 }}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeOut",
+                  delay: index * 0.08,
+                }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="group"
               >
@@ -102,7 +106,10 @@ export function SuccessMetrics({
                     transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
                     className={`absolute -right-6 -top-6 w-24 h-24 rounded-full blur-2xl ${
                       useConstantColors
-                        ? gradientClass(metricAccent, { direction: "br", opacity: 12 })
+                        ? gradientClass(metricAccent, {
+                            direction: "br",
+                            opacity: 12,
+                          })
                         : "bg-linear-to-br from-primary/5 to-secondary/5"
                     }`}
                   />

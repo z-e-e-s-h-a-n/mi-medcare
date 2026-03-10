@@ -2,25 +2,11 @@
 
 import { motion } from "motion/react";
 import { TRUST_METRICS } from "@/lib/constants";
-import { gradientClass } from "@/lib/gradient";
+import { gradientClass } from "@/lib/utils";
 
-interface MetricsSectionProps {
-  useConstantColors?: boolean;
-}
-
-export function MetricsSection({ useConstantColors = false }: MetricsSectionProps) {
-  const accent = TRUST_METRICS[0]?.gradient ?? "blue-500 cyan-500";
+export function MetricsSection({}) {
   return (
-    <section
-      className={`section-container py-8 ${
-        useConstantColors ? "relative overflow-hidden" : "bg-primary/10"
-      }`}
-    >
-      {useConstantColors && (
-        <div
-          className={`absolute inset-0 -z-10 ${gradientClass(accent, { opacity: 8 })}`}
-        />
-      )}
+    <section className={`section-container py-8 bg-primary/10`}>
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
