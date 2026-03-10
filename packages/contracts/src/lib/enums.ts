@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { $Enums } from "@workspace/db/browser";
+import * as $Enums from "@workspace/db/enums";
 
 /* =========================
    SHARED - ENUMS

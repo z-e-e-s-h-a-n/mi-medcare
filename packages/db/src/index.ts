@@ -1,1 +1,1 @@
-export * from "../prisma/generated/browser";
+export * from "./browser";
