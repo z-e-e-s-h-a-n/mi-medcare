@@ -25,6 +25,8 @@ import { MobileNav } from "./mobile-nav";
 import { business, HEADER_NAVIGATION } from "@/lib/constants";
 import { MegaMenu } from "./mega-menu";
 import { ConsultationForm } from "@/components/forms/consultation-form";
+import { FloatingCtas } from "@/components/layout/floating-ctas";
+import { IconCalendar } from "@tabler/icons-react";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -234,6 +236,8 @@ export function Header() {
           <MobileNav onBookConsultation={() => setIsConsultationOpen(true)} />
         </div>
       </header>
+
+      <FloatingCtas onBookConsultation={() => setIsConsultationOpen(true)} />
 
       <ConsultationForm
         open={isConsultationOpen}
