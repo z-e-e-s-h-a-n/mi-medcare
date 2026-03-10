@@ -11,13 +11,12 @@ import { CTASection } from "@/components/sections/cta-section";
 import { EHRSection } from "@/components/sections/ehr-section";
 import { SpecialtiesSection } from "@/components/sections/specialties-section";
 import { MetricsSection } from "@/components/sections/metrics-section";
-import { TRUST_METRICS } from "@/lib/constants";
 
 export default function Home() {
   return (
     <>
       <HeroSection />
-      <MetricsSection metrics={TRUST_METRICS} />
+      <MetricsSection />
       <SuccessMetrics />
       <ServicesSection limit={6} />
       <FeaturesSection />

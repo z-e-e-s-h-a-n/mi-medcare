@@ -3,7 +3,6 @@ import { PageHeader } from "@/components/layout/page-header";
 import { MetricsSection } from "@/components/sections/metrics-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { CTASection } from "@/components/sections/cta-section";
-import { TRUST_METRICS } from "@/lib/constants";
 
 const values = [
   {
@@ -42,7 +41,7 @@ export default function AboutPage() {
         description="We help healthcare organizations improve financial performance with reliable, compliant, and specialty-focused billing operations."
       />
 
-      <MetricsSection metrics={TRUST_METRICS} />
+      <MetricsSection />
 
       <section className="section-container">
         <div className="grid gap-6 md:grid-cols-3">

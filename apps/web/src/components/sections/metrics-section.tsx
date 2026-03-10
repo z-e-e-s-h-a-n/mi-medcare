@@ -1,20 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
-import { IconMap } from "@/lib/icons";
-import type { IconType } from "@/types/global";
+import { TRUST_METRICS } from "@/lib/constants";
 
-export interface MetricItem {
-  subtitle: string;
-  title: string;
-  icon: IconType;
-}
-
-interface TrustMetricsSectionProps {
-  metrics: MetricItem[];
-}
-
-export function MetricsSection({ metrics }: TrustMetricsSectionProps) {
+export function MetricsSection() {
   return (
     <section className="section-container bg-primary/10 py-8">
       <motion.div
@@ -24,8 +13,8 @@ export function MetricsSection({ metrics }: TrustMetricsSectionProps) {
         transition={{ duration: 0.45 }}
         className="grid grid-cols-1 gap-8 text-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
       >
-        {metrics.map((metric, index) => {
-          const Icon = IconMap[metric.icon];
+        {TRUST_METRICS.map((metric, index) => {
+          const Icon = metric.icon;
 
           return (
             <motion.div
@@ -35,10 +24,12 @@ export function MetricsSection({ metrics }: TrustMetricsSectionProps) {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.4, delay: index * 0.06 }}
               whileHover={{ y: -3 }}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center group"
             >
               {/* Icon */}
-              <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-blue-100 text-blue-600">
+              <div
+                className={`w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-linear-to-r ${metric.color} text-white shadow-sm`}
+              >
                 <Icon className="size-6" />
               </div>
 
@@ -46,7 +37,7 @@ export function MetricsSection({ metrics }: TrustMetricsSectionProps) {
               <p className="text-sm text-muted-foreground">{metric.subtitle}</p>
 
               {/* Title */}
-              <h3 className="mt-1  font-semibold text-foreground">
+              <h3 className="mt-1 font-semibold text-foreground">
                 {metric.title}
               </h3>
             </motion.div>

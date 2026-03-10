@@ -1,4 +1,3 @@
-import type { MetricItem } from "@/components/sections/metrics-section";
 import type { NavItem } from "@/types/global";
 import {
   IconChartBar,
@@ -66,6 +65,7 @@ import {
   Send,
   Wallet,
   BarChart3,
+  CheckCircle2,
 } from "lucide-react";
 
 export const business = {
@@ -122,6 +122,7 @@ export const COMPANY_STATS = [
     suffix: "M+",
     prefix: "$",
     icon: TrendingUp,
+    color: "from-green-500 to-emerald-500",
   },
   {
     label: "Accounts Receivable (AR) Days",
@@ -129,6 +130,7 @@ export const COMPANY_STATS = [
     suffix: " Days",
     prefix: "",
     icon: Clock,
+    color: "from-blue-500 to-cyan-500",
   },
   {
     label: "Turn Around Time (TAT)",
@@ -136,6 +138,7 @@ export const COMPANY_STATS = [
     suffix: " Hours",
     prefix: "",
     icon: Zap,
+    color: "from-yellow-500 to-orange-500",
   },
   {
     label: "Customer Retention",
@@ -143,6 +146,7 @@ export const COMPANY_STATS = [
     suffix: "%",
     prefix: "",
     icon: HeartHandshake,
+    color: "from-pink-500 to-rose-500",
   },
   {
     label: "Number of Claims Processed",
@@ -150,6 +154,7 @@ export const COMPANY_STATS = [
     suffix: "",
     prefix: "",
     icon: FileText,
+    color: "from-purple-500 to-indigo-500",
   },
   {
     label: "First Pass Clean Claims Rate",
@@ -157,6 +162,7 @@ export const COMPANY_STATS = [
     suffix: "%",
     prefix: "",
     icon: CheckCircle,
+    color: "from-green-500 to-teal-500",
   },
   {
     label: "Revenue Improvement",
@@ -164,6 +170,7 @@ export const COMPANY_STATS = [
     suffix: "5–10%",
     prefix: "",
     icon: ArrowUpCircle,
+    color: "from-indigo-500 to-purple-500",
   },
   {
     label: "Reduction in AR",
@@ -171,57 +178,90 @@ export const COMPANY_STATS = [
     suffix: "%",
     prefix: "",
     icon: BarChart,
+    color: "from-orange-500 to-red-500",
   },
 ];
 
 export const TRUST_BADGES = [
-  {
-    icon: IconShield,
-    text: "HIPAA Compliant",
-    color: "text-blue-500",
-  },
-  {
-    icon: IconRosetteDiscountCheck,
-    text: "Certified Coders",
-    color: "text-green-500",
-  },
-  {
-    icon: IconClock,
-    text: "24/7 Support",
-    color: "text-purple-500",
-  },
-  {
-    icon: IconSparkles,
-    text: "AI-Powered",
-    color: "text-orange-500",
-  },
-];
+    {
+      icon: IconShield,
+      text: "HIPAA Compliant",
+      color: "blue-500",
+    },
+    {
+      icon: IconRosetteDiscountCheck,
+      text: "Certified Coders",
+      color: "green-500",
+    },
+    {
+      icon: IconClock,
+      text: "24/7 Support",
+      color: "purple-500",
+    },
+    {
+      icon: IconSparkles,
+      text: "AI-Powered",
+      color: "orange-500",
+    },
+  ];
 
-export const TRUST_METRICS: MetricItem[] = [
+export const TRUST_METRICS = [
   {
     subtitle: "Trusted by",
     title: "500+ Healthcare Clients",
-    icon: "usersGroup",
+    icon: IconUsersGroup,
+    color: "from-blue-500 to-cyan-500",
   },
   {
     subtitle: "Catering to",
     title: "40+ Specialties",
-    icon: "heartbeat",
+    icon: IconHeartbeat,
+    color: "from-pink-500 to-rose-500",
   },
   {
     subtitle: "1100+ Certified",
     title: "Medical Billers & Coders",
-    icon: "clipboardCheck",
+    icon: IconClipboardCheck,
+    color: "from-green-500 to-emerald-500",
   },
   {
     subtitle: "End-to-End",
     title: "RPA Billing Solutions",
-    icon: "cpu",
+    icon: IconCpu,
+    color: "from-purple-500 to-indigo-500",
   },
   {
     subtitle: "Up to 98% First Pass",
     title: "Clean Claim Rate",
-    icon: "checkCircle",
+    icon: CheckCircle,
+    color: "from-orange-500 to-red-500",
+  },
+];
+
+export const KPI_HIGHLIGHTS = [
+  {
+    label: "Average AR Days",
+    value: "24",
+    icon: Zap,
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    label: "Clean Claim Rate",
+    value: "98%",
+    icon: CheckCircle2,
+    color: "from-green-500 to-emerald-500",
+  },
+  {
+    label: "Revenue Increase",
+    value: "5-10%",
+    icon: TrendingUp,
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    label: "Claims Processed",
+    value: "2.7M+",
+    icon: BarChart3,
+    color: "from-orange-500 to-red-500",
   },
 ];
 
@@ -264,240 +304,280 @@ export const SPECIALTIES = [
     href: "/specialties/cardiology",
     icon: IconHeartbeat,
     description: "Billing expertise for cardiology practices.",
+    color: "from-red-500 to-rose-500",
   },
   {
     title: "Dermatology",
     href: "/specialties/dermatology",
     icon: IconSparkles,
     description: "Specialized dermatology revenue cycle services.",
+    color: "from-amber-400 to-orange-500",
   },
   {
     title: "Orthopedics",
     href: "/specialties/orthopedics",
     icon: IconBolt,
     description: "RCM solutions designed for orthopedic clinics.",
+    color: "from-amber-500 to-yellow-500",
   },
   {
     title: "Psychiatry",
     href: "/specialties/psychiatry",
     icon: IconUsersGroup,
     description: "Mental health billing and coding services.",
+    color: "from-indigo-500 to-blue-500",
   },
   {
     title: "Internal Medicine",
     href: "/specialties/internal-medicine",
     icon: Stethoscope,
     description: "Comprehensive billing support for internal medicine.",
+    color: "from-emerald-500 to-green-500",
   },
   {
     title: "Neurology",
     href: "/specialties/neurology",
     icon: Brain,
     description: "Accurate coding and billing for neurology services.",
+    color: "from-purple-500 to-violet-500",
   },
   {
     title: "OB/GYN",
     href: "/specialties/obgyn",
     icon: Baby,
     description: "Specialized billing for obstetrics and gynecology.",
+    color: "from-pink-500 to-rose-500",
   },
   {
     title: "Pediatrics",
     href: "/specialties/pediatrics",
     icon: Baby,
     description: "Complete billing solutions for pediatric practices.",
+    color: "from-sky-500 to-cyan-500",
   },
   {
     title: "Podiatry",
     href: "/specialties/podiatry",
     icon: Footprints,
     description: "Expert coding and billing for podiatry services.",
+    color: "from-amber-500 to-orange-600",
   },
   {
     title: "Pulmonology",
     href: "/specialties/pulmonology",
     icon: Wind,
     description: "Respiratory and pulmonary care billing expertise.",
+    color: "from-cyan-500 to-teal-500",
   },
   {
     title: "Nephrology",
     href: "/specialties/nephrology",
     icon: Droplet,
     description: "Kidney care and dialysis billing services.",
+    color: "from-blue-500 to-indigo-500",
   },
   {
     title: "Urgent Care",
     href: "/specialties/urgent-care",
     icon: Activity,
     description: "Fast, accurate billing for urgent care centers.",
+    color: "from-amber-500 to-orange-400",
   },
   {
     title: "Sleep Medicine",
     href: "/specialties/sleep-medicine",
     icon: Moon,
     description: "Comprehensive sleep study and disorder billing.",
+    color: "from-slate-500 to-blue-500",
   },
   {
     title: "Primary Care",
     href: "/specialties/primary-care",
     icon: Stethoscope,
     description: "Full-service billing for primary care physicians.",
+    color: "from-emerald-500 to-teal-500",
   },
   {
     title: "Urology",
     href: "/specialties/urology",
     icon: Droplet,
     description: "Specialized urology practice revenue management.",
+    color: "from-cyan-500 to-blue-500",
   },
   {
     title: "Endocrinology",
     href: "/specialties/endocrinology",
     icon: Activity,
     description: "Hormone and metabolic disorder billing solutions.",
+    color: "from-amber-400 to-orange-500",
   },
   {
     title: "Hand Surgery",
     href: "/specialties/hand-surgery",
     icon: Hand,
     description: "Precision coding for hand and upper extremity surgery.",
+    color: "from-rose-500 to-pink-500",
   },
   {
     title: "Rheumatology",
     href: "/specialties/rheumatology",
     icon: Flame,
     description: "Arthritis and autoimmune disease billing expertise.",
+    color: "from-orange-500 to-red-500",
   },
   {
     title: "Otolaryngology (ENT)",
     href: "/specialties/ent",
     icon: Ear,
     description: "Ear, nose, and throat specialty billing services.",
+    color: "from-indigo-500 to-violet-500",
   },
   {
     title: "Ophthalmology",
     href: "/specialties/ophthalmology",
     icon: Eye,
     description: "Comprehensive eye care and surgery billing.",
+    color: "from-teal-500 to-emerald-500",
   },
   {
     title: "Allergy & Immunology",
     href: "/specialties/allergy-immunology",
     icon: Shield,
     description: "Allergy testing and immunotherapy billing.",
+    color: "from-lime-500 to-green-500",
   },
   {
     title: "Speech Therapy",
     href: "/specialties/speech-therapy",
     icon: Mic,
     description: "Speech-language pathology billing solutions.",
+    color: "from-purple-500 to-fuchsia-500",
   },
   {
     title: "General Surgery",
     href: "/specialties/general-surgery",
     icon: Scissors,
     description: "Surgical procedure coding and billing expertise.",
+    color: "from-rose-400 to-red-500",
   },
   {
     title: "Physical Therapy",
     href: "/specialties/physical-therapy",
     icon: Dumbbell,
     description: "Rehabilitation and physical therapy billing.",
+    color: "from-indigo-500 to-blue-500",
   },
   {
     title: "Vascular Surgery",
     href: "/specialties/vascular-surgery",
     icon: Network,
     description: "Vascular procedure and surgery billing services.",
+    color: "from-emerald-500 to-teal-500",
   },
   {
     title: "Physical Medicine",
     href: "/specialties/physical-medicine",
     icon: Activity,
     description: "PM&R and rehabilitation billing expertise.",
+    color: "from-orange-400 to-amber-500",
   },
   {
     title: "Oncology",
     href: "/specialties/oncology",
     icon: Microscope,
     description: "Cancer treatment and infusion billing services.",
+    color: "from-purple-600 to-indigo-600",
   },
   {
     title: "Pain Management",
     href: "/specialties/pain-management",
     icon: Flame,
     description: "Interventional pain management billing solutions.",
+    color: "from-orange-500 to-amber-500",
   },
   {
     title: "Infectious Disease",
     href: "/specialties/infectious-disease",
     icon: Bug,
     description: "ID and HIV/AIDS treatment billing expertise.",
+    color: "from-green-500 to-emerald-500",
   },
   {
     title: "Behavioral Health",
     href: "/specialties/behavioral-health",
     icon: Users,
     description: "Mental health and counseling billing services.",
+    color: "from-sky-500 to-blue-500",
   },
   {
     title: "Ambulatory Surgery",
     href: "/specialties/ambulatory-surgery",
     icon: Hospital,
     description: "ASC facility and procedure billing solutions.",
+    color: "from-teal-500 to-cyan-500",
   },
   {
     title: "Gastroenterology",
     href: "/specialties/gastroenterology",
     icon: Activity,
     description: "Digestive health and endoscopy billing.",
+    color: "from-red-500 to-orange-500",
   },
   {
     title: "Rehabilitative Medicine",
     href: "/specialties/rehabilitative-medicine",
     icon: HeartPulse,
     description: "Comprehensive rehab therapy billing services.",
+    color: "from-pink-500 to-rose-500",
   },
   {
     title: "Neurosurgery",
     href: "/specialties/neurosurgery",
     icon: Brain,
     description: "Complex neurosurgical procedure billing.",
+    color: "from-indigo-600 to-blue-600",
   },
   {
     title: "Dental",
     href: "/specialties/dental",
     icon: Smile,
     description: "Dental and oral surgery billing solutions.",
+    color: "from-amber-500 to-orange-500",
   },
   {
     title: "Medical Nutrition",
     href: "/specialties/medical-nutrition",
     icon: Apple,
     description: "Nutrition counseling and therapy billing.",
+    color: "from-lime-500 to-green-500",
   },
   {
     title: "Birth Center",
     href: "/specialties/birth-center",
     icon: Baby,
     description: "Midwifery and birth center billing services.",
+    color: "from-rose-400 to-pink-500",
   },
   {
     title: "Family Practice",
     href: "/specialties/family-practice",
     icon: Users,
     description: "Comprehensive family medicine billing solutions.",
+    color: "from-blue-500 to-indigo-500",
   },
   {
     title: "Radiology",
     href: "/specialties/radiology",
     icon: Radio,
     description: "Diagnostic imaging and radiology billing.",
+    color: "from-cyan-500 to-sky-500",
   },
   {
     title: "Anesthesia",
     href: "/specialties/anesthesia",
     icon: Syringe,
     description: "Anesthesiology coding and billing expertise.",
+    color: "from-slate-500 to-blue-500",
   },
 ];
 
@@ -523,36 +603,42 @@ export const BILLING_PROCESS = [
     description:
       "We analyze your workflows, specialty requirements, and revenue goals to design a customized billing strategy.",
     icon: ClipboardCheck,
+    color: "from-blue-500 to-cyan-500",
   },
   {
     title: "Patient Intake & Verification",
     description:
       "Patient demographics and insurance details are verified before services to prevent claim denials.",
     icon: UserCheck,
+    color: "from-emerald-500 to-green-500",
   },
   {
     title: "Accurate Medical Coding",
     description:
       "Certified coders assign CPT, ICD-10, and HCPCS codes to ensure compliant and clean claims.",
     icon: FileText,
+    color: "from-purple-500 to-indigo-500",
   },
   {
     title: "Fast Claim Submission",
     description:
       "Claims are electronically submitted to payers to reduce delays and improve first-pass acceptance.",
     icon: Send,
+    color: "from-orange-500 to-amber-500",
   },
   {
     title: "Payment Recording",
     description:
       "Payments from insurance providers and patients are posted and reconciled accurately.",
     icon: Wallet,
+    color: "from-sky-500 to-blue-500",
   },
   {
     title: "Reports & Follow-Up",
     description:
       "Detailed performance reports and denial follow-ups ensure maximum reimbursements.",
     icon: BarChart3,
+    color: "from-pink-500 to-rose-500",
   },
 ];
 
@@ -664,36 +750,42 @@ export const FEATURES = [
     description: "Reduce manual work by 70% with intelligent automation",
     icon: IconCpu,
     stats: "70% Less Manual Work",
+    color: "from-purple-500 to-fuchsia-500",
   },
   {
     title: "Real-time Analytics",
     description: "Make data-driven decisions with live dashboards",
     icon: IconChartLine,
     stats: "Real-time Insights",
+    color: "from-blue-500 to-cyan-500",
   },
   {
     title: "Seamless Integration",
     description: "Connect with 50+ EHR systems effortlessly",
     icon: IconPlug,
     stats: "50+ Integrations",
+    color: "from-emerald-500 to-teal-500",
   },
   {
     title: "Fast Claim Processing",
     description: "Submit claims in minutes, not hours",
     icon: IconBolt,
     stats: "2x Faster Processing",
+    color: "from-amber-500 to-orange-500",
   },
   {
     title: "HIPAA Compliant",
     description: "Enterprise-grade security and compliance",
     icon: IconLock,
     stats: "100% Compliant",
+    color: "from-indigo-500 to-blue-500",
   },
   {
     title: "Multi-Specialty Support",
     description: "Expertise across 40+ medical specialties",
     icon: IconWorld,
     stats: "40+ Specialties",
+    color: "from-pink-500 to-rose-500",
   },
 ];
 
