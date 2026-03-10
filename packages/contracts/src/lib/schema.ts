@@ -18,7 +18,11 @@ export const identifierSchema = z.union([emailSchema, phoneSchema], {
   }),
 });
 
-export const nameSchema = z.string().min(3);
+export const nameSchema = z
+  .string()
+  .trim()
+  .min(3, "Please enter at least 3 characters")
+  .refine((val) => val.length > 0, "Name cannot be blank");
 export const passwordSchema = z.string().min(8);
 export const numberSchema = z.coerce.number<number>().int().min(1);
 

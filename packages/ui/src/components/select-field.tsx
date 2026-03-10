@@ -6,8 +6,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./select";
-import { Check } from "lucide-react";
-import { cn } from "../lib/utils";
 import {
   Combobox,
   ComboboxChip,
@@ -78,45 +76,33 @@ export function MultiSelectField<TFormData>({
 }
 
 interface SelectFieldProps<TFormData> extends BaseFieldProps<TFormData> {
-  options: string[];
-  multiple?: boolean;
+  options: string[] | { label: string; value: string }[];
 }
 
 export const SelectField = <TFormData,>({
   options,
   disabled,
-  multiple,
   ...props
 }: SelectFieldProps<TFormData>) => {
   return (
     <FormField {...props}>
       {({ isInvalid, ...field }) => {
-        const value = field.value ?? (multiple ? [] : "");
+        const normalizedOptions = options.map((option) =>
+          typeof option === "string"
+            ? { label: option, value: option }
+            : option,
+        );
 
-        const handleChange = (v: string) => {
-          if (!multiple) {
-            field.onChange(v);
-            return;
-          }
+        const value = field.value ?? "";
 
-          const arr = Array.isArray(value) ? value : [];
-
-          field.onChange(
-            arr.includes(v) ? arr.filter((i) => i !== v) : [...arr, v],
-          );
-        };
-
-        const displayValue = multiple
-          ? Array.isArray(value) && value.length
-            ? value.filter((v) => Boolean(v)).join(", ")
-            : undefined
-          : value;
+        const selectedLabel =
+          normalizedOptions.find((o) => o.value === value)?.label ?? value;
 
         return (
           <Select
             name={field.name}
-            value={multiple ? undefined : value}
-            onValueChange={handleChange}
+            value={value}
+            onValueChange={field.onChange}
             disabled={disabled}
           >
             <SelectTrigger
@@ -125,37 +111,16 @@ export const SelectField = <TFormData,>({
               className="w-full capitalize"
             >
               <SelectValue placeholder={field.placeholder}>
-                {displayValue?.length ? displayValue : field.placeholder}
+                {selectedLabel || field.placeholder}
               </SelectValue>
             </SelectTrigger>
 
             <SelectContent position="popper">
-              {options.map((o) => {
-                const checked =
-                  multiple && Array.isArray(value) && value.includes(o);
-
-                return (
-                  <SelectItem
-                    key={o}
-                    value={o}
-                    className={cn(
-                      multiple &&
-                        "flex items-center justify-between capitalize",
-                    )}
-                    onSelect={() => {
-                      if (multiple) {
-                        handleChange(o);
-                      }
-                    }}
-                  >
-                    <span>{o}</span>
-
-                    {multiple && checked && (
-                      <Check className="size-4 text-primary" />
-                    )}
-                  </SelectItem>
-                );
-              })}
+              {normalizedOptions.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         );

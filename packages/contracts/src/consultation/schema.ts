@@ -15,12 +15,15 @@ import {
 
 export const createConsultationRequestSchema = z.object({
   fullName: nameSchema,
-  practiceName: z.string(),
+  practiceName: z
+    .string()
+    .trim()
+    .min(2, "Please tell us your organization or practice name"),
   email: emailSchema,
   phone: phoneSchema,
   practiceType: PracticeTypeEnum,
   monthlyClaims: MonthlyClaimsRangeEnum,
-  message: z.string(),
+  message: z.string().min(10, "Tell us what you need help with"),
 });
 
 export const updateConsultationRequestSchema = z.object({

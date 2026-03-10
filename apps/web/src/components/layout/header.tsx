@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
@@ -29,18 +29,18 @@ import { ConsultationForm } from "@/components/forms/consultation-form";
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+  const scrollThreshold = 80;
+  const lastScrolledRef = useRef(false);
 
   useEffect(() => {
-    let ticking = false;
-
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 10);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      window.requestAnimationFrame(() => {
+        const shouldScroll = window.scrollY > scrollThreshold;
+        if (shouldScroll !== lastScrolledRef.current) {
+          lastScrolledRef.current = shouldScroll;
+          setIsScrolled(shouldScroll);
+        }
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });

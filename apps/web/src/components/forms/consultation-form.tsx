@@ -38,6 +38,16 @@ interface ConsultationFormProps {
   onOpenChange: (open: boolean) => void;
 }
 
+const monthlyClaimsOptions = [
+  { value: "range_0_250", label: "0 to 250 claims / month" },
+  { value: "range_251_1000", label: "251 to 1,000 claims / month" },
+  { value: "range_1001_3000", label: "1,001 to 5,000 claims / month" },
+  { value: "range_3000_plus", label: "5,001+ claims / month" },
+] satisfies {
+  label: string;
+  value: (typeof MonthlyClaimsRangeEnum.options)[number];
+}[];
+
 export function ConsultationForm({
   open,
   onOpenChange,
@@ -175,7 +185,7 @@ export function ConsultationForm({
                   </>
                 }
                 placeholder="Monthly Claims"
-                options={MonthlyClaimsRangeEnum.options}
+                options={monthlyClaimsOptions}
               />
             </div>
 
@@ -212,7 +222,7 @@ export function ConsultationForm({
                       </>
                     ) : (
                       <>
-                        Submit Consultation Request
+                        Submit Request
                         <Send className="ml-2" />
                       </>
                     )}

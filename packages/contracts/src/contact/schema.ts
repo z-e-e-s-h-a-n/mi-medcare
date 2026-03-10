@@ -20,7 +20,7 @@ export const createContactMessageSchema = z.object({
   phone: phoneSchema,
   practiceType: PracticeTypeEnum,
   bestContactTime: ContactTimePreferenceEnum,
-  message: z.string(),
+  message: z.string().min(10, "Tell us a bit more about your request"),
 });
 
 export const updateContactMessageSchema = z.object({
