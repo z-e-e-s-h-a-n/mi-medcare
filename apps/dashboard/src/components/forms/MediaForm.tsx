@@ -1,6 +1,9 @@
 import { useForm } from "@tanstack/react-form";
 
-import { mediaUpdateSchema } from "@workspace/contracts/media";
+import {
+  mediaUpdateSchema,
+  type MediaUpdateType,
+} from "@workspace/contracts/media";
 import { Button } from "@workspace/ui/components/button";
 import { Form } from "@workspace/ui/components/form";
 import { InputField } from "@workspace/ui/components/input-field";

@@ -5,30 +5,22 @@ import type {
   newsletterSubscriberQuerySchema,
 } from "./schema";
 import type { NewsletterSubscriber } from "@workspace/db/browser";
+import type { BaseQueryResponse, Sanitize } from "../lib/types";
 
-declare global {
-  type NewsletterSubscriberType = z.input<typeof newsletterSubscriberSchema>;
-  type NewsletterSubscriberDto = z.output<typeof newsletterSubscriberSchema>;
+export type NewsletterSubscriberType = z.input<
+  typeof newsletterSubscriberSchema
+>;
 
-  type NewsletterUnSubscriberType = z.input<
-    typeof newsletterUnSubscriberSchema
-  >;
-  type NewsletterUnSubscriberDto = z.output<
-    typeof newsletterUnSubscriberSchema
-  >;
+export type NewsletterUnSubscriberType = z.input<
+  typeof newsletterUnSubscriberSchema
+>;
 
-  type NewsletterSubscriberQueryType = z.input<
-    typeof newsletterSubscriberQuerySchema
-  >;
-  type NewsletterSubscriberQueryDto = z.output<
-    typeof newsletterSubscriberQuerySchema
-  >;
+export type NewsletterSubscriberQueryType = z.input<
+  typeof newsletterSubscriberQuerySchema
+>;
 
-  type NewsletterSubscriberResponse = Sanitize<NewsletterSubscriber>;
+export type NewsletterSubscriberResponse = Sanitize<NewsletterSubscriber>;
 
-  interface NewsletterSubscriberQueryResponse extends BaseQueryResponse {
-    users: NewsletterSubscriberResponse[];
-  }
+export interface NewsletterSubscriberQueryResponse extends BaseQueryResponse {
+  users: NewsletterSubscriberResponse[];
 }
-
-export {};

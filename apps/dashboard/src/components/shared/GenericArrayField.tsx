@@ -13,6 +13,7 @@ import type { AnyFormApi } from "@workspace/ui/components/form";
 import { Button } from "@workspace/ui/components/button";
 import GenericFormTable from "@/components/shared/GenericFormTable";
 import type { ColumnConfig } from "@/components/shared/GenericTable";
+import type { ArrayItem } from "@workspace/contracts";
 
 export interface ArrayFormItemProps<TItem, TCtx = any> {
   onSubmit: (item: TItem) => void;

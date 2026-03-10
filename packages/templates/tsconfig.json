@@ -8,6 +8,6 @@
       "@workspace/templates/*": ["src/*"]
     }
   },
-  "include": [".", "../contracts/src/**/*types.d.ts"],
+  "include": ["."],
   "exclude": ["node_modules", "dist"]
 }

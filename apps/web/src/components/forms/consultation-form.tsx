@@ -7,7 +7,10 @@ import { Form } from "@workspace/ui/components/form";
 import { InputField } from "@workspace/ui/components/input-field";
 import { SelectField } from "@workspace/ui/components/select-field";
 import { Button } from "@workspace/ui/components/button";
-import { createConsultationRequestSchema } from "@workspace/contracts/consultation";
+import {
+  createConsultationRequestSchema,
+  type CreateConsultationRequestType,
+} from "@workspace/contracts/consultation";
 import { MonthlyClaimsRangeEnum, PracticeTypeEnum } from "@workspace/contracts";
 import {
   Building2,

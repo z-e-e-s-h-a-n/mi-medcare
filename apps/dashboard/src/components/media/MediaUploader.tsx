@@ -6,7 +6,11 @@ import Image from "next/image";
 import { X, Upload } from "lucide-react";
 import { type Accept, useDropzone } from "react-dropzone";
 
-import { MediaTypeEnum } from "@workspace/contracts";
+import {
+  MediaTypeEnum,
+  type MediaType,
+  type MediaVisibility,
+} from "@workspace/contracts";
 import { cn } from "@workspace/ui/lib/utils";
 import { Input } from "@workspace/ui/components/input";
 import { Button } from "@workspace/ui/components/button";

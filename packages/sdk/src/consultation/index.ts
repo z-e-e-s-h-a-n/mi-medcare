@@ -1,4 +1,10 @@
 import { apiClient, executeApi } from "../lib";
+import type {
+  ConsultationRequestQueryDto,
+  ConsultationRequestQueryResponse,
+  ConsultationRequestResponse,
+  CreateConsultationRequestDto,
+} from "@workspace/contracts/consultation";
 
 // Public route to create consultation request
 export const createConsultationRequest = (data: CreateConsultationRequestDto) =>

@@ -18,6 +18,7 @@ import {
 } from "@workspace/ui/components/card";
 import { Button } from "@workspace/ui/components/button";
 import DetailsPageSkeleton from "@/components/skeleton/DetailsPageSkeleton";
+import type { ArrayItem, BaseResponse } from "@workspace/contracts";
 
 export interface DetailFieldConfig<TData> {
   label: string;

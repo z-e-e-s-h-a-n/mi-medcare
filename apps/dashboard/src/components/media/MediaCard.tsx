@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import { toast } from "sonner";
+import type {
+  MediaResponse,
+  MediaUpdateType,
+} from "@workspace/contracts/media";
 import {
   MoreVertical,
   Trash2,

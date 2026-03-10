@@ -1,194 +1,173 @@
 import { z } from "zod";
 import * as enums from "./enums";
-import React from "react";
+import type { ReactNode } from "react";
 import { Prisma } from "@workspace/db/browser";
 
 /* ======================================================
    GLOBAL DECLARATIONS
 ====================================================== */
 
-declare global {
-  /* --------------------
-     Shared - Utilities
-  -------------------- */
+export type Nullable<T> = T | null;
+export type DecimalInstance = InstanceType<typeof Prisma.Decimal>;
+export type StrictOmit<T, K extends keyof T> = Omit<T, K>;
+export type Optional<T, K extends keyof T> = Omit<T, K> &
+  Partial<Pick<T, K>>;
+export type ArrayItem<T> = T extends any[] ? T[number] : never;
 
-  type Nullable<T> = T | null;
-  type DecimalInstance = InstanceType<typeof Prisma.Decimal>;
-  type StrictOmit<T, K extends keyof T> = Omit<T, K>;
-  type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-  type ArrayItem<T> = T extends any[] ? T[number] : never;
+export type Primitive =
+  | string
+  | number
+  | boolean
+  | bigint
+  | symbol
+  | undefined
+  | null;
 
-  type Primitive =
-    | string
-    | number
-    | boolean
-    | bigint
-    | symbol
-    | undefined
-    | null;
+export type Sanitize<T> = T extends DecimalInstance
+  ? number
+  : T extends Date
+    ? string
+    : T extends null
+      ? undefined
+      : T extends Primitive
+        ? T
+        : T extends Array<infer U>
+          ? Array<Sanitize<U>>
+          : {
+              [K in keyof T]: Sanitize<T[K]>;
+            };
 
-  type Sanitize<T> = T extends DecimalInstance
-    ? number
-    : T extends Date
-      ? string
-      : T extends null
-        ? undefined
-        : T extends Primitive
-          ? T
-          : T extends Array<infer U>
-            ? Array<Sanitize<U>>
-            : {
-                [K in keyof T]: Sanitize<T[K]>;
-              };
-
-  /* --------------------
-     Apps Shared - Types
-  -------------------- */
-
-  interface SegmentParams {
-    [key: string]: string;
-  }
-
-  type TSearchParams = Record<string, string | string[] | undefined>;
-
-  interface AppPageProps<
-    TParams extends SegmentParams = SegmentParams,
-    TSParams extends TSearchParams = TSearchParams,
-  > {
-    params: Promise<TParams>;
-    searchParams: Promise<TSParams>;
-  }
-
-  interface AppLayoutProps {
-    children?: React.ReactNode;
-  }
-
-  type FormSectionType = "add" | "update";
-  type AuthFormType = "sign-up" | "sign-in" | "reset-password" | "set-password";
-
-  interface BaseCUFormProps {
-    entityId?: string;
-    formType: FormSectionType;
-  }
-
-  /* --------------------
-     Shared - TYPES
-  -------------------- */
-
-  type SortOrderType = z.infer<typeof enums.SortOrderEnum>;
-  type ChartRangeType = z.infer<typeof enums.ChartRangeEnum>;
-
-  type OAuthProvider = "google" | "facebook" | "apple";
-  type AuthActions = "verifyIdentifier" | "verifyMfa" | "setPassword";
-
-  type OtpType = z.infer<typeof enums.OtpTypeEnum>;
-  type OtpPurpose = z.infer<typeof enums.OtpPurposeEnum>;
-
-  type MfaMethod = z.infer<typeof enums.MfaMethodEnum>;
-  type SessionStatus = z.infer<typeof enums.SessionStatusEnum>;
-
-  type PushProvider = z.infer<typeof enums.PushProviderEnum>;
-  type MessagingChannel = z.infer<typeof enums.MessagingChannelEnum>;
-  type NotificationChannel = z.infer<typeof enums.NotificationChannelEnum>;
-  type NotificationPurpose = z.infer<typeof enums.NotificationPurposeEnum>;
-  type NotificationStatus = z.infer<typeof enums.NotificationStatusEnum>;
-  type NotificationPriority = z.infer<typeof enums.NotificationPriorityEnum>;
-
-  /* --------------------
-     SHARED QUERY - TYPES
-  -------------------- */
-
-  type BaseSortByType = z.infer<typeof enums.BaseSortByEnum>;
-
-  interface BaseQueryType {
-    page?: number;
-    limit?: number;
-    search?: string;
-    sortOrder?: SortOrderType;
-    sortBy?: string;
-    searchBy?: string;
-  }
-
-  /* --------------------
-     SHARED RESPONSE - TYPES
-  -------------------- */
-
-  interface HealthCheckResponse {
-    message: string;
-    status: string;
-    uptime: string;
-    timestamp: string;
-  }
-
-  interface BaseResponse {
-    id: string;
-  }
-
-  interface BaseQueryResponse {
-    total: number;
-    page: number;
-    limit: number;
-    totalPages: number;
-  }
-
-  /* --------------------
-     USER - TYPES
-  -------------------- */
-
-  type UserRole = z.infer<typeof enums.UserRoleEnum>;
-  type UserStatus = z.infer<typeof enums.UserStatusEnum>;
-
-  type UserSearchByType = z.infer<typeof enums.UserSearchByEnum>;
-  type UserSortByType = z.infer<typeof enums.UserSortByEnum>;
-
-  /* --------------------
-     MEDIA - TYPES
-  -------------------- */
-
-  type MediaType = z.infer<typeof enums.MediaTypeEnum>;
-  type MediaVisibility = z.infer<typeof enums.MediaVisibilityEnum>;
-
-  type MediaSearchByType = z.infer<typeof enums.MediaSearchByEnum>;
-  type MediaSortByType = z.infer<typeof enums.MediaSortByEnum>;
-
-  /* --------------------
-     CONTACT / CONSULTATION
-  -------------------- */
-  type PracticeType = z.infer<typeof enums.PracticeTypeEnum>;
-  type ConsultationStatus = z.infer<typeof enums.ConsultationStatusEnum>;
-
-  type MonthlyClaimsRangeType = z.infer<typeof enums.MonthlyClaimsRangeEnum>;
-  type ContactMessageStatus = z.infer<typeof enums.ContactMessageStatusEnum>;
-  type ContactTimePreference = z.infer<typeof enums.ContactTimePreferenceEnum>;
-
-  type ContactMessageSortByType = z.infer<
-    typeof enums.ContactMessageSortByEnum
-  >;
-  type ContactMessageSearchByType = z.infer<
-    typeof enums.ContactMessageSearchByEnum
-  >;
-
-  type ConsultationRequestSearchByType = z.infer<
-    typeof enums.ConsultationRequestSearchByEnum
-  >;
-  type ConsultationRequestSearchByType = z.infer<
-    typeof enums.ConsultationRequestSearchByEnum
-  >;
-
-  /* --------------------
-     NEWSLETTER - TYPES
-  -------------------- */
-  type NewsletterSubscriberSortByType = z.infer<
-    typeof enums.NewsletterSubscriberSortByEnum
-  >;
-  type NewsletterSubscriberSearchByType = z.infer<
-    typeof enums.NewsletterSubscriberSearchByEnum
-  >;
-
-  /* --------------------
-     SERVICES - TYPES
-  -------------------- */
-  type ProductStatus = z.infer<typeof enums.ProductStatusEnum>;
+export interface SegmentParams {
+  [key: string]: string;
 }
 
-export {};
+export type TSearchParams = Record<string, string | string[] | undefined>;
+
+export interface AppPageProps<
+  TParams extends SegmentParams = SegmentParams,
+  TSParams extends TSearchParams = TSearchParams,
+> {
+  params: Promise<TParams>;
+  searchParams: Promise<TSParams>;
+}
+
+export interface AppLayoutProps {
+  children?: ReactNode;
+}
+
+export type FormSectionType = "add" | "update";
+export type AuthFormType =
+  | "sign-up"
+  | "sign-in"
+  | "reset-password"
+  | "set-password";
+
+export interface BaseCUFormProps {
+  entityId?: string;
+  formType: FormSectionType;
+}
+
+export type SortOrderType = z.infer<typeof enums.SortOrderEnum>;
+export type ChartRangeType = z.infer<typeof enums.ChartRangeEnum>;
+
+export type OAuthProvider = "google" | "facebook" | "apple";
+export type AuthActions = "verifyIdentifier" | "verifyMfa" | "setPassword";
+export type IdentifierType = "email" | "phone";
+
+export type OtpType = z.infer<typeof enums.OtpTypeEnum>;
+export type OtpPurpose = z.infer<typeof enums.OtpPurposeEnum>;
+
+export type MfaMethod = z.infer<typeof enums.MfaMethodEnum>;
+export type SessionStatus = z.infer<typeof enums.SessionStatusEnum>;
+
+export type PushProvider = z.infer<typeof enums.PushProviderEnum>;
+export type MessagingChannel = z.infer<typeof enums.MessagingChannelEnum>;
+export type NotificationChannel = z.infer<
+  typeof enums.NotificationChannelEnum
+>;
+export type NotificationPurpose = z.infer<
+  typeof enums.NotificationPurposeEnum
+>;
+export type NotificationStatus = z.infer<typeof enums.NotificationStatusEnum>;
+export type NotificationPriority = z.infer<
+  typeof enums.NotificationPriorityEnum
+>;
+
+export type BaseSortByType = z.infer<typeof enums.BaseSortByEnum>;
+
+export interface BaseQueryType {
+  page?: number;
+  limit?: number;
+  search?: string;
+  sortOrder?: SortOrderType;
+  sortBy?: string;
+  searchBy?: string;
+}
+
+export interface HealthCheckResponse {
+  message: string;
+  status: string;
+  uptime: string;
+  timestamp: string;
+}
+
+export interface BaseResponse {
+  id: string;
+}
+
+export interface BaseQueryResponse {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export type UserRole = z.infer<typeof enums.UserRoleEnum>;
+export type UserStatus = z.infer<typeof enums.UserStatusEnum>;
+
+export type UserSearchByType = z.infer<typeof enums.UserSearchByEnum>;
+export type UserSortByType = z.infer<typeof enums.UserSortByEnum>;
+
+export type MediaType = z.infer<typeof enums.MediaTypeEnum>;
+export type MediaVisibility = z.infer<typeof enums.MediaVisibilityEnum>;
+
+export type MediaSearchByType = z.infer<typeof enums.MediaSearchByEnum>;
+export type MediaSortByType = z.infer<typeof enums.MediaSortByEnum>;
+
+export type PracticeType = z.infer<typeof enums.PracticeTypeEnum>;
+export type ConsultationStatus = z.infer<
+  typeof enums.ConsultationRequestStatusEnum
+>;
+
+export type MonthlyClaimsRangeType = z.infer<
+  typeof enums.MonthlyClaimsRangeEnum
+>;
+export type ContactMessageStatus = z.infer<
+  typeof enums.ContactMessageStatusEnum
+>;
+export type ContactTimePreference = z.infer<
+  typeof enums.ContactTimePreferenceEnum
+>;
+
+export type ContactMessageSortByType = z.infer<
+  typeof enums.ContactMessageSortByEnum
+>;
+export type ContactMessageSearchByType = z.infer<
+  typeof enums.ContactMessageSearchByEnum
+>;
+
+export type ConsultationRequestSortByType = z.infer<
+  typeof enums.ConsultationRequestSortByEnum
+>;
+export type ConsultationRequestSearchByType = z.infer<
+  typeof enums.ConsultationRequestSearchByEnum
+>;
+
+export type NewsletterSubscriberSortByType = z.infer<
+  typeof enums.NewsletterSubscriberSortByEnum
+>;
+export type NewsletterSubscriberSearchByType = z.infer<
+  typeof enums.NewsletterSubscriberSearchByEnum
+>;
+
+export type ProductStatus = z.infer<typeof enums.ProductStatusEnum>;

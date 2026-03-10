@@ -1,6 +1,8 @@
 "use client";
 
 import { UserRoleEnum } from "@workspace/contracts";
+import type { UserQueryType } from "@workspace/contracts/admin";
+import type { UserResponse } from "@workspace/contracts/user";
 import { Badge } from "@workspace/ui/components/badge";
 
 import { useAdminUsers } from "@/hooks/admin";

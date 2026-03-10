@@ -2,6 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
+import type { AppPageProps } from "@workspace/contracts";
+import type { UserResponse } from "@workspace/contracts/user";
 
 import { useAdminUser } from "@/hooks/admin";
 import { Badge } from "@workspace/ui/components/badge";

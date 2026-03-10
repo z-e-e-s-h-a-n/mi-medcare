@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import type { NewsletterSubscriberDto } from "@workspace/contracts/newsletter";
 import type { ApiException, ApiSuccess } from "@workspace/sdk";
 import { subscribeNewsletter } from "@workspace/sdk/newsletter";
 

@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import type { MediaResponse } from "@workspace/contracts/media";
 import { twMerge } from "tailwind-merge";
 import { toast } from "sonner";
 

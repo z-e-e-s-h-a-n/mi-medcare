@@ -5,7 +5,10 @@ import { motion } from "motion/react";
 import { Form } from "@workspace/ui/components/form";
 import { InputField } from "@workspace/ui/components/input-field";
 import { Button } from "@workspace/ui/components/button";
-import { newsletterSubscriberSchema } from "@workspace/contracts/newsletter";
+import {
+  newsletterSubscriberSchema,
+  type NewsletterSubscriberType,
+} from "@workspace/contracts/newsletter";
 import { Loader2, Mail, Send, User } from "lucide-react";
 import { useSubscribeNewsletter } from "@/hooks/useNewsletter";
 import { toast } from "sonner";

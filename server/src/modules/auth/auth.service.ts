@@ -7,6 +7,20 @@ import {
 import argon2 from "argon2";
 import type { Request, Response } from "express";
 import type { UserStatus } from "@workspace/db/browser";
+import type {
+  IdentifierType,
+  UserRole,
+} from "@workspace/contracts";
+import type {
+  RequestOtpDto,
+  ResetPasswordDto,
+  SignInDto,
+  SignUpDto,
+  UpdateIdentifierDto,
+  UpdateMfaDto,
+  ValidateOtpDto,
+} from "@workspace/contracts/auth";
+import type { SafeUser } from "@workspace/contracts/user";
 
 import { OtpService } from "./otp.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";

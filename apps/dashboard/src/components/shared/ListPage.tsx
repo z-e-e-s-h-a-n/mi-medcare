@@ -5,6 +5,11 @@ import type { ApiException } from "@workspace/sdk";
 import { useConfirm } from "@workspace/ui/hooks/use-confirm";
 import GenericTable, { type ColumnConfig } from "./GenericTable";
 import type { ListFilterConfig, SearchByOption } from "./SearchToolbar";
+import type {
+  BaseQueryResponse,
+  BaseQueryType,
+  BaseResponse,
+} from "@workspace/contracts";
 
 interface UseListResult<TKey extends string, TData> {
   data?: BaseQueryResponse & {

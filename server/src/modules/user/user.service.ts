@@ -1,5 +1,6 @@
 import { type Request } from "express";
 import { Injectable } from "@nestjs/common";
+import type { UserProfileDto } from "@workspace/contracts/user";
 
 import { AuthService } from "@/modules/auth/auth.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";

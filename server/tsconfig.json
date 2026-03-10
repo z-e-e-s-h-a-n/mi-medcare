@@ -19,9 +19,7 @@
     }
   },
   "include": [
-    "**/*.ts",
-    "../packages/templates/src/types/global.d.ts",
-    "../packages/contracts/src/**/*types.d.ts"
+    "**/*.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }

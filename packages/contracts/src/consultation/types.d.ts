@@ -5,36 +5,26 @@ import type {
   consultationRequestQuerySchema,
 } from "./schema";
 import type { ConsultationRequest } from "@workspace/db/browser";
+import type { BaseQueryResponse, Sanitize } from "../lib/types";
+import type { BaseUserResponse } from "../user/types";
 
-declare global {
-  type CreateConsultationRequestType = z.input<
-    typeof createConsultationRequestSchema
-  >;
-  type CreateConsultationRequestDto = z.output<
-    typeof createConsultationRequestSchema
-  >;
+export type CreateConsultationRequestType = z.input<
+  typeof createConsultationRequestSchema
+>;
 
-  type UpdateConsultationRequestType = z.input<
-    typeof updateConsultationRequestSchema
-  >;
-  type UpdateConsultationRequestDto = z.output<
-    typeof updateConsultationRequestSchema
-  >;
+export type UpdateConsultationRequestType = z.input<
+  typeof updateConsultationRequestSchema
+>;
 
-  type ConsultationRequestQueryType = z.input<
-    typeof consultationRequestQuerySchema
-  >;
-  type ConsultationRequestQueryDto = z.output<
-    typeof consultationRequestQuerySchema
-  >;
+export type ConsultationRequestQueryType = z.input<
+  typeof consultationRequestQuerySchema
+>;
 
-  interface ConsultationRequestResponse extends Sanitize<ConsultationRequest> {
-    repliedBy?: BaseUserResponse;
-  }
-
-  interface ConsultationRequestQueryResponse extends BaseQueryResponse {
-    messages: ConsultationRequestResponse[];
-  }
+export interface ConsultationRequestResponse
+  extends Sanitize<ConsultationRequest> {
+  repliedBy?: BaseUserResponse;
 }
 
-export {};
+export interface ConsultationRequestQueryResponse extends BaseQueryResponse {
+  messages: ConsultationRequestResponse[];
+}

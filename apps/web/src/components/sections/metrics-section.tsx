@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { IconMap } from "@/lib/icons";
+import type { IconType } from "@/types/global";
 
 export interface MetricItem {
   subtitle: string;

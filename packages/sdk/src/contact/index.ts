@@ -1,4 +1,11 @@
 import { apiClient, executeApi } from "../lib";
+import type {
+  ContactMessageQueryDto,
+  ContactMessageQueryResponse,
+  ContactMessageResponse,
+  CreateContactMessageDto,
+  UpdateContactMessageDto,
+} from "@workspace/contracts/contact";
 
 // Public route to create a new contact message
 export const createContactMessage = (data: CreateContactMessageDto) =>

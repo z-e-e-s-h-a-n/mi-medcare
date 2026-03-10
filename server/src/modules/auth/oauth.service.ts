@@ -18,6 +18,7 @@ import { OtpService } from "./otp.service";
 import { EnvService } from "@/modules/env/env.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { NotificationService } from "@/modules/notification/notification.service";
+import type { OAuthProvider } from "@workspace/contracts";
 
 interface OAuthProfile {
   provider: OAuthProvider;

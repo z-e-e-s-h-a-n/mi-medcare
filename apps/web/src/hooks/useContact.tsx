@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import type { CreateContactMessageDto } from "@workspace/contracts/contact";
 import type { ApiException, ApiSuccess } from "@workspace/sdk";
 import { createContactMessage } from "@workspace/sdk/contact";
 

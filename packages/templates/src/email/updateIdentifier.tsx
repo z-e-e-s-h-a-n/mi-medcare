@@ -1,4 +1,5 @@
 import { Text } from "@react-email/components";
+import type { EmailTemplateComponent } from "../types/global";
 import { ActionBlock } from "./components/actionBlock";
 import { Greeting } from "./components/greeting";
 import { Header } from "./components/header";

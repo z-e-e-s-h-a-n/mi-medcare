@@ -6,7 +6,13 @@ import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { Mail, Shield, Phone, Smartphone, Loader2 } from "lucide-react";
 import z from "zod";
-import { identifierSchema, passwordSchema } from "@workspace/contracts";
+import {
+  identifierSchema,
+  passwordSchema,
+  type IdentifierType,
+  type OtpPurpose,
+} from "@workspace/contracts";
+import type { UserResponse } from "@workspace/contracts/user";
 import {
   requestOtp,
   resetPassword,
@@ -28,8 +34,6 @@ import { MfaMethodEnum } from "@workspace/contracts";
 import { Badge } from "@workspace/ui/components/badge";
 import useUser from "@/hooks/user";
 import UserSessions from "./UserSessions";
-
-type IdentifierType = "email" | "phone";
 
 interface AccountSectionProps {
   user: UserResponse;

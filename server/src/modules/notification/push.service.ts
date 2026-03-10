@@ -1,5 +1,6 @@
 import * as admin from "firebase-admin";
 import { Injectable } from "@nestjs/common";
+import type { SafeUser } from "@workspace/contracts/user";
 
 import { InjectLogger } from "@/decorators/logger.decorator";
 import { EnvService } from "@/modules/env/env.service";

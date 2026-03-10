@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { CircleCheckIcon, LoaderCircle, OctagonXIcon } from "lucide-react";
+import type { OtpPurpose, OtpType } from "@workspace/contracts";
 
 import { validateOtp, verifyUpdateIdentifier } from "@workspace/sdk/auth";
 import { cn } from "@workspace/ui/lib/utils";

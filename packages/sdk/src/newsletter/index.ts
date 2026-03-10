@@ -1,4 +1,10 @@
 import { apiClient, executeApi } from "../lib";
+import type {
+  NewsletterSubscriberDto,
+  NewsletterSubscriberQueryDto,
+  NewsletterUnSubscriberDto,
+  NewsletterSubscriberQueryResponse,
+} from "@workspace/contracts/newsletter";
 
 // Subscribe to newsletter
 export const subscribeNewsletter = (data: NewsletterSubscriberDto) =>

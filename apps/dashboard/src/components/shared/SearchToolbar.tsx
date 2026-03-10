@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select";
+import type { BaseQueryType, SortOrderType } from "@workspace/contracts";
 
 export interface ListFilterConfig<TQuery> {
   key: keyof TQuery;

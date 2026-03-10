@@ -1,4 +1,5 @@
 import { cn } from "@workspace/ui/lib/utils";
+import type { UserResponse } from "@workspace/contracts/user";
 import {
   Avatar,
   AvatarFallback,

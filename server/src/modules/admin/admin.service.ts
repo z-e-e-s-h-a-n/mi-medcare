@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import type { CUUserDto, UserQueryDto } from "@workspace/contracts/admin";
 import type { Prisma } from "@workspace/db/browser";
 
 import { AuthService } from "@/modules/auth/auth.service";

@@ -1,4 +1,8 @@
 import { Injectable } from "@nestjs/common";
+import type {
+  ConsultationRequestQueryDto,
+  CreateConsultationRequestDto,
+} from "@workspace/contracts/consultation";
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { NotificationService } from "@/modules/notification/notification.service";
 import { resolveEmailTemplate } from "@workspace/templates";

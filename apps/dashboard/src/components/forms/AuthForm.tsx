@@ -23,10 +23,16 @@ import { useRouter } from "next/navigation";
 import { InputField } from "@workspace/ui/components/input-field";
 import z from "zod";
 import {
+  type AuthFormType,
   nameSchema,
   passwordSchema,
   identifierSchema,
+  type OtpPurpose,
 } from "@workspace/contracts";
+import type {
+  SignUpType,
+  ValidateOtpType,
+} from "@workspace/contracts/auth";
 import Image from "next/image";
 
 interface AuthFormProps {

@@ -1,4 +1,5 @@
 import type { MetricItem } from "@/components/sections/metrics-section";
+import type { NavItem } from "@/types/global";
 import {
   IconChartBar,
   IconFileText,

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
+import type { MediaCreateDto, MediaQueryDto, MediaUpdateDto } from "@workspace/contracts/media";
 import type { Prisma } from "@workspace/db/browser";
-import { MediaQueryDto, MediaUpdateDto } from "@workspace/contracts/media";
 
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { CloudinaryService } from "./cloudinary.service";

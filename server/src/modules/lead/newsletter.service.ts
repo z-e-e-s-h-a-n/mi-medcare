@@ -1,4 +1,9 @@
 import { Injectable } from "@nestjs/common";
+import type {
+  NewsletterSubscriberDto,
+  NewsletterSubscriberQueryDto,
+  NewsletterUnSubscriberDto,
+} from "@workspace/contracts/newsletter";
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { resolveEmailTemplate } from "@workspace/templates";
 import { NotificationService } from "@/modules/notification/notification.service";

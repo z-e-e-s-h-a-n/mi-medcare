@@ -1,6 +1,17 @@
 import { Injectable } from "@nestjs/common";
 import type { Otp } from "@workspace/db/browser";
-import { resolveEmailTemplate } from "@workspace/templates";
+import type {
+  MessagingChannel,
+  NotificationChannel,
+  NotificationPriority,
+  NotificationPurpose,
+  NotificationStatus,
+} from "@workspace/contracts";
+import type { SafeUser } from "@workspace/contracts/user";
+import {
+  resolveEmailTemplate,
+  type EmailTemplateMap,
+} from "@workspace/templates";
 import { appName } from "@workspace/shared/constants";
 
 import { PushService } from "./push.service";

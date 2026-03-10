@@ -4,7 +4,10 @@ import { motion } from "motion/react";
 import { Form } from "@workspace/ui/components/form";
 import { InputField } from "@workspace/ui/components/input-field";
 import { SelectField } from "@workspace/ui/components/select-field";
-import { createContactMessageSchema } from "@workspace/contracts/contact";
+import {
+  createContactMessageSchema,
+  type CreateContactMessageType,
+} from "@workspace/contracts/contact";
 import {
   Building2,
   Calendar,

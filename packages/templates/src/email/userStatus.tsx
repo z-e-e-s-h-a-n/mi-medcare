@@ -1,5 +1,9 @@
 import { Text } from "@react-email/components";
 import { appName } from "@workspace/shared/constants";
+import type {
+  EmailTemplateComponent,
+  EmailTemplateProps,
+} from "../types/global";
 import { Greeting } from "./components/greeting";
 import { Header } from "./components/header";
 import { Layout } from "./components/layout";

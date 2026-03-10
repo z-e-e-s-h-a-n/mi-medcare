@@ -29,6 +29,7 @@ import SearchToolbar from "@/components/shared/SearchToolbar";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
 import type { PaginationProps } from "@/components/shared/Pagination";
 import type { SearchToolbarProps } from "@/components/shared/SearchToolbar";
+import type { BaseQueryType, BaseResponse } from "@workspace/contracts";
 
 export interface ColumnConfig<TData, TQuery extends BaseQueryType = never> {
   header: string;

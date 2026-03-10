@@ -5,7 +5,12 @@ import { useRouter } from "next/navigation";
 import { useForm } from "@tanstack/react-form";
 
 import { CUUserSchema } from "@workspace/contracts/admin";
-import { UserRoleEnum, UserStatusEnum } from "@workspace/contracts";
+import {
+  UserRoleEnum,
+  UserStatusEnum,
+  type BaseCUFormProps,
+} from "@workspace/contracts";
+import type { CUUserType } from "@workspace/contracts/admin";
 
 import { Form } from "@workspace/ui/components/form";
 import { Button } from "@workspace/ui/components/button";
