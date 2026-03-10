@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
+    "rootDir": ".",
     "paths": {
       "@/*": ["src/*"],
       "@/decorators/*": ["src/lib/decorators/*"],
@@ -18,8 +19,6 @@
       "@/constants/*": ["src/lib/constants/*"]
     }
   },
-  "include": [
-    "**/*.ts"
-  ],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
