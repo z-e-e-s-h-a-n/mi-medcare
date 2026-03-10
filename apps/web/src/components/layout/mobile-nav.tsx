@@ -69,7 +69,16 @@ export function MobileNav({ onBookConsultation }: MobileNavProps) {
               className="flex items-center gap-2 text-sm"
             >
               <MapPin className="h-4 w-4 text-primary" />
-              <span className="text-muted-foreground">{business.address}</span>
+              <span className="text-muted-foreground">
+                {business.address}, {business.city}, {business.state}{" "}
+                {business.postalCode}, {business.country}
+                {business.secondaryAddress ? (
+                  <>
+                    <br />
+                    {business.secondaryAddress}
+                  </>
+                ) : null}
+              </span>
             </motion.div>
           </div>
         </div>

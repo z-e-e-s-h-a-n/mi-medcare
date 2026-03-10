@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
+import { business } from "@/lib/constants";
 
 export function CTASection() {
   return (
@@ -88,19 +89,19 @@ export function CTASection() {
             className="flex items-center justify-center gap-6 text-sm text-white/80"
           >
             <Link
-              href="/contact"
+              href={`mailto:${business.email}`}
               className="flex items-center gap-2 hover:text-white transition-colors"
             >
               <Mail className="h-4 w-4" />
-              info@mimedcare.com
+              {business.email}
             </Link>
             <span>•</span>
             <Link
-              href="/contact"
+              href={`tel:${business.phone}`}
               className="flex items-center gap-2 hover:text-white transition-colors"
             >
               <Phone className="h-4 w-4" />
-              +1 (800) 123-4567
+              {business.phone}
             </Link>
           </motion.div>
         </div>

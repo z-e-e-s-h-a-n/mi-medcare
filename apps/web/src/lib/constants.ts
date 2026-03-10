@@ -96,8 +96,8 @@ export const business = {
   },
 
   email: "info@mimedcarellc.com",
-  phone: "1 916-252-1833",
-  whatsapp: "1 916-252-1833",
+  phone: "+1 916-252-1833",
+  whatsapp: "19162521833",
   website: "",
 
   tiktok: "https://www.facebook.com/mimedcarellc",
@@ -108,9 +108,10 @@ export const business = {
   youtube: "https://www.facebook.com/mimedcarellc",
 
   address: "1401 21st ST #13807",
+  secondaryAddress: "7422 Sudley Rd, Manassas, VA 20109, USA",
   city: "Sacramento",
   state: "CA",
-  country: "US",
+  country: "USA",
   postalCode: "95811",
 
   metaTitle: "Medical Billing Services in USA",

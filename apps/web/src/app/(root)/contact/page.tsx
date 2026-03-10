@@ -21,7 +21,8 @@ const contactInfo = [
     icon: MapPin,
     title: "Visit Us",
     content: `${business.address}`,
-    subtitle: `${business.city}, ${business.state} ${business.postalCode}`,
+    subtitle: `${business.city}, ${business.state} ${business.postalCode}, ${business.country}`,
+    extra: business.secondaryAddress,
   },
   {
     icon: Phone,
@@ -146,6 +147,12 @@ Revenue Cycle"
                   <p className="text-sm text-muted-foreground">
                     {item.subtitle}
                   </p>
+
+                  {"extra" in item && item.extra ? (
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {item.extra}
+                    </p>
+                  ) : null}
 
                   {/* Action */}
                   {item.action && (
