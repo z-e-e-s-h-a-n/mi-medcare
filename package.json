@@ -5,8 +5,11 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "build:packages": "turbo run build --filter=@workspace/*",
-    "dev": "turbo dev",
+    "build:web": "turbo build --filter=web",
+    "build:dashboard": "turbo build --filter=dashboard",
+    "build:server": "turbo build --filter=server",
+    "build:packages": "turbo build --filter=@workspace/*",
+    "dev:": "turbo dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "check-types": "turbo check-types",
