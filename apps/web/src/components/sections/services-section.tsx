@@ -7,12 +7,18 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
 import { SectionHeader } from "@/components/layout/section-header";
 import { SERVICES } from "@/lib/constants";
+import { gradientClass } from "@/lib/gradient";
+import { cn } from "@workspace/ui/lib/utils";
 
 interface ServicesSectionProps {
   limit?: number;
+  useConstantColors?: boolean;
 }
 
-export function ServicesSection({ limit }: ServicesSectionProps) {
+export function ServicesSection({
+  limit,
+  useConstantColors = false,
+}: ServicesSectionProps) {
   const displayServices = limit ? SERVICES.slice(0, limit) : SERVICES;
 
   return (
@@ -38,16 +44,16 @@ export function ServicesSection({ limit }: ServicesSectionProps) {
             >
               {/* Gradient Background on Hover */}
               <div
-                className={`absolute inset-0 bg-linear-to-br ${service.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
+                className={`absolute inset-0 ${gradientClass(service.gradient, { direction: "br" })} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
               />
 
               {/* Icon with Animation */}
               <motion.div
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6 }}
-                className={`w-14 h-14 rounded-xl bg-linear-to-br ${service.color} p-3 mb-4 text-white`}
+                className={`w-14 h-14 rounded-xl ${gradientClass(service.gradient, { direction: "br" })} p-3 mb-4 text-white`}
               >
-                <Icon className="w-full h-full" />
+                <Icon className="size-full" />
               </motion.div>
 
               <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
@@ -57,16 +63,23 @@ export function ServicesSection({ limit }: ServicesSectionProps) {
 
               {/* Stats Badge */}
 
-              <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm mb-4 absolute top-4 right-4">
+              <span
+                className={cn(
+                  "px-3 py-1 rounded-full text-sm mb-4 absolute top-4 right-4",
+                  useConstantColors
+                    ? `${gradientClass(service.gradient, { opacity: 50 })} text-white`
+                    : "bg-primary/10 text-primary",
+                )}
+              >
                 {service.stats}
               </span>
 
               <Link
                 href={service.href}
-                className="flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all"
+                className="flex items-center gap-2 font-medium group-hover:gap-3 transition-all text-primary"
               >
-                Learn More
-                <ArrowRight className="w-4 h-4" />
+                <span>Learn More</span>
+                <ArrowRight />
               </Link>
             </motion.div>
           );
@@ -82,7 +95,7 @@ export function ServicesSection({ limit }: ServicesSectionProps) {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Button size="lg" className="group">
+          <Button href="/services" size="lg" className="group">
             View All Services
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>

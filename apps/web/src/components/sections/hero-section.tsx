@@ -111,7 +111,7 @@ export function HeroSection() {
                   className="flex items-center gap-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50"
                 >
                   <div className={`p-2 rounded-full bg-${item.color}/10`}>
-                    <item.icon className={`h-4 w-4 ${item.color}`} />
+                    <item.icon className={`h-4 w-4 text-${item.color}`} />
                   </div>
                   <span className="text-sm font-medium">{item.text}</span>
                 </motion.div>

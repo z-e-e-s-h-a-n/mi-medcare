@@ -3,8 +3,17 @@
 import { motion } from "motion/react";
 import CountUp from "react-countup";
 import { COMPANY_STATS } from "@/lib/constants";
+import { gradientClass } from "@/lib/gradient";
 
-export function SuccessMetrics() {
+interface SuccessMetricsProps {
+  useConstantColors?: boolean;
+}
+
+export function SuccessMetrics({
+  useConstantColors = false,
+}: SuccessMetricsProps) {
+  const bgA = COMPANY_STATS[0]?.gradient ?? "blue-500 cyan-500";
+  const bgB = COMPANY_STATS[1]?.gradient ?? "purple-500 pink-500";
   return (
     <section className="relative overflow-hidden py-24">
       {/* Abstract Background Pattern */}
@@ -13,21 +22,41 @@ export function SuccessMetrics() {
 
         {/* Animated grid lines */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent via-primary/20 to-transparent" />
-          <div className="absolute top-0 left-2/4 w-px h-full bg-linear-to-b from-transparent via-secondary/20 to-transparent" />
-          <div className="absolute top-0 left-3/4 w-px h-full bg-linear-to-b from-transparent via-primary/20 to-transparent" />
+          <div
+            className={`absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent to-transparent ${
+              useConstantColors ? "via-foreground/10" : "via-primary/20"
+            }`}
+          />
+          <div
+            className={`absolute top-0 left-2/4 w-px h-full bg-linear-to-b from-transparent to-transparent ${
+              useConstantColors ? "via-foreground/10" : "via-secondary/20"
+            }`}
+          />
+          <div
+            className={`absolute top-0 left-3/4 w-px h-full bg-linear-to-b from-transparent to-transparent ${
+              useConstantColors ? "via-foreground/10" : "via-primary/20"
+            }`}
+          />
         </div>
 
         {/* Floating orbs */}
         <motion.div
           animate={{ x: [0, 100, 0], y: [0, -100, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-20 right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
+          className={`absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl ${
+            useConstantColors
+              ? gradientClass(bgA, { direction: "br", opacity: 8 })
+              : "bg-primary/5"
+          }`}
         />
         <motion.div
           animate={{ x: [0, -100, 0], y: [0, 100, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-20 left-20 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"
+          className={`absolute bottom-20 left-20 w-64 h-64 rounded-full blur-3xl ${
+            useConstantColors
+              ? gradientClass(bgB, { direction: "br", opacity: 8 })
+              : "bg-secondary/5"
+          }`}
         />
       </div>
 
@@ -52,6 +81,7 @@ export function SuccessMetrics() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {COMPANY_STATS.map((metric, index) => {
             const isRevenueImprovement = metric.label === "Revenue Improvement";
+            const metricAccent = metric.gradient ?? "blue-500 cyan-500";
 
             return (
               <motion.div
@@ -75,7 +105,11 @@ export function SuccessMetrics() {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true, amount: 0.4 }}
                     transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
-                    className="absolute -right-6 -top-6 w-24 h-24 bg-linear-to-br from-primary/5 to-secondary/5 rounded-full blur-2xl"
+                    className={`absolute -right-6 -top-6 w-24 h-24 rounded-full blur-2xl ${
+                      useConstantColors
+                        ? gradientClass(metricAccent, { direction: "br", opacity: 12 })
+                        : "bg-linear-to-br from-primary/5 to-secondary/5"
+                    }`}
                   />
 
                   {/* Icon with rotation */}
@@ -84,16 +118,30 @@ export function SuccessMetrics() {
                       whileInView={{ rotate: [0, 360] }}
                       viewport={{ once: true, amount: 0.4 }}
                       transition={{ duration: 1, delay: index * 0.1 + 0.5 }}
-                      className="w-12 h-12 rounded-full bg-linear-to-br from-primary/10 to-secondary/10 flex items-center justify-center border border-primary/20"
+                      className={`w-12 h-12 rounded-full flex items-center justify-center border ${
+                        useConstantColors
+                          ? `${gradientClass(metricAccent, { direction: "br" })} border-white/15`
+                          : "bg-linear-to-br from-primary/10 to-secondary/10 border-primary/20"
+                      }`}
                     >
-                      <metric.icon className="size-5 text-primary" />
+                      <metric.icon
+                        className={`size-5 ${
+                          useConstantColors ? "text-white" : "text-primary"
+                        }`}
+                      />
                     </motion.div>
                   </div>
 
                   {/* Value */}
                   <div className="space-y-1 mb-3">
                     {isRevenueImprovement ? (
-                      <div className="text-3xl lg:text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+                      <div
+                        className={`text-3xl lg:text-4xl font-bold ${
+                          useConstantColors
+                            ? gradientClass(metricAccent, { type: "text" })
+                            : "bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent"
+                        }`}
+                      >
                         5-10%
                       </div>
                     ) : (
@@ -122,7 +170,11 @@ export function SuccessMetrics() {
                     whileInView={{ width: "100%" }}
                     viewport={{ once: true, amount: 0.4 }}
                     transition={{ duration: 1, delay: index * 0.1 + 0.8 }}
-                    className="absolute bottom-0 left-0 h-0.5 bg-linear-to-r from-primary to-secondary origin-left"
+                    className={`absolute bottom-0 left-0 h-0.5 origin-left ${
+                      useConstantColors
+                        ? gradientClass(metricAccent)
+                        : "bg-linear-to-r from-primary to-secondary"
+                    }`}
                     style={{ opacity: 0.3 }}
                   />
                 </div>

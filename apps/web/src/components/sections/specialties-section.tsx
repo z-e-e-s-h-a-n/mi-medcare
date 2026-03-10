@@ -3,14 +3,19 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { SPECIALTIES } from "@/lib/constants";
+import { gradientClass } from "@/lib/gradient";
 import { Button } from "@workspace/ui/components/button";
 import { ArrowRight } from "lucide-react";
 
 interface SpecialtiesSectionProps {
   limit?: number;
+  useConstantColors?: boolean;
 }
 
-export function SpecialtiesSection({ limit }: SpecialtiesSectionProps) {
+export function SpecialtiesSection({
+  limit,
+  useConstantColors = false,
+}: SpecialtiesSectionProps) {
   const displaySpecialties = limit ? SPECIALTIES.slice(0, limit) : SPECIALTIES;
 
   return (
@@ -52,12 +57,26 @@ export function SpecialtiesSection({ limit }: SpecialtiesSectionProps) {
               className="w-full"
             >
               <Link
-                className="flex w-full items-center gap-3 rounded-lg border bg-background p-4 hover:border-primary/40 hover:shadow-sm transition-all"
+                className={`flex w-full items-center gap-3 rounded-lg border bg-background p-4 hover:shadow-sm transition-all ${
+                  useConstantColors
+                    ? "hover:border-border/80"
+                    : "hover:border-primary/40"
+                }`}
                 href={specialty.href}
               >
                 {/* Icon */}
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <Icon className="h-5 w-5 text-primary" />
+                <div
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${
+                    useConstantColors
+                      ? `${gradientClass(specialty.gradient, { direction: "br" })} text-white`
+                      : "bg-primary/10"
+                  }`}
+                >
+                  <Icon
+                    className={`h-5 w-5 ${
+                      useConstantColors ? "text-white" : "text-primary"
+                    }`}
+                  />
                 </div>
 
                 {/* Name */}
@@ -79,7 +98,7 @@ export function SpecialtiesSection({ limit }: SpecialtiesSectionProps) {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Button size="lg" className="group">
+          <Button href="/specialties" size="lg" className="group">
             View All {SPECIALTIES.length} Specialties
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>

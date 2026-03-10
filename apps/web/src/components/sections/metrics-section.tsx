@@ -2,10 +2,25 @@
 
 import { motion } from "motion/react";
 import { TRUST_METRICS } from "@/lib/constants";
+import { gradientClass } from "@/lib/gradient";
 
-export function MetricsSection() {
+interface MetricsSectionProps {
+  useConstantColors?: boolean;
+}
+
+export function MetricsSection({ useConstantColors = false }: MetricsSectionProps) {
+  const accent = TRUST_METRICS[0]?.gradient ?? "blue-500 cyan-500";
   return (
-    <section className="section-container bg-primary/10 py-8">
+    <section
+      className={`section-container py-8 ${
+        useConstantColors ? "relative overflow-hidden" : "bg-primary/10"
+      }`}
+    >
+      {useConstantColors && (
+        <div
+          className={`absolute inset-0 -z-10 ${gradientClass(accent, { opacity: 8 })}`}
+        />
+      )}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +43,7 @@ export function MetricsSection() {
             >
               {/* Icon */}
               <div
-                className={`w-12 h-12 mb-4 flex items-center justify-center rounded-full bg-linear-to-r ${metric.color} text-white shadow-sm`}
+                className={`w-12 h-12 mb-4 flex items-center justify-center rounded-full ${gradientClass(metric.gradient)} text-white shadow-sm`}
               >
                 <Icon className="size-6" />
               </div>

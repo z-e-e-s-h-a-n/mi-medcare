@@ -16,14 +16,14 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <MetricsSection />
+      <MetricsSection useConstantColors />
       <SuccessMetrics />
-      <ServicesSection limit={6} />
+      <ServicesSection limit={6} useConstantColors />
       <FeaturesSection />
-      <HowItWorksSection />
-      <BenefitsSection />
+      <HowItWorksSection useConstantColors />
+      <BenefitsSection useConstantColors />
       <EHRSection limit={8} />
-      <SpecialtiesSection limit={8} />
+      <SpecialtiesSection limit={8} useConstantColors />
       <TestimonialsSection />
       <FAQSection />
       <BlogSection />

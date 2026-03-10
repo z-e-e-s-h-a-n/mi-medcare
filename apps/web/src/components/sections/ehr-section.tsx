@@ -53,7 +53,7 @@ export function EHRSection({ limit }: EHRSectionProps) {
               boxShadow:
                 "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
             }}
-            className="group relative flex items-center justify-center rounded-xl border border-primary/50 bg-background/50 p-2 backdrop-blur-sm transition-all duration-300 sm:p-4"
+            className="group relative flex items-center justify-center rounded-xl border border-primary/50 bg-white p-2 backdrop-blur-sm transition-all duration-300 sm:p-4"
           >
             <Tooltip>
               <TooltipTrigger className="relative h-24 w-full">
@@ -75,7 +75,7 @@ export function EHRSection({ limit }: EHRSectionProps) {
           className="text-center mt-12"
         >
           <Button asChild variant="outline" size="lg" className="group">
-            <Link href="/ehr-integrations">
+            <Link href="/emr-ehr-support">
               View All {EHR_SYSTEMS.length} EHR Systems
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>

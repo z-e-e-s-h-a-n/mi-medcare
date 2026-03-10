@@ -1,81 +1,237 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 import { BILLING_PROCESS } from "@/lib/constants";
 import { SectionHeader } from "@/components/layout/section-header";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { KpiSection } from "./kpi-section";
+import { gradientClass } from "@/lib/gradient";
 
-export function HowItWorksSection() {
+interface HowItWorksSectionProps {
+  useConstantColors?: boolean;
+}
+
+export function HowItWorksSection({
+  useConstantColors = false,
+}: HowItWorksSectionProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Progress line height based on scroll
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section className="section-container py-20">
-      <SectionHeader
-        badge="Our Process"
-        title="How Our Medical Billing Process Works"
-        description="Our medical billing company simplifies every step of the billing cycle to help practices get paid faster, with fewer denials."
-      />
+    <section
+      ref={containerRef}
+      className="relative overflow-hidden py-24 bg-linear-to-b from-background via-background to-muted/30"
+    >
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent via-primary/20 to-transparent" />
+        <div className="absolute top-0 right-1/4 w-px h-full bg-linear-to-b from-transparent via-secondary/20 to-transparent" />
 
-      <div className="relative mt-16">
-        {/* Process Steps */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+        {/* Floating orbs */}
+        <motion.div
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 20, 0],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-20 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -20, 0],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-20 right-10 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"
+        />
+      </div>
+
+      <div className="section-container relative">
+        <SectionHeader
+          badge="Simple Process"
+          title="How We Transform Your Revenue Cycle"
+          description="A seamless journey from assessment to accelerated payments, designed to maximize your practice's revenue potential."
+        />
+
+        {/* Stats Summary Cards */}
+        <KpiSection useConstantColors={useConstantColors} />
+
+        {/* Main Timeline */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Central Animated Line */}
+          <motion.div
+            className="absolute left-1/2 top-0 w-0.5 bg-linear-to-b from-primary via-secondary to-primary/30 -translate-x-1/2"
+            style={{ height: lineHeight }}
+          >
+            {/* Pulsing dots on the line */}
+            <motion.div
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute -top-2 -left-1.5 w-4 h-4 bg-primary rounded-full"
+            />
+            <motion.div
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{ duration: 2, delay: 1, repeat: Infinity }}
+              className="absolute -bottom-2 -left-1.5 w-4 h-4 bg-secondary rounded-full"
+            />
+          </motion.div>
+
+          {/* Process Steps */}
           {BILLING_PROCESS.map((step, index) => {
             const Icon = step.icon;
+            const isEven = index % 2 === 0;
+            const iconBg = useConstantColors
+              ? `${gradientClass(step.gradient)} text-white`
+              : "bg-linear-to-br from-primary/10 to-secondary/10 text-primary";
+            const cardGlow = useConstantColors
+              ? `${gradientClass(step.gradient, { opacity: 10 })} opacity-0 group-hover:opacity-10`
+              : "bg-linear-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100";
 
             return (
               <motion.div
                 key={step.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-                viewport={{ once: true, amount: 0.2 }}
-                className="group relative"
+                initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.15,
+                  type: "spring",
+                  stiffness: 100,
+                }}
+                className={`relative flex items-center mb-16 last:mb-0 ${
+                  isEven ? "flex-row" : "flex-row-reverse"
+                }`}
               >
-                {/* Card with hover effect */}
-                <motion.div
-                  whileHover={{
-                    y: -5,
-                    transition: { type: "spring", stiffness: 400, damping: 17 },
-                  }}
-                  className="relative bg-background/50 backdrop-blur-sm border rounded-2xl p-8 hover:border-primary/50 transition-all duration-300 h-full flex flex-col"
+                {/* Content Card */}
+                <div
+                  className={`w-5/12 ${isEven ? "pr-8 text-right" : "pl-8 text-left"}`}
                 >
-                  {/* Step Number with animated background */}
-                  <div className="flex items-start gap-4 mb-4">
-                    <motion.div
-                      className="relative"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 17,
-                      }}
-                    >
-                      <div className="absolute inset-0 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-all duration-300" />
-                      <div className="relative w-14 h-14 bg-linear-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center border border-primary/20 group-hover:border-primary/40 transition-all duration-300">
-                        <Icon className="w-7 h-7 text-primary" />
-                      </div>
-                    </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="relative group"
+                  >
+                    {/* Background glow on hover */}
+                    <div
+                      className={`absolute inset-0 rounded-2xl blur-xl transition-opacity duration-500 ${cardGlow}`}
+                    />
 
-                    {/* Step indicator */}
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
-                        Step {index + 1}
+                    {/* Card */}
+                    <div className="relative bg-background/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6 hover:border-primary/30 transition-all duration-300">
+                      {/* Step Number Badge */}
+                      <div
+                        className={`absolute top-4 ${isEven ? "left-4" : "right-4"}`}
+                      >
+                        <span className="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                          Step {index + 1}
+                        </span>
+                      </div>
+
+                      {/* Icon with animation */}
+                      <motion.div
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                        className={`inline-flex p-4 rounded-xl mb-4 ${iconBg} ${
+                          isEven ? "ml-auto" : ""
+                        }`}
+                      >
+                        <Icon className="size-8" />
+                      </motion.div>
+
+                      {/* Content */}
+                      <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                        {step.title}
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {step.description}
+                      </p>
+
+                      {/* Decorative corner accent */}
+                      <div
+                        className={`absolute bottom-0 ${isEven ? "right-0" : "left-0"} w-12 h-12 border-b-2 ${isEven ? "border-r-2" : "border-l-2"} border-primary/20 rounded-br-2xl`}
+                      />
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Center Timeline Node */}
+                <div className="relative z-10 flex items-center justify-center w-2/12">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 15,
+                      delay: index * 0.15 + 0.3,
+                    }}
+                    className="relative"
+                  >
+                    {/* Outer ring */}
+                    <div className="absolute inset-0 bg-linear-to-r from-primary to-secondary rounded-full animate-pulse" />
+
+                    {/* Inner circle */}
+                    <div className="relative w-12 h-12 bg-background rounded-full border-4 border-primary flex items-center justify-center">
+                      <span className="text-lg font-bold text-primary">
+                        {index + 1}
                       </span>
                     </div>
-                  </div>
 
-                  {/* Content */}
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed grow">
-                    {step.description}
-                  </p>
+                    {/* Floating arrow indicators */}
+                    {index < BILLING_PROCESS.length - 1 && (
+                      <motion.div
+                        animate={{ y: [0, 5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="absolute -bottom-8 left-1/2 -translate-x-1/2"
+                      >
+                        <ArrowRight className="w-5 h-5 text-primary rotate-90" />
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </div>
 
-                  {/* Hover indicator line */}
-                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-linear-to-r from-primary to-secondary rounded-b-2xl transition-all duration-300 group-hover:w-full" />
-                </motion.div>
+                {/* Empty space for opposite side */}
+                <div className="w-5/12" />
               </motion.div>
             );
           })}
         </div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-20"
+        >
+          <div className="inline-flex items-center gap-3 bg-linear-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-full px-8 py-4">
+            <Sparkles className="w-5 h-5 text-primary" />
+            <span className="text-sm font-medium">
+              Ready to streamline your revenue cycle?
+            </span>
+            <motion.button
+              whileHover={{ x: 5 }}
+              className="text-primary hover:text-primary/80 transition-colors font-semibold"
+            >
+              Get Started Today →
+            </motion.button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

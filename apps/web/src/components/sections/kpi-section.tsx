@@ -1,11 +1,12 @@
 import { KPI_HIGHLIGHTS } from "@/lib/constants";
 import { motion } from "motion/react";
+import { gradientClass } from "@/lib/gradient";
 
 interface KpiSectionProps {
-  useColors?: boolean;
+  useConstantColors?: boolean;
 }
 
-export function KpiSection({ useColors = false }: KpiSectionProps) {
+export function KpiSection({ useConstantColors = false }: KpiSectionProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -16,7 +17,8 @@ export function KpiSection({ useColors = false }: KpiSectionProps) {
     >
       {KPI_HIGHLIGHTS.map((stat) => {
         const Icon = stat.icon;
-        const gradient = `bg-linear-to-r ${stat.color}`;
+        const gradient = gradientClass(stat.gradient);
+        const gradientSoft = gradientClass(stat.gradient, { opacity: 10 });
 
         return (
           <motion.div
@@ -25,39 +27,20 @@ export function KpiSection({ useColors = false }: KpiSectionProps) {
             className="relative group"
           >
             <div
-              className="absolute inset-0 bg-linear-to-r opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300 blur-xl"
-              style={{
-                background: `linear-linear(to right, ${stat.color})`,
-              }}
+              className={`absolute inset-0 opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300 blur-xl ${gradient}`}
             />
             <div
-              className={`relative text-center rounded-2xl p-4 ${
-                useColors
-                  ? `${gradient} text-white bg-opacity-70 border border-transparent`
+              className={`relative text-center rounded-2xl p-4  ${
+                useConstantColors
+                  ? `${gradientSoft} border border-transparent`
                   : "bg-background/50 backdrop-blur-sm border border-border"
               }`}
             >
-              <div
-                className={`inline-flex p-2 rounded-lg mb-2 ${
-                  gradient
-                } bg-opacity-10`}
-              >
+              <div className={`inline-flex p-2 rounded-lg mb-2 ${gradient}`}>
                 <Icon className="w-4 h-4 text-white" />
               </div>
-              <p
-                className={`text-2xl font-bold ${
-                  useColors ? "text-white" : "text-foreground"
-                }`}
-              >
-                {stat.value}
-              </p>
-              <p
-                className={`text-xs ${
-                  useColors ? "text-white/80" : "text-muted-foreground"
-                }`}
-              >
-                {stat.label}
-              </p>
+              <p className={`text-2xl font-bold`}>{stat.value}</p>
+              <p className={`text-xs`}>{stat.label}</p>
             </div>
           </motion.div>
         );

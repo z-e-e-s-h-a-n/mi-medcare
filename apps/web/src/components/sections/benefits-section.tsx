@@ -3,31 +3,19 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { BENEFITS_OF_CHOOSING } from "@/lib/constants";
-import {
-  CheckCircle,
-  Zap,
-  FileCheck,
-  DollarSign,
-  Shield,
-  BarChart,
-  TrendingUp,
-  HeadphonesIcon,
-} from "lucide-react";
+import { gradientClass } from "@/lib/gradient";
+import { CheckCircle, TrendingUp } from "lucide-react";
 
-const benefitIcons = [
-  Zap,
-  FileCheck,
-  DollarSign,
-  Shield,
-  BarChart,
-  TrendingUp,
-  HeadphonesIcon,
-  CheckCircle,
-];
+interface BenefitsSectionProps {
+  useConstantColors?: boolean;
+}
 
-export function BenefitsSection() {
+export function BenefitsSection({
+  useConstantColors = false,
+}: BenefitsSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const accent = BENEFITS_OF_CHOOSING.keyBenefits[0]?.gradient;
 
   return (
     <section className="relative overflow-hidden py-24" ref={ref}>
@@ -69,7 +57,7 @@ export function BenefitsSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 bg-primary/1 0 text-primary`}
             >
               <TrendingUp className="w-4 h-4" />
               <span className="text-sm font-medium">Why Choose Us</span>
@@ -91,8 +79,11 @@ export function BenefitsSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4 }}
-              className="flex items-center gap-6 p-6 bg-linear-to-r from-primary/5 to-secondary/5 rounded-2xl border"
+              className="relative flex items-center gap-6 p-6 rounded-2xl border overflow-hidden"
             >
+              <div
+                className={`absolute inset-0 -z-10 bg-linear-to-r from-primary/5 to-secondary/5`}
+              />
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
                   <motion.div
@@ -120,44 +111,67 @@ export function BenefitsSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid grid-cols-2 gap-4"
           >
-            {BENEFITS_OF_CHOOSING.keyBenefits.map((benefit, index) => {
-              const Icon = benefitIcons[index];
+            {BENEFITS_OF_CHOOSING.keyBenefits.map((benefit) => {
+              const Icon = benefit.icon;
+              const benefitAccent = benefit.gradient;
 
               return (
                 <motion.div
-                  key={benefit}
+                  key={benefit.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  transition={{ duration: 0.5 }}
                   whileHover={{
                     scale: 1.05,
                     transition: { type: "spring", stiffness: 400, damping: 17 },
                   }}
                   className="group relative"
                 >
-                  <div className="h-full bg-background/50 backdrop-blur-sm border rounded-xl p-5 hover:border-primary/30 transition-all duration-300">
+                  <div
+                    className={`h-full bg-background/50 backdrop-blur-sm border rounded-xl p-5 transition-all duration-300 ${
+                      useConstantColors
+                        ? "hover:border-border/80"
+                        : "hover:border-primary/30"
+                    }`}
+                  >
                     {/* Icon with animated background */}
-                    <motion.div
-                      className="relative mb-3"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <div className="absolute inset-0 bg-primary/5 rounded-full blur-md group-hover:bg-primary/10 transition-all" />
-                      <div className="relative w-10 h-10 bg-linear-to-br from-primary/10 to-secondary/10 rounded-lg flex items-center justify-center border border-primary/20">
-                        <Icon className="w-5 h-5 text-primary" />
+                    <motion.div className="relative mb-3">
+                      <div
+                        className={`absolute inset-0 rounded-full blur-md transition-all ${
+                          useConstantColors
+                            ? `${gradientClass(benefitAccent, { direction: "br" })} opacity-10 group-hover:opacity-20`
+                            : "bg-primary/5 group-hover:bg-primary/10"
+                        }`}
+                      />
+                      <div
+                        className={`relative w-10 h-10 rounded-lg flex items-center justify-center border ${
+                          useConstantColors
+                            ? `${gradientClass(benefitAccent, { direction: "br" })} border-white/15`
+                            : "bg-linear-to-br from-primary/10 to-secondary/10 border-primary/20"
+                        }`}
+                      >
+                        <Icon
+                          className={`w-5 h-5 ${
+                            useConstantColors ? "text-white" : "text-primary"
+                          }`}
+                        />
                       </div>
                     </motion.div>
 
                     {/* Benefit text */}
                     <h3 className="font-semibold text-sm lg:text-base leading-tight">
-                      {benefit}
+                      {benefit.title}
                     </h3>
 
                     {/* Hover indicator dot */}
                     <motion.div
                       initial={{ scale: 0 }}
                       whileHover={{ scale: 1 }}
-                      className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"
+                      className={`absolute top-2 right-2 w-2 h-2 rounded-full ${
+                        useConstantColors
+                          ? gradientClass(benefitAccent)
+                          : "bg-primary"
+                      }`}
                     />
                   </div>
                 </motion.div>
@@ -174,13 +188,21 @@ export function BenefitsSection() {
           className="mt-16 text-center"
         >
           <div className="inline-flex items-center gap-3 bg-background/50 backdrop-blur-sm border rounded-full px-6 py-3">
-            <CheckCircle className="w-5 h-5 text-primary" />
+            <CheckCircle
+              className={`w-5 h-5 ${
+                useConstantColors ? "text-foreground" : "text-primary"
+              }`}
+            />
             <span className="text-sm font-medium">
               Ready to transform your revenue cycle?
             </span>
             <motion.button
               whileHover={{ x: 5 }}
-              className="text-primary hover:text-primary/80 transition-colors"
+              className={`transition-colors ${
+                useConstantColors
+                  ? `${gradientClass(accent, { type: "text" })} opacity-90 hover:opacity-70`
+                  : "text-primary hover:text-primary/80"
+              }`}
             >
               Schedule a consultation →
             </motion.button>

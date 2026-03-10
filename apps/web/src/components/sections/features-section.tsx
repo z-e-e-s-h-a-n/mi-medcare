@@ -5,8 +5,15 @@ import { CheckCircle2 } from "lucide-react";
 
 import { FEATURES } from "@/lib/constants";
 import { SectionHeader } from "@/components/layout/section-header";
+import { gradientClass } from "@/lib/gradient";
 
-export function FeaturesSection() {
+interface FeaturesSectionProps {
+  useConstantColors?: boolean;
+}
+
+export function FeaturesSection({
+  useConstantColors = false,
+}: FeaturesSectionProps) {
   return (
     <section className="section-container">
       <SectionHeader
@@ -23,14 +30,24 @@ export function FeaturesSection() {
               key={feature.title}
               initial={{ opacity: 0, y: 22, scale: 0.96 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
+              transition={{ duration: 0.3, delay: index * 0.08 }}
               viewport={{ once: true, amount: 0.2 }}
               whileHover={{ scale: 1.05 }}
               className="relative p-8 rounded-2xl border bg-linear-to-br from-background to-muted/30"
             >
               <div className="relative">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-primary" />
+                <div
+                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
+                    useConstantColors
+                      ? `${gradientClass(feature.gradient, { direction: "br" })} text-white`
+                      : "bg-primary/10"
+                  }`}
+                >
+                  <Icon
+                    className={`w-6 h-6 ${
+                      useConstantColors ? "text-white" : "text-primary"
+                    }`}
+                  />
                 </div>
 
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -38,9 +55,21 @@ export function FeaturesSection() {
                   {feature.description}
                 </p>
 
-                <div className="flex items-center gap-2 text-sm text-primary">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>{feature.stats}</span>
+                <div className="flex items-center gap-2 text-sm">
+                  <CheckCircle2
+                    className={`w-4 h-4 ${
+                      useConstantColors ? "text-foreground/70" : "text-primary"
+                    }`}
+                  />
+                  <span
+                    className={
+                      useConstantColors
+                        ? gradientClass(feature.gradient, { type: "text" })
+                        : "text-primary"
+                    }
+                  >
+                    {feature.stats}
+                  </span>
                 </div>
               </div>
             </motion.div>
