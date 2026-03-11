@@ -202,22 +202,22 @@ export const TRUST_BADGES = [
   {
     icon: IconShield,
     text: "HIPAA Compliant",
-    color: "blue-500",
+    gradient: "from-blue-500 to-cyan-500",
   },
   {
     icon: IconRosetteDiscountCheck,
     text: "Certified Coders",
-    color: "green-500",
+    gradient: "from-green-500 to-emerald-500",
   },
   {
     icon: IconClock,
     text: "24/7 Support",
-    color: "purple-500",
+    gradient: "from-purple-500 to-indigo-500",
   },
   {
     icon: IconSparkles,
     text: "AI-Powered",
-    color: "orange-500",
+    gradient: "from-orange-500 to-amber-500",
   },
 ];
 

@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { IconTrendingUp, IconClock } from "@tabler/icons-react";
 import { TRUST_BADGES } from "@/lib/constants";
+import { gradientClass } from "@/lib/utils";
 
 export function HeroSection() {
   return (
@@ -80,7 +81,7 @@ export function HeroSection() {
                 Your Revenue,
               </span>
               <br />
-              <span className="text-foreground">Management</span>
+              <span className="text-foreground">Our Responsibility</span>
             </motion.h1>
 
             {/* Subtitle - Added for better context */}
@@ -110,8 +111,10 @@ export function HeroSection() {
                   whileHover={{ x: 5 }}
                   className="flex items-center gap-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50"
                 >
-                  <div className={`p-2 rounded-full bg-${item.color}/10`}>
-                    <item.icon className={`h-4 w-4 text-${item.color}`} />
+                  <div
+                    className={`p-2 rounded-full ${gradientClass(item.gradient, { opacity: 50 })} text-white`}
+                  >
+                    <item.icon />
                   </div>
                   <span className="text-sm font-medium">{item.text}</span>
                 </motion.div>
