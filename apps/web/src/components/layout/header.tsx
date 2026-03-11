@@ -228,6 +228,7 @@ export function Header() {
               <Button
                 variant="gradient"
                 className="rounded-2xl"
+                pulseDelay={5000}
                 onClick={() => setIsConsultationOpen(true)}
               >
                 Book Consultation

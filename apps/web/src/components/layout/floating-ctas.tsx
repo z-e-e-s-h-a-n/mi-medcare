@@ -12,6 +12,7 @@ export function FloatingCtas({ onBookConsultation }: FloatingCtasProps) {
       <Button
         variant="gradient"
         className="h-11 rounded-full px-4 shadow-lg lg:hidden"
+        pulseDelay={4000}
         onClick={onBookConsultation}
       >
         <IconCalendar className="size-5" />
