@@ -12,6 +12,9 @@ interface MetricsSectionProps {
 export function MetricsSection({ className }: MetricsSectionProps) {
   return (
     <section className={cn("section-container py-8 bg-primary/10", className)}>
+      <h2 className="sr-only">
+        Trust metrics that prove MI MedCare performance
+      </h2>
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}

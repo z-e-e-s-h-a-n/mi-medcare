@@ -123,11 +123,11 @@ export function Header() {
               whileHover="hover"
             >
               {[
-                { href: business.facebook, icon: IconBrandFacebook },
-                { href: business.instagram, icon: IconBrandInstagram },
-                { href: business.linkedin, icon: IconBrandLinkedin },
-                { href: business.tiktok, icon: IconBrandTiktok },
-              ].map((social, index) => (
+                { href: business.facebook, Icon: IconBrandFacebook },
+                { href: business.instagram, Icon: IconBrandInstagram },
+                { href: business.linkedin, Icon: IconBrandLinkedin },
+                { href: business.tiktok, Icon: IconBrandTiktok },
+              ].map(({ Icon, href }, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ y: -2 }}
@@ -137,8 +137,13 @@ export function Header() {
                     damping: 10,
                   }}
                 >
-                  <Link href={social.href}>
-                    <social.icon />
+                  <Link
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Visit MI MedCare on ${Icon.name}`}
+                  >
+                    <Icon />
                   </Link>
                 </motion.div>
               ))}

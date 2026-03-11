@@ -48,7 +48,7 @@ export function Footer() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <h4 className="font-semibold mb-4">{section.title}</h4>
+              <h3 className="font-semibold mb-4">{section.title}</h3>
               <ul className="space-y-2">
                 {section.links.map((link) => (
                   <motion.li
@@ -58,6 +58,8 @@ export function Footer() {
                   >
                     <Link
                       href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
                       className="text-sm text-muted-foreground hover:text-primary transition-colors"
                     >
                       {link.label}
@@ -94,8 +96,10 @@ export function Footer() {
               >
                 <Link
                   href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Visit MI MedCare on ${Icon.name}`}
                   className="text-muted-foreground hover:text-primary transition-colors"
-                  aria-label={Icon.name}
                 >
                   <Icon className="h-5 w-5" />
                 </Link>

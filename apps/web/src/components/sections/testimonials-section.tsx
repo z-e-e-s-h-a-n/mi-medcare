@@ -97,9 +97,9 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
                       )}
                     </div>
                     <div className="min-w-0">
-                      <h4 className="font-semibold truncate">
+                      <h3 className="font-semibold truncate">
                         {testimonial.name}
-                      </h4>
+                      </h3>
                       <p className="text-xs text-muted-foreground truncate">
                         {testimonial.role}
                       </p>

@@ -1,6 +1,6 @@
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 import { business } from "@/lib/constants";
-import { Button, buttonVariants } from "@workspace/ui/components/button";
+import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 
 type WhatsAppFabProps = {
@@ -19,7 +19,7 @@ export function WhatsAppFab({ className }: WhatsAppFabProps) {
       title="Chat on WhatsApp"
       pulseDelay={4000}
       className={cn(
-        "h-11 rounded-full bg-[#25D366] px-4 text-white [--pulse-color:#25D366] shadow-lg hover:bg-[#20bd5a] focus-visible:ring-[#25D366]/30",
+        "h-11 rounded-full bg-[#1DA851] px-4 text-white [--pulse-color:#1DA851] shadow-lg hover:bg-[#20bd5a] focus-visible:ring-[#1DA851]/30",
         className,
       )}
     >
