@@ -230,7 +230,11 @@
   }
 
   body {
-    @apply max-w-360 mx-auto bg-background text-foreground;
+    @apply w-full bg-background text-foreground;
+  }
+
+  #root {
+    @apply w-full max-w-360 mx-auto min-h-screen min-[1440px]:border-x;
   }
 
   button {

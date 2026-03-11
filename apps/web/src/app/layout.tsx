@@ -82,7 +82,9 @@ const RootLayout = ({ children }: AppLayoutProps) => {
       <body
         className={`${primaryFont.variable} ${secondaryFont.variable} font-sans antialiased`}
       >
-        <ProviderWrapper>{children}</ProviderWrapper>
+        <ProviderWrapper>
+          <div id="root">{children}</div>
+        </ProviderWrapper>
       </body>
       <GoogleAnalytics gaId="G-3GCVD9KWT0" />
     </html>
