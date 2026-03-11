@@ -88,7 +88,7 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
                           src={testimonial.image}
                           alt={testimonial.name}
                           fill
-                          className="object-cover"
+                          className="object-top"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-primary font-bold">

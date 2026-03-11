@@ -9,15 +9,15 @@ import {
   newsletterSubscriberSchema,
   type NewsletterSubscriberType,
 } from "@workspace/contracts/newsletter";
-import { Loader2, Mail, Send, User } from "lucide-react";
+import { ArrowRight, Loader2, Mail, User } from "lucide-react";
 import { useSubscribeNewsletter } from "@/hooks/useNewsletter";
 import { toast } from "sonner";
 
-interface NewsletterFormProps {
+interface NewsletterCtaFormProps {
   className?: string;
 }
 
-export function NewsletterForm({ className }: NewsletterFormProps) {
+export function NewsletterCtaForm({ className }: NewsletterCtaFormProps) {
   const { isPending, mutateAsync } = useSubscribeNewsletter();
 
   const form = useForm({
@@ -45,36 +45,47 @@ export function NewsletterForm({ className }: NewsletterFormProps) {
     <Form
       form={form}
       className={className || "space-y-4"}
+      header={
+        <div className="space-y-2">
+          <p className="text-sm font-semibold text-primary">Newsletter</p>
+          <h3 className="text-xl font-semibold">Get billing insights weekly</h3>
+          <p className="text-sm text-muted-foreground">
+            Short, practical tips to improve collections and reduce denials.
+          </p>
+        </div>
+      }
       footer={
         <p className="text-xs text-muted-foreground">
-          We only send healthcare billing insights. No spam.
+          One email per week. Unsubscribe anytime.
         </p>
       }
     >
-      <InputField
-        form={form}
-        name="name"
-        label={
-          <>
-            <User className="text-primary" />
-            Name *
-          </>
-        }
-        placeholder="Your name"
-      />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <InputField
+          form={form}
+          name="name"
+          label={
+            <>
+              <User className="text-primary" />
+              Name *
+            </>
+          }
+          placeholder="Your name"
+        />
 
-      <InputField
-        form={form}
-        name="email"
-        type="email"
-        label={
-          <>
-            <Mail className="text-primary" />
-            Email *
-          </>
-        }
-        placeholder="you@clinic.com"
-      />
+        <InputField
+          form={form}
+          name="email"
+          type="email"
+          label={
+            <>
+              <Mail className="text-primary" />
+              Email *
+            </>
+          }
+          placeholder="you@clinic.com"
+        />
+      </div>
 
       <form.Subscribe selector={(state) => state.canSubmit}>
         {(canSubmit) => (
@@ -91,8 +102,8 @@ export function NewsletterForm({ className }: NewsletterFormProps) {
                 </>
               ) : (
                 <>
-                  Subscribe
-                  <Send className="ml-2" />
+                  Join the newsletter
+                  <ArrowRight className="ml-2" />
                 </>
               )}
             </Button>

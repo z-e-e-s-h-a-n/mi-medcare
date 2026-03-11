@@ -9,35 +9,16 @@ import {
   IconBrandTiktok,
 } from "@tabler/icons-react";
 import { FOOTER_NAVIGATION, business } from "@/lib/constants";
-import Image from "next/image";
+import { Logo } from "./logo";
 
 export function Footer() {
   return (
-    <footer className="bg-background/50 border-t">
+    <footer className="bg-muted border-t">
       {/* Main Footer */}
       <div className="section-container py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Company Info - Simplified without contact details */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="lg:col-span-1"
-          >
-            <Link href="/" className="inline-block mb-4">
-              <Image
-                src={business.logo.url}
-                alt="Logo"
-                width={200}
-                height={60}
-              />
-            </Link>
-            <p className="text-muted-foreground mb-4">
-              Comprehensive medical billing and practice management solutions
-              for healthcare providers.
-            </p>
-          </motion.div>
+          <Logo />
 
           {/* Footer Links */}
           {FOOTER_NAVIGATION.map((section, index) => (

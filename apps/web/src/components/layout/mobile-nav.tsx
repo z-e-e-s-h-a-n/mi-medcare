@@ -19,6 +19,7 @@ import {
 import { Menu, ChevronDown, Phone, Mail, MapPin } from "lucide-react";
 import { business, HEADER_NAVIGATION } from "@/lib/constants";
 import { formatBusinessAddress } from "@/lib/utils";
+import ThemeSwitch from "@workspace/ui/components/theme-toggle";
 
 interface MobileNavProps {
   onBookConsultation?: () => void;
@@ -45,7 +46,8 @@ export function MobileNav({ onBookConsultation }: MobileNavProps) {
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="flex flex-col h-full">
-        <SheetHeader className="p-6 border-b">
+        <SheetHeader className="p-6 border-b flex flex-row items-center gap-4">
+          <ThemeSwitch />
           <SheetTitle className="text-left">Menu</SheetTitle>
         </SheetHeader>
 

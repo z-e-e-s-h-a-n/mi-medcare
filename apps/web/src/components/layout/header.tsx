@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "motion/react";
 import {
   IconMapPin,
@@ -27,6 +26,8 @@ import { MegaMenu } from "./mega-menu";
 import { ConsultationForm } from "@/components/forms/consultation-form";
 import { FloatingCtas } from "@/components/layout/floating-ctas";
 import { formatBusinessAddress } from "@/lib/utils";
+import { Logo } from "./logo";
+import ThemeSwitch from "@workspace/ui/components/theme-toggle";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,7 +68,7 @@ export function Header() {
         className="hidden lg:flex bg-primary text-primary-foreground overflow-hidden"
       >
         <div className="section-container flex items-center justify-between gap-6 bg-primary text-primary-foreground text-sm py-2.5">
-          <div className="flex items-center gap-6">
+          <div className="flex-1 min-w-0  flex items-center gap-6">
             <motion.div
               className="flex items-center gap-2"
               whileHover={{ x: 2 }}
@@ -148,6 +149,8 @@ export function Header() {
                 </motion.div>
               ))}
             </motion.div>
+            |
+            <ThemeSwitch />
           </div>
         </div>
       </motion.div>
@@ -166,20 +169,7 @@ export function Header() {
           }`}
         >
           {/* Logo with animation */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <Link href="/">
-              <Image
-                src={business.logo.url}
-                alt="Logo"
-                width={200}
-                height={60}
-              />
-            </Link>
-          </motion.div>
+          <Logo />
 
           {/* Desktop Navigation with hover animations */}
           <NavigationMenu className="hidden lg:flex">

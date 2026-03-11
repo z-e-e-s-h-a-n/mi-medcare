@@ -844,7 +844,7 @@ export const TESTIMONIALS = [
     content:
       "MIMedCare transformed our revenue cycle. Claim denials dropped by 40% and we're seeing payments 2x faster.",
     rating: 5,
-    image: "/images/testimonials/sarah.jpg",
+    image: "/images/testimonials/testimonial-1.jpg",
     practice: "HeartCare Associates",
   },
   {
@@ -853,7 +853,7 @@ export const TESTIMONIALS = [
     content:
       "The AI automation has cut our administrative work by 70%. Our team can now focus on patient care.",
     rating: 5,
-    image: "/images/testimonials/michael.jpg",
+    image: "/images/testimonials/testimonial-3.jpg",
     practice: "Chen Medical Group",
   },
   {
@@ -862,7 +862,7 @@ export const TESTIMONIALS = [
     content:
       "Best decision we made. Their coding accuracy is unmatched and the analytics dashboard is incredible.",
     rating: 5,
-    image: "/images/testimonials/emily.jpg",
+    image: "/images/testimonials/testimonial-5.jpg",
     practice: "Dermatology Partners",
   },
   {
@@ -871,7 +871,7 @@ export const TESTIMONIALS = [
     content:
       "98% clean claim rate and 45-day AR cycle. The ROI we've seen in 6 months is remarkable.",
     rating: 5,
-    image: "/images/testimonials/robert.jpg",
+    image: "/images/testimonials/testimonial-4.jpg",
     practice: "Regional Health System",
   },
 ];
@@ -884,7 +884,7 @@ export const BLOG_POSTS = [
     date: "Mar 15, 2024",
     readTime: "5 min read",
     category: "AI & Automation",
-    image: "/images/blog/ai-billing.jpg",
+    image: "/images/blogs/blog-1.webp",
     slug: "/blog/ai-transforming-medical-billing",
   },
   {
@@ -894,7 +894,7 @@ export const BLOG_POSTS = [
     date: "Mar 10, 2024",
     readTime: "8 min read",
     category: "Revenue Management",
-    image: "/images/blog/rcm-best-practices.jpg",
+    image: "/images/blogs/blog-2.webp",
     slug: "/blog/rcm-best-practices-2024",
   },
   {
@@ -904,7 +904,7 @@ export const BLOG_POSTS = [
     date: "Mar 5, 2024",
     readTime: "6 min read",
     category: "Medical Coding",
-    image: "/images/blog/icd11-guide.jpg",
+    image: "/images/blogs/blog-3.webp",
     slug: "/blog/icd-11-guide",
   },
 ];
@@ -1011,7 +1011,7 @@ export const HEADER_NAVIGATION: NavItem[] = [
       description:
         "From eligibility verification to final payment, our end-to-end RCM services help healthcare practices increase collections and reduce administrative workload.",
       href: "/services",
-      image: "/images/rcm-platform.jpg",
+      image: "/images/rcm-platform.png",
     },
   },
 
@@ -1024,7 +1024,7 @@ export const HEADER_NAVIGATION: NavItem[] = [
       description:
         "Our teams understand the complex billing rules across dozens of healthcare specialties.",
       href: "/specialties",
-      image: "/images/specialties.jpg",
+      image: "/images/specialties-1.webp",
     },
   },
 
