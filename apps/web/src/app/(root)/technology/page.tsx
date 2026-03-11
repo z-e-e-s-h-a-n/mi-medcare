@@ -1,8 +1,31 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
 import { CTASection } from "@/components/sections/cta-section";
 import { TECHNOLOGY_PILLARS } from "./data";
+
+const PAGE_TITLE = "Technology & Automation";
+const PAGE_DESCRIPTION =
+  "MI MedCare brings AI automation, analytics, and deep integrations together so your practice avoids paperwork and gets paid faster.";
+const PAGE_URL = "https://www.mimedcare.com/technology";
+
+export const metadata: Metadata = {
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: PAGE_URL,
+    siteName: "MI MedCare",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+  },
+};
 
 export default function TechnologyPage() {
   return (
@@ -35,7 +58,9 @@ export default function TechnologyPage() {
                 {pillar.title}
               </h3>
 
-              <p className="text-sm text-muted-foreground">{pillar.description}</p>
+              <p className="text-sm text-muted-foreground">
+                {pillar.description}
+              </p>
 
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                 {pillar.highlights.map((highlight) => (

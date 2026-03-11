@@ -18,6 +18,30 @@ import { PageHeader } from "@/components/layout/page-header";
 import { ContactForm } from "@/components/forms/contact-form";
 import { formatBusinessAddress } from "@/lib/utils";
 
+import type { Metadata } from "next";
+
+const PAGE_TITLE = "Contact Us";
+const PAGE_DESCRIPTION =
+  "Whether you're ready to get started or just exploring options, our team is here to help you optimize your medical billing.";
+const PAGE_URL = "https://www.mimedcare.com/contact";
+
+export const metadata: Metadata = {
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: PAGE_URL,
+    siteName: "MI MedCare",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+  },
+};
+
 const headOfficeAddress = business.addresses?.[0];
 const branchAddresses = business.addresses?.slice(1) ?? [];
 
