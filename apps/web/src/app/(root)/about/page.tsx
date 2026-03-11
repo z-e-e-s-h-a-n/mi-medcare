@@ -19,26 +19,10 @@ import {
 } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
 
-const PAGE_TITLE = "About Us";
-const PAGE_DESCRIPTION =
-  "We combine specialty billing expertise, automation, and compliance to help practices stop chasing payments and focus on patient care.";
-const PAGE_URL = "https://www.mimedcare.com/about";
-
 export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  openGraph: {
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    url: PAGE_URL,
-    siteName: "MI MedCare",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-  },
+  title: "About Us",
+  description:
+    "We combine specialty billing expertise, automation, and compliance to help practices stop chasing payments and focus on patient care.",
 };
 
 const aboutValues = [

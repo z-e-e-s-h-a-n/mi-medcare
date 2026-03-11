@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@workspace/ui/components/button";
+
+export const metadata: Metadata = {
+  title: "Specialty Details",
+  description:
+    "Placeholder page for specialty details while the dedicated content is being built.",
+};
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -36,4 +43,3 @@ export default async function SpecialtyDetailPage({ params }: PageProps) {
     </>
   );
 }
-

@@ -13,26 +13,10 @@ import { EHRSection } from "@/components/sections/ehr-section";
 import { SpecialtiesSection } from "@/components/sections/specialties-section";
 import { MetricsSection } from "@/components/sections/metrics-section";
 
-const PAGE_TITLE = "Nationwide Medical Billing";
-const PAGE_DESCRIPTION =
-  "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care.";
-const PAGE_URL = "https://www.mimedcare.com/";
-
 export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  openGraph: {
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    url: PAGE_URL,
-    siteName: "MI MedCare",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-  },
+  title: "NMedical Billing Services in USA",
+  description:
+    "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care.",
 };
 
 export default function Home() {

@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
 import { CTASection } from "@/components/sections/cta-section";
 import { KPI_HIGHLIGHTS } from "@/lib/constants";
 import { TECHNOLOGY_PILLARS } from "../data";
+
+export const metadata: Metadata = {
+  title: "Analytics & Reporting",
+  description:
+    "Realtime insights replace guesswork, showing everything from clean claim rate to net collections so you can make faster decisions.",
+};
 
 const analyticsMetrics = KPI_HIGHLIGHTS.filter((metric) =>
   ["Average AR Days", "Clean Claim Rate", "Revenue Increase"].includes(metric.label),

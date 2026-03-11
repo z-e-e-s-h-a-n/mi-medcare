@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
 import { CTASection } from "@/components/sections/cta-section";
 import { TECHNOLOGY_PILLARS } from "../data";
+
+export const metadata: Metadata = {
+  title: "AI Automation",
+  description:
+    "AI and RPA power our intelligent revenue cycle so enrollees are checked, claims are scrubbed, and denials are resolved automatically.",
+};
 
 const aiUseCases = [
   "Robotic claim scrubbing validates patient, payer, and charge data before transmission.",

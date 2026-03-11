@@ -19,26 +19,10 @@ import { formatBusinessAddress } from "@/lib/utils";
 
 import type { Metadata } from "next";
 
-const PAGE_TITLE = "Contact Us";
-const PAGE_DESCRIPTION =
-  "Whether you're ready to get started or just exploring options, our team is here to help you optimize your medical billing.";
-const PAGE_URL = "https://www.mimedcare.com/contact";
-
 export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  openGraph: {
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    url: PAGE_URL,
-    siteName: "MI MedCare",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-  },
+  title: "Contact Us",
+  description:
+    "Whether you're ready to get started or just exploring options, our team is here to help you optimize your medical billing.",
 };
 
 const headOfficeAddress = business.addresses?.[0];

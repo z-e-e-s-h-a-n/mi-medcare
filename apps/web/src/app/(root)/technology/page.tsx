@@ -5,26 +5,10 @@ import { SectionHeader } from "@/components/layout/section-header";
 import { CTASection } from "@/components/sections/cta-section";
 import { TECHNOLOGY_PILLARS } from "./data";
 
-const PAGE_TITLE = "Technology & Automation";
-const PAGE_DESCRIPTION =
-  "MI MedCare brings AI automation, analytics, and deep integrations together so your practice avoids paperwork and gets paid faster.";
-const PAGE_URL = "https://www.mimedcare.com/technology";
-
 export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  openGraph: {
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    url: PAGE_URL,
-    siteName: "MI MedCare",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-  },
+  title: "Technology & Automation",
+  description:
+    "MI MedCare brings AI automation, analytics, and deep integrations together so your practice avoids paperwork and gets paid faster.",
 };
 
 export default function TechnologyPage() {

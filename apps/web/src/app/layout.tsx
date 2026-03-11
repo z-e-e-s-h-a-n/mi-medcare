@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "MI MedCare LLC",
-      url: "https://www.mimedcare.com",
+      url: "https://www.mimedcarellc.com",
     },
   ],
 
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Medical Billing Services in USA | MI MedCare",
     description:
       "Professional medical billing services for family practice, internal medicine, mental health & urgent care.",
-    url: "https://www.mimedcare.com",
+    url: "https://www.mimedcarellc.com",
     siteName: "MI MedCare",
     type: "website",
   },

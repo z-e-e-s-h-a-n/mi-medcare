@@ -10,26 +10,10 @@ import { PageHeader } from "@/components/layout/page-header";
 import { CTASection } from "@/components/sections/cta-section";
 import { CASE_STUDIES } from "@/lib/constants";
 
-const PAGE_TITLE = "Healthcare Billing Case Studies";
-const PAGE_DESCRIPTION =
-  "Real examples of how we helped practices improve collections, reduce AR days, and strengthen billing performance.";
-const PAGE_URL = "https://www.mimedcare.com/case-studies";
-
 export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  openGraph: {
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    url: PAGE_URL,
-    siteName: "MI MedCare",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-  },
+  title: "Healthcare Billing Case Studies",
+  description:
+    "Real examples of how we helped practices improve collections, reduce AR days, and strengthen billing performance.",
 };
 
 export default function CaseStudiesPage() {

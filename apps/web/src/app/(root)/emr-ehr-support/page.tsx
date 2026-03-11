@@ -4,26 +4,10 @@ import { PageHeader } from "@/components/layout/page-header";
 import { EHRSection } from "@/components/sections/ehr-section";
 import { CTASection } from "@/components/sections/cta-section";
 
-const PAGE_TITLE = "EMR & EHR Billing Support";
-const PAGE_DESCRIPTION =
-  "We support a wide range of EMR and EHR systems so your billing operations stay efficient without changing the platform you already use.";
-const PAGE_URL = "https://www.mimedcare.com/emr-ehr-support";
-
 export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  openGraph: {
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    url: PAGE_URL,
-    siteName: "MI MedCare",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-  },
+  title: "EMR & EHR Billing Support",
+  description:
+    "We support a wide range of EMR and EHR systems so your billing operations stay efficient without changing the platform you already use.",
 };
 
 const supportHighlights = [

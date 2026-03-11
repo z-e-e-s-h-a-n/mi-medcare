@@ -1003,7 +1003,7 @@ export const CASE_STUDIES = [
 
 export const HEADER_NAVIGATION: NavItem[] = [
   {
-    title: "Solutions",
+    title: "Services",
     children: SERVICES.slice(0, 6),
 
     featured: {
