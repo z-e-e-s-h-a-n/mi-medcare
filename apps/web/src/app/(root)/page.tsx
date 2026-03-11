@@ -14,7 +14,7 @@ import { SpecialtiesSection } from "@/components/sections/specialties-section";
 import { MetricsSection } from "@/components/sections/metrics-section";
 
 export const metadata: Metadata = {
-  title: "NMedical Billing Services in USA",
+  title: "Medical Billing Services in USA",
   description:
     "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care.",
 };
