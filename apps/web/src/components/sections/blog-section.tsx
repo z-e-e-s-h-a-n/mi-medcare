@@ -5,13 +5,18 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
+import { cn } from "@workspace/ui/lib/utils";
 
 import { BLOG_POSTS } from "@/lib/constants";
 import { SectionHeader } from "@/components/layout/section-header";
 
-export function BlogSection() {
+interface BlogSectionProps {
+  className?: string;
+}
+
+export function BlogSection({ className }: BlogSectionProps) {
   return (
-    <section className="section-container bg-muted">
+    <section className={cn("section-container bg-muted", className)}>
       <div>
         <SectionHeader
           badge="Blog"

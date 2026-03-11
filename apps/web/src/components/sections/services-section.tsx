@@ -13,16 +13,18 @@ import { cn } from "@workspace/ui/lib/utils";
 interface ServicesSectionProps {
   limit?: number;
   useConstantColors?: boolean;
+  className?: string;
 }
 
 export function ServicesSection({
   limit,
   useConstantColors = false,
+  className,
 }: ServicesSectionProps) {
   const displayServices = limit ? SERVICES.slice(0, limit) : SERVICES;
 
   return (
-    <section className="section-container bg-muted">
+    <section className={cn("section-container bg-muted", className)}>
       <SectionHeader
         badge="Our Services"
         title="Comprehensive RCM Solutions"

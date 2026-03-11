@@ -10,7 +10,7 @@ export default function SpecialtiesPage() {
         badge="40+ Specialties"
         description="From primary care to complex surgical specialties, we deliver coding and billing workflows tailored to each practice type."
       />
-      <SpecialtiesSection />
+      <SpecialtiesSection useConstantColors />
       <CTASection />
     </>
   );

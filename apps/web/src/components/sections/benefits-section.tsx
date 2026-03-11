@@ -5,20 +5,26 @@ import { useRef } from "react";
 import { BENEFITS_OF_CHOOSING } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
 import { CheckCircle, TrendingUp } from "lucide-react";
+import { cn } from "@workspace/ui/lib/utils";
 
 interface BenefitsSectionProps {
   useConstantColors?: boolean;
+  className?: string;
 }
 
 export function BenefitsSection({
   useConstantColors = false,
+  className,
 }: BenefitsSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const accent = BENEFITS_OF_CHOOSING.keyBenefits[0]?.gradient;
 
   return (
-    <section className="relative overflow-hidden py-24" ref={ref}>
+    <section
+      className={cn("relative overflow-hidden py-24", className)}
+      ref={ref}
+    >
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Main Content */}

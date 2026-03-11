@@ -6,20 +6,23 @@ import { SPECIALTIES } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
 import { Button } from "@workspace/ui/components/button";
 import { ArrowRight } from "lucide-react";
+import { cn } from "@workspace/ui/lib/utils";
 
 interface SpecialtiesSectionProps {
   limit?: number;
   useConstantColors?: boolean;
+  className?: string;
 }
 
 export function SpecialtiesSection({
   limit,
   useConstantColors = false,
+  className,
 }: SpecialtiesSectionProps) {
   const displaySpecialties = limit ? SPECIALTIES.slice(0, limit) : SPECIALTIES;
 
   return (
-    <section className="section-container">
+    <section className={cn("section-container", className)}>
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

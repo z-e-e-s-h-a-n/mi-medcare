@@ -5,10 +5,20 @@ import Image from "next/image";
 import { IconTrendingUp, IconClock } from "@tabler/icons-react";
 import { TRUST_BADGES } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
+import { cn } from "@workspace/ui/lib/utils";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  className?: string;
+}
+
+export function HeroSection({ className }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden min-h-[calc(100vh-200px)] flex items-center">
+    <section
+      className={cn(
+        "relative overflow-hidden min-h-[calc(100vh-200px)] flex items-center",
+        className,
+      )}
+    >
       {/* Background Image with Sophisticated Overlay */}
       <div className="absolute inset-0 -z-20">
         <Image

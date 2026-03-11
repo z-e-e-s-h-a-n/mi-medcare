@@ -6,16 +6,19 @@ import { CheckCircle2 } from "lucide-react";
 import { FEATURES } from "@/lib/constants";
 import { SectionHeader } from "@/components/layout/section-header";
 import { gradientClass } from "@/lib/utils";
+import { cn } from "@workspace/ui/lib/utils";
 
 interface FeaturesSectionProps {
   useConstantColors?: boolean;
+  className?: string;
 }
 
 export function FeaturesSection({
   useConstantColors = false,
+  className,
 }: FeaturesSectionProps) {
   return (
-    <section className="section-container">
+    <section className={cn("section-container", className)}>
       <SectionHeader
         badge="Why Choose Us"
         title="Powerful Features for Modern Practices"

@@ -8,6 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@workspace/ui/components/accordion";
+import { cn } from "@workspace/ui/lib/utils";
 
 import { FAQS } from "@/lib/constants";
 import { SectionHeader } from "@/components/layout/section-header";
@@ -17,13 +18,16 @@ interface FAQSectionProps {
     question: string;
     answer: string;
   }[];
+  className?: string;
 }
 
-export function FAQSection({ faqs }: FAQSectionProps) {
+export function FAQSection({ faqs, className }: FAQSectionProps) {
   if (!faqs) faqs = FAQS;
 
   return (
-    <section className="section-container max-w-4xl mx-auto">
+    <section
+      className={cn("section-container max-w-4xl mx-auto", className)}
+    >
       <div>
         <SectionHeader
           badge="FAQ"

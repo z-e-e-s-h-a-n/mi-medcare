@@ -12,16 +12,18 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@workspace/ui/components/tooltip";
+import { cn } from "@workspace/ui/lib/utils";
 
 interface EHRSectionProps {
   limit?: number;
+  className?: string;
 }
 
-export function EHRSection({ limit }: EHRSectionProps) {
+export function EHRSection({ limit, className }: EHRSectionProps) {
   const displayEHRs = limit ? EHR_SYSTEMS.slice(0, limit) : EHR_SYSTEMS;
 
   return (
-    <section className="section-container bg-muted">
+    <section className={cn("section-container bg-muted", className)}>
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

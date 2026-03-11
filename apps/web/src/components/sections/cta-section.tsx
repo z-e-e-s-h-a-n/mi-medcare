@@ -5,10 +5,15 @@ import { motion } from "motion/react";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
 import { business } from "@/lib/constants";
+import { cn } from "@workspace/ui/lib/utils";
 
-export function CTASection() {
+interface CTASectionProps {
+  className?: string;
+}
+
+export function CTASection({ className }: CTASectionProps) {
   return (
-    <section className="relative overflow-hidden">
+    <section className={cn("relative overflow-hidden", className)}>
       {/* Background with Parallax */}
       <motion.div
         initial={{ scale: 1.2 }}

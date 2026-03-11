@@ -3,10 +3,15 @@
 import { motion } from "motion/react";
 import { TRUST_METRICS } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
+import { cn } from "@workspace/ui/lib/utils";
 
-export function MetricsSection({}) {
+interface MetricsSectionProps {
+  className?: string;
+}
+
+export function MetricsSection({ className }: MetricsSectionProps) {
   return (
-    <section className={`section-container py-8 bg-primary/10`}>
+    <section className={cn("section-container py-8 bg-primary/10", className)}>
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}

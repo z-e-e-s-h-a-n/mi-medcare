@@ -13,10 +13,15 @@ import {
 } from "@workspace/ui/components/carousel";
 import { TESTIMONIALS } from "@/lib/constants";
 import { SectionHeader } from "@/components/layout/section-header";
+import { cn } from "@workspace/ui/lib/utils";
 
-export function TestimonialsSection() {
+interface TestimonialsSectionProps {
+  className?: string;
+}
+
+export function TestimonialsSection({ className }: TestimonialsSectionProps) {
   return (
-    <section className="section-container bg-muted">
+    <section className={cn("section-container bg-muted", className)}>
       <SectionHeader
         badge="Testimonials"
         title="What Our Clients Say"

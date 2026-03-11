@@ -4,18 +4,23 @@ import { motion } from "motion/react";
 import CountUp from "react-countup";
 import { COMPANY_STATS } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
+import { cn } from "@workspace/ui/lib/utils";
 
 interface SuccessMetricsProps {
   useConstantColors?: boolean;
+  className?: string;
 }
 
 export function SuccessMetrics({
   useConstantColors = false,
+  className,
 }: SuccessMetricsProps) {
   const bgA = COMPANY_STATS[0]?.gradient ?? "blue-500 cyan-500";
   const bgB = COMPANY_STATS[1]?.gradient ?? "purple-500 pink-500";
   return (
-    <section className="relative overflow-hidden py-24">
+    <section
+      className={cn("relative overflow-hidden py-24", className)}
+    >
       {/* Abstract Background Pattern */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-full h-full bg-linear-to-br from-primary/5 via-transparent to-secondary/5" />

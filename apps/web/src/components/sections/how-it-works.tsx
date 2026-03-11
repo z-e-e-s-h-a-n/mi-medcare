@@ -7,13 +7,16 @@ import { SectionHeader } from "@/components/layout/section-header";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { KpiSection } from "./kpi-section";
 import { gradientClass } from "@/lib/utils";
+import { cn } from "@workspace/ui/lib/utils";
 
 interface HowItWorksSectionProps {
   useConstantColors?: boolean;
+  className?: string;
 }
 
 export function HowItWorksSection({
   useConstantColors = false,
+  className,
 }: HowItWorksSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -46,7 +49,10 @@ export function HowItWorksSection({
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden py-16 md:py-24 bg-muted"
+      className={cn(
+        "relative overflow-hidden py-16 md:py-24 bg-muted",
+        className,
+      )}
     >
       {/* Abstract Background Elements - Hidden on mobile for performance */}
       <div className="absolute inset-0 -z-10">
