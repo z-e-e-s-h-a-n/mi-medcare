@@ -86,14 +86,10 @@ export function SuccessMetrics({
             return (
               <motion.div
                 key={metric.label}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{
-                  duration: 0.5,
-                  ease: "easeOut",
-                  delay: index * 0.08,
-                }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45 }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="group"
               >
