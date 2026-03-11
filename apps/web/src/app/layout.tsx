@@ -6,14 +6,6 @@ import type { AppLayoutProps } from "@workspace/contracts";
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-export async function generateMetadata() {
-  return {
-    icons: {
-      icon: business.favicon.url,
-    },
-  };
-}
-
 const primaryFont = Poppins({
   variable: "--font-primary",
   subsets: ["latin"],
@@ -32,6 +24,10 @@ export const metadata: Metadata = {
   },
   description:
     "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care. Increase revenue, reduce denials & stay HIPAA compliant.",
+
+  icons: {
+    icon: business.favicon.url,
+  },
 
   robots: {
     index: true,

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
 
 import { motion } from "motion/react";
 import { easeOut } from "motion";
