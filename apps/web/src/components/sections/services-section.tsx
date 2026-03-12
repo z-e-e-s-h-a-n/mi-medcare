@@ -75,12 +75,12 @@ export function ServicesSection({
               >
                 {service.stats}
               </span>
-
               <Link
                 href={service.href}
+                aria-label={`Learn more about ${service.title}`}
                 className="flex items-center gap-2 font-medium group-hover:gap-3 transition-all text-primary"
               >
-                <span>Learn More</span>
+                Learn More
                 <ArrowRight />
               </Link>
             </motion.div>

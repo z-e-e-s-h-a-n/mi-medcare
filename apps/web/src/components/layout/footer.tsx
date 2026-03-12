@@ -81,6 +81,7 @@ export function Footer() {
                   rel="noreferrer"
                   aria-label={`Visit MI MedCare on ${Icon.name}`}
                   className="text-muted-foreground hover:text-primary transition-colors"
+                  prefetch={false}
                 >
                   <Icon className="h-5 w-5" />
                 </Link>
