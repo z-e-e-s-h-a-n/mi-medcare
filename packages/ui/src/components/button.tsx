@@ -39,10 +39,12 @@ const buttonVariants = cva(
 
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 export type ButtonProps = React.ComponentProps<"button"> &
-  React.ComponentProps<"a"> &
   ButtonVariants & {
     asChild?: boolean;
     pulseDelay?: number;
+    target?: React.HTMLAttributeAnchorTarget;
+    href?: string;
+    rel?: string;
   };
 
 function Button({
