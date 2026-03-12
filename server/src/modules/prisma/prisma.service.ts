@@ -32,7 +32,7 @@ export class PrismaService
       log:
         env.get("NODE_ENV") === "production"
           ? ["error", "warn"]
-          : ["query", "error", "warn", "info"],
+          : ["error", "warn", "info"],
     });
 
     global.prismaClient = this;

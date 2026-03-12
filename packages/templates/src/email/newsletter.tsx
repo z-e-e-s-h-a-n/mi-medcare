@@ -8,7 +8,7 @@ import { Header } from "./components/header";
 import { Layout } from "./components/layout";
 
 const isUnsubscribed = (props: EmailTemplateProps<"newsletter">) => {
-  return Boolean(props.newsletterSubscriber.isActive);
+  return !props.newsletterSubscriber.isActive;
 };
 
 export const Newsletter: EmailTemplateComponent<"newsletter"> = (props) => {

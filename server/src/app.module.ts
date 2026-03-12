@@ -19,6 +19,7 @@ import { AdminModule } from "@/modules/admin/admin.module";
 import { CacheModule } from "@/modules/cache/cache.module";
 import { UserModule } from "@/modules/user/user.module";
 import { MediaModule } from "@/modules/media/media.module";
+import { LeadModule } from "./modules/lead/lead.module";
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { MediaModule } from "@/modules/media/media.module";
     UserModule,
     AdminModule,
     MediaModule,
+    LeadModule,
   ],
 
   providers: [
