@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, Phone, Mail, CheckCircle2, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  Phone,
+  Mail,
+  CheckCircle2,
+  ShieldCheck,
+} from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
 import { business } from "@/lib/constants";
 import { NewsletterCtaForm } from "@/components/forms/newsletter-form";
@@ -26,8 +32,10 @@ export function CTASection() {
           transition={{ duration: 20, repeat: Infinity }}
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: "url('/images/pattern.svg')",
-            backgroundSize: "50px 50px",
+            // Inline SVG pattern to avoid missing asset and keep it subtle.
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M0 32h64M0 0h64M0 64h64' stroke='%23ffffff' stroke-opacity='0.35' stroke-width='1'/%3E%3Cpath d='M32 0v64M0 0v64M64 0v64' stroke='%23ffffff' stroke-opacity='0.35' stroke-width='1'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%23ffffff' fill-opacity='0.45'/%3E%3C/svg%3E\")",
+            backgroundSize: "64px 64px",
           }}
         />
       </motion.div>

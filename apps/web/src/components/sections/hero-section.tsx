@@ -1,17 +1,177 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { motion } from "motion/react";
-import Image from "next/image";
-import { IconTrendingUp, IconClock } from "@tabler/icons-react";
+import {
+  IconTrendingUp,
+  IconClock,
+  IconShield,
+  IconBrain,
+  IconStethoscope,
+  IconReportMedical,
+  IconHeartbeat,
+  IconCash,
+  IconChecklist,
+} from "@tabler/icons-react";
 import { TRUST_BADGES } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
 import { cn } from "@workspace/ui/lib/utils";
+import { useMemo } from "react";
 
 interface HeroSectionProps {
   className?: string;
 }
 
+// Animation configurations - extracted for better performance and reusability
+const ANIMATIONS = {
+  floatingIcon: (delay: number = 0) => ({
+    y: [0, -15, 0],
+    x: [0, 8, 0],
+    rotate: [0, 5, -5, 0],
+    transition: {
+      y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay },
+      x: { duration: 5, repeat: Infinity, ease: "easeInOut", delay },
+      rotate: { duration: 6, repeat: Infinity, ease: "easeInOut", delay },
+    },
+  }),
+  pulse: {
+    scale: [1, 1.05, 1],
+    transition: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+  },
+  rotate: (duration: number = 40, direction: 1 | -1 = 1) => ({
+    rotate: direction * 360,
+    transition: { duration, repeat: Infinity, ease: "linear" },
+  }),
+};
+
+// Pattern styles - memoized to prevent recalculation
+const PATTERNS = {
+  dots: `
+    radial-gradient(circle at 30px 30px, oklch(from var(--primary) l c h / 0.12) 1px, transparent 1px),
+    radial-gradient(circle at 70px 90px, oklch(from var(--secondary) l c h / 0.10) 1.5px, transparent 1.5px)
+  `,
+  lines: `
+    linear-gradient(45deg, oklch(from var(--primary) l c h / 0.15) 1px, transparent 1px),
+    linear-gradient(-45deg, oklch(from var(--secondary) l c h / 0.15) 1px, transparent 1px)
+  `,
+  waves: `
+    repeating-linear-gradient(45deg, transparent, transparent 25px, oklch(from var(--primary) l c h / 0.25) 25px, oklch(from var(--primary) l c h / 0.25) 30px),
+    repeating-linear-gradient(135deg, transparent, transparent 35px, oklch(from var(--secondary) l c h / 0.25) 35px, oklch(from var(--secondary) l c h / 0.25) 45px)
+  `,
+};
+
+// Floating icons configuration
+const FLOATING_ICONS = [
+  {
+    Icon: IconHeartbeat,
+    color: "from-purple-500 to-purple-600",
+    position: "left-10 top-10",
+    delay: 0.4,
+    animationDelay: 0,
+  },
+  {
+    Icon: IconBrain,
+    color: "from-blue-500 to-blue-600",
+    position: "right-10 top-20",
+    delay: 0.5,
+    animationDelay: 0.5,
+  },
+  {
+    Icon: IconCash,
+    color: "from-green-500 to-green-600",
+    position: "left-0 top-1/2 -translate-y-1/2",
+    delay: 0.6,
+    animationDelay: 1,
+  },
+  {
+    Icon: IconReportMedical,
+    color: "from-orange-500 to-orange-600",
+    position: "right-0 top-1/2 -translate-y-1/2",
+    delay: 0.7,
+    animationDelay: 1.5,
+  },
+  {
+    Icon: IconStethoscope,
+    color: "from-pink-500 to-pink-600",
+    position: "left-16 bottom-10",
+    delay: 0.8,
+    animationDelay: 2,
+  },
+  {
+    Icon: IconShield,
+    color: "from-teal-500 to-teal-600",
+    position: "right-16 bottom-20",
+    delay: 0.9,
+    animationDelay: 2.5,
+  },
+];
+
+// Floating cards configuration
+const FLOATING_CARDS = [
+  {
+    Icon: IconTrendingUp,
+    color: "from-primary to-secondary",
+    label: "Efficiency",
+    value: "+32%",
+    textColor: "text-primary",
+    position: "left-1/4 top-1/4",
+    initialX: -30,
+    animateX: 10,
+    moveX: [10, 0, 10],
+    moveY: [0, -12, 0],
+    delay: 1.2,
+    borderColor: "border-primary/20",
+  },
+  {
+    Icon: IconClock,
+    color: "from-secondary to-primary",
+    label: "Time Saved",
+    value: "-48%",
+    textColor: "text-primary",
+    position: "right-1/3 bottom-1/3",
+    initialX: 30,
+    animateX: -60,
+    moveX: [-60, -54, -60],
+    moveY: [-70, -40, -70],
+    delay: 1.3,
+    borderColor: "border-secondary/20",
+  },
+  {
+    Icon: IconChecklist,
+    color: "from-green-500 to-green-600",
+    label: "Accuracy",
+    value: "98%",
+    textColor: "text-green-500",
+    position: "left-2/3 top-2/3",
+    initialY: 10,
+    animateY: -80,
+    moveX: [-40, -10, -40],
+    moveY: [-10, 0, -10],
+    delay: 1.4,
+    borderColor: "border-green-500/20",
+  },
+];
+
 export function HeroSection({ className }: HeroSectionProps) {
+  // Memoize pattern styles
+  const patternStyles = useMemo(
+    () => ({
+      dots: {
+        backgroundImage: PATTERNS.dots,
+        backgroundSize: "100px 100px, 150px 150px",
+      },
+      lines: {
+        backgroundImage: PATTERNS.lines,
+        backgroundSize: "60px 60px, 80px 80px",
+      },
+      waves: {
+        backgroundImage: PATTERNS.waves,
+        backgroundSize: "100px 100px, 120px 120px",
+      },
+    }),
+    [],
+  );
+
   return (
     <section
       className={cn(
@@ -19,57 +179,96 @@ export function HeroSection({ className }: HeroSectionProps) {
         className,
       )}
     >
-      {/* Background Image with Sophisticated Overlay */}
-      <div className="absolute inset-0 -z-20">
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Healthcare Background"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-linear-to-r from-background/80 via-background/60 to-background/40" />
-      </div>
+      {/* Premium Pattern Background - Optimized with will-change */}
+      <div className="absolute inset-0 -z-20 overflow-hidden will-change-transform">
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-background to-secondary/5" />
 
-      {/* Animated Background Elements - More Subtle */}
-      <div className="absolute inset-0 -z-10">
-        {/* Gradient Orbs - Softer */}
+        {/* Pattern 1 — Floating Dots */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 0.2, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute top-20 left-10 size-96 bg-primary/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 0.15, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
-          className="absolute bottom-20 right-10 w-125 h-125 bg-secondary/10 rounded-full blur-3xl"
+          animate={{ y: [0, 30, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 will-change-transform"
+          style={patternStyles.dots}
         />
 
-        {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.01]" />
+        {/* Pattern 2 — Geometric Lines */}
+        <motion.div
+          animate={{ rotate: [0, 5, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 opacity-20 will-change-transform"
+          style={patternStyles.lines}
+        />
+
+        {/* Pattern 3 — Soft Waves */}
+        <motion.div
+          animate={{ x: [0, -20, 0], y: [0, 10, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 opacity-[0.07] will-change-transform"
+          style={patternStyles.waves}
+        />
+
+        {/* Gradient Orbs - Optimized with will-change */}
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.1, 0.2, 0.1],
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-40 -left-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl will-change-transform will-change-opacity"
+        />
+
+        <motion.div
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [0.1, 0.2, 0.1],
+            x: [0, -40, 0],
+            y: [0, 40, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute -bottom-40 -right-40 w-96 h-96 bg-secondary/20 rounded-full blur-3xl will-change-transform will-change-opacity"
+        />
+
+        {/* Light Sweep */}
+        <motion.div
+          initial={{ x: "-100%" }}
+          animate={{ x: "200%" }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 2,
+          }}
+          className="absolute top-0 left-0 w-1/2 h-full bg-linear-to-r from-transparent via-white/5 to-transparent skew-x-12 will-change-transform"
+        />
       </div>
 
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content - Enhanced Typography */}
+          {/* Left Content - Simplified animation props */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center lg:text-left"
           >
-            {/* Trust Badge - More Elegant */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-3 bg-primary/5 text-primary px-4 py-2 rounded-full mb-8 border border-primary/10"
+              className="inline-flex items-center gap-3 bg-primary/10 text-primary px-4 py-2 rounded-full mb-8 border border-primary/20"
             >
               <motion.span
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                animate={ANIMATIONS.pulse as any}
                 className="relative flex h-2 w-2"
               >
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-50"></span>
@@ -80,24 +279,24 @@ export function HeroSection({ className }: HeroSectionProps) {
               </span>
             </motion.div>
 
-            {/* Main Heading - More Refined */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-5xl lg:text-7xl font-bold mb-6 tracking-tight"
             >
-              <span className="gradient-text bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                 Your Revenue,
               </span>
               <br />
               <span className="text-foreground">Our Responsibility</span>
             </motion.h1>
 
-            {/* Subtitle - Added for better context */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             >
@@ -105,10 +304,10 @@ export function HeroSection({ className }: HeroSectionProps) {
               denials, and accelerate cash flow.
             </motion.p>
 
-            {/* Trust Indicators - Enhanced with icons */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.6 }}
               className="grid grid-cols-2 gap-4 max-w-lg mx-auto lg:mx-0"
             >
@@ -117,6 +316,7 @@ export function HeroSection({ className }: HeroSectionProps) {
                   key={item.text}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: 0.6 + index * 0.1 }}
                   whileHover={{ x: 5 }}
                   className="flex items-center gap-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50"
@@ -132,124 +332,158 @@ export function HeroSection({ className }: HeroSectionProps) {
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Visual Elements */}
+          {/* Right Content - Optimized with memoized configurations */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden lg:block"
+            className="relative hidden lg:block h-150"
           >
-            {/* Main Visual - Abstract Data Visualization */}
+            {/* Central Abstract Element */}
             <motion.div
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="relative z-10"
-            >
-              <div className="relative w-full h-125">
-                {/* Abstract RCM Visualization */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 60,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                >
-                  <div className="w-80 h-80 border-2 border-primary/20 rounded-full" />
-                </motion.div>
-
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 50,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                >
-                  <div className="w-60 h-60 border-2 border-secondary/20 rounded-full" />
-                </motion.div>
-
-                {/* Central Icon */}
-                <motion.div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                >
-                  <div className="w-32 h-32 bg-linear-to-br from-primary to-secondary rounded-2xl shadow-2xl flex items-center justify-center">
-                    <IconTrendingUp className="w-16 h-16 text-white" />
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-
-            {/* Floating Stats Cards - More Professional */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="absolute -left-6 top-20 bg-background/90 backdrop-blur-lg rounded-xl p-4 shadow-xl border border-border/50"
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96"
             >
               <motion.div
-                animate={{ scale: [1, 1.02, 1] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="flex items-center gap-3"
+                animate={ANIMATIONS.rotate(40) as any}
+                className="absolute inset-0"
               >
-                <div className="w-12 h-12 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center shadow-lg">
-                  <IconTrendingUp className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">
-                    Clean Claim Rate
-                  </p>
-                  <p className="text-2xl font-bold text-green-500">98%</p>
-                  <p className="text-xs text-green-500">↑ 12% this month</p>
-                </div>
+                <div className="absolute inset-0 border-2 border-primary/20 rounded-full" />
+                <div className="absolute inset-8 border border-secondary/30 rounded-full" />
+                <div className="absolute inset-16 border border-primary/10 rounded-full" />
               </motion.div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1, duration: 0.6 }}
-              className="absolute -right-6 bottom-20 bg-background/90 backdrop-blur-lg rounded-xl p-4 shadow-xl border border-border/50"
-            >
-              <motion.div
-                animate={{ scale: [1, 1.02, 1] }}
-                transition={{ duration: 3, delay: 1, repeat: Infinity }}
-                className="flex items-center gap-3"
-              >
-                <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-                  <IconClock className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">
-                    Claims Processed
-                  </p>
-                  <p className="text-2xl font-bold text-blue-500">5M+</p>
-                  <p className="text-xs text-blue-500">Annual volume</p>
-                </div>
-              </motion.div>
-            </motion.div>
+            {/* Floating Icons - Mapped from configuration */}
+            {FLOATING_ICONS.map(
+              ({ Icon, color, position, delay, animationDelay }) => (
+                <motion.div
+                  key={position}
+                  initial={{
+                    opacity: 0,
+                    scale: 0,
+                    x: position.includes("left") ? -50 : 50,
+                    y: position.includes("top")
+                      ? -50
+                      : position.includes("bottom")
+                        ? 50
+                        : 0,
+                  }}
+                  animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
+                  className={`absolute ${position}`}
+                >
+                  <motion.div
+                    animate={ANIMATIONS.floatingIcon(animationDelay) as any}
+                    className={`bg-linear-to-br ${color} p-5 rounded-2xl shadow-xl will-change-transform`}
+                  >
+                    <Icon className="w-8 h-8 text-white" />
+                  </motion.div>
+                </motion.div>
+              ),
+            )}
 
-            {/* Decorative Elements - More Refined */}
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-              className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-150 border border-primary/5 rounded-full"
-            />
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-              className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-125 border border-secondary/5 rounded-full"
-            />
+            {/* Small floating dots - Optimized with keyframe sharing */}
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 0.6, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 1.0 + i * 0.1 }}
+              >
+                <motion.div
+                  animate={ANIMATIONS.floatingIcon(i * 0.3) as any}
+                  className="absolute w-2 h-2 rounded-full will-change-transform"
+                  style={{
+                    background:
+                      i % 2 === 0
+                        ? "oklch(from var(--primary) l c h)"
+                        : "oklch(from var(--secondary) l c h)",
+                    top: `${20 + i * 10}%`,
+                    left: `${30 + i * 8}%`,
+                    opacity: 0.6,
+                  }}
+                />
+              </motion.div>
+            ))}
+
+            {/* Floating cards - Mapped from configuration */}
+            {FLOATING_CARDS.map(
+              ({
+                Icon,
+                color,
+                label,
+                value,
+                textColor,
+                position,
+                initialX,
+                animateX,
+                initialY,
+                animateY,
+                moveX,
+                moveY,
+                delay,
+                borderColor,
+              }) => (
+                <motion.div
+                  key={label}
+                  initial={{
+                    opacity: 0,
+                    scale: 0,
+                    x: initialX ?? 0,
+                    y: initialY ?? 0,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    x: animateX ?? 0,
+                    y: animateY ?? 0,
+                  }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay, type: "spring" }}
+                  className={`absolute ${position}`}
+                >
+                  <motion.div
+                    animate={{
+                      y: moveY,
+                      x: moveX,
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: delay * 0.5,
+                    }}
+                    className={`bg-background/80 backdrop-blur-lg p-3 rounded-xl shadow-xl border ${borderColor} will-change-transform`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <div
+                        className={`w-8 h-8 bg-linear-to-br ${color} rounded-lg flex items-center justify-center`}
+                      >
+                        <Icon className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-muted-foreground">{label}</p>
+                        <p className={`text-sm font-bold ${textColor}`}>
+                          {value}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ),
+            )}
           </motion.div>
         </div>
       </div>

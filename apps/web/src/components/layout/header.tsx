@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import {
   IconMapPin,
   IconMail,
@@ -29,149 +30,185 @@ import { formatBusinessAddress } from "@/lib/utils";
 import { Logo } from "./logo";
 import ThemeSwitch from "@workspace/ui/components/theme-toggle";
 
+// Memoized social links configuration
+const SOCIAL_LINKS = [
+  { href: business.facebook, Icon: IconBrandFacebook, name: "Facebook" },
+  { href: business.instagram, Icon: IconBrandInstagram, name: "Instagram" },
+  { href: business.linkedin, Icon: IconBrandLinkedin, name: "LinkedIn" },
+  { href: business.tiktok, Icon: IconBrandTiktok, name: "TikTok" },
+] as const;
+
+// Animation variants for better performance
+const hoverVariants = {
+  spring: {
+    type: "spring",
+    stiffness: 400,
+    damping: 17,
+  },
+  gentle: {
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  },
+};
+
+const iconHoverVariants = {
+  hover: { rotate: [0, -10, 10, -5, 0] },
+  tap: { scale: 0.95 },
+};
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
-  const scrollThreshold = 80;
-  const lastScrolledRef = useRef(false);
-  const headOfficeAddress = business.addresses?.[0];
-  const headOfficeDisplay = headOfficeAddress
-    ? `${headOfficeAddress.label ? `${headOfficeAddress.label}: ` : ""}${formatBusinessAddress(
-        headOfficeAddress,
-      )}`
-    : "Multiple Locations";
 
-  useEffect(() => {
-    const handleScroll = () => {
-      window.requestAnimationFrame(() => {
-        const shouldScroll = window.scrollY > scrollThreshold;
-        if (shouldScroll !== lastScrolledRef.current) {
-          lastScrolledRef.current = shouldScroll;
-          setIsScrolled(shouldScroll);
-        }
-      });
-    };
+  // Use Motion's useScroll for better performance
+  const { scrollY } = useScroll();
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
+  // Memoize formatted address
+  const headOfficeDisplay = useMemo(() => {
+    const headOfficeAddress = business.addresses?.[0];
+    return headOfficeAddress
+      ? `${headOfficeAddress.label ? `${headOfficeAddress.label}: ` : ""}${formatBusinessAddress(
+          headOfficeAddress,
+        )}`
+      : "Multiple Locations";
   }, []);
+
+  // Optimized scroll handling with useMotionValueEvent
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const threshold = 20;
+    setIsScrolled(latest > threshold);
+  });
+
+  // Memoize callbacks
+  const handleConsultationOpen = useCallback(() => {
+    setIsConsultationOpen(true);
+  }, []);
+
+  const handleConsultationClose = useCallback(() => {
+    setIsConsultationOpen(false);
+  }, []);
+
   return (
     <>
-      {/* Top Bar - Animated entrance/exit */}
+      {/* Top Bar - Optimized animations */}
       <motion.div
+        initial={{ height: 40, opacity: 1 }}
         animate={{
-          height: isScrolled ? 0 : 40,
+          height: isScrolled ? 24 : 40,
           opacity: isScrolled ? 0 : 1,
         }}
-        transition={{ duration: 0.25, ease: "easeInOut" }}
-        className="hidden lg:flex bg-primary text-primary-foreground overflow-hidden"
+        transition={{ duration: 0.2, ease: "linear" }}
+        className="hidden lg:flex bg-primary text-primary-foreground overflow-hidden will-change-[height,opacity]"
       >
         <div className="section-container flex items-center justify-between gap-6 bg-primary text-primary-foreground text-sm py-2.5">
-          <div className="flex-1 min-w-0  flex items-center gap-6">
+          <div className="flex-1 min-w-0 flex items-center gap-6">
+            {/* Address - Optimized hover */}
             <motion.div
               className="flex items-center gap-2"
               whileHover={{ x: 2 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              transition={hoverVariants.spring as any}
             >
               <motion.div
-                whileHover={{ rotate: [0, -10, 10, -5, 0] }}
-                transition={{ duration: 0.3 }}
+                whileHover="hover"
+                whileTap="tap"
+                variants={iconHoverVariants}
+                transition={{ duration: 0.2 }}
               >
-                <IconMapPin />
+                <IconMapPin className="w-4 h-4" />
               </motion.div>
-              <span>{headOfficeDisplay}</span>
+              <span className="truncate">{headOfficeDisplay}</span>
             </motion.div>
+
+            {/* Email - Optimized */}
             <motion.div
               whileHover={{ x: 2 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              transition={hoverVariants.spring as any}
             >
               <Link
                 href={`mailto:${business.email}`}
                 className="flex items-center gap-2"
+                prefetch={false}
               >
                 <motion.div
-                  whileHover={{ rotate: [0, -5, 5, 0] }}
-                  transition={{ duration: 0.3 }}
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={iconHoverVariants}
+                  transition={{ duration: 0.2 }}
                 >
-                  <IconMail />
+                  <IconMail className="w-4 h-4" />
                 </motion.div>
                 <span>{business.email}</span>
               </Link>
             </motion.div>
           </div>
+
           <div className="flex items-center gap-6">
+            {/* Phone - Optimized */}
             <motion.div
               whileHover={{ x: 2 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              transition={hoverVariants.spring as any}
             >
               <Link
                 href={`tel:${business.phone}`}
                 className="flex items-center gap-2"
+                prefetch={false}
               >
                 <motion.div
-                  whileHover={{ rotate: [0, -10, 10, -5, 0] }}
-                  transition={{ duration: 0.3 }}
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={iconHoverVariants}
+                  transition={{ duration: 0.2 }}
                 >
-                  <IconPhone />
+                  <IconPhone className="w-4 h-4" />
                 </motion.div>
                 <span>{business.phone}</span>
               </Link>
             </motion.div>
-            <motion.div
-              className="flex items-center gap-2"
-              initial="initial"
-              whileHover="hover"
-            >
-              {[
-                { href: business.facebook, Icon: IconBrandFacebook },
-                { href: business.instagram, Icon: IconBrandInstagram },
-                { href: business.linkedin, Icon: IconBrandLinkedin },
-                { href: business.tiktok, Icon: IconBrandTiktok },
-              ].map(({ Icon, href }, index) => (
+
+            {/* Social Links - Optimized with useMemo */}
+            <motion.div className="flex items-center gap-2">
+              {SOCIAL_LINKS.map(({ Icon, href, name }) => (
                 <motion.div
-                  key={index}
+                  key={name}
                   whileHover={{ y: -2 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 10,
-                  }}
+                  whileTap={{ y: 0 }}
+                  transition={hoverVariants.gentle as any}
                 >
                   <Link
                     href={href}
                     target="_blank"
-                    rel="noreferrer"
-                    aria-label={`Visit MI MedCare on ${Icon.name}`}
+                    rel="noopener noreferrer"
+                    aria-label={`Visit MI MedCare on ${name}`}
+                    prefetch={false}
                   >
-                    <Icon />
+                    <Icon className="w-4 h-4" />
                   </Link>
                 </motion.div>
               ))}
             </motion.div>
-            |
+
+            <div className="w-px h-4 bg-primary-foreground/20" />
+
             <ThemeSwitch />
           </div>
         </div>
       </motion.div>
 
-      {/* Main Header */}
-      <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-          isScrolled
-            ? "border-b bg-background/95 backdrop-blur-lg shadow-sm"
-            : "bg-background/80 backdrop-blur-lg border-b"
-        }`}
-      >
-        <div
-          className={`section-container flex items-center justify-between gap-6 transition-all duration-300 ${
-            isScrolled ? "py-3" : "py-4"
-          }`}
+      {/* Main Header - Optimized */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-lg shadow-sm">
+        <motion.div
+          initial={{ paddingTop: 16, paddingBottom: 16 }}
+          animate={{
+            paddingTop: isScrolled ? 12 : 16,
+            paddingBottom: isScrolled ? 12 : 16,
+          }}
+          transition={{ duration: 0.2, ease: "linear" }}
+          className="section-container flex items-center justify-between gap-6 will-change-[padding]"
         >
-          {/* Logo with animation */}
           <Logo />
 
-          {/* Desktop Navigation with hover animations */}
+          {/* Desktop Navigation - Optimized */}
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               {HEADER_NAVIGATION.map((item) => (
@@ -181,16 +218,12 @@ export function Header() {
                       <NavigationMenuTrigger>
                         <motion.span
                           whileHover={{ y: -1 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 400,
-                            damping: 17,
-                          }}
+                          transition={hoverVariants.spring as any}
+                          className="inline-block"
                         >
                           {item.title}
                         </motion.span>
                       </NavigationMenuTrigger>
-
                       <NavigationMenuContent>
                         <MegaMenu item={item} />
                       </NavigationMenuContent>
@@ -201,15 +234,12 @@ export function Header() {
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* CTA Buttons with animations */}
-          <motion.div
-            className="hidden lg:flex items-center gap-4"
-            whileHover="hover"
-          >
+          {/* CTA Buttons - Optimized */}
+          <motion.div className="hidden lg:flex items-center gap-4">
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              transition={hoverVariants.spring as any}
             >
               <Button href="/contact" variant="outline" className="rounded-2xl">
                 Contact
@@ -218,13 +248,13 @@ export function Header() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              transition={hoverVariants.spring as any}
             >
               <Button
                 variant="gradient"
                 className="rounded-2xl"
                 pulseDelay={5000}
-                onClick={() => setIsConsultationOpen(true)}
+                onClick={handleConsultationOpen}
               >
                 Book Consultation
               </Button>
@@ -232,15 +262,15 @@ export function Header() {
           </motion.div>
 
           {/* Mobile */}
-          <MobileNav onBookConsultation={() => setIsConsultationOpen(true)} />
-        </div>
+          <MobileNav onBookConsultation={handleConsultationOpen} />
+        </motion.div>
       </header>
 
-      <FloatingCtas onBookConsultation={() => setIsConsultationOpen(true)} />
+      <FloatingCtas onBookConsultation={handleConsultationOpen} />
 
       <ConsultationForm
         open={isConsultationOpen}
-        onOpenChange={setIsConsultationOpen}
+        onOpenChange={handleConsultationClose}
       />
     </>
   );
