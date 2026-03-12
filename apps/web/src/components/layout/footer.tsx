@@ -18,39 +18,51 @@ export function Footer() {
       <div className="section-wrapper py-12">
         <div className="section-container">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
-          {/* Company Info - Simplified without contact details */}
-          <Logo />
-
-          {/* Footer Links */}
-          {FOOTER_NAVIGATION.map((section, index) => (
+            {/* Company Info - Simplified without contact details */}
             <motion.div
-              key={section.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
+              className="lg:col-span-1"
             >
-              <h3 className="font-semibold mb-4">{section.title}</h3>
-              <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <motion.li
-                    key={link.label}
-                    whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <Link
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
+              <Logo />
+              <p className="text-muted-foreground mb-4">
+                Comprehensive medical billing and practice management solutions
+                for healthcare providers.
+              </p>
             </motion.div>
-          ))}
+
+            {/* Footer Links */}
+            {FOOTER_NAVIGATION.map((section, index) => (
+              <motion.div
+                key={section.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="font-semibold mb-4">{section.title}</h3>
+                <ul className="space-y-2">
+                  {section.links.map((link) => (
+                    <motion.li
+                      key={link.label}
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <Link
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
 
           {/* Bottom Bar */}
@@ -81,7 +93,7 @@ export function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={`Visit MI MedCare on ${Icon.name}`}
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-primary"
                     prefetch={false}
                   >
                     <Icon className="h-5 w-5" />

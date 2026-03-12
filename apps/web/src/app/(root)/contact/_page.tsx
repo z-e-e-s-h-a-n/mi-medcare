@@ -272,7 +272,7 @@ Revenue Cycle"
       </section>
 
       {/* Contact Form & Map Section */}
-      <section className="section-wrapper pb-20">
+      <section className="section-wrapper bg-muted pb-20">
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}

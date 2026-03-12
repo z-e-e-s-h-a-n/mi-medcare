@@ -15,54 +15,8 @@ export function SuccessMetrics({
   useConstantColors = true,
   className,
 }: SuccessMetricsProps) {
-  const bgA = COMPANY_STATS[0]?.gradient ?? "blue-500 cyan-500";
-  const bgB = COMPANY_STATS[1]?.gradient ?? "purple-500 pink-500";
   return (
     <section className={cn("relative overflow-hidden py-24", className)}>
-      {/* Abstract Background Pattern */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-0 w-full h-full bg-linear-to-br from-primary/5 via-transparent to-secondary/5" />
-
-        {/* Animated grid lines */}
-        <div className="absolute inset-0 opacity-20">
-          <div
-            className={`absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent to-transparent ${
-              useConstantColors ? "via-foreground/10" : "via-primary/20"
-            }`}
-          />
-          <div
-            className={`absolute top-0 left-2/4 w-px h-full bg-linear-to-b from-transparent to-transparent ${
-              useConstantColors ? "via-foreground/10" : "via-secondary/20"
-            }`}
-          />
-          <div
-            className={`absolute top-0 left-3/4 w-px h-full bg-linear-to-b from-transparent to-transparent ${
-              useConstantColors ? "via-foreground/10" : "via-primary/20"
-            }`}
-          />
-        </div>
-
-        {/* Floating orbs */}
-        <motion.div
-          animate={{ x: [0, 100, 0], y: [0, -100, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className={`absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl ${
-            useConstantColors
-              ? gradientClass(bgA, { direction: "br", opacity: 8 })
-              : "bg-primary/5"
-          }`}
-        />
-        <motion.div
-          animate={{ x: [0, -100, 0], y: [0, 100, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className={`absolute bottom-20 left-20 w-64 h-64 rounded-full blur-3xl ${
-            useConstantColors
-              ? gradientClass(bgB, { direction: "br", opacity: 8 })
-              : "bg-secondary/5"
-          }`}
-        />
-      </div>
-
       <div className="section-wrapper">
         <div className="section-container">
           {/* Header */}
@@ -98,7 +52,13 @@ export function SuccessMetrics({
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                   className="group"
                 >
-                  <div className="relative h-full bg-linear-to-br from-background via-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 overflow-hidden">
+                  <div
+                    className={cn(
+                      "relative h-full bg-linear-to-br from-primary/10 to-accent/10 backdrop-blur-sm border rounded-2xl p-6 overflow-hidden transition-colors duration-300 group ",
+                      !useConstantColors &&
+                        "hover:from-primary hover:via-primary/80 hover:to-primary/60 hover:text-primary-foreground",
+                    )}
+                  >
                     {/* Background decoration */}
                     <motion.div
                       initial={{ scale: 0 }}
@@ -128,9 +88,12 @@ export function SuccessMetrics({
                         }`}
                       >
                         <metric.icon
-                          className={`size-5 ${
-                            useConstantColors ? "text-white" : "text-primary"
-                          }`}
+                          className={cn(
+                            "size-5 transition-colors",
+                            useConstantColors
+                              ? "text-white"
+                              : "text-primary group-hover:text-primary-foreground",
+                          )}
                         />
                       </motion.div>
                     </div>
@@ -148,22 +111,20 @@ export function SuccessMetrics({
                           5-10%
                         </div>
                       ) : (
-                        <div className="text-3xl lg:text-4xl font-bold">
+                        <div className="text-3xl lg:text-4xl font-bold transition-colors group-hover:text-primary-foreground">
                           {metric.prefix}
                           <CountUp
                             end={metric.value}
                             duration={2.5}
                             separator=","
                             suffix={metric.suffix}
-                            enableScrollSpy
-                            scrollSpyOnce
                           />
                         </div>
                       )}
                     </div>
 
                     {/* Label */}
-                    <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                    <p className="text-sm text-muted-foreground transition-colors duration-300 group-hover:text-primary-foreground/80">
                       {metric.label}
                     </p>
 

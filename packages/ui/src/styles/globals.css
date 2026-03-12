@@ -87,10 +87,6 @@
   --muted: oklch(0.25 0.02 220);
   --muted-foreground: oklch(0.7 0.02 220);
 
-  /* Softer mint */
-  --accent: oklch(0.45 0.12 170);
-  --accent-foreground: oklch(0.95 0.01 170);
-
   --destructive: oklch(0.65 0.22 25);
 
   --border: oklch(0.3 0.02 220 / 30%);

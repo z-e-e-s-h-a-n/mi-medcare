@@ -1,6 +1,7 @@
 // components/ui/section-header.tsx
 "use client";
 
+import { cn } from "@workspace/ui/lib/utils";
 import { motion } from "motion/react";
 
 interface SectionHeaderProps {
@@ -9,6 +10,7 @@ interface SectionHeaderProps {
   description?: string;
   center?: boolean;
   badge?: string;
+  className?: string;
 }
 
 export function SectionHeader({
@@ -17,9 +19,10 @@ export function SectionHeader({
   description,
   center = true,
   badge,
+  className,
 }: SectionHeaderProps) {
   return (
-    <div className={`mb-12 ${center ? "text-center" : ""}`}>
+    <div className={cn("mb-12", center ? "text-center" : "", className)}>
       {badge && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -238,11 +238,7 @@ export function Header() {
                 whileTap={{ scale: 0.98 }}
                 transition={hoverVariants.spring as any}
               >
-                <Button
-                  href="/contact"
-                  variant="outline"
-                  className="rounded-2xl"
-                >
+                <Button href="/contact" variant="outline">
                   Contact
                 </Button>
               </motion.div>
@@ -253,7 +249,8 @@ export function Header() {
               >
                 <Button
                   variant="gradient"
-                  className="rounded-2xl"
+                  size="lg"
+                  className="rounded-xl"
                   pulseDelay={5000}
                   onClick={handleConsultationOpen}
                 >
