@@ -16,7 +16,11 @@ async function bootstrap() {
   const logger = await app.resolve(LoggerService);
 
   const start = Date.now();
-  const port = env.get("APP_PORT");
+
+  const port = process.env.PORT
+    ? parseInt(process.env.PORT, 10)
+    : env.get("APP_PORT") || 3000;
+
   const endpoint = env.get("APP_ENDPOINT");
   const nodeEnv = env.get("NODE_ENV");
   const allowedOrigins = env.get("CORS_ORIGIN");

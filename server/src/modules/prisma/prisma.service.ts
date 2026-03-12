@@ -8,6 +8,10 @@ import { InjectLogger } from "@/decorators/logger.decorator";
 import { EnvService } from "@/modules/env/env.service";
 import { LoggerService } from "@/modules/logger/logger.service";
 
+declare global {
+  var prismaClient: PrismaService | undefined;
+}
+
 @Injectable()
 export class PrismaService
   extends PrismaClient
@@ -21,7 +25,17 @@ export class PrismaService
     const connectionString = env.get("DB_URI");
     const adapter = new PrismaPg({ connectionString });
 
-    super({ adapter });
+    if (global.prismaClient) return global.prismaClient;
+
+    super({
+      adapter,
+      log:
+        env.get("NODE_ENV") === "production"
+          ? ["error", "warn"]
+          : ["query", "error", "warn", "info"],
+    });
+
+    global.prismaClient = this;
 
     const host = new URL(connectionString).hostname;
     this.dbHost = host;
