@@ -6,7 +6,7 @@ import {
 } from "@nestjs/common";
 import argon2 from "argon2";
 import type { Request, Response } from "express";
-import type { UserStatus } from "@workspace/db/browser";
+import type { UserStatus } from "@workspace/db/client";
 import type {
   IdentifierType,
   UserRole,
@@ -591,3 +591,4 @@ export class AuthService {
     },
   };
 }
+

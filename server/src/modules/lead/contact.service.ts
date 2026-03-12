@@ -7,7 +7,7 @@ import type {
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { NotificationService } from "@/modules/notification/notification.service";
 import { resolveEmailTemplate } from "@workspace/templates";
-import type { ContactMessage, Prisma } from "@workspace/db/browser";
+import type { ContactMessage, Prisma } from "@workspace/db/client";
 
 @Injectable()
 export class ContactService {
@@ -124,3 +124,4 @@ export class ContactService {
     await this.notify.sendEmail(contactMessage.email, subject, html);
   }
 }
+

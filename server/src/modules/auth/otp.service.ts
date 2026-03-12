@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import type { Otp } from "@workspace/db/browser";
+import type { Otp } from "@workspace/db/client";
 import type {
   OtpPurpose,
   OtpType,
@@ -254,3 +254,4 @@ export class OtpService {
     }
   }
 }
+

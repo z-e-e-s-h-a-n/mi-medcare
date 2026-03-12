@@ -1,4 +1,4 @@
-import type { UserStatus, UserRole } from "@workspace/db/browser";
+import type { UserStatus, UserRole } from "@workspace/db/client";
 
 declare global {
   namespace Express {
@@ -12,3 +12,4 @@ declare global {
 }
 
 export {};
+

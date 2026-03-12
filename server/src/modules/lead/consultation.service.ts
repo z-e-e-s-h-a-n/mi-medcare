@@ -6,7 +6,7 @@ import type {
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { NotificationService } from "@/modules/notification/notification.service";
 import { resolveEmailTemplate } from "@workspace/templates";
-import type { ConsultationRequest } from "@workspace/db/browser";
+import type { ConsultationRequest } from "@workspace/db/client";
 
 @Injectable()
 export class ConsultationService {
@@ -86,3 +86,4 @@ export class ConsultationService {
     await this.notify.sendEmail(request.email, subject, html);
   }
 }
+

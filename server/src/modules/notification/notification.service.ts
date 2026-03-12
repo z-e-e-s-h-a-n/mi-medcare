@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import type { Otp } from "@workspace/db/browser";
+import type { Otp } from "@workspace/db/client";
 import type {
   MessagingChannel,
   NotificationChannel,
@@ -170,3 +170,4 @@ export class NotificationService {
     return channels;
   }
 }
+

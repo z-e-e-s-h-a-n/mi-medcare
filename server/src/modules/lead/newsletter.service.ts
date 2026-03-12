@@ -7,7 +7,7 @@ import type {
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { resolveEmailTemplate } from "@workspace/templates";
 import { NotificationService } from "@/modules/notification/notification.service";
-import type { NewsletterSubscriber, Prisma } from "@workspace/db/browser";
+import type { NewsletterSubscriber, Prisma } from "@workspace/db/client";
 
 @Injectable()
 export class NewsletterService {

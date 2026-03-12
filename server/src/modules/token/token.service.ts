@@ -4,7 +4,7 @@ import type { Request, Response } from "express";
 import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { futureDate } from "@workspace/shared/utils";
-import { UserRole, UserStatus, type Prisma } from "@workspace/db/browser";
+import { UserRole, UserStatus, type Prisma } from "@workspace/db/client";
 
 import { CookieService } from "@/utils/cookie.util";
 import { ClientService } from "@/utils/client.utils";
@@ -257,3 +257,4 @@ export class TokenService {
     return { message: "All Session Revoked Successfully." };
   }
 }
+

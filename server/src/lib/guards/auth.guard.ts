@@ -7,7 +7,7 @@ import {
   type CanActivate,
   type ExecutionContext,
 } from "@nestjs/common";
-import type { UserRole } from "@workspace/db/browser";
+import type { UserRole } from "@workspace/db/client";
 
 import { ROLES_KEY } from "@/decorators/roles.decorator";
 import { InjectLogger } from "@/decorators/logger.decorator";
@@ -66,3 +66,4 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
+
