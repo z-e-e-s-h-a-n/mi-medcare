@@ -136,8 +136,9 @@ export function NotFound() {
       />
 
       {/* Main Content Container */}
-      <div className="section-container relative px-4 py-16 z-10">
-        <div className="max-w-6xl mx-auto text-center">
+      <div className="section-wrapper relative px-4 py-16 z-10">
+        <div className="section-container">
+          <div className="max-w-6xl mx-auto text-center">
           {/* 404 Number */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -212,6 +213,7 @@ export function NotFound() {
               Contact Support
             </Button>
           </motion.div>
+          </div>
         </div>
       </div>
 

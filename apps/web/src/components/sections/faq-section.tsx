@@ -25,8 +25,9 @@ export function FAQSection({ faqs, className }: FAQSectionProps) {
   if (!faqs) faqs = FAQS;
 
   return (
-    <section className={cn("section-container", className)}>
-      <div className="max-w-4xl mx-auto">
+    <section className={cn("section-wrapper", className)}>
+      <div className="section-container">
+        <div className="max-w-4xl mx-auto">
         <SectionHeader
           badge="FAQ"
           title="Frequently Asked Questions"
@@ -65,6 +66,7 @@ export function FAQSection({ faqs, className }: FAQSectionProps) {
             ))}
           </Accordion>
         </motion.div>
+        </div>
       </div>
     </section>
   );

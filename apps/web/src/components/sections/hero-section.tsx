@@ -16,13 +16,12 @@ import {
 import { TRUST_BADGES } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
 import { cn } from "@workspace/ui/lib/utils";
-import { useMemo } from "react";
+import Image from "next/image";
 
 interface HeroSectionProps {
   className?: string;
 }
 
-// Animation configurations - extracted for better performance and reusability
 const ANIMATIONS = {
   floatingIcon: (delay: number = 0) => ({
     y: [0, -15, 0],
@@ -44,23 +43,6 @@ const ANIMATIONS = {
   }),
 };
 
-// Pattern styles - memoized to prevent recalculation
-const PATTERNS = {
-  dots: `
-    radial-gradient(circle at 30px 30px, oklch(from var(--primary) l c h / 0.12) 1px, transparent 1px),
-    radial-gradient(circle at 70px 90px, oklch(from var(--secondary) l c h / 0.10) 1.5px, transparent 1.5px)
-  `,
-  lines: `
-    linear-gradient(45deg, oklch(from var(--primary) l c h / 0.15) 1px, transparent 1px),
-    linear-gradient(-45deg, oklch(from var(--secondary) l c h / 0.15) 1px, transparent 1px)
-  `,
-  waves: `
-    repeating-linear-gradient(45deg, transparent, transparent 25px, oklch(from var(--primary) l c h / 0.25) 25px, oklch(from var(--primary) l c h / 0.25) 30px),
-    repeating-linear-gradient(135deg, transparent, transparent 35px, oklch(from var(--secondary) l c h / 0.25) 35px, oklch(from var(--secondary) l c h / 0.25) 45px)
-  `,
-};
-
-// Floating icons configuration
 const FLOATING_ICONS = [
   {
     Icon: IconHeartbeat,
@@ -106,7 +88,6 @@ const FLOATING_ICONS = [
   },
 ];
 
-// Floating cards configuration
 const FLOATING_CARDS = [
   {
     Icon: IconTrendingUp,
@@ -153,25 +134,6 @@ const FLOATING_CARDS = [
 ];
 
 export function HeroSection({ className }: HeroSectionProps) {
-  // Memoize pattern styles
-  const patternStyles = useMemo(
-    () => ({
-      dots: {
-        backgroundImage: PATTERNS.dots,
-        backgroundSize: "100px 100px, 150px 150px",
-      },
-      lines: {
-        backgroundImage: PATTERNS.lines,
-        backgroundSize: "60px 60px, 80px 80px",
-      },
-      waves: {
-        backgroundImage: PATTERNS.waves,
-        backgroundSize: "100px 100px, 120px 120px",
-      },
-    }),
-    [],
-  );
-
   return (
     <section
       className={cn(
@@ -179,79 +141,20 @@ export function HeroSection({ className }: HeroSectionProps) {
         className,
       )}
     >
-      {/* Premium Pattern Background - Optimized with will-change */}
-      <div className="absolute inset-0 -z-20 overflow-hidden will-change-transform">
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-background to-secondary/5" />
-
-        {/* Pattern 1 — Floating Dots */}
-        <motion.div
-          animate={{ y: [0, 30, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inset-0 will-change-transform"
-          style={patternStyles.dots}
+      <div className="absolute inset-0 -z-20">
+        <Image
+          src="/images/hero-bg.jpg"
+          alt="Healthcare Background"
+          fill
+          className="object-cover"
+          priority
         />
-
-        {/* Pattern 2 — Geometric Lines */}
-        <motion.div
-          animate={{ rotate: [0, 5, 0], scale: [1, 1.05, 1] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inset-0 opacity-20 will-change-transform"
-          style={patternStyles.lines}
-        />
-
-        {/* Pattern 3 — Soft Waves */}
-        <motion.div
-          animate={{ x: [0, -20, 0], y: [0, 10, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inset-0 opacity-[0.07] will-change-transform"
-          style={patternStyles.waves}
-        />
-
-        {/* Gradient Orbs - Optimized with will-change */}
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.1, 0.2, 0.1],
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-40 -left-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl will-change-transform will-change-opacity"
-        />
-
-        <motion.div
-          animate={{
-            scale: [1, 1.4, 1],
-            opacity: [0.1, 0.2, 0.1],
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="absolute -bottom-40 -right-40 w-96 h-96 bg-secondary/20 rounded-full blur-3xl will-change-transform will-change-opacity"
-        />
-
-        {/* Light Sweep */}
-        <motion.div
-          initial={{ x: "-100%" }}
-          animate={{ x: "200%" }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 2,
-          }}
-          className="absolute top-0 left-0 w-1/2 h-full bg-linear-to-r from-transparent via-white/5 to-transparent skew-x-12 will-change-transform"
-        />
+        <div className="absolute inset-0 bg-linear-to-r from-background/80 via-background/60 to-background/40" />
       </div>
 
-      <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="section-wrapper">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content - Simplified animation props */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -485,6 +388,7 @@ export function HeroSection({ className }: HeroSectionProps) {
               ),
             )}
           </motion.div>
+          </div>
         </div>
       </div>
     </section>

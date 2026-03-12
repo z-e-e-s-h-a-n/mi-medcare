@@ -252,111 +252,115 @@ Revenue Cycle"
       />
 
       {/* Contact Info Cards Section */}
-      <section className="section-container py-20">
-        <div className="space-y-6">
-          {/* Address Card - Full Width */}
-          <div className="grid grid-cols-1">
-            {renderContactCard(addressCard, 0)}
-          </div>
+      <section className="section-wrapper py-20">
+        <div className="section-container">
+          <div className="space-y-6">
+            {/* Address Card - Full Width */}
+            <div className="grid grid-cols-1">
+              {renderContactCard(addressCard, 0)}
+            </div>
 
-          {/* Call, WhatsApp, Email, Hours Cards - 4 Columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {renderContactCard(callCard, 1, 0.1)}
-            {renderContactCard(whatsappCard, 2, 0.15)}
-            {renderContactCard(emailCard, 3, 0.2)}
-            {renderContactCard(hoursCard, 4, 0.25)}
+            {/* Call, WhatsApp, Email, Hours Cards - 4 Columns */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {renderContactCard(callCard, 1, 0.1)}
+              {renderContactCard(whatsappCard, 2, 0.15)}
+              {renderContactCard(emailCard, 3, 0.2)}
+              {renderContactCard(hoursCard, 4, 0.25)}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Form & Map Section */}
-      <section className="section-container pb-20">
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="bg-linear-to-br from-background to-background/50 backdrop-blur-sm border rounded-2xl p-8">
-              <ContactForm />
-            </div>
-          </motion.div>
+      <section className="section-wrapper pb-20">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="bg-linear-to-br from-background to-background/50 backdrop-blur-sm border rounded-2xl p-8">
+                <ContactForm />
+              </div>
+            </motion.div>
 
-          {/* Map & Social */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            {/* Map */}
-            <div className="bg-linear-to-br from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 h-100 overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3120.123456789!2d-121.4944!3d38.5816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDM0JzUzLjgiTiAxMjHCsDI5JzQwLjAiVw!5e0!3m2!1sen!2sus!4v1234567890"
-                width="100%"
-                height="100%"
-                style={{ border: 0, borderRadius: "1rem" }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="MI MedCare Location"
-              />
-            </div>
-
-            {/* Social Connect */}
-            <div className="bg-linear-to-br from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6">
-              <h3 className="text-xl font-semibold mb-4">Connect With Us</h3>
-              <div className="flex flex-wrap gap-3">
-                {socialLinks.map((social) => {
-                  const Icon = social.icon;
-
-                  return (
-                    <motion.a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ y: -3 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="group"
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary/10 to-secondary/10 flex items-center justify-center border border-primary/20 hover:border-primary/40 transition-all overflow-hidden">
-                        <Icon className="w-5 h-5 text-primary group-hover:text-primary/80 transition-colors transform-gpu" />
-                      </div>
-                    </motion.a>
-                  );
-                })}
+            {/* Map & Social */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              {/* Map */}
+              <div className="bg-linear-to-br from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 h-100 overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3120.123456789!2d-121.4944!3d38.5816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDM0JzUzLjgiTiAxMjHCsDI5JzQwLjAiVw!5e0!3m2!1sen!2sus!4v1234567890"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, borderRadius: "1rem" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="MI MedCare Location"
+                />
               </div>
 
-              <div className="mt-6 pt-6 border-t">
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">
-                    Head Office:
-                  </span>{" "}
-                  {headOfficeAddress ? (
-                    <>
-                      {formatBusinessAddress(headOfficeAddress)}
-                      <br />
-                      <span className="text-xs block mt-1">
-                        {headOfficeAddress.city}, {headOfficeAddress.state}{" "}
-                        {headOfficeAddress.postalCode}
-                      </span>
-                    </>
-                  ) : (
-                    "Multiple Locations"
-                  )}
-                  <br />
-                  <span className="font-semibold text-foreground">
-                    Hours:
-                  </span>{" "}
-                  Mon-Fri, 9:00 AM - 6:00 PM PST
-                </p>
+              {/* Social Connect */}
+              <div className="bg-linear-to-br from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6">
+                <h3 className="text-xl font-semibold mb-4">Connect With Us</h3>
+                <div className="flex flex-wrap gap-3">
+                  {socialLinks.map((social) => {
+                    const Icon = social.icon;
+
+                    return (
+                      <motion.a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ y: -3 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group"
+                      >
+                        <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary/10 to-secondary/10 flex items-center justify-center border border-primary/20 hover:border-primary/40 transition-all overflow-hidden">
+                          <Icon className="w-5 h-5 text-primary group-hover:text-primary/80 transition-colors transform-gpu" />
+                        </div>
+                      </motion.a>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-6 pt-6 border-t">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">
+                      Head Office:
+                    </span>{" "}
+                    {headOfficeAddress ? (
+                      <>
+                        {formatBusinessAddress(headOfficeAddress)}
+                        <br />
+                        <span className="text-xs block mt-1">
+                          {headOfficeAddress.city}, {headOfficeAddress.state}{" "}
+                          {headOfficeAddress.postalCode}
+                        </span>
+                      </>
+                    ) : (
+                      "Multiple Locations"
+                    )}
+                    <br />
+                    <span className="font-semibold text-foreground">
+                      Hours:
+                    </span>{" "}
+                    Mon-Fri, 9:00 AM - 6:00 PM PST
+                  </p>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

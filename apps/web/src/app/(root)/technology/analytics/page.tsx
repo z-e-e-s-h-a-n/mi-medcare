@@ -34,58 +34,70 @@ export default function AnalyticsPage() {
         description="Realtime insights replace guesswork, showing everything from clean claim rate to net collections so you can make faster decisions."
       />
 
-      <section className="section-container">
-        <SectionHeader
-          title="Data that drives smarter decisions"
-          description={pillar.description}
-        />
+      <section className="section-wrapper">
+        <div className="section-container">
+          <SectionHeader
+            title="Data that drives smarter decisions"
+            description={pillar.description}
+          />
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          {analyticsMetrics.map((metric) => (
-            <article
-              key={metric.label}
-              className="rounded-2xl border border-border bg-background/50 p-6"
-            >
-              <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                {metric.label}
-              </p>
-              <p className="text-3xl font-bold text-foreground mt-3">{metric.value}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-6 rounded-2xl border border-border bg-background/60 p-6">
-          <h3 className="text-lg font-semibold text-foreground mb-3">Reports that matter most</h3>
-          <ul className="space-y-3 text-sm text-muted-foreground">
-            {analyticsPlaybook.map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <span className="mt-1 h-1 w-1 rounded-full bg-primary" />
-                <span>{item}</span>
-              </li>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {analyticsMetrics.map((metric) => (
+              <article
+                key={metric.label}
+                className="rounded-2xl border border-border bg-background/50 p-6"
+              >
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                  {metric.label}
+                </p>
+                <p className="text-3xl font-bold text-foreground mt-3">
+                  {metric.value}
+                </p>
+              </article>
             ))}
-          </ul>
-          <p className="mt-5 text-sm text-muted-foreground">
-            Our dashboards export to CSV, PDF, and visualization tools so you can share trends with boards or payers instantly.
-          </p>
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-border bg-background/60 p-6">
+            <h3 className="text-lg font-semibold text-foreground mb-3">
+              Reports that matter most
+            </h3>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              {analyticsPlaybook.map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="mt-1 h-1 w-1 rounded-full bg-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 text-sm text-muted-foreground">
+              Our dashboards export to CSV, PDF, and visualization tools so you
+              can share trends with boards or payers instantly.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="section-container pt-0">
-        <SectionHeader title="How it all connects" description={pillar.hero} />
-        <div className="grid gap-6 md:grid-cols-2">
-          {pillar.highlights.map((highlight) => (
-            <article
-              key={highlight}
-              className="rounded-2xl border border-border bg-background/40 p-6"
+      <section className="section-wrapper pt-0">
+        <div className="section-container">
+          <SectionHeader title="How it all connects" description={pillar.hero} />
+          <div className="grid gap-6 md:grid-cols-2">
+            {pillar.highlights.map((highlight) => (
+              <article
+                key={highlight}
+                className="rounded-2xl border border-border bg-background/40 p-6"
+              >
+                <p className="text-sm text-muted-foreground">{highlight}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-6 text-sm text-muted-foreground">
+            <Link
+              href="/technology"
+              className="font-medium text-primary underline"
             >
-              <p className="text-sm text-muted-foreground">{highlight}</p>
-            </article>
-          ))}
-        </div>
-        <div className="mt-6 text-sm text-muted-foreground">
-          <Link href="/technology" className="font-medium text-primary underline">
-            Back to the technology overview
-          </Link>
+              Back to the technology overview
+            </Link>
+          </div>
         </div>
       </section>
 

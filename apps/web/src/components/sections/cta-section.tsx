@@ -40,8 +40,9 @@ export function CTASection() {
         />
       </motion.div>
 
-      <div className="section-container relative py-16 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+      <div className="section-wrapper relative py-16 lg:py-20">
+        <div className="section-container">
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
           <div className="text-white">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -157,6 +158,7 @@ export function CTASection() {
           >
             <NewsletterCtaForm />
           </motion.div>
+          </div>
         </div>
       </div>
     </section>

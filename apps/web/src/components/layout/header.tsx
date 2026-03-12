@@ -5,13 +5,10 @@ import { useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import {
-  IconMapPin,
-  IconMail,
   IconBrandFacebook,
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandTiktok,
-  IconPhone,
 } from "@tabler/icons-react";
 import {
   NavigationMenu,
@@ -29,6 +26,7 @@ import { FloatingCtas } from "@/components/layout/floating-ctas";
 import { formatBusinessAddress } from "@/lib/utils";
 import { Logo } from "./logo";
 import ThemeSwitch from "@workspace/ui/components/theme-toggle";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 // Memoized social links configuration
 const SOCIAL_LINKS = [
@@ -67,11 +65,7 @@ export function Header() {
   // Memoize formatted address
   const headOfficeDisplay = useMemo(() => {
     const headOfficeAddress = business.addresses?.[0];
-    return headOfficeAddress
-      ? `${headOfficeAddress.label ? `${headOfficeAddress.label}: ` : ""}${formatBusinessAddress(
-          headOfficeAddress,
-        )}`
-      : "Multiple Locations";
+    return formatBusinessAddress(headOfficeAddress);
   }, []);
 
   // Optimized scroll handling with useMotionValueEvent
@@ -99,171 +93,179 @@ export function Header() {
           opacity: isScrolled ? 0 : 1,
         }}
         transition={{ duration: 0.2, ease: "linear" }}
-        className="hidden lg:flex bg-primary text-primary-foreground overflow-hidden will-change-[height,opacity]"
+        className="section-wrapper hidden lg:flex items-center bg-primary text-primary-foreground overflow-hidden will-change-[height,opacity]"
       >
-        <div className="section-container flex items-center justify-between gap-6 bg-primary text-primary-foreground text-sm py-2.5">
-          <div className="flex-1 min-w-0 flex items-center gap-6">
-            {/* Address - Optimized hover */}
-            <motion.div
-              className="flex items-center gap-2"
-              whileHover={{ x: 2 }}
-              transition={hoverVariants.spring as any}
-            >
+        <div className="section-container">
+          <div className="flex items-center justify-between gap-6 bg-primary text-primary-foreground text-sm py-2.5">
+            <div className="flex-1 min-w-0 flex items-center gap-6">
+              {/* Address - Optimized hover */}
               <motion.div
-                whileHover="hover"
-                whileTap="tap"
-                variants={iconHoverVariants}
-                transition={{ duration: 0.2 }}
+                className="flex items-center gap-2"
+                whileHover={{ x: 2 }}
+                transition={hoverVariants.spring as any}
               >
-                <IconMapPin className="w-4 h-4" />
+                <motion.div
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={iconHoverVariants}
+                  transition={{ duration: 0.2 }}
+                >
+                  <MapPin />
+                </motion.div>
+                <span className="truncate">{headOfficeDisplay}</span>
               </motion.div>
-              <span className="truncate">{headOfficeDisplay}</span>
-            </motion.div>
 
-            {/* Email - Optimized */}
-            <motion.div
-              whileHover={{ x: 2 }}
-              transition={hoverVariants.spring as any}
-            >
-              <Link
-                href={`mailto:${business.email}`}
-                className="flex items-center gap-2"
-                prefetch={false}
+              {/* Email - Optimized */}
+              <motion.div
+                whileHover={{ x: 2 }}
+                transition={hoverVariants.spring as any}
               >
-                <motion.div
-                  whileHover="hover"
-                  whileTap="tap"
-                  variants={iconHoverVariants}
-                  transition={{ duration: 0.2 }}
+                <Link
+                  href={`mailto:${business.email}`}
+                  className="flex items-center gap-2"
+                  prefetch={false}
                 >
-                  <IconMail className="w-4 h-4" />
-                </motion.div>
-                <span>{business.email}</span>
-              </Link>
-            </motion.div>
-          </div>
-
-          <div className="flex items-center gap-6">
-            {/* Phone - Optimized */}
-            <motion.div
-              whileHover={{ x: 2 }}
-              transition={hoverVariants.spring as any}
-            >
-              <Link
-                href={`tel:${business.phone}`}
-                className="flex items-center gap-2"
-                prefetch={false}
-              >
-                <motion.div
-                  whileHover="hover"
-                  whileTap="tap"
-                  variants={iconHoverVariants}
-                  transition={{ duration: 0.2 }}
-                >
-                  <IconPhone className="w-4 h-4" />
-                </motion.div>
-                <span>{business.phone}</span>
-              </Link>
-            </motion.div>
-
-            {/* Social Links - Optimized with useMemo */}
-            <motion.div className="flex items-center gap-2">
-              {SOCIAL_LINKS.map(({ Icon, href, name }) => (
-                <motion.div
-                  key={name}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ y: 0 }}
-                  transition={hoverVariants.gentle as any}
-                >
-                  <Link
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Visit MI MedCare on ${name}`}
-                    prefetch={false}
+                  <motion.div
+                    whileHover="hover"
+                    whileTap="tap"
+                    variants={iconHoverVariants}
+                    transition={{ duration: 0.2 }}
                   >
-                    <Icon className="w-4 h-4" />
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
+                    <Mail />
+                  </motion.div>
+                  <span>{business.email}</span>
+                </Link>
+              </motion.div>
+            </div>
 
-            <div className="w-px h-4 bg-primary-foreground/20" />
+            <div className="flex items-center gap-6">
+              {/* Phone - Optimized */}
+              <motion.div
+                whileHover={{ x: 2 }}
+                transition={hoverVariants.spring as any}
+              >
+                <Link
+                  href={`tel:${business.phone}`}
+                  className="flex items-center gap-2"
+                  prefetch={false}
+                >
+                  <motion.div
+                    whileHover="hover"
+                    whileTap="tap"
+                    variants={iconHoverVariants}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Phone />
+                  </motion.div>
+                  <span>{business.phone}</span>
+                </Link>
+              </motion.div>
 
-            <ThemeSwitch />
+              {/* Social Links - Optimized with useMemo */}
+              <motion.div className="flex items-center gap-2">
+                {SOCIAL_LINKS.map(({ Icon, href, name }) => (
+                  <motion.div
+                    key={name}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ y: 0 }}
+                    transition={hoverVariants.gentle as any}
+                  >
+                    <Link
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visit MI MedCare on ${name}`}
+                      prefetch={false}
+                    >
+                      <Icon />
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <div className="w-px h-4 bg-primary-foreground/20" />
+
+              <ThemeSwitch />
+            </div>
           </div>
         </div>
       </motion.div>
 
       {/* Main Header - Optimized */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-lg shadow-sm">
-        <motion.div
-          initial={{ paddingTop: 16, paddingBottom: 16 }}
-          animate={{
-            paddingTop: isScrolled ? 12 : 16,
-            paddingBottom: isScrolled ? 12 : 16,
-          }}
-          transition={{ duration: 0.2, ease: "linear" }}
-          className="section-container flex items-center justify-between gap-6 will-change-[padding]"
-        >
-          <Logo />
+      <header className="section-wrapper sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-lg shadow-sm">
+        <div className="section-container">
+          <motion.div
+            initial={{ paddingTop: 16, paddingBottom: 16 }}
+            animate={{
+              paddingTop: isScrolled ? 12 : 16,
+              paddingBottom: isScrolled ? 12 : 16,
+            }}
+            transition={{ duration: 0.2, ease: "linear" }}
+            className="flex items-center justify-between gap-6 will-change-[padding]"
+          >
+            <Logo />
 
-          {/* Desktop Navigation - Optimized */}
-          <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList>
-              {HEADER_NAVIGATION.map((item) => (
-                <NavigationMenuItem key={item.title}>
-                  {item.children && (
-                    <>
-                      <NavigationMenuTrigger>
-                        <motion.span
-                          whileHover={{ y: -1 }}
-                          transition={hoverVariants.spring as any}
-                          className="inline-block"
-                        >
-                          {item.title}
-                        </motion.span>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <MegaMenu item={item} />
-                      </NavigationMenuContent>
-                    </>
-                  )}
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+            {/* Desktop Navigation - Optimized */}
+            <NavigationMenu className="hidden lg:flex">
+              <NavigationMenuList>
+                {HEADER_NAVIGATION.map((item) => (
+                  <NavigationMenuItem key={item.title}>
+                    {item.children && (
+                      <>
+                        <NavigationMenuTrigger>
+                          <motion.span
+                            whileHover={{ y: -1 }}
+                            transition={hoverVariants.spring as any}
+                            className="inline-block"
+                          >
+                            {item.title}
+                          </motion.span>
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <MegaMenu item={item} />
+                        </NavigationMenuContent>
+                      </>
+                    )}
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
 
-          {/* CTA Buttons - Optimized */}
-          <motion.div className="hidden lg:flex items-center gap-4">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={hoverVariants.spring as any}
-            >
-              <Button href="/contact" variant="outline" className="rounded-2xl">
-                Contact
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={hoverVariants.spring as any}
-            >
-              <Button
-                variant="gradient"
-                className="rounded-2xl"
-                pulseDelay={5000}
-                onClick={handleConsultationOpen}
+            {/* CTA Buttons - Optimized */}
+            <motion.div className="hidden lg:flex items-center gap-4">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={hoverVariants.spring as any}
               >
-                Book Consultation
-              </Button>
+                <Button
+                  href="/contact"
+                  variant="outline"
+                  className="rounded-2xl"
+                >
+                  Contact
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={hoverVariants.spring as any}
+              >
+                <Button
+                  variant="gradient"
+                  className="rounded-2xl"
+                  pulseDelay={5000}
+                  onClick={handleConsultationOpen}
+                >
+                  Book Consultation
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
 
-          {/* Mobile */}
-          <MobileNav onBookConsultation={handleConsultationOpen} />
-        </motion.div>
+            {/* Mobile */}
+            <MobileNav onBookConsultation={handleConsultationOpen} />
+          </motion.div>
+        </div>
       </header>
 
       <FloatingCtas onBookConsultation={handleConsultationOpen} />

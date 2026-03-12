@@ -25,8 +25,9 @@ export function BenefitsSection({
       className={cn("relative overflow-hidden py-24", className)}
       ref={ref}
     >
-      <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="section-wrapper">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Main Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -159,36 +160,37 @@ export function BenefitsSection({
               );
             })}
           </motion.div>
-        </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-flex items-center gap-3 bg-background/50 backdrop-blur-sm border rounded-full px-6 py-3">
-            <CheckCircle
-              className={`w-5 h-5 ${
-                useConstantColors ? "text-foreground" : "text-primary"
-              }`}
-            />
-            <span className="text-sm font-medium">
-              Ready to transform your revenue cycle?
-            </span>
-            <motion.button
-              whileHover={{ x: 5 }}
-              className={`transition-colors ${
-                useConstantColors
-                  ? `${gradientClass(accent, { type: "text" })} opacity-90 hover:opacity-70`
-                  : "text-primary hover:text-primary/80"
-              }`}
-            >
-              Schedule a consultation →
-            </motion.button>
           </div>
-        </motion.div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-16 text-center"
+          >
+            <div className="inline-flex items-center gap-3 bg-background/50 backdrop-blur-sm border rounded-full px-6 py-3">
+              <CheckCircle
+                className={`w-5 h-5 ${
+                  useConstantColors ? "text-foreground" : "text-primary"
+                }`}
+              />
+              <span className="text-sm font-medium">
+                Ready to transform your revenue cycle?
+              </span>
+              <motion.button
+                whileHover={{ x: 5 }}
+                className={`transition-colors ${
+                  useConstantColors
+                    ? `${gradientClass(accent, { type: "text" })} opacity-90 hover:opacity-70`
+                    : "text-primary hover:text-primary/80"
+                }`}
+              >
+                Schedule a consultation →
+              </motion.button>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

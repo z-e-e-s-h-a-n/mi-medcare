@@ -78,12 +78,13 @@ export function HowItWorksSection({
         />
       </div>
 
-      <div className="section-container relative px-4 md:px-6">
-        <SectionHeader
-          badge="Simple Process"
-          title="How We Transform Your Revenue Cycle"
-          description="A seamless journey from assessment to accelerated payments, designed to maximize your practice's revenue potential."
-        />
+      <div className="section-wrapper relative px-4 md:px-6">
+        <div className="section-container">
+          <SectionHeader
+            badge="Simple Process"
+            title="How We Transform Your Revenue Cycle"
+            description="A seamless journey from assessment to accelerated payments, designed to maximize your practice's revenue potential."
+          />
 
         {/* Stats Summary Cards - Now responsive */}
         <div className="mb-12 md:mb-20">
@@ -315,26 +316,27 @@ export function HowItWorksSection({
         </div>
 
         {/* Bottom CTA - Mobile optimized */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-12 md:mt-20"
-        >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-3 bg-linear-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-2xl sm:rounded-full px-6 py-4 sm:px-8 sm:py-4">
-            <Sparkles className="w-5 h-5 text-primary shrink-0" />
-            <span className="text-sm font-medium text-center sm:text-left">
-              Ready to streamline your revenue cycle?
-            </span>
-            <motion.button
-              whileHover={{ x: 5 }}
-              className="text-primary hover:text-primary/80 transition-colors font-semibold text-sm sm:text-base"
-            >
-              Get Started Today →
-            </motion.button>
-          </div>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="text-center mt-12 md:mt-20"
+          >
+            <div className="inline-flex flex-col sm:flex-row items-center gap-3 bg-linear-to-r from-primary/10 to-secondary/10 backdrop-blur-sm border border-primary/20 rounded-2xl sm:rounded-full px-6 py-4 sm:px-8 sm:py-4">
+              <Sparkles className="w-5 h-5 text-primary shrink-0" />
+              <span className="text-sm font-medium text-center sm:text-left">
+                Ready to streamline your revenue cycle?
+              </span>
+              <motion.button
+                whileHover={{ x: 5 }}
+                className="text-primary hover:text-primary/80 transition-colors font-semibold text-sm sm:text-base"
+              >
+                Get Started Today →
+              </motion.button>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

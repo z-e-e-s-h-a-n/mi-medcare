@@ -31,10 +31,7 @@ const GRADIENT_OPACITY_SAFE_LIST =
 void GRADIENT_OPACITY_SAFE_LIST;
 
 export const splitGradient = (gradient: string): [string, string] => {
-  const tokens = gradient
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean);
+  const tokens = gradient.trim().split(/\s+/).filter(Boolean);
 
   const [from = "from-transparent", to = from] = tokens;
   return [from, to];
@@ -65,5 +62,5 @@ export type BusinessAddress = {
   country: string;
 };
 
-export const formatBusinessAddress = (address: BusinessAddress) =>
-  `${address.line1}, ${address.city}, ${address.state} ${address.postalCode}, ${address.country}`;
+export const formatBusinessAddress = (address: BusinessAddress, full = false) =>
+  `${address.line1}, ${address.city}, ${address.state} ${address.postalCode}${full ? ", " + address.country : ""}`.trim();

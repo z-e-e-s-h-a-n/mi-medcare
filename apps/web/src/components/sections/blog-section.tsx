@@ -16,8 +16,8 @@ interface BlogSectionProps {
 
 export function BlogSection({ className }: BlogSectionProps) {
   return (
-    <section className={cn("section-container bg-muted", className)}>
-      <div>
+    <section className={cn("section-wrapper bg-muted", className)}>
+      <div className="section-container">
         <SectionHeader
           badge="Blog"
           title="Latest Insights"

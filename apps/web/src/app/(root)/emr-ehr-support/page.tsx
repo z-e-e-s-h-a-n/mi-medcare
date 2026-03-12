@@ -49,40 +49,42 @@ export default function EmrEhrSupportPage() {
 
       <EHRSection />
 
-      <section className="section-container pt-0">
-        <div className="grid gap-6 md:grid-cols-3 mb-10">
-          {supportHighlights.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.title}
-                className="rounded-2xl border bg-background p-6 shadow-sm"
-              >
-                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Icon className="h-5 w-5" />
+      <section className="section-wrapper pt-0">
+        <div className="section-container">
+          <div className="grid gap-6 md:grid-cols-3 mb-10">
+            {supportHighlights.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border bg-background p-6 shadow-sm"
+                >
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {item.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
 
-        <div className="rounded-2xl border bg-muted/30 p-6 md:p-8">
-          <h2 className="text-2xl font-bold mb-4">
-            What Our EMR/EHR Support Covers
-          </h2>
-          <div className="grid gap-3 md:grid-cols-2">
-            {supportIncludes.map((item) => (
-              <div key={item} className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                <p className="text-sm md:text-base text-muted-foreground">
-                  {item}
-                </p>
-              </div>
-            ))}
+          <div className="rounded-2xl border bg-muted/30 p-6 md:p-8">
+            <h2 className="text-2xl font-bold mb-4">
+              What Our EMR/EHR Support Covers
+            </h2>
+            <div className="grid gap-3 md:grid-cols-2">
+              {supportIncludes.map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                  <p className="text-sm md:text-base text-muted-foreground">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -65,33 +65,39 @@ export default function CompliancePage() {
         description="Our compliance-first billing model helps healthcare organizations reduce risk while maintaining strong reimbursement performance."
       />
 
-      <section className="section-container">
-        <div className="grid gap-6 md:grid-cols-3">
-          {controls.map((item) => {
-            const Icon = item.icon;
-            return (
-              <article key={item.title} className="rounded-2xl border p-6">
-                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
-                <p className="text-muted-foreground">{item.description}</p>
-              </article>
-            );
-          })}
+      <section className="section-wrapper">
+        <div className="section-container">
+          <div className="grid gap-6 md:grid-cols-3">
+            {controls.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title} className="rounded-2xl border p-6">
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
+                  <p className="text-muted-foreground">{item.description}</p>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      <section className="section-container pt-0">
-        <div className="rounded-2xl border bg-muted/30 p-6 md:p-8">
-          <h2 className="text-2xl font-bold mb-4">Our Compliance Commitments</h2>
-          <div className="grid gap-3 md:grid-cols-2">
-            {commitments.map((item) => (
-              <div key={item} className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                <p className="text-muted-foreground">{item}</p>
-              </div>
-            ))}
+      <section className="section-wrapper pt-0">
+        <div className="section-container">
+          <div className="rounded-2xl border bg-muted/30 p-6 md:p-8">
+            <h2 className="text-2xl font-bold mb-4">
+              Our Compliance Commitments
+            </h2>
+            <div className="grid gap-3 md:grid-cols-2">
+              {commitments.map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                  <p className="text-muted-foreground">{item}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
