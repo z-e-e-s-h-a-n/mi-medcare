@@ -15,13 +15,16 @@ export class PrismaService
 {
   @InjectLogger()
   private readonly logger!: LoggerService;
+  private dbHost!: string;
 
   constructor(env: EnvService) {
-    const adapter = new PrismaPg({
-      connectionString: env.get("DB_URI"),
-    });
+    const connectionString = env.get("DB_URI");
+    const adapter = new PrismaPg({ connectionString });
 
     super({ adapter });
+
+    const host = new URL(connectionString).hostname;
+    this.dbHost = host;
 
     Object.assign(this, this.$extends(softDeleteExtension));
   }
@@ -29,6 +32,9 @@ export class PrismaService
   async onModuleInit() {
     this.logger.log("Connecting to the database...");
     try {
+      const isLocal =
+        this.dbHost === "localhost" || this.dbHost === "127.0.0.1";
+      this.logger.log(`DB: ${isLocal ? "LOCAL" : "REMOTE"} (${this.dbHost})`);
       await this.$connect();
       this.logger.log("✅ Database connection established.");
     } catch (error) {
