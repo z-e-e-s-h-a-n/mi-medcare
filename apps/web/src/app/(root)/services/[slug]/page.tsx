@@ -1,13 +1,33 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { PageHeader } from "@/components/layout/page-header";
-import { Button } from "@workspace/ui/components/button";
+import { notFound } from "next/navigation";
+import { ServiceDetails } from "./_page";
+import serviceDetails from "../details.json";
 
-export const metadata: Metadata = {
-  title: "Service Details",
-  description:
-    "Placeholder page for service details while the dedicated content is being built.",
-};
+const getServiceDetail = (slug: string) =>
+  serviceDetails.find((service) => service.slug === slug);
+
+export function generateStaticParams() {
+  return serviceDetails.map((service) => ({ slug: service.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const service = getServiceDetail(slug);
+
+  if (!service) {
+    return {
+      title: "Service Not Found",
+      description: "The requested service could not be found.",
+    };
+  }
+
+  return {
+    title: service.title,
+    description: service.heroDescription,
+  };
+}
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -15,31 +35,11 @@ type PageProps = {
 
 export default async function ServiceDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  const detail = getServiceDetail(slug);
 
-  return (
-    <>
-      <PageHeader
-        title="Service Details"
-        badge="Service"
-        description={`Placeholder page for: /services/${slug}`}
-      />
+  if (!detail) {
+    notFound();
+  }
 
-      <section className="section-container py-16">
-        <div className="max-w-3xl">
-          <h2 className="text-2xl font-semibold">Content coming soon</h2>
-          <p className="mt-3 text-muted-foreground">
-            We&apos;ll add full service details here later.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild variant="outline">
-              <Link href="/services">Back to Services</Link>
-            </Button>
-            <Button asChild variant="gradient">
-              <Link href="/contact">Contact Us</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+  return <ServiceDetails slug={slug} detail={detail} />;
 }

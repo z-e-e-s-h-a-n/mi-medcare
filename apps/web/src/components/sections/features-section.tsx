@@ -14,7 +14,7 @@ interface FeaturesSectionProps {
 }
 
 export function FeaturesSection({
-  useConstantColors = false,
+  useConstantColors = true,
   className,
 }: FeaturesSectionProps) {
   return (

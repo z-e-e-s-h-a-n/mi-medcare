@@ -24,13 +24,13 @@ export default function Home() {
     <>
       <HeroSection />
       <MetricsSection />
-      <SuccessMetrics />
-      <ServicesSection limit={6} useConstantColors />
-      <FeaturesSection />
-      <HowItWorksSection useConstantColors />
-      <BenefitsSection useConstantColors />
+      <SuccessMetrics useConstantColors={false} />
+      <ServicesSection limit={6} />
+      <FeaturesSection useConstantColors={false} />
+      <HowItWorksSection />
+      <BenefitsSection />
       <EHRSection limit={8} />
-      <SpecialtiesSection limit={8} useConstantColors />
+      <SpecialtiesSection limit={8} />
       <TestimonialsSection />
       <FAQSection />
       <BlogSection />

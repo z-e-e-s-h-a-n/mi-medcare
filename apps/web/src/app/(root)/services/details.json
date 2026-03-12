@@ -1,0 +1,981 @@
+[
+  {
+    "slug": "medical-billing",
+    "title": "Medical Billing Services",
+    "badge": "Core Service",
+    "heroDescription": "End-to-end medical billing that delivers clean claims, faster reimbursements, and clear financial visibility for your practice.",
+    "overview": {
+      "title": "Billing built for clean claims and reliable cash flow",
+      "body": "Our medical billing teams manage the full claim lifecycle with specialty-aware workflows, payer-specific edits, and continuous QA. We take on the administrative load so your staff can focus on patient care while we optimize reimbursements.",
+      "bullets": [
+        "Specialty-specific claim rules and modifier checks",
+        "Real-time eligibility, authorization, and charge capture support",
+        "Claim scrubbing to reduce preventable denials",
+        "Transparent monthly reporting and payer trend insights"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Higher first-pass acceptance",
+        "description": "Cleaner claims and payer-ready documentation reduce rework and resubmissions."
+      },
+      {
+        "title": "Faster reimbursements",
+        "description": "Optimized submission cadence and follow-up cycles shorten the time to payment."
+      },
+      {
+        "title": "Stronger revenue integrity",
+        "description": "Consistent charge capture and reconciliation protect against leakage."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "Charge capture review",
+        "description": "Validate encounter data and missing charges before claims go out."
+      },
+      {
+        "title": "Claim scrubbing and edits",
+        "description": "Automated and manual edits to ensure payer compliance."
+      },
+      {
+        "title": "ERA/EOB posting",
+        "description": "Accurate payment posting with contractual adjustments applied."
+      },
+      {
+        "title": "Patient balance workflows",
+        "description": "Clear statements and follow-up to improve patient collections."
+      },
+      {
+        "title": "Monthly KPI reporting",
+        "description": "Dashboards covering AR, denial rates, and payer performance."
+      }
+    ],
+    "process": [
+      {
+        "title": "Discovery and data review",
+        "description": "Assess current workflows, payer mix, and system integrations."
+      },
+      {
+        "title": "Workflow design",
+        "description": "Configure claim rules, charge capture steps, and reporting cadence."
+      },
+      {
+        "title": "Go-live and stabilization",
+        "description": "Launch with QA monitoring and rapid issue resolution."
+      },
+      {
+        "title": "Continuous optimization",
+        "description": "Monthly performance reviews and denial-prevention tuning."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Can you work with our existing EHR and PM system?",
+        "answer": "Yes. We support major EHR/PM platforms and can integrate with your current workflow."
+      },
+      {
+        "question": "How quickly can we see improvements in collections?",
+        "answer": "Many practices see measurable improvements within the first 60 to 90 days after go-live."
+      },
+      {
+        "question": "Do you support multi-location practices?",
+        "answer": "Yes. We manage provider and location-specific billing rules with consolidated reporting."
+      }
+    ],
+    "relatedSlugs": [
+      "revenue-cycle-management",
+      "medical-coding",
+      "denial-management"
+    ]
+  },
+  {
+    "slug": "revenue-cycle-management",
+    "title": "Revenue Cycle Management",
+    "badge": "RCM",
+    "heroDescription": "Comprehensive revenue cycle management that connects intake, coding, billing, and collections into one accountable process.",
+    "overview": {
+      "title": "One coordinated RCM engine for your practice",
+      "body": "We unify front-end, mid-cycle, and back-end workflows so every claim moves faster and cleaner from appointment to payment. You gain a single partner accountable for financial performance.",
+      "bullets": [
+        "Front-desk training for accurate intake and eligibility",
+        "Coding QA and documentation integrity checks",
+        "Denial prevention and appeal escalation paths",
+        "AR segmentation and targeted payer follow-up"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Shorter AR days",
+        "description": "Streamlined workflows reduce delays across the revenue cycle."
+      },
+      {
+        "title": "Predictable cash flow",
+        "description": "Improved claim accuracy and faster resolution cycles stabilize revenue."
+      },
+      {
+        "title": "Operational clarity",
+        "description": "Unified KPIs and dashboards reveal what drives performance."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "End-to-end RCM oversight",
+        "description": "Full lifecycle management from intake to collections."
+      },
+      {
+        "title": "Eligibility and authorization",
+        "description": "Upfront verification and guidance to prevent denials."
+      },
+      {
+        "title": "Coding and charge QA",
+        "description": "Specialty-aware coding audits and pre-bill review."
+      },
+      {
+        "title": "Denial and underpayment management",
+        "description": "Root-cause analysis, appeals, and recovery workflows."
+      },
+      {
+        "title": "Performance reporting",
+        "description": "Role-based dashboards for providers and leadership."
+      }
+    ],
+    "process": [
+      {
+        "title": "RCM assessment",
+        "description": "Audit your current workflow, KPIs, and payer performance."
+      },
+      {
+        "title": "Workflow alignment",
+        "description": "Define responsibilities, SOPs, and integration points."
+      },
+      {
+        "title": "Execution and monitoring",
+        "description": "Daily production with real-time quality checks."
+      },
+      {
+        "title": "Optimization cadence",
+        "description": "Monthly and quarterly reviews to keep improving results."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is included in full RCM coverage?",
+        "answer": "We manage eligibility, coding QA, claim submission, payments, denials, and reporting."
+      },
+      {
+        "question": "Can we keep some functions in-house?",
+        "answer": "Yes. We can co-manage RCM or provide modular support based on your needs."
+      },
+      {
+        "question": "How do you track performance?",
+        "answer": "We provide KPI dashboards covering AR aging, denial trends, and payer turnaround times."
+      }
+    ],
+    "relatedSlugs": [
+      "medical-billing",
+      "accounts-receivable",
+      "denial-management"
+    ]
+  },
+  {
+    "slug": "medical-coding",
+    "title": "Medical Coding Services",
+    "badge": "Coding",
+    "heroDescription": "Certified coding support that improves accuracy, reduces audit risk, and protects reimbursement.",
+    "overview": {
+      "title": "Coding accuracy that stands up to audits",
+      "body": "Our certified coders apply specialty-specific CPT, ICD-10, and HCPCS rules with documentation-driven validation. We reduce risk and improve revenue integrity for every encounter.",
+      "bullets": [
+        "Certified coders with multi-specialty experience",
+        "Modifier validation and medical necessity checks",
+        "Provider queries and documentation feedback loops",
+        "Pre-bill audits to prevent compliance issues"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Improved reimbursement accuracy",
+        "description": "Correct code selection and modifier use reduces underpayment."
+      },
+      {
+        "title": "Lower audit risk",
+        "description": "Documentation-driven coding reduces compliance exposure."
+      },
+      {
+        "title": "Faster claim approvals",
+        "description": "Cleaner coding leads to fewer edits and denials."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "CPT, ICD-10, and HCPCS coding",
+        "description": "Accurate code assignment aligned with payer policies."
+      },
+      {
+        "title": "Modifier and bundling review",
+        "description": "Reduce errors with robust modifier logic."
+      },
+      {
+        "title": "Documentation feedback",
+        "description": "Provider queries that strengthen documentation quality."
+      },
+      {
+        "title": "Coding audits",
+        "description": "Ongoing QA to ensure compliance and accuracy."
+      },
+      {
+        "title": "Specialty-specific code updates",
+        "description": "Stay current with annual code and guideline changes."
+      }
+    ],
+    "process": [
+      {
+        "title": "Documentation intake",
+        "description": "Collect encounter notes and relevant clinical data."
+      },
+      {
+        "title": "Code assignment",
+        "description": "Apply the correct codes and modifiers."
+      },
+      {
+        "title": "Quality review",
+        "description": "Secondary QA validates coding and compliance."
+      },
+      {
+        "title": "Submission readiness",
+        "description": "Deliver clean codes to the billing workflow."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Do you support both professional and facility coding?",
+        "answer": "Yes. We provide support for professional, facility, and ASC coding needs."
+      },
+      {
+        "question": "How do you handle documentation gaps?",
+        "answer": "We issue provider queries with clear guidance and track resolution."
+      },
+      {
+        "question": "Can you audit our current coding?",
+        "answer": "Yes. We can run targeted or comprehensive coding audits."
+      }
+    ],
+    "relatedSlugs": [
+      "medical-billing",
+      "billing-audit",
+      "denial-management"
+    ]
+  },
+  {
+    "slug": "credentialing",
+    "title": "Provider Credentialing",
+    "badge": "Enrollment",
+    "heroDescription": "Accelerate payer enrollment and keep provider credentials current with structured, trackable workflows.",
+    "overview": {
+      "title": "Faster credentialing with full visibility",
+      "body": "We handle CAQH setup, payer enrollment, revalidation, and roster maintenance. Our team keeps your provider files accurate so you can avoid delays and revenue gaps.",
+      "bullets": [
+        "CAQH profile setup and maintenance",
+        "Payer application submission and follow-up",
+        "Revalidation and expiration tracking",
+        "Provider roster management and updates"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Quicker payer approvals",
+        "description": "Structured submissions reduce back-and-forth with payers."
+      },
+      {
+        "title": "Reduced revenue delays",
+        "description": "Timely credentialing prevents gaps in billing eligibility."
+      },
+      {
+        "title": "Simplified compliance",
+        "description": "Centralized documentation keeps credentials accurate."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "CAQH management",
+        "description": "Initial setup, attestations, and updates."
+      },
+      {
+        "title": "Payer enrollment",
+        "description": "Application preparation and submission for each payer."
+      },
+      {
+        "title": "Status tracking",
+        "description": "Regular updates and escalation when needed."
+      },
+      {
+        "title": "Revalidation calendar",
+        "description": "Proactive tracking of payer deadlines."
+      },
+      {
+        "title": "Roster maintenance",
+        "description": "Provider additions, removals, and updates."
+      }
+    ],
+    "process": [
+      {
+        "title": "Provider data collection",
+        "description": "Gather licenses, CVs, and required documents."
+      },
+      {
+        "title": "Application submission",
+        "description": "Complete and submit payer-specific forms."
+      },
+      {
+        "title": "Payer follow-up",
+        "description": "Track status and resolve requests quickly."
+      },
+      {
+        "title": "Go-live confirmation",
+        "description": "Verify enrollment and update billing systems."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How long does credentialing usually take?",
+        "answer": "Timelines vary by payer, but we aim to keep approvals moving with consistent follow-up."
+      },
+      {
+        "question": "Can you credential multiple providers at once?",
+        "answer": "Yes. We support group practices and multi-location organizations."
+      },
+      {
+        "question": "Do you handle recredentialing?",
+        "answer": "Yes. We manage revalidation and renewal cycles proactively."
+      }
+    ],
+    "relatedSlugs": [
+      "eligibility-verification",
+      "medical-billing",
+      "revenue-cycle-management"
+    ]
+  },
+  {
+    "slug": "eligibility-verification",
+    "title": "Eligibility Verification",
+    "badge": "Front Desk",
+    "heroDescription": "Verify coverage and benefits before each visit to reduce denials and improve patient collections.",
+    "overview": {
+      "title": "Upfront verification that prevents downstream denials",
+      "body": "We confirm active coverage, benefits, and authorization requirements before services are delivered. That means fewer claim rejections and clearer patient responsibility.",
+      "bullets": [
+        "Real-time eligibility and benefit verification",
+        "Authorization prompts and payer-specific requirements",
+        "Patient responsibility estimates",
+        "Documentation notes for accurate billing"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Fewer eligibility denials",
+        "description": "Upfront checks reduce avoidable claim rejections."
+      },
+      {
+        "title": "Improved patient collections",
+        "description": "Clear financial responsibility improves point-of-service payments."
+      },
+      {
+        "title": "Smoother front desk workflow",
+        "description": "Standardized scripts and checklists reduce errors."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "Eligibility confirmation",
+        "description": "Coverage status verified prior to service."
+      },
+      {
+        "title": "Benefit breakdown",
+        "description": "Copays, deductibles, and coinsurance documented."
+      },
+      {
+        "title": "Authorization guidance",
+        "description": "Identify when pre-authorization is required."
+      },
+      {
+        "title": "Patient estimate support",
+        "description": "Estimate tools and scripts for front desk teams."
+      },
+      {
+        "title": "Verification logs",
+        "description": "Detailed records for compliance and audit needs."
+      }
+    ],
+    "process": [
+      {
+        "title": "Collect demographics",
+        "description": "Validate patient and insurance details."
+      },
+      {
+        "title": "Verify coverage",
+        "description": "Confirm active policy and effective dates."
+      },
+      {
+        "title": "Confirm benefits",
+        "description": "Document copays, deductibles, and limits."
+      },
+      {
+        "title": "Communicate findings",
+        "description": "Notify staff of issues before the visit."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How often should eligibility be checked?",
+        "answer": "We recommend verification for every visit, especially for recurring services."
+      },
+      {
+        "question": "Do you handle authorizations too?",
+        "answer": "We flag authorization requirements and help the team initiate requests."
+      },
+      {
+        "question": "Can you integrate with our scheduling system?",
+        "answer": "Yes. We can align verification workflows with your scheduling and intake process."
+      }
+    ],
+    "relatedSlugs": [
+      "medical-billing",
+      "revenue-cycle-management",
+      "denial-management"
+    ]
+  },
+  {
+    "slug": "denial-management",
+    "title": "Denial Management",
+    "badge": "Recovery",
+    "heroDescription": "Recover lost revenue and reduce recurring denials with a structured appeal and prevention program.",
+    "overview": {
+      "title": "Turn denials into recoverable revenue",
+      "body": "We analyze denial patterns, correct root causes, and appeal aggressively within payer timelines. Our goal is to recover revenue now and prevent it from slipping again.",
+      "bullets": [
+        "Denial categorization and root-cause analysis",
+        "Appeal letter drafting and submission tracking",
+        "Payer follow-up and escalation",
+        "Prevention playbooks and workflow fixes"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Higher recovery rates",
+        "description": "Appeals are filed with complete documentation and follow-through."
+      },
+      {
+        "title": "Lower repeat denials",
+        "description": "We fix the upstream issues that trigger rejections."
+      },
+      {
+        "title": "Cleaner claims pipeline",
+        "description": "Front-end edits reduce denial volume over time."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "Denial inventory",
+        "description": "Centralized list of denied claims with categorization."
+      },
+      {
+        "title": "Appeal preparation",
+        "description": "Complete documentation and payer-ready appeal packages."
+      },
+      {
+        "title": "Payer follow-up",
+        "description": "Structured call and correspondence schedules."
+      },
+      {
+        "title": "Denial trend reports",
+        "description": "Monthly reporting on root causes and payer behavior."
+      },
+      {
+        "title": "Prevention roadmap",
+        "description": "Action plan to reduce future denials."
+      }
+    ],
+    "process": [
+      {
+        "title": "Analyze and categorize",
+        "description": "Group denials by root cause and payer."
+      },
+      {
+        "title": "Correct and resubmit",
+        "description": "Fix errors and prepare appeal materials."
+      },
+      {
+        "title": "Appeal and follow up",
+        "description": "Track response times and escalate when necessary."
+      },
+      {
+        "title": "Prevent recurrence",
+        "description": "Update workflows and payer rules."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How quickly are denials worked?",
+        "answer": "We prioritize high-value claims and adhere to payer appeal timelines."
+      },
+      {
+        "question": "Do you appeal medical necessity denials?",
+        "answer": "Yes. We gather documentation and provide payer-specific appeal content."
+      },
+      {
+        "question": "Will you share denial trends with our team?",
+        "answer": "Yes. We provide clear reports and recommendations for prevention."
+      }
+    ],
+    "relatedSlugs": [
+      "medical-billing",
+      "accounts-receivable",
+      "revenue-cycle-management"
+    ]
+  },
+  {
+    "slug": "accounts-receivable",
+    "title": "Accounts Receivable Management",
+    "badge": "AR",
+    "heroDescription": "Reduce aging receivables with targeted payer follow-up and underpayment recovery.",
+    "overview": {
+      "title": "Focused follow-up that gets claims paid",
+      "body": "We segment AR by payer, age, and denial type to target the claims that will move the needle. Our team prioritizes high-impact actions that improve cash flow without disrupting your staff.",
+      "bullets": [
+        "AR aging segmentation and prioritization",
+        "Payer calling and claims status follow-up",
+        "Underpayment identification and recovery",
+        "Transparent AR performance reporting"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Lower AR days",
+        "description": "Systematic follow-up accelerates claim resolution."
+      },
+      {
+        "title": "Recovered underpayments",
+        "description": "Contractual terms are enforced and verified."
+      },
+      {
+        "title": "Cleaner AR inventory",
+        "description": "Old claims are resolved or properly written off."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "AR aging analysis",
+        "description": "Identify bottlenecks and segment high-risk claims."
+      },
+      {
+        "title": "Payer follow-up queues",
+        "description": "Structured contact and escalation workflows."
+      },
+      {
+        "title": "Underpayment review",
+        "description": "Detect and recover payer shortfalls."
+      },
+      {
+        "title": "Patient balance follow-up",
+        "description": "Transparent statements and consistent outreach."
+      },
+      {
+        "title": "Monthly AR reporting",
+        "description": "Detailed aging, payer mix, and productivity metrics."
+      }
+    ],
+    "process": [
+      {
+        "title": "Segment AR inventory",
+        "description": "Group claims by payer, age, and denial status."
+      },
+      {
+        "title": "Prioritize actions",
+        "description": "Focus on high-value and time-sensitive claims."
+      },
+      {
+        "title": "Resolve and appeal",
+        "description": "Work rejections, correct errors, and appeal where needed."
+      },
+      {
+        "title": "Report and optimize",
+        "description": "Track progress and refine workflows monthly."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What AR age buckets do you target first?",
+        "answer": "We prioritize claims near payer filing deadlines and high-value balances."
+      },
+      {
+        "question": "Do you work secondary claims?",
+        "answer": "Yes. We manage coordination of benefits and secondary billing."
+      },
+      {
+        "question": "Can you help reduce patient AR too?",
+        "answer": "Yes. We support patient statements and follow-up plans."
+      }
+    ],
+    "relatedSlugs": [
+      "payment-posting",
+      "denial-management",
+      "revenue-cycle-management"
+    ]
+  },
+  {
+    "slug": "payment-posting",
+    "title": "Payment Posting",
+    "badge": "Posting",
+    "heroDescription": "Accurate payment posting and reconciliation that keeps your books clean and reports reliable.",
+    "overview": {
+      "title": "Precision posting for trustworthy financial reporting",
+      "body": "We post ERAs and EOBs with exact contractual adjustments, maintain deposit logs, and reconcile batches so you always know what was paid, adjusted, or denied.",
+      "bullets": [
+        "ERA/EOB posting with adjustment accuracy",
+        "Secondary billing and crossover triggers",
+        "Batch reconciliation and deposit logs",
+        "Denial and underpayment flags"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Accurate ledgers",
+        "description": "Clean postings improve AR visibility and reconciliation."
+      },
+      {
+        "title": "Faster secondary billing",
+        "description": "Crossover rules reduce time to secondary payment."
+      },
+      {
+        "title": "Reduced write-off errors",
+        "description": "Clear contractual rules prevent revenue leakage."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "ERA/EOB processing",
+        "description": "Detailed posting with adjustments and remarks."
+      },
+      {
+        "title": "Deposit reconciliation",
+        "description": "Match deposits to posted batches."
+      },
+      {
+        "title": "Secondary claim triggers",
+        "description": "Prompt next-payer submissions."
+      },
+      {
+        "title": "Denial identification",
+        "description": "Route denials to the correct workflow."
+      },
+      {
+        "title": "Posting accuracy audits",
+        "description": "Periodic QA to ensure consistent posting."
+      }
+    ],
+    "process": [
+      {
+        "title": "Receive remits",
+        "description": "Collect ERAs, EOBs, and bank deposits."
+      },
+      {
+        "title": "Post and adjust",
+        "description": "Apply payments, contractuals, and remarks."
+      },
+      {
+        "title": "Reconcile batches",
+        "description": "Match posted totals to deposit records."
+      },
+      {
+        "title": "Route follow-up items",
+        "description": "Send denials and underpayments for action."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Do you handle both electronic and paper remits?",
+        "answer": "Yes. We post ERAs and manual EOBs with full reconciliation."
+      },
+      {
+        "question": "How do you prevent posting errors?",
+        "answer": "We use standardized workflows, double checks, and periodic audits."
+      },
+      {
+        "question": "Can you manage secondary billing triggers?",
+        "answer": "Yes. We apply coordination rules to ensure timely secondary claims."
+      }
+    ],
+    "relatedSlugs": [
+      "accounts-receivable",
+      "medical-billing",
+      "denial-management"
+    ]
+  },
+  {
+    "slug": "billing-audit",
+    "title": "Medical Billing Audit",
+    "badge": "Audit",
+    "heroDescription": "Identify revenue leakage and compliance risks with targeted billing and coding audits.",
+    "overview": {
+      "title": "Audit insights that improve performance and compliance",
+      "body": "We review claims, coding accuracy, and documentation workflows to uncover missed revenue, recurring denials, and compliance gaps. You receive actionable recommendations with clear next steps.",
+      "bullets": [
+        "Charge capture and claim accuracy review",
+        "Coding compliance and modifier validation",
+        "Denial root-cause analysis",
+        "Actionable remediation plan"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Recovered revenue",
+        "description": "Identify missed charges and underpayments."
+      },
+      {
+        "title": "Reduced compliance risk",
+        "description": "Highlight documentation gaps and coding issues."
+      },
+      {
+        "title": "Improved workflows",
+        "description": "Strengthen front-end and back-end processes."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "Claim sample review",
+        "description": "Audit sample claims to find patterns and gaps."
+      },
+      {
+        "title": "Coding assessment",
+        "description": "Validate code selection and modifier use."
+      },
+      {
+        "title": "Denial analysis",
+        "description": "Identify preventable denial reasons."
+      },
+      {
+        "title": "Compliance findings",
+        "description": "Highlight risk areas and corrective actions."
+      },
+      {
+        "title": "Improvement roadmap",
+        "description": "Detailed plan with prioritized fixes."
+      }
+    ],
+    "process": [
+      {
+        "title": "Select audit scope",
+        "description": "Define specialties, payers, and date ranges."
+      },
+      {
+        "title": "Review and analyze",
+        "description": "Evaluate claims, coding, and documentation."
+      },
+      {
+        "title": "Report findings",
+        "description": "Deliver insights with supporting evidence."
+      },
+      {
+        "title": "Implement fixes",
+        "description": "Apply recommended workflow and training updates."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Can you audit a specific payer or specialty?",
+        "answer": "Yes. We can target any payer, location, or specialty line."
+      },
+      {
+        "question": "Do you provide provider education?",
+        "answer": "Yes. We deliver targeted documentation and coding feedback."
+      },
+      {
+        "question": "How often should audits be done?",
+        "answer": "Quarterly or biannual audits are common for proactive compliance."
+      }
+    ],
+    "relatedSlugs": [
+      "medical-coding",
+      "medical-billing",
+      "denial-management"
+    ]
+  },
+  {
+    "slug": "laboratory-billing",
+    "title": "Laboratory Billing",
+    "badge": "Lab Billing",
+    "heroDescription": "Specialized billing for diagnostic and reference labs with complex coding and payer rules.",
+    "overview": {
+      "title": "Lab billing designed for complex payer requirements",
+      "body": "Laboratory claims require precise test mapping, modifiers, and medical necessity checks. We manage the details so lab revenue stays compliant and consistent.",
+      "bullets": [
+        "Test panel mapping and CPT code accuracy",
+        "Medical necessity and payer policy validation",
+        "CLIA and modifier checks",
+        "Reference lab reconciliation and reporting"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Fewer lab claim rejections",
+        "description": "Accurate coding and documentation reduce payer rejections."
+      },
+      {
+        "title": "Faster lab reimbursements",
+        "description": "Claims are submitted clean and tracked closely."
+      },
+      {
+        "title": "Improved compliance",
+        "description": "Payer policy updates are built into workflows."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "Lab test code mapping",
+        "description": "Accurate CPT and panel setup."
+      },
+      {
+        "title": "Medical necessity checks",
+        "description": "Documentation validation aligned with payer policies."
+      },
+      {
+        "title": "Modifier and CLIA review",
+        "description": "Compliance checks to prevent denials."
+      },
+      {
+        "title": "Reference lab reconciliation",
+        "description": "Track send-outs and reconcile payments."
+      },
+      {
+        "title": "Lab KPI reporting",
+        "description": "Visibility into test volume, denials, and reimbursement."
+      }
+    ],
+    "process": [
+      {
+        "title": "Lab workflow assessment",
+        "description": "Review test menus, requisitions, and payer mix."
+      },
+      {
+        "title": "Coding and policy setup",
+        "description": "Configure coding logic and medical necessity rules."
+      },
+      {
+        "title": "Claim submission",
+        "description": "Submit clean lab claims with required documentation."
+      },
+      {
+        "title": "Follow-up and reporting",
+        "description": "Track reimbursements and denial trends."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Do you bill for both in-house and reference lab tests?",
+        "answer": "Yes. We support both in-house diagnostics and reference lab workflows."
+      },
+      {
+        "question": "Can you help with medical necessity denials?",
+        "answer": "Yes. We use payer policies and documentation checks to reduce these denials."
+      },
+      {
+        "question": "Do you support high-volume lab billing?",
+        "answer": "Yes. Our processes scale for high test volumes."
+      }
+    ],
+    "relatedSlugs": [
+      "medical-billing",
+      "medical-coding",
+      "denial-management"
+    ]
+  },
+  {
+    "slug": "mips-consulting",
+    "title": "MIPS Consulting",
+    "badge": "Quality Programs",
+    "heroDescription": "Maximize MIPS performance scores with guided measure selection, data capture, and reporting support.",
+    "overview": {
+      "title": "MIPS guidance that protects reimbursements",
+      "body": "We help you select measures, capture the right data, and submit accurate performance reports. The result is stronger scores and fewer administrative headaches.",
+      "bullets": [
+        "Measure selection tailored to your specialty",
+        "Workflow integration for data capture",
+        "Quality, CPIA, and Promoting Interoperability support",
+        "Submission readiness checks"
+      ]
+    },
+    "outcomes": [
+      {
+        "title": "Higher MIPS scores",
+        "description": "Strategic measure selection and clean submissions improve performance."
+      },
+      {
+        "title": "Reduced penalties",
+        "description": "Compliance with CMS timelines and requirements protects revenue."
+      },
+      {
+        "title": "Simplified reporting",
+        "description": "Clear dashboards and reminders keep your team aligned."
+      }
+    ],
+    "deliverables": [
+      {
+        "title": "Measure selection",
+        "description": "Identify the highest-impact measures for your practice."
+      },
+      {
+        "title": "Data capture workflows",
+        "description": "Integrate documentation checkpoints into daily operations."
+      },
+      {
+        "title": "Performance tracking",
+        "description": "Monitor progress with easy-to-read dashboards."
+      },
+      {
+        "title": "Submission support",
+        "description": "Prepare and review reports prior to submission."
+      },
+      {
+        "title": "Program updates",
+        "description": "Stay current with CMS rule changes."
+      }
+    ],
+    "process": [
+      {
+        "title": "Assess current performance",
+        "description": "Review baseline scores and reporting readiness."
+      },
+      {
+        "title": "Select measures",
+        "description": "Choose measures aligned with clinical workflows."
+      },
+      {
+        "title": "Track and optimize",
+        "description": "Monitor performance and improve data capture."
+      },
+      {
+        "title": "Submit and review",
+        "description": "Finalize submission and confirm results."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Do you support MIPS for small and large practices?",
+        "answer": "Yes. We support solo providers, groups, and multi-site organizations."
+      },
+      {
+        "question": "Can you work with our EHR data?",
+        "answer": "Yes. We align measure reporting with your existing systems."
+      },
+      {
+        "question": "Do you provide ongoing support after submission?",
+        "answer": "Yes. We help interpret feedback and plan for the next cycle."
+      }
+    ],
+    "relatedSlugs": [
+      "revenue-cycle-management",
+      "medical-billing",
+      "medical-coding"
+    ]
+  }
+]

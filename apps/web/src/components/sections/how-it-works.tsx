@@ -15,7 +15,7 @@ interface HowItWorksSectionProps {
 }
 
 export function HowItWorksSection({
-  useConstantColors = false,
+  useConstantColors = true,
   className,
 }: HowItWorksSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);

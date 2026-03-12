@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Link from "next/link";
@@ -11,25 +12,30 @@ import { gradientClass } from "@/lib/utils";
 import { cn } from "@workspace/ui/lib/utils";
 
 interface ServicesSectionProps {
+  title?: string;
+  description?: string;
+  badge?: string;
   limit?: number;
-  useConstantColors?: boolean;
+  services?: any[];
   className?: string;
+  useConstantColors?: boolean;
 }
 
 export function ServicesSection({
+  title = "Our Services",
+  badge = "Comprehensive RCM Solutions",
+  description = "End-to-end revenue cycle management services tailored to your practice's needs",
   limit,
-  useConstantColors = false,
+  useConstantColors = true,
   className,
+  services,
 }: ServicesSectionProps) {
-  const displayServices = limit ? SERVICES.slice(0, limit) : SERVICES;
+  let displayServices = limit ? SERVICES.slice(0, limit) : SERVICES;
+  if (services) displayServices = services;
 
   return (
     <section className={cn("section-container bg-muted", className)}>
-      <SectionHeader
-        badge="Our Services"
-        title="Comprehensive RCM Solutions"
-        description="End-to-end revenue cycle management services tailored to your practice's needs"
-      />
+      <SectionHeader badge={badge} title={title} description={description} />
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayServices.map((service, index) => {

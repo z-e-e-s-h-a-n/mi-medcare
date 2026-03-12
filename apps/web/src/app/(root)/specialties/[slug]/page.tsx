@@ -1,13 +1,33 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { PageHeader } from "@/components/layout/page-header";
-import { Button } from "@workspace/ui/components/button";
+import { notFound } from "next/navigation";
+import { SpecialtyDetails } from "./_page";
+import specialtyDetails from "../details.json";
 
-export const metadata: Metadata = {
-  title: "Specialty Details",
-  description:
-    "Placeholder page for specialty details while the dedicated content is being built.",
-};
+const getSpecialtyDetail = (slug: string) =>
+  specialtyDetails.find((specialty) => specialty.slug === slug);
+
+export function generateStaticParams() {
+  return specialtyDetails.map((specialty) => ({ slug: specialty.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const specialty = getSpecialtyDetail(slug);
+
+  if (!specialty) {
+    return {
+      title: "Specialty Not Found",
+      description: "The requested specialty could not be found.",
+    };
+  }
+
+  return {
+    title: specialty.title,
+    description: specialty.heroDescription,
+  };
+}
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -15,31 +35,11 @@ type PageProps = {
 
 export default async function SpecialtyDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  const detail = getSpecialtyDetail(slug);
 
-  return (
-    <>
-      <PageHeader
-        title="Specialty Details"
-        badge="Specialty"
-        description={`Placeholder page for: /specialties/${slug}`}
-      />
+  if (!detail) {
+    notFound();
+  }
 
-      <section className="section-container py-16">
-        <div className="max-w-3xl">
-          <h2 className="text-2xl font-semibold">Content coming soon</h2>
-          <p className="mt-3 text-muted-foreground">
-            We&apos;ll add full specialty details here later.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild variant="outline">
-              <Link href="/specialties">Back to Specialties</Link>
-            </Button>
-            <Button asChild variant="gradient">
-              <Link href="/contact">Contact Us</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+  return <SpecialtyDetails slug={slug} detail={detail} />;
 }

@@ -25,10 +25,8 @@ export function FAQSection({ faqs, className }: FAQSectionProps) {
   if (!faqs) faqs = FAQS;
 
   return (
-    <section
-      className={cn("section-container max-w-4xl mx-auto", className)}
-    >
-      <div>
+    <section className={cn("section-container", className)}>
+      <div className="max-w-4xl mx-auto">
         <SectionHeader
           badge="FAQ"
           title="Frequently Asked Questions"

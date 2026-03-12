@@ -1,0 +1,2490 @@
+[
+  {
+    "slug": "cardiology",
+    "title": "Cardiology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Cardiology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Cardiology revenue cycle focus",
+      "body": "Support for diagnostics, interventional procedures, and device monitoring workflows.",
+      "bullets": [
+        "Cardiac diagnostics and imaging",
+        "Interventional procedure coding",
+        "Device monitoring support"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Cath and procedure coding",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Testing workflows",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Modifier 26 and TC usage",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Cardiology CPT families",
+      "ICD-10 cardiac specificity",
+      "Component billing rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We support outpatient and procedure billing.",
+        "question": "Do you handle cath lab and diagnostics billing?"
+      },
+      {
+        "answer": "Yes. We capture remote monitoring codes.",
+        "question": "Can you bill device monitoring services?"
+      }
+    ],
+    "relatedSlugs": [
+      "dermatology",
+      "orthopedics",
+      "psychiatry"
+    ]
+  },
+  {
+    "slug": "dermatology",
+    "title": "Dermatology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Dermatology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Dermatology revenue cycle focus",
+      "body": "Billing for office procedures, lesion work, and same-day E/M services.",
+      "bullets": [
+        "Biopsies, excisions, and destructions",
+        "E/M and procedure bundling",
+        "Pathology coordination"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure documentation",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Modifier 25 guidance",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Pathology follow-up",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Dermatology CPT procedures",
+      "ICD-10 specificity",
+      "Modifier 25 and 59 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We optimize for fast, clean claims.",
+        "question": "Do you support high-volume procedures?"
+      },
+      {
+        "answer": "Yes. We align documentation and coverage.",
+        "question": "Can you separate cosmetic vs medical billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "orthopedics",
+      "psychiatry"
+    ]
+  },
+  {
+    "slug": "orthopedics",
+    "title": "Orthopedics Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Orthopedics billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Orthopedics revenue cycle focus",
+      "body": "Billing for fracture care, imaging, injections, and surgical workflows.",
+      "bullets": [
+        "Fracture and global period rules",
+        "Imaging and injection coding",
+        "DME and brace billing"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "DME documentation",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Laterality accuracy",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Orthopedic CPT families",
+      "ICD-10 laterality",
+      "Modifier 50 and 59 usage"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We support documentation and payer rules.",
+        "question": "Do you bill DME and braces?"
+      },
+      {
+        "answer": "Yes. We track post-op services.",
+        "question": "Can you manage global period billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "psychiatry"
+    ]
+  },
+  {
+    "slug": "psychiatry",
+    "title": "Psychiatry Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Psychiatry billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Psychiatry revenue cycle focus",
+      "body": "Billing for behavioral health services with time-based and telehealth accuracy.",
+      "bullets": [
+        "Psychotherapy time-based coding",
+        "Telehealth POS and modifiers",
+        "Authorization tracking"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Session documentation",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Authorization monitoring",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Telehealth compliance",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Psychotherapy CPT codes",
+      "Behavioral E/M rules",
+      "Telehealth modifiers"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align claims to payer telehealth rules.",
+        "question": "Do you support telehealth behavioral billing?"
+      },
+      {
+        "answer": "Yes. We monitor authorization caps.",
+        "question": "Can you track session limits?"
+      }
+    ],
+    "relatedSlugs": "behavioral-healthcardiology dermatology orthopedics"
+  },
+  {
+    "slug": "internal-medicine",
+    "title": "Internal Medicine Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Internal Medicine billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Internal Medicine revenue cycle focus",
+      "body": "Billing aligned to chronic care, preventive services, and accurate E/M leveling.",
+      "bullets": [
+        "E/M leveling and modifier accuracy",
+        "Preventive and chronic care workflows",
+        "Lab and diagnostic medical necessity"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Visit coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Care management capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "ICD-10 specificity",
+      "E/M documentation",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align documentation to payer rules.",
+        "question": "Do you support preventive and chronic care billing?"
+      },
+      {
+        "answer": "Yes. We validate levels and modifiers.",
+        "question": "Can you help improve E/M accuracy?"
+      }
+    ],
+    "relatedSlugs": [
+      "pulmonology",
+      "nephrology",
+      "primary-care"
+    ]
+  },
+  {
+    "slug": "neurology",
+    "title": "Neurology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Neurology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Neurology revenue cycle focus",
+      "body": "Billing for neurologic diagnostics, procedures, and chronic care services.",
+      "bullets": [
+        "EEG and EMG workflows",
+        "Procedure and injection coding",
+        "Diagnostic medical necessity"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Diagnostic test billing",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Procedure capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Documentation QA",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Neurology CPT diagnostics",
+      "ICD-10 neuro specificity",
+      "Modifier 26 and TC rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We code EEG and EMG services.",
+        "question": "Do you support neuro diagnostics?"
+      },
+      {
+        "answer": "Yes. We align testing with payer rules.",
+        "question": "Can you manage prior auth tracking?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "obgyn",
+    "title": "OB/GYN Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "OB/GYN billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "OB/GYN revenue cycle focus",
+      "body": "Billing for maternity care, procedures, and preventive services.",
+      "bullets": [
+        "Global maternity tracking",
+        "Ultrasound and procedure coding",
+        "Preventive visit coverage"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Maternity workflow capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Procedure coding QA",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Coverage rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Global maternity CPT codes",
+      "Ultrasound coding rules",
+      "Preventive visit guidelines"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We track prenatal to postpartum care.",
+        "question": "Do you manage global maternity billing?"
+      },
+      {
+        "answer": "Yes. We align coding to documentation.",
+        "question": "Can you separate preventive and problem visits?"
+      }
+    ],
+    "relatedSlugs": "birth-centercardiology dermatology orthopedics"
+  },
+  {
+    "slug": "pediatrics",
+    "title": "Pediatrics Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Pediatrics billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Pediatrics revenue cycle focus",
+      "body": "Billing for well-child visits, vaccines, and pediatric care.",
+      "bullets": [
+        "Well-child and preventive coding",
+        "Vaccine admin and supply billing",
+        "Age-based coverage rules"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Preventive visit workflows",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Immunization billing",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Modifier 25 usage",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Preventive medicine codes",
+      "Vaccine admin CPT codes",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We manage admin and supply codes.",
+        "question": "Do you support vaccine billing?"
+      },
+      {
+        "answer": "Yes. We align coding to payer rules.",
+        "question": "Can you help with pediatric preventive visits?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "podiatry",
+    "title": "Podiatry Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Podiatry billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Podiatry revenue cycle focus",
+      "body": "Billing for routine foot care, diabetic services, and procedures.",
+      "bullets": [
+        "Routine care coverage rules",
+        "Diabetic foot coding",
+        "Debridement procedures"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Medical necessity checks",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Procedure coding QA",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Modifier guidance",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Foot care CPT rules",
+      "ICD-10 diabetic specificity",
+      "Modifier 59 usage"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We support coverage requirements.",
+        "question": "Do you handle routine foot care billing?"
+      },
+      {
+        "answer": "Yes. We align diagnoses and procedures.",
+        "question": "Can you manage diabetic foot services?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "pulmonology",
+    "title": "Pulmonology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Pulmonology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Pulmonology revenue cycle focus",
+      "body": "Billing aligned to chronic care, preventive services, and accurate E/M leveling.",
+      "bullets": [
+        "E/M leveling and modifier accuracy",
+        "Preventive and chronic care workflows",
+        "Lab and diagnostic medical necessity"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Visit coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Care management capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "ICD-10 specificity",
+      "E/M documentation",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align documentation to payer rules.",
+        "question": "Do you support preventive and chronic care billing?"
+      },
+      {
+        "answer": "Yes. We validate levels and modifiers.",
+        "question": "Can you help improve E/M accuracy?"
+      }
+    ],
+    "relatedSlugs": [
+      "internal-medicine",
+      "nephrology",
+      "primary-care"
+    ]
+  },
+  {
+    "slug": "nephrology",
+    "title": "Nephrology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Nephrology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Nephrology revenue cycle focus",
+      "body": "Billing aligned to chronic care, preventive services, and accurate E/M leveling.",
+      "bullets": [
+        "E/M leveling and modifier accuracy",
+        "Preventive and chronic care workflows",
+        "Lab and diagnostic medical necessity"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Visit coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Care management capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "ICD-10 specificity",
+      "E/M documentation",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align documentation to payer rules.",
+        "question": "Do you support preventive and chronic care billing?"
+      },
+      {
+        "answer": "Yes. We validate levels and modifiers.",
+        "question": "Can you help improve E/M accuracy?"
+      }
+    ],
+    "relatedSlugs": [
+      "internal-medicine",
+      "pulmonology",
+      "primary-care"
+    ]
+  },
+  {
+    "slug": "urgent-care",
+    "title": "Urgent Care Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Urgent Care billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Urgent Care revenue cycle focus",
+      "body": "Billing for high-volume visits, rapid eligibility, and same-day services.",
+      "bullets": [
+        "Same-day eligibility checks",
+        "E/M and procedure accuracy",
+        "Point-of-care testing"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Front-end verification",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Procedure capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Denial prevention",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Urgent care E/M rules",
+      "Modifier 25 usage",
+      "POC testing codes"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We verify coverage quickly.",
+        "question": "Do you handle same-day eligibility?"
+      },
+      {
+        "answer": "Yes. Our workflows scale for urgent care.",
+        "question": "Can you support high-volume billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "sleep-medicine",
+    "title": "Sleep Medicine Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Sleep Medicine billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Sleep Medicine revenue cycle focus",
+      "body": "Billing for sleep studies, diagnostics, and device-related services.",
+      "bullets": [
+        "Sleep study coding",
+        "Home sleep testing",
+        "DME and CPAP support"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Medical necessity tracking",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Test type accuracy",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Device billing workflows",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "PSG and home test CPT codes",
+      "ICD-10 sleep disorders",
+      "DME documentation rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We support lab and home studies.",
+        "question": "Do you bill for home sleep tests?"
+      },
+      {
+        "answer": "Yes. We support DME workflows.",
+        "question": "Can you handle CPAP billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "primary-care",
+    "title": "Primary Care Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Primary Care billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Primary Care revenue cycle focus",
+      "body": "Billing aligned to chronic care, preventive services, and accurate E/M leveling.",
+      "bullets": [
+        "E/M leveling and modifier accuracy",
+        "Preventive and chronic care workflows",
+        "Lab and diagnostic medical necessity"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Visit coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Care management capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "ICD-10 specificity",
+      "E/M documentation",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align documentation to payer rules.",
+        "question": "Do you support preventive and chronic care billing?"
+      },
+      {
+        "answer": "Yes. We validate levels and modifiers.",
+        "question": "Can you help improve E/M accuracy?"
+      }
+    ],
+    "relatedSlugs": [
+      "internal-medicine",
+      "pulmonology",
+      "nephrology"
+    ]
+  },
+  {
+    "slug": "urology",
+    "title": "Urology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Urology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Urology revenue cycle focus",
+      "body": "Billing for procedures, diagnostics, and in-office urology care.",
+      "bullets": [
+        "Cystoscopy and procedure coding",
+        "Diagnostic testing support",
+        "Modifier accuracy"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure charge capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Diagnostic billing",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Global period tracking",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Urology CPT families",
+      "ICD-10 specificity",
+      "Modifier 59 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We capture urology procedures.",
+        "question": "Do you support in-office procedures?"
+      },
+      {
+        "answer": "Yes. We track post-op services.",
+        "question": "Can you manage global period billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "endocrinology",
+    "title": "Endocrinology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Endocrinology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Endocrinology revenue cycle focus",
+      "body": "Billing aligned to chronic care, preventive services, and accurate E/M leveling.",
+      "bullets": [
+        "E/M leveling and modifier accuracy",
+        "Preventive and chronic care workflows",
+        "Lab and diagnostic medical necessity"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Visit coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Care management capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "ICD-10 specificity",
+      "E/M documentation",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align documentation to payer rules.",
+        "question": "Do you support preventive and chronic care billing?"
+      },
+      {
+        "answer": "Yes. We validate levels and modifiers.",
+        "question": "Can you help improve E/M accuracy?"
+      }
+    ],
+    "relatedSlugs": [
+      "internal-medicine",
+      "pulmonology",
+      "nephrology"
+    ]
+  },
+  {
+    "slug": "hand-surgery",
+    "title": "Hand Surgery Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Hand Surgery billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Hand Surgery revenue cycle focus",
+      "body": "Billing for procedures, global periods, and surgical workflows.",
+      "bullets": [
+        "Procedure coding accuracy",
+        "Global period tracking",
+        "Pre-authorization support"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Modifier guidance",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Post-op tracking",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Surgical CPT families",
+      "Global period rules",
+      "Modifier 51 and 59 usage"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We track post-op services.",
+        "question": "Do you manage global period billing?"
+      },
+      {
+        "answer": "Yes. We capture supply charges.",
+        "question": "Can you support implant and supply billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "general-surgery",
+      "vascular-surgery",
+      "ambulatory-surgery"
+    ]
+  },
+  {
+    "slug": "rheumatology",
+    "title": "Rheumatology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Rheumatology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Rheumatology revenue cycle focus",
+      "body": "Billing aligned to chronic care, preventive services, and accurate E/M leveling.",
+      "bullets": [
+        "E/M leveling and modifier accuracy",
+        "Preventive and chronic care workflows",
+        "Lab and diagnostic medical necessity"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Visit coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Care management capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "ICD-10 specificity",
+      "E/M documentation",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align documentation to payer rules.",
+        "question": "Do you support preventive and chronic care billing?"
+      },
+      {
+        "answer": "Yes. We validate levels and modifiers.",
+        "question": "Can you help improve E/M accuracy?"
+      }
+    ],
+    "relatedSlugs": [
+      "internal-medicine",
+      "pulmonology",
+      "nephrology"
+    ]
+  },
+  {
+    "slug": "ent",
+    "title": "Otolaryngology (ENT) Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Otolaryngology (ENT) billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Otolaryngology (ENT) revenue cycle focus",
+      "body": "Billing for ENT diagnostics, procedures, and surgical workflows.",
+      "bullets": [
+        "Endoscopy and procedure coding",
+        "Audiology and testing",
+        "Modifier accuracy"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Testing workflows",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Global period tracking",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "ENT CPT families",
+      "Modifier 26 and TC rules",
+      "Global period rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We support diagnostic testing.",
+        "question": "Do you bill for audiology services?"
+      },
+      {
+        "answer": "Yes. We manage global period rules.",
+        "question": "Can you handle surgical billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "ophthalmology",
+    "title": "Ophthalmology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Ophthalmology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Ophthalmology revenue cycle focus",
+      "body": "Billing for eye exams, imaging, and ophthalmic procedures.",
+      "bullets": [
+        "Exam and E/M coding accuracy",
+        "Ophthalmic imaging",
+        "Procedure billing"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Exam workflows",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Imaging documentation",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Procedure capture",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Ophthalmic exam codes",
+      "Imaging CPT codes",
+      "Global period rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We handle E/M and ophthalmic codes.",
+        "question": "Do you support eye exam coding?"
+      },
+      {
+        "answer": "Yes. We support OCT and related imaging.",
+        "question": "Can you bill imaging services?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "allergy-immunology",
+    "title": "Allergy & Immunology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Allergy & Immunology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Allergy & Immunology revenue cycle focus",
+      "body": "Billing for allergy testing, immunotherapy, and follow-up care.",
+      "bullets": [
+        "Allergy testing panels",
+        "Immunotherapy injections",
+        "Authorization tracking"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Test coding accuracy",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Injection documentation",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Coverage guidance",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Allergy test CPT codes",
+      "Injection codes",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We support panel and individual tests.",
+        "question": "Do you bill allergy testing?"
+      },
+      {
+        "answer": "Yes. We track injection services.",
+        "question": "Can you manage immunotherapy billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "speech-therapy",
+    "title": "Speech Therapy Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Speech Therapy billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Speech Therapy revenue cycle focus",
+      "body": "Billing for therapy plans of care, time-based units, and authorizations.",
+      "bullets": [
+        "Timed unit accuracy",
+        "Plan-of-care compliance",
+        "Authorization tracking"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Unit calculation checks",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Documentation QA",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Visit limit tracking",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Timed therapy codes",
+      "Evaluation rules",
+      "GO/GN modifiers"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We monitor visit limits and approvals.",
+        "question": "Do you track therapy authorizations?"
+      },
+      {
+        "answer": "Yes. We validate timed units.",
+        "question": "Can you help with unit calculations?"
+      }
+    ],
+    "relatedSlugs": "physical-therapycardiology dermatology orthopedics"
+  },
+  {
+    "slug": "general-surgery",
+    "title": "General Surgery Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "General Surgery billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "General Surgery revenue cycle focus",
+      "body": "Billing for procedures, global periods, and surgical workflows.",
+      "bullets": [
+        "Procedure coding accuracy",
+        "Global period tracking",
+        "Pre-authorization support"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Modifier guidance",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Post-op tracking",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Surgical CPT families",
+      "Global period rules",
+      "Modifier 51 and 59 usage"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We track post-op services.",
+        "question": "Do you manage global period billing?"
+      },
+      {
+        "answer": "Yes. We capture supply charges.",
+        "question": "Can you support implant and supply billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "hand-surgery",
+      "vascular-surgery",
+      "ambulatory-surgery"
+    ]
+  },
+  {
+    "slug": "physical-therapy",
+    "title": "Physical Therapy Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Physical Therapy billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Physical Therapy revenue cycle focus",
+      "body": "Billing for therapy plans of care, time-based units, and authorizations.",
+      "bullets": [
+        "Timed unit accuracy",
+        "Plan-of-care compliance",
+        "Authorization tracking"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Unit calculation checks",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Documentation QA",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Visit limit tracking",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Timed therapy codes",
+      "Evaluation rules",
+      "GO/GN modifiers"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We monitor visit limits and approvals.",
+        "question": "Do you track therapy authorizations?"
+      },
+      {
+        "answer": "Yes. We validate timed units.",
+        "question": "Can you help with unit calculations?"
+      }
+    ],
+    "relatedSlugs": "speech-therapycardiology dermatology orthopedics"
+  },
+  {
+    "slug": "vascular-surgery",
+    "title": "Vascular Surgery Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Vascular Surgery billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Vascular Surgery revenue cycle focus",
+      "body": "Billing for procedures, global periods, and surgical workflows.",
+      "bullets": [
+        "Procedure coding accuracy",
+        "Global period tracking",
+        "Pre-authorization support"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Modifier guidance",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Post-op tracking",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Surgical CPT families",
+      "Global period rules",
+      "Modifier 51 and 59 usage"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We track post-op services.",
+        "question": "Do you manage global period billing?"
+      },
+      {
+        "answer": "Yes. We capture supply charges.",
+        "question": "Can you support implant and supply billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "hand-surgery",
+      "general-surgery",
+      "ambulatory-surgery"
+    ]
+  },
+  {
+    "slug": "physical-medicine",
+    "title": "Physical Medicine Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Physical Medicine billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Physical Medicine revenue cycle focus",
+      "body": "Billing for rehabilitation services with documentation and unit accuracy.",
+      "bullets": [
+        "Evaluation and re-evaluation",
+        "Timed unit tracking",
+        "Authorization management"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Plan-of-care workflows",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Unit validation",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Compliance monitoring",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Rehab CPT codes",
+      "Timed unit rules",
+      "ICD-10 specificity"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We keep plans of care compliant.",
+        "question": "Do you support rehab documentation?"
+      },
+      {
+        "answer": "Yes. We monitor authorizations and limits.",
+        "question": "Can you track visit caps?"
+      }
+    ],
+    "relatedSlugs": "rehabilitative-medicinecardiology dermatology orthopedics"
+  },
+  {
+    "slug": "oncology",
+    "title": "Oncology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Oncology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Oncology revenue cycle focus",
+      "body": "Billing for infusion services, drug units, and oncology care.",
+      "bullets": [
+        "Infusion and injection workflows",
+        "Drug unit accuracy",
+        "Authorization tracking"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Infusion coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Drug and NDC capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer edits",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Infusion CPT codes",
+      "J-codes and units",
+      "Oncology ICD-10 specificity"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We manage time-based infusion coding.",
+        "question": "Do you bill infusion services?"
+      },
+      {
+        "answer": "Yes. We validate drug billing details.",
+        "question": "Can you track drug units and NDCs?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "pain-management",
+    "title": "Pain Management Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Pain Management billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Pain Management revenue cycle focus",
+      "body": "Billing for interventional procedures and chronic pain care.",
+      "bullets": [
+        "Injection and nerve block coding",
+        "Imaging guidance rules",
+        "Authorization tracking"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Modifier accuracy",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Documentation QA",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Injection CPT codes",
+      "Guidance add-on codes",
+      "Modifier 50 and 59 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We code injections and blocks.",
+        "question": "Do you support interventional pain procedures?"
+      },
+      {
+        "answer": "Yes. We manage prior approvals.",
+        "question": "Can you track authorizations?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "infectious-disease",
+    "title": "Infectious Disease Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Infectious Disease billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Infectious Disease revenue cycle focus",
+      "body": "Billing aligned to chronic care, preventive services, and accurate E/M leveling.",
+      "bullets": [
+        "E/M leveling and modifier accuracy",
+        "Preventive and chronic care workflows",
+        "Lab and diagnostic medical necessity"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Visit coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Care management capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "ICD-10 specificity",
+      "E/M documentation",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align documentation to payer rules.",
+        "question": "Do you support preventive and chronic care billing?"
+      },
+      {
+        "answer": "Yes. We validate levels and modifiers.",
+        "question": "Can you help improve E/M accuracy?"
+      }
+    ],
+    "relatedSlugs": [
+      "internal-medicine",
+      "pulmonology",
+      "nephrology"
+    ]
+  },
+  {
+    "slug": "behavioral-health",
+    "title": "Behavioral Health Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Behavioral Health billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Behavioral Health revenue cycle focus",
+      "body": "Billing for behavioral health services with time-based and telehealth accuracy.",
+      "bullets": [
+        "Psychotherapy time-based coding",
+        "Telehealth POS and modifiers",
+        "Authorization tracking"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Session documentation",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Authorization monitoring",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Telehealth compliance",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Psychotherapy CPT codes",
+      "Behavioral E/M rules",
+      "Telehealth modifiers"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align claims to payer telehealth rules.",
+        "question": "Do you support telehealth behavioral billing?"
+      },
+      {
+        "answer": "Yes. We monitor authorization caps.",
+        "question": "Can you track session limits?"
+      }
+    ],
+    "relatedSlugs": "psychiatrycardiology dermatology orthopedics"
+  },
+  {
+    "slug": "ambulatory-surgery",
+    "title": "Ambulatory Surgery Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Ambulatory Surgery billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Ambulatory Surgery revenue cycle focus",
+      "body": "Billing for procedures, global periods, and surgical workflows.",
+      "bullets": [
+        "Procedure coding accuracy",
+        "Global period tracking",
+        "Pre-authorization support"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Modifier guidance",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Post-op tracking",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Surgical CPT families",
+      "Global period rules",
+      "Modifier 51 and 59 usage"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We track post-op services.",
+        "question": "Do you manage global period billing?"
+      },
+      {
+        "answer": "Yes. We capture supply charges.",
+        "question": "Can you support implant and supply billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "hand-surgery",
+      "general-surgery",
+      "vascular-surgery"
+    ]
+  },
+  {
+    "slug": "gastroenterology",
+    "title": "Gastroenterology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Gastroenterology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Gastroenterology revenue cycle focus",
+      "body": "Billing for endoscopy, procedures, and digestive care services.",
+      "bullets": [
+        "Endoscopy and colonoscopy coding",
+        "Screening vs diagnostic rules",
+        "Pathology coordination"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Coverage rule alignment",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Pathology billing support",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "GI CPT families",
+      "Modifier 33 and 59 rules",
+      "ICD-10 GI specificity"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We apply payer coverage guidelines.",
+        "question": "Do you handle screening vs diagnostic rules?"
+      },
+      {
+        "answer": "Yes. We align documentation and claims.",
+        "question": "Can you support pathology billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "rehabilitative-medicine",
+    "title": "Rehabilitative Medicine Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Rehabilitative Medicine billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Rehabilitative Medicine revenue cycle focus",
+      "body": "Billing for rehabilitation services with documentation and unit accuracy.",
+      "bullets": [
+        "Evaluation and re-evaluation",
+        "Timed unit tracking",
+        "Authorization management"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Plan-of-care workflows",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Unit validation",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Compliance monitoring",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Rehab CPT codes",
+      "Timed unit rules",
+      "ICD-10 specificity"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We keep plans of care compliant.",
+        "question": "Do you support rehab documentation?"
+      },
+      {
+        "answer": "Yes. We monitor authorizations and limits.",
+        "question": "Can you track visit caps?"
+      }
+    ],
+    "relatedSlugs": "physical-medicinecardiology dermatology orthopedics"
+  },
+  {
+    "slug": "neurosurgery",
+    "title": "Neurosurgery Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Neurosurgery billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Neurosurgery revenue cycle focus",
+      "body": "Billing for procedures, global periods, and surgical workflows.",
+      "bullets": [
+        "Procedure coding accuracy",
+        "Global period tracking",
+        "Pre-authorization support"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Procedure capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Modifier guidance",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Post-op tracking",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Surgical CPT families",
+      "Global period rules",
+      "Modifier 51 and 59 usage"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We track post-op services.",
+        "question": "Do you manage global period billing?"
+      },
+      {
+        "answer": "Yes. We capture supply charges.",
+        "question": "Can you support implant and supply billing?"
+      }
+    ],
+    "relatedSlugs": [
+      "hand-surgery",
+      "general-surgery",
+      "vascular-surgery"
+    ]
+  },
+  {
+    "slug": "dental",
+    "title": "Dental Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Dental billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Dental revenue cycle focus",
+      "body": "Billing for dental and oral surgery services with crosswalk support.",
+      "bullets": [
+        "CDT and medical crosswalks",
+        "Medical necessity documentation",
+        "Medical and dental payer rules"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Crosswalk management",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Documentation QA",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer coordination",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "CDT to CPT alignment",
+      "Oral surgery coding",
+      "Medical necessity rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We support dual-plan workflows.",
+        "question": "Do you bill medical and dental plans?"
+      },
+      {
+        "answer": "Yes. We align with payer requirements.",
+        "question": "Can you assist with oral surgery documentation?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "medical-nutrition",
+    "title": "Medical Nutrition Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Medical Nutrition billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Medical Nutrition revenue cycle focus",
+      "body": "Billing for medical nutrition therapy and time-based counseling.",
+      "bullets": [
+        "MNT coding accuracy",
+        "Time-based documentation",
+        "Coverage verification"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Minute tracking",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Referral workflows",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Coverage checks",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "MNT CPT codes",
+      "Nutrition ICD-10 specificity",
+      "Time-based rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We manage time-based codes.",
+        "question": "Do you support MNT billing?"
+      },
+      {
+        "answer": "Yes. We track eligibility requirements.",
+        "question": "Can you verify coverage and referrals?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "birth-center",
+    "title": "Birth Center Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Birth Center billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Birth Center revenue cycle focus",
+      "body": "Billing for maternity care, procedures, and preventive services.",
+      "bullets": [
+        "Global maternity tracking",
+        "Ultrasound and procedure coding",
+        "Preventive visit coverage"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Maternity workflow capture",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Procedure coding QA",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Coverage rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Global maternity CPT codes",
+      "Ultrasound coding rules",
+      "Preventive visit guidelines"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We track prenatal to postpartum care.",
+        "question": "Do you manage global maternity billing?"
+      },
+      {
+        "answer": "Yes. We align coding to documentation.",
+        "question": "Can you separate preventive and problem visits?"
+      }
+    ],
+    "relatedSlugs": "obgyncardiology dermatology orthopedics"
+  },
+  {
+    "slug": "family-practice",
+    "title": "Family Practice Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Family Practice billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Family Practice revenue cycle focus",
+      "body": "Billing aligned to chronic care, preventive services, and accurate E/M leveling.",
+      "bullets": [
+        "E/M leveling and modifier accuracy",
+        "Preventive and chronic care workflows",
+        "Lab and diagnostic medical necessity"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Visit coding QA",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Care management capture",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Payer rule alignment",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "ICD-10 specificity",
+      "E/M documentation",
+      "Modifier 25 rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We align documentation to payer rules.",
+        "question": "Do you support preventive and chronic care billing?"
+      },
+      {
+        "answer": "Yes. We validate levels and modifiers.",
+        "question": "Can you help improve E/M accuracy?"
+      }
+    ],
+    "relatedSlugs": [
+      "internal-medicine",
+      "pulmonology",
+      "nephrology"
+    ]
+  },
+  {
+    "slug": "radiology",
+    "title": "Radiology Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Radiology billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Radiology revenue cycle focus",
+      "body": "Billing for diagnostic imaging with accurate component and modifier usage.",
+      "bullets": [
+        "Professional and technical splits",
+        "Contrast and add-on codes",
+        "Medical necessity alignment"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Component billing accuracy",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Documentation checks",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Denial prevention",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Imaging CPT codes",
+      "Modifier 26 and TC rules",
+      "Contrast coding rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We manage component splits.",
+        "question": "Do you handle professional and technical billing?"
+      },
+      {
+        "answer": "Yes. We align orders with documentation.",
+        "question": "Can you reduce imaging denials?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  },
+  {
+    "slug": "anesthesia",
+    "title": "Anesthesia Billing Services",
+    "badge": "Specialty",
+    "heroDescription": "Anesthesia billing built for specialty workflows and payer-ready claims.",
+    "overview": {
+      "title": "Anesthesia revenue cycle focus",
+      "body": "Billing for time-based anesthesia services and modifier accuracy.",
+      "bullets": [
+        "Time unit calculation",
+        "Physical status modifiers",
+        "Start/stop documentation"
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Documentation accuracy",
+        "description": "Clear clinical notes prevent downcoding and denials."
+      },
+      {
+        "title": "Payer rule changes",
+        "description": "Coverage and modifier rules shift regularly."
+      },
+      {
+        "title": "Charge capture gaps",
+        "description": "Missed services can reduce reimbursement."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Time documentation",
+        "description": "Specialty-aligned workflows built for clean claims."
+      },
+      {
+        "title": "Modifier accuracy",
+        "description": "Operational steps that improve billing consistency."
+      },
+      {
+        "title": "Case reconciliation",
+        "description": "Reporting and QA to reduce denials."
+      }
+    ],
+    "codingFocus": [
+      "Anesthesia base units",
+      "Time units and modifiers",
+      "Concurrency rules"
+    ],
+    "faqs": [
+      {
+        "answer": "Yes. We validate time units.",
+        "question": "Do you support anesthesia time calculations?"
+      },
+      {
+        "answer": "Yes. We apply correct modifiers.",
+        "question": "Can you handle concurrency modifiers?"
+      }
+    ],
+    "relatedSlugs": [
+      "cardiology",
+      "dermatology",
+      "orthopedics"
+    ]
+  }
+]

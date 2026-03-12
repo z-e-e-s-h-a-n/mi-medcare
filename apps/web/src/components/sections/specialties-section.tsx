@@ -16,7 +16,7 @@ interface SpecialtiesSectionProps {
 
 export function SpecialtiesSection({
   limit,
-  useConstantColors = false,
+  useConstantColors = true,
   className,
 }: SpecialtiesSectionProps) {
   const displaySpecialties = limit ? SPECIALTIES.slice(0, limit) : SPECIALTIES;

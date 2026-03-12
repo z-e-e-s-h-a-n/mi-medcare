@@ -13,7 +13,7 @@ interface BenefitsSectionProps {
 }
 
 export function BenefitsSection({
-  useConstantColors = false,
+  useConstantColors = true,
   className,
 }: BenefitsSectionProps) {
   const ref = useRef(null);

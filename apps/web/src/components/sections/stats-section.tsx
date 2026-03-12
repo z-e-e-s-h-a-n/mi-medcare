@@ -12,15 +12,13 @@ interface SuccessMetricsProps {
 }
 
 export function SuccessMetrics({
-  useConstantColors = false,
+  useConstantColors = true,
   className,
 }: SuccessMetricsProps) {
   const bgA = COMPANY_STATS[0]?.gradient ?? "blue-500 cyan-500";
   const bgB = COMPANY_STATS[1]?.gradient ?? "purple-500 pink-500";
   return (
-    <section
-      className={cn("relative overflow-hidden py-24", className)}
-    >
+    <section className={cn("relative overflow-hidden py-24", className)}>
       {/* Abstract Background Pattern */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-full h-full bg-linear-to-br from-primary/5 via-transparent to-secondary/5" />
