@@ -56,11 +56,7 @@
         "question": "Can you bill device monitoring services?"
       }
     ],
-    "relatedSlugs": [
-      "dermatology",
-      "orthopedics",
-      "psychiatry"
-    ]
+    "relatedSlugs": ["dermatology", "orthopedics", "psychiatry"]
   },
   {
     "slug": "dermatology",
@@ -119,11 +115,7 @@
         "question": "Can you separate cosmetic vs medical billing?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "orthopedics",
-      "psychiatry"
-    ]
+    "relatedSlugs": ["cardiology", "orthopedics", "psychiatry"]
   },
   {
     "slug": "orthopedics",
@@ -182,11 +174,7 @@
         "question": "Can you manage global period billing?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "psychiatry"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "psychiatry"]
   },
   {
     "slug": "psychiatry",
@@ -245,7 +233,7 @@
         "question": "Can you track session limits?"
       }
     ],
-    "relatedSlugs": "behavioral-healthcardiology dermatology orthopedics"
+    "relatedSlugs": ["behavioral-healthcardiology dermatology orthopedics"]
   },
   {
     "slug": "internal-medicine",
@@ -304,11 +292,7 @@
         "question": "Can you help improve E/M accuracy?"
       }
     ],
-    "relatedSlugs": [
-      "pulmonology",
-      "nephrology",
-      "primary-care"
-    ]
+    "relatedSlugs": ["pulmonology", "nephrology", "primary-care"]
   },
   {
     "slug": "neurology",
@@ -367,11 +351,7 @@
         "question": "Can you manage prior auth tracking?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "obgyn",
@@ -430,7 +410,7 @@
         "question": "Can you separate preventive and problem visits?"
       }
     ],
-    "relatedSlugs": "birth-centercardiology dermatology orthopedics"
+    "relatedSlugs": ["birth-centercardiology dermatology orthopedics"]
   },
   {
     "slug": "pediatrics",
@@ -489,11 +469,7 @@
         "question": "Can you help with pediatric preventive visits?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "podiatry",
@@ -552,11 +528,7 @@
         "question": "Can you manage diabetic foot services?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "pulmonology",
@@ -615,11 +587,7 @@
         "question": "Can you help improve E/M accuracy?"
       }
     ],
-    "relatedSlugs": [
-      "internal-medicine",
-      "nephrology",
-      "primary-care"
-    ]
+    "relatedSlugs": ["internal-medicine", "nephrology", "primary-care"]
   },
   {
     "slug": "nephrology",
@@ -678,11 +646,7 @@
         "question": "Can you help improve E/M accuracy?"
       }
     ],
-    "relatedSlugs": [
-      "internal-medicine",
-      "pulmonology",
-      "primary-care"
-    ]
+    "relatedSlugs": ["internal-medicine", "pulmonology", "primary-care"]
   },
   {
     "slug": "urgent-care",
@@ -741,11 +705,7 @@
         "question": "Can you support high-volume billing?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "sleep-medicine",
@@ -804,11 +764,7 @@
         "question": "Can you handle CPAP billing?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "primary-care",
@@ -867,11 +823,7 @@
         "question": "Can you help improve E/M accuracy?"
       }
     ],
-    "relatedSlugs": [
-      "internal-medicine",
-      "pulmonology",
-      "nephrology"
-    ]
+    "relatedSlugs": ["internal-medicine", "pulmonology", "nephrology"]
   },
   {
     "slug": "urology",
@@ -930,11 +882,7 @@
         "question": "Can you manage global period billing?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "endocrinology",
@@ -993,11 +941,7 @@
         "question": "Can you help improve E/M accuracy?"
       }
     ],
-    "relatedSlugs": [
-      "internal-medicine",
-      "pulmonology",
-      "nephrology"
-    ]
+    "relatedSlugs": ["internal-medicine", "pulmonology", "nephrology"]
   },
   {
     "slug": "hand-surgery",
@@ -1119,11 +1063,7 @@
         "question": "Can you help improve E/M accuracy?"
       }
     ],
-    "relatedSlugs": [
-      "internal-medicine",
-      "pulmonology",
-      "nephrology"
-    ]
+    "relatedSlugs": ["internal-medicine", "pulmonology", "nephrology"]
   },
   {
     "slug": "ent",
@@ -1182,11 +1122,7 @@
         "question": "Can you handle surgical billing?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "ophthalmology",
@@ -1245,11 +1181,7 @@
         "question": "Can you bill imaging services?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "allergy-immunology",
@@ -1308,11 +1240,7 @@
         "question": "Can you manage immunotherapy billing?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "speech-therapy",
@@ -1371,7 +1299,7 @@
         "question": "Can you help with unit calculations?"
       }
     ],
-    "relatedSlugs": "physical-therapycardiology dermatology orthopedics"
+    "relatedSlugs": ["physical-therapycardiology dermatology orthopedics"]
   },
   {
     "slug": "general-surgery",
@@ -1430,11 +1358,7 @@
         "question": "Can you support implant and supply billing?"
       }
     ],
-    "relatedSlugs": [
-      "hand-surgery",
-      "vascular-surgery",
-      "ambulatory-surgery"
-    ]
+    "relatedSlugs": ["hand-surgery", "vascular-surgery", "ambulatory-surgery"]
   },
   {
     "slug": "physical-therapy",
@@ -1493,7 +1417,7 @@
         "question": "Can you help with unit calculations?"
       }
     ],
-    "relatedSlugs": "speech-therapycardiology dermatology orthopedics"
+    "relatedSlugs": ["speech-therapycardiology dermatology orthopedics"]
   },
   {
     "slug": "vascular-surgery",
@@ -1552,11 +1476,7 @@
         "question": "Can you support implant and supply billing?"
       }
     ],
-    "relatedSlugs": [
-      "hand-surgery",
-      "general-surgery",
-      "ambulatory-surgery"
-    ]
+    "relatedSlugs": ["hand-surgery", "general-surgery", "ambulatory-surgery"]
   },
   {
     "slug": "physical-medicine",
@@ -1615,7 +1535,9 @@
         "question": "Can you track visit caps?"
       }
     ],
-    "relatedSlugs": "rehabilitative-medicinecardiology dermatology orthopedics"
+    "relatedSlugs": [
+      "rehabilitative-medicinecardiology dermatology orthopedics"
+    ]
   },
   {
     "slug": "oncology",
@@ -1674,11 +1596,7 @@
         "question": "Can you track drug units and NDCs?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "pain-management",
@@ -1737,11 +1655,7 @@
         "question": "Can you track authorizations?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "infectious-disease",
@@ -1800,11 +1714,7 @@
         "question": "Can you help improve E/M accuracy?"
       }
     ],
-    "relatedSlugs": [
-      "internal-medicine",
-      "pulmonology",
-      "nephrology"
-    ]
+    "relatedSlugs": ["internal-medicine", "pulmonology", "nephrology"]
   },
   {
     "slug": "behavioral-health",
@@ -1863,7 +1773,7 @@
         "question": "Can you track session limits?"
       }
     ],
-    "relatedSlugs": "psychiatrycardiology dermatology orthopedics"
+    "relatedSlugs": ["psychiatrycardiology dermatology orthopedics"]
   },
   {
     "slug": "ambulatory-surgery",
@@ -1922,11 +1832,7 @@
         "question": "Can you support implant and supply billing?"
       }
     ],
-    "relatedSlugs": [
-      "hand-surgery",
-      "general-surgery",
-      "vascular-surgery"
-    ]
+    "relatedSlugs": ["hand-surgery", "general-surgery", "vascular-surgery"]
   },
   {
     "slug": "gastroenterology",
@@ -1985,11 +1891,7 @@
         "question": "Can you support pathology billing?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "rehabilitative-medicine",
@@ -2048,7 +1950,7 @@
         "question": "Can you track visit caps?"
       }
     ],
-    "relatedSlugs": "physical-medicinecardiology dermatology orthopedics"
+    "relatedSlugs": ["physical-medicinecardiology dermatology orthopedics"]
   },
   {
     "slug": "neurosurgery",
@@ -2107,11 +2009,7 @@
         "question": "Can you support implant and supply billing?"
       }
     ],
-    "relatedSlugs": [
-      "hand-surgery",
-      "general-surgery",
-      "vascular-surgery"
-    ]
+    "relatedSlugs": ["hand-surgery", "general-surgery", "vascular-surgery"]
   },
   {
     "slug": "dental",
@@ -2170,11 +2068,7 @@
         "question": "Can you assist with oral surgery documentation?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "medical-nutrition",
@@ -2233,11 +2127,7 @@
         "question": "Can you verify coverage and referrals?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "birth-center",
@@ -2296,7 +2186,7 @@
         "question": "Can you separate preventive and problem visits?"
       }
     ],
-    "relatedSlugs": "obgyncardiology dermatology orthopedics"
+    "relatedSlugs": ["obgyncardiology dermatology orthopedics"]
   },
   {
     "slug": "family-practice",
@@ -2355,11 +2245,7 @@
         "question": "Can you help improve E/M accuracy?"
       }
     ],
-    "relatedSlugs": [
-      "internal-medicine",
-      "pulmonology",
-      "nephrology"
-    ]
+    "relatedSlugs": ["internal-medicine", "pulmonology", "nephrology"]
   },
   {
     "slug": "radiology",
@@ -2418,11 +2304,7 @@
         "question": "Can you reduce imaging denials?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   },
   {
     "slug": "anesthesia",
@@ -2481,10 +2363,6 @@
         "question": "Can you handle concurrency modifiers?"
       }
     ],
-    "relatedSlugs": [
-      "cardiology",
-      "dermatology",
-      "orthopedics"
-    ]
+    "relatedSlugs": ["cardiology", "dermatology", "orthopedics"]
   }
 ]
