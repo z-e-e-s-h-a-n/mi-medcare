@@ -39,6 +39,15 @@ export function PageHeader({
         <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/50 to-black/40" />
       </div>
 
+      {/* Medical dotted pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.06] -z-10"
+        style={{
+          backgroundImage: "radial-gradient(white 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      />
+
       {/* Content */}
       <div
         className={`section-container h-full flex items-center ${

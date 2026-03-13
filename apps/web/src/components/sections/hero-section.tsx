@@ -85,7 +85,19 @@ export function HeroSection({ className }: HeroSectionProps) {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-linear-to-r from-background/95 via-background/80 to-background/60" />
+        {/* RESTORED: Gradient overlay - this is crucial! */}
+        <div className="absolute inset-0 bg-linear-to-r from-background/30 via-background/10 to-background/0 dark:from-background/95 dark:via-background/80 dark:to-background/60" />
+
+        {/* Pattern overlay - now appears ON TOP of the gradient but BEHIND content */}
+        <div className="absolute inset-0 pointer-events-none mix-blend-overlay">
+          <div
+            className="absolute inset-0 bg-repeat"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+              backgroundSize: "200px 200px",
+            }}
+          />
+        </div>
       </div>
 
       <div className="section-wrapper">
@@ -158,10 +170,16 @@ export function HeroSection({ className }: HeroSectionProps) {
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 + index * 0.1 }}
                     whileHover={{ x: 5 }}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50"
+                    className={cn(
+                      "flex items-center gap-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50",
+                      gradientClass(item.gradient, { opacity: 5 }),
+                    )}
                   >
                     <div
-                      className={`p-2 rounded-full ${gradientClass(item.gradient, { opacity: 50 })} text-white`}
+                      className={cn(
+                        "p-2 rounded-full text-white",
+                        gradientClass(item.gradient, { opacity: 50 }),
+                      )}
                     >
                       <item.icon />
                     </div>
