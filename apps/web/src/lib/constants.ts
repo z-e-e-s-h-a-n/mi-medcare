@@ -1004,6 +1004,7 @@ export const CASE_STUDIES = [
 export const HEADER_NAVIGATION: NavItem[] = [
   {
     title: "Services",
+    href: "./services",
     children: SERVICES.slice(0, 6),
 
     featured: {
@@ -1017,6 +1018,7 @@ export const HEADER_NAVIGATION: NavItem[] = [
 
   {
     title: "Specialties",
+    href: "./specialties",
     children: SPECIALTIES.slice(0, 6),
 
     featured: {

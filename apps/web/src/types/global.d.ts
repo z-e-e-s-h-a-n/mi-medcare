@@ -13,6 +13,7 @@ export type NavChild = {
 
 export type NavItem = {
   title: string;
+  href?: string;
   children: NavChild[];
   featured?: NavChild;
 };

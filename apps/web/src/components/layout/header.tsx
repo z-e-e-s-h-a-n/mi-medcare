@@ -212,15 +212,29 @@ export function Header() {
                   <NavigationMenuItem key={item.title}>
                     {item.children && (
                       <>
-                        <NavigationMenuTrigger>
-                          <motion.span
-                            whileHover={{ y: -1 }}
-                            transition={hoverVariants.spring as any}
-                            className="inline-block"
-                          >
-                            {item.title}
-                          </motion.span>
-                        </NavigationMenuTrigger>
+                        {item.href ? (
+                          <NavigationMenuTrigger>
+                            <Link href={item.href}>
+                              <motion.span
+                                whileHover={{ y: -1 }}
+                                transition={hoverVariants.spring as any}
+                                className="inline-block"
+                              >
+                                {item.title}
+                              </motion.span>
+                            </Link>
+                          </NavigationMenuTrigger>
+                        ) : (
+                          <NavigationMenuTrigger>
+                            <motion.span
+                              whileHover={{ y: -1 }}
+                              transition={hoverVariants.spring as any}
+                              className="inline-block"
+                            >
+                              {item.title}
+                            </motion.span>
+                          </NavigationMenuTrigger>
+                        )}
                         <NavigationMenuContent>
                           <MegaMenu item={item} />
                         </NavigationMenuContent>

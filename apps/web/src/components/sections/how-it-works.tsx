@@ -93,7 +93,7 @@ export function HowItWorksSection({
           </div>
 
           {/* Main Timeline */}
-          <div className="relative max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
+          <div className="relative max-w-5xl xl:max-w-6xl mx-auto">
             {/* Central Animated Line - Hidden on mobile */}
             {!isMobile && (
               <motion.div
@@ -173,8 +173,14 @@ export function HowItWorksSection({
                             className={`absolute inset-0 rounded-2xl blur-xl transition-opacity duration-500 ${cardGlow}`}
                           />
 
-                          {/* Card */}
-                          <div className="relative bg-background/80 backdrop-blur-sm border border-border/50 rounded-2xl p-4 hover:border-primary/30 transition-all duration-300">
+                          {/* Card - FIXED: Added gradient background for mobile */}
+                          <div
+                            className={cn(
+                              "relative bg-background/80 backdrop-blur-sm border border-border/50 rounded-2xl p-4 hover:border-primary/30 transition-all duration-300",
+                              useConstantColors &&
+                                gradientClass(step.gradient, { opacity: 10 }),
+                            )}
+                          >
                             {/* Step Number Badge */}
                             <div className="mb-3">
                               <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">
@@ -278,9 +284,13 @@ export function HowItWorksSection({
                             {step.description}
                           </p>
 
-                          {/* Decorative corner accent */}
+                          {/* Decorative corner accent - FIXED: Now consistent for both sides */}
                           <div
-                            className={`absolute bottom-0 ${isEven ? "right-0" : "left-0"} w-12 h-12 border-b-2 ${isEven ? "border-r-2" : "border-l-2"} border-primary/20 rounded-br-2xl`}
+                            className={`absolute bottom-0 w-12 h-12 border-b-2 border-primary/20 ${
+                              isEven
+                                ? "right-0 border-r-2 rounded-br-2xl"
+                                : "left-0 border-l-2 rounded-bl-2xl"
+                            }`}
                           />
                         </div>
                       </motion.div>

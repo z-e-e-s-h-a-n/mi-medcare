@@ -53,7 +53,7 @@ export function ServicesSection({
               >
                 {/* Gradient Background on Hover */}
                 <div
-                  className={`absolute inset-0 ${gradientClass(service.gradient, { direction: "br" })} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
+                  className={`absolute inset-0 ${gradientClass(service.gradient, { direction: "br" })} opacity-5 group-hover:opacity-10 rounded-2xl transition-opacity duration-300`}
                 />
 
                 {/* Icon with Animation */}

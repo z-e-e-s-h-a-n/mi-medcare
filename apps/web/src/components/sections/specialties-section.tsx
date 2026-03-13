@@ -24,13 +24,12 @@ export function SpecialtiesSection({
   return (
     <section className={cn("section-wrapper", className)}>
       <div className="section-container">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14"
+          className="text-center max-w-4xl mx-auto mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
             Medical Billing for{" "}
@@ -39,13 +38,12 @@ export function SpecialtiesSection({
             </span>
           </h2>
 
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             We provide specialty-focused medical billing services designed for
             primary care practices, surgical centers, and specialty clinics.
           </p>
         </motion.div>
 
-        {/* Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {displaySpecialties.map((specialty, index) => {
             const Icon = specialty.icon;
@@ -57,43 +55,53 @@ export function SpecialtiesSection({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -6 }}
                 className="w-full"
               >
                 <Link
-                  className={`flex w-full items-center gap-3 rounded-lg border bg-background p-4 hover:shadow-sm transition-all ${
+                  className={cn(
+                    "group relative flex flex-col w-full items-center gap-3 rounded-xl border bg-background p-4 hover:shadow-lg transition-all",
                     useConstantColors
                       ? "hover:border-border/80"
-                      : "hover:border-primary/40"
-                  }`}
+                      : "hover:border-primary/40",
+                  )}
                   href={specialty.href}
                 >
-                  {/* Icon */}
                   <div
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${
+                    className={cn(
+                      "absolute inset-0 rounded-xl transition-opacity duration-300",
+                      gradientClass(specialty.gradient, { direction: "br" }),
+                      "opacity-5 group-hover:opacity-10",
+                    )}
+                  />
+
+                  <div
+                    className={cn(
+                      "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-105",
                       useConstantColors
                         ? `${gradientClass(specialty.gradient, { direction: "br" })} text-white`
-                        : "bg-primary/10"
-                    }`}
+                        : "bg-primary/10",
+                    )}
                   >
                     <Icon
-                      className={`h-5 w-5 ${
-                        useConstantColors ? "text-white" : "text-primary"
-                      }`}
+                      className={cn(
+                        "h-6 w-6",
+                        useConstantColors ? "text-white" : "text-primary",
+                      )}
                     />
                   </div>
 
-                  {/* Name */}
-                  <span className="text-sm font-medium leading-tight">
-                    {specialty.title}
-                  </span>
+                  <div className="flex flex-col items-center flex-1">
+                    <span className="text-sm font-medium leading-tight text-center mb-1">
+                      {specialty.title}
+                    </span>
+                  </div>
                 </Link>
               </motion.div>
             );
           })}
         </div>
 
-        {/* View All */}
         {limit && SPECIALTIES.length > limit && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -102,7 +110,11 @@ export function SpecialtiesSection({
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <Button href="/specialties" size="lg" className="group">
+            <Button
+              href="/specialties"
+              size="lg"
+              className="group px-8 py-6 text-base"
+            >
               View All {SPECIALTIES.length} Specialties
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
