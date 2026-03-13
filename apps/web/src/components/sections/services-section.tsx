@@ -60,7 +60,7 @@ export function ServicesSection({
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}
-                  className={`w-14 h-14 rounded-xl ${gradientClass(service.gradient, { direction: "br" })} p-3 mb-4 text-white`}
+                  className={`relative w-14 h-14 rounded-xl ${gradientClass(service.gradient, { direction: "br" })} p-3 mb-4 text-white`}
                 >
                   <Icon className="size-full" />
                 </motion.div>
@@ -85,7 +85,7 @@ export function ServicesSection({
                 <Link
                   href={service.href}
                   aria-label={`Learn more about ${service.title}`}
-                  className="flex items-center gap-2 font-medium group-hover:gap-3 transition-all text-primary"
+                  className="relative flex items-center gap-2 font-medium group-hover:gap-3 transition-all text-primary"
                 >
                   Learn More
                   <ArrowRight />

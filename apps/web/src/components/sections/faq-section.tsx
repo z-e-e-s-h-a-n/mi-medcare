@@ -11,6 +11,8 @@ import { cn } from "@workspace/ui/lib/utils";
 
 import { FAQS } from "@/lib/constants";
 import { SectionHeader } from "@/components/layout/section-header";
+import { Button } from "@workspace/ui/components/button";
+import { ArrowRight } from "lucide-react";
 
 interface FAQSectionProps {
   faqs?: {
@@ -18,9 +20,13 @@ interface FAQSectionProps {
     answer: string;
   }[];
   className?: string;
+  limit?: number;
 }
 
-export function FAQSection({ faqs, className }: FAQSectionProps) {
+export function FAQSection({ faqs, limit = 6, className }: FAQSectionProps) {
+  let displayFaqs = limit ? FAQS.slice(0, limit) : FAQS;
+  if (faqs) displayFaqs = faqs;
+
   if (!faqs) faqs = FAQS;
 
   return (
@@ -45,7 +51,7 @@ export function FAQSection({ faqs, className }: FAQSectionProps) {
             viewport={{ once: true }}
           >
             <Accordion type="single" collapsible className="w-full space-y-5">
-              {faqs.map((faq, index) => (
+              {displayFaqs.map((faq, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 16 }}
@@ -83,6 +89,22 @@ export function FAQSection({ faqs, className }: FAQSectionProps) {
               ))}
             </Accordion>
           </motion.div>
+
+          {/* View All */}
+          {limit && FAQS.length > limit && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="text-center mt-12"
+            >
+              <Button href="/services" size="lg" className="group">
+                View All Faqs
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

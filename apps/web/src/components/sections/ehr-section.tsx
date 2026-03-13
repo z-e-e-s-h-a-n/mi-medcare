@@ -1,9 +1,7 @@
-// components/sections/ehr-section.tsx
 "use client";
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import Link from "next/link";
 import { EHR_SYSTEMS } from "@/lib/constants";
 import { Button } from "@workspace/ui/components/button";
 import { ArrowRight } from "lucide-react";
@@ -82,11 +80,9 @@ export function EHRSection({ limit, className }: EHRSectionProps) {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-center mt-12"
           >
-            <Button asChild variant="outline" size="lg" className="group">
-              <Link href="/emr-ehr-support">
-                View All {EHR_SYSTEMS.length} EHR Systems
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+            <Button href="/emr-ehr-support" asChild size="lg" className="group">
+              View All {EHR_SYSTEMS.length} EHR Systems
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
         )}

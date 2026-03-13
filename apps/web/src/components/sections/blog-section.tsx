@@ -87,7 +87,7 @@ export function BlogSection({ className }: BlogSectionProps) {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Button variant="outline" size="lg" className="group">
+          <Button href="/blogs" size="lg" className="group">
             View All Articles
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
