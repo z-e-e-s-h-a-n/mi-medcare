@@ -42,7 +42,6 @@ logs
 
 # Prisma
 **/prisma/generated/
-**/prisma/migrations/
 
 
 # others
