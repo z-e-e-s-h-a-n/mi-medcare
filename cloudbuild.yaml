@@ -24,7 +24,7 @@ steps:
         "--image",
         "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA",
         "--region",
-        "asia-south1",
+        "us-central1",
         "--platform",
         "managed",
         "--allow-unauthenticated",
@@ -45,5 +45,5 @@ images:
   - "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA"
 
 substitutions:
-  _AR_HOST: asia-south1-docker.pkg.dev
+  _AR_HOST: us-central1-docker.pkg.dev
   _AR_REPO: mi-medcare
