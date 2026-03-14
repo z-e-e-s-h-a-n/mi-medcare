@@ -31,8 +31,16 @@ RUN pnpm build:server
 FROM node:24-alpine AS runner
 WORKDIR /app
 
+RUN npm install -g pnpm
+
 ENV NODE_ENV=production
 ENV PORT=8080
+
+# Needed so the Cloud Run migration Job can run `pnpm --filter ...` inside the image.
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
+COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=builder /app/turbo.json ./turbo.json
 
 COPY --from=builder /app/server/dist ./server/dist
 COPY --from=builder /app/server/package.json ./server/package.json
