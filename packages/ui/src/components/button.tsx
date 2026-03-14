@@ -45,6 +45,7 @@ export type ButtonProps = React.ComponentProps<"button"> &
     target?: React.HTMLAttributeAnchorTarget;
     href?: string;
     rel?: string;
+    prefetch?: boolean;
   };
 
 function Button({

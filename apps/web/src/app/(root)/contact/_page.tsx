@@ -5,18 +5,18 @@ import { motion } from "motion/react";
 import { easeOut } from "motion";
 import Link from "next/link";
 import { ArrowRight, Phone, Mail, MapPin, Clock } from "lucide-react";
-import {
-  IconBrandFacebook,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-  IconBrandTiktok,
-  IconBrandWhatsapp,
-} from "@tabler/icons-react";
 import { business } from "@/lib/constants";
 import { FAQSection } from "@/components/sections/faq-section";
 import { PageHeader } from "@/components/layout/page-header";
 import { ContactForm } from "@/components/forms/contact-form";
 import { formatBusinessAddress } from "@/lib/utils";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  XIcon,
+  WhatsAppIcon,
+} from "@/components/icons/social-icons";
 
 const headOfficeAddress = business.addresses?.[0];
 const branchAddresses = business.addresses?.slice(1) ?? [];
@@ -64,7 +64,7 @@ const callCard = {
 };
 
 const whatsappCard = {
-  icon: IconBrandWhatsapp,
+  icon: WhatsAppIcon,
   title: "WhatsApp",
   content: business.whatsapp,
   subtitle: "Quick replies via chat",
@@ -97,12 +97,29 @@ const hoursCard = {
 
 // Social Links
 const socialLinks = [
-  { icon: IconBrandFacebook, href: business.facebook, label: "Facebook" },
-  { icon: IconBrandInstagram, href: business.instagram, label: "Instagram" },
-  { icon: IconBrandLinkedin, href: business.linkedin, label: "LinkedIn" },
-  { icon: IconBrandTiktok, href: business.tiktok, label: "TikTok" },
   {
-    icon: IconBrandWhatsapp,
+    icon: FacebookIcon,
+    href: business.facebook,
+    label: "Facebook",
+  },
+  {
+    icon: XIcon,
+    href: business.twitter,
+    label: "X",
+    iconClassName: "dark:text-white",
+  },
+  {
+    icon: InstagramIcon,
+    href: business.instagram,
+    label: "Instagram",
+  },
+  {
+    icon: LinkedInIcon,
+    href: business.linkedin,
+    label: "LinkedIn",
+  },
+  {
+    icon: WhatsAppIcon,
     href: `https://wa.me/${business.whatsapp}`,
     label: "WhatsApp",
   },
@@ -326,8 +343,10 @@ Revenue Cycle"
                         whileTap={{ scale: 0.95 }}
                         className="group"
                       >
-                        <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary/10 to-secondary/10 flex items-center justify-center border border-primary/20 hover:border-primary/40 transition-all overflow-hidden">
-                          <Icon className="w-5 h-5 text-primary group-hover:text-primary/80 transition-colors transform-gpu" />
+                        <div className="w-12 h-12 rounded-xl bg-background/80 backdrop-blur-sm flex items-center justify-center border border-border hover:border-primary/25 transition-all overflow-hidden shadow-sm hover:shadow-md">
+                          <Icon
+                            className={`w-5 h-5 transition-transform transform-gpu group-hover:scale-110 ${social.iconClassName ?? ""}`}
+                          />
                         </div>
                       </motion.a>
                     );

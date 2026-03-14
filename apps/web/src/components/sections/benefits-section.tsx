@@ -6,6 +6,7 @@ import { BENEFITS_OF_CHOOSING } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
 import { CheckCircle, TrendingUp } from "lucide-react";
 import { cn } from "@workspace/ui/lib/utils";
+import Image from "next/image";
 
 interface BenefitsSectionProps {
   useConstantColors?: boolean;
@@ -28,138 +29,246 @@ export function BenefitsSection({
       <div className="section-wrapper">
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Main Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Badge */}
+            {/* Left Column - Main Content */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 }}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 bg-primary/1 0 text-primary`}
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8 }}
             >
-              <TrendingUp className="w-4 h-4" />
-              <span className="text-sm font-medium">Why Choose Us</span>
-            </motion.div>
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 bg-primary/10 text-primary"
+              >
+                <TrendingUp className="w-4 h-4" />
+                <span className="text-sm font-medium">Why Choose Us</span>
+              </motion.div>
 
-            {/* Title */}
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              {BENEFITS_OF_CHOOSING.title.split("Medical Billing Services")[0]}
-              <span className="gradient-text"> Medical Billing Services</span>
-            </h2>
+              {/* Title */}
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                {
+                  BENEFITS_OF_CHOOSING.title.split(
+                    "Medical Billing Services",
+                  )[0]
+                }
+                <span className="gradient-text"> Medical Billing Services</span>
+              </h2>
 
-            {/* Description */}
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              {BENEFITS_OF_CHOOSING.description}
-            </p>
+              {/* Description */}
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                {BENEFITS_OF_CHOOSING.description}
+              </p>
 
-            {/* Stats Highlight */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4 }}
-              className="relative flex items-center gap-6 p-6 rounded-2xl border overflow-hidden"
-            >
-              <div
-                className={`absolute inset-0 -z-10 bg-linear-to-r from-primary/5 to-secondary/5`}
-              />
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ y: -3 }}
-                    className="w-10 h-10 rounded-full bg-linear-to-br from-primary to-secondary border-2 border-background flex items-center justify-center text-white font-bold text-sm"
-                  >
-                    {i === 1 ? "5" : i === 2 ? "0" : i === 3 ? "0" : "+"}
-                  </motion.div>
-                ))}
-              </div>
-              <div>
-                <p className="text-2xl font-bold">500+</p>
-                <p className="text-sm text-muted-foreground">
-                  Happy Healthcare Clients
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Column - Benefits Grid */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4"
-          >
-            {BENEFITS_OF_CHOOSING.keyBenefits.map((benefit) => {
-              const Icon = benefit.icon;
-              const benefitAccent = benefit.gradient;
-
-              return (
-                <motion.div
-                  key={benefit.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5 }}
-                  whileHover={{
-                    scale: 1.05,
-                    transition: { type: "spring", stiffness: 400, damping: 17 },
-                  }}
-                  className="group relative"
-                >
-                  <div
-                    className={`h-full bg-background/50 backdrop-blur-sm border rounded-xl p-5 transition-all duration-300 ${
-                      useConstantColors
-                        ? "hover:border-border/80"
-                        : "hover:border-primary/30"
-                    }`}
-                  >
-                    {/* Icon with animated background */}
-                    <motion.div className="relative mb-3">
-                      <div
-                        className={`absolute inset-0 rounded-full blur-md transition-all ${
-                          useConstantColors
-                            ? `${gradientClass(benefitAccent, { direction: "br" })} opacity-10 group-hover:opacity-20`
-                            : "bg-primary/5 group-hover:bg-primary/10"
-                        }`}
-                      />
-                      <div
-                        className={`relative w-10 h-10 rounded-lg flex items-center justify-center border ${
-                          useConstantColors
-                            ? `${gradientClass(benefitAccent, { direction: "br" })} border-white/15`
-                            : "bg-linear-to-br from-primary/10 to-secondary/10 border-primary/20"
-                        }`}
-                      >
-                        <Icon
-                          className={`w-5 h-5 ${
-                            useConstantColors ? "text-white" : "text-primary"
-                          }`}
-                        />
-                      </div>
-                    </motion.div>
-
-                    {/* Benefit text */}
-                    <h3 className="font-semibold text-sm lg:text-base leading-tight">
-                      {benefit.title}
-                    </h3>
-
-                    {/* Hover indicator dot */}
+              {/* Stats Highlight */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.4 }}
+                className="relative flex items-center gap-6 p-6 rounded-2xl border overflow-hidden"
+              >
+                <div
+                  className={`absolute inset-0 -z-10 bg-linear-to-r from-primary/5 to-secondary/5`}
+                />
+                <div className="flex -space-x-3">
+                  {[1, 2, 3, 4].map((i) => (
                     <motion.div
-                      initial={{ scale: 0 }}
-                      whileHover={{ scale: 1 }}
-                      className={`absolute top-2 right-2 w-2 h-2 rounded-full ${
-                        useConstantColors
-                          ? gradientClass(benefitAccent)
-                          : "bg-primary"
-                      }`}
-                    />
+                      key={i}
+                      whileHover={{ y: -3 }}
+                      className="w-10 h-10 rounded-full bg-linear-to-br from-primary to-secondary border-2 border-background flex items-center justify-center text-white font-bold text-sm"
+                    >
+                      {i === 1 ? "5" : i === 2 ? "0" : i === 3 ? "0" : "+"}
+                    </motion.div>
+                  ))}
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">500+</p>
+                  <p className="text-sm text-muted-foreground">
+                    Happy Healthcare Clients
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Right Column - Benefits Grid */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative overflow-hidden rounded-3xl border bg-background/30 min-h-130 lg:min-h-150"
+            >
+              {/* Image backdrop */}
+              <div className="absolute inset-0">
+                <Image
+                  src="/images/technology.jpg"
+                  alt="Healthcare revenue cycle operations"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-black/15" />
+                <div className="absolute inset-0 bg-linear-to-b from-background/90 via-background/60 to-background/25" />
+              </div>
+
+              {/* Content */}
+              <div className="relative p-6 h-full flex flex-col justify-between">
+                {/* Top content */}
+                <div>
+                  {/* Small header pill */}
+                  <div className="mb-6">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-4 py-2 backdrop-blur-md">
+                      <span className="text-sm font-semibold">
+                        Trusted Outcomes
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        Built for U.S. practices
+                      </span>
+                    </div>
                   </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+
+                  {/* Top 2 cards */}
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {BENEFITS_OF_CHOOSING.keyBenefits
+                      .slice(0, 2)
+                      .map((benefit) => {
+                        const Icon = benefit.icon;
+                        const benefitAccent = benefit.gradient;
+
+                        return (
+                          <motion.div
+                            key={benefit.title}
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.5 }}
+                            whileHover={{
+                              y: -4,
+                              transition: { duration: 0.2 },
+                            }}
+                            className="group relative"
+                          >
+                            <div
+                              className={cn(
+                                "h-full rounded-2xl border p-5 backdrop-blur-md transition-all duration-300",
+                                "bg-background/70 border-border/60 hover:shadow-xl",
+                                useConstantColors
+                                  ? "hover:border-border/80"
+                                  : "hover:border-primary/30",
+                              )}
+                            >
+                              <div className="flex items-start gap-4">
+                                <div
+                                  className={cn(
+                                    "shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center border shadow-sm",
+                                    useConstantColors
+                                      ? `${gradientClass(benefitAccent, { direction: "br" })} border-white/15`
+                                      : "bg-primary/10 border-primary/15 text-primary",
+                                  )}
+                                >
+                                  <Icon
+                                    className={cn(
+                                      "w-5 h-5",
+                                      useConstantColors
+                                        ? "text-white"
+                                        : "text-primary",
+                                    )}
+                                  />
+                                </div>
+
+                                <div className="min-w-0">
+                                  <h3 className="font-semibold text-sm sm:text-base leading-tight">
+                                    {benefit.title}
+                                  </h3>
+                                  <p className="mt-2 text-sm text-muted-foreground">
+                                    Measurable improvements you can see month
+                                    over month.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+
+                    {/* Middle card spanning full width */}
+                    {BENEFITS_OF_CHOOSING.keyBenefits
+                      .slice(2, 3)
+                      .map((benefit) => {
+                        const Icon = benefit.icon;
+                        const benefitAccent = benefit.gradient;
+
+                        return (
+                          <motion.div
+                            key={benefit.title}
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.5 }}
+                            whileHover={{
+                              y: -4,
+                              transition: { duration: 0.2 },
+                            }}
+                            className="group relative sm:col-span-2"
+                          >
+                            <div
+                              className={cn(
+                                "h-full rounded-2xl border p-5 backdrop-blur-md transition-all duration-300",
+                                "bg-background/70 border-border/60 hover:shadow-xl",
+                                useConstantColors
+                                  ? "hover:border-border/80"
+                                  : "hover:border-primary/30",
+                              )}
+                            >
+                              <div className="flex items-start gap-4">
+                                <div
+                                  className={cn(
+                                    "shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center border shadow-sm",
+                                    useConstantColors
+                                      ? `${gradientClass(benefitAccent, { direction: "br" })} border-white/15`
+                                      : "bg-primary/10 border-primary/15 text-primary",
+                                  )}
+                                >
+                                  <Icon
+                                    className={cn(
+                                      "w-5 h-5",
+                                      useConstantColors
+                                        ? "text-white"
+                                        : "text-primary",
+                                    )}
+                                  />
+                                </div>
+
+                                <div className="min-w-0">
+                                  <h3 className="font-semibold text-sm sm:text-base leading-tight">
+                                    {benefit.title}
+                                  </h3>
+                                  <p className="mt-2 text-sm text-muted-foreground">
+                                    Measurable improvements you can see month
+                                    over month.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                  </div>
+                </div>
+
+                {/* Bottom card */}
+                <div className="mt-6">
+                  <div className="rounded-2xl border border-border/60 bg-background/60 backdrop-blur-md px-5 py-4">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div className="text-sm font-medium">
+                        Faster collections. Fewer denials. Cleaner reporting.
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        Ask for a free RCM audit
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
 
           {/* Bottom CTA */}

@@ -9,6 +9,7 @@ import { KpiSection } from "./kpi-section";
 import { gradientClass } from "@/lib/utils";
 import { cn } from "@workspace/ui/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 interface HowItWorksSectionProps {
   useConstantColors?: boolean;
@@ -50,11 +51,22 @@ export function HowItWorksSection({
   return (
     <section
       ref={containerRef}
-      className={cn(
-        "relative overflow-hidden py-16 md:py-24 bg-muted",
-        className,
-      )}
+      className={cn("relative overflow-hidden py-16 md:py-24", className)}
     >
+      {/* Subtle background image + overlays to make the section feel premium */}
+      <div className="absolute inset-0">
+        <Image
+          src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?cs=srgb&dl=pexels-mart-production-4386466.jpg&fm=jpg&w=1920"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority={false}
+        />
+        <div className="absolute inset-0 bg-linear-to-br from-background via-muted/70 to-primary/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.10),transparent_55%),radial-gradient(circle_at_80%_60%,rgba(59,130,246,0.08),transparent_55%)]" />
+      </div>
+
       {/* Abstract Background Elements - Hidden on mobile for performance */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent via-primary/20 to-transparent hidden md:block" />
@@ -127,7 +139,7 @@ export function HowItWorksSection({
                 const isEven = index % 2 === 0;
                 const iconBg = useConstantColors
                   ? `${gradientClass(step.gradient)} text-white`
-                  : "bg-linear-to-br from-primary/10 to-secondary/10 text-primary";
+                  : "bg-background/70 backdrop-blur-sm border border-border/70 text-primary";
                 const cardGlow = useConstantColors
                   ? `${gradientClass(step.gradient, { opacity: 10 })} opacity-0 group-hover:opacity-10`
                   : "bg-linear-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100";
@@ -242,7 +254,7 @@ export function HowItWorksSection({
                         {/* Card */}
                         <div
                           className={cn(
-                            "relative border border-border/50 rounded-2xl p-6 hover:border-primary/30 transition-all duration-300",
+                            "relative bg-background/70 backdrop-blur-sm border border-border/60 rounded-2xl p-6 hover:border-primary/30 transition-all duration-300",
                             useConstantColors &&
                               gradientClass(step.gradient, { opacity: 10 }),
                           )}

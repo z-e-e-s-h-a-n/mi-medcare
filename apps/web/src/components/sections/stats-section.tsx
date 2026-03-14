@@ -12,7 +12,7 @@ interface SuccessMetricsProps {
 }
 
 export function SuccessMetrics({
-  useConstantColors = true,
+  useConstantColors = false,
   className,
 }: SuccessMetricsProps) {
   return (
@@ -55,8 +55,9 @@ export function SuccessMetrics({
                   <div
                     className={cn(
                       "relative h-full bg-linear-to-br from-primary/10 to-accent/10 backdrop-blur-sm border rounded-2xl p-6 overflow-hidden transition-colors duration-300 group ",
-                      !useConstantColors &&
-                        "hover:from-primary hover:via-primary/80 hover:to-primary/60 hover:text-primary-foreground",
+                      useConstantColors
+                        ? ""
+                        : "hover:from-primary hover:via-primary/80 hover:to-primary/60 hover:text-primary-foreground",
                     )}
                   >
                     {/* Background decoration */}
@@ -67,9 +68,9 @@ export function SuccessMetrics({
                       transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
                       className={`absolute -right-6 -top-6 w-24 h-24 rounded-full blur-2xl ${
                         useConstantColors
-                          ? gradientClass(metricAccent, {
+                          ? gradientClass(metric.gradient, {
                               direction: "br",
-                              opacity: 12,
+                              opacity: 50,
                             })
                           : "bg-linear-to-br from-primary/5 to-secondary/5"
                       }`}
@@ -111,20 +112,36 @@ export function SuccessMetrics({
                           5-10%
                         </div>
                       ) : (
-                        <div className="text-3xl lg:text-4xl font-bold transition-colors group-hover:text-primary-foreground">
+                        <div
+                          className={cn(
+                            "text-3xl lg:text-4xl font-bold transition-colors ",
+                            useConstantColors
+                              ? "group-hover:text-primary"
+                              : "group-hover:text-primary-foreground",
+                          )}
+                        >
                           {metric.prefix}
                           <CountUp
                             end={metric.value}
                             duration={2.5}
                             separator=","
                             suffix={metric.suffix}
+                            enableScrollSpy
+                            scrollSpyOnce
                           />
                         </div>
                       )}
                     </div>
 
                     {/* Label */}
-                    <p className="text-sm text-muted-foreground transition-colors duration-300 group-hover:text-primary-foreground/80">
+                    <p
+                      className={cn(
+                        "text-sm text-muted-foreground transition-colors duration-300 ",
+                        useConstantColors
+                          ? "group-hover:text-primary/80"
+                          : "group-hover:text-primary-foreground/80",
+                      )}
+                    >
                       {metric.label}
                     </p>
 

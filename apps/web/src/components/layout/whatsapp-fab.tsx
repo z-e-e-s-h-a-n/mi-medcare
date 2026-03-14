@@ -1,7 +1,7 @@
-import { IconBrandWhatsapp } from "@tabler/icons-react";
 import { business } from "@/lib/constants";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
+import { WhatsAppIcon } from "@/components/icons/social-icons";
 
 type WhatsAppFabProps = {
   className?: string;
@@ -23,7 +23,7 @@ export function WhatsAppFab({ className }: WhatsAppFabProps) {
         className,
       )}
     >
-      <IconBrandWhatsapp className="size-5" />
+      <WhatsAppIcon className="size-5 text-white" />
       <span className="hidden sm:inline">WhatsApp</span>
     </Button>
   );

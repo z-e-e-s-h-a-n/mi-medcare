@@ -5,12 +5,6 @@ import { useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import {
-  IconBrandFacebook,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-  IconBrandTiktok,
-} from "@tabler/icons-react";
-import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
@@ -27,13 +21,35 @@ import { formatBusinessAddress } from "@/lib/utils";
 import { Logo } from "./logo";
 import ThemeSwitch from "@workspace/ui/components/theme-toggle";
 import { Mail, MapPin, Phone } from "lucide-react";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  XIcon,
+} from "@/components/icons/social-icons";
 
 // Memoized social links configuration
 const SOCIAL_LINKS = [
-  { href: business.facebook, Icon: IconBrandFacebook, name: "Facebook" },
-  { href: business.instagram, Icon: IconBrandInstagram, name: "Instagram" },
-  { href: business.linkedin, Icon: IconBrandLinkedin, name: "LinkedIn" },
-  { href: business.tiktok, Icon: IconBrandTiktok, name: "TikTok" },
+  {
+    href: business.facebook,
+    Icon: FacebookIcon,
+    name: "Facebook",
+  },
+  {
+    href: business.twitter,
+    Icon: XIcon,
+    name: "X",
+  },
+  {
+    href: business.instagram,
+    Icon: InstagramIcon,
+    name: "Instagram",
+  },
+  {
+    href: business.linkedin,
+    Icon: LinkedInIcon,
+    name: "LinkedIn",
+  },
 ] as const;
 
 // Animation variants for better performance
@@ -162,7 +178,7 @@ export function Header() {
               </motion.div>
 
               {/* Social Links - Optimized with useMemo */}
-              <motion.div className="flex items-center gap-2">
+              <motion.div className="flex items-center gap-4">
                 {SOCIAL_LINKS.map(({ Icon, href, name }) => (
                   <motion.div
                     key={name}
@@ -177,7 +193,7 @@ export function Header() {
                       aria-label={`Visit MI MedCare on ${name}`}
                       prefetch={false}
                     >
-                      <Icon />
+                      <Icon className="size-4 text-primary-foreground" />
                     </Link>
                   </motion.div>
                 ))}

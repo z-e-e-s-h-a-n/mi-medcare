@@ -59,8 +59,6 @@ function ThemeSwitch(props: ButtonProps) {
             <motion.svg
               key="moon"
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -70,6 +68,7 @@ function ThemeSwitch(props: ButtonProps) {
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.15 }}
+              className="size-4 2xl:size-5"
             >
               <motion.path
                 d={moonPaths.main}
@@ -95,8 +94,6 @@ function ThemeSwitch(props: ButtonProps) {
             <motion.svg
               key="sun"
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -106,6 +103,7 @@ function ThemeSwitch(props: ButtonProps) {
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.15 }}
+              className="size-4 2xl:size-5"
             >
               {/* Soft pulsing sun core */}
               <motion.circle

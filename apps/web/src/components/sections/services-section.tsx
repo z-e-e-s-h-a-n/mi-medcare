@@ -4,12 +4,13 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 import { Button } from "@workspace/ui/components/button";
 import { SectionHeader } from "@/components/layout/section-header";
 import { SERVICES } from "@/lib/constants";
-import { gradientClass } from "@/lib/utils";
 import { cn } from "@workspace/ui/lib/utils";
+import { gradientClass } from "@/lib/utils";
 
 interface ServicesSectionProps {
   title?: string;
@@ -26,7 +27,7 @@ export function ServicesSection({
   badge = "Comprehensive RCM Solutions",
   description = "End-to-end revenue cycle management services tailored to your practice's needs",
   limit,
-  useConstantColors = true,
+  useConstantColors = false,
   className,
   services,
 }: ServicesSectionProps) {
@@ -34,7 +35,7 @@ export function ServicesSection({
   if (services) displayServices = services;
 
   return (
-    <section className={cn("section-wrapper bg-muted", className)}>
+    <section className={cn("section-wrapper", className)}>
       <div className="section-container">
         <SectionHeader badge={badge} title={title} description={description} />
 
@@ -49,47 +50,115 @@ export function ServicesSection({
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
-                className="group relative bg-background rounded-2xl p-6 border hover:shadow-xl transition-all duration-300"
+                className="group relative overflow-hidden rounded-2xl border bg-background shadow-sm hover:shadow-xl transition-all duration-300"
               >
-                {/* Gradient Background on Hover */}
-                <div
-                  className={`absolute inset-0 ${gradientClass(service.gradient, { direction: "br" })} opacity-5 group-hover:opacity-10 rounded-2xl transition-opacity duration-300`}
-                />
-
-                {/* Icon with Animation */}
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                  className={`relative w-14 h-14 rounded-xl ${gradientClass(service.gradient, { direction: "br" })} p-3 mb-4 text-white`}
-                >
-                  <Icon className="size-full" />
-                </motion.div>
-
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-muted-foreground mb-4">
-                  {service.description}
-                </p>
-
-                {/* Stats Badge */}
-
-                <span
-                  className={cn(
-                    "px-3 py-1 rounded-full text-sm mb-4 absolute top-4 right-4",
-                    useConstantColors
-                      ? `${gradientClass(service.gradient, { opacity: 50 })} text-white`
-                      : "bg-primary/10 text-primary",
+                {/* Image stage */}
+                <div className="relative h-56 sm:h-64 md:h-auto md:aspect-4/3">
+                  {service.image ? (
+                    <Image
+                      src={service.image}
+                      alt={`${service.title} photo`}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-linear-to-br from-muted to-background" />
                   )}
-                >
-                  {service.stats}
-                </span>
-                <Link
-                  href={service.href}
-                  aria-label={`Learn more about ${service.title}`}
-                  className="relative flex items-center gap-2 font-medium group-hover:gap-3 transition-all text-primary"
-                >
-                  Learn More
-                  <ArrowRight />
-                </Link>
+
+                  {/* Vignette + readability */}
+                  <div className="absolute inset-0 bg-black/15" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/55 via-black/10 to-transparent" />
+
+                  {/* Mobile: plain title (no wrapper/bg) */}
+                  <div className="absolute left-4 right-4 top-4 md:hidden flex items-start justify-between gap-3">
+                    <h3 className="min-w-0 text-lg font-semibold text-white leading-snug line-clamp-2">
+                      {service.title}
+                    </h3>
+                    <Link
+                      href={service.href}
+                      aria-label={`Learn more about ${service.title}`}
+                      className="shrink-0 inline-flex items-center gap-2 text-xs font-medium text-white/90 hover:text-white transition-colors"
+                    >
+                      Learn More
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+
+                  {/* Mobile: separator above bottom icon */}
+                  <div className="absolute left-4 bottom-24 md:hidden w-14 border-t border-white/30" />
+
+                  {/* Icon badge (always visible) */}
+                  <motion.div
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                    className={cn(
+                      "absolute left-4 bottom-4 md:bottom-auto md:top-4 w-14 h-14 md:w-12 md:h-12 rounded-xl p-3 backdrop-blur-md border border-white/20 shadow-lg",
+                      useConstantColors
+                        ? `text-white ${gradientClass(service.gradient)}`
+                        : "bg-primary text-primary-foreground",
+                    )}
+                  >
+                    <Icon className="size-full" />
+                  </motion.div>
+
+                  {/* Stats pill */}
+                  <span
+                    className={cn(
+                      "hidden md:inline-flex absolute right-4 top-4 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md border border-white/20",
+                      useConstantColors
+                        ? `text-white ${gradientClass(service.gradient)}`
+                        : "bg-primary/60 text-primary-foreground",
+                    )}
+                  >
+                    {service.stats}
+                  </span>
+
+                  {/* Always-visible caption (lets you still SEE the image) */}
+                  <div className="hidden md:block absolute left-4 right-4 bottom-4">
+                    <h3
+                      className={cn(
+                        "text-base sm:text-lg font-semibold line-clamp-1",
+                        useConstantColors ? "text-white/80" : "text-foreground",
+                      )}
+                    >
+                      {service.title}
+                    </h3>
+                  </div>
+
+                  {/* Hover/focus reveal panel */}
+                  <div
+                    className={cn(
+                      "hidden md:block",
+                      "absolute inset-x-4 bottom-4 rounded-2xl bg-background/80 backdrop-blur-md border border-border/60 p-4 shadow-xl",
+                      "opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0",
+                      "transition-all duration-300",
+                      useConstantColors
+                        ? gradientClass(service.gradient, { opacity: 10 })
+                        : "",
+                    )}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0">
+                        <h4 className="text-base font-semibold line-clamp-1">
+                          {service.title}
+                        </h4>
+                        <p className="mt-2 text-sm text-muted-foreground line-clamp-3">
+                          {service.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    <Link
+                      href={service.href}
+                      aria-label={`Learn more about ${service.title}`}
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+                    >
+                      Learn More
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
               </motion.div>
             );
           })}

@@ -10,20 +10,41 @@ import { cn } from "@workspace/ui/lib/utils";
 
 interface SpecialtiesSectionProps {
   limit?: number;
-  useConstantColors?: boolean;
   className?: string;
+  useConstantColors?: boolean;
+  bgUrl?: string;
 }
 
 export function SpecialtiesSection({
   limit,
-  useConstantColors = true,
+  bgUrl,
   className,
+  useConstantColors = true,
 }: SpecialtiesSectionProps) {
   const displaySpecialties = limit ? SPECIALTIES.slice(0, limit) : SPECIALTIES;
 
   return (
-    <section className={cn("section-wrapper", className)}>
-      <div className="section-container">
+    <section
+      className={cn(
+        "section-wrapper relative overflow-hidden bg-background",
+        className,
+      )}
+    >
+      {/* Visible background image + pattern so it doesn't feel flat/white */}
+      <div className="absolute inset-0">
+        {bgUrl && (
+          <div
+            className="absolute inset-0 opacity-40"
+            style={{
+              backgroundImage: `url('${bgUrl}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        )}
+        <div className="absolute inset-0 bg-linear-to-b from-background/70 via-muted/45 to-prim/20" />
+      </div>
+      <div className="relative section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

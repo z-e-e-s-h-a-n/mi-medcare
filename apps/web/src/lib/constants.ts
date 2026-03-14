@@ -100,12 +100,10 @@ export const business = {
   whatsapp: "+1 (916) 909-6564",
   website: "",
 
-  tiktok: "https://www.facebook.com/mimedcarellc",
   facebook: "https://www.facebook.com/mimedcarellc",
-  instagram: "https://www.linkedin.com/in/mm-alam-freelancer",
-  twitter: "https://www.facebook.com/mimedcarellc",
-  linkedin: "https://www.linkedin.com/in/mm-alam-freelancer",
-  youtube: "https://www.facebook.com/mimedcarellc",
+  instagram: "https://www.instagram.com/mimedcarellc/",
+  twitter: "https://x.com/mimedcarellc",
+  linkedin: "https://www.linkedin.com/company/mi-medcare-llc/",
 
   addresses: [
     {
@@ -696,6 +694,8 @@ export const SERVICES = [
     href: "/services/medical-billing",
     description:
       "End-to-end medical billing services that improve claim acceptance and accelerate reimbursements.",
+    image:
+      "https://images.pexels.com/photos/13060576/pexels-photo-13060576.jpeg?cs=srgb&dl=pexels-lucas-guimaraes-bueno-258458556-13060576.jpg&fm=jpg",
     icon: IconFileText,
     stats: "98% Clean Claims",
     gradient: "from-blue-500 to-cyan-500",
@@ -705,6 +705,8 @@ export const SERVICES = [
     href: "/services/revenue-cycle-management",
     description:
       "Complete RCM solutions covering patient intake, billing, payments, and financial reporting.",
+    image:
+      "https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?cs=srgb&dl=pexels-asphotography-106344.jpg&fm=jpg",
     icon: IconChartBar,
     stats: "30% Faster Payments",
     gradient: "from-purple-500 to-pink-500",
@@ -714,6 +716,8 @@ export const SERVICES = [
     href: "/services/medical-coding",
     description:
       "Certified coders ensure accurate ICD-10, CPT, and HCPCS coding for compliant claims.",
+    image:
+      "https://images.pexels.com/photos/48604/pexels-photo-48604.jpeg?cs=srgb&dl=pexels-negativespace-48604.jpg&fm=jpg",
     icon: IconShieldCheck,
     stats: "100% Certified Coders",
     gradient: "from-green-500 to-emerald-500",
@@ -723,6 +727,8 @@ export const SERVICES = [
     href: "/services/credentialing",
     description:
       "Provider credentialing and payer enrollment to get your practice contracted faster.",
+    image:
+      "https://images.pexels.com/photos/8313224/pexels-photo-8313224.jpeg?cs=srgb&dl=pexels-rdne-8313224.jpg&fm=jpg",
     icon: IconRosetteDiscountCheck,
     stats: "30 Days Avg.",
     gradient: "from-orange-500 to-red-500",
@@ -732,6 +738,8 @@ export const SERVICES = [
     href: "/services/eligibility-verification",
     description:
       "Insurance eligibility and benefits verification before services are delivered.",
+    image:
+      "https://images.pexels.com/photos/5207115/pexels-photo-5207115.jpeg?cs=srgb&dl=pexels-karola-g-5207115.jpg&fm=jpg",
     icon: IconClipboardCheck,
     stats: "95% First-Pass Accuracy",
     gradient: "from-sky-500 to-blue-500",
@@ -741,6 +749,8 @@ export const SERVICES = [
     href: "/services/denial-management",
     description:
       "Identify denial causes, correct errors, and recover lost revenue efficiently.",
+    image:
+      "https://images.pexels.com/photos/7926666/pexels-photo-7926666.jpeg?cs=srgb&dl=pexels-nicola-barts-7926666.jpg&fm=jpg",
     icon: IconAlertTriangle,
     stats: "40% Denial Reduction",
     gradient: "from-yellow-500 to-amber-500",
@@ -750,6 +760,8 @@ export const SERVICES = [
     href: "/services/accounts-receivable",
     description:
       "Aggressive AR follow-up with payers to reduce outstanding claims and improve cash flow.",
+    image:
+      "https://images.pexels.com/photos/5933209/pexels-photo-5933209.jpeg?cs=srgb&dl=pexels-nestor-luis-5307112-5933209.jpg&fm=jpg",
     icon: IconWallet,
     stats: "45 Days AR",
     gradient: "from-indigo-500 to-purple-500",
@@ -759,6 +771,8 @@ export const SERVICES = [
     href: "/services/payment-posting",
     description:
       "Accurate posting of insurance and patient payments with reconciliation.",
+    image:
+      "https://images.pexels.com/photos/13060576/pexels-photo-13060576.jpeg?cs=srgb&dl=pexels-lucas-guimaraes-bueno-258458556-13060576.jpg&fm=jpg",
     icon: IconWallet,
     stats: "99% Posting Accuracy",
     gradient: "from-violet-500 to-indigo-500",
@@ -768,6 +782,8 @@ export const SERVICES = [
     href: "/services/billing-audit",
     description:
       "Detailed audits to identify revenue leakage, compliance issues, and workflow improvements.",
+    image:
+      "https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?cs=srgb&dl=pexels-asphotography-106344.jpg&fm=jpg",
     icon: IconShield,
     stats: "Revenue Leak Detection",
     gradient: "from-gray-500 to-slate-600",
@@ -777,6 +793,8 @@ export const SERVICES = [
     href: "/services/laboratory-billing",
     description:
       "Specialized billing for diagnostic labs with complex coding and payer rules.",
+    image:
+      "https://images.pexels.com/photos/48604/pexels-photo-48604.jpeg?cs=srgb&dl=pexels-negativespace-48604.jpg&fm=jpg",
     icon: Microscope,
     stats: "Lab Billing Experts",
     gradient: "from-teal-500 to-emerald-500",
@@ -786,6 +804,8 @@ export const SERVICES = [
     href: "/services/mips-consulting",
     description:
       "Documentation and compliance consulting to maximize MIPS performance scores.",
+    image:
+      "https://images.pexels.com/photos/5207115/pexels-photo-5207115.jpeg?cs=srgb&dl=pexels-karola-g-5207115.jpg&fm=jpg",
     icon: BarChart3,
     stats: "Maximize MIPS Score",
     gradient: "from-rose-500 to-pink-500",
@@ -796,6 +816,8 @@ export const FEATURES = [
   {
     title: "AI-Powered Automation",
     description: "Reduce manual work by 70% with intelligent automation",
+    image:
+      "https://images.pexels.com/photos/48604/pexels-photo-48604.jpeg?cs=srgb&dl=pexels-negativespace-48604.jpg&fm=jpg",
     icon: IconCpu,
     stats: "70% Less Manual Work",
     gradient: "from-purple-500 to-fuchsia-500",
@@ -803,6 +825,8 @@ export const FEATURES = [
   {
     title: "Real-time Analytics",
     description: "Make data-driven decisions with live dashboards",
+    image:
+      "https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?cs=srgb&dl=pexels-asphotography-106344.jpg&fm=jpg",
     icon: IconChartLine,
     stats: "Real-time Insights",
     gradient: "from-blue-500 to-cyan-500",
@@ -810,6 +834,8 @@ export const FEATURES = [
   {
     title: "Seamless Integration",
     description: "Connect with 50+ EHR systems effortlessly",
+    image:
+      "https://images.pexels.com/photos/5207115/pexels-photo-5207115.jpeg?cs=srgb&dl=pexels-karola-g-5207115.jpg&fm=jpg",
     icon: IconPlug,
     stats: "50+ Integrations",
     gradient: "from-emerald-500 to-teal-500",
@@ -817,6 +843,8 @@ export const FEATURES = [
   {
     title: "Fast Claim Processing",
     description: "Submit claims in minutes, not hours",
+    image:
+      "https://images.pexels.com/photos/13060576/pexels-photo-13060576.jpeg?cs=srgb&dl=pexels-lucas-guimaraes-bueno-258458556-13060576.jpg&fm=jpg",
     icon: IconBolt,
     stats: "2x Faster Processing",
     gradient: "from-amber-500 to-orange-500",
@@ -824,6 +852,8 @@ export const FEATURES = [
   {
     title: "HIPAA Compliant",
     description: "Enterprise-grade security and compliance",
+    image:
+      "https://images.pexels.com/photos/8313224/pexels-photo-8313224.jpeg?cs=srgb&dl=pexels-rdne-8313224.jpg&fm=jpg",
     icon: IconLock,
     stats: "100% Compliant",
     gradient: "from-indigo-500 to-blue-500",
@@ -831,6 +861,8 @@ export const FEATURES = [
   {
     title: "Multi-Specialty Support",
     description: "Expertise across 40+ medical specialties",
+    image:
+      "https://images.pexels.com/photos/5933209/pexels-photo-5933209.jpeg?cs=srgb&dl=pexels-nestor-luis-5307112-5933209.jpg&fm=jpg",
     icon: IconWorld,
     stats: "40+ Specialties",
     gradient: "from-pink-500 to-rose-500",

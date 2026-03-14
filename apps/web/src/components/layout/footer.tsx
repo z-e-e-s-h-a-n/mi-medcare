@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import {
-  IconBrandFacebook,
-  IconBrandTwitter,
-  IconBrandInstagram,
-  IconBrandTiktok,
-} from "@tabler/icons-react";
 import { FOOTER_NAVIGATION, business } from "@/lib/constants";
 import { Logo } from "./logo";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  XIcon,
+} from "@/components/icons/social-icons";
 
 export function Footer() {
   return (
@@ -78,13 +78,29 @@ export function Footer() {
             </p>
             <div className="flex space-x-4">
               {[
-                { Icon: IconBrandFacebook, href: business.facebook },
-                { Icon: IconBrandTwitter, href: business.twitter },
-                { Icon: IconBrandInstagram, href: business.instagram },
-                { Icon: IconBrandTiktok, href: business.tiktok },
-              ].map(({ Icon, href }, index) => (
+                {
+                  Icon: FacebookIcon,
+                  href: business.facebook,
+                  label: "Facebook",
+                },
+                {
+                  Icon: XIcon,
+                  href: business.twitter,
+                  label: "X",
+                },
+                {
+                  Icon: InstagramIcon,
+                  href: business.instagram,
+                  label: "Instagram",
+                },
+                {
+                  Icon: LinkedInIcon,
+                  href: business.linkedin,
+                  label: "LinkedIn",
+                },
+              ].map(({ Icon, href, label }) => (
                 <motion.div
-                  key={index}
+                  key={label}
                   whileHover={{ scale: 1.2, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -92,11 +108,15 @@ export function Footer() {
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    aria-label={`Visit MI MedCare on ${Icon.name}`}
-                    className="text-primary"
+                    aria-label={`Visit MI MedCare on ${label}`}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border bg-background/70 backdrop-blur-sm hover:bg-background transition-colors"
                     prefetch={false}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon
+                      className={
+                        label === "X" ? "h-5 w-5 dark:text-white" : "h-5 w-5"
+                      }
+                    />
                   </Link>
                 </motion.div>
               ))}

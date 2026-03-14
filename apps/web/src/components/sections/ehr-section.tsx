@@ -21,7 +21,7 @@ export function EHRSection({ limit, className }: EHRSectionProps) {
   const displayEHRs = limit ? EHR_SYSTEMS.slice(0, limit) : EHR_SYSTEMS;
 
   return (
-    <section className={cn("section-wrapper bg-muted", className)}>
+    <section className={cn("section-wrapper", className)}>
       <div className="section-container">
         {/* Header */}
         <motion.div

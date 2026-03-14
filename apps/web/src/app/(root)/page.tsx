@@ -24,16 +24,20 @@ export default function Home() {
     <>
       <HeroSection />
       <MetricsSection />
-      <SuccessMetrics useConstantColors={false} />
-      <ServicesSection limit={6} />
-      <FeaturesSection useConstantColors={false} />
-      <HowItWorksSection />
-      <BenefitsSection />
-      <EHRSection limit={8} />
-      <SpecialtiesSection limit={8} />
-      <TestimonialsSection />
-      <FAQSection />
+      <SuccessMetrics useConstantColors />
+      <ServicesSection limit={6} useConstantColors className="bg-muted" />
+      <FeaturesSection useConstantColors />
+      <HowItWorksSection useConstantColors />
+      <BenefitsSection useConstantColors />
+      <EHRSection limit={8} className="bg-muted" />
+      <SpecialtiesSection
+        limit={8}
+        useConstantColors
+        bgUrl="https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?cs=srgb&dl=pexels-pixabay-263402.jpg&fm=jpg&w=1920"
+      />
+      <TestimonialsSection className="bg-muted" />
       <BlogSection />
+      <FAQSection className="bg-muted" />
       <CTASection />
     </>
   );
