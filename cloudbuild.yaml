@@ -1,20 +1,27 @@
 steps:
+  # ---------- Build Docker Image ----------
   - name: gcr.io/cloud-builders/docker
+    env:
+      - DOCKER_BUILDKIT=1 # enable BuildKit for --mount=cache
     args:
       [
         "build",
+        "--build-arg",
+        "TURBO_TOKEN=$$TURBO_TOKEN",
+        "--build-arg",
+        "TURBO_TEAM=$$TURBO_TEAM",
         "-t",
         "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA",
-        "."
+        ".",
       ]
+    secretEnv: ["TURBO_TOKEN", "TURBO_TEAM"]
 
+  # ---------- Push Docker Image ----------
   - name: gcr.io/cloud-builders/docker
     args:
-      [
-        "push",
-        "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA"
-      ]
+      ["push", "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA"]
 
+  # ---------- Update Migration Job ----------
   - name: gcr.io/cloud-builders/gcloud
     args:
       [
@@ -28,9 +35,10 @@ steps:
         "us-central1",
         "--command",
         "pnpm",
-        "--args=--filter,@workspace/db,prisma:deploy"
+        "--args=--filter,@workspace/db,prisma:deploy",
       ]
 
+  # ---------- Execute Migration Job ----------
   - name: gcr.io/cloud-builders/gcloud
     args:
       [
@@ -40,9 +48,10 @@ steps:
         "mi-medcare-migrate",
         "--region",
         "us-central1",
-        "--wait"
+        "--wait",
       ]
 
+  # ---------- Deploy Cloud Run Service ----------
   - name: gcr.io/cloud-builders/gcloud
     args:
       [
@@ -63,14 +72,22 @@ steps:
         "--max-instances",
         "10",
         "--memory",
-        "1Gi"
+        "1Gi",
       ]
 
 options:
+  machineType: "E2_HIGHCPU_8"
   logging: CLOUD_LOGGING_ONLY
 
 images:
   - "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA"
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/558272598531/secrets/TURBO_TOKEN/versions/latest
+      env: "TURBO_TOKEN"
+    - versionName: projects/558272598531/secrets/TURBO_TEAM/versions/latest
+      env: "TURBO_TEAM"
 
 substitutions:
   _AR_HOST: us-central1-docker.pkg.dev

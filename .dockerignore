@@ -1,11 +1,14 @@
 node_modules
-dist
+.turbo
+.next
 .git
 .gitignore
 .env
 .env.*
 **/.env
 **/.env.*
+dist
 logs
 apps
 coverage
+
