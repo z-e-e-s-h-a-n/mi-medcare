@@ -29,16 +29,20 @@ RUN pnpm build:server
 
 # ---------- RUNNER ----------
 FROM node:24-alpine AS runner
-WORKDIR /app/server
+WORKDIR /app
 
 ENV NODE_ENV=production
 ENV PORT=8080
 
-COPY --from=builder /app/server/dist ./dist
-COPY --from=builder /app/server/package.json ./package.json
-COPY --from=builder /app/server/node_modules ./node_modules
-COPY --from=builder /app/packages /app/packages
+COPY --from=builder /app/server/dist ./server/dist
+COPY --from=builder /app/server/package.json ./server/package.json
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/server/node_modules ./server/node_modules
+
+# copy workspace packages
+COPY --from=builder /app/packages ./packages
 
 EXPOSE 8080
 
-CMD ["node", "dist/main.js"]
+CMD ["node", "server/dist/main.js"]
