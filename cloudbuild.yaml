@@ -1,16 +1,21 @@
 steps:
-  - name: "gcr.io/cloud-builders/docker"
+  - name: gcr.io/cloud-builders/docker
     args:
       [
         "build",
         "-t",
         "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA",
-        ".",
+        "."
       ]
-  - name: "gcr.io/cloud-builders/docker"
+
+  - name: gcr.io/cloud-builders/docker
     args:
-      ["push", "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA"]
-  - name: "gcr.io/cloud-builders/gcloud"
+      [
+        "push",
+        "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA"
+      ]
+
+  - name: gcr.io/cloud-builders/gcloud
     args:
       [
         "run",
@@ -20,13 +25,17 @@ steps:
         "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA",
         "--region",
         "asia-south1",
+        "--platform",
+        "managed",
         "--allow-unauthenticated",
+        "--port",
+        "8080",
         "--min-instances",
         "1",
         "--max-instances",
         "10",
-        "--port",
-        "8080"
+        "--memory",
+        "1Gi"
       ]
 
 options:
@@ -36,5 +45,5 @@ images:
   - "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA"
 
 substitutions:
-  _AR_HOST: "asia-south1-docker.pkg.dev"
-  _AR_REPO: "mi-medcare"
+  _AR_HOST: asia-south1-docker.pkg.dev
+  _AR_REPO: mi-medcare

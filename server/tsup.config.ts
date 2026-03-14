@@ -15,5 +15,6 @@ export default defineConfig((options) => ({
     "@workspace/shared",
     "@workspace/contracts",
     "@workspace/templates",
+    "@workspace/db",
   ],
 }));

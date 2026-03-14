@@ -1,44 +1,43 @@
 # ---------- BASE ----------
 FROM node:24-alpine AS base
 WORKDIR /app
+RUN npm install -g pnpm turbo
 
-RUN apk add --no-cache ca-certificates
+# ---------- PRUNE ----------
+FROM base AS pruner
+WORKDIR /app
 
-RUN npm install -g pnpm
+COPY . .
 
-# ---------- DEPENDENCIES ----------
-FROM base AS deps
+RUN turbo prune server --docker
 
-# Copy only files needed for dependency resolution
-COPY pnpm-lock.yaml pnpm-workspace.yaml package.json turbo.json ./
+# ---------- INSTALL ----------
+FROM base AS installer
+WORKDIR /app
 
-# Docker does not support wildcard destinations (e.g. ./packages/*/).
-# Copy workspace roots instead; turbo/pnpm will still cache most layers via the lockfile.
-COPY packages ./packages
-COPY server ./server
+COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
 RUN pnpm install --frozen-lockfile
 
-# ---------- BUILD ----------
-FROM deps AS builder
+COPY --from=pruner /app/out/full/ .
 
-# Build server
+# ---------- BUILD ----------
+FROM installer AS builder
+
 RUN pnpm build:server
 
-# ---------- PRODUCTION ----------
+# ---------- RUNNER ----------
 FROM node:24-alpine AS runner
-WORKDIR /app
-
-RUN npm install -g pnpm
+WORKDIR /app/server
 
 ENV NODE_ENV=production
 ENV PORT=8080
 
-# Copy built server
 COPY --from=builder /app/server/dist ./dist
 COPY --from=builder /app/server/package.json ./package.json
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/packages ./packages
+COPY --from=builder /app/server/node_modules ./node_modules
+COPY --from=builder /app/packages /app/packages
 
 EXPOSE 8080
 
