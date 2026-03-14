@@ -12,20 +12,17 @@ FROM base AS deps
 # Copy only files needed for dependency resolution
 COPY pnpm-lock.yaml pnpm-workspace.yaml package.json turbo.json ./
 
-# Copy workspace package.json files
-COPY packages/*/package.json ./packages/*/
-COPY server/package.json ./server/
+# Docker does not support wildcard destinations (e.g. ./packages/*/).
+# Copy workspace roots instead; turbo/pnpm will still cache most layers via the lockfile.
+COPY packages ./packages
+COPY server ./server
 
 RUN pnpm install --frozen-lockfile
 
 # ---------- BUILD ----------
 FROM deps AS builder
 
-# Copy the rest of the repo
-COPY packages ./packages
-COPY server ./server
-
-# Build server`
+# Build server
 RUN pnpm build:server
 
 # ---------- PRODUCTION ----------
