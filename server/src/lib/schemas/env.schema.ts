@@ -103,7 +103,12 @@ export const envSchema = z.object({
 });
 
 export function validateEnv(config: Record<string, any>) {
-  const parsed = envSchema.safeParse(config);
+  const normalized = {
+    ...config,
+    APP_PORT: config.PORT ?? config.APP_PORT,
+  };
+
+  const parsed = envSchema.safeParse(normalized);
 
   if (!parsed.success) {
     console.error(

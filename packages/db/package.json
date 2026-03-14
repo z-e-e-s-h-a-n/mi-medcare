@@ -6,16 +6,15 @@
   "license": "ISC",
   "scripts": {
     "build": "prisma generate && tsup",
-    "check-types": "prisma generate && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate:dev": "prisma migrate dev",
-    "prisma:migrate:prod": "prisma migrate deploy",
-    "prisma:studio": "prisma studio",
-    "prisma:validate": "prisma validate",
-    "prisma:reset": "prisma migrate reset",
-    "prisma:seed": "prisma db seed",
-    "prisma:setup:dev": "prisma migrate dev && pnpm prisma:generate"
+    "check-types": "prisma generate && tsc --noEmit",
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev",
+    "deploy": "prisma migrate deploy",
+    "studio": "prisma studio",
+    "validate": "prisma validate",
+    "reset": "prisma migrate reset",
+    "seed": "prisma db seed"
   },
   "exports": {
     ".": {

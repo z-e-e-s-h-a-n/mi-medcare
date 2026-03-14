@@ -16,11 +16,7 @@ async function bootstrap() {
   const logger = await app.resolve(LoggerService);
 
   const start = Date.now();
-
-  const port = process.env.PORT
-    ? parseInt(process.env.PORT, 10)
-    : env.get("APP_PORT") || 3000;
-
+  const port = env.get("APP_PORT");
   const endpoint = env.get("APP_ENDPOINT");
   const nodeEnv = env.get("NODE_ENV");
   const allowedOrigins = env.get("CORS_ORIGIN");
@@ -39,7 +35,7 @@ async function bootstrap() {
   app.use(cookieParser());
   app.useGlobalInterceptors(app.get(ResponseInterceptor));
   app.useGlobalFilters(app.get(AllExceptionsFilter));
-  await app.listen(port);
+  await app.listen(port, "0.0.0.0");
 
   logger.log("==========================================");
   logger.log(`🚀 Server started successfully!`);
