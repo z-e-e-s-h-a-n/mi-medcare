@@ -95,6 +95,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
             badge="Challenges"
             title="Common specialty billing challenges"
             description="We address the issues that most often slow reimbursement."
+        imageUrl="https://images.pexels.com/photos/5407210/pexels-photo-5407210.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
           <div className="grid gap-6 md:grid-cols-3">
             {detail.challenges.map((item) => (
@@ -118,6 +119,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
             badge="Focus"
             title="How we support your specialty"
             description="Targeted workflows built around your clinical and payer needs."
+        imageUrl="https://images.pexels.com/photos/5407210/pexels-photo-5407210.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
           <div className="grid gap-6 md:grid-cols-3">
             {detail.focusAreas.map((item) => (
@@ -141,6 +143,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
             badge="Coding"
             title="Coding and documentation priorities"
             description="Key areas we monitor to keep claims clean and compliant."
+        imageUrl="https://images.pexels.com/photos/5407210/pexels-photo-5407210.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
           <div className="flex flex-wrap gap-3">
             {detail.codingFocus.map((item) => (
@@ -163,6 +166,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
             badge="Related"
             title="Related specialties"
             description="Explore other specialties we support."
+        imageUrl="https://images.pexels.com/photos/5407210/pexels-photo-5407210.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {fallbackRelated.map((specialty) => {
@@ -202,3 +206,4 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
     </>
   );
 }
+

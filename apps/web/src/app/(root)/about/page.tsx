@@ -121,6 +121,7 @@ export default function AboutPage() {
         title="About MI MedCare"
         badge="Who We Are"
         description="We combine specialty billing expertise, automation, and compliance to help practices stop chasing payments and focus on patient care."
+        imageUrl="https://images.pexels.com/photos/7108401/pexels-photo-7108401.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <MetricsSection />
@@ -131,6 +132,7 @@ export default function AboutPage() {
             badge="Company Narrative"
             title="We manage your revenue cycle with intent"
             description="From patient intake through collections, we provide transparent partnership, measurable outcomes, and technology that integrates with your workflow."
+        imageUrl="https://images.pexels.com/photos/7108401/pexels-photo-7108401.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-8 lg:grid-cols-[1.2fr_.8fr]">
@@ -197,6 +199,7 @@ export default function AboutPage() {
             badge="Our Expertise"
             title="What MI MedCare does differently"
             description="We handle the full billing lifecycle so your practice is never left chasing a single claim."
+        imageUrl="https://images.pexels.com/photos/7108401/pexels-photo-7108401.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -223,6 +226,7 @@ export default function AboutPage() {
             badge="Technology"
             title="Automation and intelligence that backs every claim"
             description="Our people-first workflow is powered by AI, reporting, and integrations so you move from billing chaos to consistent cash flow."
+        imageUrl="https://images.pexels.com/photos/7108401/pexels-photo-7108401.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -259,6 +263,7 @@ export default function AboutPage() {
             badge="Impact"
             title="Measurable improvements in revenue performance"
             description="Across specialties, we deliver clean claims, faster reimbursements, and shorter AR cycles backed by transparent reporting."
+        imageUrl="https://images.pexels.com/photos/7108401/pexels-photo-7108401.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -285,6 +290,7 @@ export default function AboutPage() {
             badge="Process"
             title="Billing that never skips a step"
             description="Our six-stage workflow mirrors the competitor’s best practices while staying true to MI MedCare’s compliance and automation culture."
+        imageUrl="https://images.pexels.com/photos/7108401/pexels-photo-7108401.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -317,6 +323,7 @@ export default function AboutPage() {
             badge="Trust"
             title="Certifications and compliance"
             description="We strictly follow HIPAA, SOC, and payer rules so every interaction is auditable, secure, and dependable."
+        imageUrl="https://images.pexels.com/photos/7108401/pexels-photo-7108401.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -362,3 +369,4 @@ export default function AboutPage() {
     </>
   );
 }
+

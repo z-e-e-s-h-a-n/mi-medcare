@@ -97,6 +97,7 @@ export async function ServiceDetails({ detail, slug }: ServiceDetailsProps) {
             badge="Outcomes"
             title="Results you can expect"
             description="Focused improvements that move revenue performance in the right direction."
+        imageUrl="https://images.pexels.com/photos/4989167/pexels-photo-4989167.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
           <div className="grid gap-6 md:grid-cols-3">
             {detail.outcomes.map((item) => (
@@ -120,6 +121,7 @@ export async function ServiceDetails({ detail, slug }: ServiceDetailsProps) {
             badge="Deliverables"
             title="What we deliver"
             description="Clear, tangible outputs that improve accuracy, speed, and visibility."
+        imageUrl="https://images.pexels.com/photos/4989167/pexels-photo-4989167.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {detail.deliverables.map((item) => (
@@ -143,6 +145,7 @@ export async function ServiceDetails({ detail, slug }: ServiceDetailsProps) {
             badge="Process"
             title="How implementation works"
             description="A structured approach that minimizes disruption and delivers results quickly."
+        imageUrl="https://images.pexels.com/photos/4989167/pexels-photo-4989167.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {detail.process.map((step, index) => (
@@ -177,3 +180,4 @@ export async function ServiceDetails({ detail, slug }: ServiceDetailsProps) {
     </>
   );
 }
+

@@ -63,6 +63,7 @@ export default function CompliancePage() {
         title="Compliance & Data Security"
         badge="Trust & Compliance"
         description="Our compliance-first billing model helps healthcare organizations reduce risk while maintaining strong reimbursement performance."
+        imageUrl="https://images.pexels.com/photos/30901557/pexels-photo-30901557.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <section className="section-wrapper">
@@ -107,3 +108,4 @@ export default function CompliancePage() {
     </>
   );
 }
+

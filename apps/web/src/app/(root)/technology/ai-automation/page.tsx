@@ -27,6 +27,7 @@ export default function AiAutomationPage() {
         title="AI Automation"
         badge="Technology"
         description="AI and RPA power our intelligent revenue cycle so enrollees are checked, claims are scrubbed, and denials are resolved automatically."
+        imageUrl="https://images.pexels.com/photos/30547581/pexels-photo-30547581.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <section className="section-wrapper">
@@ -87,3 +88,4 @@ export default function AiAutomationPage() {
     </>
   );
 }
+

@@ -28,6 +28,7 @@ export default function IntegrationsPage() {
         title="EHR Integrations"
         badge="Technology"
         description="Secure connections keep your clinical system, scheduling platform, and billing stack in sync."
+        imageUrl="https://images.pexels.com/photos/36252713/pexels-photo-36252713.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <section className="section-wrapper">
@@ -74,6 +75,7 @@ export default function IntegrationsPage() {
           <SectionHeader
             title="What we sync"
             description="Bi-directional feeds keep payers, patient accounts, and charges aligned without re-keying."
+        imageUrl="https://images.pexels.com/photos/36252713/pexels-photo-36252713.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -102,3 +104,4 @@ export default function IntegrationsPage() {
     </>
   );
 }
+

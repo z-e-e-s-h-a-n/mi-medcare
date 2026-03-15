@@ -16,9 +16,11 @@ export default function BlogsPage() {
         title="Blog & Insights"
         badge="Resource Center"
         description="Explore practical articles on medical billing, coding compliance, revenue cycle optimization, and healthcare operations."
+        imageUrl="https://images.pexels.com/photos/7643743/pexels-photo-7643743.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
       <BlogSection />
       <CTASection />
     </>
   );
 }
+

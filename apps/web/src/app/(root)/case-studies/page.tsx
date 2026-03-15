@@ -23,6 +23,7 @@ export default function CaseStudiesPage() {
         title="Healthcare Billing Case Studies"
         badge="Case Studies"
         description="Real examples of how we helped practices improve collections, reduce AR days, and strengthen billing performance."
+        imageUrl="https://images.pexels.com/photos/7793162/pexels-photo-7793162.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <section className="section-wrapper">
@@ -70,3 +71,4 @@ export default function CaseStudiesPage() {
     </>
   );
 }
+

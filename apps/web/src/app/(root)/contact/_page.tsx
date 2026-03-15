@@ -371,6 +371,7 @@ export function _ContactPage() {
  Revenue Cycle"
         description="Whether you're ready to get started or just exploring options, our team is here to help you optimize your medical billing."
         badge="Get in Touch"
+        imageUrl="https://images.pexels.com/photos/7195379/pexels-photo-7195379.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       {/* Contact Info Cards Section */}

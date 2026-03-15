@@ -18,6 +18,7 @@ export default function TechnologyPage() {
         title="Technology"
         badge="Automation & Integration"
         description="MI MedCare brings AI automation, analytics, and deep integrations together so your practice avoids paperwork and gets paid faster."
+        imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <section className="section-wrapper">
@@ -26,6 +27,7 @@ export default function TechnologyPage() {
             badge="Overview"
             title="Three pillars of our revenue operations stack"
             description="Each pillar is built to support the human teams that keep your revenue cycle healthy."
+        imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -71,6 +73,7 @@ export default function TechnologyPage() {
             badge="Workflow"
             title="How our technology stack works together"
             description="Automation, reporting, and integrations form a feedback loop that keeps your team proactive instead of reactive."
+        imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -91,3 +94,4 @@ export default function TechnologyPage() {
     </>
   );
 }
+

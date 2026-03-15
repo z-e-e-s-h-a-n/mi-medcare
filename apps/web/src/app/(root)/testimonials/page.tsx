@@ -16,9 +16,11 @@ export default function TestimonialsPage() {
         title="Client Testimonials"
         badge="Success Stories"
         description="See what healthcare providers say about working with MI MedCare and how our team improved their revenue cycle outcomes."
+        imageUrl="https://images.pexels.com/photos/8313224/pexels-photo-8313224.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
       <TestimonialsSection />
       <CTASection />
     </>
   );
 }
+

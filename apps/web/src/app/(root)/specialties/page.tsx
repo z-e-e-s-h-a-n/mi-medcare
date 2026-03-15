@@ -16,9 +16,11 @@ export default function SpecialtiesPage() {
         title="Specialty-Focused Medical Billing"
         badge="40+ Specialties"
         description="From primary care to complex surgical specialties, we deliver coding and billing workflows tailored to each practice type."
+        imageUrl="https://images.pexels.com/photos/5407210/pexels-photo-5407210.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
       <SpecialtiesSection useConstantColors />
       <CTASection />
     </>
   );
 }
+

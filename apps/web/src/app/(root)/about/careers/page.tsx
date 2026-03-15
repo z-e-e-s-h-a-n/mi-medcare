@@ -42,6 +42,7 @@ export default function CareersPage() {
         title="Careers at MI MedCare"
         badge="Join Our Team"
         description="Work with a team focused on better billing outcomes, better provider experience, and better healthcare operations."
+        imageUrl="https://images.pexels.com/photos/6914012/pexels-photo-6914012.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <section className="section-wrapper">
@@ -122,3 +123,4 @@ export default function CareersPage() {
     </>
   );
 }
+
