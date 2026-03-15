@@ -1216,6 +1216,8 @@ export const FOOTER_NAVIGATION = [
       { label: "FAQs", href: "/faqs" },
       { label: "Compliance", href: "/about/compliance" },
       { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms & Conditions", href: "/terms" },
+      { label: "Cookie Policy", href: "/cookie-policy" },
     ],
   },
   {

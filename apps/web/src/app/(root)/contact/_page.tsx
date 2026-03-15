@@ -24,7 +24,6 @@ import {
 const headOfficeAddress = business.addresses?.[0];
 const branchAddresses = business.addresses?.slice(1) ?? [];
 
-// Address card with all branches shown
 const addressCard = {
   icon: MapPin,
   title: "Our Locations",
@@ -62,7 +61,7 @@ const addressCard = {
 const phonesCard = {
   icon: Phone,
   title: "Phones",
-  content: `${business.hours.days} ${business.hours.time}`,
+  content: "Available during business hours",
   gradient: "from-blue-500 to-cyan-500",
   iconColor: "text-white",
   extra: (
