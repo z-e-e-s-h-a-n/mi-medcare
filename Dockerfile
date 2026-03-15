@@ -13,12 +13,6 @@ RUN corepack enable && corepack prepare pnpm@10.28.0 --activate
 FROM base AS pruner
 WORKDIR /app
 
-# Pass Turbo remote cache credentials
-ARG TURBO_TOKEN
-ARG TURBO_TEAM
-ENV TURBO_TOKEN=$TURBO_TOKEN
-ENV TURBO_TEAM=$TURBO_TEAM
-
 COPY . .
 
 # Use local turbo version for consistent behavior
@@ -29,7 +23,7 @@ FROM base AS installer
 WORKDIR /app
 
 # Copy dependency graph and lockfile
-COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/json/ .  
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
 # Use BuildKit cache for pnpm store
@@ -45,11 +39,6 @@ COPY --from=pruner /app/out/full/ .
 # ---------- BUILD ----------
 FROM installer AS builder
 WORKDIR /app
-
-ARG TURBO_TOKEN
-ARG TURBO_TEAM
-ENV TURBO_TOKEN=$TURBO_TOKEN
-ENV TURBO_TEAM=$TURBO_TEAM
 
 # Build only the server
 RUN pnpm build:server
@@ -69,7 +58,7 @@ ENV NODE_ENV=production
 ENV PORT=8080
 
 # Copy metadata and built server
-COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/package.json ./package.json    
 COPY --from=builder /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=builder /app/turbo.json ./turbo.json

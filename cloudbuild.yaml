@@ -6,15 +6,10 @@ steps:
     args:
       [
         "build",
-        "--build-arg",
-        "TURBO_TOKEN=$$TURBO_TOKEN",
-        "--build-arg",
-        "TURBO_TEAM=$$TURBO_TEAM",
         "-t",
         "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA",
         ".",
       ]
-    secretEnv: ["TURBO_TOKEN", "TURBO_TEAM"]
 
   # ---------- Push Docker Image ----------
   - name: gcr.io/cloud-builders/docker
@@ -76,18 +71,10 @@ steps:
       ]
 
 options:
-  machineType: "E2_HIGHCPU_8"
   logging: CLOUD_LOGGING_ONLY
 
 images:
   - "${_AR_HOST}/$PROJECT_ID/${_AR_REPO}/mi-medcare-api:$COMMIT_SHA"
-
-availableSecrets:
-  secretManager:
-    - versionName: projects/558272598531/secrets/TURBO_TOKEN/versions/latest
-      env: "TURBO_TOKEN"
-    - versionName: projects/558272598531/secrets/TURBO_TEAM/versions/latest
-      env: "TURBO_TEAM"
 
 substitutions:
   _AR_HOST: us-central1-docker.pkg.dev
