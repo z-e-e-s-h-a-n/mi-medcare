@@ -24,6 +24,8 @@ interface FAQSectionProps {
 }
 
 export function FAQSection({ faqs, limit = 6, className }: FAQSectionProps) {
+  const hasCustomFaqs = Array.isArray(faqs) && faqs.length > 0;
+
   let displayFaqs = limit ? FAQS.slice(0, limit) : FAQS;
   if (faqs) displayFaqs = faqs;
 
@@ -91,7 +93,7 @@ export function FAQSection({ faqs, limit = 6, className }: FAQSectionProps) {
           </motion.div>
 
           {/* View All */}
-          {limit && FAQS.length > limit && (
+          {!hasCustomFaqs && limit && FAQS.length > limit && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

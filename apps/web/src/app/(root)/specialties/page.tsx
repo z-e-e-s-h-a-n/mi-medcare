@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/page-header";
 import { SpecialtiesSection } from "@/components/sections/specialties-section";
-import { CTASection } from "@/components/sections/cta-section";
-
 export const metadata: Metadata = {
   title: "Specialty-Focused Medical Billing",
   description:
@@ -19,8 +17,8 @@ export default function SpecialtiesPage() {
         imageUrl="https://images.pexels.com/photos/5407210/pexels-photo-5407210.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
       <SpecialtiesSection useConstantColors />
-      <CTASection />
     </>
   );
 }
+
 

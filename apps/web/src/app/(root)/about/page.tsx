@@ -6,7 +6,6 @@ import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
 import { MetricsSection } from "@/components/sections/metrics-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
-import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import {
   business,
@@ -365,8 +364,9 @@ export default function AboutPage() {
 
       <TestimonialsSection className="bg-background" />
       <FAQSection faqs={faqSubset} className="bg-muted" />
-      <CTASection />
     </>
   );
 }
+
+
 

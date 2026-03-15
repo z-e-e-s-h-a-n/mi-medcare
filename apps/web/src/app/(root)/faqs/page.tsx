@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/page-header";
 import { FAQSection } from "@/components/sections/faq-section";
-import { CTASection } from "@/components/sections/cta-section";
-
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
   description:
@@ -19,8 +17,8 @@ export default function FAQsPage() {
         imageUrl="https://images.pexels.com/photos/7709161/pexels-photo-7709161.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
       <FAQSection />
-      <CTASection />
     </>
   );
 }
+
 

@@ -8,7 +8,6 @@ import { BenefitsSection } from "@/components/sections/benefits-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { BlogSection } from "@/components/sections/blog-section";
-import { CTASection } from "@/components/sections/cta-section";
 import { EHRSection } from "@/components/sections/ehr-section";
 import { SpecialtiesSection } from "@/components/sections/specialties-section";
 import { MetricsSection } from "@/components/sections/metrics-section";
@@ -40,7 +39,8 @@ export default function Home() {
       <TestimonialsSection className="bg-muted" />
       <BlogSection />
       <FAQSection className="bg-muted" />
-      <CTASection />
     </>
   );
 }
+
+

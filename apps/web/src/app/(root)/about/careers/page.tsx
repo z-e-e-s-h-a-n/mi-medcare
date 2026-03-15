@@ -3,8 +3,6 @@ import Link from "next/link";
 import { ArrowRight, Briefcase, MapPin, Clock3 } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
 import { PageHeader } from "@/components/layout/page-header";
-import { CTASection } from "@/components/sections/cta-section";
-
 export const metadata: Metadata = {
   title: "Careers at MI MedCare",
   description:
@@ -118,9 +116,8 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }
+
 

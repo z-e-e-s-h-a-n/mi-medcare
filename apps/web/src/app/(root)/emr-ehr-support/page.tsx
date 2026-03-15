@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { CheckCircle2, ShieldCheck, Workflow, Zap } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { EHRSection } from "@/components/sections/ehr-section";
-import { CTASection } from "@/components/sections/cta-section";
-
 export const metadata: Metadata = {
   title: "EMR & EHR Billing Support",
   description:
@@ -89,9 +87,8 @@ export default function EmrEhrSupportPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }
+
 

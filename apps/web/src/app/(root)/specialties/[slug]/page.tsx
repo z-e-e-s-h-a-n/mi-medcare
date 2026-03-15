@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import specialties from "../data.json";
 import { SpecialtyDetails } from "./_page";
-import specialtyDetails from "../details.json";
 
-const getSpecialtyDetail = (slug: string) =>
-  specialtyDetails.find((specialty) => specialty.slug === slug);
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+type SpecialtyData = (typeof specialties)[number];
+
+const getSpecialtySlug = (href: string) =>
+  href.split("/").filter(Boolean).pop() ?? href;
+
+const getSpecialtyDetail = (slug: string): SpecialtyData | undefined =>
+  specialties.find((specialty) => getSpecialtySlug(specialty.href) === slug);
 
 export function generateStaticParams() {
-  return specialtyDetails.map((specialty) => ({ slug: specialty.slug }));
+  return specialties.map((specialty) => ({
+    slug: getSpecialtySlug(specialty.href),
+  }));
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const specialty = getSpecialtyDetail(slug);
 
@@ -25,13 +34,9 @@ export async function generateMetadata({
 
   return {
     title: specialty.title,
-    description: specialty.heroDescription,
+    description: specialty.description,
   };
 }
-
-type PageProps = {
-  params: Promise<{ slug: string }>;
-};
 
 export default async function SpecialtyDetailPage({ params }: PageProps) {
   const { slug } = await params;

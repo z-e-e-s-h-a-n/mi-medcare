@@ -7,7 +7,6 @@ import {
   Stethoscope,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
-import { CTASection } from "@/components/sections/cta-section";
 import { CASE_STUDIES } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -66,9 +65,9 @@ export default function CaseStudiesPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }
+
+
 

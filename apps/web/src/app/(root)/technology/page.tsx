@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
-import { CTASection } from "@/components/sections/cta-section";
 import { TECHNOLOGY_PILLARS } from "./data";
 
 export const metadata: Metadata = {
@@ -89,9 +88,9 @@ export default function TechnologyPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }
+
+
 

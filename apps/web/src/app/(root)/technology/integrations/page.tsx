@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
-import { CTASection } from "@/components/sections/cta-section";
 import { EHR_SYSTEMS } from "@/lib/constants";
 import { TECHNOLOGY_PILLARS } from "../data";
 
@@ -99,9 +98,9 @@ export default function IntegrationsPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }
+
+
 

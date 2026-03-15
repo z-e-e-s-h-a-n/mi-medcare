@@ -1,0 +1,941 @@
+[
+  {
+    "title": "Medical Billing",
+    "href": "/services/medical-billing",
+    "description": "End-to-end medical billing services that improve claim acceptance and accelerate reimbursements. We combine certified expertise with AI-driven automation for maximum efficiency.",
+    "image": "https://images.pexels.com/photos/13060576/pexels-photo-13060576.jpeg?cs=srgb&dl=pexels-lucas-guimaraes-bueno-258458556-13060576.jpg&fm=jpg",
+    "icon": "IconFileText",
+    "stats": "98% Clean Claims",
+    "gradient": "from-blue-500 to-cyan-500",
+    "details": {
+      "overview": "Our medical billing service is designed to streamline your entire revenue cycle, from patient check-in to final payment. We go beyond simple claim submission, offering a comprehensive solution that combines the expertise of certified professional billers with cutting-edge AI technology. This powerful blend ensures higher accuracy, faster reimbursements, and a significant reduction in administrative burden, allowing you to focus on what matters most: your patients. Whether you're a small practice or a large medical group, our end-to-end billing services are tailored to your unique needs and specialty.",
+      "keyFeatures": [
+        {
+          "title": "Daily Claim Submission & Scrubbing",
+          "description": "Claims are submitted electronically on a daily basis. Before submission, our intelligent claim scrubbing process, enhanced by our CLAIR AI agent, automatically checks for errors, such as incorrect modifiers or code mismatches, to prevent costly denials and ensure first-pass success."
+        },
+        {
+          "title": "Certified Coding Experts",
+          "description": "Our team of over 1100+ certified coders ensures precise ICD-10, CPT, and HCPCS code assignment. They are supported by CODIN, our AI coding agent, which reads clinical notes to suggest the most accurate and compliant codes for maximum reimbursement."
+        },
+        {
+          "title": "Denial Management & Appeals",
+          "description": "We don't just accept denials; we actively fight them. Our DEXA AI agent detects and analyzes denials in real-time, categorizing them and even auto-generating appeal letters. Our team then takes over to manage complex appeals and recover your lost revenue."
+        },
+        {
+          "title": "Patient Invoicing & Support",
+          "description": "We handle the creation and mailing of patient-friendly invoices. For payment collections, our ARIS AI agent automates patient payment calls, improving the patient financial experience and accelerating cash flow."
+        },
+        {
+          "title": "Transparent Online Reporting",
+          "description": "You get 24/7 access to a secure, HIPAA-compliant dashboard with customizable reports. Track key performance indicators like clean claim rates, denial trends, and accounts receivable aging in real-time for complete financial visibility."
+        }
+      ],
+      "process": [
+        {
+          "step": "Practice Assessment",
+          "description": "We begin by thoroughly evaluating your current workflows, financial goals, and specialty-specific requirements to personalize our billing approach for your practice."
+        },
+        {
+          "step": "Patient Intake & Eligibility",
+          "description": "Our ELIXA AI agent verifies insurance coverage and benefits in real-time before services are rendered, ensuring accuracy and identifying any prior authorization needs upfront."
+        },
+        {
+          "step": "Accurate Medical Coding",
+          "description": "Our certified coders, with assistance from CODIN AI, translate clinical documentation into precise medical codes, ensuring compliance and maximizing appropriate reimbursement."
+        },
+        {
+          "step": "Claim Scrubbing & Submission",
+          "description": "Claims are meticulously scrubbed by our CLAIR AI agent to catch and auto-fix errors. Clean claims are then submitted electronically to payers for fastest possible processing."
+        },
+        {
+          "step": "Payment Posting & Reconciliation",
+          "description": "Insurance and patient payments are accurately posted to your accounts. Our REMITA AI agent auto-reconciles payments with expected amounts, flagging any discrepancies like underpayments."
+        },
+        {
+          "step": "Reporting & Continuous Follow-Up",
+          "description": "You receive regular, detailed financial reports. Our team, empowered by ARIS, proactively follows up on outstanding claims and manages the appeals process for any denials."
+        }
+      ],
+      "benefits": [
+        "Up to 98% First Pass Clean Claim Rate",
+        "Reduction in Accounts Receivable days to under 30",
+        "Decrease in administrative and billing costs by up to 25%",
+        "Improved cash flow with faster payment cycles",
+        "Enhanced patient satisfaction through seamless billing processes",
+        "Full compliance with HIPAA and the latest CMS regulations"
+      ],
+      "uniqueAgents": [
+        {
+          "name": "CLAIR - AI Claim Scrubbing Agent",
+          "description": "Eliminates denials before submission by analyzing claims against payer rules and historical patterns, auto-fixing minor errors."
+        },
+        {
+          "name": "DEXA - Denial Experience Agent",
+          "description": "Turns denials into revenue by auto-categorizing rejections, generating appeal letters, and even initiating payer calls."
+        }
+      ],
+      "stats": [
+        { "label": "Certified Billers & Coders", "value": "1100+" },
+        { "label": "First Pass Clean Claim Rate", "value": "98%" },
+        { "label": "Average AR Days", "value": "< 30" }
+      ],
+      "faqs": [
+        {
+          "question": "What is the typical cost for medical billing services?",
+          "answer": "We offer flexible and transparent pricing models, most commonly a percentage of collections with no hidden setup fees or monthly minimums for most practices. We'll work with you to find a model that aligns with your practice's size and volume."
+        },
+        {
+          "question": "Can I keep my current Electronic Health Record (EHR) system?",
+          "answer": "Yes, absolutely. Our services are designed to integrate seamlessly with over 30+ major EHR systems. Our team will work with you to ensure a smooth setup and data flow, so you can keep using the software your practice knows and trusts."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Revenue Cycle Management",
+    "href": "/services/revenue-cycle-management",
+    "description": "Complete RCM solutions covering patient intake, billing, payments, and financial reporting. We optimize every step of your revenue cycle to maximize profitability.",
+    "image": "https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?cs=srgb&dl=pexels-asphotography-106344.jpg&fm=jpg",
+    "icon": "IconChartBar",
+    "stats": "30% Faster Payments",
+    "gradient": "from-purple-500 to-pink-500",
+    "details": {
+      "overview": "Our comprehensive Revenue Cycle Management (RCM) service provides a holistic, end-to-end solution that oversees the entire financial lifecycle of your patient encounters. From the moment a patient schedules an appointment to the final reconciliation of payment, we manage it all. By integrating every step—from eligibility and authorization to coding, billing, and denial management—we eliminate silos, improve efficiency, and provide you with a clear, unobstructed view of your practice's financial health. Our goal is to accelerate your cash flow, reduce administrative costs, and ensure you capture every dollar you've earned.",
+      "keyFeatures": [
+        {
+          "title": "Pre-Visit Eligibility & Authorization",
+          "description": "Our team, aided by ELIXA and PRIA AI agents, proactively verifies patient insurance coverage and secures necessary prior authorizations before services are delivered, preventing claim rejections and surprise patient bills."
+        },
+        {
+          "title": "Charge Capture & Coding",
+          "description": "We ensure all billable services and procedures are accurately captured and coded by our certified experts. CODIN AI assists by cross-referencing clinical documentation to suggest the most comprehensive and compliant codes."
+        },
+        {
+          "title": "Claims Management & Submission",
+          "description": "Our CLAIR AI agent scrubs every claim for errors against thousands of complex and changing payer rules, ensuring a high first-pass acceptance rate and faster payments."
+        },
+        {
+          "title": "Payment Posting & Reconciliation",
+          "description": "Insurance and patient payments are posted accurately and promptly. Our REMITA AI agent automatically reconciles these payments against expected amounts, instantly flagging discrepancies like underpayments or denials for follow-up."
+        },
+        {
+          "title": "Denial Management & Appeals",
+          "description": "Our DEXA AI agent provides real-time analysis of all denials, categorizing them by root cause and auto-generating appeal letters. Our dedicated team then aggressively pursues these appeals to recover revenue."
+        },
+        {
+          "title": "Comprehensive AR Follow-Up",
+          "description": "Our ARIS intelligent system tracks all outstanding claims, prioritizes accounts with the highest probability of recovery, and automates follow-up tasks to reduce aging accounts receivable and improve cash flow."
+        }
+      ],
+      "process": [
+        {
+          "step": "Patient Registration & Insurance Verification",
+          "description": "We verify patient demographics and insurance eligibility in real-time to ensure accurate billing from the start."
+        },
+        {
+          "step": "Charge Entry & Coding",
+          "description": "Charges for services are captured and converted into accurate medical codes based on the clinical documentation."
+        },
+        {
+          "step": "Claim Submission",
+          "description": "Clean, scrubbed claims are electronically transmitted to insurance payers."
+        },
+        {
+          "step": "Payment Posting",
+          "description": "Remittances from payers are processed and payments are posted to the correct patient accounts."
+        },
+        {
+          "step": "Denial Management & Appeal",
+          "description": "Rejected or denied claims are analyzed, corrected, and resubmitted or appealed."
+        },
+        {
+          "step": "Patient Billing & Collections",
+          "description": "Statements are sent to patients for their financial responsibility, and payment collections are managed."
+        },
+        {
+          "step": "Reporting & Analysis",
+          "description": "We provide regular, detailed reports on key financial metrics, giving you full visibility into your revenue cycle's performance."
+        }
+      ],
+      "benefits": [
+        "Faster payment cycles with optimized workflows from start to finish",
+        "Reduction in days in Accounts Receivable (DAR)",
+        "Increased net collection rates",
+        "Lower overall administrative costs",
+        "Improved financial transparency with real-time reporting dashboards",
+        "Enhanced patient satisfaction through clearer financial communication"
+      ],
+      "uniqueAgents": [
+        {
+          "name": "PRIA - Prior Authorization AI Agent",
+          "description": "Automates the detection of cases needing authorization and manages payer follow-ups with over 97% accuracy, using Predictive Risk Heatmaps to identify high-risk denials."
+        },
+        {
+          "name": "ARIS - Accounts Receivable Intelligent System",
+          "description": "Intelligently tracks outstanding claims and auto-drafts appeals. Its predictive engine scores recovery probability to prioritize high-value accounts."
+        }
+      ],
+      "stats": [
+        { "label": "Average AR Days Reduction", "value": "40%" },
+        { "label": "Net Collection Rate", "value": ">95%" },
+        { "label": "Clean Claim Rate", "value": "98%" }
+      ],
+      "faqs": [
+        {
+          "question": "How does full-service RCM differ from just billing?",
+          "answer": "Medical billing is a crucial part of RCM, but RCM is the entire financial engine. It encompasses everything from patient scheduling and eligibility verification before a visit, to coding, claims submission, payment posting, denial management, and patient collections after the visit. Full-service RCM manages the complete cycle, ensuring no revenue is lost between these interconnected steps."
+        },
+        {
+          "question": "What kind of financial reports will I receive?",
+          "answer": "You'll have access to a comprehensive suite of customizable reports through a secure online dashboard. Key reports include Accounts Receivable Aging, Payer Analysis, Provider Performance, Denial Summary & Root Cause, and Monthly Financial Snapshots, providing you with the insights needed to make informed business decisions."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Medical Coding",
+    "href": "/services/medical-coding",
+    "description": "Certified coders ensure accurate ICD-10, CPT, and HCPCS coding for compliant claims. Leverage AI-powered assistance for maximum accuracy and efficiency.",
+    "image": "https://images.pexels.com/photos/48604/pexels-photo-48604.jpeg?cs=srgb&dl=pexels-negativespace-48604.jpg&fm=jpg",
+    "icon": "IconShieldCheck",
+    "stats": "100% Certified Coders",
+    "gradient": "from-green-500 to-emerald-500",
+    "details": {
+      "overview": "Accurate medical coding is the foundation of a healthy revenue cycle. Our medical coding service combines the expertise of 100% certified professional coders with the power of advanced AI. We ensure that every diagnosis, procedure, and service is translated into the correct ICD-10, CPT, and HCPCS codes. This dual approach—human expertise augmented by artificial intelligence—minimizes errors, ensures strict compliance with ever-changing regulations, and optimizes your reimbursements, all while reducing the administrative burden on your clinical staff.",
+      "keyFeatures": [
+        {
+          "title": "100% Certified Professional Coders",
+          "description": "Our team holds certifications including CPC, CCS, and CIC. They possess deep specialty-specific knowledge, ensuring nuanced and accurate code assignment for a wide range of medical practices."
+        },
+        {
+          "title": "AI-Powered Coding Assistance (CODIN)",
+          "description": "Our CODIN AI agent reads and analyzes unstructured clinical notes using OCR and NLP technology. It extracts key diagnoses and procedures, suggesting the most appropriate and specific codes to our human coders for review and validation."
+        },
+        {
+          "title": "Proactive Compliance & Auditing",
+          "description": "CODIN automatically audits every coded claim against national and payer-specific rules (like NCCI and MUE edits) before submission. This proactive approach detects potential compliance violations and documentation gaps, significantly reducing your audit risk."
+        },
+        {
+          "title": "Specialty-Specific Coding Expertise",
+          "description": "We provide coding services for over 40 medical specialties, from primary care and cardiology to behavioral health and laboratory services. Our coders are well-versed in the unique coding challenges and guidelines of each field."
+        },
+        {
+          "title": "Seamless EHR Integration",
+          "description": "Our coding solutions integrate smoothly with over 30 major EHR systems. This allows for a streamlined workflow where coders can access documentation directly and return coded charges without manual data entry."
+        }
+      ],
+      "process": [
+        {
+          "step": "Documentation Review",
+          "description": "Certified coders, with assistance from CODIN AI, review clinical documentation from the patient encounter."
+        },
+        {
+          "step": "Code Extraction & Suggestion",
+          "description": "CODIN AI reads the notes and suggests relevant ICD-10, CPT, and HCPCS codes based on the extracted clinical data."
+        },
+        {
+          "step": "Expert Validation & Assignment",
+          "description": "A certified coder reviews the AI's suggestions, validates them against the full medical record, and assigns the final, most accurate codes."
+        },
+        {
+          "step": "Compliance & Edits Check",
+          "description": "The coded claim is run through CODIN's compliance engine to check for errors, NCCI edits, and MUE violations."
+        },
+        {
+          "step": "Charge Submission",
+          "description": "The verified and compliant codes are then ready for charge entry and claim submission."
+        }
+      ],
+      "benefits": [
+        "Maximized appropriate reimbursement through specific and complete coding",
+        "Reduced risk of audits and penalties from payers and regulatory bodies",
+        "Fewer claim denials related to coding errors",
+        "Improved cash flow with faster claims processing",
+        "Freed-up clinical time, allowing providers to focus on patient care"
+      ],
+      "uniqueAgents": [
+        {
+          "name": "CODIN - AI Coding and Compliance Agent",
+          "description": "Automates the initial coding process by reading clinical notes, extracts diagnoses/procedures, matches them to correct codes, and audits every claim for NCCI/MUE violations."
+        }
+      ],
+      "stats": [
+        { "label": "Certified Coders", "value": "1100+" },
+        { "label": "Specialties Covered", "value": "40+" },
+        { "label": "Coding Accuracy Rate", "value": ">99%" }
+      ],
+      "faqs": [
+        {
+          "question": "How does AI assistance improve coding accuracy?",
+          "answer": "AI, like our CODIN agent, serves as a powerful second pair of eyes. It excels at quickly scanning large volumes of clinical text to ensure no billable diagnosis or procedure is missed. It also performs instant, automated compliance checks against thousands of rules, catching potential errors that a human might overlook, thereby significantly enhancing overall accuracy and compliance."
+        },
+        {
+          "question": "Do you provide coding for all medical specialties?",
+          "answer": "Yes, our certified coders have experience and expertise across more than 40 specialties, including but not limited to Family Practice, Internal Medicine, Cardiology, Orthopedics, Dermatology, Pediatrics, Psychiatry, and Emergency Medicine. We assign coders with specific experience relevant to your practice."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Credentialing",
+    "href": "/services/credentialing",
+    "description": "Provider credentialing and payer enrollment to get your practice contracted faster. We manage the entire process from start to finish.",
+    "image": "https://images.pexels.com/photos/8313224/pexels-photo-8313224.jpeg?cs=srgb&dl=pexels-rdne-8313224.jpg&fm=jpg",
+    "icon": "IconRosetteDiscountCheck",
+    "stats": "30 Days Avg.",
+    "gradient": "from-orange-500 to-red-500",
+    "details": {
+      "overview": "Getting your practice set up to receive payments from insurance companies is a critical, yet often complex and time-consuming, administrative hurdle. Our Credentialing and Payer Enrollment service is designed to clear that path for you. We manage the entire verification and enrollment process from start to finish, working directly with insurance carriers, hospitals, and other healthcare entities. Our systematic approach ensures that your providers are credentialed accurately and as quickly as possible, allowing you to start seeing patients and receiving reimbursements without unnecessary delay.",
+      "keyFeatures": [
+        {
+          "title": "Initial Provider Credentialing",
+          "description": "We handle the complete process for new providers, including completing and submitting all necessary applications to private and public payers (like Medicare and Medicaid), and ensuring all supporting documentation is accurate and included."
+        },
+        {
+          "title": "Re-Credentialing & Payer Maintenance",
+          "description": "Credentialing is not a one-time event. We manage the ongoing process of re-credentialing every 3-5 years and keep all your provider information updated with payers to prevent any interruptions in your reimbursement."
+        },
+        {
+          "title": "Primary Source Verification",
+          "description": "We conduct thorough primary source verification of each provider's education, training, residency, board certifications, work history, and license status to ensure complete compliance with payer and regulatory standards."
+        },
+        {
+          "title": "Contracting & Fee Schedule Negotiation",
+          "description": "Beyond just enrollment, we can assist with understanding and negotiating your payer contracts and fee schedules to help ensure you are being fairly reimbursed for the services you provide."
+        },
+        {
+          "title": "CAQH Management",
+          "description": "We manage and maintain your providers' CAQH (Council for Affordable Quality Healthcare) profiles, ensuring the information is always up-to-date and readily available for payers, which is a critical step in the credentialing process for many commercial insurers."
+        }
+      ],
+      "process": [
+        {
+          "step": "Information Gathering",
+          "description": "We collect all necessary provider information, including licenses, DEA certificates, board certifications, education, and work history."
+        },
+        {
+          "step": "Application Completion & Submission",
+          "description": "Our team accurately completes and submits all credentialing and enrollment applications to your target payers."
+        },
+        {
+          "step": "Primary Source Verification",
+          "description": "We work with the primary sources to verify all credentials submitted, a mandatory step for payer approval."
+        },
+        {
+          "step": "Follow-Up & Expediting",
+          "description": "We proactively follow up with payers to track the status of your applications, address any queries, and keep the process moving forward."
+        },
+        {
+          "step": "Contract & Fee Schedule Review",
+          "description": "Upon approval, we help you review the proposed contract and fee schedule."
+        },
+        {
+          "step": "Ongoing Maintenance",
+          "description": "We manage ongoing re-credentialing cycles and profile updates to ensure continuous, uninterrupted network participation."
+        }
+      ],
+      "benefits": [
+        "Faster provider enrollment and network participation",
+        "Reduced administrative burden on your office staff",
+        "Minimized delays in insurance reimbursements",
+        "Improved compliance with complex payer and regulatory requirements",
+        "Increased provider and practice revenue by capturing all billable services"
+      ],
+      "stats": [
+        { "label": "Average Enrollment Time", "value": "30 Days" },
+        { "label": "Providers Credentialed", "value": "1000+" },
+        { "label": "Payers Networked With", "value": "Hundreds" }
+      ],
+      "faqs": [
+        {
+          "question": "What is the typical timeframe for getting a new provider credentialed?",
+          "answer": "The timeframe can vary significantly depending on the payer (e.g., Medicare often has different timelines than commercial insurers) and the completeness of the application. On average, you can expect the process to take anywhere from 60 to 120 days. Our expertise and proactive follow-up help ensure it stays on the faster end of that spectrum."
+        },
+        {
+          "question": "What information do you need from my providers to start?",
+          "answer": "To begin, we will need a completed credentialing application, a current curriculum vitae (CV), copies of professional licenses (medical, DEA, etc.), board certification certificates, malpractice insurance face sheet, and work history for the past 5-10 years. We provide a detailed checklist to make gathering this information straightforward."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Eligibility Verification",
+    "href": "/services/eligibility-verification",
+    "description": "Insurance eligibility and benefits verification before services are delivered. Eliminate surprises and reduce claim denials.",
+    "image": "https://images.pexels.com/photos/5207115/pexels-photo-5207115.jpeg?cs=srgb&dl=pexels-karola-g-5207115.jpg&fm=jpg",
+    "icon": "IconClipboardCheck",
+    "stats": "95% First-Pass Accuracy",
+    "gradient": "from-sky-500 to-blue-500",
+    "details": {
+      "overview": "Eligibility and benefits verification is the first and one of the most critical steps in the revenue cycle. Knowing a patient's coverage details *before* services are rendered prevents denied claims, reduces patient billing surprises, and ensures you get paid for the care you provide. Our Eligibility Verification service, powered by our intelligent ELIXA AI agent, automates and streamlines this process. We provide real-time, accurate verification of insurance coverage, co-pays, deductibles, and any prior authorization requirements, giving your front office the clarity they need and your practice the financial protection it deserves.",
+      "keyFeatures": [
+        {
+          "title": "Real-Time Insurance Verification",
+          "description": "We connect to payer systems via EDI, APIs, and AI-driven interfaces to check patient eligibility and benefits instantly, often before the patient even arrives for their appointment."
+        },
+        {
+          "title": "Comprehensive Benefits Discovery",
+          "description": "We don't just check if a patient is covered. We dig deeper to uncover critical details like active coverage dates, co-pay amounts, deductible status, co-insurance percentages, and out-of-pocket maximums."
+        },
+        {
+          "title": "Prior Authorization Alerts",
+          "description": "Our system automatically flags services that typically require prior authorization based on the patient's plan. This allows your team to start the authorization process proactively, preventing costly delays and denials."
+        },
+        {
+          "title": "Seamless EHR Integration",
+          "description": "The verification process integrates directly with your practice management or EHR system, minimizing manual data entry and ensuring that verified information is immediately available where it's needed."
+        },
+        {
+          "title": "Patient Estimate Generation",
+          "description": "With accurate benefit information, we can help generate reliable cost estimates for patients for their upcoming procedures, leading to more transparent financial conversations and improved patient payment collections."
+        }
+      ],
+      "process": [
+        {
+          "step": "Data Intake",
+          "description": "Patient demographic and insurance information is securely received from your schedule or registration system."
+        },
+        {
+          "step": "Automated Verification (ELIXA)",
+          "description": "Our ELIXA AI agent initiates real-time eligibility checks with the patient's insurance payer using the most efficient connection method."
+        },
+        {
+          "step": "Data Interpretation & Flagging",
+          "description": "ELIXA interprets the complex data returned, clearly presenting coverage details and automatically flagging services that may need prior authorization."
+        },
+        {
+          "step": "Results Integration",
+          "description": "The verified eligibility and benefits information is instantly updated in your practice management or EHR system."
+        },
+        {
+          "step": "Staff Notification",
+          "description": "Your front-office staff receives a clear, concise summary, enabling them to collect correct co-pays and discuss financial responsibility with confidence."
+        }
+      ],
+      "benefits": [
+        "Drastically reduce claim denials related to eligibility issues",
+        "Improve upfront patient collections by knowing co-pay and deductible amounts",
+        "Enhance patient satisfaction with transparent cost estimates and fewer surprise bills",
+        "Increase front-office efficiency by automating a time-consuming manual task",
+        "Accelerate the revenue cycle by preventing delays from the very first step"
+      ],
+      "uniqueAgents": [
+        {
+          "name": "ELIXA – AI Eligibility Verification Agent",
+          "description": "Automates the verification process by connecting to EHRs and payer systems in real-time. It interprets complex coverage data and tracks the number of checks requiring prior authorization."
+        }
+      ],
+      "stats": [
+        { "label": "Verification Accuracy", "value": "95%+" },
+        { "label": "Average Response Time", "value": "< 10 sec" },
+        {
+          "label": "Eligibility-Related Denial Reduction",
+          "value": "Up to 70%"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "How far in advance of an appointment can you verify eligibility?",
+          "answer": "We can verify eligibility as soon as the patient is scheduled. In fact, verifying a few days before the appointment is ideal. However, because coverage can change, we also recommend a final verification check 24-48 hours prior to the visit to ensure no changes have occurred."
+        },
+        {
+          "question": "What happens if a patient's coverage is inactive or the plan doesn't cover the service?",
+          "answer": "Our system will flag this immediately. Your staff is then alerted, allowing them to have a critical conversation with the patient before the service is rendered. This could involve rescheduling, discussing self-pay options, or checking for other qualifying coverage, ensuring you don't provide a service you won't be paid for."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Denial Management",
+    "href": "/services/denial-management",
+    "description": "Identify denial causes, correct errors, and recover lost revenue efficiently. Turn denials into opportunities.",
+    "image": "https://images.pexels.com/photos/7926666/pexels-photo-7926666.jpeg?cs=srgb&dl=pexels-nicola-barts-7926666.jpg&fm=jpg",
+    "icon": "IconAlertTriangle",
+    "stats": "40% Denial Reduction",
+    "gradient": "from-yellow-500 to-amber-500",
+    "details": {
+      "overview": "Denied claims represent a significant drain on practice revenue and a major source of administrative frustration. Our Denial Management service, powered by our advanced DEXA AI agent, transforms this challenge into an opportunity for recovery and process improvement. We don't just react to denials; we proactively analyze them to identify root causes, correct errors, and prevent them from happening again. Our systematic approach ensures that every dollar is pursued, and your revenue cycle becomes more resilient with each claim processed.",
+      "keyFeatures": [
+        {
+          "title": "Real-Time Denial Detection & Categorization",
+          "description": "Our DEXA AI agent instantly detects and analyzes every denial as it occurs. It automatically categorizes denials by type, reason, and payer, providing immediate visibility into your biggest challenges."
+        },
+        {
+          "title": "Root Cause Analysis",
+          "description": "We go beyond just fixing the immediate denial. Our analytics team, supported by DEXA's reporting, identifies the underlying root causes—be it coding errors, missing authorization, or eligibility issues—so you can implement systemic fixes."
+        },
+        {
+          "title": "Automated Appeal Letter Generation",
+          "description": "For many standard denials, DEXA can auto-generate the first draft of an appeal letter, complete with the necessary supporting documentation, dramatically speeding up the rework process."
+        },
+        {
+          "title": "Intelligent Payer Follow-Up",
+          "description": "Our team, guided by DEXA's prioritization, handles the appeals process, including making follow-up calls to payers to check on the status of appealed claims and ensure timely resolution."
+        },
+        {
+          "title": "Denial Trend Reporting & Insights",
+          "description": "You receive detailed reports and dashboards that reveal denial trends over time. This data empowers you to understand your practice's vulnerabilities and track the success of our denial reduction strategies."
+        }
+      ],
+      "process": [
+        {
+          "step": "Detection & Triage",
+          "description": "DEXA AI agent instantly detects denials and categorizes them by type, reason, and urgency for action."
+        },
+        {
+          "step": "Root Cause Analysis",
+          "description": "We analyze the denial to determine its fundamental cause, distinguishing between correctable errors and issues needing an appeal."
+        },
+        {
+          "step": "Correction or Appeal Preparation",
+          "description": "Simple errors are corrected for resubmission. For clinical or complex denials, DEXA helps draft appeal letters and gather supporting documentation."
+        },
+        {
+          "step": "Submission & Follow-Up",
+          "description": "Corrected claims are resubmitted, and formal appeals are sent to the payer. Our team follows up diligently until a final determination is made."
+        },
+        {
+          "step": "Recovery & Reporting",
+          "description": "Recovered revenue is posted, and a detailed report on the denial, its resolution, and its root cause is logged for ongoing analysis."
+        }
+      ],
+      "benefits": [
+        "Significant reduction in overall denial rates",
+        "Recovery of lost revenue from previously written-off claims",
+        "Faster resolution times for denied and appealed claims",
+        "Improved understanding of denial root causes for process improvement",
+        "Enhanced cash flow and reduced administrative rework"
+      ],
+      "uniqueAgents": [
+        {
+          "name": "DEXA - Denial Experience and Analytics Agent",
+          "description": "Revolutionizes denial management by auto-categorizing critical denials, generating appeal letters, and even initiating calls to payers to verify claim details, documenting outcomes in real-time."
+        }
+      ],
+      "stats": [
+        { "label": "Average Denial Reduction", "value": "40%" },
+        { "label": "Appeal Success Rate", "value": ">60%" },
+        { "label": "Claims Analyzed Monthly", "value": "Millions" }
+      ],
+      "faqs": [
+        {
+          "question": "What are the most common reasons for denials you see?",
+          "answer": "While it varies by practice and specialty, the most common denials we see nationally are for issues like eligibility (patient not covered or coverage not verified), missing or invalid prior authorization, coding errors (incorrect or missing codes, unbundling), and duplicate claims. Our root cause analysis helps pinpoint which issues are most prevalent for *your* practice."
+        },
+        {
+          "question": "How do you charge for denial management services?",
+          "answer": "Our denial management services are typically included as part of our comprehensive RCM or Medical Billing packages. For stand-alone denial management, we often work on a contingency basis, where our fee is a percentage of the revenue we successfully recover for you."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Accounts Receivable Management",
+    "href": "/services/accounts-receivable",
+    "description": "Aggressive AR follow-up with payers to reduce outstanding claims and improve cash flow.",
+    "image": "https://images.pexels.com/photos/5933209/pexels-photo-5933209.jpeg?cs=srgb&dl=pexels-nestor-luis-5307112-5933209.jpg&fm=jpg",
+    "icon": "IconWallet",
+    "stats": "< 30 Days AR",
+    "gradient": "from-indigo-500 to-purple-500",
+    "details": {
+      "overview": "Aging accounts receivable (AR) can choke a practice's cash flow, representing work done but not yet paid for. Our Accounts Receivable Management service is designed to aggressively and intelligently pursue these outstanding claims. Combining dedicated human expertise with our powerful ARIS (Accounts Receivable Intelligent System) AI agent, we systematically work through your aged trial balance. We prioritize follow-up efforts based on the probability of recovery, ensuring your team's time—and our efforts—are focused on the claims that will have the greatest impact on your bottom line, dramatically reducing your AR days and improving financial health.",
+      "keyFeatures": [
+        {
+          "title": "Intelligent Claim Prioritization (ARIS)",
+          "description": "Our ARIS AI agent analyzes every outstanding claim, scoring them based on factors like age, dollar amount, and payer, to predict the likelihood of successful recovery. This ensures our team focuses on the highest-value accounts first."
+        },
+        {
+          "title": "Systematic Payer Follow-Up",
+          "description": "Our dedicated AR specialists conduct persistent follow-up with insurance payers via phone, email, and payer portals to check on claim status, gather information, and push for timely resolution and payment."
+        },
+        {
+          "title": "Automated Appeal Drafting",
+          "description": "For claims that have been denied or are underpaid, ARIS can auto-draft appeal letters based on payer-specific rules and the specific reason for the shortfall, significantly accelerating the rework process."
+        },
+        {
+          "title": "Patient Payment Assistance",
+          "description": "ARIS also features Voice AI capabilities to handle inbound and outbound patient payment calls, making it easier for patients to pay their bills and improving the collection of patient-responsibility balances."
+        },
+        {
+          "title": "Comprehensive AR Reporting",
+          "description": "You receive detailed insights into your AR health, including aging reports, payer performance metrics, and recovery rates. This transparency allows you to track our progress and understand the financial dynamics of your practice."
+        }
+      ],
+      "process": [
+        {
+          "step": "AR Data Analysis",
+          "description": "ARIS analyzes your entire accounts receivable aging report, categorizing and prioritizing claims for follow-up."
+        },
+        {
+          "step": "Payer Contact Initiated",
+          "description": "Our specialists, guided by ARIS, begin contacting payers for the highest-priority claims to determine status and reason for non-payment."
+        },
+        {
+          "step": "Issue Identification & Resolution",
+          "description": "We identify any issues (e.g., missing info, denial, processing delay). ARIS assists by auto-drafting appeals or providing talking points for calls."
+        },
+        {
+          "step": "Payment Follow-Up",
+          "description": "We continue follow-up until a final determination is made and payment is received or the claim is resolved."
+        },
+        {
+          "step": "Payment Posting & Reconciliation",
+          "description": "Recovered payments are posted to the account, and the resolution is logged. Regular reports are generated to show progress and trends."
+        }
+      ],
+      "benefits": [
+        "Significant reduction in Days in Accounts Receivable (DAR)",
+        "Improved and more predictable cash flow",
+        "Recovery of revenue from aged claims",
+        "Reduced administrative burden on your in-house staff",
+        "Data-driven insights into payer behavior and AR performance"
+      ],
+      "uniqueAgents": [
+        {
+          "name": "ARIS - Accounts Receivable Intelligent System",
+          "description": "Intelligently tracks outstanding claims, uses a predictive engine to score recovery probability, auto-drafts appeals, and employs Voice AI to handle patient payment calls."
+        }
+      ],
+      "stats": [
+        { "label": "Target AR Days", "value": "< 30" },
+        {
+          "label": "Average Recovery Rate on Aged AR",
+          "value": "Significantly Improved"
+        },
+        { "label": "Payer Follow-Up Frequency", "value": "Weekly / Bi-Weekly" }
+      ],
+      "faqs": [
+        {
+          "question": "What is a 'good' number for Days in Accounts Receivable (DAR)?",
+          "answer": "For most medical practices, a DAR of 30-40 days is considered excellent, indicating that you are getting paid quickly. An average DAR is often in the 40-50 day range. When AR starts creeping above 50-60 days, it can signal problems in the billing or follow-up process and can lead to cash flow strain. Our goal is to get and keep your DAR under 30 days."
+        },
+        {
+          "question": "Will you work on very old AR, like claims over 120 days old?",
+          "answer": "Absolutely. While the probability of collection decreases over time, a significant portion of revenue can still be recovered from aged AR. Our ARIS system helps us identify which of these older claims still have a viable path to payment, and our specialists are experienced in pursuing these more complex, aged accounts."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Payment Posting",
+    "href": "/services/payment-posting",
+    "description": "Accurate posting of insurance and patient payments with reconciliation.",
+    "image": "https://images.pexels.com/photos/13060576/pexels-photo-13060576.jpeg?cs=srgb&dl=pexels-lucas-guimaraes-bueno-258458556-13060576.jpg&fm=jpg",
+    "icon": "IconWallet",
+    "stats": "99.9% Posting Accuracy",
+    "gradient": "from-violet-500 to-indigo-500",
+    "details": {
+      "overview": "Accurate and timely payment posting is essential for maintaining a clear and up-to-date picture of your practice's financial health. Our Payment Posting service ensures that every payment from insurance companies and patients is recorded correctly and promptly. By combining skilled personnel with our advanced REMITA AI agent, we automate the reconciliation of remittance advice (ERAs and EOBs) against expected payments. This process not only guarantees near-perfect accuracy but also instantly flags discrepancies like underpayments or denials, enabling immediate follow-up and protecting your revenue.",
+      "keyFeatures": [
+        {
+          "title": "Automated Payment Reconciliation (REMITA)",
+          "description": "Our REMITA AI agent automatically compares incoming insurance payments (ERAs) and paper EOBs against the expected amounts for each claim. This drastically reduces manual data entry and the potential for human error."
+        },
+        {
+          "title": "Accurate Patient Payment Posting",
+          "description": "We accurately post all patient payments, whether received via mail, online portal, or in-office, ensuring patient balances are always current."
+        },
+        {
+          "title": "Exception & Discrepancy Flagging",
+          "description": "REMITA instantly detects and flags any discrepancies, such as underpayments, overpayments, bundling issues, or denied line items. These exceptions are immediately routed to our denial management or AR team for resolution."
+        },
+        {
+          "title": "Secondary Insurance Billing",
+          "description": "Once the primary payment is posted, we automatically generate and submit the claim to the secondary insurance, ensuring no delays in collecting the full allowed amount."
+        },
+        {
+          "title": "Seamless EHR/PM Integration",
+          "description": "Posted payments and adjustments are seamlessly updated in your practice management or EHR system, ensuring your financial records are always accurate and up-to-date."
+        }
+      ],
+      "process": [
+        {
+          "step": "Receive Remittance Data",
+          "description": "We receive electronic remittance advices (ERAs) or scan paper explanation of benefits (EOBs) from insurance payers."
+        },
+        {
+          "step": "Automated Reconciliation (REMITA)",
+          "description": "REMITA AI agent automatically matches the payment and adjustments to the corresponding claim and expected amounts."
+        },
+        {
+          "step": "Payment Posting",
+          "description": "The reconciled payment amounts are accurately posted to the patient's account in your billing system."
+        },
+        {
+          "step": "Exception Handling",
+          "description": "Any discrepancies identified by REMITA (e.g., underpayment, denial) are flagged and routed to the appropriate team for immediate action."
+        },
+        {
+          "step": "Secondary Claim Generation",
+          "description": "For claims with secondary insurance, a claim is automatically generated and submitted to the secondary payer."
+        }
+      ],
+      "benefits": [
+        "Elimination of manual data entry errors",
+        "Faster and more accurate financial reporting",
+        "Immediate identification of underpayments and denials for quicker recovery",
+        "Improved cash flow through faster secondary billing",
+        "Clear and up-to-date patient account balances"
+      ],
+      "uniqueAgents": [
+        {
+          "name": "REMITA - Reconciliation and Autonomous Posting Agent",
+          "description": "Auto-reconciles remittance data with expected payments, posts payments automatically, and detects/flags exceptions like underpayments or denials by continuously learning payer patterns."
+        }
+      ],
+      "stats": [
+        { "label": "Posting Accuracy Rate", "value": "99.9%" },
+        { "label": "Payment Processing Speed", "value": "Within 24 hours" },
+        { "label": "Discrepancy Flag Rate", "value": "100%" }
+      ],
+      "faqs": [
+        {
+          "question": "What is the difference between an ERA and an EOB?",
+          "answer": "An ERA (Electronic Remittance Advice) is an electronic file sent by the insurance payer that contains payment and adjustment information for multiple claims. It can be automatically imported into a billing system. An EOB (Explanation of Benefits) is often a paper document sent for a single claim or patient. Our service can handle both, but electronic posting via ERAs is significantly faster and more efficient."
+        },
+        {
+          "question": "What happens if an insurance company underpays on a claim?",
+          "answer": "When an underpayment occurs, our REMITA AI agent flags it as an exception. This flag is then reviewed by our team. If the underpayment is contractual (allowed by your agreement), it's noted. If it's an error, the case is handed over to our Denial Management or AR team to initiate an appeal or follow-up with the payer to recover the correct amount."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Medical Billing Audit",
+    "href": "/services/billing-audit",
+    "description": "Detailed audits to identify revenue leakage, compliance issues, and workflow improvements.",
+    "image": "https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?cs=srgb&dl=pexels-asphotography-106344.jpg&fm=jpg",
+    "icon": "IconShield",
+    "stats": "Revenue Leak Detection",
+    "gradient": "from-gray-500 to-slate-600",
+    "details": {
+      "overview": "Even well-managed practices can have hidden revenue leaks and compliance risks. Our Medical Billing Audit service provides a comprehensive, objective examination of your entire revenue cycle. We go beyond simple chart reviews to analyze your coding accuracy, billing workflows, compliance with payer contracts, and financial performance. Using a combination of expert auditors and advanced analytics, we deliver a detailed report that uncovers missed revenue opportunities, identifies process inefficiencies, and highlights potential compliance vulnerabilities, providing you with a clear roadmap to a healthier, more profitable practice.",
+      "keyFeatures": [
+        {
+          "title": "Comprehensive Revenue Cycle Review",
+          "description": "We audit every stage of your revenue cycle, from patient scheduling and eligibility verification to coding, claims submission, payment posting, and denial management."
+        },
+        {
+          "title": "Coding & Documentation Accuracy Audit",
+          "description": "Our certified coders review a statistically significant sample of your charts to assess the accuracy of your coding (ICD-10, CPT, HCPCS) and ensure documentation supports the services billed. This helps identify both under-coding and over-coding risks."
+        },
+        {
+          "title": "Contractual Compliance & Payer Rule Analysis",
+          "description": "We analyze your paid claims against your payer contracts to ensure you are being reimbursed correctly according to the agreed-upon fee schedules. We also check for compliance with complex and changing payer medical policies."
+        },
+        {
+          "title": "Denial & AR Performance Analysis",
+          "description": "We dive deep into your denial data and aging accounts receivable to identify root causes, trend patterns, and benchmark your performance against industry standards."
+        },
+        {
+          "title": "Actionable Recommendations & Roadmap",
+          "description": "The final audit report doesn't just list problems; it provides clear, actionable recommendations and a prioritized roadmap for improvement, whether it's staff training, workflow changes, or targeted AR recovery efforts."
+        }
+      ],
+      "process": [
+        {
+          "step": "Initial Consultation & Scoping",
+          "description": "We discuss your specific concerns and goals to define the scope and focus of the audit (e.g., a full RCM audit, a coding audit, or a pre-billing audit)."
+        },
+        {
+          "step": "Data & Documentation Collection",
+          "description": "We securely gather the necessary data, including claims files, remittance advice, patient charts, and financial reports."
+        },
+        {
+          "step": "In-Depth Analysis",
+          "description": "Our auditors and analysts, using advanced tools, conduct a detailed review of your data, comparing it against coding guidelines, payer rules, and industry benchmarks."
+        },
+        {
+          "step": "Findings & Recommendations Report",
+          "description": "We compile our findings into a comprehensive report that quantifies identified issues (e.g., potential revenue leakage, compliance risks) and provides specific, actionable recommendations."
+        },
+        {
+          "step": "Results Presentation & Consultation",
+          "description": "We schedule a meeting to review the audit findings with you, answer your questions, and discuss the recommended roadmap for improvement."
+        }
+      ],
+      "benefits": [
+        "Identification of significant, often hidden, revenue leakage",
+        "Mitigation of compliance and audit risk",
+        "Improved coding and billing accuracy",
+        "Data-driven insights for optimizing workflows and contracts",
+        "A clear, strategic plan for enhancing overall financial performance"
+      ],
+      "stats": [
+        { "label": "Average Revenue Leakage Found", "value": "5-15%" },
+        { "label": "Audit Types Offered", "value": "RCM, Coding, Compliance" },
+        { "label": "Client Satisfaction", "value": "100%" }
+      ],
+      "faqs": [
+        {
+          "question": "How often should my practice have a medical billing audit?",
+          "answer": "For most practices, we recommend an annual external audit to ensure ongoing health and compliance. However, practices that are growing rapidly, have recently changed specialties, or are preparing for a potential payer audit may benefit from a more frequent or targeted audit."
+        },
+        {
+          "question": "What is the difference between a coding audit and a revenue cycle audit?",
+          "answer": "A coding audit is a focused review that specifically examines the accuracy of your medical coding against clinical documentation. A full revenue cycle audit is much broader. It includes a coding audit but also examines your financial performance, billing workflows, payer contract compliance, denial patterns, and AR management to provide a 360-degree view of your practice's financial operations and health."
+        }
+      ]
+    }
+  },
+  {
+    "title": "Laboratory Billing",
+    "href": "/services/laboratory-billing",
+    "description": "Specialized billing for diagnostic labs with complex coding and payer rules.",
+    "image": "https://images.pexels.com/photos/48604/pexels-photo-48604.jpeg?cs=srgb&dl=pexels-negativespace-48604.jpg&fm=jpg",
+    "icon": "Microscope",
+    "stats": "Lab Billing Experts",
+    "gradient": "from-teal-500 to-emerald-500",
+    "details": {
+      "overview": "Laboratory billing presents a unique set of challenges, from complex molecular pathology coding to evolving payer policies for genetic and advanced diagnostic tests (ADLTs). Our Laboratory Billing service is specifically designed to navigate this intricate landscape. We combine deep expertise in lab-specific coding and compliance with our advanced AI technology to ensure accurate claim submission, maximize reimbursements, and maintain strict adherence to regulations like PAMA (Protecting Access to Medicare Act). We handle the complexities so you can focus on delivering accurate diagnostic results.",
+      "keyFeatures": [
+        {
+          "title": "Specialized Lab Coding Expertise",
+          "description": "Our certified coders possess specialized knowledge of the complex CPT and HCPCS codes used in laboratory medicine, including molecular pathology, genomics, drug testing, and advanced diagnostic tests. They stay current on the latest coding updates and payer-specific guidelines."
+        },
+        {
+          "title": "Advanced PAMA Compliance",
+          "description": "We understand the intricacies of the PAMA (Protecting Access to Medicare Act) reporting requirements and private payer rate implications for labs. Our systems and processes are designed to help you navigate these complex regulations and ensure compliance."
+        },
+        {
+          "title": "Automated Claim Scrubbing for Lab Rules",
+          "description": "Our CLAIR AI agent is trained on the specific edit rules and medical policies of major payers for lab tests. It scrubs claims for errors like incorrect code combinations, missing modifiers, or bundling issues that are common in lab billing."
+        },
+        {
+          "title": "Coverage & Medical Necessity Verification",
+          "description": "We proactively verify patient insurance coverage and ensure that tests meet the payer's medical necessity criteria *before* they are performed, reducing the risk of denials for tests deemed not medically necessary."
+        },
+        {
+          "title": "Management of Advanced Beneficiary Notices (ABNs)",
+          "description": "For tests that may not be covered by Medicare, we help manage the process of generating and tracking ABNs, ensuring patients are informed of their potential financial responsibility in advance."
+        }
+      ],
+      "process": [
+        {
+          "step": "Order & Patient Info Intake",
+          "description": "We receive the test order and patient demographic and insurance information from your LIS or portal."
+        },
+        {
+          "step": "Pre-Authorization & Eligibility",
+          "description": "We verify patient coverage and determine if the specific test requires prior authorization or has specific medical necessity criteria."
+        },
+        {
+          "step": "Coding & Compliance Check",
+          "description": "Our coders assign the correct codes for the tests performed. The claim is then scrubbed by CLAIR AI for lab-specific compliance and payer edits."
+        },
+        {
+          "step": "Claim Submission",
+          "description": "Claims are submitted electronically to the appropriate payers (Medicare, Medicaid, commercial)."
+        },
+        {
+          "step": "Payment Posting & AR Follow-Up",
+          "description": "Payments are posted, and our AR team aggressively follows up on any underpayments or denials specific to lab claims."
+        }
+      ],
+      "benefits": [
+        "Maximized reimbursement for complex lab tests",
+        "Reduced denials related to coding, medical necessity, and authorization",
+        "Ensured compliance with PAMA and other lab-specific regulations",
+        "Improved cash flow and reduced administrative burden on lab staff",
+        "Increased patient satisfaction with clearer financial communication"
+      ],
+      "stats": [
+        { "label": "Lab Billing Experience", "value": "15+ Years" },
+        { "label": "Clean Claim Rate for Labs", "value": "97%" },
+        { "label": "Tests Billed Daily", "value": "Thousands" }
+      ],
+      "faqs": [
+        {
+          "question": "How do you handle billing for molecular pathology and genetic tests, which have very complex coding?",
+          "answer": "We have a dedicated team of coders with advanced training in molecular pathology and genetic testing codes, including tier 1 and tier 2 molecular codes. We use proprietary tools and our CODIN AI agent to ensure the most specific and accurate codes are selected based on the exact test performed, which is critical for correct reimbursement."
+        },
+        {
+          "question": "What is PAMA and how does it affect my lab's revenue?",
+          "answer": "PAMA (Protecting Access to Medicare Act) introduced significant changes to how clinical laboratories are reimbursed by Medicare, tying payment rates to private payer data. Compliance with PAMA's data reporting requirements is mandatory, and the resulting rate adjustments can impact revenue. Our service includes expertise in these regulations to help labs navigate the complexities and optimize their revenue under this system."
+        }
+      ]
+    }
+  },
+  {
+    "title": "MIPS Consulting",
+    "href": "/services/mips-consulting",
+    "description": "Documentation and compliance consulting to maximize MIPS performance scores.",
+    "image": "https://images.pexels.com/photos/5207115/pexels-photo-5207115.jpeg?cs=srgb&dl=pexels-karola-g-5207115.jpg&fm=jpg",
+    "icon": "BarChart3",
+    "stats": "Maximize MIPS Score",
+    "gradient": "from-rose-500 to-pink-500",
+    "details": {
+      "overview": "The Merit-based Incentive Payment System (MIPS) directly impacts your practice's Medicare reimbursement, offering payment bonuses for high performance and penalties for low performance. Our MIPS Consulting service provides the expert guidance you need to navigate this complex program successfully. We work with you to understand the requirements, optimize your documentation, and implement strategies to maximize your final MIPS score. Our goal is to turn a complex administrative task into an opportunity to showcase the quality of your care and earn the incentive payments you deserve.",
+      "keyFeatures": [
+        {
+          "title": "MIPS Readiness & Gap Analysis",
+          "description": "We start by assessing your current performance and documentation across all four MIPS performance categories: Quality, Promoting Interoperability, Improvement Activities, and Cost."
+        },
+        {
+          "title": "Quality Measure Selection & Validation",
+          "description": "With dozens of quality measures to choose from, we help you select the 6 measures that are most relevant to your specialty and practice, and ensure your data collection and reporting methods will meet CMS requirements."
+        },
+        {
+          "title": "Promoting Interoperability (PI) Guidance",
+          "description": "We help you understand and meet the PI requirements related to the use of certified EHR technology, including e-prescribing and patient data exchange."
+        },
+        {
+          "title": "Improvement Activities (IA) Attestation Support",
+          "description": "We help you identify and implement qualifying improvement activities in your practice, such as care coordination or patient engagement initiatives, and guide you through the attestation process."
+        },
+        {
+          "title": "Data Validation & Submission Support",
+          "description": "Before you submit your data, we can perform a validation check to ensure it's complete and accurate, minimizing the risk of data errors that could negatively impact your score."
+        }
+      ],
+      "process": [
+        {
+          "step": "Initial Assessment",
+          "description": "We meet with you to understand your practice, patient population, and current EHR capabilities, and review prior years' MIPS performance if available."
+        },
+        {
+          "step": "Strategic Planning",
+          "description": "We develop a customized MIPS strategy, outlining which quality measures to report, which improvement activities to implement, and how to meet PI requirements."
+        },
+        {
+          "step": "Documentation & Workflow Integration",
+          "description": "We work with your team to integrate the necessary documentation and data collection into your existing clinical workflows."
+        },
+        {
+          "step": "Ongoing Monitoring & Support",
+          "description": "We provide ongoing support throughout the performance year, answering questions and helping to troubleshoot any issues."
+        },
+        {
+          "step": "Pre-Submission Validation & Reporting",
+          "description": "Prior to the submission deadline, we help validate your data and guide you through the final submission process to CMS."
+        }
+      ],
+      "benefits": [
+        "Maximization of your MIPS final score and associated payment adjustments",
+        "Reduced risk of penalties and avoidance of negative payment adjustments",
+        "Optimized quality reporting that aligns with your clinical focus",
+        "Streamlined workflows for data collection and reporting",
+        "Peace of mind knowing you have expert guidance through the complex MIPS program"
+      ],
+      "stats": [
+        { "label": "Average Score Improvement", "value": "20+ Points" },
+        { "label": "Client Success Rate (Avoiding Penalty)", "value": "99%" },
+        {
+          "label": "MIPS Consulting Experience",
+          "value": "Since Program Inception"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "What is a good MIPS score, and what happens if I don't participate?",
+          "answer": "MIPS scores are on a scale of 0 to 100. The performance threshold, which determines whether you receive a neutral or negative payment adjustment, is set by CMS each year. Scoring above the exceptional performance threshold can lead to bonus payments. If you are a eligible clinician and do not participate in MIPS, you will automatically receive a negative payment penalty."
+        },
+        {
+          "question": "I'm in a small practice. Is MIPS consulting still worthwhile?",
+          "answer": "Absolutely. Small and solo practices often face the greatest administrative burden from MIPS. Our consulting is tailored to your specific situation. We can help you navigate the program efficiently, identify the most achievable measures, and take advantage of any special considerations or bonuses available for small practices, turning a potential burden into a financial opportunity."
+        }
+      ]
+    }
+  }
+]

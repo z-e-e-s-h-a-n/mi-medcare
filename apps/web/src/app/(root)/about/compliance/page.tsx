@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { CheckCircle2, FileCheck2, LockKeyhole, ShieldCheck } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { FAQSection } from "@/components/sections/faq-section";
-import { CTASection } from "@/components/sections/cta-section";
-
 export const metadata: Metadata = {
   title: "Compliance & Data Security",
   description:
@@ -104,8 +102,8 @@ export default function CompliancePage() {
       </section>
 
       <FAQSection faqs={complianceFAQs} />
-      <CTASection />
     </>
   );
 }
+
 

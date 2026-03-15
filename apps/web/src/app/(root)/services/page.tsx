@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/page-header";
 import { ServicesSection } from "@/components/sections/services-section";
-import { CTASection } from "@/components/sections/cta-section";
-
 export const metadata: Metadata = {
   title: "Medical Billing Services",
   description:
@@ -19,7 +17,6 @@ export default function ServicesPage() {
         imageUrl="https://images.pexels.com/photos/4989167/pexels-photo-4989167.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
       <ServicesSection />
-      <CTASection />
     </>
   );
 }
