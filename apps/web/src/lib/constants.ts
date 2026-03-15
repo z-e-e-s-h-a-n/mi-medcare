@@ -1052,7 +1052,7 @@ export const CASE_STUDIES = [
 export const HEADER_NAVIGATION: NavItem[] = [
   {
     title: "Services",
-    href: "./services",
+    href: "/services",
     children: SERVICES.slice(0, 6),
 
     featured: {
@@ -1066,7 +1066,7 @@ export const HEADER_NAVIGATION: NavItem[] = [
 
   {
     title: "Specialties",
-    href: "./specialties",
+    href: "/specialties",
     children: SPECIALTIES.slice(0, 6),
 
     featured: {
@@ -1187,7 +1187,7 @@ export const FOOTER_NAVIGATION = [
         href: "/services/revenue-cycle-management",
       },
       { label: "Credentialing", href: "/services/credentialing" },
-      { label: "AR Management", href: "/services/ar-management" },
+      { label: "AR Management", href: "/services/accounts-receivable" },
     ],
   },
   {
