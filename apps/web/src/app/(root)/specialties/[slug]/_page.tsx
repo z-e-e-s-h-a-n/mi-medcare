@@ -422,6 +422,10 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
                       Call: {business.contact.phones?.[0]?.display ?? business.contact.phones[0].display}
                     </a>
                   </Button>
+                    <p className="text-xs text-muted-foreground">
+                      By texting this number, you agree to receive text messages
+                      from our business.
+                    </p>
 
                   <Button
                     asChild
@@ -539,6 +543,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
     </>
   );
 }
+
 
 
 

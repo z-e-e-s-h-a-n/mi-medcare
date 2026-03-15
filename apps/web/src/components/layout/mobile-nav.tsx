@@ -17,15 +17,11 @@ import {
   CollapsibleTrigger,
 } from "@workspace/ui/components/collapsible";
 import { Menu, ChevronDown, Phone, Mail, MapPin } from "lucide-react";
-import { business, HEADER_NAVIGATION } from "@/lib/constants";
+import { BOOKING_LINK, business, HEADER_NAVIGATION } from "@/lib/constants";
 import { formatBusinessAddress } from "@/lib/utils";
 import ThemeSwitch from "@workspace/ui/components/theme-toggle";
 
-interface MobileNavProps {
-  onBookConsultation?: () => void;
-}
-
-export function MobileNav({ onBookConsultation }: MobileNavProps) {
+export function MobileNav() {
   const [open, setOpen] = useState(false);
   const [openSections, setOpenSections] = useState<string[]>([]);
 
@@ -174,12 +170,12 @@ export function MobileNav({ onBookConsultation }: MobileNavProps) {
 
             <Button
               className="w-full bg-linear-to-r from-primary to-secondary"
-              onClick={() => {
-                setOpen(false);
-                onBookConsultation?.();
-              }}
+              href={BOOKING_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
             >
-              Book Consultation
+              Schedule a Call
             </Button>
           </div>
         </div>

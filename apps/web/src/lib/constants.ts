@@ -155,6 +155,12 @@ export const business = {
     "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care.",
 };
 
+export const BOOKING_LINK =
+  "https://api.leadconnectorhq.com/widget/bookings/medical-bill";
+
+export const GHL_CONTACT_FORM_IFRAME_SRC =
+  "https://api.leadconnectorhq.com/widget/form/GssV1mgq5YNfEnZ152Mi";
+
 export const ASSOCIATIONS = [
   { src: "/images/association/association-1.png", alt: "Association 1" },
   { src: "/images/association/association-2.png", alt: "Association 2" },

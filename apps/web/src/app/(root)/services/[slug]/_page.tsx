@@ -331,6 +331,10 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
                       Call: {business.contact.phones?.[0]?.display ?? business.contact.phones[0].display}
                     </a>
                   </Button>
+                    <p className="text-xs text-muted-foreground">
+                      By texting this number, you agree to receive text messages
+                      from our business.
+                    </p>
 
                   <Button
                     asChild
@@ -458,4 +462,5 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
     </>
   );
 }
+
 

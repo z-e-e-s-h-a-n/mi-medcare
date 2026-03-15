@@ -5,11 +5,11 @@ import { motion } from "motion/react";
 import { easeOut } from "motion";
 import Link from "next/link";
 import { ArrowRight, Phone, Mail, MapPin, Clock, Printer } from "lucide-react";
-import { business } from "@/lib/constants";
+import { business, GHL_CONTACT_FORM_IFRAME_SRC } from "@/lib/constants";
 import { FAQSection } from "@/components/sections/faq-section";
 import { PageHeader } from "@/components/layout/page-header";
-import { ContactForm } from "@/components/forms/contact-form";
 import Image from "next/image";
+import Script from "next/script";
 import { SectionHeader } from "@/components/layout/section-header";
 import { cn } from "@workspace/ui/lib/utils";
 import { formatBusinessAddress, gradientClass } from "@/lib/utils";
@@ -66,7 +66,7 @@ const phonesCard = {
   iconColor: "text-white",
   extra: (
     <div className="mt-3 space-y-2">
-      {business.contact.phones.map((n) => (
+      {business.contact.phones.slice(0, 1).map((n) => (
         <a
           key={n.tel}
           href={`tel:${n.tel}`}
@@ -78,6 +78,10 @@ const phonesCard = {
           {n.display}
         </a>
       ))}
+      <p className="text-xs text-muted-foreground">
+        By texting this number, you agree to receive text messages from our
+        business.
+      </p>
     </div>
   ),
 };
@@ -89,7 +93,7 @@ const faxCard = {
   iconColor: "text-white",
   extra: (
     <div className="mt-3 space-y-2">
-      {business.contact.fax.map((n) => (
+      {business.contact.fax.slice(0, 1).map((n) => (
         <a
           key={n.tel}
           href={`tel:${n.tel}`}
@@ -405,7 +409,45 @@ export function _ContactPage() {
                     className="w-60 h-60 object-contain"
                   />
                 </div>
-                <ContactForm />
+                <div className="space-y-4">
+                  <div>
+                    <h2 className="text-3xl font-bold">Send Us a Message</h2>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      This form is hosted securely in our system for A2P
+                      approval. Our website form will return after approval.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-border/60 bg-background/60 overflow-hidden">
+                    <iframe
+                      src={GHL_CONTACT_FORM_IFRAME_SRC}
+                      style={{
+                        width: "100%",
+                        height: "823px",
+                        border: "none",
+                        borderRadius: "12px",
+                      }}
+                      id="inline-GssV1mgq5YNfEnZ152Mi"
+                      data-layout="{'id':'INLINE'}"
+                      data-trigger-type="alwaysShow"
+                      data-trigger-value=""
+                      data-activation-type="alwaysActivated"
+                      data-activation-value=""
+                      data-deactivation-type="neverDeactivate"
+                      data-deactivation-value=""
+                      data-form-name="Contact us Form A2P Approval"
+                      data-height="823"
+                      data-layout-iframe-id="inline-GssV1mgq5YNfEnZ152Mi"
+                      data-form-id="GssV1mgq5YNfEnZ152Mi"
+                      title="Contact us Form A2P Approval"
+                    />
+                  </div>
+
+                  <Script
+                    src="https://link.msgsndr.com/js/form_embed.js"
+                    strategy="afterInteractive"
+                  />
+                </div>
               </div>
             </motion.div>
 

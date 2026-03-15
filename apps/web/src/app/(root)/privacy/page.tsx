@@ -16,18 +16,15 @@ export default function PrivacyPolicyPage() {
       description="How we collect, use, and protect information on this website."
       imageUrl="https://images.pexels.com/photos/5380643/pexels-photo-5380643.jpeg?auto=compress&cs=tinysrgb&w=1920"
       toc={[
-        { id: "intro", label: "Overview" },
-        { id: "scope", label: "Scope" },
+        { id: "intro", label: "Introduction" },
         { id: "collect", label: "Information we collect" },
         { id: "use", label: "How we use it" },
-        { id: "hipaa", label: "HIPAA / PHI" },
-        { id: "sms", label: "Text messaging" },
+        { id: "sms", label: "SMS consent" },
         { id: "share", label: "Sharing" },
+        { id: "security", label: "Data security" },
         { id: "cookies", label: "Cookies" },
-        { id: "security", label: "Security" },
-        { id: "choices", label: "Your choices" },
-        { id: "children", label: "Children" },
-        { id: "changes", label: "Changes" },
+        { id: "third-party", label: "Third-party links" },
+        { id: "updates", label: "Updates" },
         { id: "contact", label: "Contact" },
       ]}
     >

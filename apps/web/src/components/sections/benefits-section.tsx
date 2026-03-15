@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
-import { BENEFITS_OF_CHOOSING } from "@/lib/constants";
+import { BENEFITS_OF_CHOOSING, BOOKING_LINK } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
 import { CheckCircle, TrendingUp } from "lucide-react";
 import { cn } from "@workspace/ui/lib/utils";
@@ -287,16 +287,19 @@ export function BenefitsSection({
               <span className="text-sm font-medium">
                 Ready to transform your revenue cycle?
               </span>
-              <motion.button
+              <motion.a
                 whileHover={{ x: 5 }}
                 className={`transition-colors ${
                   useConstantColors
                     ? `${gradientClass(accent, { type: "text" })} opacity-90 hover:opacity-70`
                     : "text-primary hover:text-primary/80"
                 }`}
+                href={BOOKING_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Schedule a consultation →
-              </motion.button>
+              </motion.a>
             </div>
           </motion.div>
         </div>

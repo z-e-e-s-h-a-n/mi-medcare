@@ -6,132 +6,108 @@ export function TermsContent() {
     <>
       <LegalTopCards
         items={[
-          { label: "Effective date", value: "March 15, 2026" },
+          { label: "Last updated", value: "March 2026" },
           { label: "Applies to", value: "Website use" },
-          { label: "Reminder", value: "No PHI in forms" },
+          { label: "SMS", value: "STOP / HELP supported" },
         ]}
       />
 
       <section id="intro">
-        <h2 className="scroll-mt-24">Overview</h2>
+        <h2 className="scroll-mt-24">1. Agreement to Terms</h2>
         <p>
-          These Terms and Conditions (&quot;Terms&quot;) govern your access to
-          and use of the MI MedCare website and related online services (the
-          &quot;Site&quot;). By using the Site, you agree to these Terms.
+          By accessing or using the <strong>{business.legalName}</strong>{" "}
+          website, you agree to comply with these Terms and Conditions. If you
+          do not agree with these terms, please discontinue use of the website.
         </p>
       </section>
 
-      <section id="who">
-        <h2 className="scroll-mt-24">Who we are</h2>
+      <section id="services">
+        <h2 className="scroll-mt-24">2. Description of Services</h2>
         <p>
-          The Site is operated by <strong>{business.legalName}</strong>.
+          <strong>{business.legalName}</strong> provides professional services
+          including:
         </p>
-      </section>
-
-      <section id="use">
-        <h2 className="scroll-mt-24">Use of the Site</h2>
         <ul>
-          <li>
-            You may use the Site for lawful purposes and in accordance with
-            these Terms.
-          </li>
-          <li>
-            You agree not to attempt to disrupt the Site, probe vulnerabilities,
-            or access non-public areas without authorization.
-          </li>
-          <li>
-            You agree not to submit false information, impersonate others, or
-            use the Site to transmit unlawful content.
-          </li>
+          <li>Medical Billing</li>
+          <li>Revenue Cycle Management</li>
+          <li>Credentialing &amp; Provider Enrollment</li>
+          <li>Accounts Receivable Management</li>
+          <li>Patient Billing Support</li>
+        </ul>
+        <p>Service details may vary depending on agreements with clients.</p>
+      </section>
+
+      <section id="sms">
+        <h2 className="scroll-mt-24">3. SMS Messaging Program</h2>
+        <p>
+          By submitting your phone number through our website, you agree to
+          receive SMS communications from <strong>{business.legalName}</strong>.
+        </p>
+        <p>Types of messages may include:</p>
+        <ul>
+          <li>Appointment confirmations</li>
+          <li>Customer support responses</li>
+          <li>Service notifications</li>
+          <li>Business communication related to our services</li>
+        </ul>
+        <p>
+          Message frequency may vary. Message and data rates may apply. You may
+          opt out at any time by replying <strong>STOP</strong>. Reply{" "}
+          <strong>HELP</strong> for assistance.
+        </p>
+      </section>
+
+      <section id="responsibilities">
+        <h2 className="scroll-mt-24">4. User Responsibilities</h2>
+        <ul>
+          <li>Use the website for illegal purposes</li>
+          <li>Attempt unauthorized access to our systems</li>
+          <li>Interfere with website security</li>
         </ul>
       </section>
 
-      <section id="info">
-        <h2 className="scroll-mt-24">Informational content; no medical advice</h2>
-        <p>
-          Content on the Site is provided for general informational purposes
-          about revenue cycle management and billing operations. It is not
-          medical advice, legal advice, or a substitute for professional
-          guidance tailored to your organization.
-        </p>
-      </section>
-
-      <section id="submissions">
-        <h2 className="scroll-mt-24">Contact forms and submissions</h2>
-        <p>
-          When you submit information through the Site (for example, contact or
-          consultation requests), you represent that the information is accurate
-          and that you have the right to provide it. Please do not include
-          patient medical records or sensitive PHI in website forms.
-        </p>
-      </section>
-
-      <section id="third-party">
-        <h2 className="scroll-mt-24">Third-party links</h2>
-        <p>
-          The Site may contain links to third-party sites. We do not control and
-          are not responsible for third-party content, policies, or practices.
-          Access third-party sites at your own risk.
-        </p>
-      </section>
-
       <section id="ip">
-        <h2 className="scroll-mt-24">Intellectual property</h2>
+        <h2 className="scroll-mt-24">5. Intellectual Property</h2>
         <p>
-          The Site and its content, features, and design are owned by MI MedCare
-          or its licensors and are protected by applicable intellectual property
-          laws. You may not copy, modify, distribute, or create derivative works
-          except as permitted by law or with our written permission.
-        </p>
-      </section>
-
-      <section id="disclaimer">
-        <h2 className="scroll-mt-24">Disclaimer of warranties</h2>
-        <p>
-          The Site is provided on an &quot;AS IS&quot; and &quot;AS AVAILABLE&quot;
-          basis. To the maximum extent permitted by law, we disclaim all
-          warranties of any kind, whether express or implied, including
-          warranties of merchantability, fitness for a particular purpose, and
-          non-infringement.
+          All content on this website including text, graphics, logos, and
+          design belongs to <strong>{business.legalName}</strong> and is
+          protected by intellectual property laws. Unauthorized reproduction or
+          distribution is prohibited.
         </p>
       </section>
 
       <section id="liability">
-        <h2 className="scroll-mt-24">Limitation of liability</h2>
+        <h2 className="scroll-mt-24">6. Limitation of Liability</h2>
         <p>
-          To the maximum extent permitted by law, MI MedCare and its affiliates,
-          officers, employees, and agents will not be liable for indirect,
-          incidental, consequential, special, or punitive damages, or any loss
-          of profits or revenues, arising out of or related to your use of the
-          Site.
-        </p>
-      </section>
-
-      <section id="privacy">
-        <h2 className="scroll-mt-24">Privacy</h2>
-        <p>
-          Our Privacy Policy explains how we handle personal information. By
-          using the Site, you consent to our data practices as described in the
-          Privacy Policy.
+          <strong>{business.legalName}</strong> is not responsible for damages
+          resulting from the use or inability to use this website.
         </p>
       </section>
 
       <section id="changes">
-        <h2 className="scroll-mt-24">Changes</h2>
+        <h2 className="scroll-mt-24">7. Modifications</h2>
         <p>
-          We may update these Terms from time to time. Changes will be posted on
-          this page with an updated effective date.
+          We reserve the right to update these Terms at any time. Updated
+          versions will be posted on this page.
+        </p>
+      </section>
+
+      <section id="law">
+        <h2 className="scroll-mt-24">8. Governing Law</h2>
+        <p>
+          These Terms shall be governed by the laws of the United States.
         </p>
       </section>
 
       <section id="contact">
-        <h2 className="scroll-mt-24">Contact</h2>
+        <h2 className="scroll-mt-24">9. Contact Information</h2>
         <p>
-          Questions about these Terms? Contact us at{" "}
+          <strong>{business.legalName}</strong>
+          <br />
+          Email:{" "}
           <a href={`mailto:${business.contact.email}`}>
             {business.contact.email}
           </a>
-          .
         </p>
       </section>
     </>

@@ -9,6 +9,7 @@ import { AssociationSection } from "@/components/sections/association-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import {
+  BOOKING_LINK,
   business,
   BILLING_PROCESS,
   FAQS,
@@ -182,7 +183,9 @@ export default function AboutPage() {
                   patient volumes.
                 </p>
                 <Link
-                  href="/contact"
+                  href={BOOKING_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-sm font-medium text-primary underline"
                 >
                   Schedule a consultation
@@ -363,6 +366,10 @@ export default function AboutPage() {
     </>
   );
 }
+
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import {
@@ -13,9 +13,8 @@ import {
 } from "@workspace/ui/components/navigation-menu";
 import { Button } from "@workspace/ui/components/button";
 import { MobileNav } from "./mobile-nav";
-import { business, HEADER_NAVIGATION } from "@/lib/constants";
+import { BOOKING_LINK, business, HEADER_NAVIGATION } from "@/lib/constants";
 import { MegaMenu } from "./mega-menu";
-import { ConsultationForm } from "@/components/forms/consultation-form";
 import { FloatingCtas } from "@/components/layout/floating-ctas";
 import { formatBusinessAddress } from "@/lib/utils";
 import { Logo } from "./logo";
@@ -73,7 +72,6 @@ const iconHoverVariants = {
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
 
   // Use Motion's useScroll for better performance
   const { scrollY } = useScroll();
@@ -89,15 +87,6 @@ export function Header() {
     const threshold = 20;
     setIsScrolled(latest > threshold);
   });
-
-  // Memoize callbacks
-  const handleConsultationOpen = useCallback(() => {
-    setIsConsultationOpen(true);
-  }, []);
-
-  const handleConsultationClose = useCallback(() => {
-    setIsConsultationOpen(false);
-  }, []);
 
   return (
     <>
@@ -282,25 +271,22 @@ export function Header() {
                   size="lg"
                   className="rounded-xl"
                   pulseDelay={5000}
-                  onClick={handleConsultationOpen}
+                  href={BOOKING_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Book Consultation
+                  Schedule a Call
                 </Button>
               </motion.div>
             </motion.div>
 
             {/* Mobile */}
-            <MobileNav onBookConsultation={handleConsultationOpen} />
+            <MobileNav />
           </motion.div>
         </div>
       </header>
 
-      <FloatingCtas onBookConsultation={handleConsultationOpen} />
-
-      <ConsultationForm
-        open={isConsultationOpen}
-        onOpenChange={handleConsultationClose}
-      />
+      <FloatingCtas />
     </>
   );
 }

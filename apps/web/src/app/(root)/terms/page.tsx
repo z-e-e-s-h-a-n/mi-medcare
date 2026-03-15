@@ -16,17 +16,14 @@ export default function TermsPage() {
       description="Terms governing use of the MI MedCare website."
       imageUrl="https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=1920"
       toc={[
-        { id: "intro", label: "Overview" },
-        { id: "who", label: "Who we are" },
-        { id: "use", label: "Use of site" },
-        { id: "info", label: "Informational content" },
-        { id: "submissions", label: "Submissions" },
-        { id: "third-party", label: "Third-party links" },
+        { id: "intro", label: "Agreement" },
+        { id: "services", label: "Services" },
+        { id: "sms", label: "SMS program" },
+        { id: "responsibilities", label: "Responsibilities" },
         { id: "ip", label: "Intellectual property" },
-        { id: "disclaimer", label: "Disclaimer" },
         { id: "liability", label: "Liability" },
-        { id: "privacy", label: "Privacy" },
-        { id: "changes", label: "Changes" },
+        { id: "changes", label: "Modifications" },
+        { id: "law", label: "Governing law" },
         { id: "contact", label: "Contact" },
       ]}
     >

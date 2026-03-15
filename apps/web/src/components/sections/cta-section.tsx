@@ -10,7 +10,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
-import { business } from "@/lib/constants";
+import { BOOKING_LINK, business } from "@/lib/constants";
 import { NewsletterCtaForm } from "@/components/forms/newsletter-form";
 
 export function CTASection() {
@@ -123,7 +123,9 @@ export function CTASection() {
                   size="lg"
                   variant="outline"
                   className="bg-transparent text-white border-white hover:bg-white/10 text-base px-8 w-full sm:w-auto"
-                  href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
+                  href={BOOKING_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Phone className="mr-2 h-4 w-4" />
                   Schedule a Call
