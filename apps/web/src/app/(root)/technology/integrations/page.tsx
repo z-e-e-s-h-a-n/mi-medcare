@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
-import { EHR_SYSTEMS } from "@/lib/constants";
+import { EHRSection } from "@/components/sections/ehr-section";
+import { FAQSection } from "@/components/sections/faq-section";
+import { MetricsSection } from "@/components/sections/metrics-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
+import { EHR_SYSTEMS, FAQS } from "@/lib/constants";
 import { TECHNOLOGY_PILLARS } from "../data";
 
 export const metadata: Metadata = {
@@ -30,9 +35,12 @@ export default function IntegrationsPage() {
         imageUrl="https://images.pexels.com/photos/36252713/pexels-photo-36252713.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
+      <MetricsSection />
+
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
+            badge="Integrations"
             title="Connect to any system"
             description={pillar.description}
           />
@@ -47,9 +55,7 @@ export default function IntegrationsPage() {
                 management platforms, including Epic, Cerner, Athenahealth,
                 Allscripts, and niche specialty tools.
               </p>
-              <p className="mt-4 text-sm text-muted-foreground">
-                {pillar.hero}
-              </p>
+              <p className="mt-4 text-sm text-muted-foreground">{pillar.hero}</p>
             </article>
 
             <article className="rounded-2xl border border-border bg-background/50 p-6">
@@ -69,12 +75,14 @@ export default function IntegrationsPage() {
         </div>
       </section>
 
+      <EHRSection limit={12} className="bg-muted" />
+
       <section className="section-wrapper pt-0">
         <div className="section-container">
           <SectionHeader
+            badge="Sync"
             title="What we sync"
             description="Bi-directional feeds keep payers, patient accounts, and charges aligned without re-keying."
-        imageUrl="https://images.pexels.com/photos/36252713/pexels-photo-36252713.jpeg?auto=compress&cs=tinysrgb&w=1920"
           />
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -89,18 +97,16 @@ export default function IntegrationsPage() {
           </div>
 
           <div className="mt-6 text-sm text-muted-foreground">
-            <Link
-              href="/technology"
-              className="font-medium text-primary underline"
-            >
+            <Link href="/technology" className="font-medium text-primary underline">
               Back to the technology overview
             </Link>
           </div>
         </div>
       </section>
+
+      <TestimonialsSection className="bg-background" />
+
+      <FAQSection faqs={FAQS.slice(0, 6)} className="bg-muted" />
     </>
   );
 }
-
-
-

@@ -1080,6 +1080,7 @@ export const HEADER_NAVIGATION: NavItem[] = [
 
   {
     title: "Technology",
+    href: "/technology",
     children: [
       {
         title: "AI Automation",

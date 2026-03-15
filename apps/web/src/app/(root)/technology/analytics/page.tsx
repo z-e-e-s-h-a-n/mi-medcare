@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
-import { KPI_HIGHLIGHTS } from "@/lib/constants";
+import { FAQSection } from "@/components/sections/faq-section";
+import { MetricsSection } from "@/components/sections/metrics-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
+import { FAQS, KPI_HIGHLIGHTS } from "@/lib/constants";
 import { TECHNOLOGY_PILLARS } from "../data";
 
 export const metadata: Metadata = {
@@ -34,9 +38,12 @@ export default function AnalyticsPage() {
         imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
+      <MetricsSection />
+
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
+            badge="Analytics"
             title="Data that drives smarter decisions"
             description={pillar.description}
           />
@@ -79,7 +86,11 @@ export default function AnalyticsPage() {
 
       <section className="section-wrapper pt-0">
         <div className="section-container">
-          <SectionHeader title="How it all connects" description={pillar.hero} />
+          <SectionHeader
+            badge="Visibility"
+            title="How it all connects"
+            description={pillar.hero}
+          />
           <div className="grid gap-6 md:grid-cols-2">
             {pillar.highlights.map((highlight) => (
               <article
@@ -91,18 +102,16 @@ export default function AnalyticsPage() {
             ))}
           </div>
           <div className="mt-6 text-sm text-muted-foreground">
-            <Link
-              href="/technology"
-              className="font-medium text-primary underline"
-            >
+            <Link href="/technology" className="font-medium text-primary underline">
               Back to the technology overview
             </Link>
           </div>
         </div>
       </section>
+
+      <TestimonialsSection className="bg-muted" />
+
+      <FAQSection faqs={FAQS.slice(0, 6)} className="bg-background" />
     </>
   );
 }
-
-
-

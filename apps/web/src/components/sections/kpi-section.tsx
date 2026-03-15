@@ -1,3 +1,4 @@
+"use client";
 import { KPI_HIGHLIGHTS } from "@/lib/constants";
 import { motion } from "motion/react";
 import { gradientClass } from "@/lib/utils";

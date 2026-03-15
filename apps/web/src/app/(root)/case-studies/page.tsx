@@ -6,8 +6,16 @@ import {
   CalendarClock,
   Stethoscope,
 } from "lucide-react";
+
 import { PageHeader } from "@/components/layout/page-header";
-import { CASE_STUDIES } from "@/lib/constants";
+import { SectionHeader } from "@/components/layout/section-header";
+import { BlogSection } from "@/components/sections/blog-section";
+import { FAQSection } from "@/components/sections/faq-section";
+import { MetricsSection } from "@/components/sections/metrics-section";
+import { ServicesSection } from "@/components/sections/services-section";
+import { SuccessMetrics } from "@/components/sections/stats-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
+import { CASE_STUDIES, FAQS } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Healthcare Billing Case Studies",
@@ -25,8 +33,16 @@ export default function CaseStudiesPage() {
         imageUrl="https://images.pexels.com/photos/7793162/pexels-photo-7793162.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
+      <MetricsSection />
+
       <section className="section-wrapper">
         <div className="section-container">
+          <SectionHeader
+            badge="Results"
+            title="Proof from real practices"
+            description="Each case study highlights what changed, how long it took, and the measurable billing outcomes we delivered."
+          />
+
           <div className="grid gap-6 md:grid-cols-2">
             {CASE_STUDIES.map((study) => (
               <article
@@ -65,9 +81,16 @@ export default function CaseStudiesPage() {
           </div>
         </div>
       </section>
+
+      <SuccessMetrics className="bg-muted" />
+
+      <ServicesSection limit={6} className="bg-background" />
+
+      <TestimonialsSection className="bg-muted" />
+
+      <BlogSection />
+
+      <FAQSection faqs={FAQS.slice(0, 6)} className="bg-muted" />
     </>
   );
 }
-
-
-

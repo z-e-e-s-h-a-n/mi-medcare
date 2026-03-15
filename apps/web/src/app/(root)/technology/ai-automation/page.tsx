@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
+import { FAQSection } from "@/components/sections/faq-section";
+import { KpiSection } from "@/components/sections/kpi-section";
+import { MetricsSection } from "@/components/sections/metrics-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
+import { FAQS } from "@/lib/constants";
 import { TECHNOLOGY_PILLARS } from "../data";
 
 export const metadata: Metadata = {
@@ -29,9 +35,12 @@ export default function AiAutomationPage() {
         imageUrl="https://images.pexels.com/photos/30547581/pexels-photo-30547581.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
+      <MetricsSection />
+
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
+            badge="Automation"
             title="Automating accuracy and speed"
             description={pillar.description}
           />
@@ -72,19 +81,29 @@ export default function AiAutomationPage() {
             </article>
           </div>
 
+          <div className="mt-10 rounded-2xl border border-border bg-muted/30 p-6">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">
+              Outcomes you can track
+            </p>
+            <p className="mt-2 text-lg font-semibold">
+              KPIs that improve when automation does the heavy lifting.
+            </p>
+            <div className="mt-6">
+              <KpiSection useConstantColors />
+            </div>
+          </div>
+
           <div className="mt-6 text-sm text-muted-foreground">
-            <Link
-              href="/technology"
-              className="font-medium text-primary underline"
-            >
+            <Link href="/technology" className="font-medium text-primary underline">
               Back to the technology overview
             </Link>
           </div>
         </div>
       </section>
+
+      <TestimonialsSection className="bg-muted" />
+
+      <FAQSection faqs={FAQS.slice(0, 6)} className="bg-background" />
     </>
   );
 }
-
-
-

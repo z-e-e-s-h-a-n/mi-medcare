@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
+import { EHRSection } from "@/components/sections/ehr-section";
+import { FAQSection } from "@/components/sections/faq-section";
+import { FeaturesSection } from "@/components/sections/features-section";
+import { MetricsSection } from "@/components/sections/metrics-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
+import { FAQS } from "@/lib/constants";
 import { TECHNOLOGY_PILLARS } from "./data";
 
 export const metadata: Metadata = {
@@ -20,13 +27,14 @@ export default function TechnologyPage() {
         imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
+      <MetricsSection />
+
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
             badge="Overview"
             title="Three pillars of our revenue operations stack"
-            description="Each pillar is built to support the human teams that keep your revenue cycle healthy."
-        imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
+            description="Each pillar is designed to keep your team proactive: prevent denials, speed up collections, and reduce manual work."
           />
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -44,9 +52,7 @@ export default function TechnologyPage() {
                   {pillar.title}
                 </h3>
 
-                <p className="text-sm text-muted-foreground">
-                  {pillar.description}
-                </p>
+                <p className="text-sm text-muted-foreground">{pillar.description}</p>
 
                 <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                   {pillar.highlights.map((highlight) => (
@@ -66,31 +72,13 @@ export default function TechnologyPage() {
         </div>
       </section>
 
-      <section className="section-wrapper pt-0">
-        <div className="section-container">
-          <SectionHeader
-            badge="Workflow"
-            title="How our technology stack works together"
-            description="Automation, reporting, and integrations form a feedback loop that keeps your team proactive instead of reactive."
-        imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
-          />
+      <FeaturesSection useConstantColors className="bg-muted" />
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {TECHNOLOGY_PILLARS.map((pillar) => (
-              <article
-                key={pillar.id}
-                className="rounded-2xl border border-border bg-background/60 p-6"
-              >
-                <h3 className="text-xl font-semibold mb-3">{pillar.title}</h3>
-                <p className="text-sm text-muted-foreground">{pillar.hero}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <EHRSection limit={10} className="bg-background" />
+
+      <TestimonialsSection className="bg-muted" />
+
+      <FAQSection faqs={FAQS.slice(0, 6)} className="bg-background" />
     </>
   );
 }
-
-
-

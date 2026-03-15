@@ -1,4 +1,3 @@
-// components/ui/section-header.tsx
 "use client";
 
 import { cn } from "@workspace/ui/lib/utils";
