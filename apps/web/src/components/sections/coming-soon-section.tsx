@@ -19,7 +19,7 @@ export interface ComingSoonSectionProps {
 
 const ORB_TRANSITION = {
   duration: 10,
-  repeat: Infinity as const,
+  repeat: Infinity,
   ease: "easeInOut" as const,
 };
 
@@ -31,7 +31,9 @@ export function ComingSoonSection({
   className,
 }: ComingSoonSectionProps) {
   return (
-    <section className={cn("section-wrapper relative overflow-hidden", className)}>
+    <section
+      className={cn("section-wrapper relative overflow-hidden", className)}
+    >
       {/* background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-linear-to-b from-background via-muted/40 to-background" />
@@ -63,7 +65,12 @@ export function ComingSoonSection({
                 Contact us
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button href={backHref} size="lg" variant="outline" className="group">
+              <Button
+                href={backHref}
+                size="lg"
+                variant="outline"
+                className="group"
+              >
                 Back to home
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
@@ -71,18 +78,19 @@ export function ComingSoonSection({
 
             <div className="mt-8 flex flex-col gap-3 text-sm text-muted-foreground">
               <Link
-                href={`mailto:${business.email}`}
+                href={`mailto:${business.contact.email}`}
                 className="inline-flex items-center gap-2 hover:text-foreground transition-colors"
               >
                 <Mail className="h-4 w-4 text-primary" />
-                {business.email}
+                {business.contact.email}
               </Link>
               <Link
-                href={`tel:${business.phone}`}
+                href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
                 className="inline-flex items-center gap-2 hover:text-foreground transition-colors"
               >
                 <Phone className="h-4 w-4 text-primary" />
-                {business.phone}
+                {business.contact.phones?.[0]?.display ??
+                  business.contact.phones[0].display}
               </Link>
             </div>
           </div>
@@ -127,9 +135,21 @@ export function ComingSoonSection({
               >
                 <defs>
                   <linearGradient id="cs-grad" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="rgb(59,130,246)" stopOpacity="0.9" />
-                    <stop offset="60%" stopColor="rgb(99,102,241)" stopOpacity="0.9" />
-                    <stop offset="100%" stopColor="rgb(236,72,153)" stopOpacity="0.9" />
+                    <stop
+                      offset="0%"
+                      stopColor="rgb(59,130,246)"
+                      stopOpacity="0.9"
+                    />
+                    <stop
+                      offset="60%"
+                      stopColor="rgb(99,102,241)"
+                      stopOpacity="0.9"
+                    />
+                    <stop
+                      offset="100%"
+                      stopColor="rgb(236,72,153)"
+                      stopOpacity="0.9"
+                    />
                   </linearGradient>
                 </defs>
 
@@ -160,7 +180,9 @@ export function ComingSoonSection({
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 {["Design", "Content", "Launch"].map((step, idx) => (
                   <div key={step} className="rounded-xl bg-background/60 p-4">
-                    <p className="text-xs text-muted-foreground">Step {idx + 1}</p>
+                    <p className="text-xs text-muted-foreground">
+                      Step {idx + 1}
+                    </p>
                     <p className="mt-1 font-semibold">{step}</p>
                   </div>
                 ))}

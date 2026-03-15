@@ -8,7 +8,7 @@ type WhatsAppFabProps = {
 };
 
 export function WhatsAppFab({ className }: WhatsAppFabProps) {
-  const href = `https://wa.me/${business.whatsapp}`;
+  const href = `https://wa.me/${business.contact.whatsapp.tel.replace(/\D/g, "")}`;
 
   return (
     <Button
@@ -28,3 +28,4 @@ export function WhatsAppFab({ className }: WhatsAppFabProps) {
     </Button>
   );
 }
+

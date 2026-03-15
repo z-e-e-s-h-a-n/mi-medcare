@@ -74,6 +74,7 @@ import {
 export const business = {
   name: "MI MedCare",
   legalName: "MI MedCare LLC",
+
   description:
     "Nationwide medical billing backed by local expertise. Redefining what it means to be a medical billing company in the U.S.",
 
@@ -95,23 +96,39 @@ export const business = {
     altText: "FavIcon",
   },
 
-  email: "info@mimedcarellc.com",
-  phone: "+1 (279) 242-2227",
-  whatsapp: "+1 (916) 909-6564",
-  voiceNumbers: [
-    { display: "(279) 207-3379", tel: "+12792073379" },
-    { display: "(279) 207-3380", tel: "+12792073380" },
-  ],
-  virtualFaxNumbers: [
-    { display: "(279) 217-5098", tel: "+12792175098" },
-    { display: "(279) 217-5099", tel: "+12792175099" },
-  ],
   website: "",
 
-  facebook: "https://www.facebook.com/mimedcarellc",
-  instagram: "https://www.instagram.com/mimedcarellc/",
-  twitter: "https://x.com/mimedcarellc",
-  linkedin: "https://www.linkedin.com/company/mi-medcare-llc/",
+  contact: {
+    email: "info@mimedcarellc.com",
+
+    whatsapp: {
+      display: "(916) 909-6564",
+      tel: "+19169096564",
+    },
+
+    phones: [
+      { display: "(279) 207-3379", tel: "+12792073379" },
+      { display: "(279) 207-3380", tel: "+12792073380" },
+    ],
+
+    fax: [
+      { display: "(279) 217-5098", tel: "+12792175098" },
+      { display: "(279) 217-5099", tel: "+12792175099" },
+    ],
+  },
+
+  hours: {
+    label: "Business Hours",
+    days: "Mon – Fri",
+    time: "9:00 AM – 6:00 PM PST",
+  },
+
+  social: {
+    facebook: "https://www.facebook.com/mimedcarellc",
+    instagram: "https://www.instagram.com/mimedcarellc/",
+    twitter: "https://x.com/mimedcarellc",
+    linkedin: "https://www.linkedin.com/company/mi-medcare-llc/",
+  },
 
   addresses: [
     {
@@ -133,11 +150,12 @@ export const business = {
   ],
 
   metaTitle: "Medical Billing Services in USA",
+
   metaDescription:
     "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care.",
 };
 
-export const IN_ASSOCIATION_WITH = [
+export const ASSOCIATIONS = [
   { src: "/images/association/association-1.png", alt: "Association 1" },
   { src: "/images/association/association-2.png", alt: "Association 2" },
   { src: "/images/association/association-3.png", alt: "Association 3" },

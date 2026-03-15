@@ -31,22 +31,22 @@ import {
 // Memoized social links configuration
 const SOCIAL_LINKS = [
   {
-    href: business.facebook,
+    href: business.social.facebook,
     Icon: FacebookIcon,
     name: "Facebook",
   },
   {
-    href: business.twitter,
+    href: business.social.twitter,
     Icon: XIcon,
     name: "X",
   },
   {
-    href: business.instagram,
+    href: business.social.instagram,
     Icon: InstagramIcon,
     name: "Instagram",
   },
   {
-    href: business.linkedin,
+    href: business.social.linkedin,
     Icon: LinkedInIcon,
     name: "LinkedIn",
   },
@@ -137,7 +137,7 @@ export function Header() {
                 transition={hoverVariants.spring as any}
               >
                 <Link
-                  href={`mailto:${business.email}`}
+                  href={`mailto:${business.contact.email}`}
                   className="flex items-center gap-2"
                   prefetch={false}
                 >
@@ -149,7 +149,7 @@ export function Header() {
                   >
                     <Mail />
                   </motion.div>
-                  <span>{business.email}</span>
+                  <span>{business.contact.email}</span>
                 </Link>
               </motion.div>
             </div>
@@ -161,7 +161,7 @@ export function Header() {
                 transition={hoverVariants.spring as any}
               >
                 <Link
-                  href={`tel:${business.phone}`}
+                  href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
                   className="flex items-center gap-2"
                   prefetch={false}
                 >
@@ -173,7 +173,7 @@ export function Header() {
                   >
                     <Phone />
                   </motion.div>
-                  <span>{business.phone}</span>
+                  <span>{business.contact.phones?.[0]?.display ?? business.contact.phones[0].display}</span>
                 </Link>
               </motion.div>
 
@@ -304,3 +304,5 @@ export function Header() {
     </>
   );
 }
+
+

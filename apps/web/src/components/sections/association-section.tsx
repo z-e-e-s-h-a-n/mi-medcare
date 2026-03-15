@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { IN_ASSOCIATION_WITH } from "@/lib/constants";
+import { ASSOCIATIONS } from "@/lib/constants";
 import { cn } from "@workspace/ui/lib/utils";
 
 interface AssociationSectionProps {
@@ -33,7 +33,7 @@ export function AssociationSection({
         </motion.div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
-          {IN_ASSOCIATION_WITH.map((item, index) => (
+          {ASSOCIATIONS.map((item, index) => (
             <motion.div
               key={item.src}
               initial={{ opacity: 0, y: 12 }}

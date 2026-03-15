@@ -80,22 +80,22 @@ export function Footer() {
               {[
                 {
                   Icon: FacebookIcon,
-                  href: business.facebook,
+                  href: business.social.facebook,
                   label: "Facebook",
                 },
                 {
                   Icon: XIcon,
-                  href: business.twitter,
+                  href: business.social.twitter,
                   label: "X",
                 },
                 {
                   Icon: InstagramIcon,
-                  href: business.instagram,
+                  href: business.social.instagram,
                   label: "Instagram",
                 },
                 {
                   Icon: LinkedInIcon,
-                  href: business.linkedin,
+                  href: business.social.linkedin,
                   label: "LinkedIn",
                 },
               ].map(({ Icon, href, label }) => (
@@ -127,3 +127,4 @@ export function Footer() {
     </footer>
   );
 }
+

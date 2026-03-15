@@ -36,7 +36,6 @@ export function MobileNav({ onBookConsultation }: MobileNavProps) {
   };
 
   const headOfficeAddress = business.addresses?.[0];
-  const branchAddresses = business.addresses?.slice(1) ?? [];
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -56,49 +55,31 @@ export function MobileNav({ onBookConsultation }: MobileNavProps) {
           <div className="space-y-3">
             <motion.a
               whileHover={{ x: 5 }}
-              href={`tel:${business.phone}`}
+              href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
               className="flex items-center gap-2 text-sm hover:text-primary"
             >
               <Phone className="h-4 w-4 text-primary" />
-              {business.phone}
+              {business.contact.phones?.[0]?.display ??
+                business.contact.phones[0].display}
             </motion.a>
             <motion.a
               whileHover={{ x: 5 }}
-              href={`mailto:${business.email}`}
+              href={`mailto:${business.contact.email}`}
               className="flex items-center gap-2 text-sm hover:text-primary"
             >
               <Mail className="h-4 w-4 text-primary" />
-              {business.email}
+              {business.contact.email}
             </motion.a>
             <motion.div
               whileHover={{ x: 5 }}
               className="flex items-start gap-2 text-sm"
             >
               <MapPin className="h-4 w-4 text-primary" />
-              <div className="text-muted-foreground text-sm">
-                {headOfficeAddress ? (
-                  <>
-                    <span className="font-semibold text-foreground">
-                      {headOfficeAddress.label ?? "Head Office"}:
-                    </span>{" "}
-                    {formatBusinessAddress(headOfficeAddress)}
-                  </>
-                ) : (
-                  "Multiple Locations"
-                )}
-                {branchAddresses.length > 0 ? (
-                  <div className="mt-1 space-y-1 text-xs">
-                    <span className="block font-semibold text-foreground">
-                      Branches
-                    </span>
-                    {branchAddresses.map((address) => (
-                      <span key={address.line1} className="block">
-                        {address.label ? `${address.label}: ` : ""}
-                        {formatBusinessAddress(address)}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
+              <div className="text-muted-foreground text-sm flex flex-col">
+                <span className="font-semibold text-foreground">
+                  {headOfficeAddress.label}:
+                </span>{" "}
+                {formatBusinessAddress(headOfficeAddress)}
               </div>
             </motion.div>
           </div>

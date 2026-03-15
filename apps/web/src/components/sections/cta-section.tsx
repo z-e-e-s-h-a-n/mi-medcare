@@ -123,7 +123,7 @@ export function CTASection() {
                   size="lg"
                   variant="outline"
                   className="bg-transparent text-white border-white hover:bg-white/10 text-base px-8 w-full sm:w-auto"
-                  href={`tel:${business.phone}`}
+                  href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
                 >
                   <Phone className="mr-2 h-4 w-4" />
                   Schedule a Call
@@ -138,19 +138,19 @@ export function CTASection() {
                 className="mt-6 flex flex-wrap items-center gap-6 text-sm text-white/80"
               >
                 <Link
-                  href={`mailto:${business.email}`}
+                  href={`mailto:${business.contact.email}`}
                   className="flex items-center gap-2 hover:text-white transition-colors"
                 >
                   <Mail className="h-4 w-4 shrink-0" />
-                  <span className="truncate">{business.email}</span>
+                  <span className="truncate">{business.contact.email}</span>
                 </Link>
                 <span className="hidden sm:inline text-white/40">•</span>
                 <Link
-                  href={`tel:${business.phone}`}
+                  href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
                   className="flex items-center gap-2 hover:text-white transition-colors"
                 >
                   <Phone className="h-4 w-4 shrink-0" />
-                  <span>{business.phone}</span>
+                  <span>{business.contact.phones?.[0]?.display ?? business.contact.phones[0].display}</span>
                 </Link>
               </motion.div>
             </div>
@@ -170,3 +170,4 @@ export function CTASection() {
     </section>
   );
 }
+

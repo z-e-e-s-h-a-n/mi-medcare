@@ -59,33 +59,21 @@ const addressCard = {
   ),
 };
 
-const callCard = {
+const phonesCard = {
   icon: Phone,
-  title: "Call Us",
-  content: business.phone,
-  subtitle: "Mon-Fri 9am-6pm PST",
-  href: `tel:${business.phone}`,
-  action: "Call Now",
+  title: "Phones",
+  content: `${business.hours.days} ${business.hours.time}`,
   gradient: "from-blue-500 to-cyan-500",
-  iconColor: "text-white",
-};
-
-const voiceNumbersCard = {
-  icon: Phone,
-  title: "Voice Number",
-  content: "Direct voice lines",
-  subtitle: "Available during business hours",
-  gradient: "from-sky-500 to-blue-500",
   iconColor: "text-white",
   extra: (
     <div className="mt-3 space-y-2">
-      {business.voiceNumbers.map((n) => (
+      {business.contact.phones.map((n) => (
         <a
           key={n.tel}
           href={`tel:${n.tel}`}
           className={cn(
             "block text-sm font-semibold hover:underline",
-            gradientClass("from-sky-500 to-blue-500", { type: "text" }),
+            gradientClass("from-blue-500 to-cyan-500", { type: "text" }),
           )}
         >
           {n.display}
@@ -94,17 +82,15 @@ const voiceNumbersCard = {
     </div>
   ),
 };
-
-const virtualFaxNumbersCard = {
+const faxCard = {
   icon: Printer,
-  title: "Virtual Fax Number",
-  content: "Send documents securely",
-  subtitle: "Virtual fax lines",
+  title: "Fax",
+  content: "Virtual fax numbers",
   gradient: "from-slate-600 to-slate-500",
   iconColor: "text-white",
   extra: (
     <div className="mt-3 space-y-2">
-      {business.virtualFaxNumbers.map((n) => (
+      {business.contact.fax.map((n) => (
         <a
           key={n.tel}
           href={`tel:${n.tel}`}
@@ -119,35 +105,32 @@ const virtualFaxNumbersCard = {
     </div>
   ),
 };
-
 const whatsappCard = {
   icon: WhatsAppIcon,
   title: "WhatsApp",
-  content: business.whatsapp,
+  content: business.contact.whatsapp.display,
   subtitle: "Quick replies via chat",
-  href: `https://wa.me/${business.whatsapp}`,
+  href: `https://wa.me/${business.contact.whatsapp.tel.replace("+", "")}`,
   action: "Send Message",
   gradient: "from-emerald-500 to-green-500",
   iconColor: "text-white",
-  external: true, // Mark as external link
+  external: true,
 };
-
 const emailCard = {
   icon: Mail,
   title: "Email Us",
-  content: business.email,
+  content: business.contact.email,
   subtitle: "24/7 Support Available",
-  href: `mailto:${business.email}`,
+  href: `mailto:${business.contact.email}`,
   action: "Send Email",
   gradient: "from-purple-500 to-indigo-500",
   iconColor: "text-white",
 };
-
 const hoursCard = {
   icon: Clock,
-  title: "Business Hours",
-  content: "Monday - Friday",
-  subtitle: "9:00 AM - 6:00 PM PST",
+  title: business.hours.label,
+  content: business.hours.days,
+  subtitle: business.hours.time,
   gradient: "from-orange-500 to-amber-500",
   iconColor: "text-white",
   extra: (
@@ -156,37 +139,35 @@ const hoursCard = {
     </div>
   ),
 };
-
 // Social Links
 const socialLinks = [
   {
     icon: FacebookIcon,
-    href: business.facebook,
+    href: business.social.facebook,
     label: "Facebook",
   },
   {
     icon: XIcon,
-    href: business.twitter,
+    href: business.social.twitter,
     label: "X",
     iconClassName: "dark:text-white",
   },
   {
     icon: InstagramIcon,
-    href: business.instagram,
+    href: business.social.instagram,
     label: "Instagram",
   },
   {
     icon: LinkedInIcon,
-    href: business.linkedin,
+    href: business.social.linkedin,
     label: "LinkedIn",
   },
   {
     icon: WhatsAppIcon,
-    href: `https://wa.me/${business.whatsapp}`,
+    href: `https://wa.me/${business.contact.whatsapp.tel.replace("+", "")}`,
     label: "WhatsApp",
   },
 ];
-
 export function _ContactPage() {
   const cardVariants = {
     rest: { y: 0 },
@@ -367,8 +348,7 @@ export function _ContactPage() {
   return (
     <>
       <PageHeader
-        title="Let's Talk About Your
- Revenue Cycle"
+        title="Let's Talk About Your Revenue Cycle"
         description="Whether you're ready to get started or just exploring options, our team is here to help you optimize your medical billing."
         badge="Get in Touch"
         imageUrl="https://images.pexels.com/photos/7195379/pexels-photo-7195379.jpeg?auto=compress&cs=tinysrgb&w=1920"
@@ -382,24 +362,20 @@ export function _ContactPage() {
             title="Reach Us Your Way"
             description="Choose the fastest option to connect with our team — call, WhatsApp, email, or send a message."
           />
+
           <div className="space-y-6">
-            {/* Address Card - Full Width */}
-            <div className="grid grid-cols-1">
+            {/* Locations + Hours */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {renderContactCard(addressCard, 0)}
+              {renderContactCard(hoursCard, 1, 0.05)}
             </div>
 
-            {/* Call, WhatsApp, Email, Hours Cards - 4 Columns */}
+            {/* Phones, WhatsApp, Email, Fax */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {renderContactCard(callCard, 1, 0.1)}
-              {renderContactCard(whatsappCard, 2, 0.15)}
-              {renderContactCard(emailCard, 3, 0.2)}
-              {renderContactCard(hoursCard, 4, 0.25)}
-            </div>
-
-            {/* Voice & Virtual Fax Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {renderContactCard(voiceNumbersCard, 5, 0.3)}
-              {renderContactCard(virtualFaxNumbersCard, 6, 0.35)}
+              {renderContactCard(phonesCard, 2, 0.1)}
+              {renderContactCard(whatsappCard, 3, 0.15)}
+              {renderContactCard(emailCard, 4, 0.2)}
+              {renderContactCard(faxCard, 5, 0.25)}
             </div>
           </div>
         </div>

@@ -326,9 +326,9 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
                     variant="outline"
                     className="justify-start gap-2"
                   >
-                    <a href={`tel:${business.phone}`}>
+                    <a href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}>
                       <Phone className="h-4 w-4" />
-                      Call: {business.phone}
+                      Call: {business.contact.phones?.[0]?.display ?? business.contact.phones[0].display}
                     </a>
                   </Button>
 
@@ -337,9 +337,9 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
                     variant="outline"
                     className="justify-start gap-2"
                   >
-                    <a href={`mailto:${business.email}`}>
+                    <a href={`mailto:${business.contact.email}`}>
                       <Mail className="h-4 w-4" />
-                      Email: {business.email}
+                      Email: {business.contact.email}
                     </a>
                   </Button>
                 </div>
@@ -458,3 +458,4 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
     </>
   );
 }
+
