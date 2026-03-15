@@ -4,12 +4,15 @@
 import { motion } from "motion/react";
 import { easeOut } from "motion";
 import Link from "next/link";
-import { ArrowRight, Phone, Mail, MapPin, Clock } from "lucide-react";
+import { ArrowRight, Phone, Mail, MapPin, Clock, Printer } from "lucide-react";
 import { business } from "@/lib/constants";
 import { FAQSection } from "@/components/sections/faq-section";
 import { PageHeader } from "@/components/layout/page-header";
 import { ContactForm } from "@/components/forms/contact-form";
-import { formatBusinessAddress } from "@/lib/utils";
+import Image from "next/image";
+import { SectionHeader } from "@/components/layout/section-header";
+import { cn } from "@workspace/ui/lib/utils";
+import { formatBusinessAddress, gradientClass } from "@/lib/utils";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -26,6 +29,8 @@ const addressCard = {
   icon: MapPin,
   title: "Our Locations",
   content: "Multiple Offices to Serve You",
+  gradient: "from-rose-500 to-pink-500",
+  iconColor: "text-white",
   extra: (
     <div className="space-y-3 mt-3">
       {headOfficeAddress && (
@@ -61,6 +66,58 @@ const callCard = {
   subtitle: "Mon-Fri 9am-6pm PST",
   href: `tel:${business.phone}`,
   action: "Call Now",
+  gradient: "from-blue-500 to-cyan-500",
+  iconColor: "text-white",
+};
+
+const voiceNumbersCard = {
+  icon: Phone,
+  title: "Voice Number",
+  content: "Direct voice lines",
+  subtitle: "Available during business hours",
+  gradient: "from-sky-500 to-blue-500",
+  iconColor: "text-white",
+  extra: (
+    <div className="mt-3 space-y-2">
+      {business.voiceNumbers.map((n) => (
+        <a
+          key={n.tel}
+          href={`tel:${n.tel}`}
+          className={cn(
+            "block text-sm font-semibold hover:underline",
+            gradientClass("from-sky-500 to-blue-500", { type: "text" }),
+          )}
+        >
+          {n.display}
+        </a>
+      ))}
+    </div>
+  ),
+};
+
+const virtualFaxNumbersCard = {
+  icon: Printer,
+  title: "Virtual Fax Number",
+  content: "Send documents securely",
+  subtitle: "Virtual fax lines",
+  gradient: "from-slate-600 to-slate-500",
+  iconColor: "text-white",
+  extra: (
+    <div className="mt-3 space-y-2">
+      {business.virtualFaxNumbers.map((n) => (
+        <a
+          key={n.tel}
+          href={`tel:${n.tel}`}
+          className={cn(
+            "block text-sm font-semibold hover:underline",
+            gradientClass("from-slate-600 to-slate-500", { type: "text" }),
+          )}
+        >
+          {n.display}
+        </a>
+      ))}
+    </div>
+  ),
 };
 
 const whatsappCard = {
@@ -70,7 +127,8 @@ const whatsappCard = {
   subtitle: "Quick replies via chat",
   href: `https://wa.me/${business.whatsapp}`,
   action: "Send Message",
-  iconColor: "text-[#25D366]", // WhatsApp green color
+  gradient: "from-emerald-500 to-green-500",
+  iconColor: "text-white",
   external: true, // Mark as external link
 };
 
@@ -81,6 +139,8 @@ const emailCard = {
   subtitle: "24/7 Support Available",
   href: `mailto:${business.email}`,
   action: "Send Email",
+  gradient: "from-purple-500 to-indigo-500",
+  iconColor: "text-white",
 };
 
 const hoursCard = {
@@ -88,6 +148,8 @@ const hoursCard = {
   title: "Business Hours",
   content: "Monday - Friday",
   subtitle: "9:00 AM - 6:00 PM PST",
+  gradient: "from-orange-500 to-amber-500",
+  iconColor: "text-white",
   extra: (
     <div className="mt-2 text-sm text-muted-foreground">
       <p>Weekends: Closed</p>
@@ -159,22 +221,39 @@ export function _ContactPage() {
   const renderContactCard = (item: any, index: any, customDelay = 0) => {
     const Icon = item.icon;
     const hasHref = "href" in item && item.href;
+    const accent = item.gradient ?? "from-primary to-secondary";
 
     // Card content
     const cardContent = (
       <>
+        {/* Watermark */}
+        <div className="pointer-events-none absolute -right-8 -top-8 opacity-[0.06]">
+          <Icon className="w-28 h-28" />
+        </div>
+
         {/* Icon */}
         <motion.div
           variants={iconVariants}
           className="relative mb-4 overflow-visible"
         >
           {/* Blur effect */}
-          <div className="absolute inset-0 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-all" />
+          <div
+            className={cn(
+              "absolute inset-0 rounded-full blur-xl transition-all",
+              gradientClass(accent, { direction: "br", opacity: 10 }),
+              "group-hover:opacity-80 opacity-50",
+            )}
+          />
 
           {/* Icon container */}
-          <div className="relative w-14 h-14 bg-linear-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center border border-primary/20 overflow-hidden">
+          <div
+            className={cn(
+              "relative w-14 h-14 rounded-2xl flex items-center justify-center overflow-hidden shadow-md border border-white/15",
+              gradientClass(accent, { direction: "br" }),
+            )}
+          >
             <Icon
-              className={`w-7 h-7 ${item.iconColor || "text-primary"} transform-gpu`}
+              className={`w-7 h-7 ${item.iconColor || "text-white"} transform-gpu`}
             />
           </div>
         </motion.div>
@@ -183,7 +262,14 @@ export function _ContactPage() {
         <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
 
         {hasHref ? (
-          <p className="text-primary mb-1">{item.content}</p>
+          <p
+            className={cn(
+              "mb-1 font-semibold",
+              gradientClass(accent, { type: "text" }),
+            )}
+          >
+            {item.content}
+          </p>
         ) : (
           <p className="font-medium mb-1">{item.content}</p>
         )}
@@ -198,12 +284,23 @@ export function _ContactPage() {
         {item.action && (
           <motion.div
             variants={actionVariants}
-            className="mt-3 text-xs text-primary font-medium flex items-center gap-1"
+            className={cn(
+              "mt-3 text-xs font-medium flex items-center gap-1",
+              gradientClass(accent, { type: "text" }),
+            )}
           >
             {item.action}
             <ArrowRight className="w-3 h-3" />
           </motion.div>
         )}
+
+        {/* Accent line */}
+        <div
+          className={cn(
+            "absolute bottom-0 left-0 h-0.5 w-full opacity-40",
+            gradientClass(accent),
+          )}
+        />
       </>
     );
 
@@ -228,7 +325,11 @@ export function _ContactPage() {
               initial="rest"
               whileHover="hover"
               animate="rest"
-              className="group h-full bg-linear-to-b from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 hover:border-primary/30 transition-all overflow-hidden"
+              className={cn(
+                "group relative h-full rounded-2xl border border-border/60 p-6 overflow-hidden backdrop-blur-xl shadow-sm transition-all duration-300",
+                "hover:-translate-y-1 hover:shadow-xl hover:border-primary/30",
+                gradientClass(accent, { direction: "br", opacity: 8 }),
+              )}
             >
               {cardContent}
             </motion.div>
@@ -251,7 +352,11 @@ export function _ContactPage() {
           initial="rest"
           whileHover="hover"
           animate="rest"
-          className="group h-full bg-linear-to-b from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 hover:border-primary/30 transition-all overflow-hidden"
+          className={cn(
+            "group relative h-full rounded-2xl border border-border/60 p-6 overflow-hidden backdrop-blur-xl shadow-sm transition-all duration-300",
+            "hover:-translate-y-1 hover:shadow-xl hover:border-primary/30",
+            gradientClass(accent, { direction: "br", opacity: 8 }),
+          )}
         >
           {cardContent}
         </motion.div>
@@ -263,14 +368,19 @@ export function _ContactPage() {
     <>
       <PageHeader
         title="Let's Talk About Your
-Revenue Cycle"
+ Revenue Cycle"
         description="Whether you're ready to get started or just exploring options, our team is here to help you optimize your medical billing."
         badge="Get in Touch"
       />
 
       {/* Contact Info Cards Section */}
-      <section className="section-wrapper py-20">
+      <section className="section-wrapper">
         <div className="section-container">
+          <SectionHeader
+            badge="Contact"
+            title="Reach Us Your Way"
+            description="Choose the fastest option to connect with our team — call, WhatsApp, email, or send a message."
+          />
           <div className="space-y-6">
             {/* Address Card - Full Width */}
             <div className="grid grid-cols-1">
@@ -284,12 +394,22 @@ Revenue Cycle"
               {renderContactCard(emailCard, 3, 0.2)}
               {renderContactCard(hoursCard, 4, 0.25)}
             </div>
+
+            {/* Voice & Virtual Fax Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {renderContactCard(voiceNumbersCard, 5, 0.3)}
+              {renderContactCard(virtualFaxNumbersCard, 6, 0.35)}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Form & Map Section */}
-      <section className="section-wrapper bg-muted pb-20">
+      <section className="relative section-wrapper bg-muted py-20 overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute -top-24 -left-24 size-96 rounded-full bg-primary/15 blur-3xl" />
+          <div className="absolute -bottom-24 -right-24 size-96 rounded-full bg-secondary/15 blur-3xl" />
+        </div>
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -299,7 +419,16 @@ Revenue Cycle"
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="bg-linear-to-br from-background to-background/50 backdrop-blur-sm border rounded-2xl p-8">
+              <div className="relative bg-background/70 backdrop-blur-xl border border-border/60 rounded-2xl p-8 shadow-sm overflow-hidden">
+                <div className="pointer-events-none absolute -right-10 -top-10 opacity-20">
+                  <Image
+                    src="/images/rcm-platform.png"
+                    alt="RCM platform"
+                    width={280}
+                    height={280}
+                    className="w-60 h-60 object-contain"
+                  />
+                </div>
                 <ContactForm />
               </div>
             </motion.div>
@@ -313,7 +442,7 @@ Revenue Cycle"
               className="space-y-6"
             >
               {/* Map */}
-              <div className="bg-linear-to-br from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6 h-100 overflow-hidden">
+              <div className="bg-background/70 backdrop-blur-xl border border-border/60 rounded-2xl p-6 h-100 overflow-hidden shadow-sm">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3120.123456789!2d-121.4944!3d38.5816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDM0JzUzLjgiTiAxMjHCsDI5JzQwLjAiVw!5e0!3m2!1sen!2sus!4v1234567890"
                   width="100%"
@@ -327,7 +456,7 @@ Revenue Cycle"
               </div>
 
               {/* Social Connect */}
-              <div className="bg-linear-to-br from-background to-background/50 backdrop-blur-sm border rounded-2xl p-6">
+              <div className="bg-background/70 backdrop-blur-xl border border-border/60 rounded-2xl p-6 shadow-sm">
                 <h3 className="text-xl font-semibold mb-4">Connect With Us</h3>
                 <div className="flex flex-wrap gap-3">
                   {socialLinks.map((social) => {
@@ -343,7 +472,7 @@ Revenue Cycle"
                         whileTap={{ scale: 0.95 }}
                         className="group"
                       >
-                        <div className="w-12 h-12 rounded-xl bg-background/80 backdrop-blur-sm flex items-center justify-center border border-border hover:border-primary/25 transition-all overflow-hidden shadow-sm hover:shadow-md">
+                        <div className="w-12 h-12 rounded-xl bg-linear-to-br from-background/60 via-primary/5 to-accent/10 backdrop-blur-sm flex items-center justify-center border border-border/70 hover:border-primary/25 transition-all overflow-hidden shadow-sm hover:shadow-md">
                           <Icon
                             className={`w-5 h-5 transition-transform transform-gpu group-hover:scale-110 ${social.iconClassName ?? ""}`}
                           />

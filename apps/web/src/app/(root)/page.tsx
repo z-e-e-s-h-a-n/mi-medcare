@@ -12,6 +12,7 @@ import { CTASection } from "@/components/sections/cta-section";
 import { EHRSection } from "@/components/sections/ehr-section";
 import { SpecialtiesSection } from "@/components/sections/specialties-section";
 import { MetricsSection } from "@/components/sections/metrics-section";
+import { AssociationSection } from "@/components/sections/association-section";
 
 export const metadata: Metadata = {
   title: "Medical Billing Services in USA",
@@ -27,6 +28,7 @@ export default function Home() {
       <SuccessMetrics useConstantColors />
       <ServicesSection limit={6} useConstantColors className="bg-muted" />
       <FeaturesSection useConstantColors />
+      <AssociationSection />
       <HowItWorksSection useConstantColors />
       <BenefitsSection useConstantColors />
       <EHRSection limit={8} className="bg-muted" />

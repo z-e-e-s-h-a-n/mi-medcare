@@ -98,6 +98,14 @@ export const business = {
   email: "info@mimedcarellc.com",
   phone: "+1 (279) 242-2227",
   whatsapp: "+1 (916) 909-6564",
+  voiceNumbers: [
+    { display: "(279) 207-3379", tel: "+12792073379" },
+    { display: "(279) 207-3380", tel: "+12792073380" },
+  ],
+  virtualFaxNumbers: [
+    { display: "(279) 217-5098", tel: "+12792175098" },
+    { display: "(279) 217-5099", tel: "+12792175099" },
+  ],
   website: "",
 
   facebook: "https://www.facebook.com/mimedcarellc",
@@ -128,6 +136,14 @@ export const business = {
   metaDescription:
     "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care.",
 };
+
+export const IN_ASSOCIATION_WITH = [
+  { src: "/images/association/association-1.png", alt: "Association 1" },
+  { src: "/images/association/association-2.png", alt: "Association 2" },
+  { src: "/images/association/association-3.png", alt: "Association 3" },
+  { src: "/images/association/association-4.png", alt: "Association 4" },
+  { src: "/images/association/association-5.png", alt: "Association 5" },
+];
 
 export const COMPANY_STATS = [
   {
