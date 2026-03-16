@@ -179,8 +179,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
         errorCode: issue.code,
       }));
 
-      console.log("meta", meta);
-
       message = "Validation failed";
     }
 

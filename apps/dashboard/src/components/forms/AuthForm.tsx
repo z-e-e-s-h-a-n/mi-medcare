@@ -57,7 +57,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
       firstName: nameSchema,
       lastName: nameSchema.optional(),
     }),
-    ...(formType.includes("Password") &&
+    ...(formType.includes("password") &&
       otpMeta?.valid && { password: passwordSchema }),
   });
 
@@ -112,7 +112,6 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
         }
         toast.success(message);
       } catch (err: any) {
-        console.log("err ......", err);
         if (err.action === "verifyIdentifier") {
           setOtpPurpose("verifyIdentifier");
           setRedirectUrl("/auth/sign-in");

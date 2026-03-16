@@ -122,8 +122,6 @@ export class AuthService {
   async requestOtp(dto: RequestOtpDto) {
     const { user, email, meta } = await this.findUserFail404(dto.email);
 
-    console.log("request received", dto.purpose);
-
     switch (dto.purpose) {
       case "verifyIdentifier": {
         await this.checkVerificationStatus(user, email, "verified");

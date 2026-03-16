@@ -36,7 +36,6 @@ export const MediaField = <TFormData,>({
               setPreview(media.url);
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (err: any) {
-              console.error(err);
               toast.error(err?.message || "Failed to set media");
             }
           });

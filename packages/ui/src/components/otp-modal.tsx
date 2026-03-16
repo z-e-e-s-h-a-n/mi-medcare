@@ -50,7 +50,6 @@ const OtpModal = ({
       setOpen(false);
       if (redirectUrl) router.push(redirectUrl);
     } catch (err: any) {
-      console.log("Failed to verify OTP", err.message);
       toast.error("Failed to verify OTP", {
         description: err.message,
       });
@@ -67,7 +66,6 @@ const OtpModal = ({
       setSecret("");
       toast.success(res.message);
     } catch (err: any) {
-      console.log("Failed to Request OTP", err.message);
       toast.error("Failed to Request OTP", {
         description: err.message,
       });
@@ -80,7 +78,7 @@ const OtpModal = ({
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent className="space-y-6 rounded-4xl">
         <AlertDialogHeader className="flex flex-col items-center">
-          <AlertDialogTitle>Enter You OTP</AlertDialogTitle>
+          <AlertDialogTitle>Enter Your OTP</AlertDialogTitle>
           <AlertDialogDescription>
             We&apos;ve sent a code to{" "}
             <span className="text-primary">{email}</span>.
@@ -104,7 +102,7 @@ const OtpModal = ({
             className="rounded-4xl"
             size="lg"
           >
-            Verify Otp
+            Verify OTP
             {isLoading && <LoaderCircle className="animate-spin" />}
           </Button>
           <AlertDialogDescription className="flex-center gap-1">
