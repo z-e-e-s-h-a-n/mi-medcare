@@ -1,0 +1,67 @@
+"use client";
+
+import { Badge } from "@workspace/ui/components/badge";
+import type {
+  PostQueryType,
+  PostResponse,
+} from "@workspace/contracts/content";
+
+import { useDeletePost, usePosts } from "@/hooks/content";
+import ListPage from "@/components/shared/ListPage";
+import DateWrapper from "@/components/shared/DateWrapper";
+import type { ColumnConfig } from "@/components/shared/GenericTable";
+import type { SearchByOption } from "@/components/shared/SearchToolbar";
+
+const postColumns: ColumnConfig<PostResponse, PostQueryType>[] = [
+  {
+    header: "Title",
+    accessor: "title",
+    sortKey: "title",
+  },
+  {
+    header: "Category",
+    accessor: (post) => post.category?.name ?? "—",
+  },
+  {
+    header: "Status",
+    accessor: (post) => <Badge variant="secondary">{post.status}</Badge>,
+  },
+  {
+    header: "Featured",
+    accessor: (post) =>
+      post.isFeatured ? <Badge variant="secondary">Featured</Badge> : "—",
+  },
+  {
+    header: "Views",
+    accessor: "viewsCount",
+    sortKey: "viewsCount",
+  },
+  {
+    header: "Published",
+    accessor: (post) =>
+      post.publishedAt ? <DateWrapper date={post.publishedAt} /> : "—",
+    sortKey: "publishedAt",
+  },
+];
+
+const postSearchOptions: SearchByOption<PostQueryType>[] = [
+  { value: "title", label: "Title" },
+  { value: "slug", label: "Slug" },
+  { value: "id", label: "Id" },
+];
+
+const PostsPage = () => {
+  return (
+    <ListPage
+      entityKey="posts"
+      columns={postColumns}
+      searchByOptions={postSearchOptions}
+      useListHook={usePosts}
+      useDeleteHook={useDeletePost}
+      defaultSortBy="createdAt"
+      defaultSearchBy="title"
+    />
+  );
+};
+
+export default PostsPage;

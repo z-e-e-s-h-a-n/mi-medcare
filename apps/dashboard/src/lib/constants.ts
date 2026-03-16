@@ -4,6 +4,9 @@ import {
   IconSettings,
   type Icon,
   IconPhoto,
+  IconCategory,
+  IconTags,
+  IconFileText,
 } from "@tabler/icons-react";
 
 export type NavItem = {
@@ -46,13 +49,39 @@ export const sidebarMenu: NavGroup[] = [
         url: "/media",
         icon: IconPhoto,
       },
+
+      {
+        title: "Content",
+        children: [
+          {
+            title: "Categories",
+            url: "/admin/content/categories",
+            icon: IconCategory,
+          },
+          {
+            title: "Tags",
+            url: "/admin/content/tags",
+            icon: IconTags,
+          },
+          {
+            title: "Pages",
+            url: "/admin/content/pages",
+            icon: IconFileText,
+          },
+          {
+            title: "Posts",
+            url: "/admin/content/posts",
+            icon: IconFileText,
+          },
+        ],
+      },
     ],
   },
 
   {
     items: [
       {
-        title: "Settings",
+        title: "Business Profile",
         url: "/settings",
         icon: IconSettings,
       },
