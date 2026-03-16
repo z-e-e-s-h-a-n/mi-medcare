@@ -67,10 +67,10 @@ export const ContactMessageStatusEnum = z.enum($Enums.ContactMessageStatus);
 export const ContactTimePreferenceEnum = z.enum($Enums.ContactTimePreference);
 
 export const ContactMessageSortByEnum = z.enum([
-  "name",
+  "fullName",
+  "practiceName",
   "email",
   "phone",
-  "subject",
   "repliedAt",
 ]);
 
@@ -84,7 +84,7 @@ export const ContactMessageSearchByEnum = z.enum([
 ]);
 
 export const ConsultationRequestSortByEnum = z.enum([
-  "name",
+  "fullName",
   "practiceName",
   "email",
   "phone",
@@ -112,7 +112,51 @@ export const NewsletterSubscriberSortByEnum = z.enum([
 export const NewsletterSubscriberSearchByEnum = z.enum(["name", "email"]);
 
 /* =========================
-   SERVICES
+   CONTENT
 ========================= */
 
 export const ProductStatusEnum = z.enum($Enums.ProductStatus);
+export const CategorySearchByEnum = z.enum(["id", "name", "slug"]);
+export const CategorySortByEnum = z.enum(["name", "slug", "updatedAt"]);
+
+export const TagSearchByEnum = z.enum(["id", "name", "slug"]);
+export const TagSortByEnum = z.enum(["name", "slug", "updatedAt"]);
+
+export const PageSearchByEnum = z.enum(["id", "title", "slug"]);
+export const PageSortByEnum = z.enum([
+  "title",
+  "slug",
+  "updatedAt",
+  "publishedAt",
+  "viewsCount",
+]);
+
+export const PostSearchByEnum = z.enum(["id", "title", "slug"]);
+export const PostSortByEnum = z.enum([
+  "title",
+  "slug",
+  "updatedAt",
+  "publishedAt",
+  "viewsCount",
+]);
+
+/* =========================
+   SYSTEM
+========================= */
+
+export const AuditActionEnum = z.enum($Enums.AuditAction);
+export const AuditLogSearchByEnum = z.enum([
+  "userId",
+  "entityType",
+  "entityId",
+]);
+export const AuditLogSortByEnum = z.enum(["createdAt", "entityType"]);
+
+export const TrafficSourceSearchByEnum = z.enum([
+  "utmSource",
+  "utmMedium",
+  "utmCampaign",
+  "referrer",
+  "landingPage",
+]);
+export const TrafficSourceSortByEnum = z.enum(["createdAt"]);

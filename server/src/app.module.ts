@@ -19,7 +19,10 @@ import { AdminModule } from "@/modules/admin/admin.module";
 import { CacheModule } from "@/modules/cache/cache.module";
 import { UserModule } from "@/modules/user/user.module";
 import { MediaModule } from "@/modules/media/media.module";
+import { AuditModule } from "@/modules/audit/audit.module";
 import { BusinessModule } from "@/modules/business/business.module";
+import { ContentModule } from "@/modules/content/content.module";
+import { TrafficModule } from "@/modules/traffic/traffic.module";
 import { LeadModule } from "./modules/lead/lead.module";
 
 @Module({
@@ -40,7 +43,10 @@ import { LeadModule } from "./modules/lead/lead.module";
     UserModule,
     AdminModule,
     MediaModule,
+    AuditModule,
     BusinessModule,
+    ContentModule,
+    TrafficModule,
     LeadModule,
   ],
 

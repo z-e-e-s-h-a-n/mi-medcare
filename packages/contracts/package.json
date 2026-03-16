@@ -22,9 +22,17 @@
       "import": "./dist/admin.js",
       "types": "./dist/admin.d.ts"
     },
+    "./audit": {
+      "import": "./dist/audit.js",
+      "types": "./dist/audit.d.ts"
+    },
     "./business": {
       "import": "./dist/business.js",
       "types": "./dist/business.d.ts"
+    },
+    "./content": {
+      "import": "./dist/content.js",
+      "types": "./dist/content.d.ts"
     },
     "./contact": {
       "import": "./dist/contact.js",
@@ -37,6 +45,10 @@
     "./newsletter": {
       "import": "./dist/newsletter.js",
       "types": "./dist/newsletter.d.ts"
+    },
+    "./traffic": {
+      "import": "./dist/traffic.js",
+      "types": "./dist/traffic.d.ts"
     },
     "./user": {
       "import": "./dist/user.js",

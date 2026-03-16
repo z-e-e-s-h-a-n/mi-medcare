@@ -50,7 +50,7 @@ export const baseQuerySchema = <
   sortByEnum: TSortBy,
   searchByEnum: TSearchBy,
 ) => {
-  const sortByWithCreatedAt = z.literal(BaseSortByEnum.options).or(sortByEnum);
+  const sortByWithCreatedAt = BaseSortByEnum.or(sortByEnum);
 
   return z.object({
     page: numberSchema.default(1),

@@ -171,3 +171,20 @@ export type NewsletterSubscriberSearchByType = z.infer<
 >;
 
 export type ProductStatus = z.infer<typeof enums.ProductStatusEnum>;
+export type CategorySearchByType = z.infer<typeof enums.CategorySearchByEnum>;
+export type CategorySortByType = z.infer<typeof enums.CategorySortByEnum>;
+export type TagSearchByType = z.infer<typeof enums.TagSearchByEnum>;
+export type TagSortByType = z.infer<typeof enums.TagSortByEnum>;
+export type PageSearchByType = z.infer<typeof enums.PageSearchByEnum>;
+export type PageSortByType = z.infer<typeof enums.PageSortByEnum>;
+export type PostSearchByType = z.infer<typeof enums.PostSearchByEnum>;
+export type PostSortByType = z.infer<typeof enums.PostSortByEnum>;
+export type AuditAction = z.infer<typeof enums.AuditActionEnum>;
+export type AuditLogSearchByType = z.infer<typeof enums.AuditLogSearchByEnum>;
+export type AuditLogSortByType = z.infer<typeof enums.AuditLogSortByEnum>;
+export type TrafficSourceSearchByType = z.infer<
+  typeof enums.TrafficSourceSearchByEnum
+>;
+export type TrafficSourceSortByType = z.infer<
+  typeof enums.TrafficSourceSortByEnum
+>;
