@@ -32,7 +32,7 @@ const Layout = ({ children }: AppLayoutProps) => {
       <AppSidebar variant="inset" />
       <SidebarInset>
         <Header />
-        {children}
+        <div className="section-wrapper">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );

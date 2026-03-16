@@ -10,7 +10,7 @@ export class NotificationController {
 
   @Get()
   async getAllNotification(@User("id") userId: string) {
-    const notifications = this.prisma.notification.findMany({
+    const notifications = await this.prisma.notification.findMany({
       where: { userId },
     });
 
@@ -21,7 +21,11 @@ export class NotificationController {
   }
 
   @Put("/:id")
-  async markAsRead(@Param("id") id: string) {
+  async markAsRead(@Param("id") id: string, @User("id") userId: string) {
+    await this.prisma.notification.findFirstOrThrow({
+      where: { id, userId },
+    });
+
     await this.prisma.notification.update({
       where: { id },
       data: { viewedAt: new Date() },

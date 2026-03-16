@@ -3,6 +3,7 @@ import type {
   ConsultationRequestQueryDto,
   CreateConsultationRequestDto,
 } from "@workspace/contracts/consultation";
+import type { Prisma } from "@workspace/db/client";
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { NotificationService } from "@/modules/notification/notification.service";
 import { resolveEmailTemplate } from "@workspace/templates";
@@ -36,18 +37,21 @@ export class ConsultationService {
   async queryRequests(query: ConsultationRequestQueryDto) {
     const { page, limit, status, search, searchBy, sortBy, sortOrder } = query;
 
-    const where: any = {};
+    const where: Prisma.ConsultationRequestWhereInput = {};
     if (status) where.status = status;
 
     if (search && searchBy) {
-      const searchMap: Record<string, any> = {
+      const searchMap: Record<
+        typeof searchBy,
+        Prisma.ConsultationRequestWhereInput
+      > = {
         email: { email: { contains: search, mode: "insensitive" } },
         phone: { phone: { contains: search, mode: "insensitive" } },
         name: { fullName: { contains: search, mode: "insensitive" } },
         practiceName: {
           practiceName: { contains: search, mode: "insensitive" },
         },
-        practiceType: { practiceType: { equals: search } },
+        practiceType: { practiceType: { equals: search as any } },
       };
       Object.assign(where, searchMap[searchBy]);
     }

@@ -3,6 +3,7 @@ import { ContactService } from "./contact.service";
 import { Roles } from "@/decorators/roles.decorator";
 import { Public } from "@/decorators/public.decorator";
 import {
+  ContactMessageQueryDto,
   CreateContactMessageDto,
   UpdateContactMessageDto,
 } from "@workspace/contracts/contact";
@@ -19,7 +20,7 @@ export class ContactController {
 
   @Roles("admin")
   @Get()
-  async queryMessages(@Query() query: any) {
+  async queryMessages(@Query() query: ContactMessageQueryDto) {
     return this.service.queryMessages(query);
   }
 

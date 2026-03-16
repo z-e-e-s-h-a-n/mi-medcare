@@ -8,4 +8,6 @@ export type BusinessProfileType = z.input<typeof businessProfileSchema>;
 
 export interface BusinessProfileResponse extends Sanitize<BusinessProfile> {
   logo?: MediaResponse;
+  favicon?: MediaResponse;
+  cover?: MediaResponse;
 }

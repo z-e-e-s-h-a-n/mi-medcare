@@ -4,11 +4,11 @@ import { emailSchema, phoneSchema, idSchema } from "../lib/schema";
 export const businessProfileSchema = z.object({
   name: z.string().min(1),
   legalName: z.string(),
-  slug: z.string().min(1),
   description: z.string(),
 
+  faviconId: idSchema,
   logoId: idSchema,
-  coverImageId: idSchema.optional(),
+  coverId: idSchema.optional(),
 
   email: emailSchema,
   phone: phoneSchema,
