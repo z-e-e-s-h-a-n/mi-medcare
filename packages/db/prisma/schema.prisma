@@ -126,7 +126,7 @@ enum MediaType {
   other
 }
 
-enum ProductStatus {
+enum PostStatus {
   draft
   review
   published
@@ -324,7 +324,6 @@ model Media {
 
   users            User[]            @relation("UserImage")
   posts            Post[]            @relation("PostCover")
-  pages            Page[]            @relation("PageCover")
   businessLogos    BusinessProfile[] @relation("BusinessProfileLogo")
   businessCovers   BusinessProfile[] @relation("BusinessProfileCoverImage")
   businessFavIcons BusinessProfile[] @relation("BusinessProfileFavicon")
@@ -339,30 +338,6 @@ model Media {
 //
 // SERVICES
 //
-
-model Page {
-  id String @id @default(ulid())
-
-  coverId String?
-  cover   Media?  @relation("PageCover", fields: [coverId], references: [id])
-
-  title   String
-  slug    String @unique
-  content String @db.Text
-
-  metaTitle       String?
-  metaDescription String?
-
-  viewsCount Int           @default(0)
-  status     ProductStatus @default(draft)
-
-  views ContentView[]
-
-  publishedAt DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
-}
 
 model Post {
   id String @id @default(ulid())
@@ -383,16 +358,14 @@ model Post {
 
   tags Tag[]
 
-  status      ProductStatus @default(draft)
+  status      PostStatus @default(draft)
   publishedAt DateTime?
 
   metaTitle       String?
   metaDescription String?
 
-  viewsCount Int     @default(0)
-  isFeatured Boolean @default(false)
-
-  views ContentView[]
+  viewsCount Int           @default(0)
+  views      ContentView[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -415,19 +388,14 @@ model ContentView {
   postId String?
   post   Post?   @relation(fields: [postId], references: [id])
 
-  pageId String?
-  page   Page?   @relation(fields: [pageId], references: [id])
-
   trafficSourceId String?
   trafficSource   TrafficSource? @relation(fields: [trafficSourceId], references: [id])
 
   viewedAt DateTime @default(now())
 
   @@index([postId])
-  @@index([pageId])
   @@index([viewedAt])
   @@index([postId, viewedAt])
-  @@index([pageId, viewedAt])
 }
 
 model Category {

@@ -9,29 +9,31 @@ import type {
   BaseQueryResponse,
   BaseQueryType,
   BaseResponse,
+  SortOrderType,
 } from "@workspace/contracts";
 
-interface UseListResult<TData> {
-  data?: BaseQueryResponse;
+interface UseListResult<TKey extends string, TData> {
+  data?: BaseQueryResponse & {
+    [K in TKey]: TData[];
+  };
 
   isLoading?: boolean;
   fetchError?: unknown;
 }
-
 interface ListPageConfig<
   TData extends BaseResponse,
   TQuery extends BaseQueryType,
-  TRouteKey extends string,
-  TDataKey extends string = TRouteKey,
+  TKey extends string,
 > {
-  entityKey: TRouteKey;
-  dataKey?: TDataKey;
+  dataKey: TKey;
+  entityType?: string;
   canEdit?: boolean;
+  canAdd?: boolean;
   columns: ColumnConfig<TData, TQuery>[];
   searchByOptions: SearchByOption<TQuery>[];
 
   defaultParams?: TQuery;
-  useListHook: (params: TQuery) => UseListResult<TData>;
+  useListHook: (params: TQuery) => UseListResult<TKey, TData>;
   useDeleteHook?: () => {
     deleteAsync: (args: { id: string; force?: boolean }) => Promise<unknown>;
     isDeleting: boolean;
@@ -47,12 +49,12 @@ interface ListPageConfig<
 function ListPage<
   TData extends BaseResponse,
   TQuery extends BaseQueryType,
-  TRouteKey extends string,
-  TDataKey extends string = TRouteKey,
+  TKey extends string,
 >({
-  entityKey,
   dataKey,
+  entityType,
   canEdit,
+  canAdd,
   columns,
   defaultSearchBy,
   defaultSortBy,
@@ -61,14 +63,14 @@ function ListPage<
   useDeleteHook,
   defaultParams,
   filterConfig,
-}: ListPageConfig<TData, TQuery, TRouteKey, TDataKey>) {
+}: ListPageConfig<TData, TQuery, TKey>) {
   const [page, setPage] = React.useState(1);
   const [limit, setLimit] = React.useState(10);
   const [search, setSearch] = React.useState("");
   const [searchBy, setSearchBy] =
     React.useState<TQuery["searchBy"]>(defaultSearchBy);
   const [sortBy, setSortBy] = React.useState<TQuery["sortBy"]>(defaultSortBy);
-  const [sortOrder, setSortOrder] = React.useState<"asc" | "desc">("desc");
+  const [sortOrder, setSortOrder] = React.useState<SortOrderType>("desc");
   const [filter, setFilter] = React.useState<string>();
 
   const query = {
@@ -87,9 +89,8 @@ function ListPage<
   const { data, isLoading } = useListHook(query);
   const deleteHook = useDeleteHook?.();
   const { confirm } = useConfirm();
-  const resolvedDataKey = dataKey ?? entityKey;
-  const tableData =
-    ((data as Record<string, TData[]> | undefined)?.[resolvedDataKey] ?? []);
+  const tableData = data?.[dataKey] ?? [];
+  if (!entityType) entityType = dataKey;
 
   const handleDelete = async (row: TData) => {
     if (!deleteHook) return;
@@ -98,21 +99,19 @@ function ListPage<
     await deleteHook.deleteAsync({ id: row.id, force: false });
   };
 
-  const entityTitle = entityKey.split("/").pop();
-
   return (
     <div className="container mx-auto p-6">
       <div className="mb-6">
         <h1 className="text-3xl font-bold capitalize">
-          {entityTitle} Management
+          {entityType} Management
         </h1>
         <p className="text-muted-foreground">
-          Manage your {entityTitle} here. View, edit, or delete existing
-          records.
+          Manage your {entityType} here. View, edit, or delete existing records.
         </p>
       </div>
       <GenericTable
-        entityType={entityKey}
+        entityType={entityType}
+        canAdd={canAdd}
         canEdit={canEdit}
         data={tableData}
         total={data?.total || 0}

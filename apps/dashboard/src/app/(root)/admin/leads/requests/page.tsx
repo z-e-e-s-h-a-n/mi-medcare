@@ -54,7 +54,8 @@ const consultationSearchOptions: SearchByOption<ConsultationRequestQueryType>[] 
 const ConsultationRequestsPage = () => {
   return (
     <ListPage
-      entityKey="requests"
+      dataKey="requests"
+      canAdd={false}
       columns={consultationColumns}
       searchByOptions={consultationSearchOptions}
       useListHook={useConsultationRequests}

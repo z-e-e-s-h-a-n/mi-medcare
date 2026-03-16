@@ -3,8 +3,6 @@ import type {
   CategoryDto,
   CategoryQueryDto,
   ContentViewDto,
-  PageDto,
-  PageQueryDto,
   PostDto,
   PostQueryDto,
   TagDto,
@@ -250,126 +248,6 @@ export class ContentService {
     };
   }
 
-  async createPage(dto: PageDto, userId?: string) {
-    const page = await this.prisma.page.create({
-      data: dto,
-      include: this.pageInclude,
-    });
-
-    await this.logMutation("create", "Page", page.id, userId, dto);
-
-    return {
-      message: "Page created successfully.",
-      data: page,
-    };
-  }
-
-  async updatePage(id: string, dto: PageDto, userId?: string) {
-    const page = await this.prisma.page.update({
-      where: { id },
-      data: dto,
-      include: this.pageInclude,
-    });
-
-    await this.logMutation("update", "Page", id, userId, dto);
-
-    return {
-      message: "Page updated successfully.",
-      data: page,
-    };
-  }
-
-  async deletePage(id: string, force = false, userId?: string) {
-    await this.prisma.page.delete({
-      where: { id },
-      ...({ force } as any),
-    });
-
-    await this.logMutation("delete", "Page", id, userId, { force });
-
-    return { message: "Page deleted successfully." };
-  }
-
-  async restorePage(id: string, userId?: string) {
-    await this.prisma.page.update({
-      where: { id },
-      data: { deletedAt: null },
-    });
-
-    await this.logMutation("update", "Page", id, userId, {
-      deletedAt: null,
-    });
-
-    return { message: "Page restored successfully." };
-  }
-
-  async queryPages(query: PageQueryDto, publishedOnly = false) {
-    const { page, limit, sortBy, sortOrder, search, searchBy, status } = query;
-    const where: Prisma.PageWhereInput = {};
-
-    if (publishedOnly) where.status = "published";
-    else if (status) where.status = status;
-
-    if (search && searchBy) {
-      const searchWhereMap: Record<typeof searchBy, Prisma.PageWhereInput> = {
-        id: { id: search },
-        title: { title: { contains: search, mode: "insensitive" } },
-        slug: { slug: { contains: search, mode: "insensitive" } },
-      };
-
-      Object.assign(where, searchWhereMap[searchBy]);
-    }
-
-    const skip = (page - 1) * limit;
-    const orderBy = { [sortBy]: sortOrder };
-
-    const [pages, total] = await Promise.all([
-      this.prisma.page.findMany({
-        where,
-        skip,
-        take: limit,
-        orderBy,
-        include: this.pageInclude,
-      }),
-      this.prisma.page.count({ where }),
-    ]);
-
-    return {
-      message: "Pages fetched successfully.",
-      data: {
-        pages,
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      },
-    };
-  }
-
-  async getPageById(id: string) {
-    const page = await this.prisma.page.findUniqueOrThrow({
-      where: { id },
-      include: this.pageInclude,
-    });
-
-    return {
-      message: "Page fetched successfully.",
-      data: page,
-    };
-  }
-
-  async getPageBySlug(slug: string) {
-    const page = await this.prisma.page.findFirstOrThrow({
-      where: { slug, status: "published" },
-      include: this.pageInclude,
-    });
-
-    return {
-      message: "Page fetched successfully.",
-      data: page,
-    };
-  }
-
   async createPost(dto: PostDto, authorId: string) {
     const { tagIds, ...rest } = dto;
 
@@ -446,7 +324,6 @@ export class ContentService {
       categoryId,
       authorId,
       tagId,
-      isFeatured,
     } = query;
 
     const where: Prisma.PostWhereInput = {};
@@ -457,7 +334,6 @@ export class ContentService {
     if (categoryId) where.categoryId = categoryId;
     if (authorId) where.authorId = authorId;
     if (tagId) where.tags = { some: { id: tagId } };
-    if (isFeatured !== undefined) where.isFeatured = isFeatured;
 
     if (search && searchBy) {
       const searchWhereMap: Record<typeof searchBy, Prisma.PostWhereInput> = {
@@ -532,13 +408,6 @@ export class ContentService {
         });
       }
 
-      if (dto.pageId) {
-        await tx.page.update({
-          where: { id: dto.pageId },
-          data: { viewsCount: { increment: 1 } },
-        });
-      }
-
       return createdView;
     });
 
@@ -567,10 +436,6 @@ export class ContentService {
   private readonly categoryInclude = {
     parent: true,
     children: true,
-  };
-
-  private readonly pageInclude = {
-    cover: { include: { uploadedBy: { omit: { password: true } } } },
   };
 
   private readonly postInclude = {

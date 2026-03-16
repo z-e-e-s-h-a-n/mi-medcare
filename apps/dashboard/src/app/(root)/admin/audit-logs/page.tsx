@@ -48,8 +48,8 @@ const auditSearchOptions: SearchByOption<AuditLogQueryType>[] = [
 const AuditLogsPage = () => {
   return (
     <ListPage
-      entityKey="audit-logs"
       dataKey={"logs"}
+      entityType="audit-logs"
       canEdit={false}
       columns={auditColumns}
       searchByOptions={auditSearchOptions}

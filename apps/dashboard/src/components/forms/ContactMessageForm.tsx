@@ -1,10 +1,10 @@
 "use client";
 
-import { ClipboardList } from "lucide-react";
+import { MessageSquareReply } from "lucide-react";
 
-import { updateConsultationRequestSchema } from "@workspace/contracts/consultation";
+import { updateContactMessageSchema } from "@workspace/contracts/contact";
 import {
-  ConsultationRequestStatusEnum,
+  ContactMessageStatusEnum,
   type BaseCUFormProps,
 } from "@workspace/contracts";
 import { InputField } from "@workspace/ui/components/input-field";
@@ -17,30 +17,30 @@ import {
   CardTitle,
 } from "@workspace/ui/components/card";
 
-import { useConsultationRequest } from "@/hooks/lead";
+import { useContactMessage } from "@/hooks/lead";
 import { GenericForm } from "../shared/GenericForm";
 
-const ConsultationRequestForm = (props: BaseCUFormProps) => {
+const ContactReplyForm = (props: BaseCUFormProps) => {
   return (
     <GenericForm
       {...props}
-      entityName="Request"
-      description="Track qualification progress and internal notes."
-      useQuery={useConsultationRequest}
-      schema={updateConsultationRequestSchema}
+      entityName="Message"
+      description="Update the message status and add internal notes."
+      useQuery={useContactMessage}
+      schema={updateContactMessageSchema}
       defaultValues={{
-        status: "new",
+        status: "pending",
       }}
     >
       {(form) => (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <ClipboardList className="size-5" />
-              Request Status
+              <MessageSquareReply className="size-5" />
+              Response Details
             </CardTitle>
             <CardDescription>
-              Update current progress and store your notes.
+              Mark review progress and store reply notes.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -48,7 +48,7 @@ const ConsultationRequestForm = (props: BaseCUFormProps) => {
               form={form}
               name="status"
               label="Status"
-              options={ConsultationRequestStatusEnum.options}
+              options={ContactMessageStatusEnum.options}
             />
             <InputField
               form={form}
@@ -64,4 +64,4 @@ const ConsultationRequestForm = (props: BaseCUFormProps) => {
   );
 };
 
-export default ConsultationRequestForm;
+export default ContactReplyForm;

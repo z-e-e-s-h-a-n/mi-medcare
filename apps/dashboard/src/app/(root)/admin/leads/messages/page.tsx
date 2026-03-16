@@ -53,8 +53,8 @@ const contactSearchOptions: SearchByOption<ContactMessageQueryType>[] = [
 const ContactMessagesPage = () => {
   return (
     <ListPage
-      entityKey="messages"
-      canEdit
+      dataKey="messages"
+      canAdd={false}
       columns={contactColumns}
       searchByOptions={contactSearchOptions}
       useListHook={useContactMessages}

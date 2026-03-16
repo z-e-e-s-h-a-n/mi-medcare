@@ -1,4 +1,4 @@
-import ContactReplyForm from "@/components/forms/ContactReplyForm";
+import ContactMessageForm from "@/components/forms/ContactMessageForm";
 
 type EditContactMessagePageProps = {
   params: Promise<{ id: string }>;
@@ -8,7 +8,7 @@ const EditContactMessagePage = async ({
   params,
 }: EditContactMessagePageProps) => {
   const { id } = await params;
-  return <ContactReplyForm entityId={id} />;
+  return <ContactMessageForm entityId={id} formType="update" />;
 };
 
 export default EditContactMessagePage;

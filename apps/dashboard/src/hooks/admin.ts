@@ -85,7 +85,7 @@ export function useAdminMutations() {
   });
 
   const restoreMutation = useMutation({
-    mutationFn: (id: string) => user.restoreUser(id),
+    mutationFn: user.restoreUser,
     onSuccess: invalidateUsers,
   });
 

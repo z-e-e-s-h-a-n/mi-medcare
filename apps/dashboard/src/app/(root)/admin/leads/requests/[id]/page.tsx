@@ -1,17 +1,19 @@
+"use client";
 import { ClipboardList } from "lucide-react";
 
 import type { ConsultationRequestResponse } from "@workspace/contracts/consultation";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useConsultationRequest } from "@/hooks/lead";
+import React from "react";
 
 type ConsultationRequestDetailsPageProps = {
   params: Promise<{ id: string }>;
 };
 
-const ConsultationRequestDetailsPage = async ({
+const ConsultationRequestDetailsPage = ({
   params,
 }: ConsultationRequestDetailsPageProps) => {
-  const { id } = await params;
+  const { id } = React.use(params);
 
   return (
     <GenericDetailsPage<ConsultationRequestResponse, never>

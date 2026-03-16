@@ -1,11 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import type {
-  TrafficSourceQueryResponse,
-  TrafficSourceQueryType,
-  TrafficSourceResponse,
-} from "@workspace/contracts/traffic";
+import type { TrafficSourceQueryType } from "@workspace/contracts/traffic";
 import type { ApiException } from "@workspace/sdk";
 import * as traffic from "@workspace/sdk/traffic";
 import { parseDuration } from "@workspace/shared/utils";
@@ -20,16 +16,7 @@ const queryDefaults = {
   retry: false,
 };
 
-type QueryResult<T> = {
-  data?: T;
-  isLoading: boolean;
-  isFetching: boolean;
-  fetchError: ApiException | null;
-};
-
-export function useTrafficSources(
-  params: TrafficSourceQueryType,
-): QueryResult<TrafficSourceQueryResponse> {
+export function useTrafficSources(params: TrafficSourceQueryType) {
   const query = useQuery({
     queryKey: ["trafficSources", params],
     queryFn: () => traffic.getTrafficSources(params),
@@ -42,11 +29,11 @@ export function useTrafficSources(
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
   };
 }
 
-export function useTrafficSource(id?: string): QueryResult<TrafficSourceResponse> {
+export function useTrafficSource(id?: string) {
   const query = useQuery({
     queryKey: ["trafficSource", id],
     queryFn: () => traffic.getTrafficSource(id!),
@@ -59,6 +46,6 @@ export function useTrafficSource(id?: string): QueryResult<TrafficSourceResponse
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
   };
 }

@@ -50,7 +50,8 @@ const newsletterSearchOptions: SearchByOption<NewsletterSubscriberQueryType>[] =
 const NewsletterSubscribersPage = () => {
   return (
     <ListPage
-      entityKey="users"
+      dataKey="subscribers"
+      canAdd={false}
       canEdit={false}
       columns={newsletterColumns}
       searchByOptions={newsletterSearchOptions}

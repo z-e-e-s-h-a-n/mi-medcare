@@ -115,21 +115,12 @@ export const NewsletterSubscriberSearchByEnum = z.enum(["name", "email"]);
    CONTENT
 ========================= */
 
-export const ProductStatusEnum = z.enum($Enums.ProductStatus);
+export const PostStatusEnum = z.enum($Enums.PostStatus);
 export const CategorySearchByEnum = z.enum(["id", "name", "slug"]);
 export const CategorySortByEnum = z.enum(["name", "slug", "updatedAt"]);
 
 export const TagSearchByEnum = z.enum(["id", "name", "slug"]);
 export const TagSortByEnum = z.enum(["name", "slug", "updatedAt"]);
-
-export const PageSearchByEnum = z.enum(["id", "title", "slug"]);
-export const PageSortByEnum = z.enum([
-  "title",
-  "slug",
-  "updatedAt",
-  "publishedAt",
-  "viewsCount",
-]);
 
 export const PostSearchByEnum = z.enum(["id", "title", "slug"]);
 export const PostSortByEnum = z.enum([

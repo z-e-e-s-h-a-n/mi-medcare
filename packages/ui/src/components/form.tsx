@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { cn } from "../lib/utils";
 import {
   Field,
   FieldDescription,
@@ -14,6 +15,7 @@ import type {
   FieldValidateOrFn,
   FieldAsyncValidateOrFn,
   ReactFormExtendedApi,
+  FieldListeners,
 } from "@tanstack/react-form";
 
 export type AnyFormApi<TFormData> = ReactFormExtendedApi<
@@ -70,6 +72,7 @@ export interface BaseFieldProps<
   form: AnyFormApi<TFormData>;
   disabled?: boolean;
   validators?: FieldValidatorsFor<TFormData, TName>;
+  listeners?: FieldListeners<TFormData, TName, DeepValue<TFormData, TName>>;
 }
 
 export interface FieldChildrenProps<TFormData> {
@@ -95,7 +98,7 @@ export const Form = <TFormData,>({
   className,
 }: FormProps<TFormData>) => {
   return (
-    <section id={id} className={className}>
+    <section id={id} className={cn("py-12", className)}>
       {header}
       <form
         onSubmit={async (e) => {
@@ -122,11 +125,14 @@ export const FormField = <TFormData,>({
   children,
   validators,
   disabled,
-}: FormFieldProps<TFormData>) => {
+  listeners,
+}: FormFieldProps<TFormData> & {
+  listeners?: any;
+}) => {
   if (!placeholder && typeof label === "string") placeholder = label;
 
   return (
-    <form.Field name={name} validators={validators}>
+    <form.Field name={name} validators={validators} listeners={listeners}>
       {(field) => {
         const isInvalid =
           field.state.meta.isTouched && !field.state.meta.isValid;

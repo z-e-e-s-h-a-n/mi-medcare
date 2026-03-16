@@ -23,4 +23,4 @@ export const getContactMessage = (id: string) =>
 export const replyContactMessage = (
   id: string,
   data: UpdateContactMessageType,
-) => executeApi<null>(() => apiClient.put(`/contact/${id}/reply`, data));
+) => executeApi<any>(() => apiClient.put(`/contact/${id}/reply`, data));

@@ -2,7 +2,6 @@ import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import {
   CategoryQueryDto,
   ContentViewDto,
-  PageQueryDto,
   PostQueryDto,
   TagQueryDto,
 } from "@workspace/contracts/content";
@@ -33,16 +32,6 @@ export class ContentController {
   @Get("tags/:slug")
   async getTag(@Param("slug") slug: string) {
     return this.contentService.getTagBySlug(slug);
-  }
-
-  @Get("pages")
-  async getPages(@Query() query: PageQueryDto) {
-    return this.contentService.queryPages(query, true);
-  }
-
-  @Get("pages/:slug")
-  async getPage(@Param("slug") slug: string) {
-    return this.contentService.getPageBySlug(slug);
   }
 
   @Get("posts")

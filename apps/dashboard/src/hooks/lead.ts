@@ -3,21 +3,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type {
   ContactMessageQueryType,
-  ContactMessageQueryResponse,
-  ContactMessageResponse,
   UpdateContactMessageType,
 } from "@workspace/contracts/contact";
 import type {
   ConsultationRequestQueryType,
-  ConsultationRequestQueryResponse,
-  ConsultationRequestResponse,
   UpdateConsultationRequestType,
 } from "@workspace/contracts/consultation";
-import type {
-  NewsletterSubscriberQueryResponse,
-  NewsletterSubscriberQueryType,
-  NewsletterSubscriberResponse,
-} from "@workspace/contracts/newsletter";
+import type { NewsletterSubscriberQueryType } from "@workspace/contracts/newsletter";
 import type { ApiException } from "@workspace/sdk";
 import * as contact from "@workspace/sdk/contact";
 import * as consultation from "@workspace/sdk/consultation";
@@ -34,22 +26,7 @@ const queryDefaults = {
   retry: false,
 };
 
-type ListResult<T> = {
-  data?: T;
-  isLoading: boolean;
-  isFetching: boolean;
-  fetchError: ApiException | null;
-};
-
-type MutationResult<TData, TInput> = ListResult<TData> & {
-  mutateAsync: (data: TInput) => Promise<TData>;
-  isPending: boolean;
-  mutateError: ApiException | null;
-};
-
-export function useContactMessages(
-  params: ContactMessageQueryType,
-): ListResult<ContactMessageQueryResponse> {
+export function useContactMessages(params: ContactMessageQueryType) {
   const query = useQuery({
     queryKey: ["contactMessages", params],
     queryFn: () => contact.getContactMessages(params),
@@ -62,13 +39,11 @@ export function useContactMessages(
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
   };
 }
 
-export function useContactMessage(
-  id?: string,
-): MutationResult<ContactMessageResponse, UpdateContactMessageType> {
+export function useContactMessage(id?: string) {
   const queryClient = useQueryClient();
 
   const query = useQuery({
@@ -81,10 +56,7 @@ export function useContactMessage(
 
   const mutation = useMutation({
     mutationFn: (data: UpdateContactMessageType) =>
-      contact
-        .replyContactMessage(id!, data)
-        .then(() => contact.getContactMessage(id!))
-        .then((res) => res.data),
+      contact.replyContactMessage(id!, data).then((res) => res.data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["contactMessages"] });
       queryClient.invalidateQueries({ queryKey: ["contactMessage", id] });
@@ -95,16 +67,15 @@ export function useContactMessage(
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
+
     mutateAsync: mutation.mutateAsync,
     isPending: mutation.isPending,
-    mutateError: mutation.error as ApiException | null,
+    mutateError: mutation.error as ApiException,
   };
 }
 
-export function useConsultationRequests(
-  params: ConsultationRequestQueryType,
-): ListResult<ConsultationRequestQueryResponse> {
+export function useConsultationRequests(params: ConsultationRequestQueryType) {
   const query = useQuery({
     queryKey: ["consultationRequests", params],
     queryFn: () => consultation.listConsultationRequests(params),
@@ -117,16 +88,11 @@ export function useConsultationRequests(
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
   };
 }
 
-export function useConsultationRequest(
-  id?: string,
-): MutationResult<
-  ConsultationRequestResponse,
-  UpdateConsultationRequestType
-> {
+export function useConsultationRequest(id?: string) {
   const queryClient = useQueryClient();
 
   const query = useQuery({
@@ -152,16 +118,16 @@ export function useConsultationRequest(
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
     mutateAsync: mutation.mutateAsync,
     isPending: mutation.isPending,
-    mutateError: mutation.error as ApiException | null,
+    mutateError: mutation.error as ApiException,
   };
 }
 
 export function useNewsletterSubscribers(
   params: NewsletterSubscriberQueryType,
-): ListResult<NewsletterSubscriberQueryResponse> {
+) {
   const query = useQuery({
     queryKey: ["newsletterSubscribers", params],
     queryFn: () => newsletter.listNewsletterSubscribers(params),
@@ -174,13 +140,11 @@ export function useNewsletterSubscribers(
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
   };
 }
 
-export function useNewsletterSubscriber(
-  id?: string,
-): ListResult<NewsletterSubscriberResponse> {
+export function useNewsletterSubscriber(id?: string) {
   const query = useQuery({
     queryKey: ["newsletterSubscriber", id],
     queryFn: () => newsletter.getNewsletterSubscriber(id!),
@@ -193,6 +157,6 @@ export function useNewsletterSubscriber(
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
   };
 }

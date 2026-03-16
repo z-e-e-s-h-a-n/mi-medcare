@@ -47,6 +47,8 @@ export interface SearchToolbarProps<TQuery extends BaseQueryType> {
   filterConfig?: ListFilterConfig<TQuery>;
 
   searchByOptions: SearchByOption<TQuery>[];
+
+  canAdd?: boolean;
   entityType?: string;
 }
 
@@ -61,6 +63,7 @@ function SearchToolbar<TQuery extends BaseQueryType>({
   setFilter,
   filterConfig,
   entityType,
+  canAdd = true,
 }: SearchToolbarProps<TQuery>) {
   return (
     <div className="flex items-center flex-wrap gap-3 justify-between">
@@ -120,7 +123,7 @@ function SearchToolbar<TQuery extends BaseQueryType>({
             </Select>
           )}
 
-          {entityType && (
+          {canAdd && entityType && (
             <Button href={`${entityType}/new`} className="capitalize">
               <Plus /> New {entityType.split("/").pop()?.replace(/s$/, "")}
             </Button>

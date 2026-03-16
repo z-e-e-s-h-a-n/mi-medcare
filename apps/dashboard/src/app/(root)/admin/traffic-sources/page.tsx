@@ -11,35 +11,37 @@ import DateWrapper from "@/components/shared/DateWrapper";
 import type { ColumnConfig } from "@/components/shared/GenericTable";
 import type { SearchByOption } from "@/components/shared/SearchToolbar";
 
-const trafficColumns: ColumnConfig<TrafficSourceResponse, TrafficSourceQueryType>[] =
-  [
-    {
-      header: "Source",
-      accessor: (source) => source.utmSource ?? "—",
-      sortKey: "createdAt",
-    },
-    {
-      header: "Medium",
-      accessor: (source) => source.utmMedium ?? "—",
-    },
-    {
-      header: "Campaign",
-      accessor: (source) => source.utmCampaign ?? "—",
-    },
-    {
-      header: "Referrer",
-      accessor: (source) => source.referrer ?? "—",
-    },
-    {
-      header: "Landing Page",
-      accessor: (source) => source.landingPage ?? "—",
-    },
-    {
-      header: "Created",
-      accessor: (source) => <DateWrapper date={source.createdAt} />,
-      sortKey: "createdAt",
-    },
-  ];
+const trafficColumns: ColumnConfig<
+  TrafficSourceResponse,
+  TrafficSourceQueryType
+>[] = [
+  {
+    header: "Source",
+    accessor: (source) => source.utmSource ?? "—",
+    sortKey: "createdAt",
+  },
+  {
+    header: "Medium",
+    accessor: (source) => source.utmMedium ?? "—",
+  },
+  {
+    header: "Campaign",
+    accessor: (source) => source.utmCampaign ?? "—",
+  },
+  {
+    header: "Referrer",
+    accessor: (source) => source.referrer ?? "—",
+  },
+  {
+    header: "Landing Page",
+    accessor: (source) => source.landingPage ?? "—",
+  },
+  {
+    header: "Created",
+    accessor: (source) => <DateWrapper date={source.createdAt} />,
+    sortKey: "createdAt",
+  },
+];
 
 const trafficSearchOptions: SearchByOption<TrafficSourceQueryType>[] = [
   { value: "utmSource", label: "UTM Source" },
@@ -52,8 +54,8 @@ const trafficSearchOptions: SearchByOption<TrafficSourceQueryType>[] = [
 const TrafficSourcesPage = () => {
   return (
     <ListPage
-      entityKey="traffic-sources"
       dataKey={"sources"}
+      entityType="traffic-sources"
       canEdit={false}
       columns={trafficColumns}
       searchByOptions={trafficSearchOptions}

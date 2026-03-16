@@ -40,7 +40,7 @@ const tagSearchOptions: SearchByOption<TagQueryType>[] = [
 const TagsPage = () => {
   return (
     <ListPage
-      entityKey="tags"
+      dataKey="tags"
       columns={tagColumns}
       searchByOptions={tagSearchOptions}
       useListHook={useTags}

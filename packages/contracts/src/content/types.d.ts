@@ -1,50 +1,35 @@
 import type z from "zod";
 import type {
-  categoryPayloadSchema,
-  categoryQuerySchema,
-  contentViewPayloadSchema,
-  pagePayloadSchema,
-  pageQuerySchema,
-  postPayloadSchema,
-  postQuerySchema,
-  tagPayloadSchema,
+  CUTagSchema,
+  CUPostSchema,
+  CUCategorySchema,
+  contentViewSchema,
   tagQuerySchema,
+  postQuerySchema,
+  categoryQuerySchema,
 } from "./schema";
-import type {
-  Category,
-  ContentView,
-  Page,
-  Post,
-  Tag,
-} from "@workspace/db/browser";
+import type { Category, ContentView, Post, Tag } from "@workspace/db/browser";
 import type { BaseQueryResponse, Sanitize } from "../lib/types";
 import type { MediaResponse } from "../media/types";
 import type { BaseUserResponse } from "../user/types";
 
-export type CategoryType = z.input<typeof categoryPayloadSchema>;
+export type CategoryType = z.input<typeof CUCategorySchema>;
 export type CategoryQueryType = z.input<typeof categoryQuerySchema>;
 
-export type TagType = z.input<typeof tagPayloadSchema>;
+export type TagType = z.input<typeof CUTagSchema>;
 export type TagQueryType = z.input<typeof tagQuerySchema>;
 
-export type PageType = z.input<typeof pagePayloadSchema>;
-export type PageQueryType = z.input<typeof pageQuerySchema>;
-
-export type PostType = z.input<typeof postPayloadSchema>;
+export type PostType = z.input<typeof CUPostSchema>;
 export type PostQueryType = z.input<typeof postQuerySchema>;
 
-export type ContentViewType = z.input<typeof contentViewPayloadSchema>;
+export type ContentViewType = z.input<typeof contentViewSchema>;
 
 export interface CategoryResponse extends Sanitize<Category> {
   parent?: Sanitize<Category>;
   children?: Sanitize<Category>[];
 }
 
-export interface TagResponse extends Sanitize<Tag> {}
-
-export interface PageResponse extends Sanitize<Page> {
-  cover?: MediaResponse;
-}
+export type TagResponse = Sanitize<Tag>;
 
 export interface PostResponse extends Sanitize<Post> {
   author: BaseUserResponse;
@@ -61,12 +46,8 @@ export interface TagQueryResponse extends BaseQueryResponse {
   tags: TagResponse[];
 }
 
-export interface PageQueryResponse extends BaseQueryResponse {
-  pages: PageResponse[];
-}
-
 export interface PostQueryResponse extends BaseQueryResponse {
   posts: PostResponse[];
 }
 
-export interface ContentViewResponse extends Sanitize<ContentView> {}
+export type ContentViewResponse = Sanitize<ContentView>;

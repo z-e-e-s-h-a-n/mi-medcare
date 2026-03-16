@@ -28,10 +28,14 @@ interface UseQueryResult<TData, TFormData> {
   mutateError: ApiException | null;
 }
 
-interface GenericCUFormProps<TData, TFormData> extends BaseCUFormProps {
+interface GenericFormProps<TData, TFormData> extends BaseCUFormProps {
   entityName: string;
   defaultValues: Partial<TFormData>;
   schema: FormValidateOrFn<TFormData>;
+  title?: string;
+  description?: string;
+  submitLabel?: string;
+  mapDataToValues?: (data: TData) => TFormData;
   children?: (
     form: AnyFormApi<TFormData>,
     formType: FormSectionType,
@@ -54,12 +58,16 @@ interface GenericCUFormProps<TData, TFormData> extends BaseCUFormProps {
   }[keyof TFormData];
 }
 
-export function GenericCUForm<
+export function GenericForm<
   TData extends Record<string, any>,
   TFormData extends Record<string, any>,
 >({
   entityId,
   entityName,
+  title,
+  description,
+  submitLabel,
+  mapDataToValues,
   formType,
   children,
   defaultValues,
@@ -67,7 +75,7 @@ export function GenericCUForm<
   useQuery,
   formHeader,
   arrayFields,
-}: GenericCUFormProps<TData, TFormData>) {
+}: GenericFormProps<TData, TFormData>) {
   const router = useRouter();
   const pathname = usePathname();
   const listPath = getBackPath(pathname, formType === "add" ? 1 : 2);
@@ -95,10 +103,14 @@ export function GenericCUForm<
 
   useEffect(() => {
     if (data && !isFormReady) {
-      form.reset(data as unknown as TFormData);
+      form.reset(
+        mapDataToValues
+          ? mapDataToValues(data)
+          : (data as unknown as TFormData),
+      );
       setIsFormReady(true);
     }
-  }, [data, form, isFormReady]);
+  }, [data, form, isFormReady, mapDataToValues]);
 
   if (isLoading || !isFormReady) return <CUFormSkeleton />;
 
@@ -107,14 +119,20 @@ export function GenericCUForm<
       form={form}
       header={
         <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-3">
-            {formType === "add" ? "Add New" : "Update"} {entityName}
-            {entityId && `: ${entityId}`}
-          </h2>
+          <div className="flex items-center gap-4">
+            <h2 className="text-3xl font-bold mb-3">
+              {title ??
+                `${formType === "add" ? "Add New" : "Update"} ${entityName}`}
+            </h2>
+          </div>
+
+          {description ? (
+            <p className="text-muted-foreground">{description}</p>
+          ) : null}
         </div>
       }
     >
-      {formHeader && formHeader(form, formType)}
+      {formHeader && formHeader(form, formType, data)}
 
       {arrayFields && (
         <GenericArrayField
@@ -127,29 +145,40 @@ export function GenericCUForm<
 
       {children?.(form, formType)}
 
-      <form.Subscribe
-        selector={(state) => ({
-          canSubmit: state.canSubmit,
-        })}
-      >
-        {({ canSubmit }) => (
-          <Button
-            type="submit"
-            size="lg"
-            className="w-full text-base"
-            disabled={isPending || !canSubmit}
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 animate-spin" />
-                Sending...
-              </>
-            ) : (
-              `${formType} ${entityName}`
-            )}
-          </Button>
-        )}
-      </form.Subscribe>
+      <div className="flex items-center justify-between">
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() => router.push(listPath)}
+          disabled={isPending}
+        >
+          Cancel
+        </Button>
+
+        <form.Subscribe
+          selector={(state) => ({
+            canSubmit: state.canSubmit,
+          })}
+        >
+          {({ canSubmit }) => (
+            <Button
+              type="submit"
+              size="lg"
+              className="capitalize"
+              disabled={isPending || !canSubmit}
+            >
+              {isPending ? (
+                <>
+                  <Loader2 className="mr-2 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                (submitLabel ?? `${formType} ${entityName}`)
+              )}
+            </Button>
+          )}
+        </form.Subscribe>
+      </div>
     </Form>
   );
 }

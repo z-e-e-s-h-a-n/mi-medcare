@@ -6,7 +6,7 @@ import type { ApiException } from "@workspace/sdk";
 import * as business from "@workspace/sdk/business";
 import { parseDuration } from "@workspace/shared/utils";
 
-const STALE_TIME = parseDuration("15m");
+const STALE_TIME = parseDuration("1h");
 
 const queryDefaults = {
   staleTime: STALE_TIME,
@@ -21,20 +21,8 @@ export function useBusinessProfile() {
 
   const businessQuery = useQuery({
     queryKey: ["business-profile"],
-    queryFn: async () => {
-      try {
-        const res = await business.getBusinessProfile();
-        return res.data;
-      } catch (error) {
-        const apiError = error as ApiException;
-
-        if (apiError.status === 404) {
-          return undefined;
-        }
-
-        throw error;
-      }
-    },
+    queryFn: business.getBusinessProfile,
+    select: (res) => res.data,
     ...queryDefaults,
   });
 
@@ -50,10 +38,10 @@ export function useBusinessProfile() {
     data: businessQuery.data,
     isLoading: businessQuery.isLoading,
     isFetching: businessQuery.isFetching,
-    fetchError: businessQuery.error as ApiException | null,
+    fetchError: businessQuery.error as ApiException,
 
     mutateAsync: mutation.mutateAsync,
     isPending: mutation.isPending,
-    mutateError: mutation.error,
+    mutateError: mutation.error as ApiException,
   };
 }

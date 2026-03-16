@@ -47,8 +47,14 @@ const TrafficSourceDetailsPage = async ({
           title: "UTM Details",
           columns: 3,
           fields: [
-            { label: "UTM Source", accessor: (source) => source.utmSource ?? "—" },
-            { label: "UTM Medium", accessor: (source) => source.utmMedium ?? "—" },
+            {
+              label: "UTM Source",
+              accessor: (source) => source.utmSource ?? "—",
+            },
+            {
+              label: "UTM Medium",
+              accessor: (source) => source.utmMedium ?? "—",
+            },
             {
               label: "UTM Campaign",
               accessor: (source) => source.utmCampaign ?? "—",
@@ -79,22 +85,16 @@ const TrafficSourceDetailsPage = async ({
           ],
         },
       ]}
-      children={(source) => (
+    >
+      {(source) => (
         <div className="grid gap-6">
           <RelatedListCard
             title="Content Views"
             columns={["Target", "Viewed At"]}
             rows={source.contentViews?.map((view) => ({
               id: view.id,
-              href: view.postId
-                ? `/admin/content/posts/${view.postId}`
-                : view.pageId
-                  ? `/admin/content/pages/${view.pageId}`
-                  : undefined,
-              values: [
-                view.postId ? `Post: ${view.postId}` : `Page: ${view.pageId ?? "—"}`,
-                view.viewedAt,
-              ],
+              href: `/admin/content/posts/${view.postId}`,
+              values: [`Post: ${view.postId}`, view.viewedAt],
             }))}
           />
           <RelatedListCard
@@ -130,7 +130,7 @@ const TrafficSourceDetailsPage = async ({
           />
         </div>
       )}
-    />
+    </GenericDetailsPage>
   );
 };
 

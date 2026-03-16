@@ -51,7 +51,7 @@ const categorySearchOptions: SearchByOption<CategoryQueryType>[] = [
 const CategoriesPage = () => {
   return (
     <ListPage
-      entityKey="categories"
+      dataKey="categories"
       columns={categoryColumns}
       searchByOptions={categorySearchOptions}
       useListHook={useCategories}

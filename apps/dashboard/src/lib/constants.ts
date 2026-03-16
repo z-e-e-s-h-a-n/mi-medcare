@@ -9,6 +9,8 @@ import {
   IconFileText,
   IconRoute,
   IconHistory,
+  IconAddressBook,
+  IconFolder,
 } from "@tabler/icons-react";
 
 export type NavItem = {
@@ -38,6 +40,47 @@ export const sidebarMenu: NavGroup[] = [
     groupLabel: "MANAGEMENT",
     items: [
       {
+        title: "Content",
+        icon: IconFolder,
+        children: [
+          {
+            title: "Posts",
+            url: "/admin/content/posts",
+            icon: IconFileText,
+          },
+          {
+            title: "Tags",
+            url: "/admin/content/tags",
+            icon: IconTags,
+          },
+          {
+            title: "Categories",
+            url: "/admin/content/categories",
+            icon: IconCategory,
+          },
+        ],
+      },
+
+      {
+        title: "Leads",
+        icon: IconAddressBook,
+        children: [
+          {
+            title: "Newsletter",
+            url: "/admin/leads/subscribers",
+          },
+          {
+            title: "Consultations",
+            url: "/admin/leads/requests",
+          },
+          {
+            title: "Contact Messages",
+            url: "/admin/leads/messages",
+          },
+        ],
+      },
+
+      {
         title: "Users",
         icon: IconUsers,
         children: [
@@ -50,50 +93,6 @@ export const sidebarMenu: NavGroup[] = [
         title: "Media",
         url: "/media",
         icon: IconPhoto,
-      },
-
-      {
-        title: "Content",
-        children: [
-          {
-            title: "Categories",
-            url: "/admin/content/categories",
-            icon: IconCategory,
-          },
-          {
-            title: "Tags",
-            url: "/admin/content/tags",
-            icon: IconTags,
-          },
-          {
-            title: "Pages",
-            url: "/admin/content/pages",
-            icon: IconFileText,
-          },
-          {
-            title: "Posts",
-            url: "/admin/content/posts",
-            icon: IconFileText,
-          },
-        ],
-      },
-
-      {
-        title: "Leads",
-        children: [
-          {
-            title: "Contact Messages",
-            url: "/admin/leads/contact",
-          },
-          {
-            title: "Consultations",
-            url: "/admin/leads/consultation",
-          },
-          {
-            title: "Newsletter",
-            url: "/admin/leads/newsletter",
-          },
-        ],
       },
 
       {

@@ -11,8 +11,6 @@ import {
 import {
   CategoryDto,
   CategoryQueryDto,
-  PageDto,
-  PageQueryDto,
   PostDto,
   PostQueryDto,
   TagDto,
@@ -103,44 +101,6 @@ export class ContentAdminController {
   @Post("tags/:id/restore")
   async restoreTag(@Param("id") id: string, @User("id") userId: string) {
     return this.contentService.restoreTag(id, userId);
-  }
-
-  @Post("pages")
-  async createPage(@Body() dto: PageDto, @User("id") userId: string) {
-    return this.contentService.createPage(dto, userId);
-  }
-
-  @Get("pages")
-  async queryPages(@Query() query: PageQueryDto) {
-    return this.contentService.queryPages(query);
-  }
-
-  @Get("pages/:id")
-  async getPage(@Param("id") id: string) {
-    return this.contentService.getPageById(id);
-  }
-
-  @Put("pages/:id")
-  async updatePage(
-    @Param("id") id: string,
-    @Body() dto: PageDto,
-    @User("id") userId: string,
-  ) {
-    return this.contentService.updatePage(id, dto, userId);
-  }
-
-  @Delete("pages/:id")
-  async deletePage(
-    @Param("id") id: string,
-    @BooleanQuery("force") force: boolean,
-    @User("id") userId: string,
-  ) {
-    return this.contentService.deletePage(id, force, userId);
-  }
-
-  @Post("pages/:id/restore")
-  async restorePage(@Param("id") id: string, @User("id") userId: string) {
-    return this.contentService.restorePage(id, userId);
   }
 
   @Post("posts")

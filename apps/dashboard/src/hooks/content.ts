@@ -48,28 +48,6 @@ export const {
 );
 
 export const {
-  useEntity: usePage,
-  useEntities: usePages,
-  useCreateEntity: useCreatePage,
-  useUpdateEntity: useUpdatePage,
-  useDeleteEntity: useDeletePage,
-  useRestoreEntity: useRestorePage,
-} = createCrudHooks(
-  {
-    findOne: content.getAdminPage,
-    findAll: content.getAdminPages,
-    create: content.createPage,
-    update: content.updatePage,
-    delete: content.deletePage,
-    restore: content.restorePage,
-  },
-  {
-    single: "page",
-    list: "pageList",
-  },
-);
-
-export const {
   useEntity: usePost,
   useEntities: usePosts,
   useCreateEntity: useCreatePost,

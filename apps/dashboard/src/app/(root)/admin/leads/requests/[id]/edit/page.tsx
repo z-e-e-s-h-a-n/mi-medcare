@@ -8,7 +8,7 @@ const EditConsultationRequestPage = async ({
   params,
 }: EditConsultationRequestPageProps) => {
   const { id } = await params;
-  return <ConsultationRequestForm entityId={id} />;
+  return <ConsultationRequestForm entityId={id} formType="update" />;
 };
 
 export default EditConsultationRequestPage;

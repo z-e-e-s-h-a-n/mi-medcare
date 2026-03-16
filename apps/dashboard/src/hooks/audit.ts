@@ -1,11 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import type {
-  AuditLogQueryResponse,
-  AuditLogQueryType,
-  AuditLogResponse,
-} from "@workspace/contracts/audit";
+import type { AuditLogQueryType } from "@workspace/contracts/audit";
 import type { ApiException } from "@workspace/sdk";
 import * as audit from "@workspace/sdk/audit";
 import { parseDuration } from "@workspace/shared/utils";
@@ -20,16 +16,7 @@ const queryDefaults = {
   retry: false,
 };
 
-type QueryResult<T> = {
-  data?: T;
-  isLoading: boolean;
-  isFetching: boolean;
-  fetchError: ApiException | null;
-};
-
-export function useAuditLogs(
-  params: AuditLogQueryType,
-): QueryResult<AuditLogQueryResponse> {
+export function useAuditLogs(params: AuditLogQueryType) {
   const query = useQuery({
     queryKey: ["auditLogs", params],
     queryFn: () => audit.getAuditLogs(params),
@@ -42,11 +29,11 @@ export function useAuditLogs(
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
   };
 }
 
-export function useAuditLog(id?: string): QueryResult<AuditLogResponse> {
+export function useAuditLog(id?: string) {
   const query = useQuery({
     queryKey: ["auditLog", id],
     queryFn: () => audit.getAuditLog(id!),
@@ -59,6 +46,6 @@ export function useAuditLog(id?: string): QueryResult<AuditLogResponse> {
     data: query.data,
     isLoading: query.isLoading,
     isFetching: query.isFetching,
-    fetchError: query.error as ApiException | null,
+    fetchError: query.error as ApiException,
   };
 }

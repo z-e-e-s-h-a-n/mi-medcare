@@ -22,5 +22,5 @@ export type NewsletterSubscriberQueryType = z.input<
 export type NewsletterSubscriberResponse = Sanitize<NewsletterSubscriber>;
 
 export interface NewsletterSubscriberQueryResponse extends BaseQueryResponse {
-  users: NewsletterSubscriberResponse[];
+  subscribers: NewsletterSubscriberResponse[];
 }

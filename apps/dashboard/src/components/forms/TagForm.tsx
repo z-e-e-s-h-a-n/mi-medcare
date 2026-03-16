@@ -1,15 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { useForm } from "@tanstack/react-form";
-import { Loader2, Tags } from "lucide-react";
-
-import { tagPayloadSchema, type TagType } from "@workspace/contracts/content";
-import { Form } from "@workspace/ui/components/form";
-import { Button } from "@workspace/ui/components/button";
+import type { BaseCUFormProps } from "@workspace/contracts";
+import { GenericForm } from "../shared/GenericForm";
+import { useTag } from "@/hooks/content";
 import { InputField } from "@workspace/ui/components/input-field";
+import { CUTagSchema } from "@workspace/contracts/content";
 import {
   Card,
   CardContent,
@@ -17,54 +12,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@workspace/ui/components/card";
+import { Tags } from "lucide-react";
 
-import { useTag } from "@/hooks/content";
-import CUFormSkeleton from "@/components/skeleton/CUFormSkeleton";
-
-type TagFormProps = {
-  entityId?: string;
-  formType: "add" | "update";
-};
-
-const TagForm = ({ entityId, formType }: TagFormProps) => {
-  const router = useRouter();
-  const { data, mutateAsync, isPending, isLoading } = useTag(entityId!);
-
-  const form = useForm({
-    defaultValues: {
-      name: data?.name ?? "",
-      slug: data?.slug ?? "",
-    } as TagType,
-    validators: {
-      onSubmit: tagPayloadSchema,
-    },
-    onSubmit: async ({ value }) => {
-      try {
-        await mutateAsync(value);
-        toast.success(
-          `Tag ${formType === "add" ? "created" : "updated"} successfully.`,
-        );
-        router.push("/admin/content/tags");
-      } catch (error: any) {
-        toast.error(error?.message ?? "Failed to save tag.");
-      }
-    },
-  });
-
-  if (isLoading) return <CUFormSkeleton />;
-
+const CUCategoryForm = (props: BaseCUFormProps) => {
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">
-          {formType === "add" ? "New Tag" : "Edit Tag"}
-        </h1>
-        <p className="text-muted-foreground">
-          Define reusable content labels for posts.
-        </p>
-      </div>
-
-      <Form form={form}>
+    <GenericForm
+      {...props}
+      entityName="Tag"
+      useQuery={useTag}
+      schema={CUTagSchema}
+      defaultValues={{
+        name: "",
+        slug: "",
+      }}
+    >
+      {(form) => (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -82,33 +44,9 @@ const TagForm = ({ entityId, formType }: TagFormProps) => {
             </div>
           </CardContent>
         </Card>
-
-        <div className="flex justify-between border-t pt-6">
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={() => router.push("/admin/content/tags")}
-            disabled={isPending}
-          >
-            Cancel
-          </Button>
-
-          <Button type="submit" disabled={isPending}>
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 size-4 animate-spin" />
-                Saving
-              </>
-            ) : formType === "add" ? (
-              "Create Tag"
-            ) : (
-              "Update Tag"
-            )}
-          </Button>
-        </div>
-      </Form>
-    </div>
+      )}
+    </GenericForm>
   );
 };
 
-export default TagForm;
+export default CUCategoryForm;

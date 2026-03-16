@@ -72,7 +72,7 @@ const userSearchByOptions: SearchByOption<UserQueryType>[] = [
 const page = () => {
   return (
     <ListPage
-      entityKey="users"
+      dataKey="users"
       columns={userColumns}
       searchByOptions={userSearchByOptions}
       useListHook={useAdminUsers}

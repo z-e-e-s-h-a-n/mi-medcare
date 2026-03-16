@@ -1,10 +1,7 @@
 "use client";
 
 import { Badge } from "@workspace/ui/components/badge";
-import type {
-  PostQueryType,
-  PostResponse,
-} from "@workspace/contracts/content";
+import type { PostQueryType, PostResponse } from "@workspace/contracts/content";
 
 import { useDeletePost, usePosts } from "@/hooks/content";
 import ListPage from "@/components/shared/ListPage";
@@ -25,11 +22,6 @@ const postColumns: ColumnConfig<PostResponse, PostQueryType>[] = [
   {
     header: "Status",
     accessor: (post) => <Badge variant="secondary">{post.status}</Badge>,
-  },
-  {
-    header: "Featured",
-    accessor: (post) =>
-      post.isFeatured ? <Badge variant="secondary">Featured</Badge> : "—",
   },
   {
     header: "Views",
@@ -53,7 +45,7 @@ const postSearchOptions: SearchByOption<PostQueryType>[] = [
 const PostsPage = () => {
   return (
     <ListPage
-      entityKey="posts"
+      dataKey="posts"
       columns={postColumns}
       searchByOptions={postSearchOptions}
       useListHook={usePosts}

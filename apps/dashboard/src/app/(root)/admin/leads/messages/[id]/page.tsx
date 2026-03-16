@@ -1,17 +1,20 @@
+"use client";
+
 import { Mail } from "lucide-react";
 
 import type { ContactMessageResponse } from "@workspace/contracts/contact";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useContactMessage } from "@/hooks/lead";
+import React from "react";
 
 type ContactMessageDetailsPageProps = {
   params: Promise<{ id: string }>;
 };
 
-const ContactMessageDetailsPage = async ({
+const ContactMessageDetailsPage = ({
   params,
 }: ContactMessageDetailsPageProps) => {
-  const { id } = await params;
+  const { id } = React.use(params);
 
   return (
     <GenericDetailsPage<ContactMessageResponse, never>

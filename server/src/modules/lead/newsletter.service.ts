@@ -63,7 +63,7 @@ export class NewsletterService {
     const skip = (page - 1) * limit;
     const orderBy = { [sortBy]: sortOrder };
 
-    const [users, total] = await Promise.all([
+    const [subscribers, total] = await Promise.all([
       this.prisma.newsletterSubscriber.findMany({
         where,
         skip,
@@ -76,7 +76,7 @@ export class NewsletterService {
     return {
       message: "Subscribers fetched successfully.",
       data: {
-        users,
+        subscribers,
         total,
         page,
         limit,
@@ -86,9 +86,11 @@ export class NewsletterService {
   }
 
   async getSubscriber(id: string) {
-    const subscriber = await this.prisma.newsletterSubscriber.findUniqueOrThrow({
-      where: { id },
-    });
+    const subscriber = await this.prisma.newsletterSubscriber.findUniqueOrThrow(
+      {
+        where: { id },
+      },
+    );
 
     return {
       message: "Subscriber fetched successfully.",
