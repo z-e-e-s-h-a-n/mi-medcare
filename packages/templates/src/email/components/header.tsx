@@ -1,4 +1,5 @@
 import { Heading, Text } from "@react-email/components";
+import { emailTheme } from "./theme";
 
 interface HeaderProps {
   title: string;
@@ -7,9 +8,19 @@ interface HeaderProps {
 
 export const Header = ({ title, subtitle }: HeaderProps) => (
   <>
-    <Heading className="text-xl font-semibold text-gray-900 mb-1">
+    <Heading
+      className="mb-1 text-xl font-semibold"
+      style={{ color: emailTheme.foreground }}
+    >
       {title}
     </Heading>
-    {subtitle && <Text className="text-sm text-gray-500 mb-6">{subtitle}</Text>}
+    {subtitle && (
+      <Text
+        className="mb-6 text-sm"
+        style={{ color: emailTheme.mutedForeground }}
+      >
+        {subtitle}
+      </Text>
+    )}
   </>
 );

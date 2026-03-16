@@ -15,23 +15,24 @@ export const Newsletter: EmailTemplateComponent<"newsletter"> = (props) => {
   if (isUnsubscribed(props)) {
     return (
       <Layout previewText="You have unsubscribed">
-        <Header title="Unsubscription Successful" />
+        <Header title="You Have Been Unsubscribed" />
         <Greeting name={props.newsletterSubscriber.name} />
         <Text className="text-base text-gray-900">
-          You have successfully unsubscribed from our newsletter. You will no
-          longer receive emails from us.
+          You have successfully unsubscribed from MI MedCare updates. You will
+          no longer receive product news, billing insights, or service
+          announcements.
         </Text>
       </Layout>
     );
   }
 
   return (
-    <Layout previewText="Newsletter subscription confirmed">
+    <Layout previewText="Subscription confirmed">
       <Header title="Subscription Confirmed" />
       <Greeting name={props.newsletterSubscriber.name} />
       <Text className="text-base text-gray-900">
-        Thank you for subscribing to our newsletter. You will now receive the
-        latest updates and offers.
+        Thank you for subscribing to MI MedCare updates. You will now receive
+        announcements, billing insights, and service updates from our team.
       </Text>
     </Layout>
   );

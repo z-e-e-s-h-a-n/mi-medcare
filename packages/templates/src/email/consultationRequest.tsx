@@ -10,12 +10,13 @@ export const ConsultationRequest: EmailTemplateComponent<
   return (
     <Layout previewText="Consultation request received">
       <Header
-        title="New Consultation Request"
+        title="Consultation Request Received"
         subtitle={props.consultationRequest.practiceName || ""}
       />
       <Greeting name={props.consultationRequest.fullName} />
       <Text className="text-base text-gray-900">
-        We have received your consultation request.
+        Thank you for reaching out to MI MedCare. We have received your
+        consultation request.
       </Text>
       <Text className="text-base text-gray-900">
         <strong>Practice Name:</strong>{" "}
@@ -28,8 +29,14 @@ export const ConsultationRequest: EmailTemplateComponent<
         </Text>
       )}
       <Text className="text-base text-gray-900">
-        Our team will contact you at {props.consultationRequest.email} or{" "}
-        {props.consultationRequest.phone} shortly.
+        Our team will contact you soon to discuss your billing goals, current
+        workflow, and where we can support your revenue cycle operations.
+      </Text>
+      <Text className="text-base text-gray-900">
+        Contact details on file: {props.consultationRequest.email}
+        {props.consultationRequest.phone
+          ? ` | ${props.consultationRequest.phone}`
+          : ""}
       </Text>
       {props.consultationRequest.message && (
         <Text className="text-base text-gray-900">
@@ -43,4 +50,4 @@ export const ConsultationRequest: EmailTemplateComponent<
 ConsultationRequest.subject = () =>
   "Your consultation request has been received";
 ConsultationRequest.message = () =>
-  "We have received your consultation request and will contact you soon.";
+  "We received your consultation request and will contact you soon.";

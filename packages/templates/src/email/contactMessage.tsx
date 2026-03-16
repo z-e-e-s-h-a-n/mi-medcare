@@ -15,20 +15,19 @@ export const ContactMessage: EmailTemplateComponent<"contactMessage"> = (
 ) => {
   if (isReplied(props)) {
     return (
-      <Layout previewText="Your message has been replied">
+      <Layout previewText="Your MI MedCare message has been answered">
         <Header
           title="Message Replied"
           subtitle={props.contactMessage.practiceName || ""}
         />
         <Greeting name={props.contactMessage.fullName} />
         <Text className="text-base text-gray-900">
-          Your message regarding "
-          {props.contactMessage.practiceName || "your inquiry"}" has been
-          replied.
+          Our team has replied to your message about{" "}
+          {props.contactMessage.practiceName || "your billing inquiry"}.
         </Text>
         {props.contactMessage.notes && (
           <Text className="text-base text-gray-900">
-            Reply Notes: {props.contactMessage.notes}
+            Response details: {props.contactMessage.notes}
           </Text>
         )}
       </Layout>
@@ -38,14 +37,18 @@ export const ContactMessage: EmailTemplateComponent<"contactMessage"> = (
   return (
     <Layout previewText="New contact message received">
       <Header
-        title="New Contact Message"
+        title="Message Received"
         subtitle={props.contactMessage.practiceName || ""}
       />
       <Greeting name={props.contactMessage.fullName} />
       <Text className="text-base text-gray-900">
-        We have received your message regarding "
-        {props.contactMessage.practiceName || "your inquiry"}". Our team will
-        get back to you shortly.
+        We received your message and our medical billing team will review it
+        shortly.
+      </Text>
+      <Text className="text-base text-gray-900">
+        If your note is related to claims, eligibility, denials, payment
+        posting, or prior authorization support, we will route it to the right
+        specialist.
       </Text>
     </Layout>
   );
@@ -53,10 +56,10 @@ export const ContactMessage: EmailTemplateComponent<"contactMessage"> = (
 
 ContactMessage.subject = (props) =>
   isReplied(props)
-    ? "Your contact message has been replied"
-    : "New contact message received";
+    ? "Your MI MedCare message has been answered"
+    : "We received your message";
 
 ContactMessage.message = (props) =>
   isReplied(props)
-    ? "Your contact message has been replied."
-    : "We have received your contact message and will respond shortly.";
+    ? "Our team has responded to your message."
+    : "We received your message and will respond shortly.";

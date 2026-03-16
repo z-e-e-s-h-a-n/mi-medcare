@@ -17,7 +17,7 @@ export const UserStatus: EmailTemplateComponent<"userStatus"> = (props) => {
       <Layout previewText="Your account has been suspended">
         <Header
           title="Account Suspended"
-          subtitle={`${appName.default} Travel Account Notice`}
+          subtitle={`${appName.default} Account Notice`}
         />
         <Greeting name={props.user.displayName} />
         <Text className="text-base text-gray-900">
@@ -44,12 +44,11 @@ export const UserStatus: EmailTemplateComponent<"userStatus"> = (props) => {
       />
       <Greeting name={props.user.displayName} />
       <Text className="text-base text-gray-900">
-        Great news! Your {appName.default} travel account has been successfully
-        reactivated.
+        Your {appName.default} account has been successfully reactivated.
       </Text>
       <Text className="text-base text-gray-900">
-        You can now sign in and continue planning your trips without any
-        restrictions.
+        You can now sign back in and continue managing your billing operations
+        without interruption.
       </Text>
     </Layout>
   );

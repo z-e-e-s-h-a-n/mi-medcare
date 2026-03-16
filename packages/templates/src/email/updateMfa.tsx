@@ -21,7 +21,8 @@ export const UpdateMfa: EmailTemplateComponent<"updateMfa"> = (props) => {
           <Header title="Disable Two-Factor Authentication" />
           <Greeting name={props.user.displayName} />
           <Text className="text-base text-gray-900">
-            Use the code below to disable 2FA for your travel account.
+            Use the code below to disable multi-factor authentication for your
+            MI MedCare account.
           </Text>
           <NumericCode code={props.otp.secret} />
           <Text className="text-xs text-gray-500 text-center">
@@ -36,7 +37,7 @@ export const UpdateMfa: EmailTemplateComponent<"updateMfa"> = (props) => {
         <Header title="2FA Disabled" />
         <Greeting name={props.user.displayName} />
         <Text className="text-base text-gray-900">
-          Two-factor authentication has been disabled on your account.
+          Multi-factor authentication has been disabled on your account.
         </Text>
       </Layout>
     );
@@ -48,7 +49,8 @@ export const UpdateMfa: EmailTemplateComponent<"updateMfa"> = (props) => {
         <Header title="Enable Two-Factor Authentication" />
         <Greeting name={props.user.displayName} />
         <Text className="text-base text-gray-900">
-          Use the code below to enable 2FA for your travel account.
+          Use the code below to enable multi-factor authentication for your
+          MI MedCare account.
         </Text>
         <NumericCode code={props.otp.secret} />
         <Text className="text-xs text-gray-500 text-center">
@@ -63,7 +65,7 @@ export const UpdateMfa: EmailTemplateComponent<"updateMfa"> = (props) => {
       <Header title="2FA Enabled Successfully" />
       <Greeting name={props.user.displayName} />
       <Text className="text-base text-gray-900">
-        Two-factor authentication is now active on your account.
+        Multi-factor authentication is now active on your account.
       </Text>
     </Layout>
   );

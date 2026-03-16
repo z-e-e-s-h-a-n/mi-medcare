@@ -1,11 +1,12 @@
 import { Text } from "@react-email/components";
+import { emailTheme } from "./theme";
 
 interface GreetingProps {
   name?: string | null;
 }
 
 export const Greeting = ({ name }: GreetingProps) => (
-  <Text className="text-base text-gray-900">
+  <Text className="text-base" style={{ color: emailTheme.foreground }}>
     Hello <strong>{name ?? "there"}</strong>,
   </Text>
 );

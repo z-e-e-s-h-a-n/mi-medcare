@@ -25,7 +25,8 @@ export const UpdatePassword: EmailTemplateComponent<"updatePassword"> = (
           <Header title="Set Your Password" />
           <Greeting name={props.user.displayName} />
           <Text className="text-base text-gray-900">
-            Create a password to access your {appName.default} travel account.
+            Create a password to access your {appName.default} account and
+            manage billing operations securely.
           </Text>
           <ActionBlock link={link} label="Set password" otp={props.otp} />
         </Layout>
@@ -34,26 +35,28 @@ export const UpdatePassword: EmailTemplateComponent<"updatePassword"> = (
 
     return (
       <Layout previewText="Password set successfully">
-        <Header title="Password Set Successfully" />
-        <Greeting name={props.user.displayName} />
-        <Text className="text-base text-gray-900">
-          Your password has been created successfully.
-        </Text>
-      </Layout>
-    );
+      <Header title="Password Set Successfully" />
+      <Greeting name={props.user.displayName} />
+      <Text className="text-base text-gray-900">
+        Your password has been created successfully. You can now sign in to
+        your account.
+      </Text>
+    </Layout>
+  );
   }
 
   if (props.otp) {
     const link = `${props.clientUrl}/auth/reset-password?email=${props.identifier}&purpose=${props.otp.purpose}&secret=${props.otp.secret}&type=${props.otp.type}`;
     return (
       <Layout previewText="Reset your password">
-        <Header title="Reset Your Password" />
-        <Greeting name={props.user.displayName} />
-        <Text className="text-base text-gray-900">
-          Use the code below to reset your password.
-        </Text>
-        <ActionBlock link={link} label="Reset password" otp={props.otp} />
-      </Layout>
+      <Header title="Reset Your Password" />
+      <Greeting name={props.user.displayName} />
+      <Text className="text-base text-gray-900">
+        Use the code below to reset your password and restore secure access to
+        your account.
+      </Text>
+      <ActionBlock link={link} label="Reset password" otp={props.otp} />
+    </Layout>
     );
   }
 
@@ -62,7 +65,7 @@ export const UpdatePassword: EmailTemplateComponent<"updatePassword"> = (
       <Header title="Password Reset Successful" />
       <Greeting name={props.user.displayName} />
       <Text className="text-base text-gray-900">
-        Your password has been updated.
+        Your password has been updated successfully.
       </Text>
     </Layout>
   );

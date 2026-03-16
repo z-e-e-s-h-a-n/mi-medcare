@@ -9,14 +9,15 @@ export const SignUp: EmailTemplateComponent<"signUp"> = ({ user }) => (
   <Layout previewText={`Welcome to ${appName.default}`}>
     <Header
       title={`Welcome to ${appName.default}`}
-      subtitle="Your travel account is ready"
+      subtitle="Your medical billing account is ready"
     />
     <Greeting name={user.displayName} />
     <Text className="text-base text-gray-900">
-      Your travel agency account has been successfully created.
+      Your account has been created successfully.
     </Text>
     <Text className="text-base text-gray-900">
-      You can now sign in and start planning your next adventure.
+      You can now sign in to manage billing workflows, service requests, and
+      account settings with MI MedCare.
     </Text>
   </Layout>
 );

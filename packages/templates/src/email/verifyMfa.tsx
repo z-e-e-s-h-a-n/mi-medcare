@@ -10,10 +10,10 @@ export const VerifyMfa: EmailTemplateComponent<"verifyMfa"> = ({
   otp,
 }) => (
   <Layout previewText="Your security code">
-    <Header title="Security Code" />
+    <Header title="Security Code" subtitle="Multi-factor authentication" />
     <Greeting name={user.displayName} />
     <Text className="text-base text-gray-900">
-      Use the code below to complete your sign-in.
+      Use the code below to complete sign-in to your MI MedCare account.
     </Text>
     <NumericCode code={otp!.secret} />
     <Text className="text-xs text-gray-500 text-center">

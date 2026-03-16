@@ -1,3 +1,5 @@
+import { emailTheme } from "./theme";
+
 interface NumericCodeProps {
   code: string;
 }
@@ -7,7 +9,12 @@ export const NumericCode = ({ code }: NumericCodeProps) => (
     {code.split("").map((digit, i) => (
       <span
         key={i}
-        className="inline-block min-w-11 py-3 mx-1 bg-gray-50 border border-gray-200 rounded-lg text-xl font-mono font-bold text-gray-900"
+        className="mx-1 inline-block min-w-11 rounded-xl border py-3 text-xl font-mono font-bold"
+        style={{
+          backgroundColor: emailTheme.background,
+          borderColor: emailTheme.border,
+          color: emailTheme.foreground,
+        }}
       >
         {digit}
       </span>
