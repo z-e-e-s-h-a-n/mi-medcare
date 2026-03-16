@@ -17,6 +17,7 @@ const NewsletterSubscriberDetailsPage = async ({
     <GenericDetailsPage<NewsletterSubscriberResponse, never>
       entityId={id}
       entityName="newsletter subscriber"
+      canEdit={false}
       useQuery={useNewsletterSubscriber}
       renderHeader={(subscriber) => (
         <div className="flex items-start gap-4">

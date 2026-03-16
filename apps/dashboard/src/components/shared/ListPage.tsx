@@ -11,10 +11,8 @@ import type {
   BaseResponse,
 } from "@workspace/contracts";
 
-interface UseListResult<TKey extends string, TData> {
-  data?: BaseQueryResponse & {
-    [K in TKey]: TData[];
-  };
+interface UseListResult<TData> {
+  data?: BaseQueryResponse;
 
   isLoading?: boolean;
   fetchError?: unknown;
@@ -23,15 +21,17 @@ interface UseListResult<TKey extends string, TData> {
 interface ListPageConfig<
   TData extends BaseResponse,
   TQuery extends BaseQueryType,
-  TKey extends string,
+  TRouteKey extends string,
+  TDataKey extends string = TRouteKey,
 > {
-  entityKey: TKey;
+  entityKey: TRouteKey;
+  dataKey?: TDataKey;
   canEdit?: boolean;
   columns: ColumnConfig<TData, TQuery>[];
   searchByOptions: SearchByOption<TQuery>[];
 
   defaultParams?: TQuery;
-  useListHook: (params: TQuery) => UseListResult<TKey, TData>;
+  useListHook: (params: TQuery) => UseListResult<TData>;
   useDeleteHook?: () => {
     deleteAsync: (args: { id: string; force?: boolean }) => Promise<unknown>;
     isDeleting: boolean;
@@ -47,9 +47,11 @@ interface ListPageConfig<
 function ListPage<
   TData extends BaseResponse,
   TQuery extends BaseQueryType,
-  TKey extends string,
+  TRouteKey extends string,
+  TDataKey extends string = TRouteKey,
 >({
   entityKey,
+  dataKey,
   canEdit,
   columns,
   defaultSearchBy,
@@ -59,7 +61,7 @@ function ListPage<
   useDeleteHook,
   defaultParams,
   filterConfig,
-}: ListPageConfig<TData, TQuery, TKey>) {
+}: ListPageConfig<TData, TQuery, TRouteKey, TDataKey>) {
   const [page, setPage] = React.useState(1);
   const [limit, setLimit] = React.useState(10);
   const [search, setSearch] = React.useState("");
@@ -85,6 +87,9 @@ function ListPage<
   const { data, isLoading } = useListHook(query);
   const deleteHook = useDeleteHook?.();
   const { confirm } = useConfirm();
+  const resolvedDataKey = dataKey ?? entityKey;
+  const tableData =
+    ((data as Record<string, TData[]> | undefined)?.[resolvedDataKey] ?? []);
 
   const handleDelete = async (row: TData) => {
     if (!deleteHook) return;
@@ -109,7 +114,7 @@ function ListPage<
       <GenericTable
         entityType={entityKey}
         canEdit={canEdit}
-        data={data?.[entityKey] || []}
+        data={tableData}
         total={data?.total || 0}
         limit={data?.limit || 10}
         currentPage={data?.page || 1}

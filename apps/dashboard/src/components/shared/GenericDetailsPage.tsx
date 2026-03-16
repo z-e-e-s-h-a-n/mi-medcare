@@ -52,6 +52,7 @@ interface GenericDetailsPageProps<
 > {
   entityId: string;
   entityName: string;
+  canEdit?: boolean;
   sections: SectionConfig<TData>[];
   relatedEntities?: RelatedEntityConfig<TData, TKey>[];
   renderHeader: (data: TData) => React.ReactNode;
@@ -70,6 +71,7 @@ export function GenericDetailsPage<
 >({
   entityId,
   entityName,
+  canEdit = true,
   sections,
   useQuery,
   relatedEntities,
@@ -163,12 +165,14 @@ export function GenericDetailsPage<
 
           <div className="flex items-center gap-2">
             {renderActions?.(data)}
-            <Button asChild>
-              <Link href={`${pathname}/edit`}>
-                <Edit className="h-4 w-4 mr-2" />
-                Edit
-              </Link>
-            </Button>
+            {canEdit && (
+              <Button asChild>
+                <Link href={`${pathname}/edit`}>
+                  <Edit className="h-4 w-4 mr-2" />
+                  Edit
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
 
