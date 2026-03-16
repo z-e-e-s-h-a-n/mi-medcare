@@ -75,6 +75,24 @@ export const sidebarMenu: NavGroup[] = [
           },
         ],
       },
+
+      {
+        title: "Leads",
+        children: [
+          {
+            title: "Contact Messages",
+            url: "/admin/leads/contact",
+          },
+          {
+            title: "Consultations",
+            url: "/admin/leads/consultation",
+          },
+          {
+            title: "Newsletter",
+            url: "/admin/leads/newsletter",
+          },
+        ],
+      },
     ],
   },
 

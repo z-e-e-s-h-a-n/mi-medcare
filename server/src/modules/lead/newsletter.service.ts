@@ -43,7 +43,7 @@ export class NewsletterService {
     const { page, limit, searchBy, search, sortBy, sortOrder } = query;
 
     const where: Prisma.NewsletterSubscriberWhereInput = {};
-    if (query.isActive) where.isActive = query.isActive;
+    if (query.isActive !== undefined) where.isActive = query.isActive;
 
     if (search && searchBy) {
       const searchWhereMap: Record<
@@ -82,6 +82,17 @@ export class NewsletterService {
         limit,
         totalPages: Math.ceil(total / limit),
       },
+    };
+  }
+
+  async getSubscriber(id: string) {
+    const subscriber = await this.prisma.newsletterSubscriber.findUniqueOrThrow({
+      where: { id },
+    });
+
+    return {
+      message: "Subscriber fetched successfully.",
+      data: subscriber,
     };
   }
 

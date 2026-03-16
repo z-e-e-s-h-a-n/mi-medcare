@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Query } from "@nestjs/common";
+import { Controller, Post, Body, Get, Query, Param } from "@nestjs/common";
 import { NewsletterService } from "./newsletter.service";
 import {
   NewsletterSubscriberDto,
@@ -28,5 +28,11 @@ export class NewsletterController {
   @Get()
   async list(@Query() query: NewsletterSubscriberQueryDto) {
     return this.service.list(query);
+  }
+
+  @Roles("admin")
+  @Get(":id")
+  async getSubscriber(@Param("id") id: string) {
+    return this.service.getSubscriber(id);
   }
 }

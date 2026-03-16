@@ -1,18 +1,18 @@
 import { apiClient, executeApi } from "../lib";
 import type {
-  ContactMessageQueryDto,
   ContactMessageQueryResponse,
+  ContactMessageQueryType,
   ContactMessageResponse,
-  CreateContactMessageDto,
-  UpdateContactMessageDto,
+  CreateContactMessageType,
+  UpdateContactMessageType,
 } from "@workspace/contracts/contact";
 
 // Public route to create a new contact message
-export const createContactMessage = (data: CreateContactMessageDto) =>
+export const createContactMessage = (data: CreateContactMessageType) =>
   executeApi<null>(() => apiClient.post("/contact", data));
 
 // Admin routes
-export const getContactMessages = (params?: ContactMessageQueryDto) =>
+export const getContactMessages = (params?: ContactMessageQueryType) =>
   executeApi<ContactMessageQueryResponse>(() =>
     apiClient.get("/contact", { params }),
   );
@@ -22,5 +22,5 @@ export const getContactMessage = (id: string) =>
 
 export const replyContactMessage = (
   id: string,
-  data: UpdateContactMessageDto,
+  data: UpdateContactMessageType,
 ) => executeApi<null>(() => apiClient.put(`/contact/${id}/reply`, data));

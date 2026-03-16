@@ -34,7 +34,10 @@ export class ContactService {
   async updateMessage(id: string, dto: UpdateContactMessageDto) {
     const message = await this.prisma.contactMessage.update({
       where: { id },
-      data: dto,
+      data: {
+        ...dto,
+        ...(dto.status === "replied" ? { repliedAt: new Date() } : {}),
+      },
     });
 
     if (dto.status === "replied") await this.notifyUser(message);

@@ -26,5 +26,5 @@ export interface ConsultationRequestResponse
 }
 
 export interface ConsultationRequestQueryResponse extends BaseQueryResponse {
-  messages: ConsultationRequestResponse[];
+  requests: ConsultationRequestResponse[];
 }

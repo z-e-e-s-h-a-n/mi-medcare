@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import type {
   ConsultationRequestQueryDto,
   CreateConsultationRequestDto,
+  UpdateConsultationRequestDto,
 } from "@workspace/contracts/consultation";
 import type { Prisma } from "@workspace/db/client";
 import { PrismaService } from "@/modules/prisma/prisma.service";
@@ -32,6 +33,15 @@ export class ConsultationService {
     });
 
     return { message: "Request fetched successfully.", data: request };
+  }
+
+  async updateRequest(id: string, dto: UpdateConsultationRequestDto) {
+    const request = await this.prisma.consultationRequest.update({
+      where: { id },
+      data: dto,
+    });
+
+    return { message: "Request updated successfully.", data: request };
   }
 
   async queryRequests(query: ConsultationRequestQueryDto) {

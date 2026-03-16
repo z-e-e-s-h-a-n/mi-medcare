@@ -1,10 +1,19 @@
-import { Controller, Post, Body, Get, Param, Query } from "@nestjs/common";
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  Query,
+  Put,
+} from "@nestjs/common";
 import { ConsultationService } from "./consultation.service";
 import { Public } from "@/decorators/public.decorator";
 import { Roles } from "@/decorators/roles.decorator";
 import {
   CreateConsultationRequestDto,
   ConsultationRequestQueryDto,
+  UpdateConsultationRequestDto,
 } from "@workspace/contracts/consultation";
 
 @Controller("consultation")
@@ -27,5 +36,14 @@ export class ConsultationController {
   @Get(":id")
   async getRequest(@Param("id") id: string) {
     return this.service.getRequest(id);
+  }
+
+  @Roles("admin")
+  @Put(":id")
+  async updateRequest(
+    @Param("id") id: string,
+    @Body() dto: UpdateConsultationRequestDto,
+  ) {
+    return this.service.updateRequest(id, dto);
   }
 }
