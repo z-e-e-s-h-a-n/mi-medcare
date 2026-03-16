@@ -8,6 +8,7 @@ import {
   IconTags,
   IconFileText,
   IconRoute,
+  IconHistory,
 } from "@tabler/icons-react";
 
 export type NavItem = {
@@ -99,6 +100,12 @@ export const sidebarMenu: NavGroup[] = [
         title: "Traffic Sources",
         url: "/admin/traffic-sources",
         icon: IconRoute,
+      },
+
+      {
+        title: "Audit Logs",
+        url: "/admin/audit-logs",
+        icon: IconHistory,
       },
     ],
   },
