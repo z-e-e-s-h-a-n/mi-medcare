@@ -24,8 +24,7 @@ export function WhatsAppFab({ className }: WhatsAppFabProps) {
       )}
     >
       <WhatsAppIcon className="size-5 text-white" />
-      <span className="hidden sm:inline">WhatsApp</span>
+      <span>WhatsApp</span>
     </Button>
   );
 }
-

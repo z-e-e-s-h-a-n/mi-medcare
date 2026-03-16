@@ -175,7 +175,7 @@ export function MobileNav() {
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
             >
-              Schedule a Call
+              Book Appointment
             </Button>
           </div>
         </div>

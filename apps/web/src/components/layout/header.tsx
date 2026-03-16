@@ -162,7 +162,10 @@ export function Header() {
                   >
                     <Phone />
                   </motion.div>
-                  <span>{business.contact.phones?.[0]?.display ?? business.contact.phones[0].display}</span>
+                  <span>
+                    {business.contact.phones?.[0]?.display ??
+                      business.contact.phones[0].display}
+                  </span>
                 </Link>
               </motion.div>
 
@@ -275,7 +278,7 @@ export function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Schedule a Call
+                  Book Appointment
                 </Button>
               </motion.div>
             </motion.div>
@@ -290,5 +293,3 @@ export function Header() {
     </>
   );
 }
-
-
