@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { MfaMethodEnum, OtpPurposeEnum, OtpTypeEnum } from "../lib/enums";
-import { identifierSchema, nameSchema, passwordSchema } from "../lib/schema";
+import { emailSchema, nameSchema, passwordSchema } from "../lib/schema";
 
 export const signInSchema = z.object({
-  identifier: identifierSchema,
+  email: emailSchema,
   password: passwordSchema.optional(),
 });
 
@@ -13,7 +13,7 @@ export const signUpSchema = signInSchema.extend({
 });
 
 export const requestOtpSchema = z.object({
-  identifier: identifierSchema,
+  email: emailSchema,
   purpose: OtpPurposeEnum,
 });
 
@@ -30,6 +30,6 @@ export const updateMfaSchema = validateOtpSchema.extend({
   preferredMfa: MfaMethodEnum,
 });
 
-export const updateIdentifierSchema = validateOtpSchema.extend({
-  newIdentifier: identifierSchema,
+export const updateEmailSchema = validateOtpSchema.extend({
+  newEmail: emailSchema,
 });

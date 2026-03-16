@@ -29,7 +29,7 @@ interface OtpModalProps extends RequestOtpType {
 }
 
 const OtpModal = ({
-  identifier,
+  email,
   purpose,
   open,
   setOpen,
@@ -43,7 +43,7 @@ const OtpModal = ({
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const res = await validateOtp({ identifier, purpose, secret });
+      const res = await validateOtp({ email, purpose, secret });
       toast.success(res.message);
 
       setOtpMeta({ valid: true, token: res.meta?.secret });
@@ -63,7 +63,7 @@ const OtpModal = ({
   const handleResendOTP = async () => {
     setIsLoading(true);
     try {
-      const res = await requestOtp({ identifier, purpose });
+      const res = await requestOtp({ email, purpose });
       setSecret("");
       toast.success(res.message);
     } catch (err: any) {
@@ -83,7 +83,7 @@ const OtpModal = ({
           <AlertDialogTitle>Enter You OTP</AlertDialogTitle>
           <AlertDialogDescription>
             We&apos;ve sent a code to{" "}
-            <span className="text-primary">{identifier}</span>.
+            <span className="text-primary">{email}</span>.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <InputOTP maxLength={6} value={secret} onChange={setSecret}>

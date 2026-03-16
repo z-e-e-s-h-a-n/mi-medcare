@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { CircleCheckIcon, LoaderCircle, OctagonXIcon } from "lucide-react";
 import type { OtpPurpose, OtpType } from "@workspace/contracts";
 
-import { validateOtp, verifyUpdateIdentifier } from "@workspace/sdk/auth";
+import { validateOtp, verifyUpdateEmail } from "@workspace/sdk/auth";
 import { cn } from "@workspace/ui/lib/utils";
 import { Card, CardContent } from "@workspace/ui/components/card";
 
@@ -14,16 +14,16 @@ type VerificationStatus = "loading" | "success" | "error";
 const VALID_PURPOSES = new Set(["verifyIdentifier", "updateIdentifier"]);
 
 export interface VerifyAuthProps {
-  identifier: string;
-  newIdentifier?: string;
+  email: string;
+  newEmail?: string;
   purpose: OtpPurpose;
   secret: string;
   type?: OtpType;
 }
 
 function VerifyAuthPage({
-  identifier,
-  newIdentifier,
+  email,
+  newEmail,
   purpose,
   secret,
   type,
@@ -41,18 +41,17 @@ function VerifyAuthPage({
   useEffect(() => {
     const verify = async () => {
       try {
-        const isUpdateIdentifier =
-          purpose === "updateIdentifier" && newIdentifier;
+        const isUpdateIdentifier = purpose === "updateIdentifier" && newEmail;
 
         const res = isUpdateIdentifier
-          ? await verifyUpdateIdentifier({
-              identifier,
-              newIdentifier,
+          ? await verifyUpdateEmail({
+              email,
+              newEmail,
               purpose,
               secret,
               type,
             })
-          : await validateOtp({ identifier, purpose, secret, type });
+          : await validateOtp({ email, purpose, secret, type });
 
         toast.success(res.message);
         setStatus("success");
@@ -71,7 +70,7 @@ function VerifyAuthPage({
     };
 
     verify();
-  }, [identifier, newIdentifier, purpose, secret, type, router]);
+  }, [email, newEmail, purpose, router, secret, type]);
 
   const StatusConfig = {
     loading: {

@@ -9,9 +9,7 @@ export type RequestOtpType = z.input<typeof schema.requestOtpSchema>;
 export type ValidateOtpType = z.input<typeof schema.validateOtpSchema>;
 export type ResetPasswordType = z.input<typeof schema.resetPasswordSchema>;
 export type UpdateMfaType = z.input<typeof schema.updateMfaSchema>;
-export type UpdateIdentifierType = z.input<
-  typeof schema.updateIdentifierSchema
->;
+export type UpdateEmailType = z.input<typeof schema.updateEmailSchema>;
 
 export interface SignInResponse {
   id: string;

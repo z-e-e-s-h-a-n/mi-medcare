@@ -37,13 +37,13 @@ const CUUserForm = (props: BaseCUFormProps) => {
         firstName: "",
         lastName: "",
         displayName: "",
-        identifier: "",
+        email: "",
         role: "customer",
         status: "pending",
       }}
       mapDataToValues={(data) => ({
         ...data,
-        identifier: data.email ?? data.phone ?? "",
+        email: data.email ?? "",
       })}
     >
       {(form, formType) => (
@@ -95,14 +95,14 @@ const CUUserForm = (props: BaseCUFormProps) => {
                 Account & Security
               </CardTitle>
               <CardDescription>
-                Login identifier and optional password update.
+                Login email and optional password update.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <InputField
                 form={form}
-                name="identifier"
-                label="Email / Phone"
+                name="email"
+                label="Email"
                 type="email"
                 disabled={formType === "update"}
               />

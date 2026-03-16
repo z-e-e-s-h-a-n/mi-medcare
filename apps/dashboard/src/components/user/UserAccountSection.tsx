@@ -4,19 +4,19 @@
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
-import { Mail, Shield, Phone, Smartphone, Loader2 } from "lucide-react";
+import { Mail, Shield, Loader2 } from "lucide-react";
 import z from "zod";
 import {
-  identifierSchema,
+  emailSchema,
   passwordSchema,
-  type IdentifierType,
   type OtpPurpose,
+  MfaMethodEnum,
 } from "@workspace/contracts";
 import type { UserResponse } from "@workspace/contracts/user";
 import {
   requestOtp,
+  requestUpdateEmail,
   resetPassword,
-  requestUpdateIdentifier,
   updateMfa,
 } from "@workspace/sdk/auth";
 import { Form } from "@workspace/ui/components/form";
@@ -30,7 +30,6 @@ import { Button } from "@workspace/ui/components/button";
 import { InputField } from "@workspace/ui/components/input-field";
 import OtpModal, { type OtpMeta } from "@workspace/ui/components/otp-modal";
 import { SelectField } from "@workspace/ui/components/select-field";
-import { MfaMethodEnum } from "@workspace/contracts";
 import { Badge } from "@workspace/ui/components/badge";
 import useUser from "@/hooks/user";
 import UserSessions from "./UserSessions";
@@ -39,38 +38,41 @@ interface AccountSectionProps {
   user: UserResponse;
 }
 
+const MFA_OPTIONS = MfaMethodEnum.options.filter(
+  (method) => method === "email" || method === "authApp",
+);
+
 const AccountSection = ({ user }: AccountSectionProps) => {
   const { refetchUser } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [otpPurpose, setOtpPurpose] = useState<OtpPurpose>();
-  const [identifierType, setIdentifierType] = useState<IdentifierType>();
   const [otpMeta, setOtpMeta] = useState<OtpMeta>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const primaryIdentifier = user.email || user.phone;
-  const primaryIdentifierType = user.email ? "email" : "phone";
+  const email = user.email ?? "";
 
   const schema = z.object({
-    newIdentifier:
-      otpPurpose === "updateIdentifier"
-        ? identifierSchema
-        : z.string().optional(),
-    newPassword: otpPurpose?.includes("Password")
+    newEmail:
+      otpPurpose === "updateIdentifier" ? emailSchema : z.string().optional(),
+    newPassword: otpPurpose === "updatePassword"
       ? passwordSchema
       : z.string().optional(),
-    confirmPassword: otpPurpose?.includes("Password")
+    confirmPassword: otpPurpose === "updatePassword"
       ? passwordSchema
       : z.string().optional(),
     preferredMfa:
-      otpPurpose === "updateMfa" ? MfaMethodEnum : MfaMethodEnum.optional(),
+      otpPurpose === "updateMfa"
+        ? z.enum(["email", "authApp"])
+        : z.enum(["email", "authApp"]).optional(),
   });
 
   const form = useForm({
     defaultValues: {
-      newIdentifier: otpPurpose === "updateIdentifier" ? "" : undefined,
-      newPassword: otpPurpose?.includes("Password") ? "" : undefined,
-      confirmPassword: otpPurpose?.includes("Password") ? "" : undefined,
-      preferredMfa: user.preferredMfa ?? "email",
+      newEmail: otpPurpose === "updateIdentifier" ? "" : undefined,
+      newPassword: otpPurpose === "updatePassword" ? "" : undefined,
+      confirmPassword: otpPurpose === "updatePassword" ? "" : undefined,
+      preferredMfa:
+        user.preferredMfa === "authApp" ? "authApp" : "email",
     },
     validators: {
       onSubmit: schema as any,
@@ -82,9 +84,9 @@ const AccountSection = ({ user }: AccountSectionProps) => {
         if (!otpMeta?.token) throw new Error("OTP token is missing");
 
         if (otpPurpose === "updateIdentifier") {
-          const res = await requestUpdateIdentifier({
-            identifier: primaryIdentifier!,
-            newIdentifier: value.newIdentifier!,
+          const res = await requestUpdateEmail({
+            email,
+            newEmail: value.newEmail!,
             purpose: otpPurpose,
             secret: otpMeta.token,
           });
@@ -92,7 +94,7 @@ const AccountSection = ({ user }: AccountSectionProps) => {
           message = res.message;
         } else if (otpPurpose === "updatePassword") {
           const res = await resetPassword({
-            identifier: primaryIdentifier!,
+            email,
             purpose: otpPurpose,
             newPassword: value.newPassword!,
             secret: otpMeta.token,
@@ -101,9 +103,9 @@ const AccountSection = ({ user }: AccountSectionProps) => {
           message = res.message;
         } else if (otpPurpose === "updateMfa") {
           const res = await updateMfa({
-            identifier: primaryIdentifier!,
+            email,
             purpose: otpPurpose,
-            preferredMfa: value.preferredMfa,
+            preferredMfa: value.preferredMfa as "email" | "authApp",
             secret: otpMeta.token,
           });
           message = res.message;
@@ -117,28 +119,24 @@ const AccountSection = ({ user }: AccountSectionProps) => {
       } finally {
         setOtpPurpose(undefined);
         setOtpMeta(undefined);
-        setIdentifierType(undefined);
         setIsLoading(false);
       }
     },
   });
 
-  const handleOpen = (purpose: OtpPurpose, type?: IdentifierType) => {
-    if (type) setIdentifierType(type);
+  const handleOpen = (purpose: OtpPurpose) => {
     setOtpMeta(undefined);
     setOtpPurpose(purpose);
     setIsOpen(true);
   };
 
   useEffect(() => {
-    if (!otpPurpose || !primaryIdentifier) return;
-
-    if (otpMeta?.valid) return;
+    if (!otpPurpose || !email || !isOpen || otpMeta?.valid) return;
 
     const otpRequest = async () => {
       try {
         const res = await requestOtp({
-          identifier: primaryIdentifier,
+          email,
           purpose: otpPurpose,
         });
         toast.success(res.message);
@@ -150,193 +148,82 @@ const AccountSection = ({ user }: AccountSectionProps) => {
     };
 
     otpRequest();
-  }, [isOpen, otpPurpose, primaryIdentifier, otpMeta?.valid]);
+  }, [email, isOpen, otpMeta?.valid, otpPurpose]);
 
   useEffect(() => {
     if (otpMeta?.valid && !otpMeta.token) {
       refetchUser();
+      setOtpPurpose(undefined);
     }
   }, [otpMeta?.token, otpMeta?.valid, refetchUser]);
 
   return (
     <Form form={form} className="space-y-6">
-      {/* Account Identifiers Section */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Smartphone className="size-5" />
-            Account Identifiers
+            <Mail className="size-5" />
+            Login Email
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Email Section */}
-          <div className="space-y-4 p-4 rounded-lg border">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Mail className="size-5 text-muted-foreground" />
-                <div>
-                  <p className="font-medium">Email Address</p>
-                  {user.email ? (
-                    <>
-                      <p className="text-muted-foreground text-sm">
-                        {user.email}
-                      </p>
-                      <p className="text-xs mt-1">
-                        Status:{" "}
-                        <span
-                          className={
-                            user.isEmailVerified
-                              ? "text-green-600"
-                              : "text-amber-600"
-                          }
-                        >
-                          {user.isEmailVerified ? "Verified" : "Unverified"}
-                        </span>
-                      </p>
-                    </>
-                  ) : (
-                    <p className="text-muted-foreground text-sm">
-                      No email added
-                    </p>
-                  )}
-                </div>
+          <div className="space-y-4 rounded-lg border p-4">
+            <div className="flex items-center justify-between gap-4">
+              <div className="space-y-1">
+                <p className="font-medium">Email Address</p>
+                <p className="text-sm text-muted-foreground">{user.email}</p>
+                <p className="text-xs">
+                  Status:{" "}
+                  <span
+                    className={
+                      user.isEmailVerified ? "text-green-600" : "text-amber-600"
+                    }
+                  >
+                    {user.isEmailVerified ? "Verified" : "Unverified"}
+                  </span>
+                </p>
               </div>
               <Button
                 variant="secondary"
                 size="sm"
-                onClick={() => handleOpen("updateIdentifier", "email")}
+                onClick={() => handleOpen("updateIdentifier")}
                 disabled={isLoading}
               >
-                {user.email ? "Change Email" : "Add Email"}
+                Change Email
               </Button>
             </div>
 
-            {otpMeta?.valid &&
-              otpPurpose === "updateIdentifier" &&
-              identifierType === "email" && (
-                <div className="space-y-4 p-4 border rounded-lg bg-muted/50">
-                  <InputField
-                    form={form}
-                    name="newIdentifier"
-                    label={user.email ? "New Email" : "Email Address"}
-                    type="email"
-                    placeholder="Enter email address"
-                  />
-                  <div className="flex gap-2">
-                    <Button
-                      type="submit"
-                      className="w-full sm:w-auto"
-                      disabled={isLoading}
-                    >
-                      {user.email ? "Change Email" : "Verify Email"}
-                      {isLoading && <Loader2 className="animate-spin" />}
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => {
-                        setOtpMeta(undefined);
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                </div>
-              )}
-          </div>
-
-          {/* Phone Section */}
-          <div className="space-y-4 p-4 rounded-lg border">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Phone className="size-5 text-muted-foreground" />
-                <div>
-                  <p className="font-medium">Phone Number</p>
-                  {user.phone ? (
-                    <>
-                      <p className="text-muted-foreground text-sm">
-                        {user.phone}
-                      </p>
-                      <p className="text-xs mt-1">
-                        Status:{" "}
-                        <span
-                          className={
-                            user.isPhoneVerified
-                              ? "text-green-600"
-                              : "text-amber-600"
-                          }
-                        >
-                          {user.isPhoneVerified ? "Verified" : "Unverified"}
-                        </span>
-                      </p>
-                    </>
-                  ) : (
-                    <p className="text-muted-foreground text-sm">
-                      No phone number added
-                    </p>
-                  )}
+            {otpMeta?.valid && otpPurpose === "updateIdentifier" && (
+              <div className="space-y-4 rounded-lg border bg-muted/50 p-4">
+                <InputField
+                  form={form}
+                  name="newEmail"
+                  label="New Email"
+                  type="email"
+                  placeholder="Enter new email address"
+                />
+                <div className="flex gap-2">
+                  <Button type="submit" disabled={isLoading}>
+                    Save Email
+                    {isLoading && <Loader2 className="animate-spin" />}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      setOtpMeta(undefined);
+                      setOtpPurpose(undefined);
+                    }}
+                  >
+                    Cancel
+                  </Button>
                 </div>
               </div>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => handleOpen("updateIdentifier", "phone")}
-                disabled={isLoading}
-              >
-                {user.phone ? "Change Phone" : "Add Phone"}
-              </Button>
-            </div>
-
-            {otpMeta?.valid &&
-              otpPurpose === "updateIdentifier" &&
-              identifierType === "phone" && (
-                <div className="space-y-4 p-4 border rounded-lg bg-muted/50">
-                  <InputField
-                    form={form}
-                    name="newIdentifier"
-                    label={user.phone ? "New Phone Number" : "Phone Number"}
-                    type="tel"
-                    placeholder="Enter phone number"
-                  />
-                  <div className="flex gap-2">
-                    <Button
-                      type="submit"
-                      className="w-full sm:w-auto"
-                      disabled={isLoading}
-                    >
-                      {user.phone ? "Change Phone" : "Verify Phone"}
-                      {isLoading && <Loader2 className="animate-spin" />}
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => {
-                        setOtpMeta(undefined);
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                </div>
-              )}
-          </div>
-
-          {/* Primary Identifier Info */}
-          <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
-            <p className="text-sm text-blue-700 dark:text-blue-300">
-              <strong>Current login method:</strong>{" "}
-              {primaryIdentifierType === "email" ? "Email" : "Phone number"}
-              <br />
-              <span className="text-xs">
-                You can add both email and phone for additional security and
-                recovery options.
-              </span>
-            </p>
+            )}
           </div>
         </CardContent>
       </Card>
 
-      {/* Security Settings Section */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -345,10 +232,8 @@ const AccountSection = ({ user }: AccountSectionProps) => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Multi-Factor Authentication */}
           <div className="space-y-4">
-            {/* MFA Status */}
-            <div className="flex items-center justify-between p-4 rounded-lg border">
+            <div className="flex items-center justify-between rounded-lg border p-4">
               <div className="space-y-1">
                 <p className="font-medium">Multi-Factor Authentication</p>
                 <div className="text-sm text-muted-foreground">
@@ -356,17 +241,11 @@ const AccountSection = ({ user }: AccountSectionProps) => {
                     <div className="flex items-center gap-2">
                       <Badge
                         variant="secondary"
-                        className="text-green-700 bg-green-700/30"
+                        className="bg-green-700/30 text-green-700"
                       >
                         Enabled
                       </Badge>
-                      <Badge variant="secondary">
-                        {user.preferredMfa === "email" && <Mail />}
-                        {user.preferredMfa === "sms" && <Phone />}
-                        {user.preferredMfa === "whatsapp" && <Phone />}
-                        {user.preferredMfa === "authApp" && <Shield />}
-                        {user.preferredMfa}
-                      </Badge>
+                      <Badge variant="secondary">{user.preferredMfa}</Badge>
                     </div>
                   ) : (
                     <span>Disabled</span>
@@ -375,46 +254,35 @@ const AccountSection = ({ user }: AccountSectionProps) => {
               </div>
 
               <div className="flex gap-2">
-                {user.preferredMfa ? (
-                  <>
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      onClick={() => handleOpen("updateMfa")}
-                    >
-                      Change Method
-                    </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => handleOpen("updateMfa")}
+                  disabled={isLoading}
+                >
+                  {user.preferredMfa ? "Change Method" : "Enable MFA"}
+                </Button>
 
-                    <Button
-                      size="sm"
-                      variant="destructive"
-                      onClick={() => handleOpen("disableMfa")}
-                    >
-                      Disable
-                    </Button>
-                  </>
-                ) : (
+                {user.preferredMfa && (
                   <Button
                     size="sm"
-                    variant="secondary"
-                    onClick={() => handleOpen("enableMfa")}
+                    variant="destructive"
+                    onClick={() => handleOpen("disableMfa")}
                     disabled={isLoading}
                   >
-                    Enable MFA
+                    Disable
                   </Button>
                 )}
               </div>
             </div>
 
             {otpMeta?.valid && otpPurpose === "updateMfa" && (
-              <div className="space-y-4 p-4 border rounded-lg">
+              <div className="space-y-4 rounded-lg border p-4">
                 <SelectField
                   form={form}
                   name="preferredMfa"
                   label="Select MFA Method"
-                  options={MfaMethodEnum.options.filter(
-                    (m) => m !== user.preferredMfa,
-                  )}
+                  options={MFA_OPTIONS.filter((m) => m !== user.preferredMfa)}
                 />
 
                 <div className="flex gap-2">
@@ -438,12 +306,11 @@ const AccountSection = ({ user }: AccountSectionProps) => {
             )}
           </div>
 
-          {/* Password Section */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 rounded-lg border bg-card">
+            <div className="flex items-center justify-between rounded-lg border bg-card p-4">
               <div>
                 <p className="font-medium">Password</p>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   Last changed: {new Date(user.updatedAt).toLocaleDateString()}
                 </p>
               </div>
@@ -458,7 +325,7 @@ const AccountSection = ({ user }: AccountSectionProps) => {
             </div>
 
             {otpMeta?.valid && otpPurpose === "updatePassword" && (
-              <div className="space-y-4 p-4 border rounded-lg">
+              <div className="space-y-4 rounded-lg border p-4">
                 <InputField
                   form={form}
                   name="newPassword"
@@ -481,11 +348,7 @@ const AccountSection = ({ user }: AccountSectionProps) => {
                   }}
                 />
                 <div className="flex gap-2">
-                  <Button
-                    type="submit"
-                    className="w-full sm:w-auto"
-                    disabled={isLoading}
-                  >
+                  <Button type="submit" disabled={isLoading}>
                     Update Password
                     {isLoading && <Loader2 className="animate-spin" />}
                   </Button>
@@ -506,16 +369,14 @@ const AccountSection = ({ user }: AccountSectionProps) => {
         </CardContent>
       </Card>
 
-      {/* User Sessions */}
       <UserSessions />
 
-      {/* OTP Modal */}
-      {otpPurpose && (
+      {otpPurpose && email && (
         <OtpModal
           open={isOpen}
           setOpen={setIsOpen}
           setOtpMeta={setOtpMeta}
-          identifier={primaryIdentifier!}
+          email={email}
           purpose={otpPurpose}
         />
       )}

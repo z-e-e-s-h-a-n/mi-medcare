@@ -8,7 +8,7 @@ import type {
   SignInResponse,
   SignInType,
   SignUpType,
-  UpdateIdentifierType,
+  UpdateEmailType,
   UpdateMfaType,
   ValidateOtpResponse,
   ValidateOtpType,
@@ -53,11 +53,11 @@ export const updateMfa = (data: UpdateMfaType) =>
    IDENTIFIER CHANGE
    ========================= */
 
-export const requestUpdateIdentifier = (data: UpdateIdentifierType) =>
-  executeApi(() => apiClient.post("/auth/request-update-identifier", data));
+export const requestUpdateEmail = (data: UpdateEmailType) =>
+  executeApi(() => apiClient.post("/auth/request-update-email", data));
 
-export const verifyUpdateIdentifier = (params: UpdateIdentifierType) =>
-  executeApi(() => apiClient.get("/auth/verify-update-identifier", { params }));
+export const verifyUpdateEmail = (params: UpdateEmailType) =>
+  executeApi(() => apiClient.get("/auth/verify-update-email", { params }));
 
 /* =========================
    OAuth

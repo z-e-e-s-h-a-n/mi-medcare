@@ -94,9 +94,7 @@ export class AdminService {
     return { message: "User Fetched Successfully.", data: user };
   }
 
-  async updateUser({ identifier, ...dto }: CUUserDto, userId: string) {
-    const { key, value } = this.authService.parseIdentifier(identifier);
-
+  async updateUser({ email, ...dto }: CUUserDto, userId: string) {
     let hashedPassword: string | null = null;
 
     if (dto.password) {
@@ -107,7 +105,7 @@ export class AdminService {
       where: { id: userId },
       data: {
         ...dto,
-        [key]: value,
+        email: this.authService.normalizeEmail(email),
         ...(hashedPassword && { password: hashedPassword }),
       },
     });

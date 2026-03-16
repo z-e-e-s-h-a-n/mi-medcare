@@ -11,33 +11,26 @@ export const VerifyIdentifier: EmailTemplateComponent<"verifyIdentifier"> = ({
   identifier,
   clientUrl,
 }) => {
-  const type = identifier.includes("@") ? "email" : "phone number";
-  const typeLabel = type === "email" ? "Email Address" : "Phone Number";
-  const link = `${clientUrl}/auth/verify?identifier=${identifier}&purpose=${otp?.purpose}&secret=${otp?.secret}&type=${otp?.type}`;
+  const link = `${clientUrl}/auth/verify?email=${identifier}&purpose=${otp?.purpose}&secret=${otp?.secret}&type=${otp?.type}`;
 
   return (
-    <Layout previewText={`Verify your ${type}`}>
-      <Header title={`Verify Your ${typeLabel}`} />
+    <Layout previewText="Verify your email">
+      <Header title="Verify Your Email Address" />
       <Greeting name={user.displayName} />
       <Text className="text-base text-gray-900">
-        Please verify your {type} to activate your travel account.
+        Please verify your email to activate your account.
       </Text>
       {otp ? (
-        <ActionBlock link={link} label={`Verify ${type}`} otp={otp} />
+        <ActionBlock link={link} label="Verify email" otp={otp} />
       ) : (
         <Text className="text-base text-gray-900">
-          Your {type} has been verified successfully.
+          Your email has been verified successfully.
         </Text>
       )}
     </Layout>
   );
 };
 
-VerifyIdentifier.subject = (props) => {
-  const type = props.identifier.includes("@") ? "email" : "phone number";
-  return `Verify your ${type}`;
-};
+VerifyIdentifier.subject = () => "Verify your email";
 VerifyIdentifier.message = (props) =>
-  props.otp
-    ? `Verification code: ${props.otp.secret}`
-    : "Your identifier has been verified.";
+  props.otp ? `Verification code: ${props.otp.secret}` : "Your email has been verified.";

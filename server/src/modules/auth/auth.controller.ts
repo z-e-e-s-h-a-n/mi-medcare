@@ -11,7 +11,7 @@ import {
   Res,
 } from "@nestjs/common";
 import {
-  UpdateIdentifierDto,
+  UpdateEmailDto,
   RequestOtpDto,
   ResetPasswordDto,
   SignInDto,
@@ -79,14 +79,14 @@ export class AuthController {
   }
 
   @Public()
-  @Get("verify-update-identifier")
-  async verifyUpdateIdentifier(@Query() dto: UpdateIdentifierDto) {
-    return this.authService.verifyUpdateIdentifier(dto);
+  @Get("verify-update-email")
+  async verifyUpdateEmail(@Query() dto: UpdateEmailDto) {
+    return this.authService.verifyUpdateEmail(dto);
   }
 
-  @Post("request-update-identifier")
-  async requestUpdateIdentifier(@Body() dto: UpdateIdentifierDto) {
-    return this.authService.requestUpdateIdentifier(dto);
+  @Post("request-update-email")
+  async requestUpdateEmail(@Body() dto: UpdateEmailDto) {
+    return this.authService.requestUpdateEmail(dto);
   }
 
   @Post("update-mfa")

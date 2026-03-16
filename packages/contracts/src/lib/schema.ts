@@ -12,11 +12,7 @@ export const phoneSchema = z
   .string()
   .regex(/^\+[1-9]\d{9,14}$/, "Invalid phone number");
 
-export const identifierSchema = z.union([emailSchema, phoneSchema], {
-  error: () => ({
-    message: "Identifier must be a valid email or phone number",
-  }),
-});
+export const identifierSchema = emailSchema;
 
 export const nameSchema = z
   .string()

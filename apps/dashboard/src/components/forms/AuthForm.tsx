@@ -26,13 +26,10 @@ import {
   type AuthFormType,
   nameSchema,
   passwordSchema,
-  identifierSchema,
+  emailSchema,
   type OtpPurpose,
 } from "@workspace/contracts";
-import type {
-  SignUpType,
-  ValidateOtpType,
-} from "@workspace/contracts/auth";
+import type { SignUpType, ValidateOtpType } from "@workspace/contracts/auth";
 import Image from "next/image";
 
 interface AuthFormProps {
@@ -43,7 +40,7 @@ interface AuthFormProps {
 
 function AuthForm({ className, formType, queryParams }: AuthFormProps) {
   const { purpose, secret, type } = queryParams;
-  const [identifier, setIdentifier] = useState(queryParams.identifier);
+  const [email, setEmail] = useState(queryParams.email);
   const [isOpen, setIsOpen] = useState(false);
   const [otpMeta, setOtpMeta] = useState<OtpMeta>();
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +49,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
 
   const router = useRouter();
   const schema = z.object({
-    identifier: identifierSchema,
+    email: emailSchema,
     ...(formType.includes("sign") && {
       password: passwordSchema,
     }),
@@ -60,13 +57,13 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
       firstName: nameSchema,
       lastName: nameSchema.optional(),
     }),
-    ...(formType.includes("set-password") &&
+    ...(formType.includes("Password") &&
       otpMeta?.valid && { password: passwordSchema }),
   });
 
   const form = useForm({
     defaultValues: {
-      identifier,
+      email,
       password: formType.includes("sign") ? "" : undefined,
       confirmPassword: formType === "sign-up" ? "" : undefined,
       firstName: "",
@@ -99,12 +96,12 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
             const nextPurpose: OtpPurpose =
               formType === "set-password" ? "setPassword" : "resetPassword";
             setOtpPurpose(nextPurpose);
-            const res = await requestOtp({ identifier, purpose: nextPurpose });
+            const res = await requestOtp({ email, purpose: nextPurpose });
             message = res.message;
             setIsOpen(true);
           } else {
             const res = await resetPassword({
-              identifier,
+              email,
               purpose: otpPurpose,
               secret: otpMeta?.token,
               newPassword: value.password!,
@@ -130,10 +127,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
     },
   });
 
-  const formIdentifier = useStore(
-    form.store,
-    (state) => state.values.identifier,
-  );
+  const formIdentifier = useStore(form.store, (state) => state.values.email);
 
   useEffect(() => {
     if (!secret) return;
@@ -141,7 +135,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
     const verifySecret = async () => {
       try {
         const res = await validateOtp({
-          identifier,
+          email,
           purpose: otpPurpose,
           secret,
           type,
@@ -155,18 +149,18 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
       }
     };
     verifySecret();
-  }, [secret, identifier, otpPurpose, type]);
+  }, [email, otpPurpose, secret, type]);
 
   useEffect(() => {
     if (otpMeta?.valid) {
       form.reset({
         firstName: "",
-        identifier,
+        email,
         password: "",
         confirmPassword: "",
       });
     }
-  }, [identifier, form, otpMeta?.valid]);
+  }, [email, form, otpMeta?.valid]);
 
   useEffect(() => {
     if (redirectUrl && !isOpen) {
@@ -176,7 +170,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
 
   useEffect(() => {
     if (formIdentifier) {
-      setIdentifier(formIdentifier);
+      setEmail(formIdentifier);
     }
   }, [formIdentifier]);
 
@@ -204,10 +198,10 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
               </h1>
               <p className="text-muted-foreground text-sm text-balance">
                 {formType === "sign-up"
-                  ? "Enter your identifier below to create your account"
+                  ? "Enter your email below to create your account"
                   : formType === "sign-in"
                     ? "Login to your One world account"
-                    : `Enter your identifier to continue`}
+                    : "Enter your email to continue"}
               </p>
             </div>
             {formType === "sign-up" && (
@@ -218,8 +212,9 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
             )}
             <InputField
               form={form}
-              name="identifier"
-              label="Email / Mobile"
+              name="email"
+              label="Email"
+              type="email"
               disabled={!!otpMeta?.valid}
             />
             <div
@@ -329,7 +324,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
       <OtpModal
         open={isOpen}
         setOpen={setIsOpen}
-        identifier={identifier}
+        email={email}
         purpose={otpPurpose}
         redirectUrl={redirectUrl}
         setOtpMeta={setOtpMeta}

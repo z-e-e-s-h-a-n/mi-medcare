@@ -4,7 +4,7 @@ import {
   requestOtpSchema,
   validateOtpSchema,
   resetPasswordSchema,
-  updateIdentifierSchema,
+  updateEmailSchema,
   updateMfaSchema,
 } from "./schema";
 import { createZodDto } from "nestjs-zod";
@@ -21,4 +21,4 @@ export class ResetPasswordDto extends createZodDto(resetPasswordSchema) {}
 
 export class UpdateMfaDto extends createZodDto(updateMfaSchema) {}
 
-export class UpdateIdentifierDto extends createZodDto(updateIdentifierSchema) {}
+export class UpdateEmailDto extends createZodDto(updateEmailSchema) {}
