@@ -6,14 +6,9 @@ import type { ContactMessageResponse } from "@workspace/contracts/contact";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useContactMessage } from "@/hooks/lead";
 import React from "react";
+import type { AppPageProps } from "@workspace/contracts";
 
-type ContactMessageDetailsPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const ContactMessageDetailsPage = ({
-  params,
-}: ContactMessageDetailsPageProps) => {
+const ContactMessageDetailsPage = ({ params }: AppPageProps) => {
   const { id } = React.use(params);
 
   return (

@@ -34,8 +34,8 @@ enum OtpPurpose {
   setPassword
   resetPassword
   updatePassword
-  verifyIdentifier
-  updateIdentifier
+  verifyEmail
+  updateEmail
   enableMfa
   disableMfa
   updateMfa
@@ -83,8 +83,8 @@ enum NotificationPurpose {
   verifyMfa
   updateMfa
   updatePassword
-  verifyIdentifier
-  updateIdentifier
+  verifyEmail
+  updateEmail
 
   userStatus
 

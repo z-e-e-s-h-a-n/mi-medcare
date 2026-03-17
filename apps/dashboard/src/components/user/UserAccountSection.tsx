@@ -53,7 +53,7 @@ const AccountSection = ({ user }: AccountSectionProps) => {
 
   const schema = z.object({
     newEmail:
-      otpPurpose === "updateIdentifier" ? emailSchema : z.string().optional(),
+      otpPurpose === "updateEmail" ? emailSchema : z.string().optional(),
     newPassword: otpPurpose === "updatePassword"
       ? passwordSchema
       : z.string().optional(),
@@ -68,7 +68,7 @@ const AccountSection = ({ user }: AccountSectionProps) => {
 
   const form = useForm({
     defaultValues: {
-      newEmail: otpPurpose === "updateIdentifier" ? "" : undefined,
+      newEmail: otpPurpose === "updateEmail" ? "" : undefined,
       newPassword: otpPurpose === "updatePassword" ? "" : undefined,
       confirmPassword: otpPurpose === "updatePassword" ? "" : undefined,
       preferredMfa:
@@ -83,7 +83,7 @@ const AccountSection = ({ user }: AccountSectionProps) => {
         setIsLoading(true);
         if (!otpMeta?.token) throw new Error("OTP token is missing");
 
-        if (otpPurpose === "updateIdentifier") {
+        if (otpPurpose === "updateEmail") {
           const res = await requestUpdateEmail({
             email,
             newEmail: value.newEmail!,
@@ -186,14 +186,14 @@ const AccountSection = ({ user }: AccountSectionProps) => {
               <Button
                 variant="secondary"
                 size="sm"
-                onClick={() => handleOpen("updateIdentifier")}
+                onClick={() => handleOpen("updateEmail")}
                 disabled={isLoading}
               >
                 Change Email
               </Button>
             </div>
 
-            {otpMeta?.valid && otpPurpose === "updateIdentifier" && (
+            {otpMeta?.valid && otpPurpose === "updateEmail" && (
               <div className="space-y-4 rounded-lg border bg-muted/50 p-4">
                 <InputField
                   form={form}

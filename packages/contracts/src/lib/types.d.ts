@@ -71,8 +71,7 @@ export type SortOrderType = z.infer<typeof enums.SortOrderEnum>;
 export type ChartRangeType = z.infer<typeof enums.ChartRangeEnum>;
 
 export type OAuthProvider = "google" | "facebook" | "apple";
-export type AuthActions = "verifyIdentifier" | "verifyMfa" | "setPassword";
-export type IdentifierType = "email" | "phone";
+export type AuthActions = "verifyEmail" | "verifyMfa" | "setPassword";
 
 export type OtpType = z.infer<typeof enums.OtpTypeEnum>;
 export type OtpPurpose = z.infer<typeof enums.OtpPurposeEnum>;

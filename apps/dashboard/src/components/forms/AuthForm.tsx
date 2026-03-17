@@ -31,6 +31,7 @@ import {
 } from "@workspace/contracts";
 import type { SignUpType, ValidateOtpType } from "@workspace/contracts/auth";
 import Image from "next/image";
+import { appName } from "@workspace/shared/constants";
 
 interface AuthFormProps {
   formType: AuthFormType;
@@ -78,7 +79,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
       try {
         let message = `${formType} successfully!`;
         if (formType === "sign-up") {
-          setOtpPurpose("verifyIdentifier");
+          setOtpPurpose("verifyEmail");
           const res = await signUp(value);
           message = res.message;
           setRedirectUrl("/auth/sign-in");
@@ -112,8 +113,8 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
         }
         toast.success(message);
       } catch (err: any) {
-        if (err.action === "verifyIdentifier") {
-          setOtpPurpose("verifyIdentifier");
+        if (err.action === "verifyEmail") {
+          setOtpPurpose("verifyEmail");
           setRedirectUrl("/auth/sign-in");
           setIsOpen(true);
         }
@@ -126,7 +127,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
     },
   });
 
-  const formIdentifier = useStore(form.store, (state) => state.values.email);
+  const formEmail = useStore(form.store, (state) => state.values.email);
 
   useEffect(() => {
     if (!secret) return;
@@ -168,10 +169,10 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
   }, [redirectUrl, isOpen, router]);
 
   useEffect(() => {
-    if (formIdentifier) {
-      setEmail(formIdentifier);
+    if (formEmail) {
+      setEmail(formEmail);
     }
-  }, [formIdentifier]);
+  }, [formEmail]);
 
   return (
     <div className={cn("flex flex-col gap-6", className)}>
@@ -185,7 +186,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
                   className="flex flex-col items-center gap-2 font-medium"
                 >
                   <GalleryVerticalEnd className="size-6" />
-                  <span className="sr-only">One World Tours</span>
+                  <span className="sr-only">{appName.default}</span>
                 </Link>
               )}
               <h1 className="text-2xl font-bold capitalize">
@@ -199,7 +200,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
                 {formType === "sign-up"
                   ? "Enter your email below to create your account"
                   : formType === "sign-in"
-                    ? "Login to your One world account"
+                    ? `Login to your ${appName.default} account`
                     : "Enter your email to continue"}
               </p>
             </div>

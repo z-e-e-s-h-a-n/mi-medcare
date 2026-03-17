@@ -29,18 +29,18 @@ type OtpMetaMap = {
   setPassword: undefined;
   updatePassword: undefined;
 
-  verifyIdentifier: undefined;
+  verifyEmail: undefined;
 
-  updateIdentifier: {
-    oldIdentifier: string;
-    newIdentifier: string;
+  updateEmail: {
+    oldEmail: string;
+    newEmail: string;
   };
 };
 
 type OtpMeta<P extends OtpPurpose> = OtpMetaMap[P];
 
 interface SendOtpPayload<P extends OtpPurpose> {
-  identifier: string;
+  email: string;
   purpose: P;
   type?: OtpType;
   notify?: boolean;
@@ -73,7 +73,7 @@ export class OtpService {
 
   async sendOtp<P extends OtpPurpose>({
     user,
-    identifier,
+    email,
     purpose,
     type = "numericCode",
     notify = true,
@@ -109,8 +109,9 @@ export class OtpService {
     const notifyMeta = this.buildOtpNotification(purpose, {
       user,
       otp,
-      identifier,
+      email,
       clientUrl,
+      meta,
     });
 
     await this.notifyService.sendNotification(notifyMeta);
@@ -173,7 +174,7 @@ export class OtpService {
     payload: {
       user: SafeUser;
       otp?: Otp;
-      identifier: string;
+      email: string;
       clientUrl?: string;
       meta?: OtpMeta<P>;
     },
@@ -182,7 +183,7 @@ export class OtpService {
       user: payload.user,
       otp: payload.otp,
       clientUrl: payload.clientUrl,
-      identifier: payload.identifier,
+      email: payload.email,
     };
 
     switch (purpose) {
@@ -234,16 +235,16 @@ export class OtpService {
           purpose: "updatePassword",
         };
 
-      case "verifyIdentifier":
+      case "verifyEmail":
         return {
           ...basePayload,
-          purpose: "verifyIdentifier",
+          purpose: "verifyEmail",
         };
 
-      case "updateIdentifier":
+      case "updateEmail":
         return {
           ...basePayload,
-          purpose: "updateIdentifier",
+          purpose: "updateEmail",
           meta: payload.meta!,
         };
 

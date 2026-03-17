@@ -3,12 +3,9 @@ import { FileText } from "lucide-react";
 import type { PostResponse } from "@workspace/contracts/content";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { usePost } from "@/hooks/content";
+import type { AppPageProps } from "@workspace/contracts";
 
-type PostDetailsPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const PostDetailsPage = async ({ params }: PostDetailsPageProps) => {
+const PostDetailsPage = async ({ params }: AppPageProps) => {
   const { id } = await params;
 
   return (

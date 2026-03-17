@@ -1,6 +1,7 @@
 import { Separator } from "@workspace/ui/components/separator";
 import { SidebarTrigger } from "@workspace/ui/components/sidebar";
 import ThemeSwitch from "@workspace/ui/components/theme-toggle";
+import { appName } from "@workspace/shared/constants";
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
         className="ml-2 mr-4 data-[orientation=vertical]:h-4"
       />
       <div className="flex w-full items-center justify-between">
-        <h2 className="text-base font-medium">One World Tours</h2>
+        <h2 className="text-base font-medium">{appName.default}</h2>
         <ThemeSwitch />
       </div>
     </header>

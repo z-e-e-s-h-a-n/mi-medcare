@@ -1,10 +1,7 @@
 import CategoryForm from "@/components/forms/CategoryForm";
+import type { AppPageProps } from "@workspace/contracts";
 
-type EditCategoryPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const EditCategoryPage = async ({ params }: EditCategoryPageProps) => {
+const EditCategoryPage = async ({ params }: AppPageProps) => {
   const { id } = await params;
   return <CategoryForm entityId={id} formType="update" />;
 };

@@ -5,13 +5,11 @@ import { FolderTree } from "lucide-react";
 import type { CategoryResponse } from "@workspace/contracts/content";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useCategory } from "@/hooks/content";
+import type { AppPageProps } from "@workspace/contracts";
+import React from "react";
 
-type CategoryDetailsPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const CategoryDetailsPage = async ({ params }: CategoryDetailsPageProps) => {
-  const { id } = await params;
+const CategoryDetailsPage = ({ params }: AppPageProps) => {
+  const { id } = React.use(params);
 
   return (
     <GenericDetailsPage<CategoryResponse, "children">

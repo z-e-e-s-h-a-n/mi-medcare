@@ -1,10 +1,7 @@
 import PostForm from "@/components/forms/PostForm";
+import type { AppPageProps } from "@workspace/contracts";
 
-type EditPostPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const EditPostPage = async ({ params }: EditPostPageProps) => {
+const EditPostPage = async ({ params }: AppPageProps) => {
   const { id } = await params;
   return <PostForm entityId={id} formType="update" />;
 };

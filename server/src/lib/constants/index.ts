@@ -27,11 +27,11 @@ export const NOTIFICATION_POLICY_MAP: Record<
     priority: "important",
     push: false,
   },
-  verifyIdentifier: {
+  verifyEmail: {
     priority: "important",
     push: false,
   },
-  updateIdentifier: {
+  updateEmail: {
     priority: "important",
     push: false,
   },

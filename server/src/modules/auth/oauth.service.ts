@@ -115,7 +115,7 @@ export class OAuthService implements OnModuleInit {
       await this.notifyService.sendNotification({
         user,
         purpose: "signUp",
-        identifier: user.email!,
+        email: user.email!,
       });
     }
 
@@ -152,7 +152,7 @@ export class OAuthService implements OnModuleInit {
         user: rest,
         type: "secureToken",
         purpose: "setPassword",
-        identifier: normalized.email,
+        email: normalized.email,
       });
     }
 

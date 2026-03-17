@@ -24,13 +24,15 @@ import { EnvService } from "@/modules/env/env.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { LoggerService } from "@/modules/logger/logger.service";
 
+type EmailTemplatePurpose = keyof EmailTemplateMap;
+
 export type SendNotificationProps = {
-  [K in NotificationPurpose]: { purpose: K } & EmailTemplateMap[K] & {
-      identifier: string;
+  [K in EmailTemplatePurpose]: { purpose: K } & EmailTemplateMap[K] & {
+      email: string;
       user: SafeUser;
       otp?: Otp;
     };
-}[NotificationPurpose];
+}[EmailTemplatePurpose];
 
 @Injectable()
 export class NotificationService {
@@ -50,7 +52,7 @@ export class NotificationService {
 
     const { priority, push } = NOTIFICATION_POLICY_MAP[props.purpose];
     const channels = this.determineChannels(
-      props.identifier,
+      props.email,
       props.user,
       priority,
       push,
@@ -61,7 +63,7 @@ export class NotificationService {
       const notification = await this.prisma.notification.create({
         data: {
           userId: props.user.id,
-          recipient: props.identifier,
+          recipient: props.email,
           purpose: props.purpose,
           channels,
           priority,
@@ -78,13 +80,13 @@ export class NotificationService {
         try {
           switch (channel) {
             case "email":
-              await this.sendEmail(props.identifier, subject, html);
+              await this.sendEmail(props.email, subject, html);
               break;
             case "sms":
-              await this.sendMessage("sms", props.identifier, message);
+              await this.sendMessage("sms", props.email, message);
               break;
             case "whatsapp":
-              await this.sendMessage("whatsapp", props.identifier, message);
+              await this.sendMessage("whatsapp", props.email, message);
               break;
             case "push":
               await this.sendPush(props.user, subject, message);
@@ -94,7 +96,7 @@ export class NotificationService {
         } catch (error) {
           allSuccess = false;
           this.logger.error("Notification send Failed", {
-            identifier: props.identifier,
+            email: props.email,
             channel,
             error,
           });
@@ -113,7 +115,7 @@ export class NotificationService {
       });
     } catch (error) {
       this.logger.error(`❌ Notification send Failed`, {
-        identifier: props.identifier,
+        email: props.email,
         channels,
         error,
       });
@@ -139,7 +141,7 @@ export class NotificationService {
   }
 
   private determineChannels(
-    identifier: string,
+    email: string,
     user: SafeUser,
     priority: NotificationPriority,
     allowPush: boolean,
@@ -148,7 +150,7 @@ export class NotificationService {
     const channels: NotificationChannel[] = [];
 
     if (isOtp) {
-      const isEmail = identifier.includes("@");
+      const isEmail = email.includes("@");
       return [isEmail ? "email" : user.fallbackChannel];
     }
 

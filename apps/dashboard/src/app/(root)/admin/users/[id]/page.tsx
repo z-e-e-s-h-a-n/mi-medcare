@@ -89,7 +89,7 @@ const renderHeader = (data: UserResponse) => (
   </div>
 );
 
-const Page = ({ params }: AppPageProps<{ id: string }>) => {
+const Page = ({ params }: AppPageProps) => {
   const { id } = React.use(params);
 
   return (

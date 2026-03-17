@@ -9,12 +9,9 @@ import {
 } from "@workspace/ui/components/card";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useAuditLog } from "@/hooks/audit";
+import type { AppPageProps } from "@workspace/contracts";
 
-type AuditLogDetailsPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const AuditLogDetailsPage = async ({ params }: AuditLogDetailsPageProps) => {
+const AuditLogDetailsPage = async ({ params }: AppPageProps) => {
   const { id } = await params;
 
   return (
@@ -46,7 +43,8 @@ const AuditLogDetailsPage = async ({ params }: AuditLogDetailsPageProps) => {
             { label: "Entity Id", accessor: "entityId" },
             {
               label: "User",
-              accessor: (log) => log.user?.displayName ?? log.userId ?? "System",
+              accessor: (log) =>
+                log.user?.displayName ?? log.userId ?? "System",
             },
             { label: "IP Address", accessor: (log) => log.ip ?? "—" },
             { label: "User Agent", accessor: (log) => log.userAgent ?? "—" },
@@ -54,7 +52,8 @@ const AuditLogDetailsPage = async ({ params }: AuditLogDetailsPageProps) => {
           ],
         },
       ]}
-      children={(log) =>
+    >
+      {(log) =>
         log.meta ? (
           <Card>
             <CardHeader>
@@ -68,7 +67,7 @@ const AuditLogDetailsPage = async ({ params }: AuditLogDetailsPageProps) => {
           </Card>
         ) : null
       }
-    />
+    </GenericDetailsPage>
   );
 };
 

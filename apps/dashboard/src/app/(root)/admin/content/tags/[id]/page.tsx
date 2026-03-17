@@ -5,13 +5,11 @@ import { Tags } from "lucide-react";
 import type { TagResponse } from "@workspace/contracts/content";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useTag } from "@/hooks/content";
+import type { AppPageProps } from "@workspace/contracts";
+import React from "react";
 
-type TagDetailsPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const TagDetailsPage = async ({ params }: TagDetailsPageProps) => {
-  const { id } = await params;
+const TagDetailsPage = ({ params }: AppPageProps) => {
+  const { id } = React.use(params);
 
   return (
     <GenericDetailsPage<TagResponse, never>

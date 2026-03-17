@@ -5,13 +5,13 @@ import { Greeting } from "./components/greeting";
 import { Header } from "./components/header";
 import { Layout } from "./components/layout";
 
-export const VerifyIdentifier: EmailTemplateComponent<"verifyIdentifier"> = ({
+export const VerifyEmail: EmailTemplateComponent<"verifyEmail"> = ({
   user,
   otp,
-  identifier,
+  email,
   clientUrl,
 }) => {
-  const link = `${clientUrl}/auth/verify?email=${identifier}&purpose=${otp?.purpose}&secret=${otp?.secret}&type=${otp?.type}`;
+  const link = `${clientUrl}/auth/verify?email=${email}&purpose=${otp?.purpose}&secret=${otp?.secret}&type=${otp?.type}`;
 
   return (
     <Layout previewText="Verify your email">
@@ -31,6 +31,6 @@ export const VerifyIdentifier: EmailTemplateComponent<"verifyIdentifier"> = ({
   );
 };
 
-VerifyIdentifier.subject = () => "Verify your email";
-VerifyIdentifier.message = (props) =>
+VerifyEmail.subject = () => "Verify your email";
+VerifyEmail.message = (props) =>
   props.otp ? `Verification code: ${props.otp.secret}` : "Your email has been verified.";

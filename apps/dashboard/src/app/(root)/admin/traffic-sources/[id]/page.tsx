@@ -11,14 +11,9 @@ import {
 } from "@workspace/ui/components/card";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useTrafficSource } from "@/hooks/traffic";
+import type { AppPageProps } from "@workspace/contracts";
 
-type TrafficSourceDetailsPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const TrafficSourceDetailsPage = async ({
-  params,
-}: TrafficSourceDetailsPageProps) => {
+const TrafficSourceDetailsPage = async ({ params }: AppPageProps) => {
   const { id } = await params;
 
   return (
@@ -102,7 +97,7 @@ const TrafficSourceDetailsPage = async ({
             columns={["Name", "Email", "Status"]}
             rows={source.contactMessages?.map((message) => ({
               id: message.id,
-              href: `/admin/leads/contact/${message.id}`,
+              href: `/admin/leads/messages/${message.id}`,
               values: [message.fullName, message.email, message.status],
             }))}
           />
@@ -111,7 +106,7 @@ const TrafficSourceDetailsPage = async ({
             columns={["Name", "Practice", "Status"]}
             rows={source.consultationRequests?.map((request) => ({
               id: request.id,
-              href: `/admin/leads/consultation/${request.id}`,
+              href: `/admin/leads/requests/${request.id}`,
               values: [request.fullName, request.practiceName, request.status],
             }))}
           />
@@ -120,7 +115,7 @@ const TrafficSourceDetailsPage = async ({
             columns={["Name", "Email", "Status"]}
             rows={source.newsletterSubs?.map((subscriber) => ({
               id: subscriber.id,
-              href: `/admin/leads/newsletter/${subscriber.id}`,
+              href: `/admin/leads/subscribers/${subscriber.id}`,
               values: [
                 subscriber.name,
                 subscriber.email,

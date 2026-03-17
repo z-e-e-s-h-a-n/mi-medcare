@@ -19,7 +19,7 @@ export const UpdatePassword: EmailTemplateComponent<"updatePassword"> = (
 ) => {
   if (isSetPassword(props)) {
     if (props.otp) {
-      const link = `${props.clientUrl}/auth/set-password?email=${props.identifier}&purpose=${props.otp.purpose}&secret=${props.otp.secret}&type=${props.otp.type}`;
+      const link = `${props.clientUrl}/auth/set-password?email=${props.email}&purpose=${props.otp.purpose}&secret=${props.otp.secret}&type=${props.otp.type}`;
       return (
         <Layout previewText="Set your password">
           <Header title="Set Your Password" />
@@ -46,7 +46,7 @@ export const UpdatePassword: EmailTemplateComponent<"updatePassword"> = (
   }
 
   if (props.otp) {
-    const link = `${props.clientUrl}/auth/reset-password?email=${props.identifier}&purpose=${props.otp.purpose}&secret=${props.otp.secret}&type=${props.otp.type}`;
+    const link = `${props.clientUrl}/auth/reset-password?email=${props.email}&purpose=${props.otp.purpose}&secret=${props.otp.secret}&type=${props.otp.type}`;
     return (
       <Layout previewText="Reset your password">
       <Header title="Reset Your Password" />

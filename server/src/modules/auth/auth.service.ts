@@ -51,7 +51,7 @@ export class AuthService {
     if (!meta.password) {
       await this.otpService.sendOtp({
         user,
-        identifier: email,
+        email,
         type: "secureToken",
         purpose: "setPassword",
       });
@@ -81,7 +81,7 @@ export class AuthService {
       this.assertSupportedMfa(user.preferredMfa);
       await this.otpService.sendOtp({
         user,
-        identifier: email,
+        email,
         purpose: "verifyMfa",
       });
       return {
@@ -104,7 +104,7 @@ export class AuthService {
     if (user.loginAlerts) {
       await this.notifyService.sendNotification({
         purpose: "signIn",
-        identifier: email,
+        email,
         user,
       });
     }
@@ -123,12 +123,12 @@ export class AuthService {
     const { user, email, meta } = await this.findUserFail404(dto.email);
 
     switch (dto.purpose) {
-      case "verifyIdentifier": {
+      case "verifyEmail": {
         await this.checkVerificationStatus(user, email, "verified");
 
         await this.otpService.sendOtp({
           user,
-          identifier: email,
+          email,
           purpose: dto.purpose,
         });
 
@@ -146,17 +146,17 @@ export class AuthService {
 
         await this.otpService.sendOtp({
           user,
-          identifier: email,
+          email,
           purpose: dto.purpose,
         });
 
         return { message: `${dto.purpose} OTP sent.` };
       }
 
-      case "updateIdentifier": {
+      case "updateEmail": {
         await this.otpService.sendOtp({
           user,
-          identifier: email,
+          email,
           purpose: dto.purpose,
         });
 
@@ -167,7 +167,7 @@ export class AuthService {
         this.assertSupportedMfa(user.preferredMfa);
         await this.otpService.sendOtp({
           user,
-          identifier: email,
+          email,
           purpose: dto.purpose,
         });
 
@@ -183,7 +183,7 @@ export class AuthService {
 
         await this.otpService.sendOtp({
           user,
-          identifier: email,
+          email,
           purpose: dto.purpose,
         });
 
@@ -193,7 +193,7 @@ export class AuthService {
       case "verifyMfa": {
         await this.otpService.sendOtp({
           user,
-          identifier: email,
+          email,
           purpose: dto.purpose,
         });
 
@@ -216,7 +216,7 @@ export class AuthService {
     });
 
     switch (dto.purpose) {
-      case "verifyIdentifier": {
+      case "verifyEmail": {
         await this.prisma.user.update({
           where: { id: user.id },
           data: { isEmailVerified: true },
@@ -230,7 +230,7 @@ export class AuthService {
       case "updatePassword": {
         const otp = await this.otpService.sendOtp({
           user,
-          identifier: email,
+          email,
           type: "secureToken",
           purpose: dto.purpose,
           notify: false,
@@ -242,10 +242,10 @@ export class AuthService {
         };
       }
 
-      case "updateIdentifier": {
+      case "updateEmail": {
         const otp = await this.otpService.sendOtp({
           user,
-          identifier: email,
+          email,
           type: "secureToken",
           purpose: dto.purpose,
           notify: false,
@@ -261,7 +261,7 @@ export class AuthService {
         this.assertSupportedMfa(user.preferredMfa);
         const otp = await this.otpService.sendOtp({
           user,
-          identifier: email,
+          email,
           type: "secureToken",
           purpose: dto.purpose,
           notify: false,
@@ -280,7 +280,7 @@ export class AuthService {
         });
 
         await this.notifyService.sendNotification({
-          identifier: dto.email,
+          email: dto.email,
           purpose: "updateMfa",
           user,
           action: "update",
@@ -331,7 +331,7 @@ export class AuthService {
     });
 
     await this.notifyService.sendNotification({
-      identifier: dto.email,
+      email: dto.email,
       purpose: "updatePassword",
       user,
       action:
@@ -364,7 +364,7 @@ export class AuthService {
     });
 
     await this.notifyService.sendNotification({
-      identifier: dto.email,
+      email: dto.email,
       purpose: "updateMfa",
       user,
       action: user.preferredMfa ? "update" : "enable",
@@ -388,12 +388,12 @@ export class AuthService {
 
     await this.otpService.sendOtp({
       user,
-      identifier: newEmail,
+      email: newEmail,
       type: "secureToken",
-      purpose: "updateIdentifier",
+      purpose: "updateEmail",
       meta: {
-        oldIdentifier: email,
-        newIdentifier: newEmail,
+        oldEmail: email,
+        newEmail,
       },
     });
 
@@ -412,16 +412,16 @@ export class AuthService {
       type: "secureToken",
     });
 
-    const newIdentifier = otp.meta?.newIdentifier;
+    const nextEmail = otp.meta?.newEmail;
 
-    if (!newIdentifier || newIdentifier !== dto.newEmail) {
+    if (!nextEmail || nextEmail !== dto.newEmail) {
       throw new BadRequestException("Invalid email update token.");
     }
 
     await this.prisma.user.update({
       where: { id: user.id },
       data: {
-        email: newIdentifier,
+        email: nextEmail,
         isEmailVerified: true,
       },
     });
@@ -429,21 +429,21 @@ export class AuthService {
     await this.tokenService.revokeAllSessions(user);
     await this.notifyService.sendNotification({
       user,
-      identifier: dto.email,
-      purpose: "updateIdentifier",
+      email: dto.email,
+      purpose: "updateEmail",
       meta: {
-        newIdentifier: dto.newEmail,
-        oldIdentifier: dto.email,
+        newEmail: dto.newEmail,
+        oldEmail: dto.email,
       },
     });
 
     await this.notifyService.sendNotification({
       user,
-      identifier: dto.newEmail,
-      purpose: "updateIdentifier",
+      email: dto.newEmail,
+      purpose: "updateEmail",
       meta: {
-        newIdentifier: dto.newEmail,
-        oldIdentifier: dto.email,
+        newEmail: dto.newEmail,
+        oldEmail: dto.email,
       },
     });
 
@@ -471,14 +471,14 @@ export class AuthService {
 
     await this.notifyService.sendNotification({
       purpose: "signUp",
-      identifier: email,
+      email,
       user,
     });
 
     await this.otpService.sendOtp({
       user,
-      identifier: email,
-      purpose: "verifyIdentifier",
+      email,
+      purpose: "verifyEmail",
     });
 
     return { user };
@@ -553,13 +553,13 @@ export class AuthService {
     if (check === "unverified" && !isVerified) {
       await this.otpService.sendOtp({
         user,
-        identifier: email,
-        purpose: "verifyIdentifier",
+        email,
+        purpose: "verifyEmail",
       });
 
       throw new UnauthorizedException({
         message: "Email not verified",
-        action: "verifyIdentifier",
+        action: "verifyEmail",
       });
     }
   }

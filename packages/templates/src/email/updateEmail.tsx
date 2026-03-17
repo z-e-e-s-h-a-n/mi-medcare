@@ -5,17 +5,16 @@ import { Greeting } from "./components/greeting";
 import { Header } from "./components/header";
 import { Layout } from "./components/layout";
 
-export const UpdateIdentifier: EmailTemplateComponent<"updateIdentifier"> = ({
+export const UpdateEmail: EmailTemplateComponent<"updateEmail"> = ({
   user,
   otp,
-  identifier,
   clientUrl,
   meta,
 }) => {
-  const { oldIdentifier, newIdentifier } = meta;
+  const { oldEmail, newEmail } = meta;
 
   if (otp) {
-    const link = `${clientUrl}/auth/verify?email=${oldIdentifier}&newEmail=${newIdentifier}&purpose=${otp.purpose}&secret=${otp.secret}&type=${otp.type}`;
+    const link = `${clientUrl}/auth/verify?email=${oldEmail}&newEmail=${newEmail}&purpose=${otp.purpose}&secret=${otp.secret}&type=${otp.type}`;
     return (
       <Layout previewText="Email change request">
         <Header
@@ -27,10 +26,10 @@ export const UpdateIdentifier: EmailTemplateComponent<"updateIdentifier"> = ({
           A request was made to change your email.
         </Text>
         <Text className="text-base text-gray-900">
-          Current Email: <strong>{oldIdentifier}</strong>
+          Current Email: <strong>{oldEmail}</strong>
         </Text>
         <Text className="text-base text-gray-900">
-          New Email: <strong>{newIdentifier}</strong>
+          New Email: <strong>{newEmail}</strong>
         </Text>
         <ActionBlock
           link={link}
@@ -49,16 +48,16 @@ export const UpdateIdentifier: EmailTemplateComponent<"updateIdentifier"> = ({
         Your email has been successfully updated.
       </Text>
       <Text className="text-base text-gray-900">
-        Previous Email: <strong>{oldIdentifier}</strong>
+        Previous Email: <strong>{oldEmail}</strong>
       </Text>
       <Text className="text-base text-gray-900">
-        New Email: <strong>{newIdentifier}</strong>
+        New Email: <strong>{newEmail}</strong>
       </Text>
     </Layout>
   );
 };
 
-UpdateIdentifier.subject = (props) =>
+UpdateEmail.subject = (props) =>
   props.otp ? "Email change request" : "Email updated";
-UpdateIdentifier.message = (props) =>
+UpdateEmail.message = (props) =>
   props.otp ? "Confirm email change." : "Email updated.";

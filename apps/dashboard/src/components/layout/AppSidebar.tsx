@@ -107,17 +107,23 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                 <DropdownMenuGroup>
                   <DropdownMenuItem
                     className="cursor-pointer"
-                    asChild
                     onClick={closeSidebar}
+                    asChild
                   >
                     <Link href="/users/account">
                       <IconUserCircle />
                       Account
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="cursor-pointer">
-                    <IconNotification />
-                    Notifications
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    onClick={closeSidebar}
+                    asChild
+                  >
+                    <Link href="/notifications">
+                      <IconNotification />
+                      Notifications
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />

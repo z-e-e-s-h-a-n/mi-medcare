@@ -11,7 +11,7 @@ import { cn } from "@workspace/ui/lib/utils";
 import { Card, CardContent } from "@workspace/ui/components/card";
 
 type VerificationStatus = "loading" | "success" | "error";
-const VALID_PURPOSES = new Set(["verifyIdentifier", "updateIdentifier"]);
+const VALID_PURPOSES = new Set(["verifyEmail", "updateEmail"]);
 
 export interface VerifyAuthProps {
   email: string;
@@ -41,9 +41,9 @@ function VerifyAuthPage({
   useEffect(() => {
     const verify = async () => {
       try {
-        const isUpdateIdentifier = purpose === "updateIdentifier" && newEmail;
+        const isUpdateEmail = purpose === "updateEmail" && newEmail;
 
-        const res = isUpdateIdentifier
+        const res = isUpdateEmail
           ? await verifyUpdateEmail({
               email,
               newEmail,

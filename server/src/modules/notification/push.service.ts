@@ -73,8 +73,11 @@ export class PushService {
   }
 
   private async sendWithExpo(token: string, title: string, body: string) {
-    // TODO: implement Expo push logic here
-    this.logger.log("Expo push placeholder", { token, title, body });
+    this.logger.warn("Expo push is not configured for this deployment", {
+      token,
+      title,
+      body,
+    });
   }
 
   private ensureFirebase() {

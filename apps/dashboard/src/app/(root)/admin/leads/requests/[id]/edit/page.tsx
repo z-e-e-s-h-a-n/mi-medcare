@@ -1,12 +1,7 @@
 import ConsultationRequestForm from "@/components/forms/ConsultationRequestForm";
+import type { AppPageProps } from "@workspace/contracts";
 
-type EditConsultationRequestPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const EditConsultationRequestPage = async ({
-  params,
-}: EditConsultationRequestPageProps) => {
+const EditConsultationRequestPage = async ({ params }: AppPageProps) => {
   const { id } = await params;
   return <ConsultationRequestForm entityId={id} formType="update" />;
 };

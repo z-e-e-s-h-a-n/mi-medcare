@@ -5,14 +5,9 @@ import type { ConsultationRequestResponse } from "@workspace/contracts/consultat
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useConsultationRequest } from "@/hooks/lead";
 import React from "react";
+import type { AppPageProps } from "@workspace/contracts";
 
-type ConsultationRequestDetailsPageProps = {
-  params: Promise<{ id: string }>;
-};
-
-const ConsultationRequestDetailsPage = ({
-  params,
-}: ConsultationRequestDetailsPageProps) => {
+const ConsultationRequestDetailsPage = ({ params }: AppPageProps) => {
   const { id } = React.use(params);
 
   return (

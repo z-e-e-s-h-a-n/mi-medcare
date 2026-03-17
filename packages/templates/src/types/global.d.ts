@@ -5,10 +5,9 @@ import type {
   NewsletterSubscriber,
 } from "@workspace/db/browser";
 import type { ReactElement } from "react";
-import type { NotificationPurpose } from "@workspace/contracts";
 import type { SafeUser } from "@workspace/contracts/user";
 
-export type EmailTemplateComponent<TPurpose extends NotificationPurpose> = {
+export type EmailTemplateComponent<TPurpose extends keyof EmailTemplateMap> = {
   (props: EmailTemplateProps<TPurpose>): ReactElement;
   subject: (props: EmailTemplateProps<TPurpose>) => string;
   message: (props: EmailTemplateProps<TPurpose>) => string;
@@ -23,7 +22,7 @@ export interface EmailTemplateResult {
 export interface EmailTemplateBaseProps {
   user: SafeUser;
   otp?: Otp;
-  identifier: string;
+  email: string;
   clientUrl?: string;
   message: string;
   contactMessage: ContactMessage;
@@ -41,18 +40,18 @@ export type EmailTemplateMap = {
   } & Pick<EmailTemplateBaseProps, "user" | "otp">;
   updatePassword: {
     action: "set" | "update" | "reset";
-  } & Pick<EmailTemplateBaseProps, "user" | "otp" | "identifier" | "clientUrl">;
-  verifyIdentifier: Pick<
+  } & Pick<EmailTemplateBaseProps, "user" | "otp" | "email" | "clientUrl">;
+  verifyEmail: Pick<
     EmailTemplateBaseProps,
-    "user" | "otp" | "identifier" | "clientUrl"
+    "user" | "otp" | "email" | "clientUrl"
   >;
-  updateIdentifier: Pick<
+  updateEmail: Pick<
     EmailTemplateBaseProps,
-    "user" | "otp" | "identifier" | "clientUrl"
+    "user" | "otp" | "email" | "clientUrl"
   > & {
     meta: {
-      newIdentifier: string;
-      oldIdentifier: string;
+      newEmail: string;
+      oldEmail: string;
     };
   };
   userStatus: Pick<EmailTemplateBaseProps, "user" | "message">;
@@ -61,6 +60,8 @@ export type EmailTemplateMap = {
   consultationRequest: Pick<EmailTemplateBaseProps, "consultationRequest">;
 };
 
-export type EmailTemplateProps<T extends NotificationPurpose> = {
+export type EmailTemplatePurpose = keyof EmailTemplateMap;
+
+export type EmailTemplateProps<T extends EmailTemplatePurpose> = {
   purpose: T;
 } & EmailTemplateMap[T];

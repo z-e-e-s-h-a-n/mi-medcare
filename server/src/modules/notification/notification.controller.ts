@@ -12,6 +12,7 @@ export class NotificationController {
   async getAllNotification(@User("id") userId: string) {
     const notifications = await this.prisma.notification.findMany({
       where: { userId },
+      orderBy: [{ viewedAt: "asc" }, { createdAt: "desc" }],
     });
 
     return {

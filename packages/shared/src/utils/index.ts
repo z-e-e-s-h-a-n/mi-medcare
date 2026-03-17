@@ -1,3 +1,3 @@
 export * from "./number";
 export * from "./date";
-export * from "./identifier";
+export * from "./slugify";
