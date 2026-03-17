@@ -1010,42 +1010,57 @@ async function seedAuditLogs(users: any[], posts: any[]) {
   console.log("Seeding audit logs...");
 
   const logs = [];
-  const entityTypes = [
-    "User",
-    "Post",
-    "Category",
-    "Media",
-    "ContactMessage",
-    "ConsultationRequest",
-    "NewsletterSubscriber",
+  const entitySeeds = [
+    {
+      entityType: "User",
+      actions: ["login", "logout", "update", "statusChange"],
+      resolveEntityId: () => faker.helpers.arrayElement(users).id,
+    },
+    {
+      entityType: "Post",
+      actions: ["create", "update", "statusChange", "delete"],
+      resolveEntityId: () => faker.helpers.arrayElement(posts).id,
+    },
+    {
+      entityType: "Category",
+      actions: ["create", "update"],
+      resolveEntityId: () => faker.string.ulid(),
+    },
+    {
+      entityType: "Media",
+      actions: ["create", "update", "delete"],
+      resolveEntityId: () => faker.string.ulid(),
+    },
+    {
+      entityType: "ContactMessage",
+      actions: ["create", "update", "statusChange"],
+      resolveEntityId: () => faker.string.uuid(),
+    },
+    {
+      entityType: "ConsultationRequest",
+      actions: ["create", "update", "statusChange", "delete"],
+      resolveEntityId: () => faker.string.ulid(),
+    },
+    {
+      entityType: "NewsletterSubscriber",
+      actions: ["create", "statusChange", "delete"],
+      resolveEntityId: () => faker.string.uuid(),
+    },
   ] as const;
 
   for (let index = 0; index < 32; index++) {
     const user = faker.helpers.arrayElement(users);
-    const entityType = faker.helpers.arrayElement(entityTypes);
+    const entitySeed = faker.helpers.arrayElement(entitySeeds);
     const createdAt = randomDate(daysAgo(45), now);
-    const relatedPost = faker.helpers.arrayElement(posts);
+    const action = randomEnum(entitySeed.actions);
 
     logs.push(
       await prisma.auditLog.create({
         data: {
           userId: user.id,
-          action: randomEnum([
-            "create",
-            "update",
-            "delete",
-            "login",
-            "logout",
-            "statusChange",
-          ]) as any,
-          entityType,
-          entityId:
-            entityType === "Post"
-              ? relatedPost.id
-              : faker.helpers.arrayElement([
-                  faker.string.uuid(),
-                  faker.string.ulid(),
-                ]),
+          action: action as any,
+          entityType: entitySeed.entityType,
+          entityId: entitySeed.resolveEntityId(),
           meta: {
             source: "seed",
             summary: faker.helpers.arrayElement([

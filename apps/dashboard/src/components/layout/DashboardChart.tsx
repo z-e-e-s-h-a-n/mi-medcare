@@ -25,6 +25,8 @@ import {
 } from "@workspace/ui/components/card";
 import {
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
@@ -44,7 +46,7 @@ import {
 const postViewsChartConfig = {
   value: {
     label: "Post Views",
-    color: "var(--primary)",
+    color: "var(--chart-1)",
   },
 } satisfies ChartConfig;
 
@@ -64,6 +66,20 @@ const leadsChartConfig = {
 } satisfies ChartConfig;
 
 const statusColors = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)"];
+const postStatusChartConfig = {
+  Published: {
+    label: "Published",
+    color: "var(--chart-1)",
+  },
+  Review: {
+    label: "Review",
+    color: "var(--chart-2)",
+  },
+  Draft: {
+    label: "Draft",
+    color: "var(--chart-3)",
+  },
+} satisfies ChartConfig;
 
 interface DashboardChartProps {
   charts: DashboardResponse["charts"];
@@ -130,7 +146,7 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
             config={postViewsChartConfig}
             className="aspect-auto h-80 w-full"
           >
-            <AreaChart data={filteredPostViews}>
+            <AreaChart accessibilityLayer data={filteredPostViews}>
               <defs>
                 <linearGradient id="fillPostViews" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="var(--color-value)" stopOpacity={0.8} />
@@ -156,10 +172,13 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
                 cursor={false}
                 content={
                   <ChartTooltipContent
+                    className="min-w-40"
+                    nameKey="value"
                     labelFormatter={(value) =>
                       new Date(value).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
+                        year: "numeric",
                       })
                     }
                     indicator="dot"
@@ -172,6 +191,11 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
                 fill="url(#fillPostViews)"
                 stroke="var(--color-value)"
                 strokeWidth={2}
+                activeDot={{ r: 4 }}
+              />
+              <ChartLegend
+                content={<ChartLegendContent />}
+                verticalAlign="top"
               />
             </AreaChart>
           </ChartContainer>
@@ -187,14 +211,24 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
         </CardHeader>
         <CardContent>
           <ChartContainer config={leadsChartConfig} className="aspect-auto h-72 w-full">
-            <BarChart data={charts.leads}>
+            <BarChart accessibilityLayer data={charts.leads}>
               <CartesianGrid vertical={false} />
               <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} />
               <YAxis allowDecimals={false} tickLine={false} axisLine={false} />
-              <ChartTooltip content={<ChartTooltipContent indicator="dashed" />} />
+              <ChartTooltip
+                cursor={false}
+                content={
+                  <ChartTooltipContent
+                    className="min-w-44"
+                    indicator="dashed"
+                    labelFormatter={(value) => `Month: ${value}`}
+                  />
+                }
+              />
               <Bar dataKey="contactMessages" stackId="leads" fill="var(--color-contactMessages)" radius={[0, 0, 6, 6]} />
               <Bar dataKey="consultationRequests" stackId="leads" fill="var(--color-consultationRequests)" />
               <Bar dataKey="newsletterSubscribers" stackId="leads" fill="var(--color-newsletterSubscribers)" radius={[6, 6, 0, 0]} />
+              <ChartLegend content={<ChartLegendContent />} />
             </BarChart>
           </ChartContainer>
         </CardContent>
@@ -208,9 +242,11 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
-          <ChartContainer config={{}} className="aspect-auto h-56 w-full">
-            <PieChart>
-              <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+          <ChartContainer config={postStatusChartConfig} className="aspect-auto h-56 w-full">
+            <PieChart accessibilityLayer>
+              <ChartTooltip
+                content={<ChartTooltipContent hideLabel nameKey="label" />}
+              />
               <Pie
                 data={charts.postStatuses}
                 dataKey="value"
@@ -222,7 +258,7 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
                 {charts.postStatuses.map((entry, index) => (
                   <Cell
                     key={entry.label}
-                    fill={statusColors[index % statusColors.length]}
+                    fill={`var(--color-${entry.label})`}
                   />
                 ))}
               </Pie>
@@ -238,7 +274,8 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
                   <span
                     className="size-2.5 rounded-full"
                     style={{
-                      backgroundColor: statusColors[index % statusColors.length],
+                      backgroundColor:
+                        statusColors[index % statusColors.length],
                     }}
                   />
                   <span>{item.label}</span>

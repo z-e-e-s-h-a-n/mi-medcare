@@ -82,7 +82,7 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <DashboardStats stats={data.stats} />
+      <DashboardStats stats={data.stats} charts={data.charts} />
 
       <div className="px-4 lg:px-6">
         <DashboardChart charts={data.charts} />
