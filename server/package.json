@@ -119,6 +119,23 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "moduleNameMapper": {
+      "^@/decorators/(.*)$": "<rootDir>/lib/decorators/$1",
+      "^@/dto/(.*)$": "<rootDir>/lib/dto/$1",
+      "^@/filters/(.*)$": "<rootDir>/lib/filters/$1",
+      "^@/guards/(.*)$": "<rootDir>/lib/guards/$1",
+      "^@/middleware/(.*)$": "<rootDir>/lib/middleware/$1",
+      "^@/interceptors/(.*)$": "<rootDir>/lib/interceptors/$1",
+      "^@/pipes/(.*)$": "<rootDir>/lib/pipes/$1",
+      "^@/schemas/(.*)$": "<rootDir>/lib/schemas/$1",
+      "^@/templates/(.*)$": "<rootDir>/lib/templates/$1",
+      "^@/utils/(.*)$": "<rootDir>/lib/utils/$1",
+      "^@/constants/(.*)$": "<rootDir>/lib/constants/$1",
+      "^@workspace/shared/utils$": "<rootDir>/../../packages/shared/src/utils/index.ts",
+      "^@workspace/shared/constants$": "<rootDir>/../../packages/shared/src/constants/index.ts",
+      "^@workspace/db/client$": "<rootDir>/../../packages/db/src/client.ts",
+      "^@/(.*)$": "<rootDir>/$1"
+    },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],

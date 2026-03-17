@@ -1,67 +1,136 @@
-# Monorepo Starter Template
+# Mi MedCare
 
-This is a minimal, modern monorepo template based on shadcn/ui, customized for fast development and scalability.
+Mi MedCare is a medical billing and revenue-cycle management platform with:
 
-## Features
+- a NestJS backend in `server`
+- an admin dashboard in `apps/dashboard`
+- shared contracts, SDK, UI, templates, and database packages in `packages/*`
 
-- Modular structure for web, server, and shared packages
-- Customizable UI components (`packages/ui`)
-- Tailwind CSS and PostCSS preconfigured
-- TypeScript everywhere
-- Ready for Next.js and NestJS
-- ESLint, TurboRepo, and PNPM workspace setup
+`apps/web` exists in the repo, but it is not part of the current delivery scope.
 
-## Structure
+## Product Scope
 
-- `apps/web` – Next.js frontend
-- `server` – NestJS backend
-- `packages/ui` – Shared UI components
-- `packages/config` – Shared configs (ESLint, TypeScript)
+The delivered product currently covers:
 
-## Getting Started
+- admin and author user management
+- email-first authentication with MFA support
+- business profile management
+- media management via Cloudinary
+- content management for posts, categories, and tags
+- lead capture for contact messages, consultation requests, and newsletter subscribers
+- audit logs, notifications, traffic sources, and dashboard analytics
+
+## Workspace Structure
+
+- `apps/dashboard` - Next.js admin dashboard
+- `server` - NestJS API
+- `packages/contracts` - shared schemas and API contracts
+- `packages/sdk` - frontend API client
+- `packages/db` - Prisma schema, migrations, and seed data
+- `packages/templates` - email templates
+- `packages/ui` - shared UI components
+
+## Prerequisites
+
+- Node.js `24+`
+- `pnpm` `10+`
+- PostgreSQL
+- Cloudinary account
+- SMTP credentials for email delivery
+
+Optional integrations:
+
+- Google OAuth
+- Facebook OAuth
+- Firebase Cloud Messaging for push notifications
+
+## Local Setup
+
+1. Install dependencies.
 
 ```bash
 pnpm install
-pnpm dev # Start all apps
 ```
 
-## Database Setup
+2. Create the server env file from [server/.env.example](/d:/mi-medcare/server/.env.example) and fill in the required values.
 
-1. Edit the `.env` file in the `server` directory:
+3. Create `apps/dashboard/.env.local` with the API base URL.
 
 ```env
-DB_URI="postgresql://username:password@localhost:5432/your-db-name"
+NEXT_PUBLIC_API_URL="http://localhost:4000"
 ```
 
-Replace `username`, `password`, and `your-db-name` with your PostgreSQL credentials and the desired database name.
-
-2. Navigate to the server folder:
+4. Run database setup.
 
 ```bash
-cd server
+pnpm --filter @workspace/db prisma:generate
+pnpm --filter @workspace/db prisma:migrate
+pnpm --filter @workspace/db prisma:seed
 ```
 
-3. Run Prisma commands to set up the database and generate the client:
+5. Start the backend and dashboard.
 
 ```bash
-pnpm prisma:migrate:dev
-pnpm prisma:generate
+pnpm --filter server dev
+pnpm --filter dashboard dev
 ```
 
-> Note: Make sure your PostgreSQL server is running and accessible with the credentials you set.
+The default local endpoints are:
 
-## Usage
+- API: `http://localhost:4000`
+- Dashboard: `http://localhost:3001`
 
-Import UI components in your app:
+## Useful Commands
 
-```tsx
-import { Button } from "@workspace/ui/components/button";
+```bash
+pnpm --filter server check-types
+pnpm --filter dashboard check-types
+pnpm --filter @workspace/contracts build
+pnpm --filter @workspace/sdk check-types
+pnpm --filter @workspace/db build
 ```
 
-## Customization
+## Seed Data
 
-Feel free to modify, extend, and organize the template to fit your workflow.
+The seed creates realistic demo data for dashboard review, including:
 
----
+- admin and author users
+- business profile
+- media library
+- categories and tags
+- posts with view activity
+- contact, consultation, and newsletter leads
+- audit logs and notifications
 
-Made with ❤️ using shadcn/ui & Monorepo
+Use the seeded data to validate dashboard cards, charts, activity feeds, and detail pages.
+
+## Handover Checklist
+
+Before handing the project to a client, confirm all of the following:
+
+- `server/.env` is filled with real production values
+- `apps/dashboard/.env.local` or production env contains `NEXT_PUBLIC_API_URL`
+- PostgreSQL database is created and Prisma migrations are applied
+- Cloudinary credentials are valid and uploads work
+- SMTP credentials are valid and email templates send successfully
+- OAuth values are filled only if Google/Facebook login is intended
+- Firebase values are filled only if push notifications are intended
+- an initial admin account exists, either from seed data or `pnpm --filter server admin:bootstrap`
+- the latest type checks and backend tests pass
+
+## Production Notes
+
+- Auth is email-first. Phone is retained only as profile/contact data, not as a login identifier.
+- Push notifications are optional. If Firebase env values are left blank, push delivery is skipped.
+- OAuth is optional. If provider env values are blank, those strategies are not registered.
+- `apps/web` is not required for the current client delivery.
+
+## Testing
+
+Backend smoke tests live in `server/src/**/*.spec.ts`.
+
+Run them with:
+
+```bash
+pnpm --filter server test -- --runInBand
+```

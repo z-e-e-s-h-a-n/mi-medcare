@@ -16,6 +16,8 @@ import { slugify } from "@workspace/shared/utils";
 
 import { OtpService } from "./otp.service";
 import { EnvService } from "@/modules/env/env.service";
+import { InjectLogger } from "@/decorators/logger.decorator";
+import { LoggerService } from "@/modules/logger/logger.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { NotificationService } from "@/modules/notification/notification.service";
 import type { OAuthProvider } from "@workspace/contracts";
@@ -32,6 +34,9 @@ interface OAuthProfile {
 
 @Injectable()
 export class OAuthService implements OnModuleInit {
+  @InjectLogger()
+  private readonly logger!: LoggerService;
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly otpService: OtpService,
@@ -45,6 +50,15 @@ export class OAuthService implements OnModuleInit {
   }
 
   private initGoogleStrategy() {
+    if (
+      !this.env.get("GOOGLE_CLIENT_ID") ||
+      !this.env.get("GOOGLE_CLIENT_SECRET") ||
+      !this.env.get("GOOGLE_CALLBACK_URL")
+    ) {
+      this.logger.warn("Google OAuth is disabled because its env values are missing.");
+      return;
+    }
+
     passport.use(
       "google",
       new GoogleStrategy(
@@ -67,6 +81,15 @@ export class OAuthService implements OnModuleInit {
   }
 
   private initFacebookStrategy() {
+    if (
+      !this.env.get("FACEBOOK_CLIENT_ID") ||
+      !this.env.get("FACEBOOK_CLIENT_SECRET") ||
+      !this.env.get("FACEBOOK_CALLBACK_URL")
+    ) {
+      this.logger.warn("Facebook OAuth is disabled because its env values are missing.");
+      return;
+    }
+
     passport.use(
       "facebook",
       new FacebookStrategy(

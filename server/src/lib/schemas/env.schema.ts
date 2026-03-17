@@ -56,21 +56,13 @@ export const envSchema = z.object({
   // ==============================
   // OAuth Providers
   // ==============================
-  GOOGLE_CLIENT_ID: z.string(),
-  GOOGLE_CLIENT_SECRET: z.string(),
-  GOOGLE_CALLBACK_URL: z.string(),
+  GOOGLE_CLIENT_ID: z.string().default(""),
+  GOOGLE_CLIENT_SECRET: z.string().default(""),
+  GOOGLE_CALLBACK_URL: z.string().default(""),
 
-  FACEBOOK_CLIENT_ID: z.string(),
-  FACEBOOK_CLIENT_SECRET: z.string(),
-  FACEBOOK_CALLBACK_URL: z.string(),
-
-  // ==============================
-  // SMS (Twilio)
-  // ==============================
-  TWILIO_ACCOUNT_SID: z.string(),
-  TWILIO_AUTH_TOKEN: z.string(),
-  TWILIO_PHONE: z.string(),
-  TWILIO_WHATSAPP: z.string(),
+  FACEBOOK_CLIENT_ID: z.string().default(""),
+  FACEBOOK_CLIENT_SECRET: z.string().default(""),
+  FACEBOOK_CALLBACK_URL: z.string().default(""),
 
   // ==============================
   // Email (Resend)
@@ -83,10 +75,11 @@ export const envSchema = z.object({
   // ==============================
   // Firebase
   // ==============================
-  FIREBASE_PROJECT_ID: z.string(),
-  FIREBASE_CLIENT_EMAIL: z.string(),
+  FIREBASE_PROJECT_ID: z.string().default(""),
+  FIREBASE_CLIENT_EMAIL: z.string().default(""),
   FIREBASE_PRIVATE_KEY: z
     .string()
+    .default("")
     .transform((key) => key.replace(/\\n/g, "\n")),
 
   // ==============================

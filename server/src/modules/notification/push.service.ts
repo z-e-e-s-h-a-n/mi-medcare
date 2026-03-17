@@ -18,6 +18,11 @@ export class PushService {
   ) {}
 
   async sendPush(user: SafeUser, title: string, body: string) {
+    if (!this.hasFirebaseConfig()) {
+      this.logger.warn("Push notifications are disabled because Firebase env values are missing.");
+      return;
+    }
+
     const sessions = await this.prisma.session.findMany({
       where: { userId: user.id, status: "active", pushToken: { not: null } },
       select: { pushToken: true, pushProvider: true },
@@ -81,7 +86,11 @@ export class PushService {
   }
 
   private ensureFirebase() {
-    if (admin.apps.length) return;
+    if (!this.hasFirebaseConfig()) {
+      return false;
+    }
+
+    if (admin.apps.length) return true;
 
     admin.initializeApp({
       credential: admin.credential.cert({
@@ -92,5 +101,14 @@ export class PushService {
     });
 
     this.logger.log("✅ Firebase Admin initialized");
+    return true;
+  }
+
+  private hasFirebaseConfig() {
+    return (
+      !!this.env.get("FIREBASE_PROJECT_ID") &&
+      !!this.env.get("FIREBASE_CLIENT_EMAIL") &&
+      !!this.env.get("FIREBASE_PRIVATE_KEY")
+    );
   }
 }
