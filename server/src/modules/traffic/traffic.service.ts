@@ -102,7 +102,7 @@ export class TrafficService {
     const source = await this.prisma.trafficSource.findUniqueOrThrow({
       where: { id },
       include: {
-        contentViews: true,
+        postViews: true,
         contactMessages: true,
         consultationRequests: true,
         newsletterSubs: true,

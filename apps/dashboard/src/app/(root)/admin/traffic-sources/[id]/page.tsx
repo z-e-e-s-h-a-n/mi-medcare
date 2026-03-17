@@ -84,9 +84,9 @@ const TrafficSourceDetailsPage = async ({ params }: AppPageProps) => {
       {(source) => (
         <div className="grid gap-6">
           <RelatedListCard
-            title="Content Views"
+            title="Post Views"
             columns={["Target", "Viewed At"]}
-            rows={source.contentViews?.map((view) => ({
+            rows={source.postViews?.map((view) => ({
               id: view.id,
               href: `/admin/content/posts/${view.postId}`,
               values: [`Post: ${view.postId}`, view.viewedAt],

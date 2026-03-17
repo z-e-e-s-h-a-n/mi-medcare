@@ -42,7 +42,7 @@ export const CUPostSchema = z.object({
   metaDescription: z.string().optional(),
 });
 
-export const contentViewSchema = z.object({
+export const postViewSchema = z.object({
   postId: idSchema,
   trafficSourceId: idSchema.optional(),
 });

@@ -22,6 +22,7 @@ import { MediaModule } from "@/modules/media/media.module";
 import { AuditModule } from "@/modules/audit/audit.module";
 import { BusinessModule } from "@/modules/business/business.module";
 import { ContentModule } from "@/modules/content/content.module";
+import { DashboardModule } from "@/modules/dashboard/dashboard.module";
 import { TrafficModule } from "@/modules/traffic/traffic.module";
 import { LeadModule } from "./modules/lead/lead.module";
 
@@ -46,6 +47,7 @@ import { LeadModule } from "./modules/lead/lead.module";
     AuditModule,
     BusinessModule,
     ContentModule,
+    DashboardModule,
     TrafficModule,
     LeadModule,
   ],

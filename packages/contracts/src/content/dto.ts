@@ -4,7 +4,7 @@ import {
   CUTagSchema,
   CUPostSchema,
   CUCategorySchema,
-  contentViewSchema,
+  postViewSchema,
   tagQuerySchema,
   postQuerySchema,
   categoryQuerySchema,
@@ -19,4 +19,4 @@ export class TagQueryDto extends createZodDto(tagQuerySchema) {}
 export class PostDto extends createZodDto(CUPostSchema) {}
 export class PostQueryDto extends createZodDto(postQuerySchema) {}
 
-export class ContentViewDto extends createZodDto(contentViewSchema) {}
+export class PostViewDto extends createZodDto(postViewSchema) {}

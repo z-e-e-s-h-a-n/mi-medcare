@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import type {
   CategoryDto,
   CategoryQueryDto,
-  ContentViewDto,
   PostDto,
+  PostViewDto,
   PostQueryDto,
   TagDto,
   TagQueryDto,
@@ -395,9 +395,9 @@ export class ContentService {
     };
   }
 
-  async createContentView(dto: ContentViewDto) {
+  async createPostView(dto: PostViewDto) {
     const view = await this.prisma.$transaction(async (tx) => {
-      const createdView = await tx.contentView.create({
+      const createdView = await tx.postView.create({
         data: dto,
       });
 
@@ -412,7 +412,7 @@ export class ContentService {
     });
 
     return {
-      message: "Content view tracked successfully.",
+      message: "Post view tracked successfully.",
       data: view,
     };
   }

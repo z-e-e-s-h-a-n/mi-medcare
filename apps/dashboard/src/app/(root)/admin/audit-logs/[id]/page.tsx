@@ -1,3 +1,4 @@
+"use client";
 import { FileClock } from "lucide-react";
 
 import type { AuditLogResponse } from "@workspace/contracts/audit";
@@ -10,9 +11,10 @@ import {
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useAuditLog } from "@/hooks/audit";
 import type { AppPageProps } from "@workspace/contracts";
+import React from "react";
 
-const AuditLogDetailsPage = async ({ params }: AppPageProps) => {
-  const { id } = await params;
+const AuditLogDetailsPage = ({ params }: AppPageProps) => {
+  const { id } = React.use(params);
 
   return (
     <GenericDetailsPage<AuditLogResponse, never>

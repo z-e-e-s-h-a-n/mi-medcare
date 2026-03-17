@@ -8,7 +8,7 @@ CREATE TYPE "UserRole" AS ENUM ('admin', 'customer', 'author', 'editor');
 CREATE TYPE "UserStatus" AS ENUM ('pending', 'active', 'suspended');
 
 -- CreateEnum
-CREATE TYPE "OtpPurpose" AS ENUM ('setPassword', 'resetPassword', 'updatePassword', 'verifyIdentifier', 'updateIdentifier', 'enableMfa', 'disableMfa', 'updateMfa', 'verifyMfa');
+CREATE TYPE "OtpPurpose" AS ENUM ('setPassword', 'resetPassword', 'updatePassword', 'verifyEmail', 'updateEmail', 'enableMfa', 'disableMfa', 'updateMfa', 'verifyMfa');
 
 -- CreateEnum
 CREATE TYPE "OtpType" AS ENUM ('numericCode', 'secureToken');
@@ -29,7 +29,7 @@ CREATE TYPE "MessagingChannel" AS ENUM ('sms', 'whatsapp');
 CREATE TYPE "PushProvider" AS ENUM ('fcm', 'expo');
 
 -- CreateEnum
-CREATE TYPE "NotificationPurpose" AS ENUM ('signUp', 'signIn', 'verifyMfa', 'updateMfa', 'updatePassword', 'verifyIdentifier', 'updateIdentifier', 'userStatus', 'newsletter', 'securityAlert', 'contactMessage', 'consultationRequest');
+CREATE TYPE "NotificationPurpose" AS ENUM ('signUp', 'signIn', 'verifyMfa', 'updateMfa', 'updatePassword', 'verifyEmail', 'updateEmail', 'userStatus', 'newsletter', 'securityAlert', 'contactMessage', 'consultationRequest');
 
 -- CreateEnum
 CREATE TYPE "NotificationPriority" AS ENUM ('normal', 'important');
@@ -47,7 +47,7 @@ CREATE TYPE "MediaVisibility" AS ENUM ('private', 'public');
 CREATE TYPE "MediaType" AS ENUM ('photo', 'logo', 'other');
 
 -- CreateEnum
-CREATE TYPE "ProductStatus" AS ENUM ('draft', 'review', 'published');
+CREATE TYPE "PostStatus" AS ENUM ('draft', 'review', 'published');
 
 -- CreateEnum
 CREATE TYPE "PracticeType" AS ENUM ('privatePractice', 'groupPractice', 'hospital', 'clinic', 'urgentCare', 'specialtyClinic', 'other');
@@ -172,25 +172,6 @@ CREATE TABLE "Media" (
 );
 
 -- CreateTable
-CREATE TABLE "Page" (
-    "id" TEXT NOT NULL,
-    "coverId" TEXT,
-    "title" TEXT NOT NULL,
-    "slug" TEXT NOT NULL,
-    "content" TEXT NOT NULL,
-    "metaTitle" TEXT,
-    "metaDescription" TEXT,
-    "viewsCount" INTEGER NOT NULL DEFAULT 0,
-    "status" "ProductStatus" NOT NULL DEFAULT 'draft',
-    "publishedAt" TIMESTAMP(3),
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "deletedAt" TIMESTAMP(3),
-
-    CONSTRAINT "Page_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Post" (
     "id" TEXT NOT NULL,
     "authorId" TEXT NOT NULL,
@@ -200,12 +181,11 @@ CREATE TABLE "Post" (
     "excerpt" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "coverId" TEXT,
-    "status" "ProductStatus" NOT NULL DEFAULT 'draft',
+    "status" "PostStatus" NOT NULL DEFAULT 'draft',
     "publishedAt" TIMESTAMP(3),
     "metaTitle" TEXT,
     "metaDescription" TEXT,
     "viewsCount" INTEGER NOT NULL DEFAULT 0,
-    "isFeatured" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "deletedAt" TIMESTAMP(3),
@@ -214,14 +194,13 @@ CREATE TABLE "Post" (
 );
 
 -- CreateTable
-CREATE TABLE "ContentView" (
+CREATE TABLE "PostView" (
     "id" TEXT NOT NULL,
     "postId" TEXT,
-    "pageId" TEXT,
     "trafficSourceId" TEXT,
     "viewedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "ContentView_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PostView_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -446,9 +425,6 @@ CREATE INDEX "Media_createdAt_idx" ON "Media"("createdAt");
 CREATE INDEX "Media_deletedAt_idx" ON "Media"("deletedAt");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Page_slug_key" ON "Page"("slug");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Post_slug_key" ON "Post"("slug");
 
 -- CreateIndex
@@ -479,19 +455,13 @@ CREATE INDEX "Post_createdAt_idx" ON "Post"("createdAt");
 CREATE INDEX "Post_deletedAt_idx" ON "Post"("deletedAt");
 
 -- CreateIndex
-CREATE INDEX "ContentView_postId_idx" ON "ContentView"("postId");
+CREATE INDEX "PostView_postId_idx" ON "PostView"("postId");
 
 -- CreateIndex
-CREATE INDEX "ContentView_pageId_idx" ON "ContentView"("pageId");
+CREATE INDEX "PostView_viewedAt_idx" ON "PostView"("viewedAt");
 
 -- CreateIndex
-CREATE INDEX "ContentView_viewedAt_idx" ON "ContentView"("viewedAt");
-
--- CreateIndex
-CREATE INDEX "ContentView_postId_viewedAt_idx" ON "ContentView"("postId", "viewedAt");
-
--- CreateIndex
-CREATE INDEX "ContentView_pageId_viewedAt_idx" ON "ContentView"("pageId", "viewedAt");
+CREATE INDEX "PostView_postId_viewedAt_idx" ON "PostView"("postId", "viewedAt");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
@@ -593,9 +563,6 @@ ALTER TABLE "Notification" ADD CONSTRAINT "Notification_userId_fkey" FOREIGN KEY
 ALTER TABLE "Media" ADD CONSTRAINT "Media_uploadedById_fkey" FOREIGN KEY ("uploadedById") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Page" ADD CONSTRAINT "Page_coverId_fkey" FOREIGN KEY ("coverId") REFERENCES "Media"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -605,13 +572,10 @@ ALTER TABLE "Post" ADD CONSTRAINT "Post_categoryId_fkey" FOREIGN KEY ("categoryI
 ALTER TABLE "Post" ADD CONSTRAINT "Post_coverId_fkey" FOREIGN KEY ("coverId") REFERENCES "Media"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ContentView" ADD CONSTRAINT "ContentView_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "PostView" ADD CONSTRAINT "PostView_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ContentView" ADD CONSTRAINT "ContentView_pageId_fkey" FOREIGN KEY ("pageId") REFERENCES "Page"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ContentView" ADD CONSTRAINT "ContentView_trafficSourceId_fkey" FOREIGN KEY ("trafficSourceId") REFERENCES "TrafficSource"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "PostView" ADD CONSTRAINT "PostView_trafficSourceId_fkey" FOREIGN KEY ("trafficSourceId") REFERENCES "TrafficSource"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Category" ADD CONSTRAINT "Category_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;

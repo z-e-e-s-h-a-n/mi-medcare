@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import {
   CategoryQueryDto,
-  ContentViewDto,
   PostQueryDto,
+  PostViewDto,
   TagQueryDto,
 } from "@workspace/contracts/content";
 
@@ -44,8 +44,8 @@ export class ContentController {
     return this.contentService.getPostBySlug(slug);
   }
 
-  @Post("content/views")
-  async trackView(@Body() dto: ContentViewDto) {
-    return this.contentService.createContentView(dto);
+  @Post("post-views")
+  async trackView(@Body() dto: PostViewDto) {
+    return this.contentService.createPostView(dto);
   }
 }

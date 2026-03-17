@@ -8,6 +8,7 @@ export default defineConfig({
     audit: "src/audit/index.ts",
     business: "src/business/index.ts",
     content: "src/content/index.ts",
+    dashboard: "src/dashboard/index.ts",
     traffic: "src/traffic/index.ts",
     user: "src/user/index.ts",
     media: "src/media/index.ts",

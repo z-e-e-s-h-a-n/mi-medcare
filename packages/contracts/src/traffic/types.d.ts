@@ -6,8 +6,8 @@ import type {
 import type {
   ConsultationRequest,
   ContactMessage,
-  ContentView,
   NewsletterSubscriber,
+  PostView,
   TrafficSource,
 } from "@workspace/db/browser";
 import type { BaseQueryResponse, Sanitize } from "../lib/types";
@@ -16,7 +16,7 @@ export type CreateTrafficSourceType = z.input<typeof createTrafficSourceSchema>;
 export type TrafficSourceQueryType = z.input<typeof trafficSourceQuerySchema>;
 
 export interface TrafficSourceResponse extends Sanitize<TrafficSource> {
-  contentViews?: Sanitize<ContentView>[];
+  postViews?: Sanitize<PostView>[];
   contactMessages?: Sanitize<ContactMessage>[];
   consultationRequests?: Sanitize<ConsultationRequest>[];
   newsletterSubs?: Sanitize<NewsletterSubscriber>[];

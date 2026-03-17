@@ -34,6 +34,10 @@
       "import": "./dist/content.js",
       "types": "./dist/content.d.ts"
     },
+    "./dashboard": {
+      "import": "./dist/dashboard.js",
+      "types": "./dist/dashboard.d.ts"
+    },
     "./contact": {
       "import": "./dist/contact.js",
       "types": "./dist/contact.d.ts"

@@ -364,8 +364,8 @@ model Post {
   metaTitle       String?
   metaDescription String?
 
-  viewsCount Int           @default(0)
-  views      ContentView[]
+  viewsCount Int        @default(0)
+  postViews  PostView[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -382,7 +382,7 @@ model Post {
   @@index([deletedAt])
 }
 
-model ContentView {
+model PostView {
   id String @id @default(ulid())
 
   postId String?
@@ -562,7 +562,7 @@ model TrafficSource {
 
   createdAt DateTime @default(now())
 
-  contentViews         ContentView[]
+  postViews            PostView[]
   contactMessages      ContactMessage[]
   consultationRequests ConsultationRequest[]
   newsletterSubs       NewsletterSubscriber[]

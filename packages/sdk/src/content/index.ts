@@ -4,10 +4,10 @@ import type {
   CategoryQueryType,
   CategoryResponse,
   CategoryType,
-  ContentViewResponse,
-  ContentViewType,
   PostQueryResponse,
   PostQueryType,
+  PostViewResponse,
+  PostViewType,
   PostResponse,
   PostType,
   TagQueryResponse,
@@ -114,5 +114,5 @@ export const deletePost = (id: string, force = false) =>
 export const restorePost = (id: string) =>
   executeApi<null>(() => apiClient.post(`/admin/content/posts/${id}/restore`));
 
-export const createContentView = (data: ContentViewType) =>
-  executeApi<ContentViewResponse>(() => apiClient.post("/content/views", data));
+export const createPostView = (data: PostViewType) =>
+  executeApi<PostViewResponse>(() => apiClient.post("/post-views", data));
