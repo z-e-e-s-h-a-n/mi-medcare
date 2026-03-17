@@ -80,7 +80,6 @@ export type MfaMethod = z.infer<typeof enums.MfaMethodEnum>;
 export type SessionStatus = z.infer<typeof enums.SessionStatusEnum>;
 
 export type PushProvider = z.infer<typeof enums.PushProviderEnum>;
-export type MessagingChannel = z.infer<typeof enums.MessagingChannelEnum>;
 export type NotificationChannel = z.infer<
   typeof enums.NotificationChannelEnum
 >;

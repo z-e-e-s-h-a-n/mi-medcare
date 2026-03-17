@@ -6,8 +6,11 @@ import {
 } from "@nestjs/common";
 import argon2 from "argon2";
 import type { Request, Response } from "express";
-import type { UserStatus } from "@workspace/db/client";
-import type { UserRole } from "@workspace/contracts";
+import type {
+  MfaMethod as DbMfaMethod,
+  UserRole as DbUserRole,
+  UserStatus,
+} from "@workspace/db/client";
 import type {
   RequestOtpDto,
   ResetPasswordDto,
@@ -38,7 +41,7 @@ export class AuthService {
       throw new BadRequestException("Password should not be empty.");
     }
 
-    await this.createUser(dto, "customer");
+    await this.createUser(dto, "author");
 
     return {
       message: "User created successfully. Please verify your email.",
@@ -360,7 +363,7 @@ export class AuthService {
 
     await this.prisma.user.update({
       where: { id: user.id },
-      data: { preferredMfa: dto.preferredMfa },
+      data: { preferredMfa: dto.preferredMfa as DbMfaMethod },
     });
 
     await this.notifyService.sendNotification({
@@ -450,7 +453,7 @@ export class AuthService {
     return { message: "Email changed successfully." };
   }
 
-  async createUser(dto: SignUpDto, role: UserRole) {
+  async createUser(dto: SignUpDto, role: DbUserRole) {
     const { email } = await this.findUserFail200(dto.email);
 
     const hashedPassword = dto.password
@@ -464,7 +467,7 @@ export class AuthService {
         firstName: dto.firstName,
         lastName: dto.lastName,
         displayName: `${dto.firstName} ${dto.lastName}`.trim(),
-        role,
+        role: role as DbUserRole,
       },
       ...this.userView,
     });

@@ -108,7 +108,7 @@ export class OAuthService implements OnModuleInit {
           displayName: normalized.displayName,
           isEmailVerified: true,
           password: null,
-          role: "customer",
+          role: "author",
         },
       });
 

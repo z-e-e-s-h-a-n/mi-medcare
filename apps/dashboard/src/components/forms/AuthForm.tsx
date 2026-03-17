@@ -28,8 +28,9 @@ import {
   passwordSchema,
   emailSchema,
   type OtpPurpose,
+  type SignUpType,
+  type ValidateOtpType,
 } from "@workspace/contracts";
-import type { SignUpType, ValidateOtpType } from "@workspace/contracts/auth";
 import Image from "next/image";
 import { appName } from "@workspace/shared/constants";
 

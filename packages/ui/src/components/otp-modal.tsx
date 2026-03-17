@@ -14,14 +14,16 @@ import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
 import { requestOtp, validateOtp } from "@workspace/sdk/auth";
 import { useRouter } from "next/navigation";
-import type { RequestOtpType } from "@workspace/contracts/auth";
+import type { OtpPurpose } from "@workspace/contracts";
 
 export interface OtpMeta {
   token?: string;
   valid?: boolean;
 }
 
-interface OtpModalProps extends RequestOtpType {
+interface OtpModalProps {
+  email: string;
+  purpose: OtpPurpose;
   open: boolean;
   setOpen: (o: boolean) => void;
   setOtpMeta: (m?: OtpMeta) => void;

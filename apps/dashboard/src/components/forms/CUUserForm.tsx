@@ -38,7 +38,7 @@ const CUUserForm = (props: BaseCUFormProps) => {
         lastName: "",
         displayName: "",
         email: "",
-        role: "customer",
+        role: "author",
         status: "pending",
       }}
       mapDataToValues={(data) => ({

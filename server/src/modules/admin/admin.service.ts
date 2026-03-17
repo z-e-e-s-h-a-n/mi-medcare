@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import type { CUUserDto, UserQueryDto } from "@workspace/contracts/admin";
-import type { Prisma } from "@workspace/db/client";
+import type { Prisma, UserRole as DbUserRole } from "@workspace/db/client";
 
 import { AuthService } from "@/modules/auth/auth.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";
@@ -37,7 +37,7 @@ export class AdminService {
 
     const where: Prisma.UserWhereInput = {};
 
-    if (role) where.role = role;
+    if (role) where.role = role as DbUserRole;
     else where.role = { not: "admin" };
 
     if (isEmailVerified !== undefined) where.isEmailVerified = isEmailVerified;
@@ -105,6 +105,7 @@ export class AdminService {
       where: { id: userId },
       data: {
         ...dto,
+        role: dto.role as DbUserRole,
         email: this.authService.normalizeEmail(email),
         ...(hashedPassword && { password: hashedPassword }),
       },

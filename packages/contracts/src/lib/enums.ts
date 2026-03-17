@@ -16,7 +16,6 @@ export const MfaMethodEnum = z.enum($Enums.MfaMethod);
 export const SessionStatusEnum = z.enum($Enums.SessionStatus);
 
 export const PushProviderEnum = z.enum($Enums.PushProvider);
-export const MessagingChannelEnum = z.enum($Enums.MessagingChannel);
 export const NotificationChannelEnum = z.enum($Enums.NotificationChannel);
 export const NotificationPurposeEnum = z.enum($Enums.NotificationPurpose);
 export const NotificationStatusEnum = z.enum($Enums.NotificationStatus);
@@ -31,7 +30,7 @@ export const BaseSortByEnum = z.enum(["createdAt"]);
 /* =========================
    USER
 ========================= */
-export const UserRoleEnum = z.enum($Enums.UserRole).exclude(["admin"]);
+export const UserRoleEnum = z.enum($Enums.UserRole);
 export const UserStatusEnum = z.enum($Enums.UserStatus);
 
 export const UserSearchByEnum = z.enum(["id", "email", "phone", "displayName"]);

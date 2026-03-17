@@ -7,7 +7,7 @@ import { Roles } from "@/decorators/roles.decorator";
 export class DashboardController {
   constructor(private readonly dashboardService: DashboardService) {}
 
-  @Roles("admin", "author", "editor")
+  @Roles("admin", "author")
   @Get()
   async getOverview() {
     return this.dashboardService.getOverview();

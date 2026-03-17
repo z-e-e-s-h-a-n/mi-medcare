@@ -40,9 +40,33 @@ async function seedUsers() {
 
   const password = await hashPassword("password123");
 
+  const admins = await Promise.all(
+    Array.from({ length: 2 }).map(async () => {
+      const firstName = faker.person.firstName();
+      const lastName = faker.person.lastName();
+      return prisma.user.create({
+        data: {
+          firstName,
+          lastName,
+          displayName: `${firstName} ${lastName}`,
+          email: faker.internet.email({ firstName, lastName }).toLowerCase(),
+          phone: faker.phone.number(),
+          password,
+          role: "admin",
+          status: "active",
+          isEmailVerified: true,
+          isPhoneVerified: faker.datatype.boolean(0.6),
+          preferredTheme: randomEnum(["light", "dark", "system"]),
+          pushNotifications: faker.datatype.boolean(),
+          loginAlerts: faker.datatype.boolean(),
+        },
+      });
+    }),
+  );
+
   // Create authors
   const authors = await Promise.all(
-    Array.from({ length: 3 }).map(async (_, i) => {
+    Array.from({ length: 4 }).map(async () => {
       const firstName = faker.person.firstName();
       const lastName = faker.person.lastName();
       return prisma.user.create({
@@ -65,31 +89,9 @@ async function seedUsers() {
     }),
   );
 
-  // Create editors
-  const editors = await Promise.all(
-    Array.from({ length: 2 }).map(async (_, i) => {
-      const firstName = faker.person.firstName();
-      const lastName = faker.person.lastName();
-      return prisma.user.create({
-        data: {
-          firstName,
-          lastName,
-          displayName: `${firstName} ${lastName}`,
-          email: faker.internet.email({ firstName, lastName }).toLowerCase(),
-          phone: faker.phone.number(),
-          password,
-          role: "editor",
-          status: "active",
-          isEmailVerified: true,
-          isPhoneVerified: true,
-        },
-      });
-    }),
-  );
-
-  const allUsers = [...authors, ...editors];
+  const allUsers = [...admins, ...authors];
   console.log(`✅ Created ${allUsers.length} users`);
-  return { authors, editors, allUsers };
+  return { admins, authors, allUsers };
 }
 
 async function seedMedia(users: any[]) {
@@ -399,10 +401,10 @@ async function seedNotifications(users: any[]) {
         "contactMessage",
         "consultationRequest",
       ]);
-      const channels = faker.helpers.arrayElements(
-        ["push", "email", "sms", "whatsapp"] as const,
-        { min: 1, max: 2 },
-      );
+      const channels = faker.helpers.arrayElements(["push", "email"] as const, {
+        min: 1,
+        max: 2,
+      });
       const priority = randomEnum(["normal", "important"]);
       const status = randomEnum(["pending", "partial", "sent", "failed"]);
       const viewedAt =

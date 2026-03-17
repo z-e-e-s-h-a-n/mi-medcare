@@ -36,7 +36,7 @@ const DashboardStats = ({ stats }: DashboardStatsProps) => {
             Registered dashboard users
           </div>
           <div className="text-muted-foreground">
-            Includes admins, editors, and authors
+            Includes admins and authors
           </div>
         </CardFooter>
       </Card>

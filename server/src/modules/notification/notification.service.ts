@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import type { Otp } from "@workspace/db/client";
 import type {
-  MessagingChannel,
-  NotificationChannel,
-  NotificationPriority,
+  NotificationChannel as DbNotificationChannel,
+  Otp,
+} from "@workspace/db/client";
+import type {
   NotificationPurpose,
   NotificationStatus,
 } from "@workspace/contracts";
@@ -16,7 +16,6 @@ import { appName } from "@workspace/shared/constants";
 
 import { PushService } from "./push.service";
 import { EmailService } from "./email.service";
-import { MessagingService } from "./messaging.service";
 
 import { NOTIFICATION_POLICY_MAP } from "@/constants/index";
 import { InjectLogger } from "@/decorators/logger.decorator";
@@ -43,7 +42,6 @@ export class NotificationService {
     private readonly prisma: PrismaService,
     private readonly env: EnvService,
     private readonly emailService: EmailService,
-    private readonly messagingService: MessagingService,
     private readonly pushService: PushService,
   ) {}
 
@@ -52,9 +50,7 @@ export class NotificationService {
 
     const { priority, push } = NOTIFICATION_POLICY_MAP[props.purpose];
     const channels = this.determineChannels(
-      props.email,
       props.user,
-      priority,
       push,
       !!props.otp,
     );
@@ -81,12 +77,6 @@ export class NotificationService {
           switch (channel) {
             case "email":
               await this.sendEmail(props.email, subject, html);
-              break;
-            case "sms":
-              await this.sendMessage("sms", props.email, message);
-              break;
-            case "whatsapp":
-              await this.sendMessage("whatsapp", props.email, message);
               break;
             case "push":
               await this.sendPush(props.user, subject, message);
@@ -128,45 +118,27 @@ export class NotificationService {
     await this.emailService.sendMail({ from, to, subject, html });
   }
 
-  async sendMessage(type: MessagingChannel, to: string, text: string) {
-    if (type === "sms") {
-      await this.messagingService.sendSms(to, text);
-    } else {
-      await this.messagingService.sendWhatsapp(to, text);
-    }
-  }
-
   async sendPush(user: SafeUser, subject: string, message: string) {
     await this.pushService.sendPush(user, subject, message);
   }
 
   private determineChannels(
-    email: string,
     user: SafeUser,
-    priority: NotificationPriority,
     allowPush: boolean,
     isOtp: boolean,
-  ): NotificationChannel[] {
-    const channels: NotificationChannel[] = [];
-
+  ): DbNotificationChannel[] {
     if (isOtp) {
-      const isEmail = email.includes("@");
-      return [isEmail ? "email" : user.fallbackChannel];
+      return ["email"];
     }
+
+    const channels: DbNotificationChannel[] = [];
 
     if (allowPush && user.pushNotifications) {
       channels.push("push");
     }
 
-    const hasEmail = user.email && user.isEmailVerified;
-    const hasPhone = user.phone && user.isPhoneVerified;
-
-    if (hasEmail) {
+    if (user.email && user.isEmailVerified) {
       channels.push("email");
-    }
-
-    if (priority === "important" && hasPhone) {
-      channels.push(user.fallbackChannel);
     }
 
     return channels;

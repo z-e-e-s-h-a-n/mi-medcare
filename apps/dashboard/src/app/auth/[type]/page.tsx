@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
-import type { AppPageProps, AuthFormType } from "@workspace/contracts";
-import type { ValidateOtpType } from "@workspace/contracts/auth";
+import type {
+  AppPageProps,
+  AuthFormType,
+  ValidateOtpType,
+} from "@workspace/contracts";
 import AuthForm from "@/components/forms/AuthForm";
 
 const page = async ({

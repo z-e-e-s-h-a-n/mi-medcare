@@ -12,7 +12,7 @@ import {
   type UserProfileType,
   type UserResponse,
 } from "@workspace/contracts/user";
-import { MessagingChannelEnum, ThemeModeEnum } from "@workspace/contracts";
+import { ThemeModeEnum } from "@workspace/contracts";
 
 import {
   Card,
@@ -55,7 +55,6 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
       displayName: user.displayName,
       imageId: user.imageId ?? undefined,
       preferredTheme: user.preferredTheme,
-      fallbackChannel: user.fallbackChannel,
       pushNotifications: user.pushNotifications,
       loginAlerts: user.loginAlerts,
     } as UserProfileType,
@@ -156,7 +155,7 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
         </CardHeader>
 
         <CardContent className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             <form.Subscribe
               selector={(s) => ({ theme: s.values.preferredTheme })}
             >
@@ -172,13 +171,6 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
                 );
               }}
             </form.Subscribe>
-
-            <SelectField
-              form={form}
-              name="fallbackChannel"
-              label="SMS Channel"
-              options={MessagingChannelEnum.options}
-            />
           </div>
 
           {/* Push Notifications */}

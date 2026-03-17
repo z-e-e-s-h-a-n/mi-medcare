@@ -2,7 +2,7 @@
 CREATE TYPE "ThemeMode" AS ENUM ('light', 'dark', 'system');
 
 -- CreateEnum
-CREATE TYPE "UserRole" AS ENUM ('admin', 'customer', 'author', 'editor');
+CREATE TYPE "UserRole" AS ENUM ('admin', 'author');
 
 -- CreateEnum
 CREATE TYPE "UserStatus" AS ENUM ('pending', 'active', 'suspended');
@@ -14,16 +14,13 @@ CREATE TYPE "OtpPurpose" AS ENUM ('setPassword', 'resetPassword', 'updatePasswor
 CREATE TYPE "OtpType" AS ENUM ('numericCode', 'secureToken');
 
 -- CreateEnum
-CREATE TYPE "MfaMethod" AS ENUM ('email', 'sms', 'whatsapp', 'authApp');
+CREATE TYPE "MfaMethod" AS ENUM ('email', 'authApp');
 
 -- CreateEnum
 CREATE TYPE "SessionStatus" AS ENUM ('active', 'revoked', 'expired');
 
 -- CreateEnum
-CREATE TYPE "NotificationChannel" AS ENUM ('push', 'email', 'sms', 'whatsapp');
-
--- CreateEnum
-CREATE TYPE "MessagingChannel" AS ENUM ('sms', 'whatsapp');
+CREATE TYPE "NotificationChannel" AS ENUM ('push', 'email');
 
 -- CreateEnum
 CREATE TYPE "PushProvider" AS ENUM ('fcm', 'expo');
@@ -81,7 +78,6 @@ CREATE TABLE "User" (
     "preferredTheme" "ThemeMode" NOT NULL DEFAULT 'system',
     "pushNotifications" BOOLEAN NOT NULL DEFAULT false,
     "preferredMfa" "MfaMethod",
-    "fallbackChannel" "MessagingChannel" NOT NULL DEFAULT 'sms',
     "loginAlerts" BOOLEAN NOT NULL DEFAULT true,
     "lastLoginAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
