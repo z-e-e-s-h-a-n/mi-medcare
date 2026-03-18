@@ -26,6 +26,8 @@ export class DashboardService {
       newsletterSubscribers,
       recentAuditLogs,
       topPerformingPosts,
+      topCategories,
+      topTags,
       recentContactMessages,
       recentConsultationRequests,
       recentNewsletterSubscribers,
@@ -55,6 +57,26 @@ export class DashboardService {
         include: {
           author: { omit: { password: true } },
           category: true,
+        },
+      }),
+      this.prisma.category.findMany({
+        where: { deletedAt: null },
+        take: 8,
+        orderBy: { posts: { _count: "desc" } },
+        include: {
+          _count: {
+            select: { posts: true },
+          },
+        },
+      }),
+      this.prisma.tag.findMany({
+        where: { deletedAt: null },
+        take: 8,
+        orderBy: { posts: { _count: "desc" } },
+        include: {
+          _count: {
+            select: { posts: true },
+          },
         },
       }),
       this.prisma.contactMessage.findMany({
@@ -126,7 +148,6 @@ export class DashboardService {
         }),
         postStatuses: [
           { label: "Published", value: 0 },
-          { label: "Review", value: 0 },
           { label: "Draft", value: 0 },
         ].map((item) => ({
           ...item,
@@ -154,7 +175,7 @@ export class DashboardService {
               lastName: log.user.lastName ?? undefined,
               displayName: log.user.displayName,
               email: log.user.email ?? undefined,
-              phone: log.user.phone ?? undefined,
+              phone: undefined,
             }
           : undefined,
       })),
@@ -189,16 +210,30 @@ export class DashboardService {
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
         )
         .slice(0, 10),
-      topPerformingPosts: topPerformingPosts.map((post) => ({
-        id: post.id,
-        title: post.title,
-        slug: post.slug,
-        status: post.status,
-        viewsCount: post.viewsCount,
-        publishedAt: post.publishedAt?.toISOString(),
-        authorName: post.author.displayName,
-        categoryName: post.category.name,
-      })),
+      contentOverview: {
+        posts: topPerformingPosts.map((post) => ({
+          id: post.id,
+          title: post.title,
+          slug: post.slug,
+          status: post.status,
+          viewsCount: post.viewsCount,
+          publishedAt: post.publishedAt?.toISOString(),
+          authorName: post.author.displayName,
+          categoryName: post.category.name,
+        })),
+        categories: topCategories.map((category) => ({
+          id: category.id,
+          name: category.name,
+          slug: category.slug,
+          postCount: category._count.posts,
+        })),
+        tags: topTags.map((tag) => ({
+          id: tag.id,
+          name: tag.name,
+          slug: tag.slug,
+          postCount: tag._count.posts,
+        })),
+      },
     };
 
     return {

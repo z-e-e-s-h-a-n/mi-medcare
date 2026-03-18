@@ -130,9 +130,6 @@ const NotificationsPage = () => {
                       <Badge variant="outline" className="capitalize">
                         {notification.purpose}
                       </Badge>
-                      <Badge variant="outline" className="capitalize">
-                        {notification.priority}
-                      </Badge>
                     </div>
                     <div>
                       <p className="font-medium">{notification.subject}</p>

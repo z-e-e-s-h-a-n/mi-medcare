@@ -17,7 +17,7 @@ const AuditLogDetailsPage = ({ params }: AppPageProps) => {
   const { id } = React.use(params);
 
   return (
-    <GenericDetailsPage<AuditLogResponse, never>
+    <GenericDetailsPage<AuditLogResponse>
       entityId={id}
       entityName="audit log"
       canEdit={false}

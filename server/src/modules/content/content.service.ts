@@ -1,9 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import type {
   CategoryDto,
   CategoryQueryDto,
   PostDto,
-  PostViewDto,
   PostQueryDto,
   TagDto,
   TagQueryDto,
@@ -97,7 +96,10 @@ export class ContentService {
         skip,
         take: limit,
         orderBy,
-        include: this.categoryInclude,
+        include: {
+          ...this.categoryInclude,
+          _count: { select: { posts: true } },
+        },
       }),
       this.prisma.category.count({ where }),
     ]);
@@ -117,7 +119,10 @@ export class ContentService {
   async getCategoryById(id: string) {
     const category = await this.prisma.category.findUniqueOrThrow({
       where: { id },
-      include: this.categoryInclude,
+      include: {
+        ...this.categoryInclude,
+        posts: true,
+      },
     });
 
     return {
@@ -129,7 +134,7 @@ export class ContentService {
   async getCategoryBySlug(slug: string) {
     const category = await this.prisma.category.findFirstOrThrow({
       where: { slug },
-      include: this.categoryInclude,
+      include: { ...this.categoryInclude, posts: true },
     });
 
     return {
@@ -395,18 +400,39 @@ export class ContentService {
     };
   }
 
-  async createPostView(dto: PostViewDto) {
+  async createPostView(dto: {
+    postId: string;
+    trafficSourceId?: string;
+    visitorKey: string;
+  }) {
+    if (!dto.visitorKey) {
+      throw new BadRequestException("Visitor key is required.");
+    }
+
+    const viewedOn = new Date();
+    viewedOn.setUTCHours(0, 0, 0, 0);
+
     const view = await this.prisma.$transaction(async (tx) => {
-      const createdView = await tx.postView.create({
-        data: dto,
+      const existingView = await tx.postView.findFirst({
+        where: {
+          postId: dto.postId,
+          visitorKey: dto.visitorKey,
+          viewedOn,
+        } as any,
       });
 
-      if (dto.postId) {
-        await tx.post.update({
-          where: { id: dto.postId },
-          data: { viewsCount: { increment: 1 } },
-        });
+      if (existingView) {
+        return existingView;
       }
+
+      const createdView = await tx.postView.create({
+        data: { ...dto, viewedOn } as any,
+      });
+
+      await tx.post.update({
+        where: { id: dto.postId },
+        data: { viewsCount: { increment: 1 } },
+      });
 
       return createdView;
     });

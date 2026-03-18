@@ -45,6 +45,7 @@ export const CUPostSchema = z.object({
 export const postViewSchema = z.object({
   postId: idSchema,
   trafficSourceId: idSchema.optional(),
+  visitorKey: z.string().min(1).optional(),
 });
 
 export const categoryQuerySchema = baseQuerySchema(

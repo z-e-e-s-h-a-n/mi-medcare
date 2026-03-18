@@ -1,62 +1,339 @@
 "use client";
 
-import { FolderTree } from "lucide-react";
+import {
+  Calendar,
+  FileText,
+  FolderTree,
+  Hash,
+  Layers,
+  LinkIcon,
+} from "lucide-react";
 
 import type { CategoryResponse } from "@workspace/contracts/content";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useCategory } from "@/hooks/content";
 import type { AppPageProps } from "@workspace/contracts";
 import React from "react";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card";
+import { Badge } from "@workspace/ui/components/badge";
 
 const CategoryDetailsPage = ({ params }: AppPageProps) => {
   const { id } = React.use(params);
 
   return (
-    <GenericDetailsPage<CategoryResponse, "children">
+    <GenericDetailsPage<CategoryResponse>
       entityId={id}
-      entityName="category"
+      entityName="Category"
       useQuery={useCategory}
-      renderHeader={(category) => (
-        <div className="flex items-start gap-4">
-          <div className="rounded-xl bg-background/80 p-3">
-            <FolderTree className="size-6" />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold">{category.name}</h2>
-            <p className="text-muted-foreground">{category.slug}</p>
-          </div>
-        </div>
-      )}
       sections={[
         {
-          title: "Overview",
-          columns: 2,
+          title: "Basic Information",
           fields: [
-            { label: "Name", accessor: "name" },
-            { label: "Slug", accessor: "slug" },
+            {
+              label: "Name",
+              accessor: "name",
+              icon: FileText,
+            },
+            {
+              label: "Slug",
+              accessor: "slug",
+              icon: Hash,
+            },
             {
               label: "Parent Category",
-              accessor: (category) => category.parent?.name ?? "—",
+              accessor: "parent",
+              icon: FolderTree,
+              render: (value) =>
+                value ? (
+                  <div className="flex items-center gap-2">
+                    <Badge variant="secondary">{value.name}</Badge>
+                    <span className="text-sm text-muted-foreground">
+                      /{value.slug}
+                    </span>
+                  </div>
+                ) : (
+                  <span className="text-muted-foreground">—</span>
+                ),
             },
             {
-              label: "Description",
-              accessor: (category) => category.description ?? "—",
+              label: "Level",
+              accessor: (data) => {
+                let depth = 0;
+                let current = data.parent;
+                while (current) {
+                  depth++;
+                  current = current.parent;
+                }
+                return depth + 1;
+              },
+              icon: Layers,
+              render: (value) => (
+                <Badge variant="outline">
+                  Level {value} {value === 1 ? "(Root)" : "(Nested)"}
+                </Badge>
+              ),
             },
           ],
+          columns: 2,
+        },
+        {
+          title: "Content",
+          fields: [
+            {
+              label: "Description",
+              accessor: "description",
+              className: "col-span-full",
+            },
+          ],
+          columns: 1,
+        },
+        {
+          title: "Timeline",
+          fields: [
+            {
+              label: "Created At",
+              accessor: "createdAt",
+              icon: Calendar,
+              format: (value) => new Date(value).toLocaleDateString(),
+            },
+            {
+              label: "Updated At",
+              accessor: "updatedAt",
+              icon: Calendar,
+              format: (value) => new Date(value).toLocaleDateString(),
+            },
+            {
+              label: "Deleted At",
+              accessor: "deletedAt",
+              icon: Calendar,
+              format: (value) =>
+                value ? new Date(value).toLocaleDateString() : "—",
+            },
+          ],
+          columns: 3,
         },
       ]}
       relatedEntities={[
         {
-          title: "Child Categories",
+          title: "Subcategories",
           dataKey: "children",
           columns: [
-            { header: "Name", accessor: (child) => child.name },
-            { header: "Slug", accessor: (child) => child.slug },
+            { header: "Name", accessor: (i) => i.name },
+            { header: "Slug", accessor: (i) => i.slug },
+            {
+              header: "Posts",
+              accessor: (item) => item.posts?.length,
+            },
+            {
+              header: "Description",
+              accessor: (i) => i.description,
+            },
           ],
-          viewPath: (child) => `/admin/content/categories/${child.id}`,
+          viewPath: (item) => `/dashboard/categories/${item.id}`,
+        },
+        {
+          title: "Posts in this Category",
+          dataKey: "posts",
+          columns: [
+            {
+              header: "Title",
+              accessor: (item) => (
+                <div className="space-y-1">
+                  <div className="font-medium">{item.title}</div>
+                  <div className="text-xs text-muted-foreground">
+                    /{item.slug}
+                  </div>
+                </div>
+              ),
+            },
+            {
+              header: "Status",
+              accessor: (item) => (
+                <Badge variant="outline">{item.status}</Badge>
+              ),
+            },
+            {
+              header: "Views",
+              accessor: (item) => item.viewsCount,
+            },
+            {
+              header: "Published",
+              accessor: (item) =>
+                item.publishedAt
+                  ? new Date(item.publishedAt).toLocaleDateString()
+                  : "—",
+            },
+          ],
+          viewPath: (item) => `/dashboard/posts/${item.id}`,
         },
       ]}
-    />
+      renderHeader={(data) => (
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex-1">
+            <div className="flex items-center gap-3 mb-2">
+              <h2 className="text-2xl font-bold">{data.name}</h2>
+              {data.children && data.children.length > 0 && (
+                <Badge variant="secondary" className="gap-1">
+                  <FolderTree className="h-3 w-3" />
+                  {data.children.length} subcategories
+                </Badge>
+              )}
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground mb-3">
+              <LinkIcon className="h-4 w-4" />
+              <span className="font-mono text-sm">/{data.slug}</span>
+            </div>
+            {data.description && (
+              <p className="text-muted-foreground">{data.description}</p>
+            )}
+            {data.parent && (
+              <div className="mt-3 flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">Parent:</span>
+                <Badge variant="secondary" className="gap-1">
+                  <FolderTree className="h-3 w-3" />
+                  {data.parent.name}
+                </Badge>
+              </div>
+            )}
+          </div>
+          <div className="text-right">
+            <span className="text-xl font-semibold text-primary">
+              {data.posts.length} Posts
+            </span>
+            <div className="text-sm text-muted-foreground">Total Posts</div>
+          </div>
+        </div>
+      )}
+    >
+      {(data) => (
+        <>
+          {/* Category Hierarchy */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <FolderTree className="h-5 w-5" />
+                Category Hierarchy
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-sm">
+                  {(() => {
+                    // Build the hierarchy path
+                    const path = [];
+                    let current: CategoryResponse | undefined = data;
+                    while (current) {
+                      path.unshift({
+                        name: current.name,
+                        slug: current.slug,
+                        id: current.id,
+                      });
+
+                      current = current.parent;
+                    }
+                    return path.map((category, index) => (
+                      <React.Fragment key={category.id}>
+                        {index > 0 && (
+                          <span className="text-muted-foreground">›</span>
+                        )}
+                        <a
+                          href={`/dashboard/categories/${category.id}`}
+                          className="text-primary hover:underline"
+                        >
+                          {category.name}
+                        </a>
+                      </React.Fragment>
+                    ));
+                  })()}
+                </div>
+                {data.children && data.children.length > 0 && (
+                  <div className="space-y-2">
+                    <div className="text-sm font-medium">
+                      Direct Subcategories:
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {data.children.map((child) => (
+                        <Badge
+                          key={child.id}
+                          variant="outline"
+                          className="gap-1"
+                          asChild
+                        >
+                          <a href={`/dashboard/categories/${child.id}`}>
+                            <FolderTree className="h-3 w-3" />
+                            {child.name}
+                            <span className="text-xs text-muted-foreground">
+                              ({child.posts.length})
+                            </span>
+                          </a>
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Statistics Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Category Statistics</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="space-y-2 p-4 rounded-lg bg-primary/5">
+                  <div className="text-2xl font-bold">{data.posts.length}</div>
+                  <div className="text-sm text-muted-foreground">
+                    Total Posts
+                  </div>
+                </div>
+                <div className="space-y-2 p-4 rounded-lg bg-secondary/5">
+                  <div className="text-2xl font-bold">
+                    {data.children?.length}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Subcategories
+                  </div>
+                </div>
+                <div className="space-y-2 p-4 rounded-lg bg-green-500/5">
+                  <div className="text-2xl font-bold">
+                    {(() => {
+                      // Calculate total views from all posts in this category
+                      return data.posts?.reduce(
+                        (total, post) => total + post.viewsCount,
+                        0,
+                      );
+                    })()}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Total Views
+                  </div>
+                </div>
+                <div className="space-y-2 p-4 rounded-lg bg-blue-500/5">
+                  <div className="text-2xl font-bold">
+                    {(() => {
+                      // Count published posts
+                      return data.posts?.filter(
+                        (post) => post.status === "published",
+                      ).length;
+                    })()}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Published Posts
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </>
+      )}
+    </GenericDetailsPage>
   );
 };
 

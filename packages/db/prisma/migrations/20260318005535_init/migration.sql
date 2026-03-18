@@ -5,7 +5,7 @@ CREATE TYPE "ThemeMode" AS ENUM ('light', 'dark', 'system');
 CREATE TYPE "UserRole" AS ENUM ('admin', 'author');
 
 -- CreateEnum
-CREATE TYPE "UserStatus" AS ENUM ('pending', 'active', 'suspended');
+CREATE TYPE "UserStatus" AS ENUM ('active', 'suspended');
 
 -- CreateEnum
 CREATE TYPE "OtpPurpose" AS ENUM ('setPassword', 'resetPassword', 'updatePassword', 'verifyEmail', 'updateEmail', 'enableMfa', 'disableMfa', 'updateMfa', 'verifyMfa');
@@ -29,10 +29,7 @@ CREATE TYPE "PushProvider" AS ENUM ('fcm', 'expo');
 CREATE TYPE "NotificationPurpose" AS ENUM ('signUp', 'signIn', 'verifyMfa', 'updateMfa', 'updatePassword', 'verifyEmail', 'updateEmail', 'userStatus', 'newsletter', 'securityAlert', 'contactMessage', 'consultationRequest');
 
 -- CreateEnum
-CREATE TYPE "NotificationPriority" AS ENUM ('normal', 'important');
-
--- CreateEnum
-CREATE TYPE "NotificationStatus" AS ENUM ('pending', 'partial', 'sent', 'failed');
+CREATE TYPE "NotificationStatus" AS ENUM ('sent', 'failed');
 
 -- CreateEnum
 CREATE TYPE "AuditAction" AS ENUM ('create', 'update', 'delete', 'login', 'logout', 'statusChange');
@@ -41,10 +38,10 @@ CREATE TYPE "AuditAction" AS ENUM ('create', 'update', 'delete', 'login', 'logou
 CREATE TYPE "MediaVisibility" AS ENUM ('private', 'public');
 
 -- CreateEnum
-CREATE TYPE "MediaType" AS ENUM ('photo', 'logo', 'other');
+CREATE TYPE "MediaType" AS ENUM ('photo', 'logo', 'post', 'category', 'other');
 
 -- CreateEnum
-CREATE TYPE "PostStatus" AS ENUM ('draft', 'review', 'published');
+CREATE TYPE "PostStatus" AS ENUM ('draft', 'published');
 
 -- CreateEnum
 CREATE TYPE "PracticeType" AS ENUM ('privatePractice', 'groupPractice', 'hospital', 'clinic', 'urgentCare', 'specialtyClinic', 'other');
@@ -70,11 +67,9 @@ CREATE TABLE "User" (
     "password" VARCHAR(255),
     "imageId" TEXT,
     "email" VARCHAR(255),
-    "phone" VARCHAR(20),
     "isEmailVerified" BOOLEAN NOT NULL DEFAULT false,
-    "isPhoneVerified" BOOLEAN NOT NULL DEFAULT false,
     "role" "UserRole" NOT NULL,
-    "status" "UserStatus" NOT NULL DEFAULT 'pending',
+    "status" "UserStatus" NOT NULL DEFAULT 'active',
     "preferredTheme" "ThemeMode" NOT NULL DEFAULT 'system',
     "pushNotifications" BOOLEAN NOT NULL DEFAULT false,
     "preferredMfa" "MfaMethod",
@@ -133,12 +128,11 @@ CREATE TABLE "Notification" (
     "userId" TEXT NOT NULL,
     "purpose" "NotificationPurpose" NOT NULL,
     "channels" "NotificationChannel"[],
-    "priority" "NotificationPriority" NOT NULL DEFAULT 'normal',
     "subject" TEXT NOT NULL,
     "message" TEXT NOT NULL,
     "recipient" TEXT NOT NULL,
     "meta" JSONB,
-    "status" "NotificationStatus" NOT NULL DEFAULT 'pending',
+    "status" "NotificationStatus" NOT NULL DEFAULT 'failed',
     "viewedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -192,8 +186,10 @@ CREATE TABLE "Post" (
 -- CreateTable
 CREATE TABLE "PostView" (
     "id" TEXT NOT NULL,
-    "postId" TEXT,
+    "postId" TEXT NOT NULL,
     "trafficSourceId" TEXT,
+    "visitorKey" VARCHAR(128) NOT NULL,
+    "viewedOn" DATE NOT NULL,
     "viewedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "PostView_pkey" PRIMARY KEY ("id")
@@ -205,6 +201,7 @@ CREATE TABLE "Category" (
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "description" TEXT,
+    "coverId" TEXT,
     "parentId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -316,6 +313,31 @@ CREATE TABLE "TrafficSource" (
 );
 
 -- CreateTable
+CREATE TABLE "BusinessPhone" (
+    "id" TEXT NOT NULL,
+    "label" TEXT NOT NULL,
+    "value" VARCHAR(20) NOT NULL,
+    "phoneProfileId" TEXT,
+    "faxProfileId" TEXT,
+
+    CONSTRAINT "BusinessPhone_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "BusinessAddress" (
+    "id" TEXT NOT NULL,
+    "label" TEXT NOT NULL,
+    "line1" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "state" TEXT NOT NULL,
+    "zip" TEXT NOT NULL,
+    "country" TEXT NOT NULL,
+    "businessProfileId" TEXT,
+
+    CONSTRAINT "BusinessAddress_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "BusinessProfile" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -325,19 +347,14 @@ CREATE TABLE "BusinessProfile" (
     "logoId" TEXT NOT NULL,
     "coverId" TEXT,
     "email" VARCHAR(255) NOT NULL,
-    "phone" VARCHAR(20) NOT NULL,
+    "whatsappId" TEXT NOT NULL,
     "website" TEXT NOT NULL,
-    "tiktok" TEXT,
-    "facebook" TEXT,
-    "instagram" TEXT,
-    "twitter" TEXT,
-    "linkedin" TEXT,
-    "youtube" TEXT,
-    "address" TEXT NOT NULL,
-    "city" TEXT NOT NULL,
-    "state" TEXT NOT NULL,
-    "country" TEXT NOT NULL,
-    "postalCode" TEXT NOT NULL,
+    "facebook" TEXT NOT NULL,
+    "instagram" TEXT NOT NULL,
+    "twitter" TEXT NOT NULL,
+    "linkedin" TEXT NOT NULL,
+    "officeHoursDays" TEXT,
+    "officeHoursTime" TEXT,
     "metaTitle" TEXT NOT NULL,
     "metaDescription" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -358,9 +375,6 @@ CREATE TABLE "_PostToTag" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_phone_key" ON "User"("phone");
-
--- CreateIndex
 CREATE INDEX "User_status_idx" ON "User"("status");
 
 -- CreateIndex
@@ -368,9 +382,6 @@ CREATE INDEX "User_role_idx" ON "User"("role");
 
 -- CreateIndex
 CREATE INDEX "User_email_isEmailVerified_idx" ON "User"("email", "isEmailVerified");
-
--- CreateIndex
-CREATE INDEX "User_phone_isPhoneVerified_idx" ON "User"("phone", "isPhoneVerified");
 
 -- CreateIndex
 CREATE INDEX "User_deletedAt_idx" ON "User"("deletedAt");
@@ -460,6 +471,9 @@ CREATE INDEX "PostView_viewedAt_idx" ON "PostView"("viewedAt");
 CREATE INDEX "PostView_postId_viewedAt_idx" ON "PostView"("postId", "viewedAt");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "PostView_postId_visitorKey_viewedOn_key" ON "PostView"("postId", "visitorKey", "viewedOn");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
 
 -- CreateIndex
@@ -541,6 +555,9 @@ CREATE INDEX "NewsletterSubscriber_createdAt_idx" ON "NewsletterSubscriber"("cre
 CREATE INDEX "NewsletterSubscriber_isActive_idx" ON "NewsletterSubscriber"("isActive");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "BusinessProfile_whatsappId_key" ON "BusinessProfile"("whatsappId");
+
+-- CreateIndex
 CREATE INDEX "_PostToTag_B_index" ON "_PostToTag"("B");
 
 -- AddForeignKey
@@ -568,10 +585,13 @@ ALTER TABLE "Post" ADD CONSTRAINT "Post_categoryId_fkey" FOREIGN KEY ("categoryI
 ALTER TABLE "Post" ADD CONSTRAINT "Post_coverId_fkey" FOREIGN KEY ("coverId") REFERENCES "Media"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PostView" ADD CONSTRAINT "PostView_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "PostView" ADD CONSTRAINT "PostView_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PostView" ADD CONSTRAINT "PostView_trafficSourceId_fkey" FOREIGN KEY ("trafficSourceId") REFERENCES "TrafficSource"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Category" ADD CONSTRAINT "Category_coverId_fkey" FOREIGN KEY ("coverId") REFERENCES "Media"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Category" ADD CONSTRAINT "Category_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -589,6 +609,15 @@ ALTER TABLE "ConsultationRequest" ADD CONSTRAINT "ConsultationRequest_trafficSou
 ALTER TABLE "NewsletterSubscriber" ADD CONSTRAINT "NewsletterSubscriber_trafficSourceId_fkey" FOREIGN KEY ("trafficSourceId") REFERENCES "TrafficSource"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "BusinessPhone" ADD CONSTRAINT "BusinessPhone_phoneProfileId_fkey" FOREIGN KEY ("phoneProfileId") REFERENCES "BusinessProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BusinessPhone" ADD CONSTRAINT "BusinessPhone_faxProfileId_fkey" FOREIGN KEY ("faxProfileId") REFERENCES "BusinessProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BusinessAddress" ADD CONSTRAINT "BusinessAddress_businessProfileId_fkey" FOREIGN KEY ("businessProfileId") REFERENCES "BusinessProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "BusinessProfile" ADD CONSTRAINT "BusinessProfile_faviconId_fkey" FOREIGN KEY ("faviconId") REFERENCES "Media"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -596,6 +625,9 @@ ALTER TABLE "BusinessProfile" ADD CONSTRAINT "BusinessProfile_logoId_fkey" FOREI
 
 -- AddForeignKey
 ALTER TABLE "BusinessProfile" ADD CONSTRAINT "BusinessProfile_coverId_fkey" FOREIGN KEY ("coverId") REFERENCES "Media"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BusinessProfile" ADD CONSTRAINT "BusinessProfile_whatsappId_fkey" FOREIGN KEY ("whatsappId") REFERENCES "BusinessPhone"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_PostToTag" ADD CONSTRAINT "_PostToTag_A_fkey" FOREIGN KEY ("A") REFERENCES "Post"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -19,7 +19,6 @@ export const PushProviderEnum = z.enum($Enums.PushProvider);
 export const NotificationChannelEnum = z.enum($Enums.NotificationChannel);
 export const NotificationPurposeEnum = z.enum($Enums.NotificationPurpose);
 export const NotificationStatusEnum = z.enum($Enums.NotificationStatus);
-export const NotificationPriorityEnum = z.enum($Enums.NotificationPriority);
 
 /* =========================
    SHARED - VARIABLES
@@ -33,9 +32,8 @@ export const BaseSortByEnum = z.enum(["createdAt"]);
 export const UserRoleEnum = z.enum($Enums.UserRole);
 export const UserStatusEnum = z.enum($Enums.UserStatus);
 
-export const UserSearchByEnum = z.enum(["id", "email", "phone", "displayName"]);
+export const UserSearchByEnum = z.enum(["id", "email", "displayName"]);
 export const UserSortByEnum = z.enum([
-  "phone",
   "email",
   "role",
   "status",

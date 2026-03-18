@@ -16,25 +16,29 @@ const USER_SEEDS = [
     firstName: "Sophia",
     lastName: "Turner",
     email: "sophia.turner@mimedcare.com",
+    role: "admin",
     status: "active",
   },
   {
     firstName: "Liam",
     lastName: "Brooks",
     email: "liam.brooks@mimedcare.com",
+    role: "admin",
     status: "active",
   },
   {
     firstName: "Olivia",
     lastName: "Patel",
     email: "olivia.patel@mimedcare.com",
+    role: "author",
     status: "active",
   },
   {
     firstName: "Noah",
     lastName: "Bennett",
     email: "noah.bennett@mimedcare.com",
-    status: "pending",
+    role: "author",
+    status: "active",
   },
 ];
 
@@ -192,7 +196,7 @@ const POST_BLUEPRINTS = [
     title: "What to Include in a Quarterly Coding Compliance Review",
     categorySlug: "medical-coding",
     tagSlugs: ["coding-audits", "medical-coding", "hipaa-compliance"],
-    status: "review",
+    status: "draft",
     daysAgo: null,
     viewTarget: 18,
   },
@@ -200,7 +204,7 @@ const POST_BLUEPRINTS = [
     title: "Collections Scripts That Feel Professional and Patient-Friendly",
     categorySlug: "patient-access",
     tagSlugs: ["patient-collections", "practice-growth", "medical-billing"],
-    status: "review",
+    status: "draft",
     daysAgo: null,
     viewTarget: 12,
   },
@@ -208,7 +212,7 @@ const POST_BLUEPRINTS = [
     title: "Payer Mix Trends Worth Watching in 2026",
     categorySlug: "practice-operations",
     tagSlugs: ["revenue-cycle", "practice-growth", "claims-management"],
-    status: "review",
+    status: "draft",
     daysAgo: null,
     viewTarget: 10,
   },
@@ -217,7 +221,7 @@ const POST_BLUEPRINTS = [
       "How Smaller Practices Can Outsource Billing Without Losing Visibility",
     categorySlug: "practice-operations",
     tagSlugs: ["medical-billing", "practice-growth", "accounts-receivable"],
-    status: "review",
+    status: "draft",
     daysAgo: null,
     viewTarget: 8,
   },
@@ -260,7 +264,7 @@ const TRAFFIC_SOURCE_SEEDS = [
     utmSource: "google",
     utmMedium: "organic",
     utmCampaign: "seo-medical-billing",
-    landingPage: "/blog/reduce-claim-denials",
+    landingPage: "/blogs/reduce-claim-denials",
     referrer: "https://www.google.com",
   },
   {
@@ -281,7 +285,7 @@ const TRAFFIC_SOURCE_SEEDS = [
     utmSource: "email",
     utmMedium: "newsletter",
     utmCampaign: "quarterly-insights",
-    landingPage: "/blog/weekly-ar-review",
+    landingPage: "/blogs/weekly-ar-review",
     referrer: null,
   },
   {
@@ -316,7 +320,7 @@ const TRAFFIC_SOURCE_SEEDS = [
     utmSource: "youtube",
     utmMedium: "video",
     utmCampaign: "practice-growth-education",
-    landingPage: "/blog/credentialing-delays-cash-flow",
+    landingPage: "/blogs/credentialing-delays-cash-flow",
     referrer: "https://www.youtube.com",
   },
   {
@@ -337,7 +341,7 @@ const TRAFFIC_SOURCE_SEEDS = [
     utmSource: "newsletter",
     utmMedium: "email",
     utmCampaign: "monthly-rcm-brief",
-    landingPage: "/blog/hipaa-safe-billing-workflows",
+    landingPage: "/blogs/hipaa-safe-billing-workflows",
     referrer: null,
   },
 ];
@@ -393,12 +397,10 @@ async function seedUsers() {
           lastName: seed.lastName,
           displayName: `${seed.firstName} ${seed.lastName}`,
           email: seed.email,
-          phone: faker.phone.number(),
           password,
-          role: "author",
+          role: seed.role as any,
           status: seed.status as any,
           isEmailVerified: true,
-          isPhoneVerified: index % 2 === 0,
           preferredTheme: randomEnum(["light", "dark", "system"]) as any,
           pushNotifications: index < 3,
           loginAlerts: true,
@@ -571,7 +573,7 @@ async function seedPosts(
         ? daysAgo(blueprint.daysAgo)
         : null;
 
-    const post = await prisma.post.create({
+      const post = await prisma.post.create({
       data: {
         authorId: author.id,
         categoryId: category.id,
@@ -639,6 +641,9 @@ async function seedPostViews(posts: any[], trafficSources: any[]) {
     if (post.status === "published") {
       for (let index = 0; index < post.seedViewTarget; index++) {
         const weightedDaysAgo = Math.floor(Math.pow(Math.random(), 1.8) * 90);
+        const viewedAt = randomDate(daysAgo(weightedDaysAgo), now);
+        const viewedOn = new Date(viewedAt);
+        viewedOn.setUTCHours(0, 0, 0, 0);
         await prisma.postView.create({
           data: {
             postId: post.id,
@@ -646,13 +651,13 @@ async function seedPostViews(posts: any[], trafficSources: any[]) {
               Math.random() < 0.85
                 ? faker.helpers.arrayElement(trafficSources).id
                 : null,
-            viewedAt: randomDate(daysAgo(weightedDaysAgo), now),
+            visitorKey: faker.string.alphanumeric(32),
+            viewedOn,
+            viewedAt,
           },
         });
         createdViews += 1;
       }
-    } else if (post.status === "review") {
-      createdViews = post.seedViewTarget;
     }
 
     await prisma.post.update({
@@ -803,7 +808,7 @@ async function seedNotifications(users: any[]) {
           ? ["push"]
           : []),
       ] as ("email" | "push")[];
-      const status = randomEnum(["sent", "sent", "sent", "partial", "pending"]);
+      const status = randomEnum(["sent", "sent", "sent", "failed"]);
 
       notifications.push(
         await prisma.notification.create({
@@ -811,10 +816,6 @@ async function seedNotifications(users: any[]) {
             userId: user.id,
             purpose,
             channels,
-            priority:
-              purpose === "securityAlert" || purpose === "updatePassword"
-                ? "important"
-                : "normal",
             subject: faker.helpers.arrayElement([
               "New dashboard activity",
               "Account security update",
@@ -1101,24 +1102,70 @@ async function seedBusinessProfile(users: any[], media: any[]) {
       legalName: "Mi MedCare Revenue Solutions LLC",
       description:
         "Medical billing and revenue cycle support for growing practices that need cleaner claims, stronger collections, and clearer reporting.",
-      faviconId: faviconMedia.id,
-      logoId: logoMedia.id,
-      coverId: coverMedia?.id ?? null,
-      email: "info@mimedcare.com",
-      phone: "+1 (800) 555-0142",
-      website: "https://www.mimedcare.com",
-      facebook: "https://facebook.com/mimedcare",
-      instagram: "https://instagram.com/mimedcare",
-      linkedin: "https://linkedin.com/company/mimedcare",
-      youtube: "https://youtube.com/@mimedcare",
-      address: "4850 West Medical Center Drive, Suite 220",
-      city: "Dallas",
-      state: "Texas",
-      country: "United States",
-      postalCode: "75254",
-      metaTitle: "Mi MedCare | Medical Billing & Revenue Cycle Support",
+      favicon: { connect: { id: faviconMedia.id } },
+      logo: { connect: { id: logoMedia.id } },
+      cover: { connect: { id: coverMedia?.id } },
+      email: "info@mimedcarellc.com",
+      whatsapp: {
+        create: {
+          label: "(916) 909-6564",
+          value: "+19169096564",
+        },
+      },
+      website: "https://www.mimedcarellc.com",
+      phones: {
+        create: [
+          {
+            label: "(279) 207-3379",
+            value: "+12792073379",
+          },
+          {
+            label: "(279) 207-3380",
+            value: "+12792073380",
+          },
+        ],
+      },
+      fax: {
+        create: [
+          {
+            label: "(279) 217-5098",
+            value: "+12792175098",
+          },
+          {
+            label: "(279) 217-5099",
+            value: "+12792175099",
+          },
+        ],
+      },
+      officeHoursDays: "Mon – Fri",
+      officeHoursTime: "9:00 AM – 6:00 PM PST",
+      facebook: "https://www.facebook.com/mimedcarellc",
+      instagram: "https://www.instagram.com/mimedcarellc/",
+      twitter: "https://x.com/mimedcarellc",
+      linkedin: "https://www.linkedin.com/company/mi-medcare-llc/",
+      addresses: {
+        create: [
+          {
+            label: "Head Office",
+            line1: "1401 21st St #13807",
+            city: "Sacramento",
+            state: "CA",
+            zip: "95811",
+            country: "USA",
+          },
+          {
+            label: "Manassas Branch",
+            line1: "7422 Sudley Rd",
+            city: "Manassas",
+            state: "VA",
+            zip: "20109",
+            country: "USA",
+          },
+        ],
+      },
+      metaTitle: "Medical Billing Services in USA",
       metaDescription:
-        "Medical billing, denial management, coding support, and revenue cycle services for healthcare practices.",
+        "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care.",
     },
   });
 

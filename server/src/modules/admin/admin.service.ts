@@ -1,6 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import type { CUUserDto, UserQueryDto } from "@workspace/contracts/admin";
-import type { Prisma, UserRole as DbUserRole } from "@workspace/db/client";
+import type {
+  Prisma,
+  UserRole as DbUserRole,
+  UserStatus as DbUserStatus,
+} from "@workspace/db/client";
 
 import { AuthService } from "@/modules/auth/auth.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";
@@ -17,7 +21,7 @@ export class AdminService {
     const { user } = await this.authService.createUser(rest, role);
 
     return {
-      message: "Customer created successfully",
+      message: "User created successfully",
       data: user,
     };
   }
@@ -32,7 +36,6 @@ export class AdminService {
       searchBy,
       role,
       isEmailVerified,
-      isPhoneVerified,
     } = query;
 
     const where: Prisma.UserWhereInput = {};
@@ -41,16 +44,12 @@ export class AdminService {
     else where.role = { not: "admin" };
 
     if (isEmailVerified !== undefined) where.isEmailVerified = isEmailVerified;
-    if (isPhoneVerified !== undefined) where.isPhoneVerified = isPhoneVerified;
 
     if (search && searchBy) {
-      const searchWhereMap: Record<typeof searchBy, any> = {
+      const searchWhereMap: Record<string, Prisma.UserWhereInput> = {
         id: { id: search },
         email: {
           email: { contains: search, mode: "insensitive" },
-        },
-        phone: {
-          phone: { contains: search, mode: "insensitive" },
         },
         displayName: {
           displayName: { contains: search, mode: "insensitive" },
@@ -106,6 +105,7 @@ export class AdminService {
       data: {
         ...dto,
         role: dto.role as DbUserRole,
+        status: dto.status as DbUserStatus,
         email: this.authService.normalizeEmail(email),
         ...(hashedPassword && { password: hashedPassword }),
       },

@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, Globe, MapPin } from "lucide-react";
+import { Building2, Globe, MapPin, Phone, Printer, Search } from "lucide-react";
 
 import {
   Card,
@@ -14,7 +14,11 @@ import { MediaField } from "../media/mediaField";
 import type { BaseCUFormProps } from "@workspace/contracts";
 import { GenericForm } from "../shared/GenericForm";
 import { useBusinessProfile } from "@/hooks/business";
+import GenericArrayField from "../shared/GenericArrayField";
 import { businessProfileSchema } from "@workspace/contracts/business";
+
+import ContactItemField from "./ContactItemField";
+import AddressField from "./AddressField";
 
 const BusinessProfileForm = (props: BaseCUFormProps) => {
   return (
@@ -24,20 +28,34 @@ const BusinessProfileForm = (props: BaseCUFormProps) => {
       description="Manage the company profile used across your platform."
       useQuery={useBusinessProfile}
       schema={businessProfileSchema}
+      mapDataToValues={(data) => ({
+        ...data,
+        whatsapp: data.whatsapp ?? { label: "(279) 207-3379", value: "" },
+        officeHoursDays: data.officeHoursDays ?? "",
+        officeHoursTime: data.officeHoursTime ?? "",
+        phones: data.phones ?? [],
+        fax: data.fax ?? [],
+        addresses: data.addresses ?? [],
+      })}
       defaultValues={{
         name: "",
         legalName: "",
         description: "",
         faviconId: "",
         logoId: "",
+        coverId: "",
         email: "",
-        phone: "",
+        whatsapp: { label: "", value: "" },
         website: "",
-        address: "",
-        city: "",
-        state: "",
-        country: "",
-        postalCode: "",
+        fax: [],
+        phones: [],
+        officeHoursDays: "",
+        officeHoursTime: "",
+        addresses: [],
+        facebook: "https://www.facebook.com/",
+        instagram: "https://www.instagram.com/",
+        twitter: "https://x.com/",
+        linkedin: "https://www.linkedin.com/",
         metaTitle: "",
         metaDescription: "",
       }}
@@ -103,14 +121,37 @@ const BusinessProfileForm = (props: BaseCUFormProps) => {
             </CardHeader>
             <CardContent className="grid gap-4 md:grid-cols-2">
               <InputField form={form} name="email" label="Email" type="email" />
-              <InputField form={form} name="phone" label="Phone" type="tel" />
               <InputField
                 form={form}
                 name="website"
                 label="Website"
                 type="url"
               />
-              <div />
+              <InputField
+                form={form}
+                name="whatsapp.label"
+                label="WhatsApp Label"
+                placeholder="(279) 207-3379"
+              />
+              <InputField
+                form={form}
+                type="tel"
+                name="whatsapp.value"
+                label="WhatsApp Number"
+                placeholder="+12345678901"
+              />
+              <InputField
+                form={form}
+                name="officeHoursDays"
+                label="Hours Days"
+                placeholder="Mon – Fri"
+              />
+              <InputField
+                form={form}
+                name="officeHoursTime"
+                label="Hours Time"
+                placeholder="9:00 AM – 6:00 PM PST"
+              />
               <InputField
                 form={form}
                 name="facebook"
@@ -135,13 +176,6 @@ const BusinessProfileForm = (props: BaseCUFormProps) => {
                 label="LinkedIn"
                 type="url"
               />
-              <InputField
-                form={form}
-                name="youtube"
-                label="YouTube"
-                type="url"
-              />
-              <InputField form={form} name="tiktok" label="TikTok" type="url" />
             </CardContent>
           </Card>
 
@@ -149,31 +183,86 @@ const BusinessProfileForm = (props: BaseCUFormProps) => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <MapPin className="size-5" />
-                Address & SEO
+                Phone, Fax & Locations
               </CardTitle>
               <CardDescription>
-                Physical location and metadata shown to search engines.
+                Manage business phone numbers, fax numbers, and office
+                locations.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="grid gap-4 md:grid-cols-2">
-                <InputField form={form} name="address" label="Address" />
-                <InputField form={form} name="city" label="City" />
-                <InputField form={form} name="state" label="State" />
-                <InputField form={form} name="country" label="Country" />
-                <InputField form={form} name="postalCode" label="Postal Code" />
-              </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                <InputField form={form} name="metaTitle" label="Meta Title" />
-                <InputField
-                  form={form}
-                  name="metaDescription"
-                  label="Meta Description"
-                  type="textarea"
-                  rows={4}
-                />
-              </div>
+            <CardContent className="space-y-6">
+              <GenericArrayField
+                form={form}
+                name="phones"
+                label={
+                  <div className="flex items-center gap-2 text-sm font-medium">
+                    <Phone className="size-4" />
+                    Phone Numbers
+                  </div>
+                }
+                FormItem={ContactItemField}
+                columns={[
+                  { header: "Label", accessor: "label" },
+                  { header: "Number", accessor: "value" },
+                ]}
+              />
+
+              <GenericArrayField
+                form={form}
+                name="fax"
+                label={
+                  <div className="flex items-center gap-2 text-sm font-medium">
+                    <Printer className="size-4" />
+                    Fax Numbers
+                  </div>
+                }
+                FormItem={ContactItemField}
+                columns={[
+                  { header: "Label", accessor: "label" },
+                  { header: "Number", accessor: "value" },
+                ]}
+              />
+
+              <GenericArrayField
+                form={form}
+                name="addresses"
+                label={
+                  <div className="flex items-center gap-2 text-sm font-medium">
+                    <MapPin className="size-4" />
+                    Locations
+                  </div>
+                }
+                FormItem={AddressField}
+                columns={[
+                  { header: "Label", accessor: "label" },
+                  { header: "Address", accessor: "line1" },
+                  { header: "City", accessor: "city" },
+                  { header: "ZIP", accessor: "zip" },
+                ]}
+              />
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Search className="size-5" />
+                SEO Metadata
+              </CardTitle>
+              <CardDescription>
+                Meta information used for search engines and link previews.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <InputField form={form} name="metaTitle" label="Meta Title" />
+              <InputField
+                form={form}
+                name="metaDescription"
+                label="Meta Description"
+                type="textarea"
+                rows={4}
+              />
             </CardContent>
           </Card>
         </>

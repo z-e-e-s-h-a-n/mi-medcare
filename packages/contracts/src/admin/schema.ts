@@ -5,12 +5,17 @@ import {
   UserSortByEnum,
   UserStatusEnum,
 } from "../lib/enums";
-import { baseQuerySchema, nameSchema, passwordSchema } from "../lib/schema";
-import { signUpSchema } from "../auth";
+import {
+  baseQuerySchema,
+  emailSchema,
+  nameSchema,
+  passwordSchema,
+} from "../lib/schema";
 
-export const CUUserSchema = signUpSchema.extend({
+export const CUUserSchema = z.object({
   firstName: nameSchema,
   lastName: nameSchema.optional(),
+  email: emailSchema,
   role: UserRoleEnum,
   displayName: nameSchema,
   status: UserStatusEnum,
@@ -23,6 +28,5 @@ export const userQuerySchema = baseQuerySchema(
 ).extend({
   role: UserRoleEnum.optional(),
   isEmailVerified: z.boolean().optional(),
-  isPhoneVerified: z.boolean().optional(),
   status: UserStatusEnum.optional(),
 });

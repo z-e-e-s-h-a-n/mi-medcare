@@ -18,7 +18,7 @@ import type { ArrayItem } from "@workspace/contracts";
 export interface ArrayFormItemProps<TItem, TCtx = any> {
   onSubmit: (item: TItem) => void;
   disabled?: boolean;
-  children: (submit: () => void) => React.ReactNode;
+  children: (submit: () => void, onCancel: () => void) => React.ReactNode;
   editData?: TItem;
   clearEditData: () => void;
   items: TItem[];
@@ -43,6 +43,7 @@ interface GenericArrayFieldProps<
   TCtx = Pick<TFormData, TFormKeys[number]>,
 > {
   name: TName & string;
+  label?: React.ReactNode;
   form: AnyFormApi<TFormData>;
   disabled?: boolean;
   columns: ColumnConfig<TItem>[];
@@ -64,6 +65,7 @@ function GenericArrayField<
   TFormKeys extends readonly (keyof TFormData)[],
 >({
   name,
+  label,
   form,
   effects,
   FormItem,
@@ -119,7 +121,9 @@ function GenericArrayField<
               <>
                 <Card>
                   <CardHeader>
-                    <CardTitle className="capitalize">{name}</CardTitle>
+                    <CardTitle className="capitalize">
+                      {label ?? name}
+                    </CardTitle>
                   </CardHeader>
 
                   <CardContent>
@@ -139,18 +143,30 @@ function GenericArrayField<
                             clearEditData={() => setEditData(undefined)}
                             ctx={ctx}
                           >
-                            {(handleSubmit) => (
+                            {(handleSubmit, handleCancel) => (
                               <div className="flex items-center justify-between">
                                 <p className="text-xs text-muted-foreground">
                                   Total {entityName}: <b>{ArrItems.length}</b>
                                 </p>
-                                <Button
-                                  type="button"
-                                  variant="secondary"
-                                  onClick={handleSubmit}
-                                >
-                                  {`Add ${entityName}`}
-                                </Button>
+
+                                <div className="flex items-center gap-4">
+                                  {editData ? (
+                                    <Button
+                                      type="button"
+                                      variant="ghost"
+                                      onClick={handleCancel}
+                                    >
+                                      Cancel edit
+                                    </Button>
+                                  ) : null}
+                                  <Button
+                                    type="button"
+                                    variant="secondary"
+                                    onClick={handleSubmit}
+                                  >
+                                    {`Add ${entityName}`}
+                                  </Button>
+                                </div>
                               </div>
                             )}
                           </FormItem>

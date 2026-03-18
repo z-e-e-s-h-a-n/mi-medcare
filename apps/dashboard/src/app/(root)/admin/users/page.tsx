@@ -46,11 +46,6 @@ const userColumns: ColumnConfig<UserResponse, UserQueryType>[] = [
     sortKey: "email",
   },
   {
-    header: "Phone",
-    accessor: "phone",
-    sortKey: "phone",
-  },
-  {
     header: "Last Login",
     accessor: (u) =>
       u.lastLoginAt ? <DateWrapper date={u.lastLoginAt} /> : "—",

@@ -13,9 +13,7 @@ const page = async ({
   const { type } = await params;
   const queryParams = await searchParams;
 
-  if (
-    !["sign-up", "sign-in", "reset-password", "set-password"].includes(type)
-  ) {
+  if (!["sign-in", "reset-password", "set-password"].includes(type)) {
     return notFound();
   }
   return <AuthForm formType={type} queryParams={queryParams} />;

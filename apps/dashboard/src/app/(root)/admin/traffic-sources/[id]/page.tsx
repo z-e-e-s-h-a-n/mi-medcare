@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Route } from "lucide-react";
 
@@ -12,12 +13,13 @@ import {
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
 import { useTrafficSource } from "@/hooks/traffic";
 import type { AppPageProps } from "@workspace/contracts";
+import React from "react";
 
-const TrafficSourceDetailsPage = async ({ params }: AppPageProps) => {
-  const { id } = await params;
+const TrafficSourceDetailsPage = ({ params }: AppPageProps) => {
+  const { id } = React.use(params);
 
   return (
-    <GenericDetailsPage<TrafficSourceResponse, never>
+    <GenericDetailsPage<TrafficSourceResponse>
       entityId={id}
       entityName="traffic source"
       canEdit={false}
@@ -149,7 +151,8 @@ const RelatedListCard = ({ title, columns, rows }: RelatedListCardProps) => {
       </CardHeader>
       <CardContent>
         <div className="overflow-hidden rounded-lg border">
-          <table className="w-full text-sm">
+          <div className="max-h-[420px] overflow-auto">
+            <table className="w-full text-sm">
             <thead className="bg-muted/50">
               <tr>
                 {columns.map((column) => (
@@ -180,7 +183,8 @@ const RelatedListCard = ({ title, columns, rows }: RelatedListCardProps) => {
                 </tr>
               ))}
             </tbody>
-          </table>
+            </table>
+          </div>
         </div>
       </CardContent>
     </Card>

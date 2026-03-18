@@ -7,20 +7,12 @@ import type {
   SessionResponse,
   SignInResponse,
   SignInType,
-  SignUpType,
   UpdateEmailType,
   UpdateMfaType,
   ValidateOtpResponse,
   ValidateOtpType,
   ResetPasswordType,
 } from "@workspace/contracts/auth";
-
-/* =========================
-   AUTH
-   ========================= */
-
-export const signUp = (data: SignUpType) =>
-  executeApi(() => apiClient.post("/auth/signup", data));
 
 export const signIn = (data: SignInType) =>
   executeApi<SignInResponse>(() => apiClient.post("/auth/signin", data));

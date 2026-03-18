@@ -3,10 +3,7 @@ import type {
   NotificationChannel as DbNotificationChannel,
   Otp,
 } from "@workspace/db/client";
-import type {
-  NotificationPurpose,
-  NotificationStatus,
-} from "@workspace/contracts";
+import type { NotificationStatus } from "@workspace/contracts";
 import type { SafeUser } from "@workspace/contracts/user";
 import {
   resolveEmailTemplate,
@@ -48,29 +45,11 @@ export class NotificationService {
   async sendNotification(props: SendNotificationProps) {
     const { html, subject, message } = await resolveEmailTemplate(props);
 
-    const { priority, push } = NOTIFICATION_POLICY_MAP[props.purpose];
-    const channels = this.determineChannels(
-      props.user,
-      push,
-      !!props.otp,
-    );
+    const { push } = NOTIFICATION_POLICY_MAP[props.purpose];
+    const channels = this.determineChannels(props.user, push, !!props.otp);
 
     try {
-      const notification = await this.prisma.notification.create({
-        data: {
-          userId: props.user.id,
-          recipient: props.email,
-          purpose: props.purpose,
-          channels,
-          priority,
-          subject,
-          message,
-          meta: props as any,
-        },
-      });
-
-      let allSuccess = true;
-      let anySuccess = false;
+      let allSuccess = channels.length > 0;
 
       for (const channel of channels) {
         try {
@@ -82,7 +61,6 @@ export class NotificationService {
               await this.sendPush(props.user, subject, message);
               break;
           }
-          anySuccess = true;
         } catch (error) {
           allSuccess = false;
           this.logger.error("Notification send Failed", {
@@ -93,15 +71,19 @@ export class NotificationService {
         }
       }
 
-      const status: NotificationStatus = allSuccess
-        ? "sent"
-        : anySuccess
-          ? "partial"
-          : "failed";
+      const status: NotificationStatus = allSuccess ? "sent" : "failed";
 
-      await this.prisma.notification.update({
-        where: { id: notification.id },
-        data: { status },
+      await this.prisma.notification.create({
+        data: {
+          userId: props.user.id,
+          recipient: props.email,
+          purpose: props.purpose,
+          channels,
+          subject,
+          message,
+          meta: props as any,
+          status,
+        },
       });
     } catch (error) {
       this.logger.error(`❌ Notification send Failed`, {
@@ -144,4 +126,3 @@ export class NotificationService {
     return channels;
   }
 }
-

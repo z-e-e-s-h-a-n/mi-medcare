@@ -1,75 +1,54 @@
-import type {
-  NotificationPriority,
-  NotificationPurpose,
-} from "@workspace/contracts";
-
-/**
- * IMPORTANT = user must see this even if it costs money (SMS / WhatsApp)
- * Do NOT mark notifications important unless missing it causes
- * loss of access, money, or travel.
- */
+import type { NotificationPurpose } from "@workspace/contracts";
 
 export const NOTIFICATION_POLICY_MAP: Record<
   NotificationPurpose,
-  { priority: NotificationPriority; push: boolean }
+  { push: boolean }
 > = {
   // AUTH
   signUp: {
-    priority: "normal",
     push: false,
   },
   signIn: {
-    priority: "normal",
     push: false,
   },
 
   updatePassword: {
-    priority: "important",
     push: false,
   },
   verifyEmail: {
-    priority: "important",
     push: false,
   },
   updateEmail: {
-    priority: "important",
     push: false,
   },
   updateMfa: {
-    priority: "important",
     push: false,
   },
   verifyMfa: {
-    priority: "important",
     push: false,
   },
 
   // ACCOUNT
   userStatus: {
-    priority: "important",
     push: true,
   },
 
   //Contact Message
   contactMessage: {
-    priority: "normal",
-    push: false,
+    push: true,
   },
 
   // Newsletter
   newsletter: {
-    priority: "normal",
-    push: false,
+    push: true,
   },
 
   //Consultation Request
   consultationRequest: {
-    priority: "normal",
-    push: false,
+    push: true,
   },
 
   securityAlert: {
-    priority: "important",
     push: true,
   },
 };

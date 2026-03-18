@@ -25,8 +25,10 @@ export type PostQueryType = z.input<typeof postQuerySchema>;
 export type PostViewType = z.input<typeof postViewSchema>;
 
 export interface CategoryResponse extends Sanitize<Category> {
-  parent?: Sanitize<Category>;
-  children?: Sanitize<Category>[];
+  parent?: CategoryResponse;
+  children?: CategoryResponse[];
+  _count: { posts: number };
+  posts: Post[];
 }
 
 export type TagResponse = Sanitize<Tag>;

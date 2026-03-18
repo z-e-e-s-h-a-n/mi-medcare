@@ -65,19 +65,15 @@ const leadsChartConfig = {
   },
 } satisfies ChartConfig;
 
-const statusColors = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)"];
+const statusColors = ["var(--chart-1)", "var(--chart-2)"];
 const postStatusChartConfig = {
   Published: {
     label: "Published",
     color: "var(--chart-1)",
   },
-  Review: {
-    label: "Review",
-    color: "var(--chart-2)",
-  },
   Draft: {
     label: "Draft",
-    color: "var(--chart-3)",
+    color: "var(--chart-2)",
   },
 } satisfies ChartConfig;
 
@@ -100,7 +96,7 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
   );
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[1.3fr_1fr]">
+    <div className="space-y-6">
       <Card className="@container/card xl:row-span-2">
         <CardHeader>
           <CardTitle>Post Views Trend</CardTitle>
@@ -149,8 +145,16 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
             <AreaChart accessibilityLayer data={filteredPostViews}>
               <defs>
                 <linearGradient id="fillPostViews" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="var(--color-value)" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="var(--color-value)" stopOpacity={0.12} />
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-value)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-value)"
+                    stopOpacity={0.12}
+                  />
                 </linearGradient>
               </defs>
               <CartesianGrid vertical={false} />
@@ -202,90 +206,122 @@ const DashboardChart = ({ charts }: DashboardChartProps) => {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Lead Intake</CardTitle>
-          <CardDescription>
-            Contact, consultation, and newsletter lead flow over the last six months.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={leadsChartConfig} className="aspect-auto h-72 w-full">
-            <BarChart accessibilityLayer data={charts.leads}>
-              <CartesianGrid vertical={false} />
-              <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} />
-              <YAxis allowDecimals={false} tickLine={false} axisLine={false} />
-              <ChartTooltip
-                cursor={false}
-                content={
-                  <ChartTooltipContent
-                    className="min-w-44"
-                    indicator="dashed"
-                    labelFormatter={(value) => `Month: ${value}`}
-                  />
-                }
-              />
-              <Bar dataKey="contactMessages" stackId="leads" fill="var(--color-contactMessages)" radius={[0, 0, 6, 6]} />
-              <Bar dataKey="consultationRequests" stackId="leads" fill="var(--color-consultationRequests)" />
-              <Bar dataKey="newsletterSubscribers" stackId="leads" fill="var(--color-newsletterSubscribers)" radius={[6, 6, 0, 0]} />
-              <ChartLegend content={<ChartLegendContent />} />
-            </BarChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
+      <div className="grid gap-6 xl:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Lead Intake</CardTitle>
+            <CardDescription>
+              Contact, consultation, and newsletter lead flow over the last six
+              months.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer
+              config={leadsChartConfig}
+              className="aspect-auto h-72 w-full"
+            >
+              <BarChart accessibilityLayer data={charts.leads}>
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                />
+                <YAxis
+                  allowDecimals={false}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <ChartTooltip
+                  cursor={false}
+                  content={
+                    <ChartTooltipContent
+                      className="min-w-44"
+                      indicator="dashed"
+                      labelFormatter={(value) => `Month: ${value}`}
+                    />
+                  }
+                />
+                <Bar
+                  dataKey="contactMessages"
+                  stackId="leads"
+                  fill="var(--color-contactMessages)"
+                  radius={[0, 0, 6, 6]}
+                />
+                <Bar
+                  dataKey="consultationRequests"
+                  stackId="leads"
+                  fill="var(--color-consultationRequests)"
+                />
+                <Bar
+                  dataKey="newsletterSubscribers"
+                  stackId="leads"
+                  fill="var(--color-newsletterSubscribers)"
+                  radius={[6, 6, 0, 0]}
+                />
+                <ChartLegend content={<ChartLegendContent />} />
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Post Status Mix</CardTitle>
-          <CardDescription>
-            Snapshot of draft, review, and published posts.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-4">
-          <ChartContainer config={postStatusChartConfig} className="aspect-auto h-56 w-full">
-            <PieChart accessibilityLayer>
-              <ChartTooltip
-                content={<ChartTooltipContent hideLabel nameKey="label" />}
-              />
-              <Pie
-                data={charts.postStatuses}
-                dataKey="value"
-                nameKey="label"
-                innerRadius={55}
-                outerRadius={86}
-                paddingAngle={4}
-              >
-                {charts.postStatuses.map((entry, index) => (
-                  <Cell
-                    key={entry.label}
-                    fill={`var(--color-${entry.label})`}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
-          </ChartContainer>
-          <div className="grid gap-3">
-            {charts.postStatuses.map((item, index) => (
-              <div
-                key={item.label}
-                className="flex items-center justify-between rounded-lg border px-3 py-2 text-sm"
-              >
-                <div className="flex items-center gap-2">
-                  <span
-                    className="size-2.5 rounded-full"
-                    style={{
-                      backgroundColor:
-                        statusColors[index % statusColors.length],
-                    }}
-                  />
-                  <span>{item.label}</span>
+        <Card>
+          <CardHeader>
+            <CardTitle>Post Status Mix</CardTitle>
+            <CardDescription>
+              Snapshot of draft and published posts.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-4">
+            <ChartContainer
+              config={postStatusChartConfig}
+              className="aspect-auto h-56 w-full"
+            >
+              <PieChart accessibilityLayer>
+                <ChartTooltip
+                  content={<ChartTooltipContent hideLabel nameKey="label" />}
+                />
+                <Pie
+                  data={charts.postStatuses}
+                  dataKey="value"
+                  nameKey="label"
+                  innerRadius={55}
+                  outerRadius={86}
+                  paddingAngle={4}
+                >
+                  {charts.postStatuses.map((entry) => (
+                    <Cell
+                      key={entry.label}
+                      fill={`var(--color-${entry.label})`}
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ChartContainer>
+            <div className="grid gap-3">
+              {charts.postStatuses.map((item, index) => (
+                <div
+                  key={item.label}
+                  className="flex items-center justify-between rounded-lg border px-3 py-2 text-sm"
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="size-2.5 rounded-full"
+                      style={{
+                        backgroundColor:
+                          statusColors[index % statusColors.length],
+                      }}
+                    />
+                    <span>{item.label}</span>
+                  </div>
+                  <span className="font-medium">{item.value}</span>
                 </div>
-                <span className="font-medium">{item.value}</span>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };

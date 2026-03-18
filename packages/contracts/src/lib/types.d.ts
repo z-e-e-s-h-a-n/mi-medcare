@@ -57,7 +57,6 @@ export interface AppLayoutProps {
 
 export type FormSectionType = "add" | "update";
 export type AuthFormType =
-  | "sign-up"
   | "sign-in"
   | "reset-password"
   | "set-password";
@@ -87,9 +86,6 @@ export type NotificationPurpose = z.infer<
   typeof enums.NotificationPurposeEnum
 >;
 export type NotificationStatus = z.infer<typeof enums.NotificationStatusEnum>;
-export type NotificationPriority = z.infer<
-  typeof enums.NotificationPriorityEnum
->;
 
 export type BaseSortByType = z.infer<typeof enums.BaseSortByEnum>;
 

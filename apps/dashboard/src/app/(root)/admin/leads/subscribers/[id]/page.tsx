@@ -12,7 +12,7 @@ const NewsletterSubscriberDetailsPage = ({ params }: AppPageProps) => {
   const { id } = React.use(params);
 
   return (
-    <GenericDetailsPage<NewsletterSubscriberResponse, never>
+    <GenericDetailsPage<NewsletterSubscriberResponse>
       entityId={id}
       entityName="newsletter subscriber"
       canEdit={false}

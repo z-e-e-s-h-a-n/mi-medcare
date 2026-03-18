@@ -1,6 +1,5 @@
 import {
   signInSchema,
-  signUpSchema,
   requestOtpSchema,
   validateOtpSchema,
   resetPasswordSchema,
@@ -10,8 +9,6 @@ import {
 import { createZodDto } from "nestjs-zod";
 
 export class SignInDto extends createZodDto(signInSchema) {}
-
-export class SignUpDto extends createZodDto(signUpSchema) {}
 
 export class RequestOtpDto extends createZodDto(requestOtpSchema) {}
 

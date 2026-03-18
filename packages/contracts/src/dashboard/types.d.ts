@@ -49,6 +49,20 @@ export interface TopPerformingPost
   categoryName: string;
 }
 
+export interface ContentOverviewCategoryItem {
+  id: string;
+  name: string;
+  slug: string;
+  postCount: number;
+}
+
+export interface ContentOverviewTagItem {
+  id: string;
+  name: string;
+  slug: string;
+  postCount: number;
+}
+
 export interface DashboardResponse {
   stats: DashboardStatBlock;
   charts: {
@@ -58,5 +72,9 @@ export interface DashboardResponse {
   };
   recentAuditLogs: AuditLogResponse[];
   recentLeads: DashboardLeadItem[];
-  topPerformingPosts: TopPerformingPost[];
+  contentOverview: {
+    posts: TopPerformingPost[];
+    categories: ContentOverviewCategoryItem[];
+    tags: ContentOverviewTagItem[];
+  };
 }

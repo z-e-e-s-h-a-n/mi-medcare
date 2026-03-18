@@ -18,7 +18,7 @@ import {
 } from "@workspace/ui/components/card";
 import { Button } from "@workspace/ui/components/button";
 import DetailsPageSkeleton from "@/components/skeleton/DetailsPageSkeleton";
-import type { ArrayItem, BaseResponse } from "@workspace/contracts";
+import type { BaseResponse } from "@workspace/contracts";
 
 export interface DetailFieldConfig<TData> {
   label: string;
@@ -36,25 +36,22 @@ export interface SectionConfig<TData> {
   columns?: 1 | 2 | 3;
 }
 
-export interface RelatedEntityConfig<TData, TKey extends keyof TData> {
+export interface RelatedEntityConfig<TData> {
   title: string;
-  dataKey: TKey;
+  dataKey: keyof TData;
   columns: Array<{
     header: string;
-    accessor: (item: ArrayItem<TData[TKey]>) => React.ReactNode;
+    accessor: keyof any | ((item: any) => React.ReactNode);
   }>;
-  viewPath?: (item: ArrayItem<TData[TKey]>) => string;
+  viewPath?: (item: any) => string;
 }
 
-interface GenericDetailsPageProps<
-  TData extends BaseResponse,
-  TKey extends keyof TData,
-> {
+interface GenericDetailsPageProps<TData extends BaseResponse> {
   entityId: string;
   entityName: string;
   canEdit?: boolean;
   sections: SectionConfig<TData>[];
-  relatedEntities?: RelatedEntityConfig<TData, TKey>[];
+  relatedEntities?: RelatedEntityConfig<TData>[];
   renderHeader: (data: TData) => React.ReactNode;
   renderActions?: (data: TData) => React.ReactNode;
   children?: (data: TData) => React.ReactNode;
@@ -65,10 +62,7 @@ interface GenericDetailsPageProps<
   };
 }
 
-export function GenericDetailsPage<
-  TData extends BaseResponse,
-  TKey extends keyof TData,
->({
+export function GenericDetailsPage<TData extends BaseResponse>({
   entityId,
   entityName,
   canEdit = true,
@@ -78,7 +72,7 @@ export function GenericDetailsPage<
   renderHeader,
   renderActions,
   children,
-}: GenericDetailsPageProps<TData, TKey>) {
+}: GenericDetailsPageProps<TData>) {
   const pathname = usePathname();
   const backPath = pathname.slice(0, pathname.lastIndexOf("/")) || "/";
 
@@ -175,10 +169,9 @@ export function GenericDetailsPage<
             )}
           </div>
         </div>
-
         <Card className="border-0 shadow-none bg-linear-to-r from-primary/20 to-secondary/50">
           <CardContent className="pt-6">{renderHeader(data)}</CardContent>
-        </Card>
+        </Card>{" "}
       </div>
 
       {/* Main Content Sections */}

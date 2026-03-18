@@ -8,17 +8,12 @@ jest.mock("@/modules/prisma/prisma.service", () => ({
   PrismaService: class PrismaService {},
 }));
 
-jest.mock("@/modules/notification/notification.service", () => ({
-  NotificationService: class NotificationService {},
-}));
-
 import { OAuthService } from "./oauth.service";
 
 describe("OAuthService", () => {
   const baseDeps = () => ({
     prisma: {} as any,
     otpService: {} as any,
-    notifyService: {} as any,
   });
 
   afterEach(() => {
@@ -46,7 +41,6 @@ describe("OAuthService", () => {
       baseDeps().prisma,
       baseDeps().otpService,
       env as any,
-      baseDeps().notifyService,
     );
 
     Object.defineProperty(service, "logger", {

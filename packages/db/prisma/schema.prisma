@@ -23,7 +23,6 @@ enum UserRole {
 }
 
 enum UserStatus {
-  pending
   active
   suspended
 }
@@ -83,14 +82,7 @@ enum NotificationPurpose {
   consultationRequest
 }
 
-enum NotificationPriority {
-  normal
-  important
-}
-
 enum NotificationStatus {
-  pending
-  partial
   sent
   failed
 }
@@ -112,12 +104,13 @@ enum MediaVisibility {
 enum MediaType {
   photo
   logo
+  post
+  category
   other
 }
 
 enum PostStatus {
   draft
-  review
   published
 }
 
@@ -175,12 +168,10 @@ model User {
 
   // Contact info
   email           String? @unique @db.VarChar(255)
-  phone           String? @unique @db.VarChar(20)
   isEmailVerified Boolean @default(false)
-  isPhoneVerified Boolean @default(false)
 
   role   UserRole
-  status UserStatus @default(pending)
+  status UserStatus @default(active)
 
   preferredTheme    ThemeMode @default(system)
   pushNotifications Boolean   @default(false)
@@ -208,7 +199,6 @@ model User {
   @@index([status])
   @@index([role])
   @@index([email, isEmailVerified])
-  @@index([phone, isPhoneVerified])
   @@index([deletedAt])
 }
 
@@ -270,14 +260,13 @@ model Notification {
 
   purpose  NotificationPurpose
   channels NotificationChannel[]
-  priority NotificationPriority  @default(normal)
 
   subject   String
   message   String
   recipient String
   meta      Json?
 
-  status NotificationStatus @default(pending)
+  status NotificationStatus @default(failed)
 
   viewedAt  DateTime?
   createdAt DateTime  @default(now())
@@ -312,6 +301,7 @@ model Media {
 
   users            User[]            @relation("UserImage")
   posts            Post[]            @relation("PostCover")
+  categories       Category[]        @relation("CategoryCover")
   businessLogos    BusinessProfile[] @relation("BusinessProfileLogo")
   businessCovers   BusinessProfile[] @relation("BusinessProfileCoverImage")
   businessFavIcons BusinessProfile[] @relation("BusinessProfileFavicon")
@@ -373,14 +363,17 @@ model Post {
 model PostView {
   id String @id @default(ulid())
 
-  postId String?
-  post   Post?   @relation(fields: [postId], references: [id])
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   trafficSourceId String?
   trafficSource   TrafficSource? @relation(fields: [trafficSourceId], references: [id])
 
-  viewedAt DateTime @default(now())
+  visitorKey String   @db.VarChar(128)
+  viewedOn   DateTime @db.Date
+  viewedAt   DateTime @default(now())
 
+  @@unique([postId, visitorKey, viewedOn])
   @@index([postId])
   @@index([viewedAt])
   @@index([postId, viewedAt])
@@ -391,6 +384,9 @@ model Category {
   name        String  @unique
   slug        String  @unique
   description String?
+
+  coverId String?
+  cover   Media?  @relation("CategoryCover", fields: [coverId], references: [id])
 
   parentId String?
   parent   Category? @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
@@ -556,6 +552,33 @@ model TrafficSource {
   newsletterSubs       NewsletterSubscriber[]
 }
 
+model BusinessPhone {
+  id    String @id @default(ulid())
+  label String
+  value String @db.VarChar(20)
+
+  whatsappProfile BusinessProfile? @relation("BusinessProfileWhatsapp")
+
+  phoneProfileId String?
+  phoneProfile   BusinessProfile? @relation("BusinessProfilePhones", fields: [phoneProfileId], references: [id], onDelete: Cascade)
+
+  faxProfileId String?
+  faxProfile   BusinessProfile? @relation("BusinessProfileFax", fields: [faxProfileId], references: [id], onDelete: Cascade)
+}
+
+model BusinessAddress {
+  id      String @id @default(ulid())
+  label   String
+  line1   String
+  city    String
+  state   String
+  zip     String
+  country String
+
+  businessProfileId String?
+  businessProfile   BusinessProfile? @relation("BusinessProfileAddresses", fields: [businessProfileId], references: [id], onDelete: Cascade)
+}
+
 model BusinessProfile {
   id String @id @default(ulid())
 
@@ -572,22 +595,23 @@ model BusinessProfile {
   coverId String?
   cover   Media?  @relation("BusinessProfileCoverImage", fields: [coverId], references: [id])
 
-  email   String @db.VarChar(255)
-  phone   String @db.VarChar(20)
-  website String
+  email String @db.VarChar(255)
 
-  tiktok    String?
-  facebook  String?
-  instagram String?
-  twitter   String?
-  linkedin  String?
-  youtube   String?
+  whatsappId String        @unique
+  whatsapp   BusinessPhone @relation("BusinessProfileWhatsapp", fields: [whatsappId], references: [id])
 
-  address    String
-  city       String
-  state      String
-  country    String
-  postalCode String
+  website   String
+  facebook  String
+  instagram String
+  twitter   String
+  linkedin  String
+
+  fax       BusinessPhone[]   @relation("BusinessProfileFax")
+  phones    BusinessPhone[]   @relation("BusinessProfilePhones")
+  addresses BusinessAddress[] @relation("BusinessProfileAddresses")
+
+  officeHoursDays String?
+  officeHoursTime String?
 
   metaTitle       String
   metaDescription String

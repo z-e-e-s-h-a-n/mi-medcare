@@ -15,7 +15,6 @@ import type {
   RequestOtpDto,
   ResetPasswordDto,
   SignInDto,
-  SignUpDto,
   UpdateEmailDto,
   UpdateMfaDto,
   ValidateOtpDto,
@@ -35,18 +34,6 @@ export class AuthService {
     private readonly otpService: OtpService,
     private readonly notifyService: NotificationService,
   ) {}
-
-  async signUp(dto: SignUpDto) {
-    if (!dto.password) {
-      throw new BadRequestException("Password should not be empty.");
-    }
-
-    await this.createUser(dto, "author");
-
-    return {
-      message: "User created successfully. Please verify your email.",
-    };
-  }
 
   async signIn(dto: SignInDto, req: Request, res: Response) {
     const { user, email, meta } = await this.findUserFail404(dto.email);
@@ -453,7 +440,15 @@ export class AuthService {
     return { message: "Email changed successfully." };
   }
 
-  async createUser(dto: SignUpDto, role: DbUserRole) {
+  async createUser(
+    dto: {
+      email: string;
+      firstName: string;
+      lastName?: string;
+      password?: string;
+    },
+    role: DbUserRole,
+  ) {
     const { email } = await this.findUserFail200(dto.email);
 
     const hashedPassword = dto.password
@@ -468,6 +463,7 @@ export class AuthService {
         lastName: dto.lastName,
         displayName: `${dto.firstName} ${dto.lastName}`.trim(),
         role: role as DbUserRole,
+        status: "active",
       },
       ...this.userView,
     });
@@ -531,11 +527,7 @@ export class AuthService {
   };
 
   checkUserStatus(status: UserStatus) {
-    if (status === "pending") {
-      throw new ForbiddenException(
-        "Your account is pending approval. Please contact support.",
-      );
-    } else if (status === "suspended") {
+    if (status === "suspended") {
       throw new ForbiddenException(
         "Your account has been suspended. Contact support for assistance.",
       );

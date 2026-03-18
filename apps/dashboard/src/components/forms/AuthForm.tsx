@@ -15,7 +15,6 @@ import {
   requestOtp,
   resetPassword,
   signIn,
-  signUp,
   validateOtp,
 } from "@workspace/sdk/auth";
 import SocialAuthField from "./SocialAuthField";
@@ -24,11 +23,9 @@ import { InputField } from "@workspace/ui/components/input-field";
 import z from "zod";
 import {
   type AuthFormType,
-  nameSchema,
   passwordSchema,
   emailSchema,
   type OtpPurpose,
-  type SignUpType,
   type ValidateOtpType,
 } from "@workspace/contracts";
 import Image from "next/image";
@@ -55,10 +52,6 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
     ...(formType.includes("sign") && {
       password: passwordSchema,
     }),
-    ...(formType === "sign-up" && {
-      firstName: nameSchema,
-      lastName: nameSchema.optional(),
-    }),
     ...(formType.includes("password") &&
       otpMeta?.valid && { password: passwordSchema }),
   });
@@ -67,11 +60,14 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
     defaultValues: {
       email,
       password: formType.includes("sign") ? "" : undefined,
-      confirmPassword: formType === "sign-up" ? "" : undefined,
-      firstName: "",
-      lastName: undefined,
+      confirmPassword: formType !== "sign-in" ? "" : undefined,
       rememberDevice: true,
-    } as SignUpType & { confirmPassword?: string; rememberDevice?: boolean },
+    } as {
+      email: string;
+      password?: string;
+      confirmPassword?: string;
+      rememberDevice?: boolean;
+    },
     validators: {
       onSubmit: schema as any,
     },
@@ -79,13 +75,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
       setIsLoading(true);
       try {
         let message = `${formType} successfully!`;
-        if (formType === "sign-up") {
-          setOtpPurpose("verifyEmail");
-          const res = await signUp(value);
-          message = res.message;
-          setRedirectUrl("/auth/sign-in");
-          setIsOpen(true);
-        } else if (formType === "sign-in") {
+        if (formType === "sign-in") {
           const res = await signIn(value);
           message = res.message;
           setRedirectUrl("/dashboard");
@@ -155,7 +145,6 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
   useEffect(() => {
     if (otpMeta?.valid) {
       form.reset({
-        firstName: "",
         email,
         password: "",
         confirmPassword: "",
@@ -191,26 +180,16 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
                 </Link>
               )}
               <h1 className="text-2xl font-bold capitalize">
-                {formType === "sign-up"
-                  ? "Create your account"
-                  : formType === "sign-in"
+                {formType === "sign-in"
                     ? "Welcome Back"
                     : formType.split("-").join(" ")}
               </h1>
               <p className="text-muted-foreground text-sm text-balance">
-                {formType === "sign-up"
-                  ? "Enter your email below to create your account"
-                  : formType === "sign-in"
+                {formType === "sign-in"
                     ? `Login to your ${appName.default} account`
                     : "Enter your email to continue"}
               </p>
             </div>
-            {formType === "sign-up" && (
-              <div className="flex items-center gap-4">
-                <InputField form={form} name="firstName" label="FirstName" />
-                <InputField form={form} name="lastName" label="Last Name" />
-              </div>
-            )}
             <InputField
               form={form}
               name="email"
@@ -220,8 +199,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
             />
             <div
               className={cn(
-                "flex gap-4",
-                formType !== "sign-up" ? "flex-col" : "items-center",
+                "flex flex-col gap-4",
               )}
             >
               {(!formType.includes("password") || !!otpMeta?.valid) && (
@@ -287,9 +265,7 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
                   type="submit"
                   className="capitalize"
                 >
-                  {formType === "sign-up"
-                    ? " Create Account"
-                    : formType === "sign-in"
+                  {formType === "sign-in"
                       ? "Login"
                       : !!otpMeta?.valid
                         ? formType.split("-").join(" ")
@@ -301,14 +277,14 @@ function AuthForm({ className, formType, queryParams }: AuthFormProps) {
 
             <SocialAuthField />
             <FieldDescription className="flex-center gap-2">
-              {formType === "sign-up"
-                ? "Already have an account?"
-                : formType === "sign-in"
-                  ? "Don't have an account?"
-                  : "Back to Sign in"}
-              <Link href={formType === "sign-in" ? "sign-up" : "sign-in"}>
-                {formType === "sign-in" ? " Sign Up" : "Sign in"}
-              </Link>
+              {formType === "sign-in" ? (
+                <span>Need access? Contact an administrator.</span>
+              ) : (
+                <>
+                  <span>Back to Sign in</span>
+                  <Link href="sign-in">Sign in</Link>
+                </>
+              )}
             </FieldDescription>
           </Form>
 

@@ -12,7 +12,12 @@ import type { SearchByOption } from "@/components/shared/SearchToolbar";
 const postColumns: ColumnConfig<PostResponse, PostQueryType>[] = [
   {
     header: "Title",
-    accessor: "title",
+    accessor: (p) => (
+      <div className="space-y-1">
+        <div className="font-medium">{p.title}</div>
+        <div className="text-xs text-muted-foreground">/{p.slug}</div>
+      </div>
+    ),
     sortKey: "title",
   },
   {

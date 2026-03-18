@@ -7,7 +7,7 @@ import type { MediaResponse } from "../media/types";
 export type UserProfileType = z.input<typeof userProfileSchema>;
 
 export type BaseUserResponse = Sanitize<
-  Pick<User, "id" | "email" | "phone" | "firstName" | "lastName" | "displayName">
+  Pick<User, "id" | "email" | "firstName" | "lastName" | "displayName">
 >;
 
 export type SafeUser = StrictOmit<User, "password"> & {

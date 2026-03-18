@@ -15,7 +15,6 @@ import {
   RequestOtpDto,
   ResetPasswordDto,
   SignInDto,
-  SignUpDto,
   ValidateOtpDto,
   UpdateMfaDto,
 } from "@workspace/contracts/auth";
@@ -31,12 +30,6 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly tokenService: TokenService,
   ) {}
-
-  @Public()
-  @Post("signup")
-  async signUp(@Body() dto: SignUpDto) {
-    return this.authService.signUp(dto);
-  }
 
   @Public()
   @Post("signin")

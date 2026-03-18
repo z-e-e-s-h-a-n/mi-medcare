@@ -31,7 +31,7 @@ const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
   };
 
   const publishedStatuses = charts.postStatuses.find((item) => item.label === "Published")?.value ?? 0;
-  const reviewStatuses = charts.postStatuses.find((item) => item.label === "Review")?.value ?? 0;
+  const draftStatuses = charts.postStatuses.find((item) => item.label === "Draft")?.value ?? 0;
 
   const postViewTrend = percentChange(
     sum(recentPostViews.map((item) => item.value)),
@@ -41,7 +41,7 @@ const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
     sum(recentLeads.map((item) => item.total)),
     sum(previousLeads.map((item) => item.total)),
   );
-  const postTrend = percentChange(publishedStatuses, reviewStatuses || 1);
+  const postTrend = percentChange(publishedStatuses, draftStatuses || 1);
 
   const trendMeta = [
     {
@@ -52,7 +52,7 @@ const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
     {
       value: postTrend,
       label: "Publishing",
-      helper: `${reviewStatuses} posts currently in review`,
+      helper: `${draftStatuses} posts currently in draft`,
     },
     {
       value: postViewTrend,
@@ -107,7 +107,7 @@ const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex items-center gap-2 font-medium">
             {postTrend >= 0 ? <TrendingUp className="size-4" /> : <TrendingDown className="size-4" />}
-            Published versus in-review pipeline
+            Published versus draft pipeline
           </div>
           <div className="text-muted-foreground">
             {trendMeta[1].helper}

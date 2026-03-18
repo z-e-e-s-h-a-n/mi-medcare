@@ -14,13 +14,13 @@ import type { SearchByOption } from "@/components/shared/SearchToolbar";
 const categoryColumns: ColumnConfig<CategoryResponse, CategoryQueryType>[] = [
   {
     header: "Name",
-    accessor: "name",
+    accessor: (c) => (
+      <div className="space-y-1">
+        <div className="font-medium">{c.name}</div>
+        <div className="text-xs text-muted-foreground">/{c.slug}</div>
+      </div>
+    ),
     sortKey: "name",
-  },
-  {
-    header: "Slug",
-    accessor: "slug",
-    sortKey: "slug",
   },
   {
     header: "Parent",
@@ -29,6 +29,10 @@ const categoryColumns: ColumnConfig<CategoryResponse, CategoryQueryType>[] = [
   {
     header: "Children",
     accessor: (category) => category.children?.length ?? 0,
+  },
+  {
+    header: "Posts",
+    accessor: (c) => c._count.posts,
   },
   {
     header: "Updated",

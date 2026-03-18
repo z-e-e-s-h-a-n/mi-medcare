@@ -4,7 +4,6 @@ import type { Session } from "@workspace/db/browser";
 import type { UserRole } from "../lib/types";
 
 export type SignInType = z.input<typeof schema.signInSchema>;
-export type SignUpType = z.input<typeof schema.signUpSchema>;
 export type RequestOtpType = z.input<typeof schema.requestOtpSchema>;
 export type ValidateOtpType = z.input<typeof schema.validateOtpSchema>;
 export type ResetPasswordType = z.input<typeof schema.resetPasswordSchema>;

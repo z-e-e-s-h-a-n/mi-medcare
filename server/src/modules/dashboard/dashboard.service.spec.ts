@@ -26,8 +26,27 @@ describe("DashboardService", () => {
         ]),
         groupBy: jest.fn().mockResolvedValue([
           { status: "published", _count: { _all: 10 } },
-          { status: "review", _count: { _all: 4 } },
-          { status: "draft", _count: { _all: 2 } },
+          { status: "draft", _count: { _all: 6 } },
+        ]),
+      },
+      category: {
+        findMany: jest.fn().mockResolvedValue([
+          {
+            id: "category-1",
+            name: "RCM",
+            slug: "rcm",
+            _count: { posts: 12 },
+          },
+        ]),
+      },
+      tag: {
+        findMany: jest.fn().mockResolvedValue([
+          {
+            id: "tag-1",
+            name: "denials",
+            slug: "denials",
+            _count: { posts: 9 },
+          },
         ]),
       },
       postView: {
@@ -50,7 +69,7 @@ describe("DashboardService", () => {
               id: "contact-1",
               fullName: "Ava Carter",
               email: "ava@example.com",
-              status: "new",
+              status: "pending",
               createdAt: new Date("2026-03-17T00:00:00.000Z"),
             },
           ]),
@@ -67,7 +86,7 @@ describe("DashboardService", () => {
               id: "consultation-1",
               fullName: "Noah Bennett",
               practiceName: "Bennett Health",
-              status: "review",
+              status: "qualified",
               createdAt: new Date("2026-03-16T00:00:00.000Z"),
             },
           ]),
@@ -107,7 +126,6 @@ describe("DashboardService", () => {
               lastName: "User",
               displayName: "Admin User",
               email: "admin@example.com",
-              phone: null,
             },
           },
         ]),
@@ -123,9 +141,11 @@ describe("DashboardService", () => {
     expect(result.data.stats.leads.total).toBe(139);
     expect(result.data.charts.postViews).toHaveLength(90);
     expect(result.data.charts.leads).toHaveLength(6);
-    expect(result.data.topPerformingPosts[0]?.title).toBe(
+    expect(result.data.contentOverview.posts[0]?.title).toBe(
       "Denied Claims Recovery Checklist",
     );
+    expect(result.data.contentOverview.categories[0]?.name).toBe("RCM");
+    expect(result.data.contentOverview.tags[0]?.name).toBe("denials");
     expect(result.data.recentLeads[0]?.type).toBe("contactMessage");
   });
 });
