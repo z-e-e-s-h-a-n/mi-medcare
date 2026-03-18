@@ -96,10 +96,7 @@ export class ContentService {
         skip,
         take: limit,
         orderBy,
-        include: {
-          ...this.categoryInclude,
-          _count: { select: { posts: true } },
-        },
+        include: this.categoryInclude,
       }),
       this.prisma.category.count({ where }),
     ]);
@@ -119,10 +116,7 @@ export class ContentService {
   async getCategoryById(id: string) {
     const category = await this.prisma.category.findUniqueOrThrow({
       where: { id },
-      include: {
-        ...this.categoryInclude,
-        posts: true,
-      },
+      include: this.categoryInclude,
     });
 
     return {
@@ -134,7 +128,7 @@ export class ContentService {
   async getCategoryBySlug(slug: string) {
     const category = await this.prisma.category.findFirstOrThrow({
       where: { slug },
-      include: { ...this.categoryInclude, posts: true },
+      include: this.categoryInclude,
     });
 
     return {
@@ -215,6 +209,7 @@ export class ContentService {
         skip,
         take: limit,
         orderBy,
+        include: this.tagsInclude,
       }),
       this.prisma.tag.count({ where }),
     ]);
@@ -345,6 +340,12 @@ export class ContentService {
         id: { id: search },
         title: { title: { contains: search, mode: "insensitive" } },
         slug: { slug: { contains: search, mode: "insensitive" } },
+        category: {
+          category: { slug: { contains: search, mode: "insensitive" } },
+        },
+        tags: {
+          tags: { some: { slug: { contains: search, mode: "insensitive" } } },
+        },
       };
 
       Object.assign(where, searchWhereMap[searchBy]);
@@ -462,6 +463,11 @@ export class ContentService {
   private readonly categoryInclude = {
     parent: true,
     children: true,
+    _count: { select: { posts: true } },
+  };
+
+  private readonly tagsInclude = {
+    _count: { select: { posts: true } },
   };
 
   private readonly postInclude = {

@@ -119,7 +119,13 @@ export const CategorySortByEnum = z.enum(["name", "slug", "updatedAt"]);
 export const TagSearchByEnum = z.enum(["id", "name", "slug"]);
 export const TagSortByEnum = z.enum(["name", "slug", "updatedAt"]);
 
-export const PostSearchByEnum = z.enum(["id", "title", "slug"]);
+export const PostSearchByEnum = z.enum([
+  "id",
+  "title",
+  "slug",
+  "category",
+  "tags",
+]);
 export const PostSortByEnum = z.enum([
   "title",
   "slug",

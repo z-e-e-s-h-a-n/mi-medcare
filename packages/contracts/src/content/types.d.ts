@@ -11,7 +11,7 @@ import type {
 import type { Category, Post, PostView, Tag } from "@workspace/db/browser";
 import type { BaseQueryResponse, Sanitize } from "../lib/types";
 import type { MediaResponse } from "../media/types";
-import type { BaseUserResponse } from "../user/types";
+import type { UserResponse } from "../user";
 
 export type CategoryType = z.input<typeof CUCategorySchema>;
 export type CategoryQueryType = z.input<typeof categoryQuerySchema>;
@@ -28,13 +28,14 @@ export interface CategoryResponse extends Sanitize<Category> {
   parent?: CategoryResponse;
   children?: CategoryResponse[];
   _count: { posts: number };
-  posts: Post[];
 }
 
-export type TagResponse = Sanitize<Tag>;
+export interface TagResponse extends Sanitize<Tag> {
+  _count: { posts: number };
+}
 
 export interface PostResponse extends Sanitize<Post> {
-  author: BaseUserResponse;
+  author: UserResponse;
   category: CategoryResponse;
   cover?: MediaResponse;
   tags: TagResponse[];

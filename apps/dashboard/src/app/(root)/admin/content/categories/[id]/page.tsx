@@ -2,6 +2,7 @@
 
 import {
   Calendar,
+  Eye,
   FileText,
   FolderTree,
   Hash,
@@ -11,7 +12,7 @@ import {
 
 import type { CategoryResponse } from "@workspace/contracts/content";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
-import { useCategory } from "@/hooks/content";
+import { useCategory, usePosts } from "@/hooks/content";
 import type { AppPageProps } from "@workspace/contracts";
 import React from "react";
 import {
@@ -21,9 +22,17 @@ import {
   CardTitle,
 } from "@workspace/ui/components/card";
 import { Badge } from "@workspace/ui/components/badge";
+import { Button } from "@workspace/ui/components/button";
+import Link from "next/link";
 
 const CategoryDetailsPage = ({ params }: AppPageProps) => {
   const { id } = React.use(params);
+
+  const { data } = usePosts({
+    categoryId: id,
+  });
+
+  const relatedPosts = data?.posts ?? [];
 
   return (
     <GenericDetailsPage<CategoryResponse>
@@ -136,41 +145,6 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
           ],
           viewPath: (item) => `/dashboard/categories/${item.id}`,
         },
-        {
-          title: "Posts in this Category",
-          dataKey: "posts",
-          columns: [
-            {
-              header: "Title",
-              accessor: (item) => (
-                <div className="space-y-1">
-                  <div className="font-medium">{item.title}</div>
-                  <div className="text-xs text-muted-foreground">
-                    /{item.slug}
-                  </div>
-                </div>
-              ),
-            },
-            {
-              header: "Status",
-              accessor: (item) => (
-                <Badge variant="outline">{item.status}</Badge>
-              ),
-            },
-            {
-              header: "Views",
-              accessor: (item) => item.viewsCount,
-            },
-            {
-              header: "Published",
-              accessor: (item) =>
-                item.publishedAt
-                  ? new Date(item.publishedAt).toLocaleDateString()
-                  : "—",
-            },
-          ],
-          viewPath: (item) => `/dashboard/posts/${item.id}`,
-        },
       ]}
       renderHeader={(data) => (
         <div className="flex items-start justify-between gap-4">
@@ -203,7 +177,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
           </div>
           <div className="text-right">
             <span className="text-xl font-semibold text-primary">
-              {data.posts.length} Posts
+              {data._count.posts || 0} Posts
             </span>
             <div className="text-sm text-muted-foreground">Total Posts</div>
           </div>
@@ -212,6 +186,61 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
     >
       {(data) => (
         <>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Posts in this Category</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-hidden rounded-lg border">
+                <table className="w-full text-sm">
+                  <thead className="bg-muted/50">
+                    <tr>
+                      <th className="px-4 py-2 text-left font-medium">Title</th>
+                      <th className="px-4 py-2 text-left font-medium">
+                        Status
+                      </th>
+                      <th className="px-4 py-2 text-left font-medium">Views</th>
+                      <th className="px-4 py-2 text-left font-medium">
+                        Published
+                      </th>
+                      <th className="w-20"></th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    {relatedPosts.map((item) => (
+                      <tr key={item.id} className="hover:bg-muted/50">
+                        <td className="px-4 py-3">
+                          <div className="space-y-1">
+                            <div className="font-medium">{item.title}</div>
+                            <div className="text-xs text-muted-foreground">
+                              /{item.slug}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3">
+                          <Badge variant="outline">{item.status}</Badge>
+                        </td>
+                        <td className="px-4 py-3">{item.viewsCount}</td>
+                        <td className="px-4 py-3">
+                          {item.publishedAt
+                            ? new Date(item.publishedAt).toLocaleDateString()
+                            : "—"}
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <Button variant="ghost" size="sm" asChild>
+                            <Link href={`/dashboard/posts/${item.id}`}>
+                              <Eye className="h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Category Hierarchy */}
           <Card>
             <CardHeader>
@@ -268,7 +297,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
                             <FolderTree className="h-3 w-3" />
                             {child.name}
                             <span className="text-xs text-muted-foreground">
-                              ({child.posts.length})
+                              ({child._count.posts ?? 0})
                             </span>
                           </a>
                         </Badge>
@@ -288,7 +317,9 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="space-y-2 p-4 rounded-lg bg-primary/5">
-                  <div className="text-2xl font-bold">{data.posts.length}</div>
+                  <div className="text-2xl font-bold">
+                    {data._count?.posts || 0}
+                  </div>
                   <div className="text-sm text-muted-foreground">
                     Total Posts
                   </div>
@@ -305,7 +336,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
                   <div className="text-2xl font-bold">
                     {(() => {
                       // Calculate total views from all posts in this category
-                      return data.posts?.reduce(
+                      return relatedPosts?.reduce(
                         (total, post) => total + post.viewsCount,
                         0,
                       );
@@ -319,7 +350,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
                   <div className="text-2xl font-bold">
                     {(() => {
                       // Count published posts
-                      return data.posts?.filter(
+                      return relatedPosts?.filter(
                         (post) => post.status === "published",
                       ).length;
                     })()}
