@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { easeOut } from "motion";
 import Link from "next/link";
 import { ArrowRight, Phone, Mail, MapPin, Clock, Printer } from "lucide-react";
-import { business, GHL_CONTACT_FORM_IFRAME_SRC } from "@/lib/constants";
+import { GHL_CONTACT_FORM_IFRAME_SRC } from "@/lib/constants";
 import { FAQSection } from "@/components/sections/faq-section";
 import { PageHeader } from "@/components/layout/page-header";
 import Image from "next/image";
@@ -20,164 +20,167 @@ import {
   XIcon,
   WhatsAppIcon,
 } from "@/components/icons/social-icons";
+import { useBusinessProfile } from "@/hooks/useBusinessProfile";
 
-const headOfficeAddress = business.addresses?.[0];
-const branchAddresses = business.addresses?.slice(1) ?? [];
+export function ContactPageClient() {
+  const { data: business } = useBusinessProfile();
 
-const addressCard = {
-  icon: MapPin,
-  title: "Our Locations",
-  content: "Multiple Offices to Serve You",
-  gradient: "from-rose-500 to-pink-500",
-  iconColor: "text-white",
-  extra: (
-    <div className="space-y-3 mt-3">
-      {headOfficeAddress && (
-        <div>
-          <p className="text-sm font-semibold text-foreground">Head Office</p>
-          <p className="text-sm text-muted-foreground">
-            {formatBusinessAddress(headOfficeAddress)}
-          </p>
-        </div>
-      )}
+  const headOfficeAddress = business.addresses?.[0];
+  const branchAddresses = business.addresses?.slice(1) ?? [];
 
-      {branchAddresses.length > 0 && (
-        <div>
-          <p className="text-sm font-semibold text-foreground">
-            Branch {branchAddresses.length > 1 ? "Locations" : "Location"}
-          </p>
-          {branchAddresses.map((address) => (
-            <p key={address.line1} className="text-sm text-muted-foreground">
-              {address.label ? `${address.label}: ` : ""}
-              {formatBusinessAddress(address)}
+  const addressCard = {
+    icon: MapPin,
+    title: "Our Locations",
+    content: "Multiple Offices to Serve You",
+    gradient: "from-rose-500 to-pink-500",
+    iconColor: "text-white",
+    extra: (
+      <div className="space-y-3 mt-3">
+        {headOfficeAddress && (
+          <div>
+            <p className="text-sm font-semibold text-foreground">Head Office</p>
+            <p className="text-sm text-muted-foreground">
+              {formatBusinessAddress(headOfficeAddress)}
             </p>
-          ))}
-        </div>
-      )}
-    </div>
-  ),
-};
+          </div>
+        )}
 
-const phonesCard = {
-  icon: Phone,
-  title: "Phones",
-  content: "Available during business hours",
-  gradient: "from-blue-500 to-cyan-500",
-  iconColor: "text-white",
-  extra: (
-    <div className="mt-3 space-y-2">
-      {business.contact.phones.slice(0, 1).map((n) => (
-        <a
-          key={n.tel}
-          href={`tel:${n.tel}`}
-          className={cn(
-            "block text-sm font-semibold hover:underline",
-            gradientClass("from-blue-500 to-cyan-500", { type: "text" }),
-          )}
-        >
-          {n.display}
-        </a>
-      ))}
-      <p className="text-xs text-muted-foreground">
-        By texting this number, you agree to receive text messages from our
-        business.
-      </p>
-    </div>
-  ),
-};
-const faxCard = {
-  icon: Printer,
-  title: "Fax",
-  content: "Virtual fax numbers",
-  gradient: "from-slate-600 to-slate-500",
-  iconColor: "text-white",
-  extra: (
-    <div className="mt-3 space-y-2">
-      {business.contact.fax.slice(0, 1).map((n) => (
-        <a
-          key={n.tel}
-          href={`tel:${n.tel}`}
-          className={cn(
-            "block text-sm font-semibold hover:underline",
-            gradientClass("from-slate-600 to-slate-500", { type: "text" }),
-          )}
-        >
-          {n.display}
-        </a>
-      ))}
-    </div>
-  ),
-};
-const whatsappCard = {
-  icon: WhatsAppIcon,
-  title: "WhatsApp",
-  content: business.contact.whatsapp.display,
-  subtitle: "Quick replies via chat",
-  href: `https://wa.me/${business.contact.whatsapp.tel.replace("+", "")}`,
-  action: "Send Message",
-  gradient: "from-emerald-500 to-green-500",
-  iconColor: "text-white",
-  external: true,
-};
-const emailCard = {
-  icon: Mail,
-  title: "Email Us",
-  content: business.contact.email,
-  subtitle: "24/7 Support Available",
-  href: `mailto:${business.contact.email}`,
-  action: "Send Email",
-  gradient: "from-purple-500 to-indigo-500",
-  iconColor: "text-white",
-};
-const hoursCard = {
-  icon: Clock,
-  title: business.hours.label,
-  content: business.hours.days,
-  subtitle: business.hours.time,
-  gradient: "from-orange-500 to-amber-500",
-  iconColor: "text-white",
-  extra: (
-    <div className="mt-2 text-sm text-muted-foreground">
-      <p>Weekends: Closed</p>
-    </div>
-  ),
-};
-// Social Links
-const socialLinks = [
-  {
-    icon: FacebookIcon,
-    href: business.social.facebook,
-    label: "Facebook",
-  },
-  {
-    icon: XIcon,
-    href: business.social.twitter,
-    label: "X",
-    iconClassName: "dark:text-white",
-  },
-  {
-    icon: InstagramIcon,
-    href: business.social.instagram,
-    label: "Instagram",
-  },
-  {
-    icon: LinkedInIcon,
-    href: business.social.linkedin,
-    label: "LinkedIn",
-  },
-  {
+        {branchAddresses.length > 0 && (
+          <div>
+            <p className="text-sm font-semibold text-foreground">
+              Branch {branchAddresses.length > 1 ? "Locations" : "Location"}
+            </p>
+            {branchAddresses.map((address) => (
+              <p key={address.line1} className="text-sm text-muted-foreground">
+                {address.label ? `${address.label}: ` : ""}
+                {formatBusinessAddress(address)}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+    ),
+  };
+
+  const phonesCard = {
+    icon: Phone,
+    title: "Phones",
+    content: "Available during business hours",
+    gradient: "from-blue-500 to-cyan-500",
+    iconColor: "text-white",
+    extra: (
+      <div className="mt-3 space-y-2">
+        {business.phones.map((n) => (
+          <a
+            key={n.value}
+            href={`tel:${n.value}`}
+            className={cn(
+              "block text-sm font-semibold hover:underline",
+              gradientClass("from-blue-500 to-cyan-500", { type: "text" }),
+            )}
+          >
+            {n.label}
+          </a>
+        ))}
+      </div>
+    ),
+  };
+
+  const faxCard = {
+    icon: Printer,
+    title: "Fax",
+    content: "Virtual fax numbers",
+    gradient: "from-slate-600 to-slate-500",
+    iconColor: "text-white",
+    extra: (
+      <div className="mt-3 space-y-2">
+        {business.fax.map((n) => (
+          <a
+            key={n.value}
+            href={`tel:${n.value}`}
+            className={cn(
+              "block text-sm font-semibold hover:underline",
+              gradientClass("from-slate-600 to-slate-500", { type: "text" }),
+            )}
+          >
+            {n.label}
+          </a>
+        ))}
+      </div>
+    ),
+  };
+
+  const whatsappCard = {
     icon: WhatsAppIcon,
-    href: `https://wa.me/${business.contact.whatsapp.tel.replace("+", "")}`,
-    label: "WhatsApp",
-  },
-];
-export function _ContactPage() {
+    title: "WhatsApp",
+    content: business.whatsapp.label,
+    subtitle: "Quick replies via chat",
+    href: `https://wa.me/${business.whatsapp.value.replace("+", "")}`,
+    action: "Send Message",
+    gradient: "from-emerald-500 to-green-500",
+    iconColor: "text-white",
+    external: true,
+  };
+
+  const emailCard = {
+    icon: Mail,
+    title: "Email Us",
+    content: business.email,
+    subtitle: "24/7 Support Available",
+    href: `mailto:${business.email}`,
+    action: "Send Email",
+    gradient: "from-purple-500 to-indigo-500",
+    iconColor: "text-white",
+  };
+
+  const hoursCard = {
+    icon: Clock,
+    title: "Business Hours",
+    content: business.officeHoursDays,
+    subtitle: business.officeHoursTime,
+    gradient: "from-orange-500 to-amber-500",
+    iconColor: "text-white",
+    extra: (
+      <div className="mt-2 text-sm text-muted-foreground">
+        <p>Weekends: Closed</p>
+      </div>
+    ),
+  };
+
+  const socialLinks = [
+    {
+      icon: FacebookIcon,
+      href: business.facebook,
+      label: "Facebook",
+    },
+    {
+      icon: XIcon,
+      href: business.twitter,
+      label: "X",
+      iconClassName: "dark:text-white",
+    },
+    {
+      icon: InstagramIcon,
+      href: business.instagram,
+      label: "Instagram",
+    },
+    {
+      icon: LinkedInIcon,
+      href: business.linkedin,
+      label: "LinkedIn",
+    },
+    {
+      icon: WhatsAppIcon,
+      href: `https://wa.me/${business.whatsapp.value.replace("+", "")}`,
+      label: "WhatsApp",
+    },
+  ];
+
   const cardVariants = {
     rest: { y: 0 },
     hover: { y: -5 },
   };
 
-  // Fixed icon animation to prevent overflow
   const iconVariants = {
     rest: {
       rotate: 0,
@@ -511,7 +514,7 @@ export function _ContactPage() {
                         <br />
                         <span className="text-xs block mt-1">
                           {headOfficeAddress.city}, {headOfficeAddress.state}{" "}
-                          {headOfficeAddress.postalCode}
+                          {headOfficeAddress.zip}
                         </span>
                       </>
                     ) : (

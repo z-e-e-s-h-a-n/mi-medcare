@@ -1,3 +1,5 @@
+import type { BusinessAddress } from "@workspace/contracts/business";
+
 export type GradientType = "bg" | "text";
 export type GradientDirection =
   | "r"
@@ -53,14 +55,11 @@ export function gradientClass(
 
   return type === "text" ? `${base} bg-clip-text text-transparent` : base;
 }
-export type BusinessAddress = {
-  label?: string;
-  line1: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  country: string;
-};
 
 export const formatBusinessAddress = (address: BusinessAddress, full = false) =>
-  `${address.line1}, ${address.city}, ${address.state} ${address.postalCode}${full ? ", " + address.country : ""}`.trim();
+  `${address.line1}, ${address.city}, ${address.state} ${address.zip}${full ? ", " + address.country : ""}`.trim();
+
+export const estimateReadTime = (content: string) => {
+  const words = content.trim().split(/\s+/).filter(Boolean).length;
+  return `${Math.max(3, Math.ceil(words / 200))} min read`;
+};

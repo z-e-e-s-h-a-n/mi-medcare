@@ -10,10 +10,13 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Button } from "@workspace/ui/components/button";
-import { BOOKING_LINK, business } from "@/lib/constants";
+import { BOOKING_LINK } from "@/lib/constants";
 import { NewsletterCtaForm } from "@/components/forms/newsletter-form";
+import { useBusinessProfile } from "@/hooks/useBusinessProfile";
 
 export function CTASection() {
+  const { data: business } = useBusinessProfile();
+
   return (
     <section className="relative overflow-hidden">
       {/* Background with Parallax - FIXED: Better gradient for mobile */}
@@ -140,19 +143,19 @@ export function CTASection() {
                 className="mt-6 flex flex-wrap items-center gap-6 text-sm text-white/80"
               >
                 <Link
-                  href={`mailto:${business.contact.email}`}
+                  href={`mailto:${business.email}`}
                   className="flex items-center gap-2 hover:text-white transition-colors"
                 >
                   <Mail className="h-4 w-4 shrink-0" />
-                  <span className="truncate">{business.contact.email}</span>
+                  <span className="truncate">{business.email}</span>
                 </Link>
                 <span className="hidden sm:inline text-white/40">•</span>
                 <Link
-                  href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
+                  href={`tel:${business.phones[0].value}`}
                   className="flex items-center gap-2 hover:text-white transition-colors"
                 >
                   <Phone className="h-4 w-4 shrink-0" />
-                  <span>{business.contact.phones?.[0]?.display ?? business.contact.phones[0].display}</span>
+                  <span>{business.phones[0].label}</span>
                 </Link>
               </motion.div>
             </div>
@@ -172,4 +175,6 @@ export function CTASection() {
     </section>
   );
 }
+
+
 

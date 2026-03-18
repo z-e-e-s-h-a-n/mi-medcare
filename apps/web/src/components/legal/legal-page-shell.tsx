@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { PageHeader } from "@/components/layout/page-header";
 import { LegalProse } from "@/components/legal/legal-prose";
 import { LegalToc, type LegalTocItem } from "@/components/legal/legal-toc";
-import { business } from "@/lib/constants";
+import { getCachedBusinessProfile } from "@/lib/business-profile";
 import { Button } from "@workspace/ui/components/button";
 
 type LegalPageShellProps = {
@@ -15,7 +15,7 @@ type LegalPageShellProps = {
   children: ReactNode;
 };
 
-export function LegalPageShell({
+export async function LegalPageShell({
   title,
   badge,
   description,
@@ -23,6 +23,8 @@ export function LegalPageShell({
   toc = [],
   children,
 }: LegalPageShellProps) {
+  const business = await getCachedBusinessProfile();
+
   return (
     <>
       <PageHeader
@@ -63,18 +65,14 @@ export function LegalPageShell({
                   </Button>
 
                   <Button asChild variant="outline" className="justify-start">
-                    <a href={`mailto:${business.contact.email}`}>
-                      Email: {business.contact.email}
+                    <a href={`mailto:${business.email}`}>
+                      Email: {business.email}
                     </a>
                   </Button>
 
                   <Button asChild variant="outline" className="justify-start">
-                    <a
-                      href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
-                    >
-                      Call:{" "}
-                      {business.contact.phones?.[0]?.display ??
-                        business.contact.phones[0].display}
+                    <a href={`tel:${business.phones[0].value}`}>
+                      Call: {business.phones[0].label}
                     </a>
                   </Button>
                 </div>

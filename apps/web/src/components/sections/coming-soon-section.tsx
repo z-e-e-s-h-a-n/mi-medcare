@@ -5,9 +5,9 @@ import { motion } from "motion/react";
 import { ArrowRight, Mail, Phone, Sparkles } from "lucide-react";
 
 import { SectionHeader } from "@/components/layout/section-header";
-import { business } from "@/lib/constants";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
+import { useBusinessProfile } from "@/hooks/useBusinessProfile";
 
 export interface ComingSoonSectionProps {
   badge?: string;
@@ -30,6 +30,8 @@ export function ComingSoonSection({
   backHref = "/",
   className,
 }: ComingSoonSectionProps) {
+  const { data: business } = useBusinessProfile();
+
   return (
     <section
       className={cn("section-wrapper relative overflow-hidden", className)}
@@ -78,19 +80,18 @@ export function ComingSoonSection({
 
             <div className="mt-8 flex flex-col gap-3 text-sm text-muted-foreground">
               <Link
-                href={`mailto:${business.contact.email}`}
+                href={`mailto:${business.email}`}
                 className="inline-flex items-center gap-2 hover:text-foreground transition-colors"
               >
                 <Mail className="h-4 w-4 text-primary" />
-                {business.contact.email}
+                {business.email}
               </Link>
               <Link
-                href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
+                href={`tel:${business.phones?.[0]?.value}`}
                 className="inline-flex items-center gap-2 hover:text-foreground transition-colors"
               >
                 <Phone className="h-4 w-4 text-primary" />
-                {business.contact.phones?.[0]?.display ??
-                  business.contact.phones[0].display}
+                {business.phones?.[0]?.label}
               </Link>
             </div>
           </div>

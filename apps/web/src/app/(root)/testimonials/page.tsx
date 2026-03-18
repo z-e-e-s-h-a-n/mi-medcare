@@ -30,7 +30,7 @@ export default function TestimonialsPage() {
 
       <SuccessMetrics className="bg-muted" />
 
-      <BlogSection />
+      <BlogSection params={{ limit: 3 }} />
 
       <FAQSection faqs={FAQS.slice(0, 6)} className="bg-muted" />
     </>

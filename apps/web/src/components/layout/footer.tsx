@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { FOOTER_NAVIGATION, business } from "@/lib/constants";
+import { FOOTER_NAVIGATION } from "@/lib/constants";
 import { Logo } from "./logo";
 import {
   FacebookIcon,
@@ -10,8 +10,43 @@ import {
   LinkedInIcon,
   XIcon,
 } from "@/components/icons/social-icons";
+import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useMemo } from "react";
 
 export function Footer() {
+  const { data: business } = useBusinessProfile();
+
+  const socialLinks = useMemo(
+    () => [
+      {
+        href: business.facebook,
+        Icon: FacebookIcon,
+        label: "Facebook",
+      },
+      {
+        href: business.twitter,
+        Icon: XIcon,
+        label: "X",
+      },
+      {
+        href: business.instagram,
+        Icon: InstagramIcon,
+        label: "Instagram",
+      },
+      {
+        href: business.linkedin,
+        Icon: LinkedInIcon,
+        label: "LinkedIn",
+      },
+    ],
+    [
+      business.facebook,
+      business.instagram,
+      business.linkedin,
+      business.twitter,
+    ],
+  );
+
   return (
     <footer className="bg-muted border-t">
       {/* Main Footer */}
@@ -52,8 +87,6 @@ export function Footer() {
                     >
                       <Link
                         href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         {link.label}
@@ -77,28 +110,7 @@ export function Footer() {
               © {new Date().getFullYear()} MIMedCare. All rights reserved.
             </p>
             <div className="flex space-x-4">
-              {[
-                {
-                  Icon: FacebookIcon,
-                  href: business.social.facebook,
-                  label: "Facebook",
-                },
-                {
-                  Icon: XIcon,
-                  href: business.social.twitter,
-                  label: "X",
-                },
-                {
-                  Icon: InstagramIcon,
-                  href: business.social.instagram,
-                  label: "Instagram",
-                },
-                {
-                  Icon: LinkedInIcon,
-                  href: business.social.linkedin,
-                  label: "LinkedIn",
-                },
-              ].map(({ Icon, href, label }) => (
+              {socialLinks.map(({ Icon, href, label }) => (
                 <motion.div
                   key={label}
                   whileHover={{ scale: 1.2, rotate: 5 }}
@@ -127,4 +139,3 @@ export function Footer() {
     </footer>
   );
 }
-

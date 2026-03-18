@@ -37,10 +37,8 @@ export default function Home() {
         bgUrl="https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?cs=srgb&dl=pexels-pixabay-263402.jpg&fm=jpg&w=1920"
       />
       <TestimonialsSection className="bg-muted" />
-      <BlogSection />
+      <BlogSection params={{ limit: 3 }} />
       <FAQSection className="bg-muted" />
     </>
   );
 }
-
-

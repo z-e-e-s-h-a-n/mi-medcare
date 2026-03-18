@@ -79,7 +79,7 @@ export default function LeadershipPage() {
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {leadershipTeam.map((person) => (
               <Card key={person.name} className="overflow-hidden">
-                <div className="relative aspect-[4/3] w-full">
+                <div className="relative aspect-4/3 w-full">
                   <Image
                     src={person.imageUrl}
                     alt={`${person.name} portrait`}
@@ -90,7 +90,9 @@ export default function LeadershipPage() {
                 </div>
                 <CardHeader className="gap-1">
                   <CardTitle className="text-base">{person.name}</CardTitle>
-                  <p className="text-xs text-muted-foreground">{person.title}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {person.title}
+                  </p>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-sm text-muted-foreground">{person.bio}</p>
@@ -115,7 +117,9 @@ export default function LeadershipPage() {
           <div className="mt-12 rounded-2xl border bg-muted/20 p-6 md:p-8">
             <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
               <div>
-                <h3 className="text-xl font-semibold">Want to talk to our team?</h3>
+                <h3 className="text-xl font-semibold">
+                  Want to talk to our team?
+                </h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Get a quick assessment and a clear plan to improve claim
                   quality and collections.

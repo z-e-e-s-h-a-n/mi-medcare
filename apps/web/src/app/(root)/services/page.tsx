@@ -44,7 +44,7 @@ export default function ServicesPage() {
 
       <TestimonialsSection className="bg-background" />
 
-      <BlogSection className="bg-muted" />
+      <BlogSection params={{ limit: 3 }} className="bg-muted" />
 
       <FAQSection faqs={FAQS.slice(0, 6)} className="bg-background" />
     </>

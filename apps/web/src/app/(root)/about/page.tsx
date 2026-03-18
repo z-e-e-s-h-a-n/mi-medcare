@@ -10,7 +10,6 @@ import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { FAQSection } from "@/components/sections/faq-section";
 import {
   BOOKING_LINK,
-  business,
   BILLING_PROCESS,
   FAQS,
   HEADER_NAVIGATION,
@@ -18,6 +17,7 @@ import {
   SPECIALTIES,
   TRUST_BADGES,
 } from "@/lib/constants";
+import { getCachedBusinessProfile } from "@/lib/business-profile";
 import { gradientClass } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -111,7 +111,9 @@ const technologyHighlights =
 
 const faqSubset = FAQS.slice(0, 6);
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const business = await getCachedBusinessProfile();
+
   const locationSummary = business.addresses
     ?.map((address) => `${address.city}, ${address.state}`)
     .join(" & ");
@@ -366,10 +368,3 @@ export default function AboutPage() {
     </>
   );
 }
-
-
-
-
-
-
-

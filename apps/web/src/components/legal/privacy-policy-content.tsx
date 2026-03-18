@@ -1,7 +1,9 @@
-import { business } from "@/lib/constants";
+import { getCachedBusinessProfile } from "@/lib/business-profile";
 import { LegalTopCards } from "@/components/legal/legal-top-cards";
 
-export function PrivacyPolicyContent() {
+export async function PrivacyPolicyContent() {
+  const business = await getCachedBusinessProfile();
+
   return (
     <>
       <LegalTopCards
@@ -49,9 +51,7 @@ export function PrivacyPolicyContent() {
         <p>We use collected information to:</p>
         <ul>
           <li>Respond to inquiries and consultation requests</li>
-          <li>
-            Provide medical billing and revenue cycle management services
-          </li>
+          <li>Provide medical billing and revenue cycle management services</li>
           <li>Improve website functionality</li>
           <li>Send service updates or customer support messages</li>
           <li>Communicate with users who request information</li>
@@ -73,8 +73,9 @@ export function PrivacyPolicyContent() {
         </ul>
         <p>
           Message frequency may vary. Message and data rates may apply. You can
-          opt out of SMS communications at any time by replying <strong>STOP</strong>{" "}
-          to unsubscribe. Reply <strong>HELP</strong> for assistance.
+          opt out of SMS communications at any time by replying{" "}
+          <strong>STOP</strong> to unsubscribe. Reply <strong>HELP</strong> for
+          assistance.
         </p>
         <p>
           We will never sell, rent, or share your phone number with third
@@ -121,8 +122,8 @@ export function PrivacyPolicyContent() {
       <section id="updates">
         <h2 className="scroll-mt-24">9. Updates to This Policy</h2>
         <p>
-          We may update this Privacy Policy periodically. Updates will be
-          posted on this page with the revised date.
+          We may update this Privacy Policy periodically. Updates will be posted
+          on this page with the revised date.
         </p>
       </section>
 
@@ -133,8 +134,7 @@ export function PrivacyPolicyContent() {
           <br />
           <strong>{business.legalName}</strong>
           <br />
-          Email:{" "}
-          <a href={`mailto:${business.contact.email}`}>{business.contact.email}</a>
+          Email: <a href={`mailto:${business.email}`}>{business.email}</a>
         </p>
       </section>
     </>

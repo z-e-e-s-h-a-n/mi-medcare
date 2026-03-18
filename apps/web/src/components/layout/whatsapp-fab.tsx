@@ -1,14 +1,15 @@
-import { business } from "@/lib/constants";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 import { WhatsAppIcon } from "@/components/icons/social-icons";
+import { useBusinessProfile } from "@/hooks/useBusinessProfile";
 
 type WhatsAppFabProps = {
   className?: string;
 };
 
 export function WhatsAppFab({ className }: WhatsAppFabProps) {
-  const href = `https://wa.me/${business.contact.whatsapp.tel.replace(/\D/g, "")}`;
+  const { data: business } = useBusinessProfile();
+  const href = `https://wa.me/${business.whatsapp.value.replace(/\D/g, "")}`;
 
   return (
     <Button
@@ -28,3 +29,4 @@ export function WhatsAppFab({ className }: WhatsAppFabProps) {
     </Button>
   );
 }
+

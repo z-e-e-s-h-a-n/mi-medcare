@@ -13,7 +13,7 @@ import {
 } from "@workspace/ui/components/navigation-menu";
 import { Button } from "@workspace/ui/components/button";
 import { MobileNav } from "./mobile-nav";
-import { BOOKING_LINK, business, HEADER_NAVIGATION } from "@/lib/constants";
+import { BOOKING_LINK, HEADER_NAVIGATION } from "@/lib/constants";
 import { MegaMenu } from "./mega-menu";
 import { FloatingCtas } from "@/components/layout/floating-ctas";
 import { formatBusinessAddress } from "@/lib/utils";
@@ -26,30 +26,7 @@ import {
   LinkedInIcon,
   XIcon,
 } from "@/components/icons/social-icons";
-
-// Memoized social links configuration
-const SOCIAL_LINKS = [
-  {
-    href: business.social.facebook,
-    Icon: FacebookIcon,
-    name: "Facebook",
-  },
-  {
-    href: business.social.twitter,
-    Icon: XIcon,
-    name: "X",
-  },
-  {
-    href: business.social.instagram,
-    Icon: InstagramIcon,
-    name: "Instagram",
-  },
-  {
-    href: business.social.linkedin,
-    Icon: LinkedInIcon,
-    name: "LinkedIn",
-  },
-] as const;
+import { useBusinessProfile } from "@/hooks/useBusinessProfile";
 
 // Animation variants for better performance
 const hoverVariants = {
@@ -72,15 +49,47 @@ const iconHoverVariants = {
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { data: business } = useBusinessProfile();
 
   // Use Motion's useScroll for better performance
   const { scrollY } = useScroll();
+
+  const socialLinks = useMemo(
+    () => [
+      {
+        href: business.facebook,
+        Icon: FacebookIcon,
+        label: "Facebook",
+      },
+      {
+        href: business.twitter,
+        Icon: XIcon,
+        label: "X",
+      },
+      {
+        href: business.instagram,
+        Icon: InstagramIcon,
+        label: "Instagram",
+      },
+      {
+        href: business.linkedin,
+        Icon: LinkedInIcon,
+        label: "LinkedIn",
+      },
+    ],
+    [
+      business.facebook,
+      business.instagram,
+      business.linkedin,
+      business.twitter,
+    ],
+  );
 
   // Memoize formatted address
   const headOfficeDisplay = useMemo(() => {
     const headOfficeAddress = business.addresses?.[0];
     return formatBusinessAddress(headOfficeAddress);
-  }, []);
+  }, [business.addresses]);
 
   // Optimized scroll handling with useMotionValueEvent
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -126,7 +135,7 @@ export function Header() {
                 transition={hoverVariants.spring as any}
               >
                 <Link
-                  href={`mailto:${business.contact.email}`}
+                  href={`mailto:${business.email}`}
                   className="flex items-center gap-2"
                   prefetch={false}
                 >
@@ -138,7 +147,7 @@ export function Header() {
                   >
                     <Mail />
                   </motion.div>
-                  <span>{business.contact.email}</span>
+                  <span>{business.email}</span>
                 </Link>
               </motion.div>
             </div>
@@ -150,7 +159,7 @@ export function Header() {
                 transition={hoverVariants.spring as any}
               >
                 <Link
-                  href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
+                  href={`tel:${business.phones[0].value}`}
                   className="flex items-center gap-2"
                   prefetch={false}
                 >
@@ -162,18 +171,15 @@ export function Header() {
                   >
                     <Phone />
                   </motion.div>
-                  <span>
-                    {business.contact.phones?.[0]?.display ??
-                      business.contact.phones[0].display}
-                  </span>
+                  <span>{business.phones[0].label}</span>
                 </Link>
               </motion.div>
 
               {/* Social Links - Optimized with useMemo */}
               <motion.div className="flex items-center gap-4">
-                {SOCIAL_LINKS.map(({ Icon, href, name }) => (
+                {socialLinks.map(({ Icon, href, label }) => (
                   <motion.div
-                    key={name}
+                    key={label}
                     whileHover={{ y: -2 }}
                     whileTap={{ y: 0 }}
                     transition={hoverVariants.gentle as any}
@@ -182,7 +188,7 @@ export function Header() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Visit MI MedCare on ${name}`}
+                      aria-label={`Visit MI MedCare on ${label}`}
                       prefetch={false}
                     >
                       <Icon className="size-4 text-primary-foreground" />

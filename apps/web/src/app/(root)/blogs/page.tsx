@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "Explore practical articles on medical billing, coding compliance, revenue cycle optimization, and healthcare operations.",
 };
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
   return (
     <>
       <PageHeader
@@ -26,7 +26,7 @@ export default function BlogsPage() {
 
       <MetricsSection />
 
-      <BlogSection />
+      <BlogSection params={{ limit: 12 }} />
 
       <ServicesSection limit={6} className="bg-muted" />
 

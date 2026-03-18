@@ -1,7 +1,9 @@
-import { business } from "@/lib/constants";
+import { getCachedBusinessProfile } from "@/lib/business-profile";
 import { LegalTopCards } from "@/components/legal/legal-top-cards";
 
-export function TermsContent() {
+export async function TermsContent() {
+  const business = await getCachedBusinessProfile();
+
   return (
     <>
       <LegalTopCards
@@ -94,9 +96,7 @@ export function TermsContent() {
 
       <section id="law">
         <h2 className="scroll-mt-24">8. Governing Law</h2>
-        <p>
-          These Terms shall be governed by the laws of the United States.
-        </p>
+        <p>These Terms shall be governed by the laws of the United States.</p>
       </section>
 
       <section id="contact">
@@ -104,10 +104,7 @@ export function TermsContent() {
         <p>
           <strong>{business.legalName}</strong>
           <br />
-          Email:{" "}
-          <a href={`mailto:${business.contact.email}`}>
-            {business.contact.email}
-          </a>
+          Email: <a href={`mailto:${business.email}`}>{business.email}</a>
         </p>
       </section>
     </>

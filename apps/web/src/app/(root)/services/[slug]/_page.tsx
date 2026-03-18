@@ -27,10 +27,10 @@ import {
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
 import { FAQSection } from "@/components/sections/faq-section";
-import { business } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
+import { useBusinessProfile } from "@/hooks/useBusinessProfile";
 
 export type ServiceDetailsContent = {
   overview: string;
@@ -91,6 +91,7 @@ interface ServiceDetailsProps {
 }
 
 export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
+  const { data: business } = useBusinessProfile();
   const AccentIcon = getIcon(detail.icon);
   const accentGradient = detail.gradient || "from-primary to-secondary";
 
@@ -326,24 +327,24 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
                     variant="outline"
                     className="justify-start gap-2"
                   >
-                    <a href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}>
+                    <a href={`tel:${business.phones[0].value}`}>
                       <Phone className="h-4 w-4" />
-                      Call: {business.contact.phones?.[0]?.display ?? business.contact.phones[0].display}
+                      Call: {business.phones[0].label}
                     </a>
                   </Button>
-                    <p className="text-xs text-muted-foreground">
-                      By texting this number, you agree to receive text messages
-                      from our business.
-                    </p>
+                  <p className="text-xs text-muted-foreground">
+                    By texting this number, you agree to receive text messages
+                    from our business.
+                  </p>
 
                   <Button
                     asChild
                     variant="outline"
                     className="justify-start gap-2"
                   >
-                    <a href={`mailto:${business.contact.email}`}>
+                    <a href={`mailto:${business.email}`}>
                       <Mail className="h-4 w-4" />
-                      Email: {business.contact.email}
+                      Email: {business.email}
                     </a>
                   </Button>
                 </div>
@@ -462,5 +463,3 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
     </>
   );
 }
-
-

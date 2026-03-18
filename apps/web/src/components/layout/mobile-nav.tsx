@@ -17,13 +17,15 @@ import {
   CollapsibleTrigger,
 } from "@workspace/ui/components/collapsible";
 import { Menu, ChevronDown, Phone, Mail, MapPin } from "lucide-react";
-import { BOOKING_LINK, business, HEADER_NAVIGATION } from "@/lib/constants";
+import { BOOKING_LINK, HEADER_NAVIGATION } from "@/lib/constants";
 import { formatBusinessAddress } from "@/lib/utils";
 import ThemeSwitch from "@workspace/ui/components/theme-toggle";
+import { useBusinessProfile } from "@/hooks/useBusinessProfile";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
   const [openSections, setOpenSections] = useState<string[]>([]);
+  const { data: business } = useBusinessProfile();
 
   const toggleSection = (title: string) => {
     setOpenSections((prev) =>
@@ -51,20 +53,19 @@ export function MobileNav() {
           <div className="space-y-3">
             <motion.a
               whileHover={{ x: 5 }}
-              href={`tel:${business.contact.phones?.[0]?.tel ?? business.contact.phones[0].tel}`}
+              href={`tel:${business.phones[0].value}`}
               className="flex items-center gap-2 text-sm hover:text-primary"
             >
               <Phone className="h-4 w-4 text-primary" />
-              {business.contact.phones?.[0]?.display ??
-                business.contact.phones[0].display}
+              {business.phones[0].label}
             </motion.a>
             <motion.a
               whileHover={{ x: 5 }}
-              href={`mailto:${business.contact.email}`}
+              href={`mailto:${business.email}`}
               className="flex items-center gap-2 text-sm hover:text-primary"
             >
               <Mail className="h-4 w-4 text-primary" />
-              {business.contact.email}
+              {business.email}
             </motion.a>
             <motion.div
               whileHover={{ x: 5 }}
@@ -183,3 +184,7 @@ export function MobileNav() {
     </Sheet>
   );
 }
+
+
+
+

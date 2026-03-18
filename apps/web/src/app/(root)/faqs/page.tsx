@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "Find quick answers about onboarding, pricing, compliance, reporting, and how we support your medical billing workflows.",
 };
 
-export default function FAQsPage() {
+export default async function FAQsPage() {
   return (
     <>
       <PageHeader
@@ -35,8 +35,7 @@ export default function FAQsPage() {
 
       <TestimonialsSection className="bg-muted" />
 
-      <BlogSection />
+      <BlogSection params={{ limit: 3 }} />
     </>
   );
 }
-

@@ -1,7 +1,9 @@
-import { business } from "@/lib/constants";
+import { getCachedBusinessProfile } from "@/lib/business-profile";
 import { LegalTopCards } from "@/components/legal/legal-top-cards";
 
-export function CookiePolicyContent() {
+export async function CookiePolicyContent() {
+  const business = await getCachedBusinessProfile();
+
   return (
     <>
       <LegalTopCards
@@ -61,9 +63,9 @@ export function CookiePolicyContent() {
       <section id="dnt">
         <h2 className="scroll-mt-24">Do Not Track</h2>
         <p>
-          Some browsers send a &quot;Do Not Track&quot; signal. Because there is no
-          uniform standard for interpreting these signals, we do not currently
-          respond to them.
+          Some browsers send a &quot;Do Not Track&quot; signal. Because there is
+          no uniform standard for interpreting these signals, we do not
+          currently respond to them.
         </p>
       </section>
 
@@ -71,10 +73,7 @@ export function CookiePolicyContent() {
         <h2 className="scroll-mt-24">Contact</h2>
         <p>
           Questions about this Cookie Policy? Contact us at{" "}
-          <a href={`mailto:${business.contact.email}`}>
-            {business.contact.email}
-          </a>
-          .
+          <a href={`mailto:${business.email}`}>{business.email}</a>.
         </p>
       </section>
     </>

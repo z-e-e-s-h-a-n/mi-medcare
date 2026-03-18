@@ -24,6 +24,7 @@ import {
   IconClock,
   IconSparkles,
 } from "@tabler/icons-react";
+import type { BusinessProfileResponse } from "@workspace/contracts/business";
 
 import {
   TrendingUp,
@@ -71,7 +72,7 @@ import {
   FileCheck,
 } from "lucide-react";
 
-export const business = {
+export const businessFallback = {
   name: "MI MedCare",
   legalName: "MI MedCare LLC",
 
@@ -84,8 +85,8 @@ export const business = {
     altText: "Logo",
   },
 
-  coverImageId: "9898964434567",
-  coverImage: {
+  coverId: "9898964434567",
+  cover: {
     url: "/images/cover.png",
     altText: "Cover Image",
   },
@@ -96,39 +97,29 @@ export const business = {
     altText: "FavIcon",
   },
 
-  website: "",
-
-  contact: {
-    email: "info@mimedcarellc.com",
-
-    whatsapp: {
-      display: "(916) 909-6564",
-      tel: "+19169096564",
-    },
-
-    phones: [
-      { display: "(279) 207-3379", tel: "+12792073379" },
-      { display: "(279) 207-3380", tel: "+12792073380" },
-    ],
-
-    fax: [
-      { display: "(279) 217-5098", tel: "+12792175098" },
-      { display: "(279) 217-5099", tel: "+12792175099" },
-    ],
+  email: "info@mimedcarellc.com",
+  whatsapp: {
+    label: "(916) 909-6564",
+    value: "+19169096564",
   },
+  website: "https://www.mimedcarellc.com",
+  facebook: "https://www.facebook.com/mimedcarellc",
+  instagram: "https://www.instagram.com/mimedcarellc",
+  twitter: "https://x.com/mimedcarellc",
+  linkedin: "https://www.linkedin.com/company/mi-medcare-llc",
 
-  hours: {
-    label: "Business Hours",
-    days: "Mon – Fri",
-    time: "9:00 AM – 6:00 PM PST",
-  },
+  phones: [
+    { label: "(279) 207-3379", value: "+12792073379" },
+    { label: "(279) 207-3380", value: "+12792073380" },
+  ],
 
-  social: {
-    facebook: "https://www.facebook.com/mimedcarellc",
-    instagram: "https://www.instagram.com/mimedcarellc/",
-    twitter: "https://x.com/mimedcarellc",
-    linkedin: "https://www.linkedin.com/company/mi-medcare-llc/",
-  },
+  fax: [
+    { label: "(279) 217-5098", value: "+12792175098" },
+    { label: "(279) 217-5099", value: "+12792175099" },
+  ],
+
+  officeHoursDays: "Mon – Fri",
+  officeHoursTime: "9:00 AM – 6:00 PM PST",
 
   addresses: [
     {
@@ -136,7 +127,7 @@ export const business = {
       line1: "1401 21st St #13807",
       city: "Sacramento",
       state: "CA",
-      postalCode: "95811",
+      zip: "95811",
       country: "USA",
     },
     {
@@ -144,16 +135,15 @@ export const business = {
       line1: "7422 Sudley Rd",
       city: "Manassas",
       state: "VA",
-      postalCode: "20109",
+      zip: "20109",
       country: "USA",
     },
   ],
 
   metaTitle: "Medical Billing Services in USA",
-
   metaDescription:
     "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care.",
-};
+} as unknown as BusinessProfileResponse;
 
 export const BOOKING_LINK =
   "https://api.leadconnectorhq.com/widget/bookings/medical-bill";
@@ -948,39 +938,6 @@ export const TESTIMONIALS = [
   },
 ];
 
-export const BLOG_POSTS = [
-  {
-    title: "10 Ways AI is Transforming Medical Billing",
-    excerpt:
-      "Discover how artificial intelligence is revolutionizing revenue cycle management...",
-    date: "Mar 15, 2024",
-    readTime: "5 min read",
-    category: "AI & Automation",
-    image: "/images/blogs/blog-1.webp",
-    slug: "/blog/ai-transforming-medical-billing",
-  },
-  {
-    title: "Maximizing Revenue in 2024: RCM Best Practices",
-    excerpt:
-      "Learn the latest strategies to optimize your practice's revenue cycle...",
-    date: "Mar 10, 2024",
-    readTime: "8 min read",
-    category: "Revenue Management",
-    image: "/images/blogs/blog-2.webp",
-    slug: "/blog/rcm-best-practices-2024",
-  },
-  {
-    title: "Understanding ICD-11: What Providers Need to Know",
-    excerpt:
-      "Get ready for the transition to ICD-11 with our comprehensive guide...",
-    date: "Mar 5, 2024",
-    readTime: "6 min read",
-    category: "Medical Coding",
-    image: "/images/blogs/blog-3.webp",
-    slug: "/blog/icd-11-guide",
-  },
-];
-
 export const FAQS = [
   {
     question: "How long does implementation take?",
@@ -1205,7 +1162,7 @@ export const FOOTER_NAVIGATION = [
     title: "Services",
     links: [
       { label: "Medical Billing", href: "/services/medical-billing" },
-      { label: "Coding Services", href: "/services/coding" },
+      { label: "Coding Services", href: "/services/medical-coding" },
       {
         label: "Revenue Cycle Management",
         href: "/services/revenue-cycle-management",
@@ -1219,8 +1176,6 @@ export const FOOTER_NAVIGATION = [
     links: [
       { label: "Blog", href: "/blogs" },
       { label: "Case Studies", href: "/case-studies" },
-      { label: "FAQs", href: "/faqs" },
-      { label: "Compliance", href: "/about/compliance" },
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms & Conditions", href: "/terms" },
       { label: "Cookie Policy", href: "/cookie-policy" },
@@ -1231,8 +1186,8 @@ export const FOOTER_NAVIGATION = [
     links: [
       { label: "Contact Us", href: "/contact" },
       { label: "Client Portal", href: "/portal" },
-      { label: "Technical Support", href: "/support" },
-      { label: "HIPAA Compliance", href: "/hipaa" },
+      { label: "Compliance", href: "/about/compliance" },
+      { label: "FAQs", href: "/faqs" },
     ],
   },
 ];

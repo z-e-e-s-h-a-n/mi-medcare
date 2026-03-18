@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { _ContactPage } from "./_page";
+import { ContactPageClient } from "./_page";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 import React from "react";
 
 const ContactPage = () => {
-  return <_ContactPage />;
+  return <ContactPageClient />;
 };
 
 export default ContactPage;

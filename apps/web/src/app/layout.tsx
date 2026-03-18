@@ -1,10 +1,12 @@
 import "@workspace/ui/globals.css";
 import { Inter, Poppins } from "next/font/google";
 import ProviderWrapper from "@workspace/ui/provider-wrapper";
-import { business } from "@/lib/constants";
 import type { AppLayoutProps } from "@workspace/contracts";
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+
+import { getCachedBusinessProfile } from "@/lib/business-profile";
+import { BusinessProfileProvider } from "@/providers/business-profile-provider";
 
 const primaryFont = Poppins({
   variable: "--font-primary",
@@ -17,59 +19,62 @@ const secondaryFont = Inter({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Medical Billing Services in USA",
-    template: "%s | MI MedCare",
-  },
-  description:
-    "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care. Increase revenue, reduce denials & stay HIPAA compliant.",
+export async function generateMetadata(): Promise<Metadata> {
+  const business = await getCachedBusinessProfile();
 
-  icons: {
-    icon: business.favicon.url,
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
-
-  authors: [
-    {
-      name: "MI MedCare LLC",
-      url: "https://www.mimedcarellc.com",
+  return {
+    title: {
+      default: business.metaTitle,
+      template: "%s | MI MedCare",
     },
-  ],
+    description: business.metaDescription,
 
-  keywords: [
-    "medical billing services in USA",
-    "medical billing company USA",
-    "medical billing for family practice",
-    "medical billing for internal medicine",
-    "medical billing for mental health clinics",
-    "medical billing for urgent care",
-    "outsourced medical billing USA",
-    "HIPAA compliant medical billing",
-  ],
+    icons: {
+      icon: business.favicon.url,
+    },
 
-  openGraph: {
-    title: "Medical Billing Services in USA | MI MedCare",
-    description:
-      "Professional medical billing services for family practice, internal medicine, mental health & urgent care.",
-    url: "https://www.mimedcarellc.com",
-    siteName: "MI MedCare",
-    type: "website",
-  },
+    robots: {
+      index: true,
+      follow: true,
+    },
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Medical Billing Services in USA | MI MedCare",
-    description:
-      "HIPAA compliant medical billing services to increase revenue and reduce denials.",
-  },
-};
+    authors: [
+      {
+        name: business.legalName,
+        url: business.website,
+      },
+    ],
 
-const RootLayout = ({ children }: AppLayoutProps) => {
+    keywords: [
+      "medical billing services in USA",
+      "medical billing company USA",
+      "medical billing for family practice",
+      "medical billing for internal medicine",
+      "medical billing for mental health clinics",
+      "medical billing for urgent care",
+      "outsourced medical billing USA",
+      "HIPAA compliant medical billing",
+    ],
+
+    openGraph: {
+      title: business.metaTitle,
+      description: business.metaDescription,
+      url: business.website,
+      siteName: business.name,
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: business.metaTitle,
+      description: business.metaDescription,
+    },
+  };
+}
+
+const RootLayout = async ({ children }: AppLayoutProps) => {
+  const business = await getCachedBusinessProfile();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -82,7 +87,11 @@ const RootLayout = ({ children }: AppLayoutProps) => {
       <body
         className={`${primaryFont.variable} ${secondaryFont.variable} font-sans antialiased`}
       >
-        <ProviderWrapper>{children}</ProviderWrapper>
+        <ProviderWrapper>
+          <BusinessProfileProvider business={business}>
+            {children}
+          </BusinessProfileProvider>
+        </ProviderWrapper>
       </body>
       <GoogleAnalytics gaId="G-3GCVD9KWT0" />
     </html>
