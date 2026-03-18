@@ -22,7 +22,7 @@ export function FeaturesSection({
     <section className={cn("section-wrapper", className)}>
       <div className="section-container">
         <SectionHeader
-          badge="MI Features"
+          subtitle="MI Features"
           title="Powerful Features for Modern Practices"
           description="Leverage cutting-edge technology to optimize your revenue cycle"
         />

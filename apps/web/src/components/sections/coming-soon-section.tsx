@@ -7,10 +7,10 @@ import { ArrowRight, Mail, Phone, Sparkles } from "lucide-react";
 import { SectionHeader } from "@/components/layout/section-header";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
-import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useBusinessProfile } from "@/hooks/business";
 
 export interface ComingSoonSectionProps {
-  badge?: string;
+  subtitle?: string;
   title?: string;
   description?: string;
   backHref?: string;
@@ -24,7 +24,7 @@ const ORB_TRANSITION = {
 };
 
 export function ComingSoonSection({
-  badge = "Coming Soon",
+  subtitle = "Coming Soon",
   title = "We are preparing something exciting & amazing for you.",
   description = "This page is under construction. Meanwhile, you can contact our team or explore our services and specialties.",
   backHref = "/",
@@ -56,7 +56,7 @@ export function ComingSoonSection({
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div>
             <SectionHeader
-              badge={badge}
+              subtitle={subtitle}
               title={title}
               description={description}
               center={false}

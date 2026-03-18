@@ -20,7 +20,7 @@ export default async function FAQsPage() {
     <>
       <PageHeader
         title="Frequently Asked Questions"
-        badge="FAQs"
+        subtitle="FAQs"
         description="Find quick answers about onboarding, pricing, compliance, reporting, and how we support your medical billing workflows."
         imageUrl="https://images.pexels.com/photos/7709161/pexels-photo-7709161.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />

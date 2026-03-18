@@ -24,7 +24,7 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
     <section className={cn("section-wrapper", className)}>
       <div className="section-container">
         <SectionHeader
-          badge="Testimonials"
+          subtitle="Testimonials"
           title="What Our Clients Say"
           description="Join hundreds of satisfied healthcare providers"
         />

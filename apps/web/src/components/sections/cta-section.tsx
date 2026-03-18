@@ -12,13 +12,13 @@ import {
 import { Button } from "@workspace/ui/components/button";
 import { BOOKING_LINK } from "@/lib/constants";
 import { NewsletterCtaForm } from "@/components/forms/newsletter-form";
-import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useBusinessProfile } from "@/hooks/business";
 
 export function CTASection() {
   const { data: business } = useBusinessProfile();
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" id="cta-section">
       {/* Background with Parallax - FIXED: Better gradient for mobile */}
       <motion.div
         initial={{ scale: 1.2 }}
@@ -175,6 +175,3 @@ export function CTASection() {
     </section>
   );
 }
-
-
-

@@ -30,7 +30,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@workspace/ui/components/sheet";
-import { useCreateConsultationRequest } from "@/hooks/useConsultation";
+import { useCreateConsultationRequest } from "@/hooks/consultation";
 import { toast } from "sonner";
 
 interface ConsultationFormProps {

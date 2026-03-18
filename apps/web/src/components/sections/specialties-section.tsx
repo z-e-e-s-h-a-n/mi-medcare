@@ -7,6 +7,7 @@ import { gradientClass } from "@/lib/utils";
 import { Button } from "@workspace/ui/components/button";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@workspace/ui/lib/utils";
+import { SectionHeader } from "../layout/section-header";
 
 interface SpecialtiesSectionProps {
   limit?: number;
@@ -44,27 +45,14 @@ export function SpecialtiesSection({
         )}
         <div className="absolute inset-0 bg-linear-to-b from-background/70 via-muted/45 to-prim/20" />
       </div>
+
+      <SectionHeader
+        title={` Medical Billing for ${SPECIALTIES.length}+ Specialties`}
+        description="We provide specialty-focused medical billing services designed for primary care practices, surgical centers, and specialty clinics."
+        className="relative"
+      />
+
       <div className="relative section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto mb-16"
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Medical Billing for{" "}
-            <span className="gradient-text">
-              {SPECIALTIES.length}+ Specialties
-            </span>
-          </h2>
-
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            We provide specialty-focused medical billing services designed for
-            primary care practices, surgical centers, and specialty clinics.
-          </p>
-        </motion.div>
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {displaySpecialties.map((specialty, index) => {
             const Icon = specialty.icon;

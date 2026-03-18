@@ -22,13 +22,13 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
     <>
       <PageHeader
         title={slug}
-        badge="Case Study"
+        subtitle="Case Study"
         imageUrl="https://images.pexels.com/photos/7793162/pexels-photo-7793162.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <ComingSoonSection
         backHref="/"
-        badge="Coming Soon"
+        subtitle="Coming Soon"
         title="We are preparing something exciting & amazing for you."
         description="Coming Soon!"
       />

@@ -20,7 +20,7 @@ import { Menu, ChevronDown, Phone, Mail, MapPin } from "lucide-react";
 import { BOOKING_LINK, HEADER_NAVIGATION } from "@/lib/constants";
 import { formatBusinessAddress } from "@/lib/utils";
 import ThemeSwitch from "@workspace/ui/components/theme-toggle";
-import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useBusinessProfile } from "@/hooks/business";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -184,7 +184,3 @@ export function MobileNav() {
     </Sheet>
   );
 }
-
-
-
-

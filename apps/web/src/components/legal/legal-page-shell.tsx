@@ -29,7 +29,7 @@ export async function LegalPageShell({
     <>
       <PageHeader
         title={title}
-        badge={badge}
+        subtitle={badge}
         description={description}
         imageUrl={imageUrl}
         height="h-80"

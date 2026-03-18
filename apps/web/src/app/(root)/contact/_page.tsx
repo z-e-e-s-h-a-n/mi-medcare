@@ -20,7 +20,7 @@ import {
   XIcon,
   WhatsAppIcon,
 } from "@/components/icons/social-icons";
-import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useBusinessProfile } from "@/hooks/business";
 
 export function ContactPageClient() {
   const { data: business } = useBusinessProfile();
@@ -356,7 +356,7 @@ export function ContactPageClient() {
       <PageHeader
         title="Let's Talk About Your Revenue Cycle"
         description="Whether you're ready to get started or just exploring options, our team is here to help you optimize your medical billing."
-        badge="Get in Touch"
+        subtitle="Get in Touch"
         imageUrl="https://images.pexels.com/photos/7195379/pexels-photo-7195379.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
@@ -364,7 +364,7 @@ export function ContactPageClient() {
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
-            badge="Contact"
+            subtitle="Contact"
             title="Reach Us Your Way"
             description="Choose the fastest option to connect with our team — call, WhatsApp, email, or send a message."
           />

@@ -13,14 +13,14 @@ export default function Page() {
     <>
       <PageHeader
         title="Client Portal"
-        badge="Support"
+        subtitle="Support"
         description="Secure portal access for clients and partners."
         imageUrl="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <ComingSoonSection
         backHref="/"
-        badge="Coming Soon"
+        subtitle="Coming Soon"
         title="We are preparing something exciting & amazing for you."
         description="Coming Soon!"
       />

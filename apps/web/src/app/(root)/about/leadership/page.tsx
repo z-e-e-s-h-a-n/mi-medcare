@@ -56,7 +56,7 @@ export default function LeadershipPage() {
     <>
       <PageHeader
         title="Leadership"
-        badge="Company"
+        subtitle="Company"
         description="Meet the leaders behind MI MedCare."
         imageUrl="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />

@@ -10,7 +10,7 @@ import {
   type NewsletterSubscriberType,
 } from "@workspace/contracts/newsletter";
 import { ArrowRight, Loader2, Mail, User } from "lucide-react";
-import { useSubscribeNewsletter } from "@/hooks/useNewsletter";
+import { useSubscribeNewsletter } from "@/hooks/newsletter";
 import { toast } from "sonner";
 
 interface NewsletterCtaFormProps {

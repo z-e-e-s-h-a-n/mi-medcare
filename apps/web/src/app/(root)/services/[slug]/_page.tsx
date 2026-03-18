@@ -30,7 +30,7 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { gradientClass } from "@/lib/utils";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
-import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useBusinessProfile } from "@/hooks/business";
 
 export type ServiceDetailsContent = {
   overview: string;
@@ -99,7 +99,7 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
     <>
       <PageHeader
         title={detail.title}
-        badge={detail.stats}
+        subtitle={detail.stats}
         description={detail.description}
         imageUrl={detail.image}
       />
@@ -161,7 +161,7 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
             <div className="space-y-14">
               <div id="overview" className="scroll-mt-24">
                 <SectionHeader
-                  badge="Overview"
+                  subtitle="Overview"
                   title="What you get"
                   description={detail.details.overview}
                   center={false}
@@ -170,7 +170,7 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
 
               <div id="features" className="scroll-mt-24">
                 <SectionHeader
-                  badge="Key Features"
+                  subtitle="Key Features"
                   title="Built to prevent denials and speed up payments"
                   description="Every feature is designed to reduce rework, improve compliance, and give you clear financial visibility."
                   center={false}
@@ -215,7 +215,7 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
               {!!detail.details.uniqueAgents?.length && (
                 <div id="agents" className="scroll-mt-24">
                   <SectionHeader
-                    badge="Automation"
+                    subtitle="Automation"
                     title="AI agents included"
                     description="Purpose-built agents support daily billing work — scrubbing, denial intelligence, reconciliation, and follow-up."
                     center={false}
@@ -248,7 +248,7 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
 
               <div id="process" className="scroll-mt-24">
                 <SectionHeader
-                  badge="Process"
+                  subtitle="Process"
                   title="How implementation works"
                   description="A structured workflow that keeps your billing clean while minimizing disruption for your team."
                   center={false}
@@ -283,7 +283,7 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
 
               <div id="benefits" className="scroll-mt-24">
                 <SectionHeader
-                  badge="Benefits"
+                  subtitle="Benefits"
                   title="What improves after onboarding"
                   description="Clear operational wins that show up in performance, cash flow, and team workload."
                   center={false}
@@ -405,7 +405,7 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
       <section className="section-wrapper">
         <div id="related" className="section-container">
           <SectionHeader
-            badge="Explore"
+            subtitle="Explore"
             title="Related services"
             description="Pair services for a complete revenue cycle strategy."
           />

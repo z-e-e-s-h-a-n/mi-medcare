@@ -37,7 +37,11 @@ export function ServicesSection({
   return (
     <section className={cn("section-wrapper", className)}>
       <div className="section-container">
-        <SectionHeader badge={badge} title={title} description={description} />
+        <SectionHeader
+          subtitle={badge}
+          title={title}
+          description={description}
+        />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayServices.map((service, index) => {

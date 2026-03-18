@@ -94,7 +94,7 @@ export function HowItWorksSection({
       <div className="section-wrapper relative px-4 md:px-6">
         <div className="section-container">
           <SectionHeader
-            badge="Simple Process"
+            subtitle="Simple Process"
             title="How We Transform Your Revenue Cycle"
             description="A seamless journey from assessment to accelerated payments, designed to maximize your practice's revenue potential."
           />

@@ -122,7 +122,7 @@ export default async function AboutPage() {
     <>
       <PageHeader
         title="About MI MedCare"
-        badge="Who We Are"
+        subtitle="Who We Are"
         description="We combine specialty billing expertise, automation, and compliance to help practices stop chasing payments and focus on patient care."
         imageUrl="https://images.pexels.com/photos/7108401/pexels-photo-7108401.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
@@ -133,7 +133,7 @@ export default async function AboutPage() {
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
-            badge="Company Narrative"
+            subtitle="Company Narrative"
             title="We manage your revenue cycle with intent"
             description="From patient intake through collections, we provide transparent partnership, measurable outcomes, and technology that integrates with your workflow."
           />
@@ -201,7 +201,7 @@ export default async function AboutPage() {
       <section className="section-wrapper bg-muted">
         <div className="section-container">
           <SectionHeader
-            badge="Our Expertise"
+            subtitle="Our Expertise"
             title="What MI MedCare does differently"
             description="We handle the full billing lifecycle so your practice is never left chasing a single claim."
           />
@@ -227,7 +227,7 @@ export default async function AboutPage() {
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
-            badge="Technology"
+            subtitle="Technology"
             title="Automation and intelligence that backs every claim"
             description="Our people-first workflow is powered by AI, reporting, and integrations so you move from billing chaos to consistent cash flow."
           />
@@ -263,7 +263,7 @@ export default async function AboutPage() {
       <section className="section-wrapper bg-muted">
         <div className="section-container">
           <SectionHeader
-            badge="Impact"
+            subtitle="Impact"
             title="Measurable improvements in revenue performance"
             description="Across specialties, we deliver clean claims, faster reimbursements, and shorter AR cycles backed by transparent reporting."
           />
@@ -289,7 +289,7 @@ export default async function AboutPage() {
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
-            badge="Process"
+            subtitle="Process"
             title="Billing that never skips a step"
             description="Our six-stage workflow mirrors the competitor’s best practices while staying true to MI MedCare’s compliance and automation culture."
           />
@@ -321,7 +321,7 @@ export default async function AboutPage() {
       <section className="section-wrapper bg-muted">
         <div className="section-container">
           <SectionHeader
-            badge="Trust"
+            subtitle="Trust"
             title="Certifications and compliance"
             description="We strictly follow HIPAA, SOC, and payer rules so every interaction is auditable, secure, and dependable."
           />

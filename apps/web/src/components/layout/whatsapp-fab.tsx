@@ -1,7 +1,7 @@
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
 import { WhatsAppIcon } from "@/components/icons/social-icons";
-import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useBusinessProfile } from "@/hooks/business";
 
 type WhatsAppFabProps = {
   className?: string;
@@ -29,4 +29,3 @@ export function WhatsAppFab({ className }: WhatsAppFabProps) {
     </Button>
   );
 }
-

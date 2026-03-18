@@ -5,10 +5,7 @@ import { notFound } from "next/navigation";
 import type { PostResponse } from "@workspace/contracts/content";
 import { BlogPostPageClient } from "./_page";
 import { getPostBySlug } from "@workspace/sdk/content";
-
-type PageProps = {
-  params: Promise<{ slug: string }>;
-};
+import type { AppPageProps } from "@workspace/contracts";
 
 const getCachedPostBySlug = cache(
   async (slug: string): Promise<PostResponse | null> => {
@@ -19,7 +16,7 @@ const getCachedPostBySlug = cache(
 
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
+}: AppPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getCachedPostBySlug(slug);
 
@@ -36,7 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPostPage({ params }: PageProps) {
+export default async function BlogPostPage({ params }: AppPageProps) {
   const { slug } = await params;
   const post = await getCachedPostBySlug(slug);
 

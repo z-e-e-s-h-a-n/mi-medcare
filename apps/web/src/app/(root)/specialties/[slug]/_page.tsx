@@ -22,7 +22,7 @@ import { SPECIALTIES } from "@/lib/constants";
 import { gradientClass } from "@/lib/utils";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
-import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useBusinessProfile } from "@/hooks/business";
 
 export type SpecialtyDetailsContent = {
   overview: string;
@@ -132,7 +132,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
     <>
       <PageHeader
         title={detail.title}
-        badge={highlightStat}
+        subtitle={highlightStat}
         description={detail.description}
       />
 
@@ -208,7 +208,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
               {/* Overview */}
               <div id="overview" className="scroll-mt-24">
                 <SectionHeader
-                  badge="Overview"
+                  subtitle="Overview"
                   title={`Billing in ${detail.title}`}
                   description="A practical view of what makes this specialty unique."
                   center={false}
@@ -245,7 +245,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
               {/* Challenges + solutions */}
               <div id="challenges" className="scroll-mt-24">
                 <SectionHeader
-                  badge="Challenges"
+                  subtitle="Challenges"
                   title="What slows reimbursement"
                   description="The common friction points that trigger delays, denials, and rework."
                   center={false}
@@ -290,7 +290,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
               {/* Key features */}
               <div id="features" className="scroll-mt-24">
                 <SectionHeader
-                  badge="Features"
+                  subtitle="Features"
                   title="Operational features that keep claims clean"
                   description="Repeatable checks, payer alignment, and tight charge capture."
                   center={false}
@@ -323,7 +323,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
               {/* Coding + denials */}
               <div id="coding" className="scroll-mt-24">
                 <SectionHeader
-                  badge="Coding"
+                  subtitle="Coding"
                   title="Coding complexities we watch closely"
                   description="Modifier usage, documentation rules, and specialty-specific payer edits."
                   center={false}
@@ -373,7 +373,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
               {/* Common codes */}
               <div id="codes" className="scroll-mt-24">
                 <SectionHeader
-                  badge="Codes"
+                  subtitle="Codes"
                   title="Common codes (examples)"
                   description="Reference-only examples to illustrate the typical coding landscape."
                   center={false}
@@ -506,7 +506,7 @@ export function SpecialtyDetails({ detail, slug }: SpecialtyDetailsProps) {
         <section id="related" className="section-wrapper scroll-mt-24">
           <div className="section-container">
             <SectionHeader
-              badge="Related"
+              subtitle="Related"
               title="Explore other specialties"
               description="More specialty billing expertise across common practice types."
             />

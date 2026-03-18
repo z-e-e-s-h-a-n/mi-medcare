@@ -67,7 +67,7 @@ export default function NewsPage() {
     <>
       <PageHeader
         title="News & Press"
-        badge="Company"
+        subtitle="Company"
         description="Announcements, updates, and press releases from MI MedCare."
         imageUrl="https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
@@ -77,16 +77,25 @@ export default function NewsPage() {
           <div className="grid gap-6 lg:grid-cols-[1fr_320px] lg:items-start">
             <div className="space-y-6">
               {newsItems.map((item) => (
-                <Card key={`${item.title}-${item.date}`} className="overflow-hidden">
+                <Card
+                  key={`${item.title}-${item.date}`}
+                  className="overflow-hidden"
+                >
                   <CardHeader className="gap-2">
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant="secondary">{item.category}</Badge>
-                      <span className="text-xs text-muted-foreground">{item.date}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {item.date}
+                      </span>
                     </div>
-                    <CardTitle className="text-lg leading-snug">{item.title}</CardTitle>
+                    <CardTitle className="text-lg leading-snug">
+                      {item.title}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-muted-foreground">{item.excerpt}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {item.excerpt}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
@@ -98,7 +107,8 @@ export default function NewsPage() {
                   Media inquiries
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  For press and partnership questions, reach our team and we&apos;ll respond soon.
+                  For press and partnership questions, reach our team and
+                  we&apos;ll respond soon.
                 </p>
                 <div className="mt-4 grid gap-3">
                   <Button href="/contact" size="lg">
@@ -111,7 +121,9 @@ export default function NewsPage() {
               </div>
 
               <div className="rounded-2xl border bg-background p-6">
-                <p className="text-sm font-semibold">Want the latest updates?</p>
+                <p className="text-sm font-semibold">
+                  Want the latest updates?
+                </p>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Follow our resources for articles, FAQs, and case studies.
                 </p>

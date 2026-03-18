@@ -28,7 +28,7 @@ export default function CaseStudiesPage() {
     <>
       <PageHeader
         title="Healthcare Billing Case Studies"
-        badge="Case Studies"
+        subtitle="Case Studies"
         description="Real examples of how we helped practices improve collections, reduce AR days, and strengthen billing performance."
         imageUrl="https://images.pexels.com/photos/7793162/pexels-photo-7793162.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
@@ -38,7 +38,7 @@ export default function CaseStudiesPage() {
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
-            badge="Results"
+            subtitle="Results"
             title="Proof from real practices"
             description="Each case study highlights what changed, how long it took, and the measurable billing outcomes we delivered."
           />

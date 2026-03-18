@@ -10,7 +10,7 @@ import {
   LinkedInIcon,
   XIcon,
 } from "@/components/icons/social-icons";
-import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useBusinessProfile } from "@/hooks/business";
 import { useMemo } from "react";
 
 export function Footer() {

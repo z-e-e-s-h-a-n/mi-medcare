@@ -11,6 +11,7 @@ import {
   TooltipTrigger,
 } from "@workspace/ui/components/tooltip";
 import { cn } from "@workspace/ui/lib/utils";
+import { SectionHeader } from "../layout/section-header";
 
 interface EHRSectionProps {
   limit?: number;
@@ -22,24 +23,12 @@ export function EHRSection({ limit, className }: EHRSectionProps) {
 
   return (
     <section className={cn("section-wrapper", className)}>
-      <div className="section-container">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            We work with these <span className="gradient-text">EHRs</span>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Our medical billing specialists know the workarounds of all the
-            EHRs. We help you submit clean claims no matter which EHR you use.
-          </p>
-        </motion.div>
+      <SectionHeader
+        title="We work with these EHRs"
+        description="Our medical billing specialists know the workarounds of all the EHRs. We help you submit clean claims no matter which EHR you use."
+      />
 
+      <div className="section-container">
         {/* EHR Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {displayEHRs.map((ehr, index) => (

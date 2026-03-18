@@ -22,7 +22,7 @@ export default function TechnologyPage() {
     <>
       <PageHeader
         title="Technology"
-        badge="Automation & Integration"
+        subtitle="Automation & Integration"
         description="MI MedCare brings AI automation, analytics, and deep integrations together so your practice avoids paperwork and gets paid faster."
         imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
@@ -32,7 +32,7 @@ export default function TechnologyPage() {
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
-            badge="Overview"
+            subtitle="Overview"
             title="Three pillars of our revenue operations stack"
             description="Each pillar is designed to keep your team proactive: prevent denials, speed up collections, and reduce manual work."
           />
@@ -52,7 +52,9 @@ export default function TechnologyPage() {
                   {pillar.title}
                 </h3>
 
-                <p className="text-sm text-muted-foreground">{pillar.description}</p>
+                <p className="text-sm text-muted-foreground">
+                  {pillar.description}
+                </p>
 
                 <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                   {pillar.highlights.map((highlight) => (

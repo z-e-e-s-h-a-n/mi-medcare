@@ -16,7 +16,9 @@ export const metadata: Metadata = {
 };
 
 const analyticsMetrics = KPI_HIGHLIGHTS.filter((metric) =>
-  ["Average AR Days", "Clean Claim Rate", "Revenue Increase"].includes(metric.label),
+  ["Average AR Days", "Clean Claim Rate", "Revenue Increase"].includes(
+    metric.label,
+  ),
 );
 
 const analyticsPlaybook = [
@@ -33,7 +35,7 @@ export default function AnalyticsPage() {
     <>
       <PageHeader
         title="Analytics & Reporting"
-        badge="Technology"
+        subtitle="Technology"
         description="Realtime insights replace guesswork, showing everything from clean claim rate to net collections so you can make faster decisions."
         imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
@@ -43,7 +45,7 @@ export default function AnalyticsPage() {
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
-            badge="Analytics"
+            subtitle="Analytics"
             title="Data that drives smarter decisions"
             description={pillar.description}
           />
@@ -87,7 +89,7 @@ export default function AnalyticsPage() {
       <section className="section-wrapper pt-0">
         <div className="section-container">
           <SectionHeader
-            badge="Visibility"
+            subtitle="Visibility"
             title="How it all connects"
             description={pillar.hero}
           />
@@ -102,7 +104,10 @@ export default function AnalyticsPage() {
             ))}
           </div>
           <div className="mt-6 text-sm text-muted-foreground">
-            <Link href="/technology" className="font-medium text-primary underline">
+            <Link
+              href="/technology"
+              className="font-medium text-primary underline"
+            >
               Back to the technology overview
             </Link>
           </div>

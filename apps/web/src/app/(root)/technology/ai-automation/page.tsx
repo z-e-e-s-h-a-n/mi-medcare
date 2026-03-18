@@ -30,7 +30,7 @@ export default function AiAutomationPage() {
     <>
       <PageHeader
         title="AI Automation"
-        badge="Technology"
+        subtitle="Technology"
         description="AI and RPA power our intelligent revenue cycle so enrollees are checked, claims are scrubbed, and denials are resolved automatically."
         imageUrl="https://images.pexels.com/photos/30547581/pexels-photo-30547581.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
@@ -40,7 +40,7 @@ export default function AiAutomationPage() {
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
-            badge="Automation"
+            subtitle="Automation"
             title="Automating accuracy and speed"
             description={pillar.description}
           />
@@ -94,7 +94,10 @@ export default function AiAutomationPage() {
           </div>
 
           <div className="mt-6 text-sm text-muted-foreground">
-            <Link href="/technology" className="font-medium text-primary underline">
+            <Link
+              href="/technology"
+              className="font-medium text-primary underline"
+            >
               Back to the technology overview
             </Link>
           </div>

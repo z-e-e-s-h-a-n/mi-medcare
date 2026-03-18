@@ -41,7 +41,7 @@ export default function EmrEhrSupportPage() {
     <>
       <PageHeader
         title="EMR & EHR Billing Support"
-        badge="Technology Support"
+        subtitle="Technology Support"
         description="We support a wide range of EMR and EHR systems so your billing operations stay efficient without changing the platform you already use."
         imageUrl="https://images.pexels.com/photos/8376228/pexels-photo-8376228.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
@@ -90,5 +90,3 @@ export default function EmrEhrSupportPage() {
     </>
   );
 }
-
-

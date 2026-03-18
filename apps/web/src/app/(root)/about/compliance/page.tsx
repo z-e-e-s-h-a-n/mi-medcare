@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { CheckCircle2, FileCheck2, LockKeyhole, ShieldCheck } from "lucide-react";
+import {
+  CheckCircle2,
+  FileCheck2,
+  LockKeyhole,
+  ShieldCheck,
+} from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { FAQSection } from "@/components/sections/faq-section";
 export const metadata: Metadata = {
@@ -31,7 +36,8 @@ const controls = [
 
 const complianceFAQs = [
   {
-    question: "How do you support HIPAA compliance in daily billing operations?",
+    question:
+      "How do you support HIPAA compliance in daily billing operations?",
     answer:
       "Our team follows strict access controls, secure workflow procedures, and continuous process checks to reduce privacy and security risks in day-to-day billing activities.",
   },
@@ -59,7 +65,7 @@ export default function CompliancePage() {
     <>
       <PageHeader
         title="Compliance & Data Security"
-        badge="Trust & Compliance"
+        subtitle="Trust & Compliance"
         description="Our compliance-first billing model helps healthcare organizations reduce risk while maintaining strong reimbursement performance."
         imageUrl="https://images.pexels.com/photos/30901557/pexels-photo-30901557.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
@@ -105,5 +111,3 @@ export default function CompliancePage() {
     </>
   );
 }
-
-

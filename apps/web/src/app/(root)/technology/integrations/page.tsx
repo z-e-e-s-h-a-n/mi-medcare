@@ -30,7 +30,7 @@ export default function IntegrationsPage() {
     <>
       <PageHeader
         title="EHR Integrations"
-        badge="Technology"
+        subtitle="Technology"
         description="Secure connections keep your clinical system, scheduling platform, and billing stack in sync."
         imageUrl="https://images.pexels.com/photos/36252713/pexels-photo-36252713.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
@@ -40,7 +40,7 @@ export default function IntegrationsPage() {
       <section className="section-wrapper">
         <div className="section-container">
           <SectionHeader
-            badge="Integrations"
+            subtitle="Integrations"
             title="Connect to any system"
             description={pillar.description}
           />
@@ -55,7 +55,9 @@ export default function IntegrationsPage() {
                 management platforms, including Epic, Cerner, Athenahealth,
                 Allscripts, and niche specialty tools.
               </p>
-              <p className="mt-4 text-sm text-muted-foreground">{pillar.hero}</p>
+              <p className="mt-4 text-sm text-muted-foreground">
+                {pillar.hero}
+              </p>
             </article>
 
             <article className="rounded-2xl border border-border bg-background/50 p-6">
@@ -80,7 +82,7 @@ export default function IntegrationsPage() {
       <section className="section-wrapper pt-0">
         <div className="section-container">
           <SectionHeader
-            badge="Sync"
+            subtitle="Sync"
             title="What we sync"
             description="Bi-directional feeds keep payers, patient accounts, and charges aligned without re-keying."
           />
@@ -97,7 +99,10 @@ export default function IntegrationsPage() {
           </div>
 
           <div className="mt-6 text-sm text-muted-foreground">
-            <Link href="/technology" className="font-medium text-primary underline">
+            <Link
+              href="/technology"
+              className="font-medium text-primary underline"
+            >
               Back to the technology overview
             </Link>
           </div>

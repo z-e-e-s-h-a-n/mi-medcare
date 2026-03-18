@@ -8,7 +8,6 @@ interface SectionHeaderProps {
   subtitle?: string;
   description?: string;
   center?: boolean;
-  badge?: string;
   className?: string;
 }
 
@@ -17,12 +16,13 @@ export function SectionHeader({
   subtitle,
   description,
   center = true,
-  badge,
   className,
 }: SectionHeaderProps) {
   return (
-    <div className={cn("mb-12", center ? "text-center" : "", className)}>
-      {badge && (
+    <div
+      className={cn("mb-12 space-y-3", center ? "text-center" : "", className)}
+    >
+      {subtitle && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -34,20 +34,8 @@ export function SectionHeader({
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          <span className="text-sm font-medium">{badge}</span>
+          <span className="text-sm font-medium">{subtitle}</span>
         </motion.div>
-      )}
-
-      {subtitle && (
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="text-primary font-semibold mb-2"
-        >
-          {subtitle}
-        </motion.p>
       )}
 
       <motion.h2
@@ -55,7 +43,7 @@ export function SectionHeader({
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
         viewport={{ once: true }}
-        className="text-3xl lg:text-4xl font-bold mb-4"
+        className="text-3xl lg:text-4xl font-bold"
       >
         {title}
       </motion.h2>

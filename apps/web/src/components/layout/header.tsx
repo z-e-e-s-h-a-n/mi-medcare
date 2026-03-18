@@ -26,7 +26,7 @@ import {
   LinkedInIcon,
   XIcon,
 } from "@/components/icons/social-icons";
-import { useBusinessProfile } from "@/hooks/useBusinessProfile";
+import { useBusinessProfile } from "@/hooks/business";
 
 // Animation variants for better performance
 const hoverVariants = {

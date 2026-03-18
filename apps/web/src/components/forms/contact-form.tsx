@@ -24,7 +24,7 @@ import {
   PracticeTypeEnum,
 } from "@workspace/contracts";
 import { Button } from "@workspace/ui/components/button";
-import { useCreateMessage } from "@/hooks/useContact";
+import { useCreateMessage } from "@/hooks/contact";
 import { toast } from "sonner";
 
 export function ContactForm() {

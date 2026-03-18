@@ -41,7 +41,7 @@ export function FAQSection({ faqs, limit = 6, className }: FAQSectionProps) {
       <div className="section-container relative">
         <div className="max-w-4xl mx-auto">
           <SectionHeader
-            badge="FAQ"
+            subtitle="FAQ"
             title="Frequently Asked Questions"
             description="Got questions? We've got answers"
           />
