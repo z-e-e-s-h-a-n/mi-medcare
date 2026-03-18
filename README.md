@@ -85,6 +85,7 @@ The default local endpoints are:
 ```bash
 pnpm --filter server check-types
 pnpm --filter dashboard check-types
+pnpm lint
 pnpm --filter @workspace/contracts build
 pnpm --filter @workspace/sdk check-types
 pnpm --filter @workspace/db build
@@ -109,28 +110,28 @@ Use the seeded data to validate dashboard cards, charts, activity feeds, and det
 Before handing the project to a client, confirm all of the following:
 
 - `server/.env` is filled with real production values
-- `apps/dashboard/.env.local` or production env contains `NEXT_PUBLIC_API_URL`
+- Vercel production env for `apps/dashboard` contains `NEXT_PUBLIC_API_URL`
 - PostgreSQL database is created and Prisma migrations are applied
 - Cloudinary credentials are valid and uploads work
 - SMTP credentials are valid and email templates send successfully
 - OAuth values are filled only if Google/Facebook login is intended
 - Firebase values are filled only if push notifications are intended
 - an initial admin account exists, either from seed data or `pnpm --filter server admin:bootstrap`
-- the latest type checks and backend tests pass
+- the latest type checks and lint pass
 
 ## Production Notes
 
 - Auth is email-first. Phone is retained only as profile/contact data, not as a login identifier.
 - Push notifications are optional. If Firebase env values are left blank, push delivery is skipped.
 - OAuth is optional. If provider env values are blank, those strategies are not registered.
+- `apps/dashboard` and `apps/web` are expected to build and deploy through Vercel.
 - `apps/web` is not required for the current client delivery.
 
-## Testing
+## Validation
 
-Backend smoke tests live in `server/src/**/*.spec.ts`.
+The main pre-handover checks for this repo are:
 
-Run them with:
+- `pnpm check-types`
+- `pnpm lint`
 
-```bash
-pnpm --filter server test -- --runInBand
-```
+Backend smoke tests exist in `server/src/**/*.spec.ts`, but they are optional for routine handover unless you specifically want to run them.
