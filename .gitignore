@@ -30,6 +30,10 @@ out
 build
 dist
 
+# Generated app artifacts
+**/next-env.d.ts
+apps/web/public/sitemap*.xml
+
 # Debug
 
 npm-debug.log\*

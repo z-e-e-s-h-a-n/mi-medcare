@@ -4,9 +4,8 @@ Mi MedCare is a medical billing and revenue-cycle management platform with:
 
 - a NestJS backend in `server`
 - an admin dashboard in `apps/dashboard`
+- a marketing website in `apps/web`
 - shared contracts, SDK, UI, templates, and database packages in `packages/*`
-
-`apps/web` exists in the repo, but it is not part of the current delivery scope.
 
 ## Product Scope
 
@@ -17,11 +16,13 @@ The delivered product currently covers:
 - business profile management
 - media management via Cloudinary
 - content management for posts, categories, and tags
+- a public-facing website for marketing, services, specialties, blog, and contact flows
 - lead capture for contact messages, consultation requests, and newsletter subscribers
 - audit logs, notifications, traffic sources, and dashboard analytics
 
 ## Workspace Structure
 
+- `apps/web` - Next.js public website
 - `apps/dashboard` - Next.js admin dashboard
 - `server` - NestJS API
 - `packages/contracts` - shared schemas and API contracts
@@ -54,7 +55,7 @@ pnpm install
 
 2. Create the server env file from [server/.env.example](/d:/mi-medcare/server/.env.example) and fill in the required values.
 
-3. Create `apps/dashboard/.env.local` with the API base URL.
+3. Create `apps/dashboard/.env.local` and `apps/web/.env.local` with the API base URL.
 
 ```env
 NEXT_PUBLIC_API_URL="http://localhost:4000"
@@ -68,22 +69,25 @@ pnpm --filter @workspace/db prisma:migrate
 pnpm --filter @workspace/db prisma:seed
 ```
 
-5. Start the backend and dashboard.
+5. Start the backend and frontend apps you need.
 
 ```bash
 pnpm --filter server dev
+pnpm --filter web dev
 pnpm --filter dashboard dev
 ```
 
 The default local endpoints are:
 
 - API: `http://localhost:4000`
+- Website: `http://localhost:3000`
 - Dashboard: `http://localhost:3001`
 
 ## Useful Commands
 
 ```bash
 pnpm --filter server check-types
+pnpm --filter web check-types
 pnpm --filter dashboard check-types
 pnpm lint
 pnpm --filter @workspace/contracts build
@@ -110,6 +114,7 @@ Use the seeded data to validate dashboard cards, charts, activity feeds, and det
 Before handing the project to a client, confirm all of the following:
 
 - `server/.env` is filled with real production values
+- Vercel production env for `apps/web` contains `NEXT_PUBLIC_API_URL`
 - Vercel production env for `apps/dashboard` contains `NEXT_PUBLIC_API_URL`
 - PostgreSQL database is created and Prisma migrations are applied
 - Cloudinary credentials are valid and uploads work
@@ -125,7 +130,6 @@ Before handing the project to a client, confirm all of the following:
 - Push notifications are optional. If Firebase env values are left blank, push delivery is skipped.
 - OAuth is optional. If provider env values are blank, those strategies are not registered.
 - `apps/dashboard` and `apps/web` are expected to build and deploy through Vercel.
-- `apps/web` is not required for the current client delivery.
 
 ## Validation
 
