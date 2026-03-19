@@ -747,7 +747,7 @@ export const SERVICES = [
     description:
       "Certified coders ensure accurate ICD-10, CPT, and HCPCS coding for compliant claims.",
     image:
-      "https://images.pexels.com/photos/48604/pexels-photo-48604.jpeg?cs=srgb&dl=pexels-negativespace-48604.jpg&fm=jpg",
+      "https://img.freepik.com/free-photo/side-view-doctor-with-stethoscope-working-laptop-writing-paper_23-2148735408.jpg",
     icon: IconShieldCheck,
     stats: "100% Certified Coders",
     gradient: "from-green-500 to-emerald-500",
@@ -758,7 +758,7 @@ export const SERVICES = [
     description:
       "Provider credentialing and payer enrollment to get your practice contracted faster.",
     image:
-      "https://images.pexels.com/photos/8313224/pexels-photo-8313224.jpeg?cs=srgb&dl=pexels-rdne-8313224.jpg&fm=jpg",
+      "https://img.freepik.com/free-photo/doctor-holding-medical-stamp-put-prescription-paper-health-care-exam-hand-physician-putting-seal-checkup-report-giving-medicine-patient-consultation-close-up_482257-38558.jpg",
     icon: IconRosetteDiscountCheck,
     stats: "30 Days Avg.",
     gradient: "from-orange-500 to-red-500",
@@ -813,7 +813,7 @@ export const SERVICES = [
     description:
       "Detailed audits to identify revenue leakage, compliance issues, and workflow improvements.",
     image:
-      "https://images.pexels.com/photos/7709161/pexels-photo-7709161.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      "https://images.pexels.com/photos/30901557/pexels-photo-30901557.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: IconShield,
     stats: "Revenue Leak Detection",
     gradient: "from-gray-500 to-slate-600",
@@ -835,7 +835,7 @@ export const SERVICES = [
     description:
       "Documentation and compliance consulting to maximize MIPS performance scores.",
     image:
-      "https://images.pexels.com/photos/30901557/pexels-photo-30901557.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      "https://images.pexels.com/photos/7108401/pexels-photo-7108401.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: BarChart3,
     stats: "Maximize MIPS Score",
     gradient: "from-rose-500 to-pink-500",
@@ -874,7 +874,7 @@ export const FEATURES = [
     title: "Fast Claim Processing",
     description: "Submit claims in minutes, not hours",
     image:
-      "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      "https://img.freepik.com/free-photo/doctor-working-computer_1098-16465.jpg",
     icon: IconBolt,
     stats: "2x Faster Processing",
     gradient: "from-amber-500 to-orange-500",
@@ -883,7 +883,7 @@ export const FEATURES = [
     title: "HIPAA Compliant",
     description: "Enterprise-grade security and compliance",
     image:
-      "https://images.pexels.com/photos/5380643/pexels-photo-5380643.jpeg?auto=compress&cs=tinysrgb&w=1920",
+      "https://img.freepik.com/free-photo/medical-banner-with-doctor-holding-stethoscope_23-2149611240.jpg?t=st=1773933621~exp=1773937221~hmac=c30317068db45b73077389bd33e181a805968eded8128ebc680d653175da6ee7&w=1060",
     icon: IconLock,
     stats: "100% Compliant",
     gradient: "from-indigo-500 to-blue-500",
