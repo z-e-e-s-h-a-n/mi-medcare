@@ -37,7 +37,6 @@ export default function AnalyticsPage() {
         title="Analytics & Reporting"
         subtitle="Technology"
         description="Realtime insights replace guesswork, showing everything from clean claim rate to net collections so you can make faster decisions."
-        imageUrl="https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <MetricsSection />

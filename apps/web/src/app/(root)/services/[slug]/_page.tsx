@@ -27,6 +27,7 @@ import {
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionHeader } from "@/components/layout/section-header";
 import { FAQSection } from "@/components/sections/faq-section";
+import { getDecorativeImage } from "@/lib/decorative-image";
 import { gradientClass } from "@/lib/utils";
 import { Button } from "@workspace/ui/components/button";
 import { cn } from "@workspace/ui/lib/utils";
@@ -101,7 +102,7 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
         title={detail.title}
         subtitle={detail.stats}
         description={detail.description}
-        imageUrl={detail.image}
+        imageUrl={getDecorativeImage(`${detail.title} ${detail.href}`, "hero", detail.image, true)}
       />
 
       <section className="section-wrapper -mt-10 pb-10">
@@ -422,7 +423,7 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
                 >
                   <div className="relative h-36 overflow-hidden">
                     <Image
-                      src={svc.image}
+                      src={getDecorativeImage(`${svc.title} ${svc.href}`, "card", svc.image, true)}
                       alt={svc.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
@@ -463,3 +464,5 @@ export function ServiceDetails({ detail, related }: ServiceDetailsProps) {
     </>
   );
 }
+
+

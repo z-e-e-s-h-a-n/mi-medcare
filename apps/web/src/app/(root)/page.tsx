@@ -31,11 +31,7 @@ export default function Home() {
       <HowItWorksSection useConstantColors />
       <BenefitsSection useConstantColors />
       <EHRSection limit={8} className="bg-muted" />
-      <SpecialtiesSection
-        limit={8}
-        useConstantColors
-        bgUrl="https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?cs=srgb&dl=pexels-pixabay-263402.jpg&fm=jpg&w=1920"
-      />
+      <SpecialtiesSection limit={8} useConstantColors />
       <TestimonialsSection className="bg-muted" />
       <BlogSection params={{ limit: 3 }} />
       <FAQSection className="bg-muted" />

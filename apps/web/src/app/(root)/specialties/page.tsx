@@ -31,7 +31,6 @@ export default function SpecialtiesPage() {
 
       <SpecialtiesSection
         useConstantColors
-        bgUrl="https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?cs=srgb&dl=pexels-pixabay-263402.jpg&fm=jpg&w=1920"
       />
 
       <HowItWorksSection useConstantColors className="bg-muted" />
@@ -48,3 +47,5 @@ export default function SpecialtiesPage() {
     </>
   );
 }
+
+

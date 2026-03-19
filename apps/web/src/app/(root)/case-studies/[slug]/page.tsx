@@ -23,7 +23,6 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       <PageHeader
         title={slug}
         subtitle="Case Study"
-        imageUrl="https://images.pexels.com/photos/7793162/pexels-photo-7793162.jpeg?auto=compress&cs=tinysrgb&w=1920"
       />
 
       <ComingSoonSection
@@ -35,3 +34,5 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
     </>
   );
 }
+
+

@@ -3,7 +3,9 @@
 import { cn } from "@workspace/ui/lib/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { Children, isValidElement, type ReactNode } from "react";
+
+import { getDecorativeImage } from "@/lib/decorative-image";
 
 interface PageHeaderProps {
   title: ReactNode;
@@ -16,6 +18,22 @@ interface PageHeaderProps {
   actions?: ReactNode;
 }
 
+function getNodeText(node: ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    return node.map((child) => getNodeText(child)).join(" ").trim();
+  }
+
+  if (isValidElement(node)) {
+    return getNodeText((node.props as { children?: ReactNode }).children);
+  }
+
+  return "";
+}
+
 export function PageHeader({
   title,
   subtitle,
@@ -26,6 +44,15 @@ export function PageHeader({
   className = "",
   height = "h-96",
 }: PageHeaderProps) {
+  const titleText = getNodeText(Children.toArray(title));
+  const resolvedImageUrl = getDecorativeImage(
+    [titleText, typeof subtitle === "string" ? subtitle : "", description]
+      .filter(Boolean)
+      .join(" | "),
+    "hero",
+    imageUrl,
+  );
+
   return (
     <div className={`relative section-wrapper ${height} ${className}`}>
       {/* Background image or fallback gradient */}
@@ -36,11 +63,11 @@ export function PageHeader({
           !imageUrl && "bg-linear-to-r from-primary/10 to-primary/5",
         )}
       >
-        {imageUrl && (
+        {resolvedImageUrl && (
           <>
             <Image
-              src={imageUrl}
-              alt="Page Header BG"
+              src={resolvedImageUrl}
+              alt={titleText ? `${titleText} header art` : "Page header art"}
               fill
               className="object-cover"
               priority

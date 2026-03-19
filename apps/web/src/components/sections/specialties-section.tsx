@@ -13,12 +13,10 @@ interface SpecialtiesSectionProps {
   limit?: number;
   className?: string;
   useConstantColors?: boolean;
-  bgUrl?: string;
 }
 
 export function SpecialtiesSection({
   limit,
-  bgUrl,
   className,
   useConstantColors = true,
 }: SpecialtiesSectionProps) {
@@ -31,18 +29,16 @@ export function SpecialtiesSection({
         className,
       )}
     >
-      {/* Visible background image + pattern so it doesn't feel flat/white */}
       <div className="absolute inset-0">
-        {bgUrl && (
-          <div
-            className="absolute inset-0 opacity-40"
-            style={{
-              backgroundImage: `url('${bgUrl}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-        )}
+        <div
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage: `url('https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?cs=srgb&dl=pexels-pixabay-263402.jpg&fm=jpg&w=1920')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+
         <div className="absolute inset-0 bg-linear-to-b from-background/70 via-muted/45 to-prim/20" />
       </div>
 

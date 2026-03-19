@@ -802,7 +802,7 @@ export const SERVICES = [
     description:
       "Accurate posting of insurance and patient payments with reconciliation.",
     image:
-      "https://images.pexels.com/photos/13060576/pexels-photo-13060576.jpeg?cs=srgb&dl=pexels-lucas-guimaraes-bueno-258458556-13060576.jpg&fm=jpg",
+      "https://images.pexels.com/photos/4989167/pexels-photo-4989167.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: IconWallet,
     stats: "99% Posting Accuracy",
     gradient: "from-violet-500 to-indigo-500",
@@ -813,7 +813,7 @@ export const SERVICES = [
     description:
       "Detailed audits to identify revenue leakage, compliance issues, and workflow improvements.",
     image:
-      "https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?cs=srgb&dl=pexels-asphotography-106344.jpg&fm=jpg",
+      "https://images.pexels.com/photos/7709161/pexels-photo-7709161.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: IconShield,
     stats: "Revenue Leak Detection",
     gradient: "from-gray-500 to-slate-600",
@@ -824,7 +824,7 @@ export const SERVICES = [
     description:
       "Specialized billing for diagnostic labs with complex coding and payer rules.",
     image:
-      "https://images.pexels.com/photos/48604/pexels-photo-48604.jpeg?cs=srgb&dl=pexels-negativespace-48604.jpg&fm=jpg",
+      "https://images.pexels.com/photos/8376228/pexels-photo-8376228.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: Microscope,
     stats: "Lab Billing Experts",
     gradient: "from-teal-500 to-emerald-500",
@@ -835,7 +835,7 @@ export const SERVICES = [
     description:
       "Documentation and compliance consulting to maximize MIPS performance scores.",
     image:
-      "https://images.pexels.com/photos/5207115/pexels-photo-5207115.jpeg?cs=srgb&dl=pexels-karola-g-5207115.jpg&fm=jpg",
+      "https://images.pexels.com/photos/30901557/pexels-photo-30901557.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: BarChart3,
     stats: "Maximize MIPS Score",
     gradient: "from-rose-500 to-pink-500",
@@ -847,7 +847,7 @@ export const FEATURES = [
     title: "AI-Powered Automation",
     description: "Reduce manual work by 70% with intelligent automation",
     image:
-      "https://images.pexels.com/photos/48604/pexels-photo-48604.jpeg?cs=srgb&dl=pexels-negativespace-48604.jpg&fm=jpg",
+      "https://images.pexels.com/photos/30547581/pexels-photo-30547581.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: IconCpu,
     stats: "70% Less Manual Work",
     gradient: "from-purple-500 to-fuchsia-500",
@@ -856,7 +856,7 @@ export const FEATURES = [
     title: "Real-time Analytics",
     description: "Make data-driven decisions with live dashboards",
     image:
-      "https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?cs=srgb&dl=pexels-asphotography-106344.jpg&fm=jpg",
+      "https://images.pexels.com/photos/8353837/pexels-photo-8353837.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: IconChartLine,
     stats: "Real-time Insights",
     gradient: "from-blue-500 to-cyan-500",
@@ -865,7 +865,7 @@ export const FEATURES = [
     title: "Seamless Integration",
     description: "Connect with 50+ EHR systems effortlessly",
     image:
-      "https://images.pexels.com/photos/5207115/pexels-photo-5207115.jpeg?cs=srgb&dl=pexels-karola-g-5207115.jpg&fm=jpg",
+      "https://images.pexels.com/photos/36252713/pexels-photo-36252713.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: IconPlug,
     stats: "50+ Integrations",
     gradient: "from-emerald-500 to-teal-500",
@@ -874,7 +874,7 @@ export const FEATURES = [
     title: "Fast Claim Processing",
     description: "Submit claims in minutes, not hours",
     image:
-      "https://images.pexels.com/photos/13060576/pexels-photo-13060576.jpeg?cs=srgb&dl=pexels-lucas-guimaraes-bueno-258458556-13060576.jpg&fm=jpg",
+      "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: IconBolt,
     stats: "2x Faster Processing",
     gradient: "from-amber-500 to-orange-500",
@@ -883,7 +883,7 @@ export const FEATURES = [
     title: "HIPAA Compliant",
     description: "Enterprise-grade security and compliance",
     image:
-      "https://images.pexels.com/photos/8313224/pexels-photo-8313224.jpeg?cs=srgb&dl=pexels-rdne-8313224.jpg&fm=jpg",
+      "https://images.pexels.com/photos/5380643/pexels-photo-5380643.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: IconLock,
     stats: "100% Compliant",
     gradient: "from-indigo-500 to-blue-500",
@@ -892,7 +892,7 @@ export const FEATURES = [
     title: "Multi-Specialty Support",
     description: "Expertise across 40+ medical specialties",
     image:
-      "https://images.pexels.com/photos/5933209/pexels-photo-5933209.jpeg?cs=srgb&dl=pexels-nestor-luis-5307112-5933209.jpg&fm=jpg",
+      "https://images.pexels.com/photos/5407210/pexels-photo-5407210.jpeg?auto=compress&cs=tinysrgb&w=1920",
     icon: IconWorld,
     stats: "40+ Specialties",
     gradient: "from-pink-500 to-rose-500",
@@ -1191,3 +1191,4 @@ export const FOOTER_NAVIGATION = [
     ],
   },
 ];
+
