@@ -18,112 +18,101 @@ export const TagListClient = () => {
   const sortedTags =
     tags?.sort((a, b) => (b._count?.posts || 0) - (a._count?.posts || 0)) || [];
 
-  const allTags = sortedTags;
+  const allTags = sortedTags.filter((tag) => (tag._count?.posts || 0) > 0);
 
   return (
     <>
-      <>
-        <PageHeader
-          subtitle={
-            // TODO fix: this upper div styles not working
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/50 mb-6">
-              <Tag className="h-8 w-8 text-primary" />
+      <PageHeader
+        subtitle={
+          <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/50">
+            <Tag className="h-8 w-8 text-primary" />
+          </div>
+        }
+        title="Blog Tags"
+        description="Explore our content through tags. Find articles by specific topics, technologies, and interests."
+        actions={
+          <Button href="/blogs" size="lg" variant="outline" asChild>
+            Back to Blog
+          </Button>
+        }
+      />
+
+      <section className="section-wrapper section-container grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <section>
+            <div className="mb-8 flex items-center justify-between">
+              <h2 className="text-3xl font-bold">All Tags</h2>
+              <Badge variant="outline">{allTags.length} tags</Badge>
             </div>
-          }
-          title="Blog Tags"
-          description="Explore our content through tags. Find articles by specific topics, technologies, and interests."
-          actions={
-            <Button href="/blogs" size="lg" variant="outline" asChild>
-              Back to Blog
-            </Button>
-          }
-        />
 
-        {/* Main Content */}
-        <section className="section-wrapper section-container grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content Area */}
-          <div className="lg:col-span-2">
-            {/* All Tags */}
-            <section>
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold">All Tags</h2>
-                <Badge variant="outline">{tags?.length || 0} tags</Badge>
+            {isLoading ? (
+              <div className="flex flex-wrap gap-2">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((i) => (
+                  <Skeleton key={i} className="h-10 w-24 rounded-full" />
+                ))}
               </div>
-
-              {isLoading ? (
-                <div className="flex flex-wrap gap-2">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
-                    (i) => (
-                      <Skeleton key={i} className="h-10 w-24 rounded-full" />
-                    ),
-                  )}
-                </div>
-              ) : (
-                <div className="flex flex-wrap gap-3">
-                  {allTags.map((tag) => (
-                    <Button
-                      key={tag.id}
-                      variant="outline"
-                      size="lg"
-                      className="h-auto py-3 px-6 rounded-full hover:scale-105 transition-transform"
-                      asChild
-                    >
-                      <Link href={`/blogs/tags/${tag.slug}`}>
-                        <Tag className="h-4 w-4 mr-2" />
-                        {tag.name}
-                        <Badge variant="secondary" className="ml-2">
-                          {tag._count.posts || 0}
-                        </Badge>
-                      </Link>
-                    </Button>
-                  ))}
-                </div>
-              )}
-
-              {!isLoading && allTags.length === 0 && (
-                <div className="text-center py-12 border rounded-lg">
-                  <Tag className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">No tags yet</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Tags will appear here once they are added to posts.
-                  </p>
-                </div>
-              )}
-            </section>
-
-            {/* Tag Cloud Alternative View */}
-            {!isLoading && allTags.length > 0 && (
-              <section className="mt-12">
-                <h3 className="text-2xl font-bold mb-6">Tag Cloud</h3>
-                <Card>
-                  <CardContent className="p-8">
-                    <div className="flex flex-wrap gap-4 justify-center">
-                      {allTags.map((tag) => {
-                        return (
-                          <Link
-                            key={tag.id}
-                            href={`/blogs/tags/${tag.slug}`}
-                            className="inline-block transition-all hover:-translate-y-1 text-sm text-muted-foreground"
-                          >
-                            <span className="font-medium hover:text-primary transition-colors">
-                              {tag.name}
-                            </span>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </CardContent>
-                </Card>
-              </section>
+            ) : allTags.length > 0 ? (
+              <div className="flex flex-wrap gap-3">
+                {allTags.map((tag) => (
+                  <Button
+                    key={tag.id}
+                    variant="outline"
+                    size="lg"
+                    className="h-auto rounded-full px-6 py-3 transition-transform hover:scale-105"
+                    asChild
+                  >
+                    <Link href={`/blogs/tags/${tag.slug}`}>
+                      <Tag className="mr-2 h-4 w-4" />
+                      {tag.name}
+                      <Badge variant="secondary" className="ml-2">
+                        {tag._count.posts || 0}
+                      </Badge>
+                    </Link>
+                  </Button>
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-3xl border border-dashed bg-muted/30 px-6 py-16 text-center">
+                <Tag className="mx-auto h-14 w-14 text-muted-foreground" />
+                <h3 className="mt-6 text-2xl font-bold">No blog tags yet</h3>
+                <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+                  Tags will appear here once published blog posts are tagged and
+                  visible on the site.
+                </p>
+              </div>
             )}
-          </div>
+          </section>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <BlogSidebar />
-          </div>
-        </section>
-      </>
+          {!isLoading && allTags.length > 0 && (
+            <section className="mt-12">
+              <h3 className="mb-6 text-2xl font-bold">Tag Cloud</h3>
+              <Card>
+                <CardContent className="p-8">
+                  <div className="flex flex-wrap justify-center gap-4">
+                    {allTags.map((tag) => {
+                      return (
+                        <Link
+                          key={tag.id}
+                          href={`/blogs/tags/${tag.slug}`}
+                          className="inline-block text-sm text-muted-foreground transition-all hover:-translate-y-1"
+                        >
+                          <span className="font-medium transition-colors hover:text-primary">
+                            {tag.name}
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+          )}
+        </div>
+
+        <div className="lg:col-span-1">
+          <BlogSidebar />
+        </div>
+      </section>
     </>
   );
 };

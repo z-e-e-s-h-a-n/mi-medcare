@@ -7,7 +7,11 @@ import { businessFallback } from "@/lib/constants";
 
 export const getCachedBusinessProfile = cache(
   async (): Promise<BusinessProfileResponse> => {
-    const response = await getBusinessProfile();
-    return response.data ?? businessFallback;
+    try {
+      const response = await getBusinessProfile();
+      return response.data;
+    } catch {
+      return businessFallback;
+    }
   },
 );

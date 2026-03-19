@@ -24,7 +24,10 @@ function getNodeText(node: ReactNode): string {
   }
 
   if (Array.isArray(node)) {
-    return node.map((child) => getNodeText(child)).join(" ").trim();
+    return node
+      .map((child) => getNodeText(child))
+      .join(" ")
+      .trim();
   }
 
   if (isValidElement(node)) {
@@ -63,18 +66,14 @@ export function PageHeader({
           !imageUrl && "bg-linear-to-r from-primary/10 to-primary/5",
         )}
       >
-        {resolvedImageUrl && (
-          <>
-            <Image
-              src={resolvedImageUrl}
-              alt={titleText ? `${titleText} header art` : "Page header art"}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/50 to-black/40" />
-          </>
-        )}
+        <Image
+          src={resolvedImageUrl}
+          alt={titleText ? `${titleText} header art` : "Page header art"}
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/70 to-black/50  " />
       </div>
 
       {/* Medical dotted pattern */}
@@ -101,7 +100,7 @@ export function PageHeader({
               viewport={{ once: true }}
             >
               {typeof subtitle === "string" ? (
-                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
+                <div className="bg-primary/30 inline-flex items-center gap-2 text-primary px-4 py-2 rounded-full mb-4">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -130,7 +129,7 @@ export function PageHeader({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-muted-foreground md:text-lg max-w-2xl mx-auto mb-6"
+              className="text-white/40 md:text-lg max-w-2xl mx-auto mb-6"
             >
               {description}
             </motion.p>

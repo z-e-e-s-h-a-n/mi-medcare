@@ -14,10 +14,12 @@ import { PageHeader } from "@/components/layout/page-header";
 export const CategoryListClient = () => {
   const { data, isLoading } = useCategories();
 
-  const categories = data?.categories;
+  const categories =
+    data?.categories?.filter((cat) => (cat._count?.posts || 0) > 0) || [];
 
-  const rootCategories = categories?.filter((cat) => !cat.parentId) || [];
-  const nestedCategories = categories?.filter((cat) => cat.parentId) || [];
+  const rootCategories = categories.filter((cat) => !cat.parentId);
+  const nestedCategories = categories.filter((cat) => cat.parentId);
+  const hasCategories = categories.length > 0;
 
   return (
     <>
@@ -31,57 +33,63 @@ export const CategoryListClient = () => {
         }
       />
 
-      {/* Main Content */}
       <section className="section-wrapper section-container">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content Area */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            {/* All Categories */}
             <section className="mb-12">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold flex items-center gap-2">
+              <div className="mb-8 flex items-center justify-between">
+                <h2 className="flex items-center gap-2 text-3xl font-bold">
                   <FolderTree className="h-6 w-6" />
                   All Categories
                 </h2>
-                <Badge variant="outline">
-                  {categories?.length || 0} categories
-                </Badge>
+                <Badge variant="outline">{categories.length} categories</Badge>
               </div>
 
               {isLoading ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   {[1, 2, 3, 4, 5, 6].map((i) => (
                     <Card key={i}>
                       <CardHeader>
                         <Skeleton className="h-6 w-32" />
                       </CardHeader>
                       <CardContent>
-                        <Skeleton className="h-4 w-full mb-2" />
+                        <Skeleton className="mb-2 h-4 w-full" />
                         <Skeleton className="h-4 w-3/4" />
                       </CardContent>
                     </Card>
                   ))}
                 </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              ) : hasCategories ? (
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   {rootCategories.map((category) => (
                     <CategoryCard key={category.id} category={category} />
                   ))}
                 </div>
+              ) : (
+                <div className="rounded-3xl border border-dashed bg-muted/30 px-6 py-16 text-center">
+                  <FolderTree className="mx-auto h-14 w-14 text-muted-foreground" />
+                  <h3 className="mt-6 text-2xl font-bold">
+                    No blog categories yet
+                  </h3>
+                  <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+                    We do not have any categories with published blog posts
+                    right now. Once articles are published, their categories
+                    will appear here.
+                  </p>
+                </div>
               )}
             </section>
 
-            {/* Nested Categories */}
             {nestedCategories.length > 0 && (
               <section>
-                <h3 className="text-2xl font-bold mb-6">Subcategories</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <h3 className="mb-6 text-2xl font-bold">Subcategories</h3>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {nestedCategories.map((category) => (
                     <Link
                       key={category.id}
                       href={`/blogs/category/${category.slug}`}
                     >
-                      <Card className="hover:shadow-md transition-shadow">
+                      <Card className="transition-shadow hover:shadow-md">
                         <CardContent className="p-4">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -95,7 +103,7 @@ export const CategoryListClient = () => {
                             </Badge>
                           </div>
                           {category.parent && (
-                            <p className="text-xs text-muted-foreground mt-2">
+                            <p className="mt-2 text-xs text-muted-foreground">
                               In: {category.parent.name}
                             </p>
                           )}
@@ -108,7 +116,6 @@ export const CategoryListClient = () => {
             )}
           </div>
 
-          {/* Sidebar */}
           <div className="lg:col-span-1">
             <BlogSidebar />
           </div>

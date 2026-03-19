@@ -30,6 +30,9 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
   className,
 }) => {
   const { data, isLoading } = useCategories();
+  const categories =
+    data?.categories?.filter((category) => (category._count?.posts || 0) > 0) ||
+    [];
 
   return (
     <aside className={cn("space-y-6", className)}>
@@ -72,18 +75,24 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
             </div>
           ) : (
             <div className="space-y-2">
-              {data?.categories.map((category) => (
-                <Link
-                  key={category.id}
-                  href={`/blogs/category/${category.slug}`}
-                  className="flex items-center justify-between p-2 rounded-lg hover:bg-muted transition-colors"
-                >
-                  <span className="text-sm font-medium">{category.name}</span>
-                  <Badge variant="secondary" className="text-xs">
-                    {category._count?.posts || 0}
-                  </Badge>
-                </Link>
-              ))}
+              {categories.length > 0 ? (
+                categories.map((category) => (
+                  <Link
+                    key={category.id}
+                    href={`/blogs/category/${category.slug}`}
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-muted transition-colors"
+                  >
+                    <span className="text-sm font-medium">{category.name}</span>
+                    <Badge variant="secondary" className="text-xs">
+                      {category._count?.posts || 0}
+                    </Badge>
+                  </Link>
+                ))
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  No blog categories with published posts yet.
+                </p>
+              )}
             </div>
           )}
         </CardContent>

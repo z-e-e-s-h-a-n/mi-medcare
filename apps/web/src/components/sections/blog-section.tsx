@@ -17,6 +17,11 @@ interface BlogSectionProps {
 export function BlogSection({ className, posts, params }: BlogSectionProps) {
   const { data } = usePosts(params);
   if (!posts) posts = data?.posts;
+  const hasPosts = (posts?.length ?? 0) > 0;
+
+  if (!hasPosts) {
+    return null;
+  }
 
   return (
     <section className={cn("section-wrapper", className)}>

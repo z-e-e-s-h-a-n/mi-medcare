@@ -36,6 +36,7 @@ export default function AnalyticsPage() {
       <PageHeader
         title="Analytics & Reporting"
         subtitle="Technology"
+        imageUrl="https://img.freepik.com/free-photo/office-workers-using-finance-graphs_23-2150408682.jpg?t=st=1773944544~exp=1773948144~hmac=51c06b212ee2425f053f97cf678ae8f5fa3aa96aa49489ca315b54e84b7ad5d3&w=1060"
         description="Realtime insights replace guesswork, showing everything from clean claim rate to net collections so you can make faster decisions."
       />
 

@@ -1,6 +1,4 @@
 "use client";
-
-"use client";
 import React from "react";
 import Link from "next/link";
 import { Button } from "@workspace/ui/components/button";
@@ -59,7 +57,7 @@ export const CategoryDetailsClient = ({
         <Breadcrumb className="mb-6">
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/blog">Blog</BreadcrumbLink>
+              <BreadcrumbLink href="/blogs">Blog</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
@@ -191,7 +189,7 @@ export const CategoryDetailsClient = ({
                   There are no published posts in this category yet.
                 </p>
                 <Button variant="outline" asChild>
-                  <Link href="/blog">Browse All Posts</Link>
+                  <Link href="/blogs">Browse All Posts</Link>
                 </Button>
               </div>
             )}
@@ -206,3 +204,4 @@ export const CategoryDetailsClient = ({
     </>
   );
 };
+
