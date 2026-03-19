@@ -64,7 +64,8 @@ export function ServicesSection({
                       alt={`${service.title} photo`}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                      quality={65}
                     />
                   ) : (
                     <div className="absolute inset-0 bg-linear-to-br from-muted to-background" />
@@ -81,10 +82,10 @@ export function ServicesSection({
                     </h3>
                     <Link
                       href={service.href}
-                      aria-label={`Learn more about ${service.title}`}
                       className="shrink-0 inline-flex items-center gap-2 text-xs font-medium text-white/90 hover:text-white transition-colors"
                     >
-                      Learn More
+                      <span>Learn More</span>
+                      <span className="sr-only"> about {service.title}</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
@@ -155,10 +156,10 @@ export function ServicesSection({
 
                     <Link
                       href={service.href}
-                      aria-label={`Learn more about ${service.title}`}
                       className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
                     >
-                      Learn More
+                      <span>Learn More</span>
+                      <span className="sr-only"> about {service.title}</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>

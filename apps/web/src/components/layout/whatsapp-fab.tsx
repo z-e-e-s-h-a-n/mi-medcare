@@ -20,7 +20,7 @@ export function WhatsAppFab({ className }: WhatsAppFabProps) {
       title="Chat on WhatsApp"
       pulseDelay={4000}
       className={cn(
-        "h-11 rounded-full bg-[#1DA851] px-4 text-white [--pulse-color:#1DA851] shadow-lg hover:bg-[#20bd5a] focus-visible:ring-[#1DA851]/30",
+        "h-12 rounded-full bg-[#13763A] px-5 font-semibold text-white [--pulse-color:#13763A] shadow-lg hover:bg-[#0F6330] focus-visible:ring-[#13763A]/30",
         className,
       )}
     >

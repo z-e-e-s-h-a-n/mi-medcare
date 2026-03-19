@@ -55,7 +55,8 @@ export function FeaturesSection({
                         src={feature.image}
                         alt={`${feature.title} photo`}
                         fill
-                        sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                        quality={60}
                         className="object-cover"
                       />
 

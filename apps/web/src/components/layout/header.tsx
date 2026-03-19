@@ -19,7 +19,7 @@ import { FloatingCtas } from "@/components/layout/floating-ctas";
 import { formatBusinessAddress } from "@/lib/utils";
 import { Logo } from "./logo";
 import ThemeSwitch from "@workspace/ui/components/theme-toggle";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ChevronDownIcon, Mail, MapPin, Phone } from "lucide-react";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -221,14 +221,14 @@ export function Header() {
 
             {/* Desktop Navigation - Optimized */}
             <NavigationMenu className="hidden lg:flex">
-              <NavigationMenuList>
+              <NavigationMenuList className="gap-2">
                 {HEADER_NAVIGATION.map((item) => (
                   <NavigationMenuItem key={item.title}>
                     {item.children && (
                       <>
                         {item.href ? (
-                          <NavigationMenuTrigger>
-                            <Link href={item.href}>
+                          <NavigationMenuTrigger asChild>
+                            <Link href={item.href} className="inline-flex">
                               <motion.span
                                 whileHover={{ y: -1 }}
                                 transition={hoverVariants.spring as any}
@@ -236,6 +236,10 @@ export function Header() {
                               >
                                 {item.title}
                               </motion.span>
+                              <ChevronDownIcon
+                                className="relative top-px ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
+                                aria-hidden="true"
+                              />
                             </Link>
                           </NavigationMenuTrigger>
                         ) : (
@@ -247,6 +251,10 @@ export function Header() {
                             >
                               {item.title}
                             </motion.span>
+                            <ChevronDownIcon
+                              className="relative top-px ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
+                              aria-hidden="true"
+                            />
                           </NavigationMenuTrigger>
                         )}
                         <NavigationMenuContent>

@@ -84,6 +84,8 @@ export function HeroSection({ className }: HeroSectionProps) {
           fill
           className="object-cover"
           priority
+          sizes="100vw"
+          quality={70}
         />
         {/* RESTORED: Gradient overlay - this is crucial! */}
         <div className="absolute inset-0 bg-linear-to-r from-background/30 via-background/10 to-background/0 dark:from-background/95 dark:via-background/80 dark:to-background/60" />

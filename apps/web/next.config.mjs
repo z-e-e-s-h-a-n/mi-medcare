@@ -4,6 +4,7 @@ const nextConfig = {
   allowedDevOrigins: ["192.168.100.9"],
 
   images: {
+    qualities: [60, 65, 70, 75],
     remotePatterns: [
       {
         protocol: "https",

@@ -25,7 +25,14 @@ export function Logo() {
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
       <Link href="/">
-        <Image src={logoPath} alt="Logo" width={200} height={60} priority />
+        <Image
+          src={logoPath}
+          alt="MI MedCare logo"
+          width={200}
+          height={60}
+          priority
+          quality={60}
+        />
       </Link>
     </motion.div>
   );
