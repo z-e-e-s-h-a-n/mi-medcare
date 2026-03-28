@@ -97,7 +97,9 @@ const RootLayoutSkeleton = () => {
         </div>
 
         {/* Dashboard Skeleton */}
-        <DashboardSkeleton />
+        <div className="section-wrapper py-12">
+          <DashboardSkeleton />
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );
