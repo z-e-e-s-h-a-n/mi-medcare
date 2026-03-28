@@ -573,7 +573,7 @@ async function seedPosts(
         ? daysAgo(blueprint.daysAgo)
         : null;
 
-      const post = await prisma.post.create({
+    const post = await prisma.post.create({
       data: {
         authorId: author.id,
         categoryId: category.id,

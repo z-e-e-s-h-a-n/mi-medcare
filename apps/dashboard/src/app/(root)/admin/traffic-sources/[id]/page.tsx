@@ -153,36 +153,39 @@ const RelatedListCard = ({ title, columns, rows }: RelatedListCardProps) => {
         <div className="overflow-hidden rounded-lg border">
           <div className="max-h-[420px] overflow-auto">
             <table className="w-full text-sm">
-            <thead className="bg-muted/50">
-              <tr>
-                {columns.map((column) => (
-                  <th key={column} className="px-4 py-2 text-left font-medium">
-                    {column}
-                  </th>
-                ))}
-                <th className="w-24" />
-              </tr>
-            </thead>
-            <tbody className="divide-y">
-              {rows.map((row) => (
-                <tr key={row.id} className="hover:bg-muted/50">
-                  {row.values.map((value, index) => (
-                    <td key={`${row.id}-${index}`} className="px-4 py-3">
-                      {value}
-                    </td>
+              <thead className="bg-muted/50">
+                <tr>
+                  {columns.map((column) => (
+                    <th
+                      key={column}
+                      className="px-4 py-2 text-left font-medium"
+                    >
+                      {column}
+                    </th>
                   ))}
-                  <td className="px-4 py-3 text-right">
-                    {row.href ? (
-                      <Button variant="ghost" size="sm" asChild>
-                        <Link href={row.href}>View</Link>
-                      </Button>
-                    ) : (
-                      "—"
-                    )}
-                  </td>
+                  <th className="w-24" />
                 </tr>
-              ))}
-            </tbody>
+              </thead>
+              <tbody className="divide-y">
+                {rows.map((row) => (
+                  <tr key={row.id} className="hover:bg-muted/50">
+                    {row.values.map((value, index) => (
+                      <td key={`${row.id}-${index}`} className="px-4 py-3">
+                        {value}
+                      </td>
+                    ))}
+                    <td className="px-4 py-3 text-right">
+                      {row.href ? (
+                        <Button variant="ghost" size="sm" asChild>
+                          <Link href={row.href}>View</Link>
+                        </Button>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </div>

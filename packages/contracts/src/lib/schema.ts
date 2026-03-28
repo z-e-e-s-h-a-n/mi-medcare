@@ -55,5 +55,7 @@ export const baseQuerySchema = <
 
     search: z.string().optional(),
     searchBy: searchByEnum.optional(),
+
+    includeIds: z.array(idSchema).default([]),
   });
 };

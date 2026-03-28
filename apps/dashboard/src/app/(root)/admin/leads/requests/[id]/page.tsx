@@ -1,11 +1,5 @@
 "use client";
-import {
-  Calendar,
-  ClipboardList,
-  Mail,
-  Phone,
-  UserRound,
-} from "lucide-react";
+import { Calendar, ClipboardList, Mail, Phone, UserRound } from "lucide-react";
 
 import type { ConsultationRequestResponse } from "@workspace/contracts/consultation";
 import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
@@ -51,7 +45,11 @@ const ConsultationRequestDetailsPage = ({ params }: AppPageProps) => {
           columns: 2,
           fields: [
             { label: "Name", accessor: "fullName", icon: UserRound },
-            { label: "Practice", accessor: "practiceName", icon: ClipboardList },
+            {
+              label: "Practice",
+              accessor: "practiceName",
+              icon: ClipboardList,
+            },
             { label: "Email", accessor: "email", icon: Mail },
             { label: "Phone", accessor: "phone", icon: Phone },
             {

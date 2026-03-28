@@ -143,7 +143,7 @@ export function GenericForm<
         />
       )}
 
-      {children?.(form, formType)}
+      {children?.(form, formType, data)}
 
       <div className="flex items-center justify-between">
         <Button

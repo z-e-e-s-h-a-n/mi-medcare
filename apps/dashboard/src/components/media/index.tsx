@@ -1,10 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Library, Upload } from "lucide-react";
-import type {
-  MediaQueryType,
-  MediaResponse,
-} from "@workspace/contracts/media";
+import type { MediaQueryType, MediaResponse } from "@workspace/contracts/media";
 
 import {
   Tabs,

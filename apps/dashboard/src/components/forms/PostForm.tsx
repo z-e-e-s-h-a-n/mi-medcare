@@ -2,7 +2,7 @@
 
 import { GenericForm } from "../shared/GenericForm";
 import { PostStatusEnum, type BaseCUFormProps } from "@workspace/contracts";
-import { useCategories, usePost } from "@/hooks/content";
+import { useCategories, usePost, useTags } from "@/hooks/content";
 import { CUPostSchema } from "@workspace/contracts/content";
 import { InputField } from "@workspace/ui/components/input-field";
 import { ComboboxField } from "@workspace/ui/components/combobox-field";
@@ -35,116 +35,142 @@ const CUPostForm = (props: BaseCUFormProps) => {
         excerpt: "",
         status: "draft",
       }}
+      mapDataToValues={(d) => ({
+        ...d,
+        tagIds: d.tags.map((t) => t.id),
+      })}
     >
-      {(form, _, data) => (
-        <>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="size-5" />
-                Post Preview
-              </CardTitle>
-              <CardDescription>
-                Main identity and how the post appears in listings.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                <InputField form={form} name="title" label="Title" />
-                <InputField form={form} name="slug" label="Slug" />
-              </div>
+      {(form, _, data) => {
+        const tagsIds = data?.tags.map((t) => t.id);
 
-              <InputField
-                form={form}
-                name="excerpt"
-                label="Excerpt"
-                type="textarea"
-                rows={4}
-              />
+        return (
+          <>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="size-5" />
+                  Post Preview
+                </CardTitle>
+                <CardDescription>
+                  Main identity and how the post appears in listings.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <InputField form={form} name="title" label="Title" />
+                  <InputField form={form} name="slug" label="Slug" />
+                </div>
 
-              <InputField
-                form={form}
-                name="content"
-                label="Content"
-                type="textarea"
-                rows={12}
-              />
+                <InputField
+                  form={form}
+                  name="excerpt"
+                  label="Excerpt"
+                  type="textarea"
+                  rows={4}
+                />
 
-              <MediaField
-                form={form}
-                name="coverId"
-                label="Cover Image"
-                defaultMedia={data?.cover}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Publishing</CardTitle>
-              <CardDescription>
-                Organization and publishing settings.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
+                <InputField
+                  form={form}
+                  name="content"
+                  label="Content"
+                  type="textarea"
+                  rows={12}
+                />
+
+                <MediaField
+                  form={form}
+                  name="coverId"
+                  label="Cover Image"
+                  defaultMedia={data?.cover}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Publishing</CardTitle>
+                <CardDescription>
+                  Organization and publishing settings.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <ComboboxField
+                    form={form}
+                    name="categoryId"
+                    label="Category"
+                    dataKey="categories"
+                    useQuery={useCategories}
+                    getOption={(c) => ({
+                      key: c.name,
+                      value: c.id,
+                      label: c.name,
+                      content: (
+                        <div>
+                          <span>{c.name}</span>
+                          <p className="max-w-full truncate">{c.description}</p>
+                        </div>
+                      ),
+                    })}
+                  />
+
+                  <SelectField
+                    form={form}
+                    name="status"
+                    label="Status"
+                    options={PostStatusEnum.options}
+                  />
+                </div>
+
                 <ComboboxField
                   form={form}
-                  name="categoryId"
-                  label="Category"
-                  dataKey="categories"
-                  useQuery={useCategories}
-                  getOption={(c) => ({
-                    key: c.name,
-                    value: c.id,
-                    label: c.name,
+                  name="tagIds"
+                  label="Tags"
+                  multiple
+                  dataKey="tags"
+                  useQuery={useTags}
+                  queryArgs={{ includeIds: tagsIds }}
+                  getOption={(t) => ({
+                    key: t.name,
+                    label: t.name,
+                    value: t.id,
                     content: (
                       <div>
-                        <span>{c.name}</span>
-                        <p className="max-w-full truncate">{c.description}</p>
+                        <span>{t.name}</span>
                       </div>
                     ),
                   })}
                 />
+              </CardContent>
+            </Card>
 
-                <SelectField
+            <Card>
+              <CardHeader>
+                <CardTitle>SEO</CardTitle>
+                <CardDescription>
+                  Optional metadata for search and sharing.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <InputField form={form} name="metaTitle" label="Meta Title" />
+                  <DatePickerField
+                    form={form}
+                    name="publishedAt"
+                    label="Published At"
+                  />
+                </div>
+                <InputField
                   form={form}
-                  name="status"
-                  label="Status"
-                  options={PostStatusEnum.options}
+                  name="metaDescription"
+                  label="Meta Description"
+                  type="textarea"
+                  rows={4}
                 />
-              </div>
-
-              <InputField form={form} name="tagIds" label="Tags" />
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>SEO</CardTitle>
-              <CardDescription>
-                Optional metadata for search and sharing.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                <InputField form={form} name="metaTitle" label="Meta Title" />
-                <DatePickerField
-                  form={form}
-                  name="publishedAt"
-                  label="Published At"
-                />
-              </div>
-              <InputField
-                form={form}
-                name="metaDescription"
-                label="Meta Description"
-                type="textarea"
-                rows={4}
-              />
-            </CardContent>
-          </Card>
-        </>
-      )}
+              </CardContent>
+            </Card>
+          </>
+        );
+      }}
     </GenericForm>
   );
 };

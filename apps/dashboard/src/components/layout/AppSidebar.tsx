@@ -40,7 +40,7 @@ import useUser from "@/hooks/user";
 import NavMain from "@/components/layout/NavMain";
 import UserCard from "@/components/user/UserCard";
 
-const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
+const AppSidebar = (props: React.ComponentProps<typeof Sidebar>) => {
   const { isMobile, setOpenMobile, toggleSidebar } = useSidebar();
 
   const { currentUser, isLoading, logoutUser, isLogoutPending, logoutError } =

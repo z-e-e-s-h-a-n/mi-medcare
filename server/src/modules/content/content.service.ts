@@ -187,7 +187,8 @@ export class ContentService {
   }
 
   async queryTags(query: TagQueryDto) {
-    const { page, limit, sortBy, sortOrder, search, searchBy } = query;
+    const { page, limit, sortBy, sortOrder, search, searchBy, includeIds } =
+      query;
     const where: Prisma.TagWhereInput = {};
 
     if (search && searchBy) {
@@ -203,7 +204,7 @@ export class ContentService {
     const skip = (page - 1) * limit;
     const orderBy = { [sortBy]: sortOrder };
 
-    const [tags, total] = await Promise.all([
+    const [items, total] = await Promise.all([
       this.prisma.tag.findMany({
         where,
         skip,
@@ -214,10 +215,24 @@ export class ContentService {
       this.prisma.tag.count({ where }),
     ]);
 
+    const existingIds = new Set(items.map((item) => item.id));
+    const missingIncludeIds = includeIds.filter((id) => !existingIds.has(id));
+
+    const forcedItems = missingIncludeIds.length
+      ? await this.prisma.tag.findMany({
+          where: { id: { in: missingIncludeIds } },
+          include: this.tagsInclude,
+        })
+      : [];
+
+    const merged = [...forcedItems, ...items].filter(
+      (item, index, arr) => index === arr.findIndex((x) => x.id === item.id),
+    );
+
     return {
       message: "Tags fetched successfully.",
       data: {
-        tags,
+        tags: merged,
         total,
         page,
         limit,

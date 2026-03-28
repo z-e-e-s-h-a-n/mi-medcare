@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from "qs";
 import type { AxiosInstance, AxiosResponse } from "axios";
 import { ApiException, type ApiResponse, type ApiSuccess } from "./types";
 
@@ -11,6 +12,7 @@ export const apiClient: AxiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  paramsSerializer: (params) => qs.stringify(params, { arrayFormat: "repeat" }),
 });
 
 export const setClientUrl = (url: string) => {
