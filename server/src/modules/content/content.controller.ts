@@ -43,7 +43,7 @@ export class ContentController {
   async getPost(
     @Param("slug") slug: string,
     @Req() req: Request,
-    @Res() res: Response,
+    @Res({ passthrough: true }) res: Response,
   ) {
     return this.contentService.getPostBySlug(slug, req, res);
   }
