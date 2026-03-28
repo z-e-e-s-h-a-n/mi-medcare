@@ -74,13 +74,13 @@ export interface BaseCUFormProps {
   formType: FormSectionType;
 }
 
+export type ClientApp = "web" | "dashboard";
 export type ThemeMode = z.infer<typeof enums.ThemeModeEnum>;
 export type SortOrderType = z.infer<typeof enums.SortOrderEnum>;
 export type ChartRangeType = z.infer<typeof enums.ChartRangeEnum>;
 
-export type OAuthProvider = "google" | "facebook" | "apple";
+export type OAuthProvider = "google";
 export type AuthActions = "verifyEmail" | "verifyMfa" | "setPassword";
-
 export type OtpType = z.infer<typeof enums.OtpTypeEnum>;
 export type OtpPurpose = z.infer<typeof enums.OtpPurposeEnum>;
 

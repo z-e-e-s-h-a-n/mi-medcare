@@ -25,6 +25,7 @@ import { ContentModule } from "@/modules/content/content.module";
 import { DashboardModule } from "@/modules/dashboard/dashboard.module";
 import { TrafficModule } from "@/modules/traffic/traffic.module";
 import { LeadModule } from "./modules/lead/lead.module";
+import { ClientModule } from "./modules/client/client.module";
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { LeadModule } from "./modules/lead/lead.module";
     CacheModule,
     SchedulerModule,
     PublicModule,
+    ClientModule,
     PrismaModule,
     LoggerModule,
     NotificationModule,

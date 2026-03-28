@@ -22,8 +22,6 @@ export class OAuthController {
     private readonly authService: AuthService,
   ) {}
 
-  // ===== GOOGLE =====
-
   @Get("google")
   @UseOAuthGuard("google")
   googleLogin() {}
@@ -33,20 +31,6 @@ export class OAuthController {
   googleCallback(@Req() req: Request, @Res() res: Response) {
     return this.handleOAuthCallback(req, res);
   }
-
-  // ===== FACEBOOK =====
-
-  @Get("facebook")
-  @UseOAuthGuard("facebook")
-  facebookLogin() {}
-
-  @Get("facebook/callback")
-  @UseGuards(AuthGuard("facebook"))
-  facebookCallback(@Req() req: Request, @Res() res: Response) {
-    return this.handleOAuthCallback(req, res);
-  }
-
-  // ===== SHARED =====
 
   private async handleOAuthCallback(req: Request, res: Response) {
     const user = req.user!;

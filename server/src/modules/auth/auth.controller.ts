@@ -35,17 +35,14 @@ export class AuthController {
   @Post("signin")
   async signIn(
     @Body() dto: SignInDto,
-    @Res({ passthrough: true }) res: Response,
+    @Res() res: Response,
     @Req() req: Request,
   ) {
     return this.authService.signIn(dto, req, res);
   }
 
   @Post("signout")
-  async signOut(
-    @User("sessionId") sessionId: string,
-    @Res({ passthrough: true }) res: Response,
-  ) {
+  async signOut(@User("sessionId") sessionId: string, @Res() res: Response) {
     return this.authService.signOut(sessionId, res);
   }
 
@@ -59,7 +56,7 @@ export class AuthController {
   @Get("validate-otp")
   async validateOtp(
     @Query() dto: ValidateOtpDto,
-    @Res({ passthrough: true }) res: Response,
+    @Res() res: Response,
     @Req() req: Request,
   ) {
     return this.authService.validateOtp(dto, req, res);
@@ -103,7 +100,7 @@ export class AuthController {
   }
 
   @Get("session/validate")
-  validateSession() {
-    return { message: "Session is valid." };
+  validateSession(@Req() req: Request, @User() user: Express.User) {
+    return this.authService.validateSession(req, user);
   }
 }

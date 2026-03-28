@@ -10,16 +10,11 @@ import {
 import type { UserRole } from "@workspace/db/client";
 
 import { ROLES_KEY } from "@/decorators/roles.decorator";
-import { InjectLogger } from "@/decorators/logger.decorator";
 import { IS_PUBLIC_KEY } from "@/decorators/public.decorator";
 import { TokenService } from "@/modules/token/token.service";
-import { LoggerService } from "@/modules/logger/logger.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  @InjectLogger()
-  private readonly logger!: LoggerService;
-
   constructor(
     private readonly tokenService: TokenService,
     private readonly reflector: Reflector,
@@ -62,8 +57,12 @@ export class AuthGuard implements CanActivate {
   private checkRoles(userRole: UserRole, requiredRoles?: UserRole[]) {
     if (requiredRoles?.length) {
       const hasRole = requiredRoles.some((role) => role === userRole);
-      if (!hasRole) throw new ForbiddenException({ errorCode: "forbidden" });
+      if (!hasRole) {
+        throw new ForbiddenException({
+          errorCode: "forbidden",
+          message: "You do not have permission to access this resource.",
+        });
+      }
     }
   }
 }
-

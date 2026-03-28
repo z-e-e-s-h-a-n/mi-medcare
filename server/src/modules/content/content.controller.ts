@@ -1,21 +1,10 @@
 import type { Request, Response } from "express";
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Query,
-  Req,
-  Res,
-} from "@nestjs/common";
+import { Controller, Get, Param, Query, Req, Res } from "@nestjs/common";
 import {
   CategoryQueryDto,
   PostQueryDto,
-  PostViewDto,
   TagQueryDto,
 } from "@workspace/contracts/content";
-import { ulid } from "ulid";
 
 import { ContentService } from "./content.service";
 import { Public } from "@/decorators/public.decorator";
@@ -51,31 +40,11 @@ export class ContentController {
   }
 
   @Get("posts/:slug")
-  async getPost(@Param("slug") slug: string) {
-    return this.contentService.getPostBySlug(slug);
-  }
-
-  @Post("post-views")
-  async trackView(
-    @Body() dto: PostViewDto,
+  async getPost(
+    @Param("slug") slug: string,
     @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
+    @Res() res: Response,
   ) {
-    const visitorKey = req.cookies["postVisitorKey"] ?? ulid();
-
-    if (!req.cookies["postVisitorKey"]) {
-      res.cookie("postVisitorKey", visitorKey, {
-        httpOnly: true,
-        sameSite: "strict",
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-        maxAge: 365 * 24 * 60 * 60 * 1000,
-      });
-    }
-
-    return this.contentService.createPostView({
-      ...dto,
-      visitorKey,
-    });
+    return this.contentService.getPostBySlug(slug, req, res);
   }
 }

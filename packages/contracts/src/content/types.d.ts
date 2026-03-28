@@ -3,7 +3,6 @@ import type {
   CUTagSchema,
   CUPostSchema,
   CUCategorySchema,
-  postViewSchema,
   tagQuerySchema,
   postQuerySchema,
   categoryQuerySchema,
@@ -21,8 +20,6 @@ export type TagQueryType = z.input<typeof tagQuerySchema>;
 
 export type PostType = z.input<typeof CUPostSchema>;
 export type PostQueryType = z.input<typeof postQuerySchema>;
-
-export type PostViewType = z.input<typeof postViewSchema>;
 
 export interface CategoryResponse extends Sanitize<Category> {
   parent?: CategoryResponse;

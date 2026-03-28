@@ -42,12 +42,6 @@ export const CUPostSchema = z.object({
   metaDescription: z.string().optional(),
 });
 
-export const postViewSchema = z.object({
-  postId: idSchema,
-  trafficSourceId: idSchema.optional(),
-  visitorKey: z.string().min(1).optional(),
-});
-
 export const categoryQuerySchema = baseQuerySchema(
   CategorySortByEnum,
   CategorySearchByEnum,

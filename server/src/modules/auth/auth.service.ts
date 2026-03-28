@@ -441,6 +441,16 @@ export class AuthService {
     return { message: "Email changed successfully." };
   }
 
+  async validateSession(req: Request, user: Express.User) {
+    return {
+      message: "Session is valid.",
+      data: {
+        id: user.id,
+        role: user.role,
+      },
+    };
+  }
+
   async createUser(
     dto: {
       email: string;

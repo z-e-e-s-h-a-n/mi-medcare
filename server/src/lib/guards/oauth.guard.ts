@@ -1,18 +1,16 @@
 import {
-  BadRequestException,
   mixin,
-  type Type,
+  BadRequestException,
   type ExecutionContext,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import type { OAuthProvider } from "@workspace/contracts";
 
-export type OAuthProvider = "google" | "facebook";
-
-export function OAuthGuard(provider: OAuthProvider): Type<any> {
+export function OAuthGuard(provider: OAuthProvider) {
   class OAuthGuardMixin extends AuthGuard(provider) {
     getAuthenticateOptions(context: ExecutionContext) {
       const req = context.switchToHttp().getRequest();
-      const clientUrl = req.query.clientUrl;
+      const clientUrl = req.query.clientUrl ?? req.query.redirectUrl;
 
       if (typeof clientUrl !== "string") {
         throw new BadRequestException("clientUrl is required");

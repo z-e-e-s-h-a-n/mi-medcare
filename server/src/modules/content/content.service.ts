@@ -1,4 +1,7 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { ulid } from "ulid";
+import type { Request, Response } from "express";
+import { Injectable } from "@nestjs/common";
+
 import type {
   CategoryDto,
   CategoryQueryDto,
@@ -8,15 +11,20 @@ import type {
   TagQueryDto,
 } from "@workspace/contracts/content";
 import type { Prisma } from "@workspace/db/client";
+import { futureDate, parseDuration } from "@workspace/shared/utils";
 
 import { AuditService } from "@/modules/audit/audit.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";
+import { ClientService } from "@/modules/client/client.service";
 
 @Injectable()
 export class ContentService {
+  private static readonly POST_VIEW_WINDOW_MS = parseDuration("24h");
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly auditService: AuditService,
+    private readonly client: ClientService,
   ) {}
 
   async createCategory(dto: CategoryDto, userId?: string) {
@@ -406,11 +414,13 @@ export class ContentService {
     };
   }
 
-  async getPostBySlug(slug: string) {
+  async getPostBySlug(slug: string, req: Request, res: Response) {
     const post = await this.prisma.post.findFirstOrThrow({
       where: { slug, status: "published" },
       include: this.postInclude,
     });
+
+    await this.createPostView(post.id, req, res);
 
     return {
       message: "Post fetched successfully.",
@@ -418,47 +428,47 @@ export class ContentService {
     };
   }
 
-  async createPostView(dto: {
-    postId: string;
-    trafficSourceId?: string;
-    visitorKey: string;
-  }) {
-    if (!dto.visitorKey) {
-      throw new BadRequestException("Visitor key is required.");
-    }
+  private async createPostView(postId: string, req: Request, res: Response) {
+    const visitorKeyClient = req.cookies["visitorKey"];
+    const visitorKey = visitorKeyClient || ulid();
 
-    const viewedOn = new Date();
+    const viewedAt = new Date();
+    const viewedOn = new Date(viewedAt);
     viewedOn.setUTCHours(0, 0, 0, 0);
+    const windowStartedAt = new Date(
+      viewedAt.getTime() - ContentService.POST_VIEW_WINDOW_MS,
+    );
 
-    const view = await this.prisma.$transaction(async (tx) => {
-      const existingView = await tx.postView.findFirst({
-        where: {
-          postId: dto.postId,
-          visitorKey: dto.visitorKey,
-          viewedOn,
-        } as any,
-      });
-
-      if (existingView) {
-        return existingView;
-      }
-
-      const createdView = await tx.postView.create({
-        data: { ...dto, viewedOn } as any,
-      });
-
-      await tx.post.update({
-        where: { id: dto.postId },
-        data: { viewsCount: { increment: 1 } },
-      });
-
-      return createdView;
+    const existingView = await this.prisma.postView.findFirst({
+      where: {
+        postId: postId,
+        visitorKey,
+        viewedAt: { gte: windowStartedAt },
+      },
+      orderBy: { viewedAt: "desc" },
     });
 
-    return {
-      message: "Post view tracked successfully.",
-      data: view,
-    };
+    if (existingView) return;
+
+    await this.prisma.postView.create({
+      data: {
+        postId,
+        visitorKey,
+        viewedAt,
+        viewedOn,
+      },
+    });
+
+    await this.prisma.post.update({
+      where: { id: postId },
+      data: { viewsCount: { increment: 1 } },
+    });
+
+    if (!visitorKeyClient) {
+      this.client.setCookie(res, "visitorKey", visitorKey, {
+        expires: futureDate("1y"),
+      });
+    }
   }
 
   private async logMutation(
