@@ -30,11 +30,7 @@ export function BlogPostPageClient({ post }: { post: PostResponse }) {
 
   return (
     <>
-      <PageHeader
-        title={post.title}
-        subtitle={post.category.name}
-        imageUrl={post.cover?.url}
-      />
+      <PageHeader title={post.title} subtitle={post.category.name} />
 
       <section className="section-wrapper section-container grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
         <article className="lg:col-span-2">
