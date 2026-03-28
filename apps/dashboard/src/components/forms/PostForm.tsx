@@ -17,6 +17,7 @@ import {
 } from "@workspace/ui/components/card";
 import { FileText } from "lucide-react";
 import { DatePickerField } from "@workspace/ui/components/date-field";
+import { RichTextField } from "@workspace/ui/components/rich-field";
 
 const CUPostForm = (props: BaseCUFormProps) => {
   return (
@@ -69,13 +70,7 @@ const CUPostForm = (props: BaseCUFormProps) => {
                   rows={4}
                 />
 
-                <InputField
-                  form={form}
-                  name="content"
-                  label="Content"
-                  type="textarea"
-                  rows={12}
-                />
+                <RichTextField form={form} name="content" label="Content" />
 
                 <MediaField
                   form={form}

@@ -38,6 +38,7 @@
     "onlyBuiltDependencies": [
       "@firebase/util",
       "@nestjs/core",
+      "@parcel/watcher",
       "@prisma/client",
       "@prisma/engines",
       "@swc/core",
