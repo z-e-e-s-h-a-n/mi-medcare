@@ -56,6 +56,7 @@ const TrafficSourcesPage = () => {
     <ListPage
       dataKey={"sources"}
       entityType="traffic-sources"
+      canAdd={false}
       canEdit={false}
       columns={trafficColumns}
       searchByOptions={trafficSearchOptions}

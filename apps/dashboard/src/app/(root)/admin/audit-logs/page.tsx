@@ -50,6 +50,7 @@ const AuditLogsPage = () => {
     <ListPage
       dataKey={"logs"}
       entityType="audit-logs"
+      canAdd={false}
       canEdit={false}
       columns={auditColumns}
       searchByOptions={auditSearchOptions}

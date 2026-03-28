@@ -131,14 +131,16 @@ const CUUserForm = (props: BaseCUFormProps) => {
                     <Button
                       type="button"
                       size="sm"
-                      onClick={() => setChangePassword(false)}
+                      onClick={() => {
+                        form.setFieldValue("password", "");
+                      }}
                     >
-                      Save
+                      Reset
                     </Button>
                     <Button
                       type="button"
                       size="sm"
-                      variant="ghost"
+                      variant="secondary"
                       onClick={() => {
                         setChangePassword(false);
                         form.setFieldValue("password", undefined);
