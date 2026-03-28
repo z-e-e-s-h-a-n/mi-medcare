@@ -15,6 +15,7 @@ import {
 } from "@workspace/ui/components/card";
 import Image from "next/image";
 import { Badge } from "@workspace/ui/components/badge";
+import { RichContent } from "@workspace/ui/components/rich-content";
 
 const PostDetailsPage = ({ params }: AppPageProps) => {
   const { id } = React.use(params);
@@ -89,11 +90,7 @@ const PostDetailsPage = ({ params }: AppPageProps) => {
               label: "Content",
               accessor: "content",
               className: "col-span-full",
-              render: (value) => (
-                <div className="prose prose-sm max-w-none">
-                  <div dangerouslySetInnerHTML={{ __html: value }} />
-                </div>
-              ),
+              render: (value) => <RichContent html={value} />,
             },
           ],
           columns: 1,
