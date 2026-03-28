@@ -191,6 +191,7 @@ interface MediaUploadQueueItemProps {
   onRetry?: () => void;
   leftActionLabel?: string;
   onLeftAction?: () => void;
+  leftActionDisabled?: boolean;
   actionLabel?: string;
   onAction?: () => void;
   disabled?: boolean;
@@ -203,6 +204,7 @@ export function MediaUploadQueueItem({
   onRetry,
   leftActionLabel,
   onLeftAction,
+  leftActionDisabled = false,
   actionLabel,
   onAction,
   disabled = false,
@@ -298,7 +300,7 @@ export function MediaUploadQueueItem({
               size="sm"
               variant="outline"
               onClick={onLeftAction}
-              disabled={disabled}
+              disabled={disabled || leftActionDisabled}
             >
               {leftActionLabel}
             </Button>

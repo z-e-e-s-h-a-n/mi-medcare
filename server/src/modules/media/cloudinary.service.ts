@@ -41,6 +41,11 @@ export class CloudinaryService {
     const result = await new Promise<UploadApiResponse>((resolve, reject) => {
       let settled = false;
       const sourceStream = streamifier.createReadStream(file.buffer);
+      const cleanupUpload = (upload: UploadApiResponse) => {
+        void this.deleteFile(upload.public_id, upload.resource_type).catch(
+          () => undefined,
+        );
+      };
 
       const resolveOnce = (value: UploadApiResponse) => {
         if (settled) return;
@@ -69,6 +74,10 @@ export class CloudinaryService {
           if (error) return rejectOnce(error);
           if (!res) {
             return rejectOnce(new BadRequestException("Upload failed"));
+          }
+          if (settled || abortSignal?.aborted) {
+            cleanupUpload(res);
+            return;
           }
           resolveOnce(res);
         },

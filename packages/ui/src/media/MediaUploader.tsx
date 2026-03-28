@@ -375,6 +375,9 @@ function MediaUploader({ onSelect }: MediaUploaderProps) {
                 item={item}
                 leftActionLabel="Edit"
                 onLeftAction={() => openEditDialog(item)}
+                leftActionDisabled={
+                  item.status === "uploading" || item.status === "success"
+                }
                 onStart={() => uploadItem(item.id)}
                 onRetry={() => uploadItem(item.id)}
                 onRemove={() => removeItem(item.id)}
