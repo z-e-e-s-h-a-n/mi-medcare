@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select";
+import { useConfirm } from "@workspace/ui/hooks/use-confirm";
 import { useDialog } from "@workspace/ui/hooks/use-dialog";
 import MediaForm from "@workspace/ui/forms/MediaForm";
 import {
@@ -51,7 +52,9 @@ interface MediaUploaderProps {
 function MediaUploader({ onSelect }: MediaUploaderProps) {
   const queryClient = useQueryClient();
   const { openDialog, closeDialog } = useDialog();
+  const { confirm } = useConfirm();
   const inputRef = useRef<HTMLInputElement>(null);
+  const abortControllersRef = useRef(new Map<string, AbortController>());
 
   const [items, setItems] = useState<UploadQueueItem[]>([]);
   const [type, setType] = useState<MediaType>("other");
@@ -158,6 +161,9 @@ function MediaUploader({ onSelect }: MediaUploaderProps) {
       return;
     }
 
+    const abortController = new AbortController();
+    abortControllersRef.current.set(itemId, abortController);
+
     setItems((prev) =>
       prev.map((item) =>
         item.id === itemId
@@ -182,6 +188,7 @@ function MediaUploader({ onSelect }: MediaUploaderProps) {
       }
 
       const result = await createMedia(formData, {
+        signal: abortController.signal,
         onUploadProgress: (event) => {
           const total = event.total ?? currentItem.file.size;
           const progress = total
@@ -212,6 +219,10 @@ function MediaUploader({ onSelect }: MediaUploaderProps) {
       await queryClient.invalidateQueries({ queryKey: ["mediaList"] });
       toast.success(`${currentItem.metadata.name} uploaded`);
     } catch (err: any) {
+      if (err?.status === 499) {
+        return;
+      }
+
       setItems((prev) =>
         prev.map((item) =>
           item.id === itemId ? { ...item, status: "error", progress: 0 } : item,
@@ -227,6 +238,8 @@ function MediaUploader({ onSelect }: MediaUploaderProps) {
           description: err?.message,
         });
       }
+    } finally {
+      abortControllersRef.current.delete(itemId);
     }
   };
 
@@ -238,7 +251,29 @@ function MediaUploader({ onSelect }: MediaUploaderProps) {
     await Promise.all(targetIds.map((itemId) => uploadItem(itemId)));
   };
 
-  const removeItem = (itemId: string) => {
+  const removeItem = async (itemId: string) => {
+    const item = items.find((entry) => entry.id === itemId);
+    if (!item) {
+      return;
+    }
+
+    if (item.status === "uploading") {
+      const ok = await confirm({
+        title: "Cancel this upload?",
+        description:
+          "The current file upload will be aborted immediately.",
+        confirmText: "Cancel upload",
+        cancelText: "Keep uploading",
+      });
+
+      if (!ok) {
+        return;
+      }
+
+      abortControllersRef.current.get(itemId)?.abort();
+      toast.success(`${item.metadata.name} upload canceled`);
+    }
+
     setItems((prev) => prev.filter((item) => item.id !== itemId));
   };
 

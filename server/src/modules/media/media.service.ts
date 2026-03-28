@@ -20,8 +20,13 @@ export class MediaService {
     file: Express.Multer.File,
     dto: MediaCreateDto,
     userId: string,
+    abortSignal?: AbortSignal,
   ) {
-    const { data, hash } = await this.cloudinary.uploadFile(file, dto.type);
+    const { data, hash } = await this.cloudinary.uploadFile(
+      file,
+      dto.type,
+      abortSignal,
+    );
 
     const media = await this.prisma.media.create({
       data: {

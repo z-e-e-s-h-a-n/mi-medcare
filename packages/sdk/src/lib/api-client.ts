@@ -50,6 +50,13 @@ export const executeApi = async <T = null>(
     }
 
     if (axios.isAxiosError(err)) {
+      if (err.code === "ERR_CANCELED") {
+        throw new ApiException({
+          message: "Request canceled",
+          status: 499,
+        });
+      }
+
       const res = err.response?.data;
 
       throw new ApiException({
