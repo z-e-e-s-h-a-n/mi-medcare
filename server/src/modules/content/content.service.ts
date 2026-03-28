@@ -22,7 +22,7 @@ export class ContentService {
   async createCategory(dto: CategoryDto, userId?: string) {
     const category = await this.prisma.category.create({
       data: dto,
-      include: this.categoryInclude,
+      include: this.getCategoryInclude(),
     });
 
     await this.logMutation("create", "Category", category.id, userId, dto);
@@ -37,7 +37,7 @@ export class ContentService {
     const category = await this.prisma.category.update({
       where: { id },
       data: dto,
-      include: this.categoryInclude,
+      include: this.getCategoryInclude(),
     });
 
     await this.logMutation("update", "Category", id, userId, dto);
@@ -72,7 +72,7 @@ export class ContentService {
     return { message: "Category restored successfully." };
   }
 
-  async queryCategories(query: CategoryQueryDto) {
+  async queryCategories(query: CategoryQueryDto, publishedOnly = false) {
     const { page, limit, sortBy, sortOrder, search, searchBy } = query;
     const where: Prisma.CategoryWhereInput = {};
 
@@ -96,7 +96,7 @@ export class ContentService {
         skip,
         take: limit,
         orderBy,
-        include: this.categoryInclude,
+        include: this.getCategoryInclude(publishedOnly),
       }),
       this.prisma.category.count({ where }),
     ]);
@@ -116,7 +116,7 @@ export class ContentService {
   async getCategoryById(id: string) {
     const category = await this.prisma.category.findUniqueOrThrow({
       where: { id },
-      include: this.categoryInclude,
+      include: this.getCategoryInclude(),
     });
 
     return {
@@ -125,10 +125,10 @@ export class ContentService {
     };
   }
 
-  async getCategoryBySlug(slug: string) {
+  async getCategoryBySlug(slug: string, publishedOnly = false) {
     const category = await this.prisma.category.findFirstOrThrow({
       where: { slug },
-      include: this.categoryInclude,
+      include: this.getCategoryInclude(publishedOnly),
     });
 
     return {
@@ -186,7 +186,7 @@ export class ContentService {
     return { message: "Tag restored successfully." };
   }
 
-  async queryTags(query: TagQueryDto) {
+  async queryTags(query: TagQueryDto, publishedOnly = false) {
     const { page, limit, sortBy, sortOrder, search, searchBy, includeIds } =
       query;
     const where: Prisma.TagWhereInput = {};
@@ -210,7 +210,7 @@ export class ContentService {
         skip,
         take: limit,
         orderBy,
-        include: this.tagsInclude,
+        include: this.getTagsInclude(publishedOnly),
       }),
       this.prisma.tag.count({ where }),
     ]);
@@ -221,7 +221,7 @@ export class ContentService {
     const forcedItems = missingIncludeIds.length
       ? await this.prisma.tag.findMany({
           where: { id: { in: missingIncludeIds } },
-          include: this.tagsInclude,
+          include: this.getTagsInclude(publishedOnly),
         })
       : [];
 
@@ -244,6 +244,7 @@ export class ContentService {
   async getTagById(id: string) {
     const tag = await this.prisma.tag.findUniqueOrThrow({
       where: { id },
+      include: this.getTagsInclude(),
     });
 
     return {
@@ -252,9 +253,10 @@ export class ContentService {
     };
   }
 
-  async getTagBySlug(slug: string) {
+  async getTagBySlug(slug: string, publishedOnly = false) {
     const tag = await this.prisma.tag.findFirstOrThrow({
       where: { slug },
+      include: this.getTagsInclude(publishedOnly),
     });
 
     return {
@@ -475,15 +477,39 @@ export class ContentService {
     });
   }
 
-  private readonly categoryInclude = {
-    parent: true,
-    children: true,
-    _count: { select: { posts: true } },
-  };
+  private getCategoryInclude(publishedOnly = false) {
+    const postCountSelect = this.getPostCountSelect(publishedOnly);
 
-  private readonly tagsInclude = {
-    _count: { select: { posts: true } },
-  };
+    return {
+      parent: true,
+      children: {
+        include: {
+          _count: { select: { posts: postCountSelect } },
+        },
+      },
+      _count: { select: { posts: postCountSelect } },
+    } satisfies Prisma.CategoryInclude;
+  }
+
+  private getTagsInclude(publishedOnly = false) {
+    return {
+      _count: {
+        select: { posts: this.getPostCountSelect(publishedOnly) },
+      },
+    } satisfies Prisma.TagInclude;
+  }
+
+  private getPostCountSelect(publishedOnly: boolean) {
+    if (!publishedOnly) {
+      return true as const;
+    }
+
+    return {
+      where: {
+        status: "published" as const,
+      },
+    };
+  }
 
   private readonly postInclude = {
     author: { omit: { password: true } },

@@ -35,7 +35,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
     [];
 
   return (
-    <aside className={cn("space-y-6", className)}>
+    <aside className={cn("space-y-6 sticky top-24", className)}>
       {/* About Card */}
       <Card>
         <CardHeader>

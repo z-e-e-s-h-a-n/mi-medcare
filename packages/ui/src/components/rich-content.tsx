@@ -9,9 +9,8 @@ interface RichContentProps {
 
 export function RichContent({ html, className }: RichContentProps) {
   return (
-    <div
-      className={cn("rich-content tiptap ProseMirror", className)}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <div className={cn("rich-content tiptap ProseMirror", className)}>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </div>
   );
 }

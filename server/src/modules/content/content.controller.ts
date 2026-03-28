@@ -27,22 +27,22 @@ export class ContentController {
 
   @Get("categories")
   async getCategories(@Query() query: CategoryQueryDto) {
-    return this.contentService.queryCategories(query);
+    return this.contentService.queryCategories(query, true);
   }
 
   @Get("categories/:slug")
   async getCategory(@Param("slug") slug: string) {
-    return this.contentService.getCategoryBySlug(slug);
+    return this.contentService.getCategoryBySlug(slug, true);
   }
 
   @Get("tags")
   async getTags(@Query() query: TagQueryDto) {
-    return this.contentService.queryTags(query);
+    return this.contentService.queryTags(query, true);
   }
 
   @Get("tags/:slug")
   async getTag(@Param("slug") slug: string) {
-    return this.contentService.getTagBySlug(slug);
+    return this.contentService.getTagBySlug(slug, true);
   }
 
   @Get("posts")
