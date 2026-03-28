@@ -8,8 +8,12 @@ import { notFound } from "next/navigation";
 
 const getCachedTagBySlug = cache(
   async (slug: string): Promise<TagResponse | null> => {
-    const res = await getTagBySlug(slug);
-    return res.data ?? null;
+    try {
+      const res = await getTagBySlug(slug);
+      return res.data;
+    } catch {
+      return null;
+    }
   },
 );
 

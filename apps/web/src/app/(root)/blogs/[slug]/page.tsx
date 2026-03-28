@@ -9,8 +9,12 @@ import type { AppPageProps } from "@workspace/contracts";
 
 const getCachedPostBySlug = cache(
   async (slug: string): Promise<PostResponse | null> => {
-    const res = await getPostBySlug(slug);
-    return res.data ?? null;
+    try {
+      const res = await getPostBySlug(slug);
+      return res.data;
+    } catch {
+      return null;
+    }
   },
 );
 
