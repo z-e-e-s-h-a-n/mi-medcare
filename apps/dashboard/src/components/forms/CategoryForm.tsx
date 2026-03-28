@@ -1,7 +1,7 @@
 "use client";
 
 import type { BaseCUFormProps } from "@workspace/contracts";
-import { GenericForm } from "../shared/GenericForm";
+import { GenericForm } from "@workspace/ui/shared/GenericForm";
 import { useCategories, useCategory } from "@/hooks/content";
 import { InputField } from "@workspace/ui/components/input-field";
 import { ComboboxField } from "@workspace/ui/components/combobox-field";

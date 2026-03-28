@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import "dotenv/config";
 import { createHash } from "crypto";
 import { faker } from "@faker-js/faker";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../prisma/generated/client";
+import { seedContent } from "./seed.content";
 
 const connectionString = process.env.DB_URI!;
 const adapter = new PrismaPg({ connectionString });
@@ -416,88 +418,6 @@ async function seedUsers() {
   return { users };
 }
 
-async function seedMedia(users: any[]) {
-  console.log("Seeding media...");
-
-  const mediaItems = [];
-  const brandedAssets = [
-    {
-      type: "logo" as const,
-      title: "Mi MedCare Primary Logo",
-      filename: "mi-medcare-logo.png",
-      visibility: "public" as const,
-    },
-    {
-      type: "logo" as const,
-      title: "Mi MedCare Favicon",
-      filename: "mi-medcare-favicon.png",
-      visibility: "public" as const,
-    },
-    {
-      type: "photo" as const,
-      title: "Revenue Team Dashboard Cover",
-      filename: "dashboard-cover.jpg",
-      visibility: "public" as const,
-    },
-  ];
-
-  for (const asset of brandedAssets) {
-    mediaItems.push(
-      await prisma.media.create({
-        data: {
-          uploadedById: users[0].id,
-          url: faker.image.url({ width: 1200, height: 630 }),
-          filename: asset.filename,
-          mimeType: asset.filename.endsWith(".png")
-            ? "image/png"
-            : "image/jpeg",
-          size: faker.number.int({ min: 20000, max: 450000 }),
-          hash: faker.string.alphanumeric(64),
-          title: asset.title,
-          altText: asset.title,
-          type: asset.type,
-          visibility: asset.visibility,
-          notes: "Brand asset seeded for dashboard preview data.",
-        },
-      }),
-    );
-  }
-
-  for (const user of users) {
-    const count = faker.number.int({ min: 1, max: 2 });
-    for (let index = 0; index < count; index++) {
-      const type = randomEnum(["photo", "other"]);
-      mediaItems.push(
-        await prisma.media.create({
-          data: {
-            uploadedById: user.id,
-            url: faker.image.urlPicsumPhotos({ width: 1280, height: 720 }),
-            filename: faker.system.fileName({ extensionCount: 1 }),
-            mimeType: "image/jpeg",
-            size: faker.number.int({ min: 150000, max: 4000000 }),
-            hash: faker.string.alphanumeric(64),
-            title: faker.helpers.arrayElement([
-              "Team workflow board",
-              "Practice operations photo",
-              "Revenue cycle reference graphic",
-              "Medical office support image",
-            ]),
-            altText: faker.lorem.sentence(),
-            type: type as any,
-            visibility: randomEnum(["private", "public"]) as any,
-            notes: faker.datatype.boolean(0.35)
-              ? "Useful for seeded post and profile previews."
-              : null,
-          },
-        }),
-      );
-    }
-  }
-
-  console.log(`Created ${mediaItems.length} media items`);
-  return mediaItems;
-}
-
 async function seedCategories() {
   console.log("Seeding categories...");
 
@@ -548,12 +468,7 @@ async function seedTags() {
   return tags;
 }
 
-async function seedPosts(
-  users: any[],
-  categories: any[],
-  tags: any[],
-  media: any[],
-) {
+async function seedPosts(users: any[], categories: any[], tags: any[]) {
   console.log("Seeding posts...");
 
   const authors = users.filter((user) => user.role === "author");
@@ -561,13 +476,11 @@ async function seedPosts(
     categories.map((category) => [category.slug, category]),
   );
   const tagMap = new Map(tags.map((tag) => [tag.slug, tag]));
-  const coverPool = media.filter((item) => item.type === "photo");
   const posts = [];
 
   for (const [index, blueprint] of POST_BLUEPRINTS.entries()) {
     const author = authors[index % authors.length];
     const category = categoryMap.get(blueprint.categorySlug)!;
-    const cover = coverPool[index % coverPool.length];
     const publishedAt =
       blueprint.status === "published" && blueprint.daysAgo !== null
         ? daysAgo(blueprint.daysAgo)
@@ -581,7 +494,6 @@ async function seedPosts(
         slug: faker.helpers.slugify(blueprint.title).toLowerCase(),
         excerpt: createPostExcerpt(blueprint.title),
         content: createPostContent(blueprint.title),
-        coverId: cover?.id ?? null,
         status: blueprint.status,
         publishedAt,
         metaTitle: blueprint.title,
@@ -816,7 +728,7 @@ async function seedNotifications(users: any[]) {
             userId: user.id,
             purpose,
             channels,
-            subject: faker.helpers.arrayElement([
+            title: faker.helpers.arrayElement([
               "New dashboard activity",
               "Account security update",
               "Lead follow-up reminder",
@@ -831,7 +743,7 @@ async function seedNotifications(users: any[]) {
             recipient: user.email!,
             meta: { source: "seed", purpose } as any,
             status: status as any,
-            viewedAt:
+            readAt:
               status === "sent" && faker.datatype.boolean(0.55)
                 ? randomDate(createdAt, now)
                 : null,
@@ -1082,111 +994,14 @@ async function seedAuditLogs(users: any[], posts: any[]) {
   return logs;
 }
 
-async function seedBusinessProfile(users: any[], media: any[]) {
-  console.log("Seeding business profile...");
-
-  const admin = users.find((user) => user.role === "admin") ?? users[0];
-  const logoMedia = media.find(
-    (item) => item.filename === "mi-medcare-logo.png",
-  );
-  const faviconMedia =
-    media.find((item) => item.filename === "mi-medcare-favicon.png") ??
-    logoMedia;
-  const coverMedia =
-    media.find((item) => item.filename === "dashboard-cover.jpg") ??
-    media.find((item) => item.type === "photo");
-
-  const profile = await prisma.businessProfile.create({
-    data: {
-      name: "Mi MedCare",
-      legalName: "Mi MedCare Revenue Solutions LLC",
-      description:
-        "Medical billing and revenue cycle support for growing practices that need cleaner claims, stronger collections, and clearer reporting.",
-      favicon: { connect: { id: faviconMedia.id } },
-      logo: { connect: { id: logoMedia.id } },
-      cover: { connect: { id: coverMedia?.id } },
-      email: "info@mimedcarellc.com",
-      whatsapp: {
-        create: {
-          label: "(916) 909-6564",
-          value: "+19169096564",
-        },
-      },
-      website: "https://www.mimedcarellc.com",
-      phones: {
-        create: [
-          {
-            label: "(279) 207-3379",
-            value: "+12792073379",
-          },
-          {
-            label: "(279) 207-3380",
-            value: "+12792073380",
-          },
-        ],
-      },
-      fax: {
-        create: [
-          {
-            label: "(279) 217-5098",
-            value: "+12792175098",
-          },
-          {
-            label: "(279) 217-5099",
-            value: "+12792175099",
-          },
-        ],
-      },
-      officeHoursDays: "Mon – Fri",
-      officeHoursTime: "9:00 AM – 6:00 PM PST",
-      facebook: "https://www.facebook.com/mimedcarellc",
-      instagram: "https://www.instagram.com/mimedcarellc/",
-      twitter: "https://x.com/mimedcarellc",
-      linkedin: "https://www.linkedin.com/company/mi-medcare-llc/",
-      addresses: {
-        create: [
-          {
-            label: "Head Office",
-            line1: "1401 21st St #13807",
-            city: "Sacramento",
-            state: "CA",
-            zip: "95811",
-            country: "USA",
-          },
-          {
-            label: "Manassas Branch",
-            line1: "7422 Sudley Rd",
-            city: "Manassas",
-            state: "VA",
-            zip: "20109",
-            country: "USA",
-          },
-        ],
-      },
-      metaTitle: "Medical Billing Services in USA",
-      metaDescription:
-        "MI MedCare LLC offers professional medical billing services in the USA for family practice, internal medicine, mental health & urgent care.",
-    },
-  });
-
-  await prisma.media.updateMany({
-    where: { uploadedById: admin.id },
-    data: { notes: "Uploaded by seeded admin account." },
-  });
-
-  console.log("Created business profile");
-  return profile;
-}
-
 async function main() {
   console.log("Starting seeding...");
 
   try {
     const { users } = await seedUsers();
-    const media = await seedMedia(users);
     const categories = await seedCategories();
     const tags = await seedTags();
-    const posts = await seedPosts(users, categories, tags, media);
+    const posts = await seedPosts(users, categories, tags);
     const trafficSources = await seedTrafficSources();
 
     await seedPostViews(posts, trafficSources);
@@ -1197,7 +1012,6 @@ async function main() {
     await seedConsultationRequests(trafficSources);
     await seedNewsletterSubscribers(trafficSources);
     await seedAuditLogs(users, posts);
-    await seedBusinessProfile(users, media);
 
     console.log("All seeding completed successfully");
   } catch (error) {
@@ -1208,4 +1022,4 @@ async function main() {
   }
 }
 
-void main();
+void seedContent();

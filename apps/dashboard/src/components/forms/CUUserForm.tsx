@@ -22,7 +22,7 @@ import {
 import { useState } from "react";
 import { KeyRound, ShieldCheck, UserRound } from "lucide-react";
 import { useAdminUser } from "@/hooks/admin";
-import { GenericForm } from "../shared/GenericForm";
+import { GenericForm } from "@workspace/ui/shared/GenericForm";
 
 const CUUserForm = (props: BaseCUFormProps) => {
   const [changePassword, setChangePassword] = useState(false);

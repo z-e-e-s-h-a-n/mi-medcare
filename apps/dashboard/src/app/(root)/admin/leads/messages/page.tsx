@@ -8,10 +8,10 @@ import type {
 import { ContactMessageStatusEnum } from "@workspace/contracts";
 
 import { useContactMessages } from "@/hooks/lead";
-import ListPage from "@/components/shared/ListPage";
-import DateWrapper from "@/components/shared/DateWrapper";
-import type { ColumnConfig } from "@/components/shared/GenericTable";
-import type { SearchByOption } from "@/components/shared/SearchToolbar";
+import ListPage from "@workspace/ui/shared/ListPage";
+import type { ColumnConfig } from "@workspace/ui/shared/GenericTable";
+import type { SearchByOption } from "@workspace/ui/shared/SearchToolbar";
+import { formatDate } from "@workspace/shared/utils";
 
 const contactColumns: ColumnConfig<
   ContactMessageResponse,
@@ -38,7 +38,7 @@ const contactColumns: ColumnConfig<
   },
   {
     header: "Received",
-    accessor: (message) => <DateWrapper date={message.createdAt} />,
+    accessor: (message) => formatDate(message.createdAt),
     sortKey: "createdAt",
   },
 ];

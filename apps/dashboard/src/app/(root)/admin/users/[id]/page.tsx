@@ -11,7 +11,7 @@ import { Badge } from "@workspace/ui/components/badge";
 import {
   type SectionConfig,
   GenericDetailsPage,
-} from "@/components/shared/GenericDetailsPage";
+} from "@workspace/ui/shared/GenericDetailsPage";
 
 const sections: SectionConfig<UserResponse>[] = [
   {

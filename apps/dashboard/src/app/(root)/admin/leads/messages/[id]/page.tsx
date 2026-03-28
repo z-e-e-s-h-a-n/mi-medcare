@@ -3,7 +3,7 @@
 import { Calendar, Mail, MessageSquare, Phone, UserRound } from "lucide-react";
 
 import type { ContactMessageResponse } from "@workspace/contracts/contact";
-import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
+import { GenericDetailsPage } from "@workspace/ui/shared/GenericDetailsPage";
 import { useContactMessage } from "@/hooks/lead";
 import React from "react";
 import type { AppPageProps } from "@workspace/contracts";

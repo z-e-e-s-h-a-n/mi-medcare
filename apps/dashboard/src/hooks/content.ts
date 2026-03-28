@@ -1,7 +1,7 @@
 "use client";
 
 import * as content from "@workspace/sdk/content";
-import { createCrudHooks } from "@/hooks/crud";
+import { createCrudHooks } from "@workspace/ui/hooks/use-crud";
 
 export const {
   useEntity: useCategory,

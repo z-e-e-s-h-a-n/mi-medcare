@@ -5,14 +5,10 @@ import ThemeSwitch from "@workspace/ui/components/theme-toggle";
 import { Badge } from "@workspace/ui/components/badge";
 import { Button } from "@workspace/ui/components/button";
 import { appName } from "@workspace/shared/constants";
-import {
-  getUnreadNotificationsCount,
-  useNotifications,
-} from "@/hooks/notification";
+import { useNotifications } from "@workspace/ui/hooks/use-notification";
 
 const Header = () => {
-  const { data: notifications } = useNotifications();
-  const unreadCount = getUnreadNotificationsCount(notifications);
+  const { unreadCount } = useNotifications();
 
   return (
     <header className="flex h-(--header-height) px-4 lg:px-6 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">

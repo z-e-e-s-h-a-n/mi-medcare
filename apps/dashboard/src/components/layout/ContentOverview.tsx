@@ -25,7 +25,10 @@ interface ContentOverviewProps {
 }
 
 const ContentOverview = ({ data }: ContentOverviewProps) => {
-  const maxPostViews = Math.max(...data.posts.map((post) => post.viewsCount), 1);
+  const maxPostViews = Math.max(
+    ...data.posts.map((post) => post.viewsCount),
+    1,
+  );
   const maxCategoryCount = Math.max(
     ...data.categories.map((category) => category.postCount),
     1,
@@ -54,7 +57,7 @@ const ContentOverview = ({ data }: ContentOverviewProps) => {
               <FileText className="size-4 text-muted-foreground" />
               <h4 className="font-semibold">Top Posts</h4>
             </div>
-            <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+            <div className="space-y-3 max-h-105 overflow-y-auto pr-1">
               {data.posts.map((post, index) => {
                 const percentage = Math.round(
                   (post.viewsCount / maxPostViews) * 100,
@@ -84,7 +87,10 @@ const ContentOverview = ({ data }: ContentOverviewProps) => {
                         <ArrowUpRight className="size-4" />
                       </div>
                     </div>
-                    <Progress value={percentage} className="mt-3 h-2 rounded-lg" />
+                    <Progress
+                      value={percentage}
+                      className="mt-3 h-2 rounded-lg"
+                    />
                   </Link>
                 );
               })}
@@ -96,7 +102,7 @@ const ContentOverview = ({ data }: ContentOverviewProps) => {
               <FolderTree className="size-4 text-muted-foreground" />
               <h4 className="font-semibold">Top Categories</h4>
             </div>
-            <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+            <div className="space-y-3 max-h-105 overflow-y-auto pr-1">
               {data.categories.map((category) => {
                 const percentage = Math.round(
                   (category.postCount / maxCategoryCount) * 100,
@@ -119,7 +125,10 @@ const ContentOverview = ({ data }: ContentOverviewProps) => {
                         {category.postCount} posts
                       </Badge>
                     </div>
-                    <Progress value={percentage} className="mt-3 h-2 rounded-lg" />
+                    <Progress
+                      value={percentage}
+                      className="mt-3 h-2 rounded-lg"
+                    />
                   </Link>
                 );
               })}
@@ -131,7 +140,7 @@ const ContentOverview = ({ data }: ContentOverviewProps) => {
               <Tag className="size-4 text-muted-foreground" />
               <h4 className="font-semibold">Popular Tags</h4>
             </div>
-            <div className="grid gap-3 max-h-[420px] overflow-y-auto pr-1 md:grid-cols-2">
+            <div className="grid gap-3 max-h-105 overflow-y-auto pr-1 md:grid-cols-2">
               {data.tags.map((tag) => {
                 const percentage = Math.round(
                   (tag.postCount / maxTagCount) * 100,

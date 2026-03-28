@@ -1,13 +1,13 @@
 "use client";
 
-import { GenericForm } from "../shared/GenericForm";
+import { GenericForm } from "@workspace/ui/shared/GenericForm";
 import { PostStatusEnum, type BaseCUFormProps } from "@workspace/contracts";
 import { useCategories, usePost, useTags } from "@/hooks/content";
 import { CUPostSchema } from "@workspace/contracts/content";
 import { InputField } from "@workspace/ui/components/input-field";
 import { ComboboxField } from "@workspace/ui/components/combobox-field";
 import { SelectField } from "@workspace/ui/components/select-field";
-import { MediaField } from "../media/mediaField";
+import { MediaField } from "@workspace/ui/media/mediaField";
 import {
   Card,
   CardContent,

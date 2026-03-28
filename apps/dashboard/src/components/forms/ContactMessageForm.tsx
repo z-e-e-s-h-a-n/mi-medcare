@@ -18,7 +18,7 @@ import {
 } from "@workspace/ui/components/card";
 
 import { useContactMessage } from "@/hooks/lead";
-import { GenericForm } from "../shared/GenericForm";
+import { GenericForm } from "@workspace/ui/shared/GenericForm";
 
 const ContactReplyForm = (props: BaseCUFormProps) => {
   return (

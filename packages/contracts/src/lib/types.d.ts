@@ -10,8 +10,7 @@ import { Prisma } from "@workspace/db/browser";
 export type Nullable<T> = T | null;
 export type DecimalInstance = InstanceType<typeof Prisma.Decimal>;
 export type StrictOmit<T, K extends keyof T> = Omit<T, K>;
-export type Optional<T, K extends keyof T> = Omit<T, K> &
-  Partial<Pick<T, K>>;
+export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 export type ArrayItem<T> = T extends any[] ? T[number] : never;
 
 export type Primitive =
@@ -55,17 +54,27 @@ export interface AppLayoutProps {
   children?: ReactNode;
 }
 
+export type NavItem = {
+  label: string;
+  href?: string;
+  icon?: Icon;
+  children?: NavItem[];
+};
+
+export interface NavGroup {
+  groupLabel?: string;
+  items: NavItem[];
+}
+
 export type FormSectionType = "add" | "update";
-export type AuthFormType =
-  | "sign-in"
-  | "reset-password"
-  | "set-password";
+export type AuthFormType = "sign-in" | "reset-password" | "set-password";
 
 export interface BaseCUFormProps {
   entityId?: string;
   formType: FormSectionType;
 }
 
+export type ThemeMode = z.infer<typeof enums.ThemeModeEnum>;
 export type SortOrderType = z.infer<typeof enums.SortOrderEnum>;
 export type ChartRangeType = z.infer<typeof enums.ChartRangeEnum>;
 
@@ -79,12 +88,8 @@ export type MfaMethod = z.infer<typeof enums.MfaMethodEnum>;
 export type SessionStatus = z.infer<typeof enums.SessionStatusEnum>;
 
 export type PushProvider = z.infer<typeof enums.PushProviderEnum>;
-export type NotificationChannel = z.infer<
-  typeof enums.NotificationChannelEnum
->;
-export type NotificationPurpose = z.infer<
-  typeof enums.NotificationPurposeEnum
->;
+export type NotificationChannel = z.infer<typeof enums.NotificationChannelEnum>;
+export type NotificationPurpose = z.infer<typeof enums.NotificationPurposeEnum>;
 export type NotificationStatus = z.infer<typeof enums.NotificationStatusEnum>;
 
 export type BaseSortByType = z.infer<typeof enums.BaseSortByEnum>;

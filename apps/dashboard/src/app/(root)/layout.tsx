@@ -5,11 +5,12 @@ import {
   SidebarProvider,
 } from "@workspace/ui/components/sidebar";
 
-import { useAuth } from "@/hooks/auth";
+import { useAuth } from "@workspace/ui/hooks/use-auth";
 import Header from "@/components/layout/Header";
-import AppSidebar from "@/components/layout/AppSidebar";
+import AppSidebar from "@workspace/ui/shared/AppSidebar";
 import RootLayoutSkeleton from "@/components/skeleton/RootLayoutSkeleton";
 import type { AppLayoutProps } from "@workspace/contracts";
+import { footerSidebarMenu, sidebarMenu } from "@/lib/constants";
 
 const Layout = ({ children }: AppLayoutProps) => {
   const { isLoading, isSuccess, error } = useAuth();
@@ -29,7 +30,11 @@ const Layout = ({ children }: AppLayoutProps) => {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
+      <AppSidebar
+        variant="inset"
+        mainMenu={sidebarMenu}
+        footerMenu={footerSidebarMenu}
+      />
       <SidebarInset>
         <Header />
         <div className="section-wrapper">{children}</div>

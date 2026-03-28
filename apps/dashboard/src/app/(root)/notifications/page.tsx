@@ -16,10 +16,9 @@ import { Separator } from "@workspace/ui/components/separator";
 import { Skeleton } from "@workspace/ui/components/skeleton";
 import { cn } from "@workspace/ui/lib/utils";
 import {
-  getUnreadNotificationsCount,
   useNotificationActions,
   useNotifications,
-} from "@/hooks/notification";
+} from "@workspace/ui/hooks/use-notification";
 
 const formatDateTime = (value: string) =>
   new Date(value).toLocaleString(undefined, {
@@ -28,10 +27,8 @@ const formatDateTime = (value: string) =>
   });
 
 const NotificationsPage = () => {
-  const { data, isLoading } = useNotifications();
+  const { data, isLoading, unreadCount } = useNotifications();
   const { markAsReadAsync, isPending } = useNotificationActions();
-
-  const unreadCount = getUnreadNotificationsCount(data);
 
   const handleMarkAsRead = async (id: string) => {
     try {
@@ -111,7 +108,7 @@ const NotificationsPage = () => {
           )}
 
           {data?.map((notification) => {
-            const isUnread = !notification.viewedAt;
+            const isUnread = !notification.readAt;
 
             return (
               <div
@@ -132,7 +129,7 @@ const NotificationsPage = () => {
                       </Badge>
                     </div>
                     <div>
-                      <p className="font-medium">{notification.subject}</p>
+                      <p className="font-medium">{notification.title}</p>
                       <p className="mt-1 text-sm text-muted-foreground">
                         {notification.message}
                       </p>

@@ -2,7 +2,6 @@ import {
   IconDashboard,
   IconUsers,
   IconSettings,
-  type Icon,
   IconPhoto,
   IconCategory,
   IconTags,
@@ -11,26 +10,17 @@ import {
   IconHistory,
   IconAddressBook,
   IconFolder,
+  IconUserCircle,
+  IconNotification,
 } from "@tabler/icons-react";
-
-export type NavItem = {
-  title: string;
-  url?: string;
-  icon?: Icon;
-  children?: NavItem[];
-};
-
-export interface NavGroup {
-  groupLabel?: string;
-  items: NavItem[];
-}
+import type { NavGroup } from "@workspace/contracts";
 
 export const sidebarMenu: NavGroup[] = [
   {
     items: [
       {
-        title: "Dashboard",
-        url: "/dashboard",
+        label: "Dashboard",
+        href: "/dashboard",
         icon: IconDashboard,
       },
     ],
@@ -40,70 +30,70 @@ export const sidebarMenu: NavGroup[] = [
     groupLabel: "MANAGEMENT",
     items: [
       {
-        title: "Content",
+        label: "Content",
         icon: IconFolder,
         children: [
           {
-            title: "Posts",
-            url: "/admin/content/posts",
+            label: "Posts",
+            href: "/admin/content/posts",
             icon: IconFileText,
           },
           {
-            title: "Tags",
-            url: "/admin/content/tags",
+            label: "Tags",
+            href: "/admin/content/tags",
             icon: IconTags,
           },
           {
-            title: "Categories",
-            url: "/admin/content/categories",
+            label: "Categories",
+            href: "/admin/content/categories",
             icon: IconCategory,
           },
         ],
       },
 
       {
-        title: "Leads",
+        label: "Leads",
         icon: IconAddressBook,
         children: [
           {
-            title: "Newsletter",
-            url: "/admin/leads/subscribers",
+            label: "Newsletter",
+            href: "/admin/leads/subscribers",
           },
           {
-            title: "Consultations",
-            url: "/admin/leads/requests",
+            label: "Consultations",
+            href: "/admin/leads/requests",
           },
           {
-            title: "Contact Messages",
-            url: "/admin/leads/messages",
+            label: "Contact Messages",
+            href: "/admin/leads/messages",
           },
         ],
       },
 
       {
-        title: "Users",
+        label: "Users",
         icon: IconUsers,
         children: [
-          { title: "Users", url: "/admin/users" },
-          { title: "Add User", url: "/admin/users/new" },
+          { label: "Users", href: "/admin/users" },
+          { label: "Add User", href: "/admin/users/new" },
         ],
       },
 
       {
-        title: "Media",
-        url: "/media",
+        label: "Media",
+        href: "/media",
         icon: IconPhoto,
       },
 
       {
-        title: "Traffic Sources",
-        url: "/admin/traffic-sources",
+        label: "Traffic Sources",
+        href: "/admin/traffic-sources",
         icon: IconRoute,
       },
 
       {
-        title: "Audit Logs",
-        url: "/admin/audit-logs",
+        label: "Audit Logs",
+        href: "/admin/audit-logs",
         icon: IconHistory,
       },
     ],
@@ -112,9 +102,26 @@ export const sidebarMenu: NavGroup[] = [
   {
     items: [
       {
-        title: "Business Profile",
-        url: "/settings",
+        label: "Business Profile",
+        href: "/settings",
         icon: IconSettings,
+      },
+    ],
+  },
+];
+
+export const footerSidebarMenu: NavGroup[] = [
+  {
+    items: [
+      {
+        label: "Account",
+        href: "/account",
+        icon: IconUserCircle,
+      },
+      {
+        label: "Notifications",
+        href: "/notifications",
+        icon: IconNotification,
       },
     ],
   },

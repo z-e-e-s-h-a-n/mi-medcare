@@ -2,7 +2,7 @@
 import { Calendar, ClipboardList, Mail, Phone, UserRound } from "lucide-react";
 
 import type { ConsultationRequestResponse } from "@workspace/contracts/consultation";
-import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
+import { GenericDetailsPage } from "@workspace/ui/shared/GenericDetailsPage";
 import { useConsultationRequest } from "@/hooks/lead";
 import React from "react";
 import type { AppPageProps } from "@workspace/contracts";

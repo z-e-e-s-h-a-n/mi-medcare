@@ -1,34 +1,27 @@
 import { Injectable } from "@nestjs/common";
-import type {
-  NotificationChannel as DbNotificationChannel,
-  Otp,
-} from "@workspace/db/client";
-import type { NotificationStatus } from "@workspace/contracts";
-import type { SafeUser } from "@workspace/contracts/user";
-import {
-  resolveEmailTemplate,
-  type EmailTemplateMap,
-} from "@workspace/templates";
+import { resolveEmailTemplate } from "@workspace/templates";
 import { appName } from "@workspace/shared/constants";
 
 import { PushService } from "./push.service";
 import { EmailService } from "./email.service";
-
-import { NOTIFICATION_POLICY_MAP } from "@/constants/index";
 import { InjectLogger } from "@/decorators/logger.decorator";
 import { EnvService } from "@/modules/env/env.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";
 import { LoggerService } from "@/modules/logger/logger.service";
-
-type EmailTemplatePurpose = keyof EmailTemplateMap;
+import type {
+  NotificationChannel,
+  NotificationPurpose,
+  NotificationStatus,
+} from "@workspace/contracts";
+import type { SafeUser } from "@workspace/contracts/user";
+import type { Otp } from "@workspace/db/client";
 
 export type SendNotificationProps = {
-  [K in EmailTemplatePurpose]: { purpose: K } & EmailTemplateMap[K] & {
-      email: string;
-      user: SafeUser;
-      otp?: Otp;
-    };
-}[EmailTemplatePurpose];
+  purpose: NotificationPurpose;
+  email: string;
+  user: SafeUser;
+  otp?: Otp;
+} & Record<string, unknown>;
 
 @Injectable()
 export class NotificationService {
@@ -45,11 +38,27 @@ export class NotificationService {
   async sendNotification(props: SendNotificationProps) {
     const { html, subject, message } = await resolveEmailTemplate(props);
 
-    const { push } = NOTIFICATION_POLICY_MAP[props.purpose];
-    const channels = this.determineChannels(props.user, push, !!props.otp);
+    const channels = this.determineChannels(
+      props.email,
+      props.user,
+      !!props.otp,
+    );
 
     try {
-      let allSuccess = channels.length > 0;
+      const notification = await this.prisma.notification.create({
+        data: {
+          userId: props.user.id,
+          recipient: props.email,
+          purpose: props.purpose,
+          channels,
+          title: subject,
+          message,
+          meta: props as any,
+        },
+      });
+
+      let allSuccess = true;
+      let anySuccess = false;
 
       for (const channel of channels) {
         try {
@@ -61,33 +70,30 @@ export class NotificationService {
               await this.sendPush(props.user, subject, message);
               break;
           }
+          anySuccess = true;
         } catch (error) {
           allSuccess = false;
           this.logger.error("Notification send Failed", {
-            email: props.email,
+            identifier: props.identifier,
             channel,
             error,
           });
         }
       }
 
-      const status: NotificationStatus = allSuccess ? "sent" : "failed";
+      const status: NotificationStatus = allSuccess
+        ? "sent"
+        : anySuccess
+          ? "partial"
+          : "failed";
 
-      await this.prisma.notification.create({
-        data: {
-          userId: props.user.id,
-          recipient: props.email,
-          purpose: props.purpose,
-          channels,
-          subject,
-          message,
-          meta: props as any,
-          status,
-        },
+      await this.prisma.notification.update({
+        where: { id: notification.id },
+        data: { status },
       });
     } catch (error) {
       this.logger.error(`❌ Notification send Failed`, {
-        email: props.email,
+        identifier: props.identifier,
         channels,
         error,
       });
@@ -105,22 +111,16 @@ export class NotificationService {
   }
 
   private determineChannels(
+    identifier: string,
     user: SafeUser,
-    allowPush: boolean,
     isOtp: boolean,
-  ): DbNotificationChannel[] {
-    if (isOtp) {
-      return ["email"];
-    }
+  ): NotificationChannel[] {
+    const channels: NotificationChannel[] = [];
+    channels.push("email");
+    if (isOtp) return channels;
 
-    const channels: DbNotificationChannel[] = [];
-
-    if (allowPush && user.pushNotifications) {
+    if (user.pushNotifications) {
       channels.push("push");
-    }
-
-    if (user.email && user.isEmailVerified) {
-      channels.push("email");
     }
 
     return channels;

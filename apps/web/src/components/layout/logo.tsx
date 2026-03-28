@@ -12,7 +12,7 @@ export function Logo() {
   useEffect(() => {
     if (theme) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setCurrentTheme(theme);
+      setCurrentTheme(theme as string);
     }
   }, [theme]);
 

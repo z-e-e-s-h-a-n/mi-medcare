@@ -10,11 +10,11 @@ import {
   CardTitle,
 } from "@workspace/ui/components/card";
 import { InputField } from "@workspace/ui/components/input-field";
-import { MediaField } from "../media/mediaField";
+import { MediaField } from "@workspace/ui/media/mediaField";
 import type { BaseCUFormProps } from "@workspace/contracts";
-import { GenericForm } from "../shared/GenericForm";
+import { GenericForm } from "@workspace/ui/shared/GenericForm";
 import { useBusinessProfile } from "@/hooks/business";
-import GenericArrayField from "../shared/GenericArrayField";
+import GenericArrayField from "@workspace/ui/shared/GenericArrayField";
 import { businessProfileSchema } from "@workspace/contracts/business";
 
 import ContactItemField from "./ContactItemField";

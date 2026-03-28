@@ -553,7 +553,7 @@ async function seedPosts(
   }
 }
 
-export async function seedDB() {
+export async function seedContent() {
   console.log("Seeding blog content...");
 
   const authorId = await resolveSeedAuthorId();
@@ -565,12 +565,3 @@ export async function seedDB() {
   console.log(`Seeded ${TAG_SEEDS.length} tags`);
   console.log(`Seeded ${POST_SEEDS.length} posts as draft`);
 }
-
-seedDB()
-  .catch((error) => {
-    console.error("Seed failed:", error);
-    process.exitCode = 1;
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });

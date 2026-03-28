@@ -18,7 +18,7 @@ import {
 } from "@workspace/ui/components/card";
 
 import { useConsultationRequest } from "@/hooks/lead";
-import { GenericForm } from "../shared/GenericForm";
+import { GenericForm } from "@workspace/ui/shared/GenericForm";
 
 const ConsultationRequestForm = (props: BaseCUFormProps) => {
   return (

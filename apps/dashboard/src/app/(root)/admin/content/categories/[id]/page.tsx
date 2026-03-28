@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 import type { CategoryResponse } from "@workspace/contracts/content";
-import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
+import { GenericDetailsPage } from "@workspace/ui/shared/GenericDetailsPage";
 import { useCategory, usePosts } from "@/hooks/content";
 import type { AppPageProps } from "@workspace/contracts";
 import React from "react";

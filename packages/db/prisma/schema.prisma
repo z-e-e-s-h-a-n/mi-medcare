@@ -83,6 +83,8 @@ enum NotificationPurpose {
 }
 
 enum NotificationStatus {
+  pending
+  partial
   sent
   failed
 }
@@ -102,7 +104,7 @@ enum MediaVisibility {
 }
 
 enum MediaType {
-  photo
+  avatar
   logo
   post
   category
@@ -163,8 +165,8 @@ model User {
   displayName String
   password    String? @db.VarChar(255)
 
-  imageId String?
-  image   Media?  @relation("UserImage", fields: [imageId], references: [id])
+  avatarId String?
+  avatar   Media?  @relation("UserAvatars", fields: [avatarId], references: [id])
 
   // Contact info
   email           String? @unique @db.VarChar(255)
@@ -254,26 +256,25 @@ model Otp {
 }
 
 model Notification {
-  id     String @id @default(ulid())
+  id String @id @default(ulid())
+
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  purpose  NotificationPurpose
-  channels NotificationChannel[]
-
-  subject   String
+  title     String
   message   String
   recipient String
   meta      Json?
 
-  status NotificationStatus @default(failed)
+  purpose  NotificationPurpose
+  channels NotificationChannel[]
+  status   NotificationStatus    @default(pending)
 
-  viewedAt  DateTime?
+  readAt    DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
-  @@index([userId])
-  @@index([status, createdAt])
+  @@index([userId, readAt])
 }
 
 model Media {
@@ -282,24 +283,24 @@ model Media {
   uploadedById String
   uploadedBy   User   @relation("UserUploads", fields: [uploadedById], references: [id])
 
-  url      String @unique
-  filename String
-  mimeType String
-  size     Int
-  hash     String @unique
+  publicId     String @unique
+  url          String @unique
+  mimeType     String
+  resourceType String
+  size         Int
+  hash         String @unique
 
-  title      String
+  name       String
   altText    String?
   type       MediaType
   visibility MediaVisibility @default(private)
-
-  notes String?
+  notes      String?
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
-  users            User[]            @relation("UserImage")
+  users            User[]            @relation("UserAvatars")
   posts            Post[]            @relation("PostCover")
   categories       Category[]        @relation("CategoryCover")
   businessLogos    BusinessProfile[] @relation("BusinessProfileLogo")
@@ -307,7 +308,7 @@ model Media {
   businessFavIcons BusinessProfile[] @relation("BusinessProfileFavicon")
 
   @@index([type])
-  @@index([filename])
+  @@index([name])
   @@index([uploadedById])
   @@index([createdAt])
   @@index([deletedAt])

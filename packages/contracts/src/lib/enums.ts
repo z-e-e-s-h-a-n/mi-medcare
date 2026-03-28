@@ -48,8 +48,8 @@ export const UserSortByEnum = z.enum([
 export const MediaTypeEnum = z.enum($Enums.MediaType);
 export const MediaVisibilityEnum = z.enum($Enums.MediaVisibility);
 
-export const MediaSearchByEnum = z.enum(["id", "title"]);
-export const MediaSortByEnum = z.enum(["size", "title", "type"]);
+export const MediaSearchByEnum = z.enum(["id", "name"]);
+export const MediaSortByEnum = z.enum(["size", "name", "type"]);
 
 /* =========================
    CONTACT / CONSULTATION

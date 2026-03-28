@@ -53,7 +53,7 @@ const RootLayoutSkeleton = () => {
                 )}
                 <SidebarMenu>
                   {items.map((item) => (
-                    <SidebarMenuItem key={item.title}>
+                    <SidebarMenuItem key={item.label}>
                       <SidebarMenuButton className="flex items-center gap-2">
                         <Skeleton className="h-4 w-4 rounded" />
                         <Skeleton className="h-4 w-full" />

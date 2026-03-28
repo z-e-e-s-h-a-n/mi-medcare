@@ -8,10 +8,10 @@ import type {
 import { ConsultationRequestStatusEnum } from "@workspace/contracts";
 
 import { useConsultationRequests } from "@/hooks/lead";
-import ListPage from "@/components/shared/ListPage";
-import DateWrapper from "@/components/shared/DateWrapper";
-import type { ColumnConfig } from "@/components/shared/GenericTable";
-import type { SearchByOption } from "@/components/shared/SearchToolbar";
+import ListPage from "@workspace/ui/shared/ListPage";
+import type { ColumnConfig } from "@workspace/ui/shared/GenericTable";
+import type { SearchByOption } from "@workspace/ui/shared/SearchToolbar";
+import { formatDate } from "@workspace/shared/utils";
 
 const consultationColumns: ColumnConfig<
   ConsultationRequestResponse,
@@ -38,7 +38,7 @@ const consultationColumns: ColumnConfig<
   },
   {
     header: "Received",
-    accessor: (request) => <DateWrapper date={request.createdAt} />,
+    accessor: (request) => formatDate(request.createdAt),
     sortKey: "createdAt",
   },
 ];

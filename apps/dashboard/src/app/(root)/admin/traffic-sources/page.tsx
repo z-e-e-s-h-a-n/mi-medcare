@@ -6,10 +6,10 @@ import type {
 } from "@workspace/contracts/traffic";
 
 import { useTrafficSources } from "@/hooks/traffic";
-import ListPage from "@/components/shared/ListPage";
-import DateWrapper from "@/components/shared/DateWrapper";
-import type { ColumnConfig } from "@/components/shared/GenericTable";
-import type { SearchByOption } from "@/components/shared/SearchToolbar";
+import ListPage from "@workspace/ui/shared/ListPage";
+import type { ColumnConfig } from "@workspace/ui/shared/GenericTable";
+import type { SearchByOption } from "@workspace/ui/shared/SearchToolbar";
+import { formatDate } from "@workspace/shared/utils";
 
 const trafficColumns: ColumnConfig<
   TrafficSourceResponse,
@@ -38,7 +38,7 @@ const trafficColumns: ColumnConfig<
   },
   {
     header: "Created",
-    accessor: (source) => <DateWrapper date={source.createdAt} />,
+    accessor: (source) => formatDate(source.createdAt),
     sortKey: "createdAt",
   },
 ];

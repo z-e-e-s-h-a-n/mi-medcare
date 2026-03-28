@@ -15,7 +15,7 @@ const zMsString = z
 
 export const envSchema = z.object({
   // ==============================
-  // App Config
+  // Mi MedCare Server
   // ==============================
   NODE_ENV: z
     .enum(["development", "production", "test"])
@@ -23,31 +23,27 @@ export const envSchema = z.object({
 
   APP_PORT: z.coerce.number(),
   APP_ENDPOINT: z.string(),
-  CLIENT_ENDPOINT: z.string(),
-  ADMIN_ENDPOINT: z.string(),
-
   CORS_ORIGIN: z
     .string()
     .transform((val) => val.split(",").map((origin) => origin.trim())),
+  CLIENT_ENDPOINT: z.string(),
+  ADMIN_ENDPOINT: z.string(),
 
   // ==============================
-  // Database / Cloud
+  // Database
   // ==============================
   DB_URI: z.string(),
 
-  CLOUDINARY_CLOUD_NAME: z.string(),
-  CLOUDINARY_API_KEY: z.string(),
-  CLOUDINARY_API_SECRET: z.string(),
+  // ==============================
+  // Media Storage
+  // ==============================
   CLOUDINARY_URL: z.string(),
+  CLOUDINARY_ROOT_FOLDER: z.string(),
 
   // ==============================
-  // OTP Model
+  // OTP and Auth
   // ==============================
   OTP_EXP: zMsString,
-
-  // ==============================
-  // Auth
-  // ==============================
   JWT_ACCESS_SECRET: z.string(),
   JWT_REFRESH_SECRET: z.string(),
   ACCESS_TOKEN_EXP: zMsString,
@@ -56,21 +52,31 @@ export const envSchema = z.object({
   // ==============================
   // OAuth Providers
   // ==============================
-  GOOGLE_CLIENT_ID: z.string().default(""),
-  GOOGLE_CLIENT_SECRET: z.string().default(""),
-  GOOGLE_CALLBACK_URL: z.string().default(""),
-
-  FACEBOOK_CLIENT_ID: z.string().default(""),
-  FACEBOOK_CLIENT_SECRET: z.string().default(""),
-  FACEBOOK_CALLBACK_URL: z.string().default(""),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
+  GOOGLE_CALLBACK_URL: z.string(),
 
   // ==============================
-  // Email (Resend)
+  // Email Delivery
   // ==============================
   SMTP_HOST: z.string(),
   SMTP_PORT: z.coerce.number(),
   SMTP_USER: z.string(),
   SMTP_PASS: z.string(),
+
+  // ==============================
+  // SMS / WhatsApp (Twilio)
+  // ==============================
+  TWILIO_ACCOUNT_SID: z.string(),
+  TWILIO_AUTH_TOKEN: z.string(),
+  TWILIO_PHONE_NUMBER: z.string(),
+  TWILIO_WHATSAPP_NUMBER: z.string(),
+
+  // ==============================
+  // GHL
+  // ==============================
+  GHL_API_TOKEN: z.string(),
+  GHL_LOCATION_ID: z.string(),
 
   // ==============================
   // Firebase
@@ -83,12 +89,12 @@ export const envSchema = z.object({
     .transform((key) => key.replace(/\\n/g, "\n")),
 
   // ==============================
-  // API Keys
+  // External APIs
   // ==============================
   IP_STACK_API_KEY: z.string(),
 
   // ==============================
-  // Admin
+  // Admin Bootstrap
   // ==============================
   ADMIN_NAME: z.string(),
   ADMIN_EMAIL: z.string(),
@@ -96,12 +102,7 @@ export const envSchema = z.object({
 });
 
 export function validateEnv(config: Record<string, any>) {
-  const normalized = {
-    ...config,
-    APP_PORT: config.PORT ?? config.APP_PORT,
-  };
-
-  const parsed = envSchema.safeParse(normalized);
+  const parsed = envSchema.safeParse(config);
 
   if (!parsed.success) {
     console.error(

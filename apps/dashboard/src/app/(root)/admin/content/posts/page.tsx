@@ -4,10 +4,10 @@ import { Badge } from "@workspace/ui/components/badge";
 import type { PostQueryType, PostResponse } from "@workspace/contracts/content";
 
 import { useDeletePost, usePosts } from "@/hooks/content";
-import ListPage from "@/components/shared/ListPage";
-import DateWrapper from "@/components/shared/DateWrapper";
-import type { ColumnConfig } from "@/components/shared/GenericTable";
-import type { SearchByOption } from "@/components/shared/SearchToolbar";
+import ListPage from "@workspace/ui/shared/ListPage";
+import type { ColumnConfig } from "@workspace/ui/shared/GenericTable";
+import type { SearchByOption } from "@workspace/ui/shared/SearchToolbar";
+import { formatDate } from "@workspace/shared/utils";
 
 const postColumns: ColumnConfig<PostResponse, PostQueryType>[] = [
   {
@@ -35,8 +35,7 @@ const postColumns: ColumnConfig<PostResponse, PostQueryType>[] = [
   },
   {
     header: "Published",
-    accessor: (post) =>
-      post.publishedAt ? <DateWrapper date={post.publishedAt} /> : "—",
+    accessor: (post) => (post.publishedAt ? formatDate(post.publishedAt) : "—"),
     sortKey: "publishedAt",
   },
 ];

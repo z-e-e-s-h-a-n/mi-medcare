@@ -6,10 +6,10 @@ import type {
 } from "@workspace/contracts/content";
 
 import { useCategories, useDeleteCategory } from "@/hooks/content";
-import ListPage from "@/components/shared/ListPage";
-import DateWrapper from "@/components/shared/DateWrapper";
-import type { ColumnConfig } from "@/components/shared/GenericTable";
-import type { SearchByOption } from "@/components/shared/SearchToolbar";
+import ListPage from "@workspace/ui/shared/ListPage";
+import type { ColumnConfig } from "@workspace/ui/shared/GenericTable";
+import type { SearchByOption } from "@workspace/ui/shared/SearchToolbar";
+import { formatDate } from "@workspace/shared/utils";
 
 const categoryColumns: ColumnConfig<CategoryResponse, CategoryQueryType>[] = [
   {
@@ -36,12 +36,12 @@ const categoryColumns: ColumnConfig<CategoryResponse, CategoryQueryType>[] = [
   },
   {
     header: "Updated",
-    accessor: (category) => <DateWrapper date={category.updatedAt} />,
+    accessor: (category) => formatDate(category.updatedAt),
     sortKey: "updatedAt",
   },
   {
     header: "Created",
-    accessor: (category) => <DateWrapper date={category.createdAt} />,
+    accessor: (category) => formatDate(category.createdAt),
     sortKey: "createdAt",
   },
 ];

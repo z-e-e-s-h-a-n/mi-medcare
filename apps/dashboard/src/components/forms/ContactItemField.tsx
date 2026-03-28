@@ -7,7 +7,7 @@ import {
   type BusinessPhone,
 } from "@workspace/contracts/business";
 import { InputField } from "@workspace/ui/components/input-field";
-import type { ArrayFormItemProps } from "../shared/GenericArrayField";
+import type { ArrayFormItemProps } from "@workspace/ui/shared/GenericArrayField";
 
 const ContactItemField = ({
   onSubmit,

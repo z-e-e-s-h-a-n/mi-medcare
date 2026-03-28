@@ -9,18 +9,12 @@ import {
   Strategy as GoogleStrategy,
   type Profile as GoogleProfile,
 } from "passport-google-oauth20";
-import {
-  Strategy as FacebookStrategy,
-  type Profile as FacebookProfile,
-} from "passport-facebook";
 import { slugify } from "@workspace/shared/utils";
+import type { OAuthProvider } from "@workspace/contracts";
 
 import { OtpService } from "./otp.service";
 import { EnvService } from "@/modules/env/env.service";
-import { InjectLogger } from "@/decorators/logger.decorator";
-import { LoggerService } from "@/modules/logger/logger.service";
 import { PrismaService } from "@/modules/prisma/prisma.service";
-import type { OAuthProvider } from "@workspace/contracts";
 
 interface OAuthProfile {
   provider: OAuthProvider;
@@ -34,9 +28,6 @@ interface OAuthProfile {
 
 @Injectable()
 export class OAuthService implements OnModuleInit {
-  @InjectLogger()
-  private readonly logger!: LoggerService;
-
   constructor(
     private readonly prisma: PrismaService,
     private readonly otpService: OtpService,
@@ -45,21 +36,9 @@ export class OAuthService implements OnModuleInit {
 
   onModuleInit() {
     this.initGoogleStrategy();
-    this.initFacebookStrategy();
   }
 
   private initGoogleStrategy() {
-    if (
-      !this.env.get("GOOGLE_CLIENT_ID") ||
-      !this.env.get("GOOGLE_CLIENT_SECRET") ||
-      !this.env.get("GOOGLE_CALLBACK_URL")
-    ) {
-      this.logger.warn(
-        "Google OAuth is disabled because its env values are missing.",
-      );
-      return;
-    }
-
     passport.use(
       "google",
       new GoogleStrategy(
@@ -81,40 +60,7 @@ export class OAuthService implements OnModuleInit {
     );
   }
 
-  private initFacebookStrategy() {
-    if (
-      !this.env.get("FACEBOOK_CLIENT_ID") ||
-      !this.env.get("FACEBOOK_CLIENT_SECRET") ||
-      !this.env.get("FACEBOOK_CALLBACK_URL")
-    ) {
-      this.logger.warn(
-        "Facebook OAuth is disabled because its env values are missing.",
-      );
-      return;
-    }
-
-    passport.use(
-      "facebook",
-      new FacebookStrategy(
-        {
-          clientID: this.env.get("FACEBOOK_CLIENT_ID"),
-          clientSecret: this.env.get("FACEBOOK_CLIENT_SECRET"),
-          callbackURL: this.env.get("FACEBOOK_CALLBACK_URL"),
-          scope: "email",
-        },
-        async (_, __, profile: FacebookProfile, done) => {
-          try {
-            const user = await this.validateOAuthLogin(profile);
-            done(null, user);
-          } catch (err) {
-            done(err, null);
-          }
-        },
-      ),
-    );
-  }
-
-  private async validateOAuthLogin(profile: GoogleProfile | FacebookProfile) {
+  private async validateOAuthLogin(profile: GoogleProfile) {
     const normalized = this.normalizeProfile(profile);
 
     if (!normalized.email) {
@@ -135,21 +81,19 @@ export class OAuthService implements OnModuleInit {
           url: normalized.imageUrl,
         },
         create: {
-          type: "photo",
+          type: "avatar",
           url: normalized.imageUrl,
-          filename: `${slugify(normalized.displayName)}-avatar`,
-          title: `${slugify(normalized.displayName)}-avatar`,
+          name: `${slugify(normalized.displayName)}-avatar`,
           mimeType: "image/jpeg",
+          resourceType: "image",
+          publicId: normalized.imageUrl,
           size: 0,
           hash: crypto.randomUUID(),
           uploadedById: user.id,
         },
         update: {
           url: normalized.imageUrl,
-          filename: `${slugify(normalized.displayName)}-avatar`,
-          mimeType: "image/jpeg",
-          size: 0,
-          hash: crypto.randomUUID(),
+          name: `${slugify(normalized.displayName)}-avatar`,
           uploadedById: user.id,
         },
       });
@@ -173,9 +117,7 @@ export class OAuthService implements OnModuleInit {
     };
   }
 
-  private normalizeProfile(
-    profile: GoogleProfile | FacebookProfile,
-  ): OAuthProfile {
+  private normalizeProfile(profile: GoogleProfile): OAuthProfile {
     const provider = profile.provider as OAuthProvider;
     const email = profile.emails?.[0]?.value || null;
 

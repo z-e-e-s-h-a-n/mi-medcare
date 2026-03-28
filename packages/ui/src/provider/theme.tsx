@@ -5,10 +5,9 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     <NextThemesProvider
       attribute="class"
       defaultTheme="light"
-      storageKey="mi-theme"
       enableSystem
-      disableTransitionOnChange
       enableColorScheme
+      disableTransitionOnChange
     >
       {children}
     </NextThemesProvider>

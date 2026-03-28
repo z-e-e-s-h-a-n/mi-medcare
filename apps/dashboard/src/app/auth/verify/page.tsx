@@ -1,7 +1,7 @@
+import type { AppPageProps } from "@workspace/contracts";
 import VerifyAuthPage, {
   type VerifyAuthProps,
-} from "@/components/shared/VerifyAuthPage";
-import type { AppPageProps } from "@workspace/contracts";
+} from "@workspace/ui/shared/VerifyAuthPage";
 
 const page = async ({ searchParams }: AppPageProps) => {
   const query = (await searchParams) as unknown as VerifyAuthProps;

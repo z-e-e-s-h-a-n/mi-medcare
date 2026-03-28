@@ -7,10 +7,10 @@ import type {
 } from "@workspace/contracts/newsletter";
 
 import { useNewsletterSubscribers } from "@/hooks/lead";
-import ListPage from "@/components/shared/ListPage";
-import DateWrapper from "@/components/shared/DateWrapper";
-import type { ColumnConfig } from "@/components/shared/GenericTable";
-import type { SearchByOption } from "@/components/shared/SearchToolbar";
+import ListPage from "@workspace/ui/shared/ListPage";
+import type { ColumnConfig } from "@workspace/ui/shared/GenericTable";
+import type { SearchByOption } from "@workspace/ui/shared/SearchToolbar";
+import { formatDate } from "@workspace/shared/utils";
 
 const newsletterColumns: ColumnConfig<
   NewsletterSubscriberResponse,
@@ -36,7 +36,7 @@ const newsletterColumns: ColumnConfig<
   },
   {
     header: "Subscribed",
-    accessor: (subscriber) => <DateWrapper date={subscriber.subscribedAt} />,
+    accessor: (subscriber) => formatDate(subscriber.subscribedAt),
     sortKey: "subscribedAt",
   },
 ];

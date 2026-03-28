@@ -6,11 +6,11 @@ import type { UserResponse } from "@workspace/contracts/user";
 import { Badge } from "@workspace/ui/components/badge";
 
 import { useAdminUsers } from "@/hooks/admin";
-import UserCard from "@/components/user/UserCard";
-import ListPage from "@/components/shared/ListPage";
-import DateWrapper from "@/components/shared/DateWrapper";
-import type { ColumnConfig } from "@/components/shared/GenericTable";
-import type { SearchByOption } from "@/components/shared/SearchToolbar";
+import ListPage from "@workspace/ui/shared/ListPage";
+import type { ColumnConfig } from "@workspace/ui/shared/GenericTable";
+import type { SearchByOption } from "@workspace/ui/shared/SearchToolbar";
+import { formatDate } from "@workspace/shared/utils";
+import UserCard from "@workspace/ui/shared/UserCard";
 
 const userColumns: ColumnConfig<UserResponse, UserQueryType>[] = [
   {
@@ -47,13 +47,12 @@ const userColumns: ColumnConfig<UserResponse, UserQueryType>[] = [
   },
   {
     header: "Last Login",
-    accessor: (u) =>
-      u.lastLoginAt ? <DateWrapper date={u.lastLoginAt} /> : "—",
+    accessor: (u) => (u.lastLoginAt ? formatDate(u.lastLoginAt) : "—"),
     sortKey: "lastLoginAt",
   },
   {
     header: "Created",
-    accessor: (u) => <DateWrapper date={u.createdAt} />,
+    accessor: (u) => formatDate(u.createdAt),
     sortKey: "createdAt",
   },
 ];

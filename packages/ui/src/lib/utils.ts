@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
-import type { MediaResponse } from "@workspace/contracts/media";
 import { twMerge } from "tailwind-merge";
 import { toast } from "sonner";
+import type { BadgeVariants } from "../components/badge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,7 +12,7 @@ export const copyToClipboard = async (text: string, label: string) => {
   toast.success(`${label} copied to clipboard`);
 };
 
-export const handleDownload = async (media: MediaResponse) => {
+export const handleDownload = async (media: { url: string; name: string }) => {
   try {
     const response = await fetch(media.url);
     const blob = await response.blob();
@@ -20,7 +20,7 @@ export const handleDownload = async (media: MediaResponse) => {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = media.filename;
+    a.download = media.name;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -39,4 +39,31 @@ export const getBackPath = (pathname: string, count = 1) => {
   return (
     "/" + segments.slice(0, Math.max(segments.length - count, 0)).join("/")
   );
+};
+
+export const getStatusVariant = (status: string): BadgeVariants["variant"] => {
+  const map: Record<string, BadgeVariants["variant"]> = {
+    active: "success",
+    suspended: "destructive",
+
+    revoked: "destructive",
+    expired: "warning",
+
+    sent: "success",
+    failed: "destructive",
+
+    draft: "outline",
+    published: "success",
+
+    new: "warning",
+    contacted: "info",
+    qualified: "success",
+    closed: "secondary",
+
+    pending: "outline",
+    viewed: "info",
+    replied: "success",
+  };
+
+  return map[status] ?? "secondary";
 };

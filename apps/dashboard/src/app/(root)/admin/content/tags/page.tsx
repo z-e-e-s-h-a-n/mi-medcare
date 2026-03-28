@@ -3,10 +3,10 @@
 import type { TagQueryType, TagResponse } from "@workspace/contracts/content";
 
 import { useDeleteTag, useTags } from "@/hooks/content";
-import ListPage from "@/components/shared/ListPage";
-import DateWrapper from "@/components/shared/DateWrapper";
-import type { ColumnConfig } from "@/components/shared/GenericTable";
-import type { SearchByOption } from "@/components/shared/SearchToolbar";
+import ListPage from "@workspace/ui/shared/ListPage";
+import type { ColumnConfig } from "@workspace/ui/shared/GenericTable";
+import type { SearchByOption } from "@workspace/ui/shared/SearchToolbar";
+import { formatDate } from "@workspace/shared/utils";
 
 const tagColumns: ColumnConfig<TagResponse, TagQueryType>[] = [
   {
@@ -21,12 +21,12 @@ const tagColumns: ColumnConfig<TagResponse, TagQueryType>[] = [
   },
   {
     header: "Updated",
-    accessor: (tag) => <DateWrapper date={tag.updatedAt} />,
+    accessor: (tag) => formatDate(tag.updatedAt),
     sortKey: "updatedAt",
   },
   {
     header: "Created",
-    accessor: (tag) => <DateWrapper date={tag.createdAt} />,
+    accessor: (tag) => formatDate(tag.createdAt),
     sortKey: "createdAt",
   },
 ];

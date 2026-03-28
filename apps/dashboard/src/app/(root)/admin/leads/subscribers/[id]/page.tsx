@@ -3,7 +3,7 @@
 import { Mail } from "lucide-react";
 
 import type { NewsletterSubscriberResponse } from "@workspace/contracts/newsletter";
-import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
+import { GenericDetailsPage } from "@workspace/ui/shared/GenericDetailsPage";
 import { useNewsletterSubscriber } from "@/hooks/lead";
 import type { AppPageProps } from "@workspace/contracts";
 import React from "react";

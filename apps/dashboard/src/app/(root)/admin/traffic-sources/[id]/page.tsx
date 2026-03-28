@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@workspace/ui/components/card";
-import { GenericDetailsPage } from "@/components/shared/GenericDetailsPage";
+import { GenericDetailsPage } from "@workspace/ui/shared/GenericDetailsPage";
 import { useTrafficSource } from "@/hooks/traffic";
 import type { AppPageProps } from "@workspace/contracts";
 import React from "react";
@@ -151,7 +151,7 @@ const RelatedListCard = ({ title, columns, rows }: RelatedListCardProps) => {
       </CardHeader>
       <CardContent>
         <div className="overflow-hidden rounded-lg border">
-          <div className="max-h-[420px] overflow-auto">
+          <div className="max-h-105 overflow-auto">
             <table className="w-full text-sm">
               <thead className="bg-muted/50">
                 <tr>

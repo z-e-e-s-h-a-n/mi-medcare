@@ -388,7 +388,8 @@ export class AuthService {
     });
 
     return {
-      message: "Link sent to your new email. Please verify to complete the change.",
+      message:
+        "Link sent to your new email. Please verify to complete the change.",
     };
   }
 
@@ -574,8 +575,7 @@ export class AuthService {
   userView = {
     omit: { password: true },
     include: {
-      image: { include: { uploadedBy: { omit: { password: true } } } },
+      avatar: { include: { uploadedBy: { omit: { password: true } } } },
     },
   };
 }
-
