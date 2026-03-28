@@ -4,6 +4,7 @@ import type { AxiosInstance, AxiosResponse } from "axios";
 import { ApiException, type ApiResponse, type ApiSuccess } from "./types";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 export const apiClient: AxiosInstance = axios.create({
   baseURL: API_URL,
@@ -20,12 +21,14 @@ export const setClientUrl = (url: string) => {
 };
 
 apiClient.interceptors.request.use((config) => {
-  if (config.headers) {
-    if (typeof window !== "undefined") {
-      config.headers["x-client-url"] = window.location.origin;
+  config.headers = config.headers ?? {};
+  config.headers["x-client-url"] = APP_URL;
 
-      if (window.location.pathname === "/auth/sign-in")
-        config.headers["x-trusted-device"] = config.data?.rememberDevice;
+  if (typeof window !== "undefined") {
+    if (window.location.pathname === "/auth/sign-in") {
+      config.headers["x-trusted-device"] = String(
+        config.data?.rememberDevice ?? false,
+      );
     }
   }
 

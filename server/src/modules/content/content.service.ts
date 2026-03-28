@@ -448,9 +448,9 @@ export class ContentService {
       orderBy: { viewedAt: "desc" },
     });
 
-    if (existingView) return;
+    if (existingView) return existingView;
 
-    await this.prisma.postView.create({
+    const newView = await this.prisma.postView.create({
       data: {
         postId,
         visitorKey,
@@ -469,6 +469,8 @@ export class ContentService {
         expires: futureDate("1y"),
       });
     }
+
+    return newView;
   }
 
   private async logMutation(

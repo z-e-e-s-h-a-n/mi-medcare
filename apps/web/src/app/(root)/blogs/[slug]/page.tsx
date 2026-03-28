@@ -1,16 +1,23 @@
 import type { Metadata } from "next";
 import { cache } from "react";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 
 import type { PostResponse } from "@workspace/contracts/content";
-import { BlogPostPageClient } from "./_page";
 import { getPostBySlug } from "@workspace/sdk/content";
 import type { AppPageProps } from "@workspace/contracts";
+import { BlogPostPageClient } from "./_page";
 
 const getCachedPostBySlug = cache(
   async (slug: string): Promise<PostResponse | null> => {
     try {
-      const res = await getPostBySlug(slug);
+      const cookieStore = await cookies();
+      const visitorKey = cookieStore.get("visitorKey")?.value;
+      const res = await getPostBySlug(slug, {
+        headers: {
+          Cookie: `visitorKey=${visitorKey}`,
+        },
+      });
       return res.data;
     } catch {
       return null;

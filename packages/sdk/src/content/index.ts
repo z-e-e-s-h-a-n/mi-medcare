@@ -1,3 +1,4 @@
+import type { AxiosRequestConfig } from "axios";
 import { apiClient, executeApi } from "../lib";
 import type {
   CategoryQueryResponse,
@@ -85,8 +86,8 @@ export const restoreTag = (id: string) =>
 export const getPosts = (params?: PostQueryType) =>
   executeApi<PostQueryResponse>(() => apiClient.get("/posts", { params }));
 
-export const getPostBySlug = (slug: string) =>
-  executeApi<PostResponse>(() => apiClient.get(`/posts/${slug}`));
+export const getPostBySlug = (slug: string, config?: AxiosRequestConfig) =>
+  executeApi<PostResponse>(() => apiClient.get(`/posts/${slug}`, config));
 
 export const createPost = (data: PostType) =>
   executeApi<PostResponse>(() => apiClient.post("/admin/content/posts", data));
