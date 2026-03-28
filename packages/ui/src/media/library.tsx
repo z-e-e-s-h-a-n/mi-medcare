@@ -70,7 +70,7 @@ function MediaLibrary({ onSelect }: MediaLibraryProps) {
           />
         </div>
         <TabsContent value="upload">
-          <MediaUploader />
+          <MediaUploader onSelect={onSelect} />
         </TabsContent>
         <TabsContent value="library" className="space-y-6">
           <MediaGrid

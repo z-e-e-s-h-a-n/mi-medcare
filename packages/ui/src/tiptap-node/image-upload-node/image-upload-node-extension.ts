@@ -1,52 +1,8 @@
 import { mergeAttributes, Node } from "@tiptap/react";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import { ImageUploadNode as ImageUploadNodeComponent } from "@workspace/ui/tiptap-node/image-upload-node/image-upload-node";
-import type { NodeType } from "@tiptap/pm/model";
-
-export type UploadFunction = (
-  file: File,
-  onProgress?: (event: { progress: number }) => void,
-  abortSignal?: AbortSignal,
-) => Promise<string>;
 
 export interface ImageUploadNodeOptions {
-  /**
-   * The type of the node.
-   * @default 'image'
-   */
-  type?: string | NodeType | undefined;
-  /**
-   * Acceptable file types for upload.
-   * @default 'image/*'
-   */
-  accept?: string;
-  /**
-   * Maximum number of files that can be uploaded.
-   * @default 1
-   */
-  limit?: number;
-  /**
-   * Maximum file size in bytes (0 for unlimited).
-   * @default 0
-   */
-  maxSize?: number;
-  /**
-   * Function to handle the upload process.
-   */
-  upload?: UploadFunction;
-  /**
-   * Callback for upload errors.
-   */
-  onError?: (error: Error) => void;
-  /**
-   * Callback for successful uploads.
-   */
-  onSuccess?: (url: string) => void;
-  /**
-   * HTML attributes to add to the image element.
-   * @default {}
-   * @example { class: 'foo' }
-   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   HTMLAttributes: Record<string, any>;
 }
@@ -54,7 +10,7 @@ export interface ImageUploadNodeOptions {
 declare module "@tiptap/react" {
   interface Commands<ReturnType> {
     imageUpload: {
-      setImageUploadNode: (options?: ImageUploadNodeOptions) => ReturnType;
+      setImageUploadNode: () => ReturnType;
     };
   }
 }
@@ -76,28 +32,7 @@ export const ImageUploadNode = Node.create<ImageUploadNodeOptions>({
 
   addOptions() {
     return {
-      type: "image",
-      accept: "image/*",
-      limit: 1,
-      maxSize: 0,
-      upload: undefined,
-      onError: undefined,
-      onSuccess: undefined,
       HTMLAttributes: {},
-    };
-  },
-
-  addAttributes() {
-    return {
-      accept: {
-        default: this.options.accept,
-      },
-      limit: {
-        default: this.options.limit,
-      },
-      maxSize: {
-        default: this.options.maxSize,
-      },
     };
   },
 
@@ -119,11 +54,10 @@ export const ImageUploadNode = Node.create<ImageUploadNodeOptions>({
   addCommands() {
     return {
       setImageUploadNode:
-        (options) =>
+        () =>
         ({ commands }) => {
           return commands.insertContent({
             type: this.name,
-            attrs: options,
           });
         },
     };

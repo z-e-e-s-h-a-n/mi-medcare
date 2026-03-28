@@ -65,12 +65,6 @@ import { useWindowSize } from "@workspace/ui/hooks/tiptap/use-window-size";
 import { useCursorVisibility } from "@workspace/ui/hooks/tiptap/use-cursor-visibility";
 
 // --- Lib ---
-import {
-  handleImageUpload,
-  MAX_FILE_SIZE,
-} from "@workspace/ui/lib/tiptap-utils";
-
-// --- Styles ---
 import "./simple-editor.scss";
 
 import type { FieldChildrenProps } from "@workspace/ui/components/form";
@@ -225,13 +219,7 @@ export function SimpleEditor<TFormData>({
       Superscript,
       Subscript,
       Selection,
-      ImageUploadNode.configure({
-        accept: "image/*",
-        maxSize: MAX_FILE_SIZE,
-        limit: 3,
-        upload: handleImageUpload,
-        onError: (error: Error) => console.error("Upload failed:", error),
-      }),
+      ImageUploadNode,
     ],
     content: value ?? placeholder,
     onUpdate({ editor }) {
