@@ -117,7 +117,7 @@ export function GenericForm<
     <Form
       form={form}
       header={
-        <div className="mb-8">
+        <div>
           <div className="flex items-center gap-4">
             <h2 className="text-3xl font-bold mb-3">
               {title ??

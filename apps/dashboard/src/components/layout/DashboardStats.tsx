@@ -1,4 +1,11 @@
-import { Eye, FileText, Inbox, TrendingDown, TrendingUp, Users } from "lucide-react";
+import {
+  Eye,
+  FileText,
+  Inbox,
+  TrendingDown,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 
 import { Badge } from "@workspace/ui/components/badge";
 import {
@@ -16,7 +23,8 @@ interface DashboardStatsProps {
   charts: DashboardResponse["charts"];
 }
 
-const formatTrend = (value: number) => `${value > 0 ? "+" : ""}${value.toFixed(1)}%`;
+const formatTrend = (value: number) =>
+  `${value > 0 ? "+" : ""}${value.toFixed(1)}%`;
 
 const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
   const recentPostViews = charts.postViews.slice(-30);
@@ -24,14 +32,17 @@ const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
   const recentLeads = charts.leads.slice(-3);
   const previousLeads = charts.leads.slice(-6, -3);
 
-  const sum = (values: number[]) => values.reduce((total, value) => total + value, 0);
+  const sum = (values: number[]) =>
+    values.reduce((total, value) => total + value, 0);
   const percentChange = (current: number, previous: number) => {
     if (previous === 0) return current > 0 ? 100 : 0;
     return ((current - previous) / previous) * 100;
   };
 
-  const publishedStatuses = charts.postStatuses.find((item) => item.label === "Published")?.value ?? 0;
-  const draftStatuses = charts.postStatuses.find((item) => item.label === "Draft")?.value ?? 0;
+  const publishedStatuses =
+    charts.postStatuses.find((item) => item.label === "Published")?.value ?? 0;
+  const draftStatuses =
+    charts.postStatuses.find((item) => item.label === "Draft")?.value ?? 0;
 
   const postViewTrend = percentChange(
     sum(recentPostViews.map((item) => item.value)),
@@ -67,7 +78,7 @@ const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
   ] as const;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 dark:*:data-[slot=card]:bg-card">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs @xl/main:grid-cols-2 @5xl/main:grid-cols-4 dark:*:data-[slot=card]:bg-card">
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Total Users</CardDescription>
@@ -106,12 +117,14 @@ const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex items-center gap-2 font-medium">
-            {postTrend >= 0 ? <TrendingUp className="size-4" /> : <TrendingDown className="size-4" />}
+            {postTrend >= 0 ? (
+              <TrendingUp className="size-4" />
+            ) : (
+              <TrendingDown className="size-4" />
+            )}
             Published versus draft pipeline
           </div>
-          <div className="text-muted-foreground">
-            {trendMeta[1].helper}
-          </div>
+          <div className="text-muted-foreground">{trendMeta[1].helper}</div>
         </CardFooter>
       </Card>
       <Card className="@container/card">
@@ -129,12 +142,14 @@ const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex items-center gap-2 font-medium">
-            {postViewTrend >= 0 ? <TrendingUp className="size-4" /> : <TrendingDown className="size-4" />}
+            {postViewTrend >= 0 ? (
+              <TrendingUp className="size-4" />
+            ) : (
+              <TrendingDown className="size-4" />
+            )}
             Combined post view activity
           </div>
-          <div className="text-muted-foreground">
-            {trendMeta[2].helper}
-          </div>
+          <div className="text-muted-foreground">{trendMeta[2].helper}</div>
         </CardFooter>
       </Card>
       <Card className="@container/card">
@@ -152,14 +167,16 @@ const DashboardStats = ({ stats, charts }: DashboardStatsProps) => {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex items-center gap-2 font-medium">
-            {leadTrend >= 0 ? <TrendingUp className="size-4" /> : <TrendingDown className="size-4" />}
+            {leadTrend >= 0 ? (
+              <TrendingUp className="size-4" />
+            ) : (
+              <TrendingDown className="size-4" />
+            )}
             {stats.leads.contactMessages} contact,{" "}
             {stats.leads.consultationRequests} consultations,{" "}
             {stats.leads.newsletterSubscribers} newsletter
           </div>
-          <div className="text-muted-foreground">
-            {trendMeta[3].helper}
-          </div>
+          <div className="text-muted-foreground">{trendMeta[3].helper}</div>
         </CardFooter>
       </Card>
     </div>

@@ -24,7 +24,6 @@ import {
   CardTitle,
 } from "@workspace/ui/components/card";
 import { Badge } from "@workspace/ui/components/badge";
-import { Skeleton } from "@workspace/ui/components/skeleton";
 import {
   Tabs,
   TabsContent,
@@ -35,6 +34,7 @@ import DashboardChart from "@/components/layout/DashboardChart";
 import ContentOverview from "@/components/layout/ContentOverview";
 import DashboardStats from "@/components/layout/DashboardStats";
 import { useDashboard } from "@/hooks/dashboard";
+import DashboardSkeleton from "@/components/skeleton/DashboardSkeleton";
 
 const formatDate = (value: string) =>
   new Date(value).toLocaleDateString(undefined, {
@@ -99,33 +99,21 @@ const DashboardPage = () => {
   const { data, isLoading, fetchError } = useDashboard();
 
   if (isLoading) {
-    return (
-      <div className="space-y-6">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <Skeleton key={index} className="h-40 rounded-2xl" />
-          ))}
-        </div>
-        <Skeleton className="h-104 rounded-2xl" />
-        <div className="grid gap-6 xl:grid-cols-3">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Skeleton key={index} className="h-96 rounded-2xl" />
-          ))}
-        </div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   if (fetchError || !data) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Dashboard unavailable</CardTitle>
-          <CardDescription>
-            {fetchError?.message ?? "Failed to load dashboard overview."}
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <section>
+        <Card>
+          <CardHeader>
+            <CardTitle>Dashboard unavailable</CardTitle>
+            <CardDescription>
+              {fetchError?.message ?? "Failed to load dashboard overview."}
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </section>
     );
   }
 
@@ -142,8 +130,8 @@ const DashboardPage = () => {
   } as const;
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-3 px-4 lg:px-6">
+    <section className="space-y-6">
+      <div className="flex flex-col gap-3 ">
         <div>
           <h1 className="text-3xl font-bold">Dashboard</h1>
           <p className="text-muted-foreground">
@@ -155,11 +143,11 @@ const DashboardPage = () => {
 
       <DashboardStats stats={data.stats} charts={data.charts} />
 
-      <div className="px-4 lg:px-6">
+      <div>
         <DashboardChart charts={data.charts} />
       </div>
 
-      <div className="grid gap-6 px-4 lg:px-6">
+      <div className="grid gap-6 ">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -299,10 +287,10 @@ const DashboardPage = () => {
         </Card>
       </div>
 
-      <div className="px-4 lg:px-6">
+      <div>
         <ContentOverview data={data.contentOverview} />
       </div>
-    </div>
+    </section>
   );
 };
 

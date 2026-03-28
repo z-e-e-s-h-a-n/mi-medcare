@@ -34,7 +34,7 @@ const UserProfileForm = () => {
   }
 
   return (
-    <section className="space-y-6 my-4">
+    <section className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Account Management</h1>
         <p className="text-muted-foreground mt-2">
@@ -44,7 +44,7 @@ const UserProfileForm = () => {
 
       <Separator />
 
-      <Tabs defaultValue="profile" className="w-full">
+      <Tabs defaultValue="profile" className="w-full space-y-8">
         <TabsList className="grid w-full grid-cols-2 lg:w-auto lg:inline-flex">
           <TabsTrigger value="profile" className="flex items-center gap-2">
             <User className="size-4" />

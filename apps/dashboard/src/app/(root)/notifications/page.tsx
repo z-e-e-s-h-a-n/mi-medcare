@@ -34,7 +34,6 @@ const NotificationsPage = () => {
     try {
       await markAsReadAsync(id);
       toast.success("Notification marked as read.");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error("Failed to update notification", {
         description: error?.message,
@@ -43,7 +42,7 @@ const NotificationsPage = () => {
   };
 
   return (
-    <div className="container mx-auto space-y-6 p-6">
+    <section className="section space-y-6">
       <div className="grid gap-4 md:grid-cols-3">
         <Card className="border-primary/20 bg-linear-to-br from-primary/10 to-card">
           <CardHeader>
@@ -160,7 +159,7 @@ const NotificationsPage = () => {
           })}
         </CardContent>
       </Card>
-    </div>
+    </section>
   );
 };
 

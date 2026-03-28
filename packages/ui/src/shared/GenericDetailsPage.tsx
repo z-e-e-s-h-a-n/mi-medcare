@@ -87,7 +87,7 @@ export function GenericDetailsPage<TData extends BaseResponse>({
 
   if (fetchError || !data) {
     return (
-      <div className="container mx-auto p-6">
+      <section>
         <div className="flex items-center gap-2 mb-6">
           <Button variant="ghost" size="icon" href={backPath}>
             <ArrowLeft className="h-4 w-4" />
@@ -106,7 +106,7 @@ export function GenericDetailsPage<TData extends BaseResponse>({
             </div>
           </CardContent>
         </Card>
-      </div>
+      </section>
     );
   }
 
@@ -145,9 +145,9 @@ export function GenericDetailsPage<TData extends BaseResponse>({
     typeof description === "function" ? description(data) : description;
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      <div className="flex flex-col gap-5">
-        <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+    <section className="space-y-6">
+      <div className="flex flex-col gap-8 mb-8">
+        <div className="flex justify-between gap-4 xl:flex-row xl:items-start xl:justify-between">
           <div className="space-y-3">
             <Button
               variant="ghost"
@@ -304,6 +304,6 @@ export function GenericDetailsPage<TData extends BaseResponse>({
           </Card>
         );
       })}
-    </div>
+    </section>
   );
 }

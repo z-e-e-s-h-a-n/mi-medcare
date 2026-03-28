@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useForm } from "@tanstack/react-form";
@@ -155,7 +154,7 @@ const AccountSection = ({ user }: AccountSectionProps) => {
   }, [otpMeta?.token, otpMeta?.valid, refetchUser]);
 
   return (
-    <Form form={form} className="space-y-6">
+    <Form form={form}>
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">

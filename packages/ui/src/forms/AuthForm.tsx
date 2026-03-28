@@ -78,7 +78,7 @@ export function AuthForm({ className, formType, queryParams }: AuthFormProps) {
         if (formType === "sign-in") {
           const res = await signIn(value);
           message = res.message;
-          setRedirectUrl("/dashboard");
+          setRedirectUrl("/");
           if (res.action === "verifyMfa") {
             setOtpPurpose("verifyMfa");
             setIsOpen(true);

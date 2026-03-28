@@ -16,7 +16,7 @@ import {
   SidebarMenuButton,
 } from "@workspace/ui/components/sidebar";
 import { cn } from "@workspace/ui/lib/utils";
-import DashboardSkeleton from "./DashboardSke1eton";
+import DashboardSkeleton from "./DashboardSkeleton";
 import { sidebarMenu } from "@/lib/constants";
 // import { sidebarMenu } from "@/lib/constants";
 

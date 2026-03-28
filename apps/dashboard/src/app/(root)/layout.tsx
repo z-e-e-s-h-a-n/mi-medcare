@@ -37,7 +37,7 @@ const Layout = ({ children }: AppLayoutProps) => {
       />
       <SidebarInset>
         <Header />
-        <div className="section-wrapper">{children}</div>
+        <div className="section-wrapper py-12">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );
