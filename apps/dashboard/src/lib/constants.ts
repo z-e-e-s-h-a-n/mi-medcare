@@ -20,7 +20,7 @@ export const sidebarMenu: NavGroup[] = [
     items: [
       {
         label: "Dashboard",
-        href: "/dashboard",
+        href: "/",
         icon: IconDashboard,
       },
     ],
@@ -35,17 +35,17 @@ export const sidebarMenu: NavGroup[] = [
         children: [
           {
             label: "Posts",
-            href: "/admin/content/posts",
+            href: "/content/posts",
             icon: IconFileText,
           },
           {
             label: "Tags",
-            href: "/admin/content/tags",
+            href: "/content/tags",
             icon: IconTags,
           },
           {
             label: "Categories",
-            href: "/admin/content/categories",
+            href: "/content/categories",
             icon: IconCategory,
           },
         ],

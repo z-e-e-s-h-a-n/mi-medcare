@@ -143,7 +143,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
               accessor: (i) => i.description,
             },
           ],
-          viewPath: (item) => `/dashboard/categories/${item.id}`,
+          viewPath: (item) => `/content/categories/${item.id}`,
         },
       ]}
       renderHeader={(data) => (
@@ -228,7 +228,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
                         </td>
                         <td className="px-4 py-3 text-right">
                           <Button variant="ghost" size="sm" asChild>
-                            <Link href={`/dashboard/posts/${item.id}`}>
+                            <Link href={`/content/posts/${item.id}`}>
                               <Eye className="h-4 w-4" />
                             </Link>
                           </Button>
@@ -271,7 +271,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
                           <span className="text-muted-foreground">›</span>
                         )}
                         <a
-                          href={`/dashboard/categories/${category.id}`}
+                          href={`/content/categories/${category.id}`}
                           className="text-primary hover:underline"
                         >
                           {category.name}
@@ -293,7 +293,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
                           className="gap-1"
                           asChild
                         >
-                          <a href={`/dashboard/categories/${child.id}`}>
+                          <a href={`/content/categories/${child.id}`}>
                             <FolderTree className="h-3 w-3" />
                             {child.name}
                             <span className="text-xs text-muted-foreground">

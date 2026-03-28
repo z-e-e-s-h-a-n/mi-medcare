@@ -66,7 +66,7 @@ const ContentOverview = ({ data }: ContentOverviewProps) => {
                 return (
                   <Link
                     key={post.id}
-                    href={`/admin/content/posts/${post.id}`}
+                    href={`/content/posts/${post.id}`}
                     className="block rounded-xl border bg-card/70 p-4 transition-colors hover:bg-muted/40"
                   >
                     <div className="flex items-start justify-between gap-3">
@@ -111,7 +111,7 @@ const ContentOverview = ({ data }: ContentOverviewProps) => {
                 return (
                   <Link
                     key={category.id}
-                    href={`/admin/content/categories/${category.id}`}
+                    href={`/content/categories/${category.id}`}
                     className="block rounded-xl border bg-card/70 p-4 transition-colors hover:bg-muted/40"
                   >
                     <div className="flex items-center justify-between gap-3">
@@ -149,7 +149,7 @@ const ContentOverview = ({ data }: ContentOverviewProps) => {
                 return (
                   <Link
                     key={tag.id}
-                    href={`/admin/content/tags/${tag.id}`}
+                    href={`/content/tags/${tag.id}`}
                     className="block rounded-xl border bg-card/70 p-4 transition-colors hover:bg-muted/40"
                   >
                     <div className="mb-2 flex items-center justify-between gap-3">

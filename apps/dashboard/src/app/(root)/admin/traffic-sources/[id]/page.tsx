@@ -90,7 +90,7 @@ const TrafficSourceDetailsPage = ({ params }: AppPageProps) => {
             columns={["Target", "Viewed At"]}
             rows={source.postViews?.map((view) => ({
               id: view.id,
-              href: `/admin/content/posts/${view.postId}`,
+              href: `/content/posts/${view.postId}`,
               values: [`Post: ${view.postId}`, view.viewedAt],
             }))}
           />
