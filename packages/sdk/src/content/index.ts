@@ -13,6 +13,7 @@ import type {
   TagQueryType,
   TagResponse,
   TagType,
+  TrackPostViewResponse,
 } from "@workspace/contracts/content";
 
 export const getCategories = (params?: CategoryQueryType) =>
@@ -88,6 +89,11 @@ export const getPosts = (params?: PostQueryType) =>
 
 export const getPostBySlug = (slug: string, config?: AxiosRequestConfig) =>
   executeApi<PostResponse>(() => apiClient.get(`/posts/${slug}`, config));
+
+export const trackPostView = (slug: string) =>
+  executeApi<TrackPostViewResponse>(() =>
+    apiClient.post(`/posts/${slug}/views`),
+  );
 
 export const createPost = (data: PostType) =>
   executeApi<PostResponse>(() => apiClient.post("/admin/content/posts", data));

@@ -51,3 +51,8 @@ export interface PostQueryResponse extends BaseQueryResponse {
 }
 
 export type PostViewResponse = Sanitize<PostView>;
+
+export interface TrackPostViewResponse {
+  tracked: boolean;
+  viewsCount: number;
+}

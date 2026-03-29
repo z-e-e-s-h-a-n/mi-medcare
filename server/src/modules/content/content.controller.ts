@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { Controller, Get, Param, Query, Req, Res } from "@nestjs/common";
+import { Controller, Get, Param, Post, Query, Req, Res } from "@nestjs/common";
 import {
   CategoryQueryDto,
   PostQueryDto,
@@ -40,11 +40,16 @@ export class ContentController {
   }
 
   @Get("posts/:slug")
-  async getPost(
+  async getPost(@Param("slug") slug: string) {
+    return this.contentService.getPostBySlug(slug);
+  }
+
+  @Post("posts/:slug/views")
+  async trackPostView(
     @Param("slug") slug: string,
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    return this.contentService.getPostBySlug(slug, req, res);
+    return this.contentService.trackPostView(slug, req, res);
   }
 }

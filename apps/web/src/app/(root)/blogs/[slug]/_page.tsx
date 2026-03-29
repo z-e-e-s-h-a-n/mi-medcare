@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Clock, Eye } from "lucide-react";
+import { Clock } from "lucide-react";
 import type { PostResponse } from "@workspace/contracts/content";
 import { Badge } from "@workspace/ui/components/badge";
 import { Button } from "@workspace/ui/components/button";
@@ -14,6 +14,7 @@ import { formatDate } from "@workspace/shared/utils";
 import { estimateReadTime } from "@/lib/utils";
 import BlogCard from "@/components/blogs/BlogCard";
 import BlogSidebar from "@/components/blogs/BlogSidebar";
+import { PostViewTracker } from "@/components/blogs/PostViewTracker";
 import { PageHeader } from "@/components/layout/page-header";
 
 export function BlogPostPageClient({ post }: { post: PostResponse }) {
@@ -76,10 +77,7 @@ export function BlogPostPageClient({ post }: { post: PostResponse }) {
                 <Clock className="h-4 w-4" />
                 {estimateReadTime(post.content)} min read
               </div>
-              <div className="flex items-center gap-1">
-                <Eye className="h-4 w-4" />
-                {post.viewsCount} views
-              </div>
+              <PostViewTracker slug={post.slug} prevCount={post.viewsCount} />
             </div>
 
             {post.cover && (
