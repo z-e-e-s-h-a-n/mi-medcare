@@ -79,16 +79,6 @@ export const envSchema = z.object({
   GHL_LOCATION_ID: z.string(),
 
   // ==============================
-  // Firebase
-  // ==============================
-  FIREBASE_PROJECT_ID: z.string().default(""),
-  FIREBASE_CLIENT_EMAIL: z.string().default(""),
-  FIREBASE_PRIVATE_KEY: z
-    .string()
-    .default("")
-    .transform((key) => key.replace(/\\n/g, "\n")),
-
-  // ==============================
   // External APIs
   // ==============================
   IP_STACK_API_KEY: z.string(),

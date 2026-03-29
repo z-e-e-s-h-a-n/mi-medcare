@@ -57,7 +57,7 @@ const TagDetailsPage = ({ params }: AppPageProps) => {
         },
       ]}
       renderHeader={(tag) => (
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-4">
           <div className="flex items-start gap-4">
             <div className="rounded-xl bg-background/80 p-3">
               <Tags className="size-6" />

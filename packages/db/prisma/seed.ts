@@ -4,7 +4,12 @@ import { createHash } from "crypto";
 import { faker } from "@faker-js/faker";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../prisma/generated/client";
-import { seedContent } from "./seed.content";
+import {
+  seedCategories,
+  seedContent,
+  seedPosts,
+  seedTags,
+} from "./seed.content";
 
 const connectionString = process.env.DB_URI!;
 const adapter = new PrismaPg({ connectionString });
@@ -14,20 +19,6 @@ const now = new Date();
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 const USER_SEEDS = [
-  {
-    firstName: "Sophia",
-    lastName: "Turner",
-    email: "sophia.turner@mimedcare.com",
-    role: "admin",
-    status: "active",
-  },
-  {
-    firstName: "Liam",
-    lastName: "Brooks",
-    email: "liam.brooks@mimedcare.com",
-    role: "admin",
-    status: "active",
-  },
   {
     firstName: "Olivia",
     lastName: "Patel",
@@ -43,56 +34,6 @@ const USER_SEEDS = [
     status: "active",
   },
 ];
-
-const CATEGORY_SEEDS = [
-  {
-    name: "Revenue Cycle Management",
-    slug: "revenue-cycle-management",
-    description: "Operational strategies for billing, claims, and collections.",
-  },
-  {
-    name: "Medical Coding",
-    slug: "medical-coding",
-    description: "Coding accuracy, documentation, and reimbursement updates.",
-  },
-  {
-    name: "Practice Operations",
-    slug: "practice-operations",
-    description: "Workflow and staffing guidance for healthcare practices.",
-  },
-  {
-    name: "Compliance",
-    slug: "compliance",
-    description: "HIPAA, payer rules, and revenue compliance best practices.",
-  },
-  {
-    name: "Patient Access",
-    slug: "patient-access",
-    description: "Eligibility, intake, and front-desk optimization content.",
-  },
-];
-
-const TAG_SEEDS = [
-  "medical billing",
-  "revenue cycle",
-  "claims management",
-  "eligibility verification",
-  "denial prevention",
-  "prior authorization",
-  "credentialing",
-  "coding audits",
-  "hipaa compliance",
-  "accounts receivable",
-  "patient collections",
-  "practice growth",
-];
-
-function titleFromSlug(slug: string) {
-  return slug
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
-}
 
 const PRACTICE_NAMES = [
   "Harbor Family Medicine",
@@ -112,154 +53,6 @@ const LEAD_MONTHLY_COUNTS = {
   consultationRequests: [2, 3, 4, 5, 6, 7],
   newsletterSubscribers: [6, 7, 9, 11, 14, 16],
 } as const;
-
-const POST_BLUEPRINTS = [
-  {
-    title: "How to Reduce Claim Denials in High-Volume Specialty Practices",
-    categorySlug: "revenue-cycle-management",
-    tagSlugs: ["medical-billing", "denial-prevention", "claims-management"],
-    status: "published",
-    daysAgo: 88,
-    viewTarget: 420,
-  },
-  {
-    title: "Front-Desk Eligibility Checks That Improve Clean Claim Rates",
-    categorySlug: "patient-access",
-    tagSlugs: ["eligibility-verification", "revenue-cycle", "practice-growth"],
-    status: "published",
-    daysAgo: 76,
-    viewTarget: 365,
-  },
-  {
-    title: "The Best Weekly AR Review for Medical Billing Teams",
-    categorySlug: "revenue-cycle-management",
-    tagSlugs: ["accounts-receivable", "medical-billing", "practice-growth"],
-    status: "published",
-    daysAgo: 69,
-    viewTarget: 310,
-  },
-  {
-    title: "Preventing Prior Authorization Delays Before They Hit Revenue",
-    categorySlug: "patient-access",
-    tagSlugs: ["prior-authorization", "revenue-cycle", "claims-management"],
-    status: "published",
-    daysAgo: 61,
-    viewTarget: 280,
-  },
-  {
-    title: "Coding Audit Habits That Protect Reimbursement Accuracy",
-    categorySlug: "medical-coding",
-    tagSlugs: ["coding-audits", "medical-coding", "hipaa-compliance"],
-    status: "published",
-    daysAgo: 54,
-    viewTarget: 245,
-  },
-  {
-    title: "KPI Benchmarks Every RCM Manager Should Review Monthly",
-    categorySlug: "revenue-cycle-management",
-    tagSlugs: ["revenue-cycle", "practice-growth", "accounts-receivable"],
-    status: "published",
-    daysAgo: 47,
-    viewTarget: 210,
-  },
-  {
-    title: "Credentialing Delays That Quietly Hurt Cash Flow",
-    categorySlug: "practice-operations",
-    tagSlugs: ["credentialing", "medical-billing", "practice-growth"],
-    status: "published",
-    daysAgo: 38,
-    viewTarget: 185,
-  },
-  {
-    title: "HIPAA-Safe Billing Workflows for Remote Teams",
-    categorySlug: "compliance",
-    tagSlugs: ["hipaa-compliance", "practice-operations", "medical-billing"],
-    status: "published",
-    daysAgo: 30,
-    viewTarget: 160,
-  },
-  {
-    title: "Why Patient Statements Need Better Timing and Clearer Messaging",
-    categorySlug: "patient-access",
-    tagSlugs: ["patient-collections", "practice-growth", "revenue-cycle"],
-    status: "published",
-    daysAgo: 22,
-    viewTarget: 130,
-  },
-  {
-    title: "Denial Root-Cause Reporting Templates for Billing Managers",
-    categorySlug: "revenue-cycle-management",
-    tagSlugs: ["denial-prevention", "claims-management", "medical-billing"],
-    status: "published",
-    daysAgo: 14,
-    viewTarget: 95,
-  },
-  {
-    title: "What to Include in a Quarterly Coding Compliance Review",
-    categorySlug: "medical-coding",
-    tagSlugs: ["coding-audits", "medical-coding", "hipaa-compliance"],
-    status: "draft",
-    daysAgo: null,
-    viewTarget: 18,
-  },
-  {
-    title: "Collections Scripts That Feel Professional and Patient-Friendly",
-    categorySlug: "patient-access",
-    tagSlugs: ["patient-collections", "practice-growth", "medical-billing"],
-    status: "draft",
-    daysAgo: null,
-    viewTarget: 12,
-  },
-  {
-    title: "Payer Mix Trends Worth Watching in 2026",
-    categorySlug: "practice-operations",
-    tagSlugs: ["revenue-cycle", "practice-growth", "claims-management"],
-    status: "draft",
-    daysAgo: null,
-    viewTarget: 10,
-  },
-  {
-    title:
-      "How Smaller Practices Can Outsource Billing Without Losing Visibility",
-    categorySlug: "practice-operations",
-    tagSlugs: ["medical-billing", "practice-growth", "accounts-receivable"],
-    status: "draft",
-    daysAgo: null,
-    viewTarget: 8,
-  },
-  {
-    title: "Billing Dashboard Metrics for New Multi-Site Clients",
-    categorySlug: "revenue-cycle-management",
-    tagSlugs: ["medical-billing", "practice-growth", "revenue-cycle"],
-    status: "draft",
-    daysAgo: null,
-    viewTarget: 0,
-  },
-  {
-    title: "Referral Tracking That Connects Marketing to Collections",
-    categorySlug: "practice-operations",
-    tagSlugs: ["practice-growth", "revenue-cycle", "claims-management"],
-    status: "draft",
-    daysAgo: null,
-    viewTarget: 0,
-  },
-  {
-    title: "How to Prepare New Clients for a Clean Billing Handoff",
-    categorySlug: "practice-operations",
-    tagSlugs: ["medical-billing", "credentialing", "practice-growth"],
-    status: "draft",
-    daysAgo: null,
-    viewTarget: 0,
-  },
-  {
-    title: "Documentation Gaps That Trigger Avoidable Downcoding",
-    categorySlug: "medical-coding",
-    tagSlugs: ["medical-coding", "coding-audits", "denial-prevention"],
-    status: "draft",
-    daysAgo: null,
-    viewTarget: 0,
-  },
-] as const;
 
 const TRAFFIC_SOURCE_SEEDS = [
   {
@@ -373,19 +166,6 @@ function monthWindow(monthOffset: number) {
   return { start, end };
 }
 
-function createPostExcerpt(title: string) {
-  return `${title} with practical recommendations for medical billing teams, practice administrators, and revenue cycle leaders.`;
-}
-
-function createPostContent(title: string) {
-  return [
-    `${title} matters because billing performance is usually shaped by a few repeated workflow decisions across eligibility, coding, claims follow-up, and collections.`,
-    `Strong medical billing teams standardize handoffs, review payer patterns weekly, and document the causes behind denials instead of treating each issue as isolated.`,
-    `When leadership can see trends clearly, they can improve turnaround times, reduce rework, and build healthier cash flow for the practice.`,
-    `This article gives operations leaders and billing managers a clean framework they can use to improve process visibility and reimbursement outcomes.`,
-  ].join("\n\n");
-}
-
 async function seedUsers() {
   console.log("Seeding users...");
 
@@ -416,105 +196,6 @@ async function seedUsers() {
   console.log(`Created ${users.length} users`);
 
   return { users };
-}
-
-async function seedCategories() {
-  console.log("Seeding categories...");
-
-  const categories = [];
-  for (const category of CATEGORY_SEEDS) {
-    categories.push(
-      await prisma.category.create({
-        data: category,
-      }),
-    );
-  }
-
-  console.log(`Created ${categories.length} categories`);
-  return categories;
-}
-
-async function seedTags() {
-  console.log("Seeding tags...");
-
-  const manualTagNames = TAG_SEEDS.map((name) => ({
-    name,
-    slug: faker.helpers.slugify(name).toLowerCase(),
-  }));
-  const blueprintTags = Array.from(
-    new Set(POST_BLUEPRINTS.flatMap((post) => post.tagSlugs)),
-  ).map((slug) => ({
-    slug,
-    name: titleFromSlug(slug),
-  }));
-  const tagSeeds = Array.from(
-    new Map(
-      [...manualTagNames, ...blueprintTags].map((tag) => [tag.slug, tag]),
-    ).values(),
-  );
-
-  const tags = await Promise.all(
-    tagSeeds.map((tag) =>
-      prisma.tag.create({
-        data: {
-          name: tag.name,
-          slug: tag.slug,
-        },
-      }),
-    ),
-  );
-
-  console.log(`Created ${tags.length} tags`);
-  return tags;
-}
-
-async function seedPosts(users: any[], categories: any[], tags: any[]) {
-  console.log("Seeding posts...");
-
-  const authors = users.filter((user) => user.role === "author");
-  const categoryMap = new Map(
-    categories.map((category) => [category.slug, category]),
-  );
-  const tagMap = new Map(tags.map((tag) => [tag.slug, tag]));
-  const posts = [];
-
-  for (const [index, blueprint] of POST_BLUEPRINTS.entries()) {
-    const author = authors[index % authors.length];
-    const category = categoryMap.get(blueprint.categorySlug)!;
-    const publishedAt =
-      blueprint.status === "published" && blueprint.daysAgo !== null
-        ? daysAgo(blueprint.daysAgo)
-        : null;
-
-    const post = await prisma.post.create({
-      data: {
-        authorId: author.id,
-        categoryId: category.id,
-        title: blueprint.title,
-        slug: faker.helpers.slugify(blueprint.title).toLowerCase(),
-        excerpt: createPostExcerpt(blueprint.title),
-        content: createPostContent(blueprint.title),
-        status: blueprint.status,
-        publishedAt,
-        metaTitle: blueprint.title,
-        metaDescription: createPostExcerpt(blueprint.title),
-        viewsCount: 0,
-        tags: {
-          connect: blueprint.tagSlugs.map((slug) => ({
-            id: tagMap.get(slug)!.id,
-          })),
-        },
-      },
-    });
-
-    posts.push({
-      ...post,
-      seedViewTarget: blueprint.viewTarget,
-    });
-  }
-
-  console.log(`Created ${posts.length} posts`);
-  return posts;
 }
 
 async function seedTrafficSources() {
@@ -1001,7 +682,7 @@ async function main() {
     const { users } = await seedUsers();
     const categories = await seedCategories();
     const tags = await seedTags();
-    const posts = await seedPosts(users, categories, tags);
+    const posts = await seedPosts(users[0].id, categories, tags);
     const trafficSources = await seedTrafficSources();
 
     await seedPostViews(posts, trafficSources);
@@ -1022,4 +703,4 @@ async function main() {
   }
 }
 
-void seedContent();
+void main();

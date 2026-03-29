@@ -1,6 +1,11 @@
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient, PostStatus, UserRole } from "./generated/client";
+import {
+  PrismaClient,
+  PostStatus,
+  UserRole,
+  type Post,
+} from "./generated/client";
 
 const connectionString = process.env.DB_URI;
 
@@ -440,7 +445,7 @@ async function resolveSeedAuthorId(): Promise<string> {
   return fallbackUser.id;
 }
 
-async function seedCategories() {
+export async function seedCategories() {
   const categoriesBySlug = new Map<string, { id: string; slug: string }>();
 
   for (const category of CATEGORY_SEEDS) {
@@ -468,7 +473,7 @@ async function seedCategories() {
   return categoriesBySlug;
 }
 
-async function seedTags() {
+export async function seedTags() {
   const tagsBySlug = new Map<string, { id: string; slug: string }>();
 
   for (const tag of TAG_SEEDS) {
@@ -494,11 +499,13 @@ async function seedTags() {
   return tagsBySlug;
 }
 
-async function seedPosts(
+export async function seedPosts(
   authorId: string,
   categoriesBySlug: Map<string, { id: string; slug: string }>,
   tagsBySlug: Map<string, { id: string; slug: string }>,
 ) {
+  const posts: Post[] = [];
+
   for (const post of POST_SEEDS) {
     const category = categoriesBySlug.get(post.categorySlug);
 
@@ -516,7 +523,7 @@ async function seedPosts(
       return { id: tag.id };
     });
 
-    await prisma.post.upsert({
+    const created = await prisma.post.upsert({
       where: { slug: post.slug },
       update: {
         authorId,
@@ -550,7 +557,11 @@ async function seedPosts(
         },
       },
     });
+
+    posts.push(created);
   }
+
+  return posts;
 }
 
 export async function seedContent() {

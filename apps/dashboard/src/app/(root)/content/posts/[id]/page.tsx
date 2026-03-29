@@ -72,7 +72,7 @@ const PostDetailsPage = ({ params }: AppPageProps) => {
             },
             {
               label: "Views",
-              accessor: "viewsCount",
+              accessor: (value) => <span>{value.viewsCount}</span>,
               icon: Eye,
             },
           ],
@@ -139,13 +139,13 @@ const PostDetailsPage = ({ params }: AppPageProps) => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-2 rounded-lg border bg-background p-4 shadow-xs">
                 <div className="text-sm text-muted-foreground">Meta Title</div>
                 <div className="text-sm font-medium">
                   {data.metaTitle || "—"}
                 </div>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 rounded-lg border bg-background p-4 shadow-xs">
                 <div className="text-sm text-muted-foreground">
                   Meta Description
                 </div>

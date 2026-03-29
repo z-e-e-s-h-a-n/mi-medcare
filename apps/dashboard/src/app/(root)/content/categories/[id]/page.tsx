@@ -191,7 +191,7 @@ const CategoryDetailsPage = ({ params }: AppPageProps) => {
               <CardTitle className="text-lg">Posts in this Category</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="overflow-hidden rounded-lg border">
+              <div className="overflow-x-auto rounded-lg border">
                 <table className="w-full text-sm">
                   <thead className="bg-muted/50">
                     <tr>

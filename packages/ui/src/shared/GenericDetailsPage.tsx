@@ -181,24 +181,21 @@ export function GenericDetailsPage<TData extends BaseResponse>({
           </div>
         </div>
 
-        <Card className="overflow-hidden border-border/70 bg-linear-to-br from-background via-primary/5 to-secondary/10 shadow-sm">
+        <Card className="overflow-hidden bg-linear-to-br from-primary/10 via-secondary/10 to-accent/10 shadow-sm">
           <CardContent className="p-6">{renderHeader(data)}</CardContent>
         </Card>
       </div>
 
       <div className="grid gap-6">
         {sections.map(({ title, description, fields, columns }, index) => (
-          <Card
-            key={index}
-            className="overflow-hidden border-border/70 shadow-sm"
-          >
+          <Card key={index} className="overflow-hidden">
             <CardHeader className="border-b bg-muted/20">
               <CardTitle className="text-lg">{title}</CardTitle>
               {description && (
                 <CardDescription>{description(data)}</CardDescription>
               )}
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent>
               <div className={cn("grid gap-4", getGridColumns(columns))}>
                 {fields.map((field, fieldIndex) => {
                   const Icon = field.icon;
@@ -209,7 +206,7 @@ export function GenericDetailsPage<TData extends BaseResponse>({
                       <div
                         key={fieldIndex}
                         className={cn(
-                          "rounded-2xl border border-border/60 bg-card/60 p-4 shadow-xs",
+                          "rounded-lg border bg-background p-4 shadow-xs",
                           field.className,
                         )}
                       >
@@ -242,14 +239,11 @@ export function GenericDetailsPage<TData extends BaseResponse>({
         }
 
         return (
-          <Card
-            key={index}
-            className="overflow-hidden border-border/70 shadow-sm"
-          >
+          <Card key={index} className="overflow-hidden">
             <CardHeader className="border-b bg-muted/20">
               <CardTitle className="text-lg">{related.title}</CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent>
               <div className="overflow-hidden rounded-lg border">
                 <table className="w-full text-sm">
                   <thead className="bg-muted/50">

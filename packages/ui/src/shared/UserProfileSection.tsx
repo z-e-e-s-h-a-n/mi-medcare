@@ -102,7 +102,7 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
             </AvatarFallback>
           </Avatar>
 
-          <div className="flex-1 flex items-start justify-between">
+          <div className="flex-1 flex flex-col items-start gap-4 sm:flex-row justify-between">
             <div>
               <p className="text-lg font-semibold">{user.displayName}</p>
               <p className="text-sm text-muted-foreground">{user.email}</p>

@@ -11,7 +11,7 @@ const Header = () => {
   const { unreadCount } = useNotifications();
 
   return (
-    <header className="flex h-(--header-height) px-4 lg:px-6 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
+    <header className="flex sticky top-0 bg-background px-4 lg:px-6 shrink-0 items-center gap-2 border-b h-16 md:h-12">
       <SidebarTrigger />
       <Separator
         orientation="vertical"

@@ -164,7 +164,7 @@ const AccountSection = ({ user }: AccountSectionProps) => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-4 rounded-lg border p-4">
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center flex-wrap justify-between gap-4">
               <div className="space-y-1">
                 <p className="font-medium">Email Address</p>
                 <p className="text-sm text-muted-foreground">{user.email}</p>
