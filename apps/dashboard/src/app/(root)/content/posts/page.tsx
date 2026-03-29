@@ -8,6 +8,7 @@ import ListPage from "@workspace/ui/shared/ListPage";
 import type { ColumnConfig } from "@workspace/ui/shared/GenericTable";
 import type { SearchByOption } from "@workspace/ui/shared/SearchToolbar";
 import { formatDate } from "@workspace/shared/utils";
+import { PostStatusEnum } from "@workspace/contracts";
 
 const postColumns: ColumnConfig<PostResponse, PostQueryType>[] = [
   {
@@ -56,6 +57,11 @@ const PostsPage = () => {
       useDeleteHook={useDeletePost}
       defaultSortBy="createdAt"
       defaultSearchBy="title"
+      filterConfig={{
+        key: "status",
+        label: "Status",
+        options: PostStatusEnum.options,
+      }}
     />
   );
 };

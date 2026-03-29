@@ -124,22 +124,22 @@ const DashboardSkeleton = () => {
           <CardContent className="space-y-3">
             {Array.from({ length: 4 }).map((_, index) => (
               <div key={index} className="rounded-2xl border bg-card/70 p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="flex min-w-0 items-center gap-3">
                     <Skeleton className="size-10 rounded-xl" />
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Skeleton className="h-5 w-20 rounded-md" />
-                        <Skeleton className="h-4 w-20" />
+                    <div className="min-w-0 space-y-2">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Skeleton className="h-5 w-16 rounded-md sm:w-20" />
+                        <Skeleton className="h-4 w-16 sm:w-20" />
                       </div>
-                      <Skeleton className="h-4 w-28" />
+                      <Skeleton className="h-4 w-24 max-w-full sm:w-28" />
                     </div>
                   </div>
-                  <Skeleton className="h-4 w-20" />
+                  <Skeleton className="h-4 w-16 shrink-0 sm:w-20" />
                 </div>
-                <div className="mt-4 flex items-center justify-between rounded-xl border border-dashed px-3 py-2">
+                <div className="mt-4 flex flex-col gap-2 rounded-xl border border-dashed px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
                   <Skeleton className="h-4 w-full max-w-sm" />
-                  <Skeleton className="size-4 rounded" />
+                  <Skeleton className="size-4 shrink-0 rounded" />
                 </div>
               </div>
             ))}
@@ -160,22 +160,22 @@ const DashboardSkeleton = () => {
             <Skeleton className="h-10 w-full rounded-md" />
             {Array.from({ length: 3 }).map((_, index) => (
               <div key={index} className="rounded-2xl border bg-card/70 p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="flex min-w-0 items-center gap-3">
                     <Skeleton className="size-10 rounded-xl" />
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Skeleton className="h-5 w-24 rounded-md" />
-                        <Skeleton className="h-4 w-20" />
+                    <div className="min-w-0 space-y-2">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Skeleton className="h-5 w-20 rounded-md sm:w-24" />
+                        <Skeleton className="h-4 w-16 sm:w-20" />
                       </div>
-                      <Skeleton className="h-4 w-36" />
+                      <Skeleton className="h-4 w-28 max-w-full sm:w-36" />
                     </div>
                   </div>
-                  <Skeleton className="h-4 w-20" />
+                  <Skeleton className="h-4 w-16 shrink-0 sm:w-20" />
                 </div>
-                <div className="mt-4 flex items-center justify-between rounded-xl border border-dashed px-3 py-2">
+                <div className="mt-4 flex flex-col gap-2 rounded-xl border border-dashed px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
                   <Skeleton className="h-4 w-full max-w-sm" />
-                  <Skeleton className="size-4 rounded" />
+                  <Skeleton className="size-4 shrink-0 rounded" />
                 </div>
               </div>
             ))}
