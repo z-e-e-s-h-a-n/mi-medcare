@@ -36,6 +36,7 @@ import { SwitchField } from "@workspace/ui/components/switch-field";
 import { useMediaLibrary } from "@workspace/ui/hooks/use-media";
 import { useTheme } from "@workspace/ui/hooks/use-theme";
 import { getStatusVariant } from "@workspace/ui/lib/utils";
+import { useNotificationActions } from "@workspace/ui/hooks/use-notification";
 
 interface ProfileFormProps {
   user: UserResponse;
@@ -44,9 +45,11 @@ interface ProfileFormProps {
 }
 
 const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
+  const { syncTheme } = useTheme();
   const { onMediaSelect } = useMediaLibrary();
   const [userImage, setUserImage] = useState(user.image);
-  const { syncTheme } = useTheme();
+  const { updatePushNotificationsAsync, isPushPending } =
+    useNotificationActions();
 
   const form = useForm({
     defaultValues: {
@@ -57,7 +60,9 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
       preferredTheme: user.preferredTheme,
       pushNotifications: user.pushNotifications,
       loginAlerts: user.loginAlerts,
-    } as UserProfileType,
+    } as UserProfileType & {
+      pushNotifications?: boolean;
+    },
     listeners: {
       onChange: ({ formApi }) => {
         const userTheme = formApi.getFieldValue("preferredTheme");
@@ -108,8 +113,19 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
                   Email verified
                 </Badge>
               </div>
+            </div>
 
-              <div className="mt-2 text-xs text-muted-foreground">
+            <div className="space-y-4">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => onMediaSelect(setUserImage)}
+              >
+                <Camera className="mr-2 size-4" />
+                Change photo
+              </Button>
+
+              <div className="text-xs text-muted-foreground">
                 <p>Joined: {new Date(user.createdAt).toLocaleDateString()}</p>
                 {user.lastLoginAt && (
                   <p>
@@ -119,15 +135,6 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
                 )}
               </div>
             </div>
-
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => onMediaSelect(setUserImage)}
-            >
-              <Camera className="mr-2 size-4" />
-              Change photo
-            </Button>
           </div>
         </CardContent>
       </Card>
@@ -171,6 +178,7 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
           <SwitchField
             form={form}
             name="pushNotifications"
+            disabled={isPushPending}
             label={
               <span className="flex items-center gap-2">
                 <Bell className="size-4" />
@@ -178,6 +186,16 @@ const ProfileSection = ({ user, onUpdate, isUpdating }: ProfileFormProps) => {
               </span>
             }
             desc="Important activity alerts"
+            handleChange={async (checked, commit) => {
+              try {
+                await updatePushNotificationsAsync(Boolean(checked));
+                commit(Boolean(checked));
+              } catch (error: any) {
+                toast.error(
+                  error.message || "Failed to configure push notifications",
+                );
+              }
+            }}
           />
 
           <SwitchField

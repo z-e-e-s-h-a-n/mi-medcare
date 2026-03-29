@@ -18,7 +18,7 @@ export const SwitchField = <TFormData,>(props: SwitchFieldProps<TFormData>) => {
         className,
       )}
     >
-      {({ isInvalid, ...field }) => (
+      {({ isInvalid, onChange, ...field }) => (
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1">
             {label && <p className="font-medium leading-none">{label}</p>}
@@ -26,6 +26,7 @@ export const SwitchField = <TFormData,>(props: SwitchFieldProps<TFormData>) => {
           </div>
           <Switch
             {...field}
+            onCheckedChange={onChange}
             checked={field.value}
             aria-invalid={isInvalid}
             className="mt-0.5"

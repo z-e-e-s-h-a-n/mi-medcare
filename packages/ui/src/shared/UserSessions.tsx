@@ -95,10 +95,7 @@ const UserSessions = () => {
                     </p>
 
                     {i === 0 && (
-                      <Badge
-                        variant={getStatusVariant("active")}
-                        className="text-green-700"
-                      >
+                      <Badge variant={getStatusVariant("active")}>
                         Current
                       </Badge>
                     )}
