@@ -1,4 +1,5 @@
 import "@workspace/ui/globals.css";
+import { Suspense } from "react";
 import { Inter, Poppins } from "next/font/google";
 import ProviderWrapper from "@workspace/ui/provider-wrapper";
 import type { AppLayoutProps } from "@workspace/contracts";
@@ -7,6 +8,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { getCachedBusinessProfile } from "@/lib/business-profile";
 import { BusinessProfileProvider } from "@/providers/business-profile-provider";
+import TrafficSourceTracker from "@/providers/traffic-source-tracker";
 
 const primaryFont = Poppins({
   variable: "--font-primary",
@@ -89,6 +91,9 @@ const RootLayout = async ({ children }: AppLayoutProps) => {
       >
         <ProviderWrapper>
           <BusinessProfileProvider business={business}>
+            <Suspense fallback={null}>
+              <TrafficSourceTracker />
+            </Suspense>
             {children}
           </BusinessProfileProvider>
         </ProviderWrapper>

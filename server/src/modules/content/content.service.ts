@@ -459,6 +459,7 @@ export class ContentService {
       await tx.postView.create({
         data: {
           postId: post.id,
+          trafficSourceId: this.client.getTrafficSourceId(req),
           visitorKey,
           viewedAt,
           viewedOn,

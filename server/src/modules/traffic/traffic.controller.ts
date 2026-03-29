@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
+import type { Request, Response } from "express";
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Req,
+  Res,
+} from "@nestjs/common";
 import {
   CreateTrafficSourceDto,
   TrafficSourceQueryDto,
@@ -16,6 +26,16 @@ export class TrafficController {
   @Post("traffic-sources")
   async create(@Body() dto: CreateTrafficSourceDto) {
     return this.trafficService.create(dto);
+  }
+
+  @Public()
+  @Post("traffic-sources/track")
+  async track(
+    @Body() dto: CreateTrafficSourceDto,
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return this.trafficService.track(dto, req, res);
   }
 
   @Roles("admin")

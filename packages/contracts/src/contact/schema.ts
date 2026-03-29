@@ -2,7 +2,6 @@ import z from "zod";
 import {
   baseQuerySchema,
   emailSchema,
-  idSchema,
   nameSchema,
   phoneSchema,
 } from "../lib/schema";
@@ -15,7 +14,6 @@ import {
 } from "../lib/enums";
 
 export const createContactMessageSchema = z.object({
-  trafficSourceId: idSchema.optional(),
   fullName: nameSchema,
   practiceName: z.string().optional(),
   email: emailSchema,

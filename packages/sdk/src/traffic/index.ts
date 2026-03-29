@@ -9,6 +9,11 @@ import type {
 export const createTrafficSource = (data: CreateTrafficSourceType) =>
   executeApi<TrafficSourceResponse>(() => apiClient.post("/traffic-sources", data));
 
+export const trackTrafficSource = (data: CreateTrafficSourceType) =>
+  executeApi<TrafficSourceResponse>(() =>
+    apiClient.post("/traffic-sources/track", data),
+  );
+
 export const getTrafficSources = (params?: TrafficSourceQueryType) =>
   executeApi<TrafficSourceQueryResponse>(() =>
     apiClient.get("/admin/traffic-sources", { params }),

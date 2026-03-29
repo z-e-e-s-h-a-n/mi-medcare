@@ -1,3 +1,4 @@
+import type { Request } from "express";
 import {
   Controller,
   Post,
@@ -6,6 +7,7 @@ import {
   Param,
   Query,
   Put,
+  Req,
 } from "@nestjs/common";
 import { ConsultationService } from "./consultation.service";
 import { Public } from "@/decorators/public.decorator";
@@ -22,8 +24,11 @@ export class ConsultationController {
 
   @Public()
   @Post()
-  async createRequest(@Body() dto: CreateConsultationRequestDto) {
-    return this.service.createRequest(dto);
+  async createRequest(
+    @Body() dto: CreateConsultationRequestDto,
+    @Req() req: Request,
+  ) {
+    return this.service.createRequest(dto, req);
   }
 
   @Roles("admin")

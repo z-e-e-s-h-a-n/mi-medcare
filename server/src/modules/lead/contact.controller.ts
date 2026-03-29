@@ -1,4 +1,14 @@
-import { Controller, Post, Body, Put, Param, Get, Query } from "@nestjs/common";
+import type { Request } from "express";
+import {
+  Controller,
+  Post,
+  Body,
+  Put,
+  Param,
+  Get,
+  Query,
+  Req,
+} from "@nestjs/common";
 import { ContactService } from "./contact.service";
 import { Roles } from "@/decorators/roles.decorator";
 import { Public } from "@/decorators/public.decorator";
@@ -14,8 +24,8 @@ export class ContactController {
 
   @Public()
   @Post()
-  async createMessage(@Body() dto: CreateContactMessageDto) {
-    return this.service.createMessage(dto);
+  async createMessage(@Body() dto: CreateContactMessageDto, @Req() req: Request) {
+    return this.service.createMessage(dto, req);
   }
 
   @Roles("admin")

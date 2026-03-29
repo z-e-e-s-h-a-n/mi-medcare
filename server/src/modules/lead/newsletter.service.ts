@@ -1,3 +1,4 @@
+import type { Request } from "express";
 import { Injectable } from "@nestjs/common";
 import type {
   NewsletterSubscriberDto,
@@ -8,19 +9,29 @@ import { PrismaService } from "@/modules/prisma/prisma.service";
 import { resolveEmailTemplate } from "@workspace/templates";
 import { NotificationService } from "@/modules/notification/notification.service";
 import type { NewsletterSubscriber, Prisma } from "@workspace/db/client";
+import { ClientService } from "@/modules/client/client.service";
 
 @Injectable()
 export class NewsletterService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly notify: NotificationService,
+    private readonly client: ClientService,
   ) {}
 
-  async subscribe(dto: NewsletterSubscriberDto) {
+  async subscribe(dto: NewsletterSubscriberDto, req?: Request) {
+    const trafficSourceId = req && this.client.getTrafficSourceId(req);
+
     const user = await this.prisma.newsletterSubscriber.upsert({
       where: { email: dto.email },
-      create: dto,
-      update: dto,
+      create: {
+        ...dto,
+        trafficSourceId,
+      },
+      update: {
+        ...dto,
+        trafficSourceId,
+      },
     });
 
     await this.notifyUser(user);

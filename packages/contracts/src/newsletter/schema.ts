@@ -7,11 +7,9 @@ import {
   nameSchema,
   emailSchema,
   baseQuerySchema,
-  idSchema,
 } from "../lib/schema";
 
 export const newsletterSubscriberSchema = z.object({
-  trafficSourceId: idSchema.optional(),
   name: nameSchema,
   email: emailSchema,
 });

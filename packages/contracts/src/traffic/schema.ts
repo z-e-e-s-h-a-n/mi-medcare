@@ -14,8 +14,6 @@ export const createTrafficSourceSchema = z.object({
   utmContent: z.string().optional(),
   referrer: z.string().optional(),
   landingPage: z.string().optional(),
-  ip: z.string().optional(),
-  userAgent: z.string().optional(),
 });
 
 export const trafficSourceQuerySchema = baseQuerySchema(

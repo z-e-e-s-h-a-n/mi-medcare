@@ -1,4 +1,5 @@
-import { Controller, Post, Body, Get, Query, Param } from "@nestjs/common";
+import type { Request } from "express";
+import { Controller, Post, Body, Get, Query, Param, Req } from "@nestjs/common";
 import { NewsletterService } from "./newsletter.service";
 import {
   NewsletterSubscriberDto,
@@ -14,8 +15,8 @@ export class NewsletterController {
 
   @Public()
   @Post("subscribe")
-  async subscribe(@Body() dto: NewsletterSubscriberDto) {
-    return this.service.subscribe(dto);
+  async subscribe(@Body() dto: NewsletterSubscriberDto, @Req() req: Request) {
+    return this.service.subscribe(dto, req);
   }
 
   @Public()

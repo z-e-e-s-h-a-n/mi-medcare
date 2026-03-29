@@ -1,3 +1,4 @@
+import type { Request } from "express";
 import { Injectable } from "@nestjs/common";
 import type {
   ContactMessageQueryDto,
@@ -8,18 +9,21 @@ import { PrismaService } from "@/modules/prisma/prisma.service";
 import { NotificationService } from "@/modules/notification/notification.service";
 import { resolveEmailTemplate } from "@workspace/templates";
 import type { ContactMessage, Prisma } from "@workspace/db/client";
+import { ClientService } from "@/modules/client/client.service";
 
 @Injectable()
 export class ContactService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly notify: NotificationService,
+    private readonly client: ClientService,
   ) {}
 
-  async createMessage(dto: CreateContactMessageDto) {
+  async createMessage(dto: CreateContactMessageDto, req?: Request) {
     const message = await this.prisma.contactMessage.create({
       data: {
         ...dto,
+        trafficSourceId: req && this.client.getTrafficSourceId(req),
       },
     });
 
