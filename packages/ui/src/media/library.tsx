@@ -25,7 +25,7 @@ function MediaLibrary({ onSelect }: MediaLibraryProps) {
   const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
   const [searchBy, setSearchBy] = useState<MediaQueryType["searchBy"]>("name");
-  const [sortBy, setSortBy] = useState<MediaQueryType["sortBy"]>("name");
+  const [sortBy, setSortBy] = useState<MediaQueryType["sortBy"]>("createdAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [filter, setFilter] = useState<string>();
 
