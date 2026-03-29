@@ -9,8 +9,9 @@ import { EnvService } from "@/modules/env/env.service";
 import { CacheService } from "@/modules/cache/cache.service";
 
 @Injectable()
-export class CacheContextMiddleware implements NestMiddleware {
+export class ClientContextMiddleware implements NestMiddleware {
   private allowedOrigins: string[];
+  private readonly publicPaths = new Set(["/", "/health"]);
 
   constructor(
     private readonly cache: CacheService,
@@ -24,6 +25,11 @@ export class CacheContextMiddleware implements NestMiddleware {
       (req.headers["x-client-url"] as string) ||
       (req.query.clientUrl as string);
 
+    if (!incomingUrl && this.shouldBypass(req)) {
+      next();
+      return;
+    }
+
     if (!incomingUrl) {
       throw new BadRequestException("clientUrl is required");
     }
@@ -35,6 +41,10 @@ export class CacheContextMiddleware implements NestMiddleware {
     await this.setClientContext(req);
 
     next();
+  }
+
+  private shouldBypass(req: Request): boolean {
+    return req.method === "GET" && this.publicPaths.has(req.path);
   }
 
   private async setClientContext(req: Request): Promise<void> {
