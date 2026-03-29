@@ -58,11 +58,18 @@ body,
   width: 100%;
   min-width: 0;
   height: auto;
-
+  position: relative;
   display: flex;
   flex-direction: column;
-
   overflow: hidden;
+}
+
+.simple-editor-toolbar {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 
@@ -82,6 +89,23 @@ body,
 }
 
 @media screen and (max-width: 480px) {
+  .simple-editor-toolbar {
+    position: sticky;
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-self: stretch;
+    -webkit-overflow-scrolling: touch;
+
+    .tiptap-toolbar-group {
+      flex: 0 0 auto;
+    }
+  }
+
   .simple-editor-content .tiptap.ProseMirror.simple-editor {
     padding: 1rem 1.5rem 30vh;
   }

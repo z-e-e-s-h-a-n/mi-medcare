@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
 
 // --- Tiptap Core Extensions ---
@@ -61,8 +61,6 @@ import { LinkIcon } from "@workspace/ui/tiptap-icons/link-icon";
 
 // --- Hooks ---
 import { useIsBreakpoint } from "@workspace/ui/hooks/tiptap/use-is-breakpoint";
-import { useWindowSize } from "@workspace/ui/hooks/tiptap/use-window-size";
-import { useCursorVisibility } from "@workspace/ui/hooks/tiptap/use-cursor-visibility";
 
 // --- Lib ---
 import "./simple-editor.scss";
@@ -184,11 +182,9 @@ export function SimpleEditor<TFormData>({
   placeholder = "",
 }: FieldChildrenProps<TFormData>) {
   const isMobile = useIsBreakpoint();
-  const { height } = useWindowSize();
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
     "main",
   );
-  const toolbarRef = useRef<HTMLDivElement>(null);
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -227,11 +223,6 @@ export function SimpleEditor<TFormData>({
     },
   });
 
-  const rect = useCursorVisibility({
-    editor,
-    overlayHeight: toolbarRef.current?.getBoundingClientRect().height ?? 0,
-  });
-
   useEffect(() => {
     if (!isMobile && mobileView !== "main") {
       setMobileView("main");
@@ -246,16 +237,7 @@ export function SimpleEditor<TFormData>({
       )}
     >
       <EditorContext.Provider value={{ editor }}>
-        <Toolbar
-          ref={toolbarRef}
-          style={{
-            ...(isMobile
-              ? {
-                  bottom: `calc(100% - ${height - rect.y}px)`,
-                }
-              : {}),
-          }}
-        >
+        <Toolbar className="simple-editor-toolbar">
           {mobileView === "main" ? (
             <MainToolbarContent
               onHighlighterClick={() => setMobileView("highlighter")}

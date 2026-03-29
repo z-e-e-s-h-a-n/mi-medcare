@@ -40,9 +40,9 @@ function MediaLibrary({ onSelect }: MediaLibraryProps) {
 
   return (
     <Tabs asChild defaultValue="library">
-      <section className="space-y-8">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <TabsList className="bg-transparent gap-4 border w-1/2">
+      <section className="space-y-8 overflow-hidden">
+        <div className="flex max-lg:flex-wrap items-center justify-between gap-4">
+          <TabsList className="bg-transparent gap-4 border w-full lg:w-1/2">
             <TabsTrigger value="upload">
               <Upload /> Upload
             </TabsTrigger>

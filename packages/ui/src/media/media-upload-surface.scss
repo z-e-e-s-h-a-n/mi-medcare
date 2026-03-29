@@ -184,7 +184,7 @@
 
   &__details .media-upload-surface__text,
   &__details .media-upload-surface__subtext {
-    white-space: nowrap;
+    white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
